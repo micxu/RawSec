@@ -249,11 +249,11 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 50 - Corrupt Transmission - Forensics</title>
-    <link href="http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/"/>
-    <id>http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/</id>
+    <title>IceCTF - 50 - Flag Storage - Web</title>
+    <link href="http://rawsec.ml/en/IceCTF-50-Flag-Storage-Web/"/>
+    <id>http://rawsec.ml/en/IceCTF-50-Flag-Storage-Web/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T22:58:43.700Z</updated>
+    <updated>2016-08-26T23:38:10.693Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -278,32 +278,19 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We intercepted this image, but it must have gotten corrupted during the transmission. Can you try and fix it? <a href="https://play.icec.tf/problem-static/corrupt_92cee405924ad39fb513e3ef910699b79bb6d45cc5046c051eb9aab3546e22c3.png" target="_blank" rel="external">corrupt.png</a></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>What a cheat, I was promised a flag and I can’t even log in. Can you get in for me? <a href="http://flagstorage.vuln.icec.tf/" target="_blank" rel="external">flagstorage.vuln.icec.tf</a>. They seem to hash their passwords, but I think the problem is somehow related to <a href="https://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="external">this</a>.</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Check the file type:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file corrupt.png</div><div class="line">corrupt.png: data</div></pre></td></tr></table></figure>
+<li><p>Look at the source code:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> updatePassword = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">        <span class="comment">// hash client side for better security, never leak the pw over the wire</span></div><div class="line">        <span class="keyword">var</span> sha = <span class="keyword">new</span> jsSHA(<span class="string">"SHA-256"</span>, <span class="string">"TEXT"</span>);</div><div class="line">        sha.update($(<span class="keyword">this</span>).val());</div><div class="line">        $(<span class="string">"#password"</span>).val(sha.getHash(<span class="string">"HEX"</span>));</div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"#password_plain"</span>).on(<span class="string">"change"</span>, updatePassword);</div><div class="line">    $(<span class="string">"#form"</span>).on(<span class="string">"submit"</span>, updatePassword);</div><div class="line">&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
 </li>
-<li><p>This PNG is clearly corrupted, check what’s wrong:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pngcheck corrupt.png</div><div class="line">corrupt.png:  CORRUPTED by text conversion</div><div class="line">ERROR: corrupt.png</div><div class="line"></div><div class="line">pngcheck -v corrupt.png</div><div class="line">File: corrupt.png (469363 bytes)</div><div class="line">  File is CORRUPTED.  It seems to have suffered EOL conversion.</div><div class="line">  It was probably transmitted in text mode.</div><div class="line">ERRORS DETECTED in corrupt.png</div></pre></td></tr></table></figure>
+<li><p>Script will send our password hashed on the network instead of plain text.</p>
 </li>
-<li><p>This kind of error may occurs when an image (binary) was downloaded as ASCII text.</p>
-</li>
-<li><p>First, we’ll check the PNG header with <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png</div><div class="line">00000000: 9050 4e47 0e1a 0a1b                      .PNG....</div></pre></td></tr></table></figure>
-</li>
-<li><p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature" target="_blank" rel="external">PNG spec</a> tell us that not the right header, good header should be:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(decimal)              137  80  78  71  13  10  26  10</div><div class="line">(hexadecimal)           89  50  4e  47  0d  0a  1a  0a</div><div class="line">(ASCII C notation)    \211   P   N   G  \r  \n \032 \n</div></pre></td></tr></table></figure>
-</li>
-<li><p>Let’s fix it with <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">HT</a> hex editor.</p>
-</li>
-<li><p>Now it sounds right:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png.fix</div><div class="line">00000000: 8950 4e47 0d0a 1a0a                      .PNG....</div><div class="line"></div><div class="line">pngcheck corrupt.png.fix</div><div class="line">corrupt.png.fix  additional data after IEND chunk</div><div class="line">ERROR: corrupt.png.fix</div></pre></td></tr></table></figure>
-</li>
-<li><p>There is still an error but now PNG is recognized and we can display the image:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">file corrupt.png.fix</div><div class="line">corrupt.png.fix: PNG image data, 500 x 408, 8-bit/color RGBA, non-interlaced</div><div class="line"></div><div class="line">pngcheck -v corrupt.png.fix</div><div class="line">File: corrupt.png.fix (469363 bytes)</div><div class="line">  chunk IHDR at offset 0x0000c, length 13</div><div class="line">    500 x 408 image, 32-bit RGB+alpha, non-interlaced</div><div class="line">  chunk bKGD at offset 0x00025, length 6</div><div class="line">    red = 0x00ff, green = 0x00ff, blue = 0x00ff</div><div class="line">  chunk pHYs at offset 0x00037, length 9: 2835x2835 pixels/meter (72 dpi)</div><div class="line">  chunk tIME at offset 0x0004c, length 7: 20 Jun 2016 03:20:08 UTC</div><div class="line">  chunk IDAT at offset 0x0005f, length 8192</div><div class="line">    zlib: deflated, 32K window, maximum compression</div><div class="line">  chunk IDAT at offset 0x0206b, length 8192</div><div class="line">  chunk IDAT at offset 0x04077, length 8192</div><div class="line">  chunk IDAT at offset 0x06083, length 8192</div><div class="line">  chunk IDAT at offset 0x0808f, length 8192</div><div class="line">  chunk IDAT at offset 0x0a09b, length 8192</div><div class="line">  chunk IDAT at offset 0x0c0a7, length 8192</div><div class="line">  chunk IDAT at offset 0x0e0b3, length 8192</div><div class="line">  chunk IDAT at offset 0x100bf, length 8192</div><div class="line">  chunk IDAT at offset 0x120cb, length 8192</div><div class="line">  chunk IDAT at offset 0x140d7, length 8192</div><div class="line">  chunk IDAT at offset 0x160e3, length 8192</div><div class="line">  chunk IDAT at offset 0x180ef, length 8192</div><div class="line">  chunk IDAT at offset 0x1a0fb, length 8192</div><div class="line">  chunk IDAT at offset 0x1c107, length 8192</div><div class="line">  chunk IDAT at offset 0x1e113, length 8192</div><div class="line">  chunk IDAT at offset 0x2011f, length 8192</div><div class="line">  chunk IDAT at offset 0x2212b, length 8192</div><div class="line">  chunk IDAT at offset 0x24137, length 8192</div><div class="line">  chunk IDAT at offset 0x26143, length 8192</div><div class="line">  chunk IDAT at offset 0x2814f, length 8192</div><div class="line">  chunk IDAT at offset 0x2a15b, length 8192</div><div class="line">  chunk IDAT at offset 0x2c167, length 8192</div><div class="line">  chunk IDAT at offset 0x2e173, length 8192</div><div class="line">  chunk IDAT at offset 0x3017f, length 8192</div><div class="line">  chunk IDAT at offset 0x3218b, length 8192</div><div class="line">  chunk IDAT at offset 0x34197, length 8192</div><div class="line">  chunk IDAT at offset 0x361a3, length 8192</div><div class="line">  chunk IDAT at offset 0x381af, length 8192</div><div class="line">  chunk IDAT at offset 0x3a1bb, length 8192</div><div class="line">  chunk IDAT at offset 0x3c1c7, length 8192</div><div class="line">  chunk IDAT at offset 0x3e1d3, length 8192</div><div class="line">  chunk IDAT at offset 0x401df, length 8192</div><div class="line">  chunk IDAT at offset 0x421eb, length 8192</div><div class="line">  chunk IDAT at offset 0x441f7, length 8192</div><div class="line">  chunk IDAT at offset 0x46203, length 8192</div><div class="line">  chunk IDAT at offset 0x4820f, length 8192</div><div class="line">  chunk IDAT at offset 0x4a21b, length 8192</div><div class="line">  chunk IDAT at offset 0x4c227, length 8192</div><div class="line">  chunk IDAT at offset 0x4e233, length 8192</div><div class="line">  chunk IDAT at offset 0x5023f, length 8192</div><div class="line">  chunk IDAT at offset 0x5224b, length 8192</div><div class="line">  chunk IDAT at offset 0x54257, length 8192</div><div class="line">  chunk IDAT at offset 0x56263, length 8192</div><div class="line">  chunk IDAT at offset 0x5826f, length 8192</div><div class="line">  chunk IDAT at offset 0x5a27b, length 8192</div><div class="line">  chunk IDAT at offset 0x5c287, length 8192</div><div class="line">  chunk IDAT at offset 0x5e293, length 8192</div><div class="line">  chunk IDAT at offset 0x6029f, length 8192</div><div class="line">  chunk IDAT at offset 0x622ab, length 8192</div><div class="line">  chunk IDAT at offset 0x642b7, length 8192</div><div class="line">  chunk IDAT at offset 0x662c3, length 8192</div><div class="line">  chunk IDAT at offset 0x682cf, length 8192</div><div class="line">  chunk IDAT at offset 0x6a2db, length 8192</div><div class="line">  chunk IDAT at offset 0x6c2e7, length 8192</div><div class="line">  chunk IDAT at offset 0x6e2f3, length 8192</div><div class="line">  chunk IDAT at offset 0x702ff, length 8192</div><div class="line">  chunk IDAT at offset 0x7230b, length 1619</div><div class="line">  chunk IEND at offset 0x7296a, length 0</div><div class="line">  additional data after IEND chunk</div><div class="line">ERRORS DETECTED in corrupt.png.fix</div><div class="line"></div><div class="line">display corrupt.png.fix</div></pre></td></tr></table></figure>
-</li>
-<li><p>Flag is <code>IceCTF{t1s_but_4_5cr4tch}</code>.</p>
-</li>
+<li>Login with random credentials.</li>
+<li>Open your browser network analyser and see the POST params: <code>username</code> and <code>password_plain</code> that you filled + <code>password</code> containing <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>.</li>
+<li><code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code> is the SHA256 hash of the null string according to <a href="http://www.di-mgt.com.au/sha_testvectors.html" target="_blank" rel="external">this</a> or if you try with <a href="https://crackstation.net/" target="_blank" rel="external">https://crackstation.net/</a>.</li>
+<li>Description of the challenge tell us it’s an SQLi so may be we need to inject username and let password_plain null so our hashed password will correspond to the hash we found.</li>
+<li>Try a classic username: <code>&#39; OR 1=1 #</code> and null password instead of random password.</li>
+<li>We get the flag: <code>IceCTF{why_would_you_even_do_anything_client_side}</code>.</li>
 </ol>
 ]]></content>
     
@@ -324,7 +311,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
     
   </entry>
   
@@ -583,84 +570,6 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 40 - Complacent - Reconnaissance</title>
-    <link href="http://rawsec.ml/en/IceCTF-40-Complacent-Reconnaissance/"/>
-    <id>http://rawsec.ml/en/IceCTF-40-Complacent-Reconnaissance/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T23:38:10.689Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>These silly bankers have gotten pretty complacent with their self signed SSL certificate. I wonder if there’s anything in there. complacent.vuln.icec.tf</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>With Mozilla Firefox (method 1):</p>
-<ol>
-<li>Go to <a href="https://complacent.vuln.icec.tf/" target="_blank" rel="external">https://complacent.vuln.icec.tf/</a>.</li>
-<li>Accept security exceptions.</li>
-<li>Open the <strong>Inspect Element</strong> pannel.</li>
-<li>Go to the <strong>Network</strong> tab and reload.</li>
-<li>Select the main GET request.</li>
-<li>Select the <strong>Security</strong> tab.</li>
-<li>The <strong>Certificate: Organizational Unit (OU)</strong> is <strong>Flag: IceCTF{this_1nformation_wasnt_h1dd3n_at_a11}</strong>.</li>
-</ol>
-<p>or</p>
-<p>With Mozilla Firefox (method 2):</p>
-<ol>
-<li>Go to <a href="https://complacent.vuln.icec.tf/" target="_blank" rel="external">https://complacent.vuln.icec.tf/</a>.</li>
-<li>Accept security exceptions.</li>
-<li>Click on the lock next to the URL bar.</li>
-<li>Then click on the arrow at the right of the little pop-up.</li>
-<li>Click on <strong>More Information</strong> button.</li>
-<li>Go to the <strong>Security</strong> tab.</li>
-<li>Click on the <strong>View Certificate</strong> button.</li>
-<li>Look at infos in the <strong>General</strong> tab.</li>
-<li>The <strong>Certificate: Organizational Unit (OU)</strong> is <strong>Flag: IceCTF{this_1nformation_wasnt_h1dd3n_at_a11}</strong>.</li>
-</ol>
-<p>PS: there is a lot of other methods</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="reconnaissance" scheme="http://rawsec.ml/tags/reconnaissance/"/>
-    
-  </entry>
-  
-  <entry>
     <title>IceCTF - 35 - IRC I - Misc</title>
     <link href="http://rawsec.ml/en/IceCTF-35-IRC-1-Misc/"/>
     <id>http://rawsec.ml/en/IceCTF-35-IRC-1-Misc/</id>
@@ -699,68 +608,6 @@
 <li>Display the topic <code>/topic</code> which is <em>Get your flags here! while they’re hot! IceCTF{pL3AsE_D0n7_5h4re_fL495_JUsT_doNT}</em>.</li>
 </ol>
 <p><strong>Note</strong>: Here a <a href="https://en.wikipedia.org/wiki/List_of_Internet_Relay_Chat_commands" target="_blank" rel="external">List of IRC commands</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 40 - Search - Misc</title>
-    <link href="http://rawsec.ml/en/IceCTF-40-Search-Misc/"/>
-    <id>http://rawsec.ml/en/IceCTF-40-Search-Misc/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T23:38:10.690Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>There’s something about this domain… <a href="http://search.icec.tf/" target="_blank" rel="external">search.icec.tf</a>, I don’t see anything, but maybe its all about the conTEXT.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Default behaviour of main dns lookup utilities (like nslookup or dig) is to look for A type record.</li>
-<li>But we want to look at TXT type record.</li>
-<li>So instead of using <code>dig search.icec.tf/</code> (eq. <code>dig -t A search.icec.tf/</code>),</li>
-<li>we’ll use <code>dig -t TXT search.icec.tf/</code>.</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig -t A search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; -t A search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 21856</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	A</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">icec.tf.		300	IN	SOA	bob.ns.cloudflare.com. dns.cloudflare.com. 2022260330 10000 2400 604800 3600</div><div class="line"></div><div class="line">;; Query time: 88 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:45:54 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 104</div><div class="line"></div><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 41552</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	A</div><div class="line"></div><div class="line">;; Query time: 0 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:46:07 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 43</div><div class="line"></div><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig -t TXT search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; -t TXT search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 35890</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">search.icec.tf.		300	IN	TXT	&quot;IceCTF&#123;flag5_all_0v3r_the_Plac3&#125;&quot;</div><div class="line"></div><div class="line">;; Query time: 61 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:46:16 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 88</div></pre></td></tr></table></figure>
-<p>For more details about DNS record types, see the <a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types" target="_blank" rel="external">List of DNS record types</a>.</p>
 ]]></content>
     
     <summary type="html">
@@ -840,6 +687,84 @@
   </entry>
   
   <entry>
+    <title>IceCTF - 40 - Complacent - Reconnaissance</title>
+    <link href="http://rawsec.ml/en/IceCTF-40-Complacent-Reconnaissance/"/>
+    <id>http://rawsec.ml/en/IceCTF-40-Complacent-Reconnaissance/</id>
+    <published>2016-08-24T22:00:00.000Z</published>
+    <updated>2016-08-26T23:38:10.689Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : IceCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>These silly bankers have gotten pretty complacent with their self signed SSL certificate. I wonder if there’s anything in there. complacent.vuln.icec.tf</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>With Mozilla Firefox (method 1):</p>
+<ol>
+<li>Go to <a href="https://complacent.vuln.icec.tf/" target="_blank" rel="external">https://complacent.vuln.icec.tf/</a>.</li>
+<li>Accept security exceptions.</li>
+<li>Open the <strong>Inspect Element</strong> pannel.</li>
+<li>Go to the <strong>Network</strong> tab and reload.</li>
+<li>Select the main GET request.</li>
+<li>Select the <strong>Security</strong> tab.</li>
+<li>The <strong>Certificate: Organizational Unit (OU)</strong> is <strong>Flag: IceCTF{this_1nformation_wasnt_h1dd3n_at_a11}</strong>.</li>
+</ol>
+<p>or</p>
+<p>With Mozilla Firefox (method 2):</p>
+<ol>
+<li>Go to <a href="https://complacent.vuln.icec.tf/" target="_blank" rel="external">https://complacent.vuln.icec.tf/</a>.</li>
+<li>Accept security exceptions.</li>
+<li>Click on the lock next to the URL bar.</li>
+<li>Then click on the arrow at the right of the little pop-up.</li>
+<li>Click on <strong>More Information</strong> button.</li>
+<li>Go to the <strong>Security</strong> tab.</li>
+<li>Click on the <strong>View Certificate</strong> button.</li>
+<li>Look at infos in the <strong>General</strong> tab.</li>
+<li>The <strong>Certificate: Organizational Unit (OU)</strong> is <strong>Flag: IceCTF{this_1nformation_wasnt_h1dd3n_at_a11}</strong>.</li>
+</ol>
+<p>PS: there is a lot of other methods</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="reconnaissance" scheme="http://rawsec.ml/tags/reconnaissance/"/>
+    
+  </entry>
+  
+  <entry>
     <title>IceCTF - 45 - Time Traveler - Forensics</title>
     <link href="http://rawsec.ml/en/IceCTF-45-Time-Traveler-Forencics/"/>
     <id>http://rawsec.ml/en/IceCTF-45-Time-Traveler-Forencics/</id>
@@ -877,6 +802,86 @@
 </ul>
 <p><strong>Similar challenge</strong>: <a href="http://rawsec.ml/en/ABCTF-50-Archive-Me-Reconaissance/">ABCTF - 50 - Archive Me - Reconaissance</a></p>
 <p><strong>POV</strong>: I think it’s more a Reconaissance challenge than a Forensics one. But you know challenge classification in CTF…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IceCTF - 50 - Corrupt Transmission - Forensics</title>
+    <link href="http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/"/>
+    <id>http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/</id>
+    <published>2016-08-24T22:00:00.000Z</published>
+    <updated>2016-08-26T22:58:43.700Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : IceCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We intercepted this image, but it must have gotten corrupted during the transmission. Can you try and fix it? <a href="https://play.icec.tf/problem-static/corrupt_92cee405924ad39fb513e3ef910699b79bb6d45cc5046c051eb9aab3546e22c3.png" target="_blank" rel="external">corrupt.png</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li><p>Check the file type:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file corrupt.png</div><div class="line">corrupt.png: data</div></pre></td></tr></table></figure>
+</li>
+<li><p>This PNG is clearly corrupted, check what’s wrong:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pngcheck corrupt.png</div><div class="line">corrupt.png:  CORRUPTED by text conversion</div><div class="line">ERROR: corrupt.png</div><div class="line"></div><div class="line">pngcheck -v corrupt.png</div><div class="line">File: corrupt.png (469363 bytes)</div><div class="line">  File is CORRUPTED.  It seems to have suffered EOL conversion.</div><div class="line">  It was probably transmitted in text mode.</div><div class="line">ERRORS DETECTED in corrupt.png</div></pre></td></tr></table></figure>
+</li>
+<li><p>This kind of error may occurs when an image (binary) was downloaded as ASCII text.</p>
+</li>
+<li><p>First, we’ll check the PNG header with <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png</div><div class="line">00000000: 9050 4e47 0e1a 0a1b                      .PNG....</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature" target="_blank" rel="external">PNG spec</a> tell us that not the right header, good header should be:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(decimal)              137  80  78  71  13  10  26  10</div><div class="line">(hexadecimal)           89  50  4e  47  0d  0a  1a  0a</div><div class="line">(ASCII C notation)    \211   P   N   G  \r  \n \032 \n</div></pre></td></tr></table></figure>
+</li>
+<li><p>Let’s fix it with <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">HT</a> hex editor.</p>
+</li>
+<li><p>Now it sounds right:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png.fix</div><div class="line">00000000: 8950 4e47 0d0a 1a0a                      .PNG....</div><div class="line"></div><div class="line">pngcheck corrupt.png.fix</div><div class="line">corrupt.png.fix  additional data after IEND chunk</div><div class="line">ERROR: corrupt.png.fix</div></pre></td></tr></table></figure>
+</li>
+<li><p>There is still an error but now PNG is recognized and we can display the image:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">file corrupt.png.fix</div><div class="line">corrupt.png.fix: PNG image data, 500 x 408, 8-bit/color RGBA, non-interlaced</div><div class="line"></div><div class="line">pngcheck -v corrupt.png.fix</div><div class="line">File: corrupt.png.fix (469363 bytes)</div><div class="line">  chunk IHDR at offset 0x0000c, length 13</div><div class="line">    500 x 408 image, 32-bit RGB+alpha, non-interlaced</div><div class="line">  chunk bKGD at offset 0x00025, length 6</div><div class="line">    red = 0x00ff, green = 0x00ff, blue = 0x00ff</div><div class="line">  chunk pHYs at offset 0x00037, length 9: 2835x2835 pixels/meter (72 dpi)</div><div class="line">  chunk tIME at offset 0x0004c, length 7: 20 Jun 2016 03:20:08 UTC</div><div class="line">  chunk IDAT at offset 0x0005f, length 8192</div><div class="line">    zlib: deflated, 32K window, maximum compression</div><div class="line">  chunk IDAT at offset 0x0206b, length 8192</div><div class="line">  chunk IDAT at offset 0x04077, length 8192</div><div class="line">  chunk IDAT at offset 0x06083, length 8192</div><div class="line">  chunk IDAT at offset 0x0808f, length 8192</div><div class="line">  chunk IDAT at offset 0x0a09b, length 8192</div><div class="line">  chunk IDAT at offset 0x0c0a7, length 8192</div><div class="line">  chunk IDAT at offset 0x0e0b3, length 8192</div><div class="line">  chunk IDAT at offset 0x100bf, length 8192</div><div class="line">  chunk IDAT at offset 0x120cb, length 8192</div><div class="line">  chunk IDAT at offset 0x140d7, length 8192</div><div class="line">  chunk IDAT at offset 0x160e3, length 8192</div><div class="line">  chunk IDAT at offset 0x180ef, length 8192</div><div class="line">  chunk IDAT at offset 0x1a0fb, length 8192</div><div class="line">  chunk IDAT at offset 0x1c107, length 8192</div><div class="line">  chunk IDAT at offset 0x1e113, length 8192</div><div class="line">  chunk IDAT at offset 0x2011f, length 8192</div><div class="line">  chunk IDAT at offset 0x2212b, length 8192</div><div class="line">  chunk IDAT at offset 0x24137, length 8192</div><div class="line">  chunk IDAT at offset 0x26143, length 8192</div><div class="line">  chunk IDAT at offset 0x2814f, length 8192</div><div class="line">  chunk IDAT at offset 0x2a15b, length 8192</div><div class="line">  chunk IDAT at offset 0x2c167, length 8192</div><div class="line">  chunk IDAT at offset 0x2e173, length 8192</div><div class="line">  chunk IDAT at offset 0x3017f, length 8192</div><div class="line">  chunk IDAT at offset 0x3218b, length 8192</div><div class="line">  chunk IDAT at offset 0x34197, length 8192</div><div class="line">  chunk IDAT at offset 0x361a3, length 8192</div><div class="line">  chunk IDAT at offset 0x381af, length 8192</div><div class="line">  chunk IDAT at offset 0x3a1bb, length 8192</div><div class="line">  chunk IDAT at offset 0x3c1c7, length 8192</div><div class="line">  chunk IDAT at offset 0x3e1d3, length 8192</div><div class="line">  chunk IDAT at offset 0x401df, length 8192</div><div class="line">  chunk IDAT at offset 0x421eb, length 8192</div><div class="line">  chunk IDAT at offset 0x441f7, length 8192</div><div class="line">  chunk IDAT at offset 0x46203, length 8192</div><div class="line">  chunk IDAT at offset 0x4820f, length 8192</div><div class="line">  chunk IDAT at offset 0x4a21b, length 8192</div><div class="line">  chunk IDAT at offset 0x4c227, length 8192</div><div class="line">  chunk IDAT at offset 0x4e233, length 8192</div><div class="line">  chunk IDAT at offset 0x5023f, length 8192</div><div class="line">  chunk IDAT at offset 0x5224b, length 8192</div><div class="line">  chunk IDAT at offset 0x54257, length 8192</div><div class="line">  chunk IDAT at offset 0x56263, length 8192</div><div class="line">  chunk IDAT at offset 0x5826f, length 8192</div><div class="line">  chunk IDAT at offset 0x5a27b, length 8192</div><div class="line">  chunk IDAT at offset 0x5c287, length 8192</div><div class="line">  chunk IDAT at offset 0x5e293, length 8192</div><div class="line">  chunk IDAT at offset 0x6029f, length 8192</div><div class="line">  chunk IDAT at offset 0x622ab, length 8192</div><div class="line">  chunk IDAT at offset 0x642b7, length 8192</div><div class="line">  chunk IDAT at offset 0x662c3, length 8192</div><div class="line">  chunk IDAT at offset 0x682cf, length 8192</div><div class="line">  chunk IDAT at offset 0x6a2db, length 8192</div><div class="line">  chunk IDAT at offset 0x6c2e7, length 8192</div><div class="line">  chunk IDAT at offset 0x6e2f3, length 8192</div><div class="line">  chunk IDAT at offset 0x702ff, length 8192</div><div class="line">  chunk IDAT at offset 0x7230b, length 1619</div><div class="line">  chunk IEND at offset 0x7296a, length 0</div><div class="line">  additional data after IEND chunk</div><div class="line">ERRORS DETECTED in corrupt.png.fix</div><div class="line"></div><div class="line">display corrupt.png.fix</div></pre></td></tr></table></figure>
+</li>
+<li><p>Flag is <code>IceCTF{t1s_but_4_5cr4tch}</code>.</p>
+</li>
+</ol>
 ]]></content>
     
     <summary type="html">
@@ -1033,6 +1038,65 @@
   </entry>
   
   <entry>
+    <title>IceCTF - 50 - Vape Nation - Stego</title>
+    <link href="http://rawsec.ml/en/IceCTF-50-Vape-Nation-Stego/"/>
+    <id>http://rawsec.ml/en/IceCTF-50-Vape-Nation-Stego/</id>
+    <published>2016-08-24T22:00:00.000Z</published>
+    <updated>2016-08-26T22:56:55.808Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : IceCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Go Green! <a href="https://play.icec.tf/problem-static/vape_nation_7d550b3069428e39775f31e7299cd354c721459043cf1a077bb388f4f531d459.png" target="_blank" rel="external">vape_nation.png</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li>Open <code>vape_nation.png</code> with <a href="http://www.caesum.com/handbook/Stegsolve.jar" target="_blank" rel="external">StegSolve</a>.</li>
+<li>Description said <strong>Go Green</strong> so just do it!</li>
+<li>Green plane 0 contain the flag: <code>IceCTF{420_CuR35_c4NCEr}</code>.</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="stegano" scheme="http://rawsec.ml/tags/stegano/"/>
+    
+  </entry>
+  
+  <entry>
     <title>IceCTF - 50 - Scavenger Hunt - Misc</title>
     <link href="http://rawsec.ml/en/IceCTF-50-Scavenger-Hunt-Misc/"/>
     <id>http://rawsec.ml/en/IceCTF-50-Scavenger-Hunt-Misc/</id>
@@ -1092,11 +1156,11 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 50 - Flag Storage - Web</title>
-    <link href="http://rawsec.ml/en/IceCTF-50-Flag-Storage-Web/"/>
-    <id>http://rawsec.ml/en/IceCTF-50-Flag-Storage-Web/</id>
+    <title>IceCTF - 40 - Search - Misc</title>
+    <link href="http://rawsec.ml/en/IceCTF-40-Search-Misc/"/>
+    <id>http://rawsec.ml/en/IceCTF-40-Search-Misc/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T23:38:10.693Z</updated>
+    <updated>2016-08-26T23:38:10.690Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1121,20 +1185,15 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>What a cheat, I was promised a flag and I can’t even log in. Can you get in for me? <a href="http://flagstorage.vuln.icec.tf/" target="_blank" rel="external">flagstorage.vuln.icec.tf</a>. They seem to hash their passwords, but I think the problem is somehow related to <a href="https://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="external">this</a>.</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>There’s something about this domain… <a href="http://search.icec.tf/" target="_blank" rel="external">search.icec.tf</a>, I don’t see anything, but maybe its all about the conTEXT.</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Look at the source code:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> updatePassword = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">        <span class="comment">// hash client side for better security, never leak the pw over the wire</span></div><div class="line">        <span class="keyword">var</span> sha = <span class="keyword">new</span> jsSHA(<span class="string">"SHA-256"</span>, <span class="string">"TEXT"</span>);</div><div class="line">        sha.update($(<span class="keyword">this</span>).val());</div><div class="line">        $(<span class="string">"#password"</span>).val(sha.getHash(<span class="string">"HEX"</span>));</div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"#password_plain"</span>).on(<span class="string">"change"</span>, updatePassword);</div><div class="line">    $(<span class="string">"#form"</span>).on(<span class="string">"submit"</span>, updatePassword);</div><div class="line">&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
-</li>
-<li><p>Script will send our password hashed on the network instead of plain text.</p>
-</li>
-<li>Login with random credentials.</li>
-<li>Open your browser network analyser and see the POST params: <code>username</code> and <code>password_plain</code> that you filled + <code>password</code> containing <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>.</li>
-<li><code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code> is the SHA256 hash of the null string according to <a href="http://www.di-mgt.com.au/sha_testvectors.html" target="_blank" rel="external">this</a> or if you try with <a href="https://crackstation.net/" target="_blank" rel="external">https://crackstation.net/</a>.</li>
-<li>Description of the challenge tell us it’s an SQLi so may be we need to inject username and let password_plain null so our hashed password will correspond to the hash we found.</li>
-<li>Try a classic username: <code>&#39; OR 1=1 #</code> and null password instead of random password.</li>
-<li>We get the flag: <code>IceCTF{why_would_you_even_do_anything_client_side}</code>.</li>
+<li>Default behaviour of main dns lookup utilities (like nslookup or dig) is to look for A type record.</li>
+<li>But we want to look at TXT type record.</li>
+<li>So instead of using <code>dig search.icec.tf/</code> (eq. <code>dig -t A search.icec.tf/</code>),</li>
+<li>we’ll use <code>dig -t TXT search.icec.tf/</code>.</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig -t A search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; -t A search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 21856</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	A</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">icec.tf.		300	IN	SOA	bob.ns.cloudflare.com. dns.cloudflare.com. 2022260330 10000 2400 604800 3600</div><div class="line"></div><div class="line">;; Query time: 88 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:45:54 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 104</div><div class="line"></div><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 41552</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	A</div><div class="line"></div><div class="line">;; Query time: 0 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:46:07 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 43</div><div class="line"></div><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig -t TXT search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; -t TXT search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 35890</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">search.icec.tf.		300	IN	TXT	&quot;IceCTF&#123;flag5_all_0v3r_the_Plac3&#125;&quot;</div><div class="line"></div><div class="line">;; Query time: 61 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:46:16 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 88</div></pre></td></tr></table></figure>
+<p>For more details about DNS record types, see the <a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types" target="_blank" rel="external">List of DNS record types</a>.</p>
 ]]></content>
     
     <summary type="html">
@@ -1154,66 +1213,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 50 - Vape Nation - Stego</title>
-    <link href="http://rawsec.ml/en/IceCTF-50-Vape-Nation-Stego/"/>
-    <id>http://rawsec.ml/en/IceCTF-50-Vape-Nation-Stego/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T22:56:55.808Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Go Green! <a href="https://play.icec.tf/problem-static/vape_nation_7d550b3069428e39775f31e7299cd354c721459043cf1a077bb388f4f531d459.png" target="_blank" rel="external">vape_nation.png</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Open <code>vape_nation.png</code> with <a href="http://www.caesum.com/handbook/Stegsolve.jar" target="_blank" rel="external">StegSolve</a>.</li>
-<li>Description said <strong>Go Green</strong> so just do it!</li>
-<li>Green plane 0 contain the flag: <code>IceCTF{420_CuR35_c4NCEr}</code>.</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="stegano" scheme="http://rawsec.ml/tags/stegano/"/>
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
