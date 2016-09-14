@@ -304,11 +304,11 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 15 - All your Base are belong to us - Misc</title>
-    <link href="http://rawsec.ml/en/IceCTF-15-All-your-Base-are-belong-to-us-Misc/"/>
-    <id>http://rawsec.ml/en/IceCTF-15-All-your-Base-are-belong-to-us-Misc/</id>
+    <title>IceCTF - 20 - Rotated! - Cryptography</title>
+    <link href="http://rawsec.ml/en/IceCTF-20-Rotated-Cryptograhy/"/>
+    <id>http://rawsec.ml/en/IceCTF-20-Rotated-Cryptograhy/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T22:50:36.267Z</updated>
+    <updated>2016-08-25T21:32:43.680Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -333,15 +333,13 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>What a mess… we got a raw flag but now what do we do… <a href="https://play.icec.tf/problem-static/flag_63c24d48595eae318c9a174f37ffb0f128758e5c16fea0ffebf12b0ba5f5b26a.txt" target="_blank" rel="external">flag.txt</a></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>They went and ROTated the flag by 5 and then ROTated it by 8! The scoundrels! Anyway once they were done this was all that was left VprPGS{jnvg_bar_cyhf_1_vf_3?}</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Look at the file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cat flag.txt</div><div class="line">01001001 01100011 01100101 01000011 01010100 01000110 01111011 01100001 01101100 00110001 01011111</div><div class="line">01101101 01111001 01011111 01100010 01100001 01110011 01100101 01110011 01011111 01100001 01110010</div><div class="line">01100101 01011111 01111001 01101111 01110101 01110010 01110011 01011111 01100001 01101110 01100100</div><div class="line">01011111 01100001 01101100 01101100 01011111 01111001 00110000 01110101 01110010 01011111 01100010</div><div class="line">01100001 01110011 01100101 01110011 01011111 01100001 01110010 01100101 01011111 01101101 01101001</div><div class="line">01101110 01100101 01111101</div></pre></td></tr></table></figure>
+<li>A ROT13 Caesar cipher again. <code>5 + 8 = 13</code> right?</li>
+<li><p>Let’s use a script:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">caesar</span><span class="params">(plaintext, shift)</span>:</span></div><div class="line">    alphabet_lower = string.ascii_lowercase</div><div class="line">    alphabet_upper = string.ascii_uppercase</div><div class="line"></div><div class="line">    shifted_alphabet_lower = alphabet_lower[shift:] + alphabet_lower[:shift]</div><div class="line">    shifted_alphabet_upper = alphabet_upper[shift:] + alphabet_upper[:shift]</div><div class="line"></div><div class="line">    alphabet = alphabet_lower + alphabet_upper</div><div class="line">    shifted_alphabet = shifted_alphabet_lower + shifted_alphabet_upper</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (sys.version_info &gt; (<span class="number">3</span>, <span class="number">0</span>)):</div><div class="line">        <span class="comment"># made with python 3.5.2</span></div><div class="line">        table = str.maketrans(alphabet, shifted_alphabet)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="comment"># made with python 2.7.12</span></div><div class="line">        table = string.maketrans(alphabet, shifted_alphabet)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> plaintext.translate(table)</div><div class="line"></div><div class="line">rot = <span class="string">'VprPGS&#123;jnvg_bar_cyhf_1_vf_3?&#125;'</span></div><div class="line">print(caesar(rot, <span class="number">5</span> + <span class="number">8</span>))</div></pre></td></tr></table></figure>
 </li>
-<li><p>It’s binary, so convert it to ASCII (with a python script):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">"flag.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> fh:</div><div class="line">    data = fh.read()</div><div class="line">    bindata = <span class="string">""</span>.join(data.split())</div><div class="line"></div><div class="line">    intdata = int(bindata, <span class="number">2</span>)</div><div class="line">    strdata = intdata.to_bytes((intdata.bit_length() + <span class="number">7</span>) // <span class="number">8</span>, <span class="string">'big'</span>).decode()</div><div class="line">    print(strdata)</div></pre></td></tr></table></figure>
-</li>
-<li><p>We get the flag: <code>IceCTF{al1_my_bases_are_yours_and_all_y0ur_bases_are_mine}</code>.</p>
+<li><p>Flag: <code>IceCTF{wait_one_plus_1_is_3?}</code>.</p>
 </li>
 </ol>
 ]]></content>
@@ -363,7 +361,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
     
   </entry>
   
@@ -425,68 +423,6 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="web" scheme="http://rawsec.ml/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 20 - Rotated! - Cryptography</title>
-    <link href="http://rawsec.ml/en/IceCTF-20-Rotated-Cryptograhy/"/>
-    <id>http://rawsec.ml/en/IceCTF-20-Rotated-Cryptograhy/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-25T21:32:43.680Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>They went and ROTated the flag by 5 and then ROTated it by 8! The scoundrels! Anyway once they were done this was all that was left VprPGS{jnvg_bar_cyhf_1_vf_3?}</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>A ROT13 Caesar cipher again. <code>5 + 8 = 13</code> right?</li>
-<li><p>Let’s use a script:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">caesar</span><span class="params">(plaintext, shift)</span>:</span></div><div class="line">    alphabet_lower = string.ascii_lowercase</div><div class="line">    alphabet_upper = string.ascii_uppercase</div><div class="line"></div><div class="line">    shifted_alphabet_lower = alphabet_lower[shift:] + alphabet_lower[:shift]</div><div class="line">    shifted_alphabet_upper = alphabet_upper[shift:] + alphabet_upper[:shift]</div><div class="line"></div><div class="line">    alphabet = alphabet_lower + alphabet_upper</div><div class="line">    shifted_alphabet = shifted_alphabet_lower + shifted_alphabet_upper</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (sys.version_info &gt; (<span class="number">3</span>, <span class="number">0</span>)):</div><div class="line">        <span class="comment"># made with python 3.5.2</span></div><div class="line">        table = str.maketrans(alphabet, shifted_alphabet)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="comment"># made with python 2.7.12</span></div><div class="line">        table = string.maketrans(alphabet, shifted_alphabet)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> plaintext.translate(table)</div><div class="line"></div><div class="line">rot = <span class="string">'VprPGS&#123;jnvg_bar_cyhf_1_vf_3?&#125;'</span></div><div class="line">print(caesar(rot, <span class="number">5</span> + <span class="number">8</span>))</div></pre></td></tr></table></figure>
-</li>
-<li><p>Flag: <code>IceCTF{wait_one_plus_1_is_3?}</code>.</p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
     
   </entry>
   
@@ -940,141 +876,6 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 45 - Toke - Web</title>
-    <link href="http://rawsec.ml/en/IceCTF-45-Toke-Web/"/>
-    <id>http://rawsec.ml/en/IceCTF-45-Toke-Web/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T23:38:10.692Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I have a feeling they were pretty high when they made <a href="http://toke.vuln.icec.tf/" target="_blank" rel="external">this website…</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Register a user an login with it.</li>
-<li>With your browser network analyser loot at cookies in response header of the HTTP request: <code>Set-Cookie: jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0;</code>.</li>
-<li><strong>JWT</strong> stands for <strong>JSON Web Tokens</strong> and is composed of 3 parts:<ul>
-<li>Part1: Header, is base64 encoded, show hash algorithm.</li>
-<li>Part2: Payload, base64 encoded, content.</li>
-<li>Part3: Signature, signature, concatenation of header + content and then encoded with the hash algorithm contained in the header.</li>
-</ul>
-</li>
-<li>So <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0</code> match with <code>header.payload.signature</code>.</li>
-<li>So we get:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">printf &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot; | base64 -d</div><div class="line">&#123;&quot;alg&quot;:&quot;HS256&quot;,&quot;typ&quot;:&quot;JWT&quot;&#125;</div><div class="line"></div><div class="line">printf &quot;eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ&quot; | base64 -d</div><div class="line">&#123;&quot;flag&quot;:&quot;IceCTF&#123;jW7_t0K3ns_4Re_nO_p14CE_fOR_53CrE7S&#125;&quot;,&quot;user&quot;:&quot;aza&quot;&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>An introduction to JSON Web Tokens is available <a href="https://jwt.io/introduction/" target="_blank" rel="external">here</a>.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 50 - Flag Storage - Web</title>
-    <link href="http://rawsec.ml/en/IceCTF-50-Flag-Storage-Web/"/>
-    <id>http://rawsec.ml/en/IceCTF-50-Flag-Storage-Web/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T23:38:10.693Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>What a cheat, I was promised a flag and I can’t even log in. Can you get in for me? <a href="http://flagstorage.vuln.icec.tf/" target="_blank" rel="external">flagstorage.vuln.icec.tf</a>. They seem to hash their passwords, but I think the problem is somehow related to <a href="https://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="external">this</a>.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Look at the source code:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> updatePassword = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">        <span class="comment">// hash client side for better security, never leak the pw over the wire</span></div><div class="line">        <span class="keyword">var</span> sha = <span class="keyword">new</span> jsSHA(<span class="string">"SHA-256"</span>, <span class="string">"TEXT"</span>);</div><div class="line">        sha.update($(<span class="keyword">this</span>).val());</div><div class="line">        $(<span class="string">"#password"</span>).val(sha.getHash(<span class="string">"HEX"</span>));</div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"#password_plain"</span>).on(<span class="string">"change"</span>, updatePassword);</div><div class="line">    $(<span class="string">"#form"</span>).on(<span class="string">"submit"</span>, updatePassword);</div><div class="line">&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
-</li>
-<li><p>Script will send our password hashed on the network instead of plain text.</p>
-</li>
-<li>Login with random credentials.</li>
-<li>Open your browser network analyser and see the POST params: <code>username</code> and <code>password_plain</code> that you filled + <code>password</code> containing <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>.</li>
-<li><code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code> is the SHA256 hash of the null string according to <a href="http://www.di-mgt.com.au/sha_testvectors.html" target="_blank" rel="external">this</a> or if you try with <a href="https://crackstation.net/" target="_blank" rel="external">https://crackstation.net/</a>.</li>
-<li>Description of the challenge tell us it’s an SQLi so may be we need to inject username and let password_plain null so our hashed password will correspond to the hash we found.</li>
-<li>Try a classic username: <code>&#39; OR 1=1 #</code> and null password instead of random password.</li>
-<li>We get the flag: <code>IceCTF{why_would_you_even_do_anything_client_side}</code>.</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
     <title>IceCTF - 50 - Corrupt Transmission - Forensics</title>
     <link href="http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/"/>
     <id>http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/</id>
@@ -1151,6 +952,137 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IceCTF - 15 - All your Base are belong to us - Misc</title>
+    <link href="http://rawsec.ml/en/IceCTF-15-All-your-Base-are-belong-to-us-Misc/"/>
+    <id>http://rawsec.ml/en/IceCTF-15-All-your-Base-are-belong-to-us-Misc/</id>
+    <published>2016-08-24T22:00:00.000Z</published>
+    <updated>2016-08-26T22:50:36.267Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : IceCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>What a mess… we got a raw flag but now what do we do… <a href="https://play.icec.tf/problem-static/flag_63c24d48595eae318c9a174f37ffb0f128758e5c16fea0ffebf12b0ba5f5b26a.txt" target="_blank" rel="external">flag.txt</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li><p>Look at the file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cat flag.txt</div><div class="line">01001001 01100011 01100101 01000011 01010100 01000110 01111011 01100001 01101100 00110001 01011111</div><div class="line">01101101 01111001 01011111 01100010 01100001 01110011 01100101 01110011 01011111 01100001 01110010</div><div class="line">01100101 01011111 01111001 01101111 01110101 01110010 01110011 01011111 01100001 01101110 01100100</div><div class="line">01011111 01100001 01101100 01101100 01011111 01111001 00110000 01110101 01110010 01011111 01100010</div><div class="line">01100001 01110011 01100101 01110011 01011111 01100001 01110010 01100101 01011111 01101101 01101001</div><div class="line">01101110 01100101 01111101</div></pre></td></tr></table></figure>
+</li>
+<li><p>It’s binary, so convert it to ASCII (with a python script):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">"flag.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> fh:</div><div class="line">    data = fh.read()</div><div class="line">    bindata = <span class="string">""</span>.join(data.split())</div><div class="line"></div><div class="line">    intdata = int(bindata, <span class="number">2</span>)</div><div class="line">    strdata = intdata.to_bytes((intdata.bit_length() + <span class="number">7</span>) // <span class="number">8</span>, <span class="string">'big'</span>).decode()</div><div class="line">    print(strdata)</div></pre></td></tr></table></figure>
+</li>
+<li><p>We get the flag: <code>IceCTF{al1_my_bases_are_yours_and_all_y0ur_bases_are_mine}</code>.</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IceCTF - 50 - Flag Storage - Web</title>
+    <link href="http://rawsec.ml/en/IceCTF-50-Flag-Storage-Web/"/>
+    <id>http://rawsec.ml/en/IceCTF-50-Flag-Storage-Web/</id>
+    <published>2016-08-24T22:00:00.000Z</published>
+    <updated>2016-08-26T23:38:10.693Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : IceCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>What a cheat, I was promised a flag and I can’t even log in. Can you get in for me? <a href="http://flagstorage.vuln.icec.tf/" target="_blank" rel="external">flagstorage.vuln.icec.tf</a>. They seem to hash their passwords, but I think the problem is somehow related to <a href="https://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="external">this</a>.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li><p>Look at the source code:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> updatePassword = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">        <span class="comment">// hash client side for better security, never leak the pw over the wire</span></div><div class="line">        <span class="keyword">var</span> sha = <span class="keyword">new</span> jsSHA(<span class="string">"SHA-256"</span>, <span class="string">"TEXT"</span>);</div><div class="line">        sha.update($(<span class="keyword">this</span>).val());</div><div class="line">        $(<span class="string">"#password"</span>).val(sha.getHash(<span class="string">"HEX"</span>));</div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"#password_plain"</span>).on(<span class="string">"change"</span>, updatePassword);</div><div class="line">    $(<span class="string">"#form"</span>).on(<span class="string">"submit"</span>, updatePassword);</div><div class="line">&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Script will send our password hashed on the network instead of plain text.</p>
+</li>
+<li>Login with random credentials.</li>
+<li>Open your browser network analyser and see the POST params: <code>username</code> and <code>password_plain</code> that you filled + <code>password</code> containing <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>.</li>
+<li><code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code> is the SHA256 hash of the null string according to <a href="http://www.di-mgt.com.au/sha_testvectors.html" target="_blank" rel="external">this</a> or if you try with <a href="https://crackstation.net/" target="_blank" rel="external">https://crackstation.net/</a>.</li>
+<li>Description of the challenge tell us it’s an SQLi so may be we need to inject username and let password_plain null so our hashed password will correspond to the hash we found.</li>
+<li>Try a classic username: <code>&#39; OR 1=1 #</code> and null password instead of random password.</li>
+<li>We get the flag: <code>IceCTF{why_would_you_even_do_anything_client_side}</code>.</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
     
   </entry>
   
@@ -1269,6 +1201,84 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="stegano" scheme="http://rawsec.ml/tags/stegano/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IceCTF - 55 - Demo - Pwn</title>
+    <link href="http://rawsec.ml/en/IceCTF-55-Demo-Pwn/"/>
+    <id>http://rawsec.ml/en/IceCTF-55-Demo-Pwn/</id>
+    <published>2016-08-24T22:00:00.000Z</published>
+    <updated>2016-08-26T23:38:10.695Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : IceCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I found this awesome premium shell, but my demo version just ran out… can you help me crack it? <code>/home/demo/</code> on the shell.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li>Connect to the shell provided by IceCTF.</li>
+<li>Go to <code>/home/demo/</code>.</li>
+<li><p>Our goal is to display <code>flag.txt</code> but it is impossible ofr the moment:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ cat flag.txt</div><div class="line">cat: flag.txt: Permission denied</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ sh</div><div class="line">$ cat /home/demo/flag.txt</div><div class="line">cat: /home/demo/flag.txt: Permission denied</div></pre></td></tr></table></figure>
+</li>
+<li><p>Display <code>demo.c</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#define _GNU_SOURCE</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;libgen.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">void give_shell() &#123;</div><div class="line">    gid_t gid = getegid();</div><div class="line">    setresgid(gid, gid, gid);</div><div class="line">    system(&quot;/bin/sh&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">    if(strncmp(basename(getenv(&quot;_&quot;)), &quot;icesh&quot;, 6) == 0)&#123;</div><div class="line">        give_shell();</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        printf(&quot;I&apos;m sorry, your free trial has ended.\n&quot;);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>To call <code>give_shell()</code> we have to bypass the if statement.</p>
+</li>
+<li>We need the <code>_</code> environment variable to be <code>_=icesh</code>.</li>
+<li><p>But our zsh shell don’t allow us to change: <code>_</code> is read-only and we can’t make it writable.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ export \_=icesh</div><div class="line">zsh: read-only variable: _</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ typeset +rx \_=icesh</div><div class="line">typeset: _: can&apos;t change type of a special parameter</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>_</code> contain the name of the last command but launching <code>icesh</code> and then <code>./demo</code> doesn’t work in this environment because the last command is <code>./demo</code> so <code>_=./demo</code>.</p>
+</li>
+<li>As <code>give_shell()</code> will give us a <code>/bin/sh</code>, let’s try with it.</li>
+<li>Start a <code>/bin/sh</code>.</li>
+<li>With <code>/bin/sh</code>, <code>_</code> contain the last command before last one, so running <code>icesh</code> and then <code>./demo</code> will work: <code>_=icesh</code>.</li>
+<li>So that launch <code>give_shell()</code> and give a <code>/bin/sh</code> enhanced with special gid instead of having <em>I’m sorry, your free trial has ended.</em> printed.</li>
+<li>With this empowered shell we can display the <code>flag.txt</code> file:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat /home/demo/flag.txt</div><div class="line">IceCTF&#123;wH0_WoU1d_3vr_7Ru5t_4rgV&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="pwn" scheme="http://rawsec.ml/tags/pwn/"/>
     
   </entry>
   
