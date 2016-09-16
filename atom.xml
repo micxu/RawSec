@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rawsec.ml/"/>
-  <updated>2016-09-14T19:39:12.629Z</updated>
+  <updated>2016-09-16T09:02:57.104Z</updated>
   <id>http://rawsec.ml/</id>
   
   <author>
@@ -14,6 +14,185 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ArchLinux - Install rTorrent and ruTorrent</title>
+    <link href="http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/"/>
+    <id>http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/</id>
+    <published>2016-09-13T22:00:00.000Z</published>
+    <updated>2016-09-16T09:02:57.104Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Warning-Post-in-construction"><a href="#Warning-Post-in-construction" class="headerlink" title="Warning: Post in construction"></a>Warning: Post in construction</h1><h2 id="Install-rTorrent"><a href="#Install-rTorrent" class="headerlink" title="Install rTorrent"></a>Install rTorrent</h2><p>As rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.</p>
+<ul>
+<li>Install <a href="https://www.archlinux.org/packages/?q=rtorrent" target="_blank" rel="external">rtorrent</a>:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S rtorrent</div></pre></td></tr></table></figure>
+<h2 id="Install-ruTorrent"><a href="#Install-ruTorrent" class="headerlink" title="Install ruTorrent"></a>Install ruTorrent</h2><ul>
+<li>Create the web server root directory if it doesn’t already exist:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir -p /srv/http</div></pre></td></tr></table></figure>
+<ul>
+<li>Go to the web server folder and clone the <a href="https://github.com/Novik/ruTorrent.git" target="_blank" rel="external">ruTorrent</a> git repository into it:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /srv/http</div><div class="line"># git clone https://github.com/Novik/ruTorrent.git rutorrent</div></pre></td></tr></table></figure>
+<h2 id="Install-Nginx"><a href="#Install-Nginx" class="headerlink" title="Install Nginx"></a>Install Nginx</h2><ul>
+<li>Install <a href="https://www.archlinux.org/packages/?name=nginx-mainline" target="_blank" rel="external">nginx-mainline</a>:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S nginx-mainline</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable and start nginx:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable nginx.service</div><div class="line"># systemctl start nginx.service</div></pre></td></tr></table></figure>
+<h2 id="Install-and-configure-PHP"><a href="#Install-and-configure-PHP" class="headerlink" title="Install and configure PHP"></a>Install and configure PHP</h2><ul>
+<li>Install <a href="https://www.archlinux.org/packages/?sort=&amp;q=php&amp;maintainer=&amp;flagged=" target="_blank" rel="external">php</a>:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S php</div></pre></td></tr></table></figure>
+<ul>
+<li>Install <a href="https://www.archlinux.org/packages/?name=php-fpm" target="_blank" rel="external">php-fpm</a>:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S php-fpm</div></pre></td></tr></table></figure>
+<ul>
+<li>Open php configuration:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php/php.ini</div></pre></td></tr></table></figure>
+<ul>
+<li>Disable php exposure (<a href="http://php.net/manual/en/ini.core.php#ini.expose-php" target="_blank" rel="external">expose_php</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">expose_php = Off</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable file uploads (<a href="http://php.net/manual/en/ini.core.php#ini.file-uploads" target="_blank" rel="external">file_uploads</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">file_uploads = On</div></pre></td></tr></table></figure>
+<ul>
+<li>Set max size of post data allowed (<a href="http://php.net/manual/en/ini.core.php#ini.post-max-size" target="_blank" rel="external">post_max_size</a>)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">post_max_size = 15M</div></pre></td></tr></table></figure>
+<ul>
+<li>Set the maximum size of an uploaded file (<a href="http://php.net/manual/en/ini.core.php#ini.upload-max-filesize" target="_blank" rel="external">upload_max_filesize</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upload_max_filesize = 15M</div></pre></td></tr></table></figure>
+<ul>
+<li>Set the timezone (<a href="http://php.net/manual/en/datetime.configuration.php#ini.date.timezone" target="_blank" rel="external">date.timezone</a>).</li>
+<li>For more security, limit the files that can be accessed by php (<a href="http://php.net/manual/en/ini.core.php#ini.open-basedir" target="_blank" rel="external">open_basedir</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open_basedir = /srv/http</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable and start php-fpm:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable php-fpm</div><div class="line"># systemctl start php-fpm</div></pre></td></tr></table></figure>
+<h2 id="Configure-Nginx"><a href="#Configure-Nginx" class="headerlink" title="Configure Nginx"></a>Configure Nginx</h2><ul>
+<li>Change the default conf:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/auth</div><div class="line"># mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.default</div><div class="line"># vim /etc/nginx/nginx.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>And add this conf:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">user http;</div><div class="line">worker_processes auto;</div><div class="line"># PID error: https://bugs.archlinux.org/task/46500</div><div class="line"># pid /run/nginx.pid;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">	worker_connections 1024;</div><div class="line">	multi_accept on;</div><div class="line">	use epoll;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">	charset UTF-8;</div><div class="line"></div><div class="line">	##</div><div class="line">	# Basic Settings</div><div class="line">	##</div><div class="line">	server_names_hash_bucket_size 64;</div><div class="line">	sendfile on;</div><div class="line">	tcp_nopush on;</div><div class="line">	tcp_nodelay on;</div><div class="line">	keepalive_timeout 65;</div><div class="line">	types_hash_max_size 2048;</div><div class="line">	server_tokens off;</div><div class="line"></div><div class="line">	# server_names_hash_bucket_size 64;</div><div class="line">	# server_name_in_redirect off;</div><div class="line"></div><div class="line">	include /etc/nginx/mime.types;</div><div class="line">	default_type application/octet-stream;</div><div class="line"></div><div class="line"></div><div class="line">	##</div><div class="line">	# Logging Settings</div><div class="line">	##</div><div class="line"></div><div class="line">	access_log /var/log/nginx/access.log;</div><div class="line">	error_log /var/log/nginx/error.log;</div><div class="line"></div><div class="line">	##</div><div class="line">	# Gzip Settings</div><div class="line">	##</div><div class="line"></div><div class="line">	gzip on;</div><div class="line">	gzip_disable &quot;msie6&quot;;</div><div class="line"></div><div class="line">	gzip_vary on;</div><div class="line">	gzip_proxied any;</div><div class="line">	gzip_comp_level 6;</div><div class="line">	gzip_buffers 16 8k;</div><div class="line">	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript</div><div class="line"></div><div class="line">	##</div><div class="line">	# Virtual Host Configs</div><div class="line">	##</div><div class="line"></div><div class="line">	include /etc/nginx/conf.d/*.conf;</div><div class="line">	include /etc/nginx/servers-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Create following directories:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/servers-available</div><div class="line"># mkdir /etc/nginx/servers-enabled</div></pre></td></tr></table></figure>
+<ul>
+<li>Create the server domain config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/servers-available/seedbox</div></pre></td></tr></table></figure>
+<ul>
+<li>And add the conf:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line"> listen 80;</div><div class="line"> listen [::]:80;</div><div class="line"> # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.</div><div class="line"> return 301 https://$host$request_uri;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># BLOCK SERVEUR HTTPS</div><div class="line">#</div><div class="line">server &#123;</div><div class="line"></div><div class="line"> listen 443 ssl http2;</div><div class="line"> server_name seedbox;</div><div class="line"> root /srv/http/rutorrent;</div><div class="line"> index index.php index.html index.htm;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># SSL</div><div class="line">#</div><div class="line"> ssl_certificate /etc/nginx/ssl/seedbox.crt;</div><div class="line"> ssl_certificate_key /etc/nginx/ssl/seedbox.key;</div><div class="line"></div><div class="line"> ssl_protocols TLSv1.2;</div><div class="line"> ssl_ciphers EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;</div><div class="line"> ssl_ecdh_curve secp384r1;</div><div class="line"> ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line"> # ssl optimizations</div><div class="line"> ssl_session_timeout 5m;</div><div class="line"> ssl_session_cache shared:SSL:20m;</div><div class="line"> ssl_session_tickets on;</div><div class="line"></div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># SECURITY</div><div class="line"></div><div class="line"> add_header X-XSS-Protection &quot;1; mode=block&quot;;</div><div class="line"> auth_basic &quot;Restricted Area&quot;;</div><div class="line"> auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth&quot;;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># PHP</div><div class="line">#</div><div class="line"> location / &#123;</div><div class="line"> index index.php index.html index.htm;</div><div class="line"> try_files $uri $uri/ /index.php?$args;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> location ~ \.php$ &#123;</div><div class="line"> try_files $uri =404;</div><div class="line"> fastcgi_split_path_info ^(.+\.php)(/.+)$;</div><div class="line"> fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;</div><div class="line"> fastcgi_index index.php;</div><div class="line"> fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line"> include fastcgi_params; &#125;</div><div class="line"></div><div class="line"> location ^~ /conf/ &#123;</div><div class="line"> deny all;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> location ^~ /share/ &#123;</div><div class="line"> deny all;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable the server:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ln -s /etc/nginx/servers-available/seedbox /etc/nginx/servers-enabled/seedbox</div></pre></td></tr></table></figure>
+<h2 id="Configure-SSL"><a href="#Configure-SSL" class="headerlink" title="Configure SSL"></a>Configure SSL</h2><p>We will both view self-signed certificate and Let’s Encrypt ones.</p>
+<h3 id="Self-signed"><a href="#Self-signed" class="headerlink" title="Self-signed"></a>Self-signed</h3><ul>
+<li>Add certificate folder:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/ssl</div></pre></td></tr></table></figure>
+<ul>
+<li>Generate self-signed certificate:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># cd /etc/nginx/ssl</div><div class="line"># openssl ecparam -genkey -name secp384r1 -out seedbox.key</div><div class="line"># openssl req -new -key seedbox.key -sha256 -out seedbox.csr</div><div class="line"># openssl req -x509 -days 3650 -sha256 -key seedbox.key -in seedbox.csr -out seedbox.crt</div></pre></td></tr></table></figure>
+<ul>
+<li>Modify files rights:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 644 /etc/nginx/ssl/*.crt</div><div class="line"># chmod 640 /etc/nginx/ssl/*.key</div></pre></td></tr></table></figure>
+<h3 id="Let’s-Encrypt"><a href="#Let’s-Encrypt" class="headerlink" title="Let’s Encrypt"></a>Let’s Encrypt</h3><p>TODO</p>
+<h2 id="Add-an-user"><a href="#Add-an-user" class="headerlink" title="Add an user"></a>Add an user</h2><ul>
+<li>Create an user:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># useradd --shell /bin/bash --create-home sdbox</div><div class="line"># passwd sdbox</div></pre></td></tr></table></figure>
+<ul>
+<li>Create needed folder for rtorrent:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir -p /home/sdbox/&#123;torrents,watch,.session&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Create rtorrent config file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /home/sdbox/.rtorrent.rc</div></pre></td></tr></table></figure>
+<ul>
+<li>Paste the config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">scgi_port = 127.0.0.1:5001</div><div class="line">encoding_list = UTF-8</div><div class="line">port_range = 45000-65000</div><div class="line">port_random = no</div><div class="line">check_hash = no</div><div class="line">directory = /home/sdbox/torrents</div><div class="line">session = /home/sdbox/.session</div><div class="line">encryption = allow_incoming, try_outgoing, enable_retry</div><div class="line">schedule = watch_directory,1,1,&quot;load_start=/home/sdbox/watch/*.torrent&quot;</div><div class="line">schedule = untied_directory,5,5,&quot;stop_untied=/home/sdbox/watch/*.torrent&quot;</div><div class="line">use_udp_trackers = yes</div><div class="line">dht = off</div><div class="line">peer_exchange = no</div><div class="line">min_peers = 40</div><div class="line">max_peers = 100</div><div class="line">min_peers_seed = 10</div><div class="line">max_peers_seed = 50</div><div class="line">max_uploads = 15</div><div class="line">execute = &#123;sh,-c,/usr/bin/php /srv/http/rutorrent/php/initplugins.php sdbox &amp;&#125;</div><div class="line">schedule = espace_disque_insuffisant,1,30,close_low_diskspace=500M</div></pre></td></tr></table></figure>
+<ul>
+<li>Give user permissions:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown --recursive sdbox:sdbox /home/sdbox</div><div class="line"># chown root:root /home/sdbox</div><div class="line"># chmod 755 /home/sdbox</div></pre></td></tr></table></figure>
+<ul>
+<li>Edit the virtual server conf:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/servers-available/seedbox</div></pre></td></tr></table></figure>
+<ul>
+<li>Add the conf:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> location /SDBOX</div><div class="line">&#123;</div><div class="line"> include scgi_params;</div><div class="line"> scgi_pass 127.0.0.1:5001;</div><div class="line"> auth_basic &quot;Restricted Area&quot;;</div><div class="line"> auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth sdbox&quot;;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>In order to do not install apache-tools, manually generate the auth file  for sdbox user (it will write over the file and don’t forget to change the password in the command):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo -n &quot;sdbox:&quot; | sudo tee /etc/nginx/auth/seedbox_auth &amp;&amp; openssl passwd -apr1 password | sudo tee -a /etc/nginx/auth/seedbox_auth</div></pre></td></tr></table></figure>
+<ul>
+<li>Protect the authentification file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 600 /etc/nginx/auth/seedbox_auth</div><div class="line"># chown http:http /etc/nginx/auth/*</div></pre></td></tr></table></figure>
+<ul>
+<li>Create ruTorrent config file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /srv/http/rutorrent/conf/users/sdbox</div><div class="line"># vim /srv/http/rutorrent/conf/users/sdbox/config.php</div></pre></td></tr></table></figure>
+<ul>
+<li>And add the content:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$pathToExternals[&apos;curl&apos;] = &apos;/usr/bin/curl&apos;;</div><div class="line">$topDirectory = &apos;/home/sdbox&apos;;</div><div class="line">$scgi_port = 5001;</div><div class="line">$scgi_host = &apos;127.0.0.1&apos;;</div><div class="line">$XMLRPCMountPoint = &apos;/SDBOX&apos;;</div></pre></td></tr></table></figure>
+<ul>
+<li>Correct permissions:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chown -R http:http /srv/http</div><div class="line"># systemctl restart nginx.service</div></pre></td></tr></table></figure>
+<h2 id="Create-a-rTorrent-service"><a href="#Create-a-rTorrent-service" class="headerlink" title="Create a rTorrent service"></a>Create a rTorrent service</h2><ul>
+<li>Create the file <code>/etc/systemd/user/rtorrent.service</code> containing:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=rTorrent Daemon</div><div class="line">After=network.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=forking</div><div class="line">KillMode=none</div><div class="line">User=sdbox</div><div class="line">ExecStart=/usr/bin/tmux new-session -c /mnt/storage/rtorrent -s rtorrent -n rtorrent -d rtorrent</div><div class="line">ExecStop=/usr/bin/bash -c &quot;/usr/bin/tmux send-keys -t rtorrent C-q &amp;&amp; while pidof rtorrent &gt; /dev/null; do sleep 0.5; done&quot;</div><div class="line">WorkingDirectory=/home/sdbox/</div><div class="line">Restart=on-failure</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable rtorrent at boot time and manually start it:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ systemctl --user enable rtorrent</div><div class="line">$ systemctl --user start rtorrent</div></pre></td></tr></table></figure>
+<p><strong>Source</strong>: <a href="https://www.sdbox.net/noobunschool/seedbox/installer-une-seedbox/" target="_blank" rel="external">sdbox</a>, <a href="https://wiki.archlinux.org/index.php/RTorrent#Installation" target="_blank" rel="external">wiki archlinux</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Warning-Post-in-construction&quot;&gt;&lt;a href=&quot;#Warning-Post-in-construction&quot; class=&quot;headerlink&quot; title=&quot;Warning: Post in construction&quot;&gt;&lt;/a&gt;W
+    
+    </summary>
+    
+      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
+    
+      <category term="archlinux" scheme="http://rawsec.ml/categories/linux/archlinux/"/>
+    
+    
+      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
+    
+      <category term="archlinux" scheme="http://rawsec.ml/tags/archlinux/"/>
+    
+  </entry>
   
   <entry>
     <title>ArchLinux - Install Zsh shell and oh-my-zsh</title>
@@ -160,6 +339,69 @@
   </entry>
   
   <entry>
+    <title>CTF(x) - 50 - crash - Forensics</title>
+    <link href="http://rawsec.ml/en/CTFx-50-crash-forensics/"/>
+    <id>http://rawsec.ml/en/CTFx-50-crash-forensics/</id>
+    <published>2016-08-26T22:00:00.000Z</published>
+    <updated>2016-08-28T17:17:45.245Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : CTF(x) 2016</li>
+<li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>defund was about to give this flag away until his computer crashed.</p>
+<p>file: <a href="http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">flag.zip</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR: <a href="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq" target="_blank" rel="external"><img src="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png" alt="asciicast"></a></p>
+<ul>
+<li><code>flag.zip</code> contains <code>.flag.txt.swp</code> and <code>flag.txt</code></li>
+<li>Extract the archive: <code>unzip flag.zip</code></li>
+<li>Recover/restore the file with the swap file: <code>vim -r flag/flag.txt</code></li>
+<li>You get some ASCII art of the flag: <code>ctf(v1m_is_be77er_than_3macs)</code>.</li>
+</ul>
+<p>Extract of VIM man page:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r          List swap files, with information about using them for recovery.</div><div class="line"></div><div class="line">-r &#123;file&#125;   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a</div><div class="line">            file with the same filename as the text file with &quot;.swp&quot; appended.  See &quot;:help recovery&quot;.</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CTF(x) - 50 - λ - Cryptography</title>
     <link href="http://rawsec.ml/en/CTFx-50-lambda-cryptography/"/>
     <id>http://rawsec.ml/en/CTFx-50-lambda-cryptography/</id>
@@ -241,11 +483,11 @@
   </entry>
   
   <entry>
-    <title>CTF(x) - 50 - crash - Forensics</title>
-    <link href="http://rawsec.ml/en/CTFx-50-crash-forensics/"/>
-    <id>http://rawsec.ml/en/CTFx-50-crash-forensics/</id>
-    <published>2016-08-26T22:00:00.000Z</published>
-    <updated>2016-08-28T17:17:45.245Z</updated>
+    <title>IceCTF - 30 - Move Along - Web</title>
+    <link href="http://rawsec.ml/en/IceCTF-30-Move-Along-Web/"/>
+    <id>http://rawsec.ml/en/IceCTF-30-Move-Along-Web/</id>
+    <published>2016-08-24T22:00:00.000Z</published>
+    <updated>2016-08-25T21:37:18.669Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -264,22 +506,20 @@
 </tbody>
 </table>
 <h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CTF(x) 2016</li>
-<li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
+<li><strong>Name</strong> : IceCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>defund was about to give this flag away until his computer crashed.</p>
-<p>file: <a href="http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">flag.zip</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR: <a href="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq" target="_blank" rel="external"><img src="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png" alt="asciicast"></a></p>
-<ul>
-<li><code>flag.zip</code> contains <code>.flag.txt.swp</code> and <code>flag.txt</code></li>
-<li>Extract the archive: <code>unzip flag.zip</code></li>
-<li>Recover/restore the file with the swap file: <code>vim -r flag/flag.txt</code></li>
-<li>You get some ASCII art of the flag: <code>ctf(v1m_is_be77er_than_3macs)</code>.</li>
-</ul>
-<p>Extract of VIM man page:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r          List swap files, with information about using them for recovery.</div><div class="line"></div><div class="line">-r &#123;file&#125;   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a</div><div class="line">            file with the same filename as the text file with &quot;.swp&quot; appended.  See &quot;:help recovery&quot;.</div></pre></td></tr></table></figure></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><a href="http://move-along.vuln.icec.tf/" target="_blank" rel="external">This site</a> seems awfully suspicious, do you think you can figure out what they’re hiding?</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li>Display source code <code>CTRL + U</code>.</li>
+<li>The page is only including an image <a href="http://move-along.vuln.icec.tf/move_along/nothing-to-see-here.jpg" target="_blank" rel="external"><code>http://move-along.vuln.icec.tf/move_along/nothing-to-see-here.jpg</code></a>.</li>
+<li>See the <code>move_along/</code> sub-folder and go in it <a href="http://move-along.vuln.icec.tf/move_along/" target="_blank" rel="external"><code>move_along/</code></a></li>
+<li>Nginx listing functionnality is not disabled so we can see there is a sub-folder [<code>0f76da769d67e021518f05b552406ff6/</code>][secretfolde] (dirb won’t work).</li>
+<li>There is a secret image <a href="http://move-along.vuln.icec.tf/move_along/0f76da769d67e021518f05b552406ff6/secret.jpg" target="_blank" rel="external"><code>secret.jpg</code></a> containing the flag <code>IceCTF{tH3_c4t_15_Ou7_oF_THe_b49}</code>.</li>
+</ol>
 ]]></content>
     
     <summary type="html">
@@ -299,7 +539,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
     
   </entry>
   
@@ -362,67 +602,6 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 30 - Move Along - Web</title>
-    <link href="http://rawsec.ml/en/IceCTF-30-Move-Along-Web/"/>
-    <id>http://rawsec.ml/en/IceCTF-30-Move-Along-Web/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-25T21:37:18.669Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><a href="http://move-along.vuln.icec.tf/" target="_blank" rel="external">This site</a> seems awfully suspicious, do you think you can figure out what they’re hiding?</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Display source code <code>CTRL + U</code>.</li>
-<li>The page is only including an image <a href="http://move-along.vuln.icec.tf/move_along/nothing-to-see-here.jpg" target="_blank" rel="external"><code>http://move-along.vuln.icec.tf/move_along/nothing-to-see-here.jpg</code></a>.</li>
-<li>See the <code>move_along/</code> sub-folder and go in it <a href="http://move-along.vuln.icec.tf/move_along/" target="_blank" rel="external"><code>move_along/</code></a></li>
-<li>Nginx listing functionnality is not disabled so we can see there is a sub-folder [<code>0f76da769d67e021518f05b552406ff6/</code>][secretfolde] (dirb won’t work).</li>
-<li>There is a secret image <a href="http://move-along.vuln.icec.tf/move_along/0f76da769d67e021518f05b552406ff6/secret.jpg" target="_blank" rel="external"><code>secret.jpg</code></a> containing the flag <code>IceCTF{tH3_c4t_15_Ou7_oF_THe_b49}</code>.</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
     
   </entry>
   
@@ -553,73 +732,6 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 40 - Alien Message - Cryptography</title>
-    <link href="http://rawsec.ml/en/IceCTF-40-Alien-Message-Cryptography/"/>
-    <id>http://rawsec.ml/en/IceCTF-40-Alien-Message-Cryptography/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-25T22:01:41.873Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We found this <a href="https://play.icec.tf/problem-static/alien_message_b84f283848b7f34fd4c7529186e66e120b0a374c9d0f2a225b0a7a215716afb5.png" target="_blank" rel="external">suspicous image</a> online and it looked like it had been planted there by an alien life form. Can you see if you can figure out what they’re trying to tell us?</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
-<li>I was pretty sure this picture contein normal text written with a special font so I began to look for alien font/code.</li>
-<li>Thanks to <a href="http://io9.gizmodo.com/5218119/13-alien-languages-you-can-actually-read" target="_blank" rel="external">this</a> article I found it was the <strong>Alienese I</strong> font from <em>Futurama</em>.</li>
-<li><p>Quote from <a href="http://futurama.wikia.com/wiki/Alienese" target="_blank" rel="external">futurama.wikia.com</a>:</p>
-<blockquote>
-<p>The first language, a simple substitution cipher, was solved almost instantly.</p>
-</blockquote>
-</li>
-<li><p>So I looked for decoders for a faster result: I found one here <a href="http://cs.oswego.edu/~dreichel/alienese_decoder/" target="_blank" rel="external">cs.oswego.edu</a> and one here <a href="http://www.gotfuturama.com/Interactive/AlienCodec/" target="_blank" rel="external">gotfuturama.com</a></p>
-</li>
-<li><strong>Flag</strong>: <code>IceCTF{good_n3wz_3veryon3_1_l1k3_fu7ur4ma_4nd_th3ir_4maz1ng_3as7er_39g5}</code></li>
-</ul>
-<p><strong>POV</strong>: This challenge? Cryptography? Really? … I deplore to still have this kind of challenge in CTF. That’s nothing but a lost of time and that have nothing to do with security. That’s even not stego because from the beginning we know that’s just a font, it’s just pain!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
-    
-  </entry>
-  
-  <entry>
     <title>IceCTF - 40 - Complacent - Reconnaissance</title>
     <link href="http://rawsec.ml/en/IceCTF-40-Complacent-Reconnaissance/"/>
     <id>http://rawsec.ml/en/IceCTF-40-Complacent-Reconnaissance/</id>
@@ -694,6 +806,73 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="reconnaissance" scheme="http://rawsec.ml/tags/reconnaissance/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IceCTF - 40 - Alien Message - Cryptography</title>
+    <link href="http://rawsec.ml/en/IceCTF-40-Alien-Message-Cryptography/"/>
+    <id>http://rawsec.ml/en/IceCTF-40-Alien-Message-Cryptography/</id>
+    <published>2016-08-24T22:00:00.000Z</published>
+    <updated>2016-08-25T22:01:41.873Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : IceCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We found this <a href="https://play.icec.tf/problem-static/alien_message_b84f283848b7f34fd4c7529186e66e120b0a374c9d0f2a225b0a7a215716afb5.png" target="_blank" rel="external">suspicous image</a> online and it looked like it had been planted there by an alien life form. Can you see if you can figure out what they’re trying to tell us?</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<li>I was pretty sure this picture contein normal text written with a special font so I began to look for alien font/code.</li>
+<li>Thanks to <a href="http://io9.gizmodo.com/5218119/13-alien-languages-you-can-actually-read" target="_blank" rel="external">this</a> article I found it was the <strong>Alienese I</strong> font from <em>Futurama</em>.</li>
+<li><p>Quote from <a href="http://futurama.wikia.com/wiki/Alienese" target="_blank" rel="external">futurama.wikia.com</a>:</p>
+<blockquote>
+<p>The first language, a simple substitution cipher, was solved almost instantly.</p>
+</blockquote>
+</li>
+<li><p>So I looked for decoders for a faster result: I found one here <a href="http://cs.oswego.edu/~dreichel/alienese_decoder/" target="_blank" rel="external">cs.oswego.edu</a> and one here <a href="http://www.gotfuturama.com/Interactive/AlienCodec/" target="_blank" rel="external">gotfuturama.com</a></p>
+</li>
+<li><strong>Flag</strong>: <code>IceCTF{good_n3wz_3veryon3_1_l1k3_fu7ur4ma_4nd_th3ir_4maz1ng_3as7er_39g5}</code></li>
+</ul>
+<p><strong>POV</strong>: This challenge? Cryptography? Really? … I deplore to still have this kind of challenge in CTF. That’s nothing but a lost of time and that have nothing to do with security. That’s even not stego because from the beginning we know that’s just a font, it’s just pain!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
     
   </entry>
   
@@ -876,11 +1055,11 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 50 - Corrupt Transmission - Forensics</title>
-    <link href="http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/"/>
-    <id>http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/</id>
+    <title>IceCTF - 45 - Toke - Web</title>
+    <link href="http://rawsec.ml/en/IceCTF-45-Toke-Web/"/>
+    <id>http://rawsec.ml/en/IceCTF-45-Toke-Web/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T22:58:43.700Z</updated>
+    <updated>2016-08-26T23:38:10.692Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -905,33 +1084,21 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We intercepted this image, but it must have gotten corrupted during the transmission. Can you try and fix it? <a href="https://play.icec.tf/problem-static/corrupt_92cee405924ad39fb513e3ef910699b79bb6d45cc5046c051eb9aab3546e22c3.png" target="_blank" rel="external">corrupt.png</a></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I have a feeling they were pretty high when they made <a href="http://toke.vuln.icec.tf/" target="_blank" rel="external">this website…</a></p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Check the file type:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file corrupt.png</div><div class="line">corrupt.png: data</div></pre></td></tr></table></figure>
+<li>Register a user an login with it.</li>
+<li>With your browser network analyser loot at cookies in response header of the HTTP request: <code>Set-Cookie: jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0;</code>.</li>
+<li><strong>JWT</strong> stands for <strong>JSON Web Tokens</strong> and is composed of 3 parts:<ul>
+<li>Part1: Header, is base64 encoded, show hash algorithm.</li>
+<li>Part2: Payload, base64 encoded, content.</li>
+<li>Part3: Signature, signature, concatenation of header + content and then encoded with the hash algorithm contained in the header.</li>
+</ul>
 </li>
-<li><p>This PNG is clearly corrupted, check what’s wrong:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pngcheck corrupt.png</div><div class="line">corrupt.png:  CORRUPTED by text conversion</div><div class="line">ERROR: corrupt.png</div><div class="line"></div><div class="line">pngcheck -v corrupt.png</div><div class="line">File: corrupt.png (469363 bytes)</div><div class="line">  File is CORRUPTED.  It seems to have suffered EOL conversion.</div><div class="line">  It was probably transmitted in text mode.</div><div class="line">ERRORS DETECTED in corrupt.png</div></pre></td></tr></table></figure>
-</li>
-<li><p>This kind of error may occurs when an image (binary) was downloaded as ASCII text.</p>
-</li>
-<li><p>First, we’ll check the PNG header with <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png</div><div class="line">00000000: 9050 4e47 0e1a 0a1b                      .PNG....</div></pre></td></tr></table></figure>
-</li>
-<li><p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature" target="_blank" rel="external">PNG spec</a> tell us that not the right header, good header should be:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(decimal)              137  80  78  71  13  10  26  10</div><div class="line">(hexadecimal)           89  50  4e  47  0d  0a  1a  0a</div><div class="line">(ASCII C notation)    \211   P   N   G  \r  \n \032 \n</div></pre></td></tr></table></figure>
-</li>
-<li><p>Let’s fix it with <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">HT</a> hex editor.</p>
-</li>
-<li><p>Now it sounds right:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png.fix</div><div class="line">00000000: 8950 4e47 0d0a 1a0a                      .PNG....</div><div class="line"></div><div class="line">pngcheck corrupt.png.fix</div><div class="line">corrupt.png.fix  additional data after IEND chunk</div><div class="line">ERROR: corrupt.png.fix</div></pre></td></tr></table></figure>
-</li>
-<li><p>There is still an error but now PNG is recognized and we can display the image:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">file corrupt.png.fix</div><div class="line">corrupt.png.fix: PNG image data, 500 x 408, 8-bit/color RGBA, non-interlaced</div><div class="line"></div><div class="line">pngcheck -v corrupt.png.fix</div><div class="line">File: corrupt.png.fix (469363 bytes)</div><div class="line">  chunk IHDR at offset 0x0000c, length 13</div><div class="line">    500 x 408 image, 32-bit RGB+alpha, non-interlaced</div><div class="line">  chunk bKGD at offset 0x00025, length 6</div><div class="line">    red = 0x00ff, green = 0x00ff, blue = 0x00ff</div><div class="line">  chunk pHYs at offset 0x00037, length 9: 2835x2835 pixels/meter (72 dpi)</div><div class="line">  chunk tIME at offset 0x0004c, length 7: 20 Jun 2016 03:20:08 UTC</div><div class="line">  chunk IDAT at offset 0x0005f, length 8192</div><div class="line">    zlib: deflated, 32K window, maximum compression</div><div class="line">  chunk IDAT at offset 0x0206b, length 8192</div><div class="line">  chunk IDAT at offset 0x04077, length 8192</div><div class="line">  chunk IDAT at offset 0x06083, length 8192</div><div class="line">  chunk IDAT at offset 0x0808f, length 8192</div><div class="line">  chunk IDAT at offset 0x0a09b, length 8192</div><div class="line">  chunk IDAT at offset 0x0c0a7, length 8192</div><div class="line">  chunk IDAT at offset 0x0e0b3, length 8192</div><div class="line">  chunk IDAT at offset 0x100bf, length 8192</div><div class="line">  chunk IDAT at offset 0x120cb, length 8192</div><div class="line">  chunk IDAT at offset 0x140d7, length 8192</div><div class="line">  chunk IDAT at offset 0x160e3, length 8192</div><div class="line">  chunk IDAT at offset 0x180ef, length 8192</div><div class="line">  chunk IDAT at offset 0x1a0fb, length 8192</div><div class="line">  chunk IDAT at offset 0x1c107, length 8192</div><div class="line">  chunk IDAT at offset 0x1e113, length 8192</div><div class="line">  chunk IDAT at offset 0x2011f, length 8192</div><div class="line">  chunk IDAT at offset 0x2212b, length 8192</div><div class="line">  chunk IDAT at offset 0x24137, length 8192</div><div class="line">  chunk IDAT at offset 0x26143, length 8192</div><div class="line">  chunk IDAT at offset 0x2814f, length 8192</div><div class="line">  chunk IDAT at offset 0x2a15b, length 8192</div><div class="line">  chunk IDAT at offset 0x2c167, length 8192</div><div class="line">  chunk IDAT at offset 0x2e173, length 8192</div><div class="line">  chunk IDAT at offset 0x3017f, length 8192</div><div class="line">  chunk IDAT at offset 0x3218b, length 8192</div><div class="line">  chunk IDAT at offset 0x34197, length 8192</div><div class="line">  chunk IDAT at offset 0x361a3, length 8192</div><div class="line">  chunk IDAT at offset 0x381af, length 8192</div><div class="line">  chunk IDAT at offset 0x3a1bb, length 8192</div><div class="line">  chunk IDAT at offset 0x3c1c7, length 8192</div><div class="line">  chunk IDAT at offset 0x3e1d3, length 8192</div><div class="line">  chunk IDAT at offset 0x401df, length 8192</div><div class="line">  chunk IDAT at offset 0x421eb, length 8192</div><div class="line">  chunk IDAT at offset 0x441f7, length 8192</div><div class="line">  chunk IDAT at offset 0x46203, length 8192</div><div class="line">  chunk IDAT at offset 0x4820f, length 8192</div><div class="line">  chunk IDAT at offset 0x4a21b, length 8192</div><div class="line">  chunk IDAT at offset 0x4c227, length 8192</div><div class="line">  chunk IDAT at offset 0x4e233, length 8192</div><div class="line">  chunk IDAT at offset 0x5023f, length 8192</div><div class="line">  chunk IDAT at offset 0x5224b, length 8192</div><div class="line">  chunk IDAT at offset 0x54257, length 8192</div><div class="line">  chunk IDAT at offset 0x56263, length 8192</div><div class="line">  chunk IDAT at offset 0x5826f, length 8192</div><div class="line">  chunk IDAT at offset 0x5a27b, length 8192</div><div class="line">  chunk IDAT at offset 0x5c287, length 8192</div><div class="line">  chunk IDAT at offset 0x5e293, length 8192</div><div class="line">  chunk IDAT at offset 0x6029f, length 8192</div><div class="line">  chunk IDAT at offset 0x622ab, length 8192</div><div class="line">  chunk IDAT at offset 0x642b7, length 8192</div><div class="line">  chunk IDAT at offset 0x662c3, length 8192</div><div class="line">  chunk IDAT at offset 0x682cf, length 8192</div><div class="line">  chunk IDAT at offset 0x6a2db, length 8192</div><div class="line">  chunk IDAT at offset 0x6c2e7, length 8192</div><div class="line">  chunk IDAT at offset 0x6e2f3, length 8192</div><div class="line">  chunk IDAT at offset 0x702ff, length 8192</div><div class="line">  chunk IDAT at offset 0x7230b, length 1619</div><div class="line">  chunk IEND at offset 0x7296a, length 0</div><div class="line">  additional data after IEND chunk</div><div class="line">ERRORS DETECTED in corrupt.png.fix</div><div class="line"></div><div class="line">display corrupt.png.fix</div></pre></td></tr></table></figure>
-</li>
-<li><p>Flag is <code>IceCTF{t1s_but_4_5cr4tch}</code>.</p>
+<li>So <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0</code> match with <code>header.payload.signature</code>.</li>
+<li>So we get:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">printf &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot; | base64 -d</div><div class="line">&#123;&quot;alg&quot;:&quot;HS256&quot;,&quot;typ&quot;:&quot;JWT&quot;&#125;</div><div class="line"></div><div class="line">printf &quot;eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ&quot; | base64 -d</div><div class="line">&#123;&quot;flag&quot;:&quot;IceCTF&#123;jW7_t0K3ns_4Re_nO_p14CE_fOR_53CrE7S&#125;&quot;,&quot;user&quot;:&quot;aza&quot;&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
+<p>An introduction to JSON Web Tokens is available <a href="https://jwt.io/introduction/" target="_blank" rel="external">here</a>.</p>
 ]]></content>
     
     <summary type="html">
@@ -951,7 +1118,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
     
   </entry>
   
@@ -1201,84 +1368,6 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="stegano" scheme="http://rawsec.ml/tags/stegano/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 55 - Demo - Pwn</title>
-    <link href="http://rawsec.ml/en/IceCTF-55-Demo-Pwn/"/>
-    <id>http://rawsec.ml/en/IceCTF-55-Demo-Pwn/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-08-26T23:38:10.695Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I found this awesome premium shell, but my demo version just ran out… can you help me crack it? <code>/home/demo/</code> on the shell.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Connect to the shell provided by IceCTF.</li>
-<li>Go to <code>/home/demo/</code>.</li>
-<li><p>Our goal is to display <code>flag.txt</code> but it is impossible ofr the moment:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ cat flag.txt</div><div class="line">cat: flag.txt: Permission denied</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ sh</div><div class="line">$ cat /home/demo/flag.txt</div><div class="line">cat: /home/demo/flag.txt: Permission denied</div></pre></td></tr></table></figure>
-</li>
-<li><p>Display <code>demo.c</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#define _GNU_SOURCE</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;libgen.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">void give_shell() &#123;</div><div class="line">    gid_t gid = getegid();</div><div class="line">    setresgid(gid, gid, gid);</div><div class="line">    system(&quot;/bin/sh&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">    if(strncmp(basename(getenv(&quot;_&quot;)), &quot;icesh&quot;, 6) == 0)&#123;</div><div class="line">        give_shell();</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        printf(&quot;I&apos;m sorry, your free trial has ended.\n&quot;);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>To call <code>give_shell()</code> we have to bypass the if statement.</p>
-</li>
-<li>We need the <code>_</code> environment variable to be <code>_=icesh</code>.</li>
-<li><p>But our zsh shell don’t allow us to change: <code>_</code> is read-only and we can’t make it writable.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ export \_=icesh</div><div class="line">zsh: read-only variable: _</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ typeset +rx \_=icesh</div><div class="line">typeset: _: can&apos;t change type of a special parameter</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>_</code> contain the name of the last command but launching <code>icesh</code> and then <code>./demo</code> doesn’t work in this environment because the last command is <code>./demo</code> so <code>_=./demo</code>.</p>
-</li>
-<li>As <code>give_shell()</code> will give us a <code>/bin/sh</code>, let’s try with it.</li>
-<li>Start a <code>/bin/sh</code>.</li>
-<li>With <code>/bin/sh</code>, <code>_</code> contain the last command before last one, so running <code>icesh</code> and then <code>./demo</code> will work: <code>_=icesh</code>.</li>
-<li>So that launch <code>give_shell()</code> and give a <code>/bin/sh</code> enhanced with special gid instead of having <em>I’m sorry, your free trial has ended.</em> printed.</li>
-<li>With this empowered shell we can display the <code>flag.txt</code> file:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat /home/demo/flag.txt</div><div class="line">IceCTF&#123;wH0_WoU1d_3vr_7Ru5t_4rgV&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="pwn" scheme="http://rawsec.ml/tags/pwn/"/>
     
   </entry>
   
