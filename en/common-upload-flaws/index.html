@@ -3,18 +3,47 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Tag: writeups | RawSec</title>
+    <title>Common upload flaws | RawSec</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="a cybersecurity and IT blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="RawSec">
-<meta property="og:url" content="http://rawsec.ml/tags/writeups/page/5/index.html">
+        <meta name="keywords" content="security,web,php" />
+    
+    <meta name="description" content="If a remote web server let you upload and execute scripts so this is beginning to turn turn bad.
+Here are some common upload flaws:
+
+extensions blacklist
+double extensions
+MIME type
+Null Byte
+
+Extensi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Common upload flaws">
+<meta property="og:url" content="http://rawsec.ml/en/common-upload-flaws/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="a cybersecurity and IT blog">
+<meta property="og:description" content="If a remote web server let you upload and execute scripts so this is beginning to turn turn bad.
+Here are some common upload flaws:
+
+extensions blacklist
+double extensions
+MIME type
+Null Byte
+
+Extensi">
+<meta property="og:image" content="http://rawsec.ml/images/security-265130_640.jpg">
+<meta property="og:updated_time" content="2016-09-21T18:40:18.041Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RawSec">
-<meta name="twitter:description" content="a cybersecurity and IT blog">
+<meta name="twitter:title" content="Common upload flaws">
+<meta name="twitter:description" content="If a remote web server let you upload and execute scripts so this is beginning to turn turn bad.
+Here are some common upload flaws:
+
+extensions blacklist
+double extensions
+MIME type
+Null Byte
+
+Extensi">
+<meta name="twitter:image" content="http://rawsec.ml/images/security-265130_640.jpg">
     
 
     
@@ -144,731 +173,137 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>Tag: <em>writeups</em>
+    <a class="page-title-link" href="/categories/security/">security</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            
+                            <article id="post-common-upload-flaws" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Common upload flaws
+        </h1>
+    
 
-    
-    
+            </header>
         
         
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
+            <div class="article-subtitle">
+                <a href="/en/common-upload-flaws/" class="article-date">
+    <time datetime="2016-09-20T22:00:00.000Z" itemprop="datePublished">Wednesday 21 September 2016 (2016-09-21)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
+
             </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
         
-        <a href="/en/ABCTF-50-Archive-Me-Reconaissance/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 50 - Archive Me - Reconaissance" class="thumbnail-image"></span>
-    
-    
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-50-Archive-Me-Reconaissance/">0</span>
-    
-</span>
+        <div class="article-entry" itemprop="articleBody">
+            <p>If a remote web server let you upload and execute scripts so this is beginning to turn turn bad.</p>
+<p>Here are some common upload flaws:</p>
+<ul>
+<li>extensions blacklist</li>
+<li>double extensions</li>
+<li>MIME type</li>
+<li>Null Byte</li>
+</ul>
+<h2 id="Extensions-blacklist"><a href="#Extensions-blacklist" class="headerlink" title="Extensions blacklist"></a>Extensions blacklist</h2><p>Blacklists are a bad idea in security.</p>
+<p>For example if a server check that there is no <code>.php</code> file extension uploaded. Ok, you may upload a php script saved as <code>.png</code> but even if it is include or publicly available you won’t be able to execute it. So what? Did you know that a php server also interpret <code>.php2</code>, <code>.pwml</code>, <code>.phtml</code>?</p>
+<p>Whit a blacklist, an administrator can forget to add them all. So to protect you, a better solution will be to establish a whitelist of authorized extension instead of a blacklist of forbidden ones.</p>
+<h2 id="Double-extensions"><a href="#Double-extensions" class="headerlink" title="Double extensions"></a>Double extensions</h2><p>A server is filtering authorized extensions and only <code>.jpg</code>, <code>.gif</code>, <code>.jpeg</code>, <code>.png</code> authorized.</p>
+<p>This kind of verification will only check the end extension with a regex matching what is after the dot in the filename.</p>
+<p>To bypass this just rename your files from <code>file.php</code> to <code>file.php.png</code>.</p>
+<p>In practice this is not so effective because the file have not the desired file extensions.</p>
+<p>To protect from this kind of attack don’t trust filename, ignore them and rename the file with a hash. And before accepting it you may want to check what the file really is with the MIME type. Once uploaded on the server check again for example with file signature header and because it can be fake you can also you other methods. For example if you only allow png images use pngcheck to be sure that’s really a png.</p>
+<h2 id="MIME-type"><a href="#MIME-type" class="headerlink" title="MIME type"></a>MIME type</h2><p>If an attacker name is php script <code>image.png</code> and temper his request and modify the content type from <code>application/octet-stream</code> to <code>image/png</code>, how can you know that’s not an image?</p>
+<p>As said previously, don’t trust client side, check again server side.</p>
+<h2 id="Null-byte"><a href="#Null-byte" class="headerlink" title="Null byte"></a>Null byte</h2><p>Double extensions works on the server but you can execute your script with an image extension? Let’s fix that.</p>
+<p>Just usethe this old flaw: injection of a null byte, that will stop the php server reading the name of the file after the null byte.</p>
+<p>Name your script something like <code>script.php%00.png</code> and upload it. What’s <code>%00</code>? It’s the hexadecimal representation of the null byte encoded for http. How does it work? See my <a href="/en/local-file-inclusion-vulnerability/#Null-Byte-Injection">post about LFI</a>, I talked about Null Byte injection.</p>
+<p>To protect yourself still the same recommendation: check server side. You also need to keep your PHP version up to date because that flaw was corrected. And a more smart name parsing will only be better.</p>
 
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
         </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-50-Archive-Me-Reconaissance/">ABCTF - 50 - Archive Me - Reconaissance</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
+        <footer class="article-footer">
+            
 
 
 
+    <a data-url="http://rawsec.ml/en/common-upload-flaws/" data-id="citd98r6l0062wz4hxbplfbmd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
 
-noraj
-1.0
-Creation
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
 
+            if ($('#' + id).length) {
+                box = $('#' + id);
 
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
 
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
+              box = $(html);
 
-DescriptionIf you could 
-        </p>
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
 </article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/ABCTF-10-Elemental-Web-Exploitation/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 10 - Elemental - Web Exploitation" class="thumbnail-image"></span>
-    
+    <section id="comments">
     
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-10-Elemental-Web-Exploitation/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-10-Elemental-Web-Exploitation/">ABCTF - 10 - Elemental - Web Exploitation</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
-
-
-
-
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
-
-DescriptionJust put in t
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/ABCTF-35-The-Flash-Web-Exploitation/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 35 - The Flash - Web Exploitation" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-35-The-Flash-Web-Exploitation/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-35-The-Flash-Web-Exploitation/">ABCTF - 35 - The Flash - Web Exploitation</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
-
-
-
-
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
-
-DescriptionCan you someh
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/ABCTF-30-TGIF-Programming/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 30 - TGIF - Programming" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-30-TGIF-Programming/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-30-TGIF-Programming/">ABCTF - 30 - TGIF - Programming</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
-
-
-
-
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
-
-DescriptionFriday is the
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/ABCTF-30-GZ-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 30 - GZ - Forensics" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-30-GZ-Forensics/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-30-GZ-Forensics/">ABCTF - 30 - GZ - Forensics</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
-
-
-
-
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
-
-DescriptionWe shot a fla
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/ABCTF-15-Just-open-it-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 15 - Just open it - Forensics" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-15-Just-open-it-Forensics/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-15-Just-open-it-Forensics/">ABCTF - 15 - Just open it - Forensics</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
-
-
-
-
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
-
-DescriptionI’m almost po
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
 
     
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/ABCTF-10-Virtual-Box-1-Virtual-Series/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 10 - Virtual Box 1 - Virtual Series" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-10-Virtual-Box-1-Virtual-Series/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-10-Virtual-Box-1-Virtual-Series/">ABCTF - 10 - Virtual Box 1 - Virtual Series</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
-
-
-
-
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
-
-DescriptionDo you know h
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/ABCTF-15-Virtual-Box-2-Virtual-Series/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 15 - Virtual Box 2 - Virtual Series" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-15-Virtual-Box-2-Virtual-Series/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-15-Virtual-Box-2-Virtual-Series/">ABCTF - 15 - Virtual Box 2 - Virtual Series</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
-
-
-
-
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
-
-DescriptionDarn, I found
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/ABCTF-10-Caesar-Salad-Cryptography/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ABCTF - 10 - Caesar Salad - Cryptography" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-10-Caesar-Salad-Cryptography/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-10-Caesar-Salad-Cryptography/">ABCTF - 10 - Caesar Salad - Cryptography</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Version
-Comment
-
-
-
-
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
-
-DescriptionMost definite
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/writeups-forensic-busybee/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="Writeups - Forensic - BusyBee" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/writeups-forensic-busybee/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-01T22:00:00.000Z" itemprop="datePublished">Saturday 2 July 2016 (2016-07-02)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/writeups-forensic-busybee/">Writeups - Forensic - BusyBee</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-Date
-By
-Version
-Comment
-
-
-
-
-05/06/2016
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : BackdoorCTF 2016
-Website : https://backdoor.sdslabs.co
-Type : Online
-Format : Jeopardy
-CTF Time : link
-
-Na
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
-
-
-    <nav id="page-nav">
-        <span class="pages">Page 5 of 6</span>
-        <a class="extend prev" rel="prev" href="/tags/writeups/page/4/">&laquo;</a><a class="page-number" href="/tags/writeups/">1</a><span class="space">&hellip;</span><a class="page-number" href="/tags/writeups/page/3/">3</a><a class="page-number" href="/tags/writeups/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/tags/writeups/page/6/">6</a><a class="extend next" rel="next" href="/tags/writeups/page/6/">&raquo;</a>
-    </nav>
-
+    </section>
 
                         </div>
                     </section>
@@ -928,6 +363,19 @@ Na
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/en/CSAW-2016-50-kill-forensics/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">CSAW CTF - 50 - Kill - Forensics</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -1123,11 +571,13 @@ Na
     var disqus_shortname = 'rawsec';
     
     
+    var disqus_url = 'http://rawsec.ml/en/common-upload-flaws/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
