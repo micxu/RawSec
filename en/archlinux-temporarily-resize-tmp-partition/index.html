@@ -3,22 +3,25 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Learn Linux: Help | RawSec</title>
+    <title>ArchLinux - Temporarily resize /tmp partition | RawSec</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="linux" />
+        <meta name="keywords" content="linux,archlinux" />
     
-    <meta name="description" content="What is the man? Let’s see what it says itself:1234$ man -f manman (1)              - an interface to the on-line reference manualsman (7)              - macros to format man pagesman (1p)">
+    <meta name="description" content="Contexttmpfs is a temporary file system that resides in memory and/or swap partition(s).
+tmpfs is commonly used for /tmp. By default, a tmpfs has its maximum size set to half the total of RAM. Note th">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Learn Linux: Help">
-<meta property="og:url" content="http://rawsec.ml/en/learn-linux-help/index.html">
+<meta property="og:title" content="ArchLinux - Temporarily resize /tmp partition">
+<meta property="og:url" content="http://rawsec.ml/en/archlinux-temporarily-resize-tmp-partition/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="What is the man? Let’s see what it says itself:1234$ man -f manman (1)              - an interface to the on-line reference manualsman (7)              - macros to format man pagesman (1p)">
+<meta property="og:description" content="Contexttmpfs is a temporary file system that resides in memory and/or swap partition(s).
+tmpfs is commonly used for /tmp. By default, a tmpfs has its maximum size set to half the total of RAM. Note th">
 <meta property="og:image" content="http://rawsec.ml/images/tux-293844_640.png">
-<meta property="og:updated_time" content="2016-10-12T21:07:54.482Z">
+<meta property="og:updated_time" content="2016-10-15T16:37:51.804Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Learn Linux: Help">
-<meta name="twitter:description" content="What is the man? Let’s see what it says itself:1234$ man -f manman (1)              - an interface to the on-line reference manualsman (7)              - macros to format man pagesman (1p)">
+<meta name="twitter:title" content="ArchLinux - Temporarily resize /tmp partition">
+<meta name="twitter:description" content="Contexttmpfs is a temporary file system that resides in memory and/or swap partition(s).
+tmpfs is commonly used for /tmp. By default, a tmpfs has its maximum size set to half the total of RAM. Note th">
 <meta name="twitter:image" content="http://rawsec.ml/images/tux-293844_640.png">
     
 
@@ -149,18 +152,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/linux/">linux</a>
+    <a class="page-title-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/linux/archlinux/">archlinux</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-learn-linux-help" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-archlinux-temporarily-resize-tmp-partition" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Learn Linux: Help
+        ArchLinux - Temporarily resize /tmp partition
         </h1>
     
 
@@ -168,40 +171,26 @@ ga('send', 'pageview');
         
         
             <div class="article-subtitle">
-                <a href="/en/learn-linux-help/" class="article-date">
-    <time datetime="2014-09-06T22:00:00.000Z" itemprop="datePublished">Sunday 7 September 2014 (2014-09-07)</time>
+                <a href="/en/archlinux-temporarily-resize-tmp-partition/" class="article-date">
+    <time datetime="2016-10-14T22:00:00.000Z" itemprop="datePublished">Saturday 15 October 2016 (2016-10-15)</time>
 </a>
                 
-    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/archlinux/">archlinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>What is the <code>man</code>? Let’s see what it says itself:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ man -f man</div><div class="line">man (1)              - an interface to the on-line reference manuals</div><div class="line">man (7)              - macros to format man pages</div><div class="line">man (1p)             - display system documentation</div></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>man</strong></td>
-<td>Explanation manual for commands and files</td>
-</tr>
-<tr>
-<td><strong>man -f</strong> <em>or</em> <strong>whatis</strong></td>
-<td>Short description for a command</td>
-</tr>
-<tr>
-<td><strong>man -k</strong> <em>or</em> <strong>apropos</strong></td>
-<td>Commands list containing the argument keyword</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ man -f unzip</div><div class="line">unzip (1)            - list, test and extract compressed files in a ZIP archive</div><div class="line"></div><div class="line">$ man -k unzip</div><div class="line">bunzip2 (1)          - a block-sorting file compressor, v1.0.6</div><div class="line">funzip (1)           - filter for extracting from a ZIP archive in a pipe</div><div class="line">gunzip (1)           - compress or expand files</div><div class="line">hunzip (1)           - decompress and decrypt hzip files to the standard output</div><div class="line">mtx-unzip (1)        - (sujet inconnu)</div><div class="line">unzip (1)            - list, test and extract compressed files in a ZIP archive</div><div class="line">unzipsfx (1)         - self-extracting stub for prepending to ZIP archives</div></pre></td></tr></table></figure></p>
+            <h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p><a href="https://wiki.archlinux.org/index.php/Tmpfs" target="_blank" rel="external">tmpfs</a> is a temporary file system that resides in memory and/or swap partition(s).</p>
+<p><a href="https://wiki.archlinux.org/index.php/Tmpfs" target="_blank" rel="external">tmpfs</a> is commonly used for <code>/tmp</code>. By default, a tmpfs has its maximum size set to half the total of RAM. Note that the actual memory/swap consumption depends on how much you fill it up, as tmpfs partitions do not consume any memory until it is actually needed.</p>
+<p>Problem example: You want to build an Android development lab in a VM. You set VM RAM to <strong>2GB</strong>. So by default, <code>/tmp</code> size will be <strong>1GB</strong>. You begin to install <a href="https://developer.android.com/studio/index.html" target="_blank" rel="external">Android Studio</a> but an error occured, telling you that there is not enough space on the disk. That’s because <code>/tmp</code> is too small to contain all temporary downloads of Android Studio during the install process.</p>
+<h2 id="Fix"><a href="#Fix" class="headerlink" title="Fix"></a>Fix</h2><p>For a problem like the prvious example, we don’t want to do a permanent change as that’s just a punctual need. So to fix the problem we’ll temporarily increase the size of <code>/tmp</code>. It is posible because in our example the VM has 2GB RAM + 4GB SWAP, so we can increase a tmpfs partition up to 6GB.</p>
+<p>Before the resizing:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ df /tmp                                           </div><div class="line">Filesystem     1K-blocks  Used Available Use% Mounted on</div><div class="line">tmpfs            1048576    84   1048492   1% /tmp</div></pre></td></tr></table></figure>
+<p>Temporary resize:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount -o remount,size=4G,noatime /tmp</div></pre></td></tr></table></figure>
+<p>After the resizing:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ df /tmp</div><div class="line">Filesystem     1K-blocks  Used Available Use% Mounted on</div><div class="line">tmpfs            4194304    80   4194224   1% /tmp</div></pre></td></tr></table></figure>
 
         </div>
         <footer class="article-footer">
@@ -209,7 +198,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/learn-linux-help/" data-id="ciubffviy0085orj3q2rvdwjg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/archlinux-temporarily-resize-tmp-partition/" data-id="ciubffvfn0047orj3w8zaxcyf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -345,20 +334,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/install-oh-my-zsh-opensuse/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            Install Oh-my-zsh on openSUSE
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/en/reach-command-line-interface-text-mode-boot-time/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/proxy-linux/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Reach the command line interface (text mode) at boot time</p>
+        <p class="article-nav-title">Setup a proxy under Linux</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -559,7 +538,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'rawsec';
     
     
-    var disqus_url = 'http://rawsec.ml/en/learn-linux-help/';
+    var disqus_url = 'http://rawsec.ml/en/archlinux-temporarily-resize-tmp-partition/';
     
     (function() {
     var dsq = document.createElement('script');

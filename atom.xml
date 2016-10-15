@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rawsec.ml/"/>
-  <updated>2016-10-13T20:26:51.769Z</updated>
+  <updated>2016-10-15T16:37:51.804Z</updated>
   <id>http://rawsec.ml/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ArchLinux - Temporarily resize /tmp partition</title>
+    <link href="http://rawsec.ml/en/archlinux-temporarily-resize-tmp-partition/"/>
+    <id>http://rawsec.ml/en/archlinux-temporarily-resize-tmp-partition/</id>
+    <published>2016-10-14T22:00:00.000Z</published>
+    <updated>2016-10-15T16:37:51.804Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p><a href="https://wiki.archlinux.org/index.php/Tmpfs" target="_blank" rel="external">tmpfs</a> is a temporary file system that resides in memory and/or swap partition(s).</p>
+<p><a href="https://wiki.archlinux.org/index.php/Tmpfs" target="_blank" rel="external">tmpfs</a> is commonly used for <code>/tmp</code>. By default, a tmpfs has its maximum size set to half the total of RAM. Note that the actual memory/swap consumption depends on how much you fill it up, as tmpfs partitions do not consume any memory until it is actually needed.</p>
+<p>Problem example: You want to build an Android development lab in a VM. You set VM RAM to <strong>2GB</strong>. So by default, <code>/tmp</code> size will be <strong>1GB</strong>. You begin to install <a href="https://developer.android.com/studio/index.html" target="_blank" rel="external">Android Studio</a> but an error occured, telling you that there is not enough space on the disk. That’s because <code>/tmp</code> is too small to contain all temporary downloads of Android Studio during the install process.</p>
+<h2 id="Fix"><a href="#Fix" class="headerlink" title="Fix"></a>Fix</h2><p>For a problem like the prvious example, we don’t want to do a permanent change as that’s just a punctual need. So to fix the problem we’ll temporarily increase the size of <code>/tmp</code>. It is posible because in our example the VM has 2GB RAM + 4GB SWAP, so we can increase a tmpfs partition up to 6GB.</p>
+<p>Before the resizing:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ df /tmp                                           </div><div class="line">Filesystem     1K-blocks  Used Available Use% Mounted on</div><div class="line">tmpfs            1048576    84   1048492   1% /tmp</div></pre></td></tr></table></figure>
+<p>Temporary resize:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount -o remount,size=4G,noatime /tmp</div></pre></td></tr></table></figure>
+<p>After the resizing:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ df /tmp</div><div class="line">Filesystem     1K-blocks  Used Available Use% Mounted on</div><div class="line">tmpfs            4194304    80   4194224   1% /tmp</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Context&quot;&gt;&lt;a href=&quot;#Context&quot; class=&quot;headerlink&quot; title=&quot;Context&quot;&gt;&lt;/a&gt;Context&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Tmpf
+    
+    </summary>
+    
+      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
+    
+      <category term="archlinux" scheme="http://rawsec.ml/categories/linux/archlinux/"/>
+    
+    
+      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
+    
+      <category term="archlinux" scheme="http://rawsec.ml/tags/archlinux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Setup a proxy under Linux</title>
+    <link href="http://rawsec.ml/en/proxy-linux/"/>
+    <id>http://rawsec.ml/en/proxy-linux/</id>
+    <published>2016-10-12T22:00:00.000Z</published>
+    <updated>2016-10-13T17:48:40.228Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Environment-variables"><a href="#Environment-variables" class="headerlink" title="Environment variables"></a>Environment variables</h2><p>Lot of programs (such as wget, curl, pacman, …) use environment variables to determine the proxy of a given protocol.</p>
+<p>Environment variables can be added per user in their <code>.bashrc</code> or <code>.zshrc</code> shell profile file with something like <code>export KEY=value</code>. The advantage is that variables can be used in order to avoid repeating the same proxy several times.</p>
+<p>Or <code>/etc/environment</code> file stores the system-wide variables initialized upon user login. Or you can use <code>/etc/syconfig/proxy</code> under openSUSE.</p>
+<p>To add proxy settings one time for everyone, you can execute the following script with sudo privilege (because you need to write into a system file: <code>/etc/environment</code>).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">file=/etc/environment</div><div class="line"></div><div class="line">http_proxy=http://proxy.example.org:8080/</div><div class="line">HTTP_PROXY=<span class="variable">$http_proxy</span></div><div class="line">https_proxy=<span class="variable">$http_proxy</span></div><div class="line">HTTPS_PROXY=<span class="variable">$https_proxy</span></div><div class="line">ftp_proxy=<span class="variable">$http_proxy</span></div><div class="line">FTP_PROXY=<span class="variable">$ftp_proxy</span></div><div class="line">rsync_proxy=<span class="variable">$http_proxy</span></div><div class="line">RSYNC_PROXY=<span class="variable">$rsync_proxy</span></div><div class="line">no_proxy=<span class="string">"localhost,127.0.0.1,localaddress,.localdomain.com"</span></div><div class="line">NO_PROXY=<span class="variable">$no_proxy</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"http_proxy=<span class="variable">$http_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTP_PROXY=<span class="variable">$HTTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"https_proxy=<span class="variable">$https_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTPS_PROXY=<span class="variable">$HTTPS_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"ftp_proxy=<span class="variable">$ftp_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"FTP_PROXY=<span class="variable">$FTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"rsync_proxy=<span class="variable">$rsync_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"RSYNC_PROXY=<span class="variable">$RSYNC_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"no_proxy=<span class="variable">$no_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"NO_PROXY=<span class="variable">$NO_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div></pre></td></tr></table></figure>
+<h2 id="Proxy-settings-on-GNOME3"><a href="#Proxy-settings-on-GNOME3" class="headerlink" title="Proxy settings on GNOME3"></a>Proxy settings on GNOME3</h2><p>Some other graphical programs (such as Chromium or Rhythmbox) ignore those environment variables and use gnome (GTK3) settings. These settings can be modified through the gnome-control-center front end and also through gsettings (see the example below).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gsettings set org.gnome.system.proxy mode &apos;manual&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http port 8080</div><div class="line">gsettings set org.gnome.system.proxy.ftp host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.ftp port 8080</div><div class="line">gsettings set org.gnome.system.proxy.https host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.https port 8080</div><div class="line">gsettings set org.gnome.system.proxy ignore-hosts &quot;[&apos;localhost&apos;, &apos;127.0.0.0/8&apos;, &apos;10.0.0.0/8&apos;, &apos;192.168.0.0/16&apos;, &apos;172.16.0.0/12&apos; , &apos;*.localdomain.com&apos; ]&quot;</div></pre></td></tr></table></figure>
+<h2 id="Package-managers"><a href="#Package-managers" class="headerlink" title="Package managers"></a>Package managers</h2><p>Since you are using awesome tools like <a href="https://en.opensuse.org/Portal:Zypper" target="_blank" rel="external">zypper</a> (openSUSE) or <a href="https://wiki.archlinux.org/index.php/pacman" target="_blank" rel="external">pacman</a> (ArchLinux) you will probably don’t care about the following paragraph.</p>
+<p>But users of apt-get or aptitue will need an additional step to use their package manager working with a proxy. They will need to edit <code>/etc/apt/apt.conf.d/proxy</code> and include the following lines:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Acquire::http::proxy &quot;http://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::ftp::proxy &quot;ftp://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::https::proxy &quot;https://proxy.example.org:8080/&quot;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Environment-variables&quot;&gt;&lt;a href=&quot;#Environment-variables&quot; class=&quot;headerlink&quot; title=&quot;Environment variables&quot;&gt;&lt;/a&gt;Environment variables&lt;/
+    
+    </summary>
+    
+      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
+    
+      <category term="system" scheme="http://rawsec.ml/tags/system/"/>
+    
+      <category term="proxy" scheme="http://rawsec.ml/tags/proxy/"/>
+    
+  </entry>
   
   <entry>
     <title>2 less known tricks of spoofing extensions on Windows</title>
@@ -57,42 +129,6 @@
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
       <category term="windows" scheme="http://rawsec.ml/tags/windows/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Setup a proxy under Linux</title>
-    <link href="http://rawsec.ml/en/proxy-linux/"/>
-    <id>http://rawsec.ml/en/proxy-linux/</id>
-    <published>2016-10-12T22:00:00.000Z</published>
-    <updated>2016-10-13T17:48:40.228Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Environment-variables"><a href="#Environment-variables" class="headerlink" title="Environment variables"></a>Environment variables</h2><p>Lot of programs (such as wget, curl, pacman, …) use environment variables to determine the proxy of a given protocol.</p>
-<p>Environment variables can be added per user in their <code>.bashrc</code> or <code>.zshrc</code> shell profile file with something like <code>export KEY=value</code>. The advantage is that variables can be used in order to avoid repeating the same proxy several times.</p>
-<p>Or <code>/etc/environment</code> file stores the system-wide variables initialized upon user login. Or you can use <code>/etc/syconfig/proxy</code> under openSUSE.</p>
-<p>To add proxy settings one time for everyone, you can execute the following script with sudo privilege (because you need to write into a system file: <code>/etc/environment</code>).</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">file=/etc/environment</div><div class="line"></div><div class="line">http_proxy=http://proxy.example.org:8080/</div><div class="line">HTTP_PROXY=<span class="variable">$http_proxy</span></div><div class="line">https_proxy=<span class="variable">$http_proxy</span></div><div class="line">HTTPS_PROXY=<span class="variable">$https_proxy</span></div><div class="line">ftp_proxy=<span class="variable">$http_proxy</span></div><div class="line">FTP_PROXY=<span class="variable">$ftp_proxy</span></div><div class="line">rsync_proxy=<span class="variable">$http_proxy</span></div><div class="line">RSYNC_PROXY=<span class="variable">$rsync_proxy</span></div><div class="line">no_proxy=<span class="string">"localhost,127.0.0.1,localaddress,.localdomain.com"</span></div><div class="line">NO_PROXY=<span class="variable">$no_proxy</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"http_proxy=<span class="variable">$http_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTP_PROXY=<span class="variable">$HTTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"https_proxy=<span class="variable">$https_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTPS_PROXY=<span class="variable">$HTTPS_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"ftp_proxy=<span class="variable">$ftp_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"FTP_PROXY=<span class="variable">$FTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"rsync_proxy=<span class="variable">$rsync_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"RSYNC_PROXY=<span class="variable">$RSYNC_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"no_proxy=<span class="variable">$no_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"NO_PROXY=<span class="variable">$NO_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div></pre></td></tr></table></figure>
-<h2 id="Proxy-settings-on-GNOME3"><a href="#Proxy-settings-on-GNOME3" class="headerlink" title="Proxy settings on GNOME3"></a>Proxy settings on GNOME3</h2><p>Some other graphical programs (such as Chromium or Rhythmbox) ignore those environment variables and use gnome (GTK3) settings. These settings can be modified through the gnome-control-center front end and also through gsettings (see the example below).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gsettings set org.gnome.system.proxy mode &apos;manual&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http port 8080</div><div class="line">gsettings set org.gnome.system.proxy.ftp host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.ftp port 8080</div><div class="line">gsettings set org.gnome.system.proxy.https host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.https port 8080</div><div class="line">gsettings set org.gnome.system.proxy ignore-hosts &quot;[&apos;localhost&apos;, &apos;127.0.0.0/8&apos;, &apos;10.0.0.0/8&apos;, &apos;192.168.0.0/16&apos;, &apos;172.16.0.0/12&apos; , &apos;*.localdomain.com&apos; ]&quot;</div></pre></td></tr></table></figure>
-<h2 id="Package-managers"><a href="#Package-managers" class="headerlink" title="Package managers"></a>Package managers</h2><p>Since you are using awesome tools like <a href="https://en.opensuse.org/Portal:Zypper" target="_blank" rel="external">zypper</a> (openSUSE) or <a href="https://wiki.archlinux.org/index.php/pacman" target="_blank" rel="external">pacman</a> (ArchLinux) you will probably don’t care about the following paragraph.</p>
-<p>But users of apt-get or aptitue will need an additional step to use their package manager working with a proxy. They will need to edit <code>/etc/apt/apt.conf.d/proxy</code> and include the following lines:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Acquire::http::proxy &quot;http://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::ftp::proxy &quot;ftp://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::https::proxy &quot;https://proxy.example.org:8080/&quot;;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Environment-variables&quot;&gt;&lt;a href=&quot;#Environment-variables&quot; class=&quot;headerlink&quot; title=&quot;Environment variables&quot;&gt;&lt;/a&gt;Environment variables&lt;/
-    
-    </summary>
-    
-      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
-    
-      <category term="system" scheme="http://rawsec.ml/tags/system/"/>
-    
-      <category term="proxy" scheme="http://rawsec.ml/tags/proxy/"/>
     
   </entry>
   
@@ -591,61 +627,6 @@
   </entry>
   
   <entry>
-    <title>ArchLinux - Install Zsh shell and oh-my-zsh</title>
-    <link href="http://rawsec.ml/en/archlinux-install-zsh/"/>
-    <id>http://rawsec.ml/en/archlinux-install-zsh/</id>
-    <published>2016-09-13T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.502Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Install-Zsh"><a href="#Install-Zsh" class="headerlink" title="Install Zsh"></a>Install Zsh</h2><ul>
-<li>Before installing <a href="https://www.archlinux.org/packages/?name=zsh" target="_blank" rel="external">zsh</a>, see what shell is currently being used:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo $SHELL</div></pre></td></tr></table></figure>
-<ul>
-<li>Install <a href="https://www.archlinux.org/packages/?name=zsh" target="_blank" rel="external">zsh</a>:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S zsh</div></pre></td></tr></table></figure>
-<ul>
-<li>For additional completion definitions, install the <a href="https://www.archlinux.org/packages/?name=zsh-completions" target="_blank" rel="external">zsh-completions</a> package:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S zsh-completions</div></pre></td></tr></table></figure>
-<ul>
-<li>Make zsh has been installed correctly and configure it:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ zsh</div></pre></td></tr></table></figure>
-<ul>
-<li>Set zsh as default shell (list shells with <code>$ chsh -l</code>):</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chsh -s /bin/zsh</div></pre></td></tr></table></figure>
-<h2 id="Install-Oh-My-Zsh"><a href="#Install-Oh-My-Zsh" class="headerlink" title="Install Oh My Zsh"></a>Install Oh My Zsh</h2><ul>
-<li>Install dependencies:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S curl git</div></pre></td></tr></table></figure>
-<ul>
-<li>Install <a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh</a>:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Install-Zsh&quot;&gt;&lt;a href=&quot;#Install-Zsh&quot; class=&quot;headerlink&quot; title=&quot;Install Zsh&quot;&gt;&lt;/a&gt;Install Zsh&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Before installing &lt;a href=&quot;h
-    
-    </summary>
-    
-      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
-    
-      <category term="archlinux" scheme="http://rawsec.ml/categories/linux/archlinux/"/>
-    
-    
-      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
-    
-      <category term="archlinux" scheme="http://rawsec.ml/tags/archlinux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ArchLinux - Install rTorrent and ruTorrent</title>
     <link href="http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/"/>
     <id>http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/</id>
@@ -825,6 +806,61 @@
   </entry>
   
   <entry>
+    <title>ArchLinux - Install Zsh shell and oh-my-zsh</title>
+    <link href="http://rawsec.ml/en/archlinux-install-zsh/"/>
+    <id>http://rawsec.ml/en/archlinux-install-zsh/</id>
+    <published>2016-09-13T22:00:00.000Z</published>
+    <updated>2016-10-12T21:07:54.502Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Install-Zsh"><a href="#Install-Zsh" class="headerlink" title="Install Zsh"></a>Install Zsh</h2><ul>
+<li>Before installing <a href="https://www.archlinux.org/packages/?name=zsh" target="_blank" rel="external">zsh</a>, see what shell is currently being used:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo $SHELL</div></pre></td></tr></table></figure>
+<ul>
+<li>Install <a href="https://www.archlinux.org/packages/?name=zsh" target="_blank" rel="external">zsh</a>:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S zsh</div></pre></td></tr></table></figure>
+<ul>
+<li>For additional completion definitions, install the <a href="https://www.archlinux.org/packages/?name=zsh-completions" target="_blank" rel="external">zsh-completions</a> package:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S zsh-completions</div></pre></td></tr></table></figure>
+<ul>
+<li>Make zsh has been installed correctly and configure it:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ zsh</div></pre></td></tr></table></figure>
+<ul>
+<li>Set zsh as default shell (list shells with <code>$ chsh -l</code>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chsh -s /bin/zsh</div></pre></td></tr></table></figure>
+<h2 id="Install-Oh-My-Zsh"><a href="#Install-Oh-My-Zsh" class="headerlink" title="Install Oh My Zsh"></a>Install Oh My Zsh</h2><ul>
+<li>Install dependencies:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S curl git</div></pre></td></tr></table></figure>
+<ul>
+<li>Install <a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh</a>:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Install-Zsh&quot;&gt;&lt;a href=&quot;#Install-Zsh&quot; class=&quot;headerlink&quot; title=&quot;Install Zsh&quot;&gt;&lt;/a&gt;Install Zsh&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Before installing &lt;a href=&quot;h
+    
+    </summary>
+    
+      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
+    
+      <category term="archlinux" scheme="http://rawsec.ml/categories/linux/archlinux/"/>
+    
+    
+      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
+    
+      <category term="archlinux" scheme="http://rawsec.ml/tags/archlinux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ASIS CTF Finals 2016 - 3 - CTF 101 - Trivia</title>
     <link href="http://rawsec.ml/en/ASIS-3-CTF-101-Trivia/"/>
     <id>http://rawsec.ml/en/ASIS-3-CTF-101-Trivia/</id>
@@ -914,69 +950,6 @@
   </entry>
   
   <entry>
-    <title>CTF(x) - 50 - crash - Forensics</title>
-    <link href="http://rawsec.ml/en/CTFx-50-crash-forensics/"/>
-    <id>http://rawsec.ml/en/CTFx-50-crash-forensics/</id>
-    <published>2016-08-26T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.522Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CTF(x) 2016</li>
-<li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>defund was about to give this flag away until his computer crashed.</p>
-<p>file: <a href="http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">flag.zip</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR: <a href="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq" target="_blank" rel="external"><img src="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png" alt="asciicast"></a></p>
-<ul>
-<li><code>flag.zip</code> contains <code>.flag.txt.swp</code> and <code>flag.txt</code></li>
-<li>Extract the archive: <code>unzip flag.zip</code></li>
-<li>Recover/restore the file with the swap file: <code>vim -r flag/flag.txt</code></li>
-<li>You get some ASCII art of the flag: <code>ctf(v1m_is_be77er_than_3macs)</code>.</li>
-</ul>
-<p>Extract of VIM man page:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r          List swap files, with information about using them for recovery.</div><div class="line"></div><div class="line">-r &#123;file&#125;   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a</div><div class="line">            file with the same filename as the text file with &quot;.swp&quot; appended.  See &quot;:help recovery&quot;.</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CTF(x) - 50 - λ - Cryptography</title>
     <link href="http://rawsec.ml/en/CTFx-50-lambda-cryptography/"/>
     <id>http://rawsec.ml/en/CTFx-50-lambda-cryptography/</id>
@@ -1058,11 +1031,74 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 60 - Exposed! - Web</title>
-    <link href="http://rawsec.ml/en/IceCTF-60-Exposed-Web/"/>
-    <id>http://rawsec.ml/en/IceCTF-60-Exposed-Web/</id>
+    <title>CTF(x) - 50 - crash - Forensics</title>
+    <link href="http://rawsec.ml/en/CTFx-50-crash-forensics/"/>
+    <id>http://rawsec.ml/en/CTFx-50-crash-forensics/</id>
+    <published>2016-08-26T22:00:00.000Z</published>
+    <updated>2016-10-12T21:07:54.522Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : CTF(x) 2016</li>
+<li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>defund was about to give this flag away until his computer crashed.</p>
+<p>file: <a href="http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">flag.zip</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR: <a href="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq" target="_blank" rel="external"><img src="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png" alt="asciicast"></a></p>
+<ul>
+<li><code>flag.zip</code> contains <code>.flag.txt.swp</code> and <code>flag.txt</code></li>
+<li>Extract the archive: <code>unzip flag.zip</code></li>
+<li>Recover/restore the file with the swap file: <code>vim -r flag/flag.txt</code></li>
+<li>You get some ASCII art of the flag: <code>ctf(v1m_is_be77er_than_3macs)</code>.</li>
+</ul>
+<p>Extract of VIM man page:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r          List swap files, with information about using them for recovery.</div><div class="line"></div><div class="line">-r &#123;file&#125;   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a</div><div class="line">            file with the same filename as the text file with &quot;.swp&quot; appended.  See &quot;:help recovery&quot;.</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IceCTF - 35 - IRC I - Misc</title>
+    <link href="http://rawsec.ml/en/IceCTF-35-IRC-1-Misc/"/>
+    <id>http://rawsec.ml/en/IceCTF-35-IRC-1-Misc/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.528Z</updated>
+    <updated>2016-10-12T21:07:54.502Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1087,35 +1123,15 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>John is pretty happy with himself, he just made his first <a href="http://exposed.vuln.icec.tf/" target="_blank" rel="external">website</a>! He used all the hip and cool systems, like NginX, PHP and Git! Everyone is so happy for him, but can you get him to give you the flag?</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>There is someone sharing flags on our IRC server, can you find him and stop him? glitch.is:6667</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Description tell us we’re looking for a web hosted git repository.</li>
-<li>Let’s try <code>http://exposed.vuln.icec.tf/.git/</code>.</li>
-<li>Oh I forgot to say! We are lazy and this tool is amazing: <a href="https://github.com/internetwache/GitTools" target="_blank" rel="external">GitTools</a>.</li>
-<li>Dump the git repo : <code>./gitdumper.sh http://exposed.vuln.icec.tf/.git/ repo</code>.</li>
-<li><p>Let’s see what we get in there:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ls -A1 repo/.git/</div><div class="line">COMMIT_EDITMSG</div><div class="line">HEAD</div><div class="line">config</div><div class="line">description</div><div class="line">index</div><div class="line">info</div><div class="line">logs</div><div class="line">objects</div><div class="line">packed-refs</div><div class="line">refs</div></pre></td></tr></table></figure>
-</li>
-<li><p>Let’s see <code>COMMIT_EDITMSG</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cat .git/COMMIT_EDITMSG</div><div class="line">add robots.txt</div><div class="line"></div><div class="line"># Please enter the commit message for your changes. Lines starting</div><div class="line"># with &apos;#&apos; will be ignored, and an empty message aborts the commit.</div><div class="line">#</div><div class="line"># Author:    James Sigurðarson &lt;jamiees2@gmail.com&gt;</div><div class="line"># Date:      Wed Aug 10 21:47:49 2016 +0000</div><div class="line">#</div><div class="line"># On branch master</div><div class="line"># Changes to be committed:</div><div class="line">#	new file:   robots.txt</div><div class="line">#</div><div class="line"># Untracked files:</div><div class="line">#	rewrite-history.sh</div><div class="line">#</div></pre></td></tr></table></figure>
-</li>
-<li><p>Interesting there is a <code>robots.txt</code>, we should have look to it sooner: <a href="http://exposed.vuln.icec.tf/robots.txt" target="_blank" rel="external">http://exposed.vuln.icec.tf/robots.txt</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">User-Agent: *</div><div class="line">Disallow: /.git</div><div class="line">Disallow: /flag.php</div></pre></td></tr></table></figure>
-</li>
-<li><p>Oh yeah a <code>flag.php</code> file! Let’s go to <a href="http://exposed.vuln.icec.tf/flag.php" target="_blank" rel="external">http://exposed.vuln.icec.tf/flag.php</a>: there is nothing anymore here.</p>
-</li>
-<li>But maybe we can found an older version of <code>flag.php</code> with git!</li>
-<li>Want to dig into git HEAD and all? Nah! There still is <a href="https://github.com/internetwache/GitTools" target="_blank" rel="external">GitTools</a>.</li>
-<li>Let’s extract all now: <code>./extractor.sh repo/ repodump/</code>.</li>
-<li><p>There is a lot of stuff in here:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">ls -RA repodump</div><div class="line">repodump:</div><div class="line">0-60756b184c2d6b8f0247c152d8549562bc14d2d9   14-b536a10b5453686bd1dfcc50da3cb156c321fb5f  2-adf0ebdff8a972f3f6158304323feba4aa1fd482   25-631503ff237e145c7bade484c44c05a223b51155  4-cda8cc0acc8a09153351e43c40f4abeb7a823a03</div><div class="line">1-6034c348380c9709715e6af60d04f684867d7234   15-e9f1db96f8b67eced8183d2d523e4ea76c008b83  20-32b31838b757a00f2e296ac198ca7d9cb930e644  26-90c2cd27cabb8ec7f55941ecee004558a070ccde  5-68162dcb661493c295f3913b1c1da2b198adfdd8</div><div class="line">10-fd2ac4d5260ee06f9a0e5f4808bf3862e2065fb8  16-ec95d11bb37f00fb8e17f6bdbb800124b79e3c32  21-5ea13398f975b53ff30b7ea162b2ec6897a48c68  27-541e08f75514d1caec2a62fe3a1af308da6f35d8  6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef</div><div class="line">11-4183a0cd7143899e4a5d34f01ce58317fd68921e  17-590a15d32d9a494be5830f61c5c180ddef86e43e  22-ebe74d8641b4d8b90c33d1deb69070476b0ef402  28-4de7e6fbbba6f94bc146b33bbfe6c0155f3c2fd4  7-f521418118a088ef00fef0c3e199d30d6c7e96a5</div><div class="line">12-175e312b3d3aeab77ada20ed93d1c9a3f2caf429  18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36  23-97dcb30a5862aa43984b8beee84c9477a7315856  29-bf55633224c5c76f49d42621ace07aa705ebae6e  8-584ae8349fe51e2cb25e11347003c11e92f88c74</div><div class="line">13-1746e11be489319bd8900318874b68304eb05288  19-1f601ea8a09052234b53e2cc1bb12e4ceacbf8a6  24-971c67fd8ed67c3986844f627917c19c151d00bf  3-d70b2e576c0f35e83d70027434050e06f729662b   9-672c8f636b6db9c79412db177dcca75cde27c82b</div><div class="line"></div><div class="line">repodump/0-60756b184c2d6b8f0247c152d8549562bc14d2d9:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/1-6034c348380c9709715e6af60d04f684867d7234:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/10-fd2ac4d5260ee06f9a0e5f4808bf3862e2065fb8:</div><div class="line">commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/11-4183a0cd7143899e4a5d34f01ce58317fd68921e:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/12-175e312b3d3aeab77ada20ed93d1c9a3f2caf429:</div><div class="line">commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/13-1746e11be489319bd8900318874b68304eb05288:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/14-b536a10b5453686bd1dfcc50da3cb156c321fb5f:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/15-e9f1db96f8b67eced8183d2d523e4ea76c008b83:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/16-ec95d11bb37f00fb8e17f6bdbb800124b79e3c32:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/17-590a15d32d9a494be5830f61c5c180ddef86e43e:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/19-1f601ea8a09052234b53e2cc1bb12e4ceacbf8a6:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/2-adf0ebdff8a972f3f6158304323feba4aa1fd482:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/20-32b31838b757a00f2e296ac198ca7d9cb930e644:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/21-5ea13398f975b53ff30b7ea162b2ec6897a48c68:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/22-ebe74d8641b4d8b90c33d1deb69070476b0ef402:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/23-97dcb30a5862aa43984b8beee84c9477a7315856:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/24-971c67fd8ed67c3986844f627917c19c151d00bf:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/25-631503ff237e145c7bade484c44c05a223b51155:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/26-90c2cd27cabb8ec7f55941ecee004558a070ccde:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/27-541e08f75514d1caec2a62fe3a1af308da6f35d8:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/28-4de7e6fbbba6f94bc146b33bbfe6c0155f3c2fd4:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/29-bf55633224c5c76f49d42621ace07aa705ebae6e:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/3-d70b2e576c0f35e83d70027434050e06f729662b:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/4-cda8cc0acc8a09153351e43c40f4abeb7a823a03:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/5-68162dcb661493c295f3913b1c1da2b198adfdd8:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/7-f521418118a088ef00fef0c3e199d30d6c7e96a5:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/8-584ae8349fe51e2cb25e11347003c11e92f88c74:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/9-672c8f636b6db9c79412db177dcca75cde27c82b:</div><div class="line">.gitignore  commit-meta.txt  index.php</div></pre></td></tr></table></figure>
-</li>
-<li><p>Still to lazy to dig with git? Ok let’s use <code>grep</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">grep -r -i icectf&#123; repodump/</div><div class="line">repodump/20-32b31838b757a00f2e296ac198ca7d9cb930e644/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/7-f521418118a088ef00fef0c3e199d30d6c7e96a5/index.php:            font-size: 2em; /* IceCTF&#123;secure_y0ur */</div><div class="line">repodump/8-584ae8349fe51e2cb25e11347003c11e92f88c74/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/0-60756b184c2d6b8f0247c152d8549562bc14d2d9/flag.php:                    echo &apos;IceCTF&#123;not_this_flag&#125;&apos;;</div><div class="line">repodump/6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef/index.php:                echo &apos;Hello World! IceCTF&#123;secure_y0ur_g1t_repos_pe0ple&#125;&apos;;</div><div class="line">repodump/18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36/index.php:                echo &apos;Hello World! IceCTF&#123;secure_y0ur_g1t_repos_pe0ple&#125;&apos;;</div><div class="line">repodump/27-541e08f75514d1caec2a62fe3a1af308da6f35d8/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/23-97dcb30a5862aa43984b8beee84c9477a7315856/flag.php:                    echo &apos;IceCTF&#123;not_this_flag&#125;&apos;;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Tada!</p>
-</li>
+<li>Connect to the IRC server (ex: with <a href="https://client02.chat.mibbit.com/" target="_blank" rel="external">mibbit</a> if you have no IRC client installed).</li>
+<li>On glitch.is home use the <code>/list</code> to list all the channels on the server.</li>
+<li>There is a channel named <code>#6470e394cb_flagshare</code>.</li>
+<li>Join it <code>/join #6470e394cb_flagshare</code>.</li>
+<li>Display the topic <code>/topic</code> which is <em>Get your flags here! while they’re hot! IceCTF{pL3AsE_D0n7_5h4re_fL495_JUsT_doNT}</em>.</li>
 </ol>
+<p><strong>Note</strong>: Here a <a href="https://en.wikipedia.org/wiki/List_of_Internet_Relay_Chat_commands" target="_blank" rel="external">List of IRC commands</a></p>
 ]]></content>
     
     <summary type="html">
@@ -1135,14 +1151,14 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
   <entry>
-    <title>IceCTF - 40 - Search - Misc</title>
-    <link href="http://rawsec.ml/en/IceCTF-40-Search-Misc/"/>
-    <id>http://rawsec.ml/en/IceCTF-40-Search-Misc/</id>
+    <title>IceCTF - 50 - Vape Nation - Stego</title>
+    <link href="http://rawsec.ml/en/IceCTF-50-Vape-Nation-Stego/"/>
+    <id>http://rawsec.ml/en/IceCTF-50-Vape-Nation-Stego/</id>
     <published>2016-08-24T22:00:00.000Z</published>
     <updated>2016-10-12T21:07:54.488Z</updated>
     
@@ -1169,15 +1185,12 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>There’s something about this domain… <a href="http://search.icec.tf/" target="_blank" rel="external">search.icec.tf</a>, I don’t see anything, but maybe its all about the conTEXT.</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Go Green! <a href="https://play.icec.tf/problem-static/vape_nation_7d550b3069428e39775f31e7299cd354c721459043cf1a077bb388f4f531d459.png" target="_blank" rel="external">vape_nation.png</a></p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Default behaviour of main dns lookup utilities (like nslookup or dig) is to look for A type record.</li>
-<li>But we want to look at TXT type record.</li>
-<li>So instead of using <code>dig search.icec.tf/</code> (eq. <code>dig -t A search.icec.tf/</code>),</li>
-<li>we’ll use <code>dig -t TXT search.icec.tf/</code>.</li>
+<li>Open <code>vape_nation.png</code> with <a href="http://www.caesum.com/handbook/Stegsolve.jar" target="_blank" rel="external">StegSolve</a>.</li>
+<li>Description said <strong>Go Green</strong> so just do it!</li>
+<li>Green plane 0 contain the flag: <code>IceCTF{420_CuR35_c4NCEr}</code>.</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig -t A search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; -t A search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 21856</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	A</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">icec.tf.		300	IN	SOA	bob.ns.cloudflare.com. dns.cloudflare.com. 2022260330 10000 2400 604800 3600</div><div class="line"></div><div class="line">;; Query time: 88 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:45:54 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 104</div><div class="line"></div><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 41552</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	A</div><div class="line"></div><div class="line">;; Query time: 0 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:46:07 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 43</div><div class="line"></div><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig -t TXT search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; -t TXT search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 35890</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">search.icec.tf.		300	IN	TXT	&quot;IceCTF&#123;flag5_all_0v3r_the_Plac3&#125;&quot;</div><div class="line"></div><div class="line">;; Query time: 61 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:46:16 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 88</div></pre></td></tr></table></figure>
-<p>For more details about DNS record types, see the <a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types" target="_blank" rel="external">List of DNS record types</a>.</p>
 ]]></content>
     
     <summary type="html">
@@ -1197,16 +1210,16 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+      <category term="stegano" scheme="http://rawsec.ml/tags/stegano/"/>
     
   </entry>
   
   <entry>
-    <title>IceCTF - 45 - Hidden in Plain Sight - ReverseEngineering</title>
-    <link href="http://rawsec.ml/en/IceCTF-45-Hidden-in-Plain-Sight-ReverseEngineering/"/>
-    <id>http://rawsec.ml/en/IceCTF-45-Hidden-in-Plain-Sight-ReverseEngineering/</id>
+    <title>IceCTF - 50 - Corrupt Transmission - Forensics</title>
+    <link href="http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/"/>
+    <id>http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.542Z</updated>
+    <updated>2016-10-12T21:07:54.525Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1231,69 +1244,33 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Make sure you take a real close look at it, it should be right there! <code>/home/plain_sight/</code> or download it <a href="https://play.icec.tf/problem-static/828644c3ad8ccfa14b86a69dccd36f2b-plain_sight_df5d2c1da50110458fa00d0db6586b23cd67317c7f7b95f4a092d645a4570296" target="_blank" rel="external">here</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Open this binary with an hex editor (ex: <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">ht</a>, <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>, <a href="http://manpages.org/hexeditor" target="_blank" rel="external">hexeditor</a>, <a href="http://home.gna.org/bless/" target="_blank" rel="external">bless</a>, <a href="http://wxhexeditor.sourceforge.net/home.php" target="_blank" rel="external">wxHexEditor</a> by preference order)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">00000510: ec0c 50e8 38fe ffff 83c4 10b0 49b0 63b0  ..P.8.......I.c.</div><div class="line">00000520: 65b0 43b0 54b0 46b0 7bb0 6cb0 6fb0 6fb0  e.C.T.F.&#123;.l.o.o.</div><div class="line">00000530: 6bb0 5fb0 6db0 6fb0 6db0 5fb0 49b0 5fb0  k._.m.o.m._.I._.</div><div class="line">00000540: 66b0 6fb0 75b0 6eb0 64b0 5fb0 69b0 74b0  f.o.u.n.d._.i.t.</div><div class="line">00000550: 7dc7 45f4 0000 0000 eb2f 83ec 0c6a 01e8  &#125;.E....../...j..</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="reverse" scheme="http://rawsec.ml/tags/reverse/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 45 - Time Traveler - Forensics</title>
-    <link href="http://rawsec.ml/en/IceCTF-45-Time-Traveler-Forencics/"/>
-    <id>http://rawsec.ml/en/IceCTF-45-Time-Traveler-Forencics/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.532Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I can assure you that the flag was on <a href="http://time-traveler.icec.tf/" target="_blank" rel="external">this website</a> at some point in time.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
-<li>Use the <a href="https://archive.org/web/" target="_blank" rel="external">WaybackMachine</a> of Internet Archive.</li>
-<li>Enter the URL <a href="http://time-traveler.icec.tf/" target="_blank" rel="external"><code>http://time-traveler.icec.tf/</code></a>.</li>
-<li>Select the save point and get the flag: <code>IceCTF{Th3y&#39;11_n3v4r_f1|\|d_m4h_fl3g_1n_th3_p45t}</code>.</li>
-</ul>
-<p><strong>Similar challenge</strong>: <a href="http://rawsec.ml/en/ABCTF-50-Archive-Me-Reconaissance/">ABCTF - 50 - Archive Me - Reconaissance</a></p>
-<p><strong>POV</strong>: I think it’s more a Reconaissance challenge than a Forensics one. But you know challenge classification in CTF…</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We intercepted this image, but it must have gotten corrupted during the transmission. Can you try and fix it? <a href="https://play.icec.tf/problem-static/corrupt_92cee405924ad39fb513e3ef910699b79bb6d45cc5046c051eb9aab3546e22c3.png" target="_blank" rel="external">corrupt.png</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li><p>Check the file type:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file corrupt.png</div><div class="line">corrupt.png: data</div></pre></td></tr></table></figure>
+</li>
+<li><p>This PNG is clearly corrupted, check what’s wrong:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pngcheck corrupt.png</div><div class="line">corrupt.png:  CORRUPTED by text conversion</div><div class="line">ERROR: corrupt.png</div><div class="line"></div><div class="line">pngcheck -v corrupt.png</div><div class="line">File: corrupt.png (469363 bytes)</div><div class="line">  File is CORRUPTED.  It seems to have suffered EOL conversion.</div><div class="line">  It was probably transmitted in text mode.</div><div class="line">ERRORS DETECTED in corrupt.png</div></pre></td></tr></table></figure>
+</li>
+<li><p>This kind of error may occurs when an image (binary) was downloaded as ASCII text.</p>
+</li>
+<li><p>First, we’ll check the PNG header with <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png</div><div class="line">00000000: 9050 4e47 0e1a 0a1b                      .PNG....</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature" target="_blank" rel="external">PNG spec</a> tell us that not the right header, good header should be:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(decimal)              137  80  78  71  13  10  26  10</div><div class="line">(hexadecimal)           89  50  4e  47  0d  0a  1a  0a</div><div class="line">(ASCII C notation)    \211   P   N   G  \r  \n \032 \n</div></pre></td></tr></table></figure>
+</li>
+<li><p>Let’s fix it with <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">HT</a> hex editor.</p>
+</li>
+<li><p>Now it sounds right:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png.fix</div><div class="line">00000000: 8950 4e47 0d0a 1a0a                      .PNG....</div><div class="line"></div><div class="line">pngcheck corrupt.png.fix</div><div class="line">corrupt.png.fix  additional data after IEND chunk</div><div class="line">ERROR: corrupt.png.fix</div></pre></td></tr></table></figure>
+</li>
+<li><p>There is still an error but now PNG is recognized and we can display the image:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">file corrupt.png.fix</div><div class="line">corrupt.png.fix: PNG image data, 500 x 408, 8-bit/color RGBA, non-interlaced</div><div class="line"></div><div class="line">pngcheck -v corrupt.png.fix</div><div class="line">File: corrupt.png.fix (469363 bytes)</div><div class="line">  chunk IHDR at offset 0x0000c, length 13</div><div class="line">    500 x 408 image, 32-bit RGB+alpha, non-interlaced</div><div class="line">  chunk bKGD at offset 0x00025, length 6</div><div class="line">    red = 0x00ff, green = 0x00ff, blue = 0x00ff</div><div class="line">  chunk pHYs at offset 0x00037, length 9: 2835x2835 pixels/meter (72 dpi)</div><div class="line">  chunk tIME at offset 0x0004c, length 7: 20 Jun 2016 03:20:08 UTC</div><div class="line">  chunk IDAT at offset 0x0005f, length 8192</div><div class="line">    zlib: deflated, 32K window, maximum compression</div><div class="line">  chunk IDAT at offset 0x0206b, length 8192</div><div class="line">  chunk IDAT at offset 0x04077, length 8192</div><div class="line">  chunk IDAT at offset 0x06083, length 8192</div><div class="line">  chunk IDAT at offset 0x0808f, length 8192</div><div class="line">  chunk IDAT at offset 0x0a09b, length 8192</div><div class="line">  chunk IDAT at offset 0x0c0a7, length 8192</div><div class="line">  chunk IDAT at offset 0x0e0b3, length 8192</div><div class="line">  chunk IDAT at offset 0x100bf, length 8192</div><div class="line">  chunk IDAT at offset 0x120cb, length 8192</div><div class="line">  chunk IDAT at offset 0x140d7, length 8192</div><div class="line">  chunk IDAT at offset 0x160e3, length 8192</div><div class="line">  chunk IDAT at offset 0x180ef, length 8192</div><div class="line">  chunk IDAT at offset 0x1a0fb, length 8192</div><div class="line">  chunk IDAT at offset 0x1c107, length 8192</div><div class="line">  chunk IDAT at offset 0x1e113, length 8192</div><div class="line">  chunk IDAT at offset 0x2011f, length 8192</div><div class="line">  chunk IDAT at offset 0x2212b, length 8192</div><div class="line">  chunk IDAT at offset 0x24137, length 8192</div><div class="line">  chunk IDAT at offset 0x26143, length 8192</div><div class="line">  chunk IDAT at offset 0x2814f, length 8192</div><div class="line">  chunk IDAT at offset 0x2a15b, length 8192</div><div class="line">  chunk IDAT at offset 0x2c167, length 8192</div><div class="line">  chunk IDAT at offset 0x2e173, length 8192</div><div class="line">  chunk IDAT at offset 0x3017f, length 8192</div><div class="line">  chunk IDAT at offset 0x3218b, length 8192</div><div class="line">  chunk IDAT at offset 0x34197, length 8192</div><div class="line">  chunk IDAT at offset 0x361a3, length 8192</div><div class="line">  chunk IDAT at offset 0x381af, length 8192</div><div class="line">  chunk IDAT at offset 0x3a1bb, length 8192</div><div class="line">  chunk IDAT at offset 0x3c1c7, length 8192</div><div class="line">  chunk IDAT at offset 0x3e1d3, length 8192</div><div class="line">  chunk IDAT at offset 0x401df, length 8192</div><div class="line">  chunk IDAT at offset 0x421eb, length 8192</div><div class="line">  chunk IDAT at offset 0x441f7, length 8192</div><div class="line">  chunk IDAT at offset 0x46203, length 8192</div><div class="line">  chunk IDAT at offset 0x4820f, length 8192</div><div class="line">  chunk IDAT at offset 0x4a21b, length 8192</div><div class="line">  chunk IDAT at offset 0x4c227, length 8192</div><div class="line">  chunk IDAT at offset 0x4e233, length 8192</div><div class="line">  chunk IDAT at offset 0x5023f, length 8192</div><div class="line">  chunk IDAT at offset 0x5224b, length 8192</div><div class="line">  chunk IDAT at offset 0x54257, length 8192</div><div class="line">  chunk IDAT at offset 0x56263, length 8192</div><div class="line">  chunk IDAT at offset 0x5826f, length 8192</div><div class="line">  chunk IDAT at offset 0x5a27b, length 8192</div><div class="line">  chunk IDAT at offset 0x5c287, length 8192</div><div class="line">  chunk IDAT at offset 0x5e293, length 8192</div><div class="line">  chunk IDAT at offset 0x6029f, length 8192</div><div class="line">  chunk IDAT at offset 0x622ab, length 8192</div><div class="line">  chunk IDAT at offset 0x642b7, length 8192</div><div class="line">  chunk IDAT at offset 0x662c3, length 8192</div><div class="line">  chunk IDAT at offset 0x682cf, length 8192</div><div class="line">  chunk IDAT at offset 0x6a2db, length 8192</div><div class="line">  chunk IDAT at offset 0x6c2e7, length 8192</div><div class="line">  chunk IDAT at offset 0x6e2f3, length 8192</div><div class="line">  chunk IDAT at offset 0x702ff, length 8192</div><div class="line">  chunk IDAT at offset 0x7230b, length 1619</div><div class="line">  chunk IEND at offset 0x7296a, length 0</div><div class="line">  additional data after IEND chunk</div><div class="line">ERRORS DETECTED in corrupt.png.fix</div><div class="line"></div><div class="line">display corrupt.png.fix</div></pre></td></tr></table></figure>
+</li>
+<li><p>Flag is <code>IceCTF{t1s_but_4_5cr4tch}</code>.</p>
+</li>
+</ol>
 ]]></content>
     
     <summary type="html">
@@ -1318,11 +1295,11 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 45 - Toke - Web</title>
-    <link href="http://rawsec.ml/en/IceCTF-45-Toke-Web/"/>
-    <id>http://rawsec.ml/en/IceCTF-45-Toke-Web/</id>
+    <title>IceCTF - 55 - Demo - Pwn</title>
+    <link href="http://rawsec.ml/en/IceCTF-55-Demo-Pwn/"/>
+    <id>http://rawsec.ml/en/IceCTF-55-Demo-Pwn/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.505Z</updated>
+    <updated>2016-10-12T21:07:54.508Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1347,21 +1324,31 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I have a feeling they were pretty high when they made <a href="http://toke.vuln.icec.tf/" target="_blank" rel="external">this website…</a></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I found this awesome premium shell, but my demo version just ran out… can you help me crack it? <code>/home/demo/</code> on the shell.</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Register a user an login with it.</li>
-<li>With your browser network analyser loot at cookies in response header of the HTTP request: <code>Set-Cookie: jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0;</code>.</li>
-<li><strong>JWT</strong> stands for <strong>JSON Web Tokens</strong> and is composed of 3 parts:<ul>
-<li>Part1: Header, is base64 encoded, show hash algorithm.</li>
-<li>Part2: Payload, base64 encoded, content.</li>
-<li>Part3: Signature, signature, concatenation of header + content and then encoded with the hash algorithm contained in the header.</li>
-</ul>
+<li>Connect to the shell provided by IceCTF.</li>
+<li>Go to <code>/home/demo/</code>.</li>
+<li><p>Our goal is to display <code>flag.txt</code> but it is impossible ofr the moment:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ cat flag.txt</div><div class="line">cat: flag.txt: Permission denied</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ sh</div><div class="line">$ cat /home/demo/flag.txt</div><div class="line">cat: /home/demo/flag.txt: Permission denied</div></pre></td></tr></table></figure>
 </li>
-<li>So <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0</code> match with <code>header.payload.signature</code>.</li>
-<li>So we get:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">printf &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot; | base64 -d</div><div class="line">&#123;&quot;alg&quot;:&quot;HS256&quot;,&quot;typ&quot;:&quot;JWT&quot;&#125;</div><div class="line"></div><div class="line">printf &quot;eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ&quot; | base64 -d</div><div class="line">&#123;&quot;flag&quot;:&quot;IceCTF&#123;jW7_t0K3ns_4Re_nO_p14CE_fOR_53CrE7S&#125;&quot;,&quot;user&quot;:&quot;aza&quot;&#125;</div></pre></td></tr></table></figure>
+<li><p>Display <code>demo.c</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#define _GNU_SOURCE</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;libgen.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">void give_shell() &#123;</div><div class="line">    gid_t gid = getegid();</div><div class="line">    setresgid(gid, gid, gid);</div><div class="line">    system(&quot;/bin/sh&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">    if(strncmp(basename(getenv(&quot;_&quot;)), &quot;icesh&quot;, 6) == 0)&#123;</div><div class="line">        give_shell();</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        printf(&quot;I&apos;m sorry, your free trial has ended.\n&quot;);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>To call <code>give_shell()</code> we have to bypass the if statement.</p>
+</li>
+<li>We need the <code>_</code> environment variable to be <code>_=icesh</code>.</li>
+<li><p>But our zsh shell don’t allow us to change: <code>_</code> is read-only and we can’t make it writable.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ export \_=icesh</div><div class="line">zsh: read-only variable: _</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ typeset +rx \_=icesh</div><div class="line">typeset: _: can&apos;t change type of a special parameter</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>_</code> contain the name of the last command but launching <code>icesh</code> and then <code>./demo</code> doesn’t work in this environment because the last command is <code>./demo</code> so <code>_=./demo</code>.</p>
+</li>
+<li>As <code>give_shell()</code> will give us a <code>/bin/sh</code>, let’s try with it.</li>
+<li>Start a <code>/bin/sh</code>.</li>
+<li>With <code>/bin/sh</code>, <code>_</code> contain the last command before last one, so running <code>icesh</code> and then <code>./demo</code> will work: <code>_=icesh</code>.</li>
+<li>So that launch <code>give_shell()</code> and give a <code>/bin/sh</code> enhanced with special gid instead of having <em>I’m sorry, your free trial has ended.</em> printed.</li>
+<li>With this empowered shell we can display the <code>flag.txt</code> file:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat /home/demo/flag.txt</div><div class="line">IceCTF&#123;wH0_WoU1d_3vr_7Ru5t_4rgV&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>An introduction to JSON Web Tokens is available <a href="https://jwt.io/introduction/" target="_blank" rel="external">here</a>.</p>
 ]]></content>
     
     <summary type="html">
@@ -1381,7 +1368,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+      <category term="pwn" scheme="http://rawsec.ml/tags/pwn/"/>
     
   </entry>
   
