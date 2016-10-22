@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rawsec.ml/"/>
-  <updated>2016-10-15T16:37:51.804Z</updated>
+  <updated>2016-10-22T21:57:52.156Z</updated>
   <id>http://rawsec.ml/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python 3 &quot;No module named SimpleHTTPServer&quot;</title>
+    <link href="http://rawsec.ml/en/python-3-simplehttpserver/"/>
+    <id>http://rawsec.ml/en/python-3-simplehttpserver/</id>
+    <published>2016-10-20T22:00:00.000Z</published>
+    <updated>2016-10-22T21:57:52.156Z</updated>
+    
+    <content type="html"><![CDATA[<p>If the default <strong>python</strong> on your machine is python 3 so running the following command will result an error:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python -m SimpleHTTPServer</div><div class="line">python: No module named SimpleHTTPServer</div></pre></td></tr></table></figure>
+<p>So use instead:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -m http.server</div></pre></td></tr></table></figure>
+<p>The <a href="https://docs.python.org/2/library/simplehttpserver.html" target="_blank" rel="external">python 2.7 doc</a> warns:</p>
+<blockquote>
+<p><strong>Note :</strong> The <a href="https://docs.python.org/2/library/simplehttpserver.html#module-SimpleHTTPServer" target="_blank" rel="external"><code>SimpleHTTPServer</code></a> module has been merged into <code>http.server</code> in Python 3. The <a href="https://docs.python.org/2/glossary.html#term-2to3" target="_blank" rel="external">2to3</a> tool will automatically adapt imports when converting your sources to Python 3.</p>
+</blockquote>
+<p>You can also check the <a href="https://docs.python.org/3.5/library/http.server.html" target="_blank" rel="external">python 3.5 doc</a>.</p>
+<p>Note that on some machines <code>python</code> redirects to <em>python 2</em> and on some others to <em>python 3</em>, so if you want a command that always works use <code>python3 -m http.server</code> or <code>python2 -m SimpleHTTPServer</code>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;If the default &lt;strong&gt;python&lt;/strong&gt; on your machine is python 3 so running the following command will result an error:&lt;/p&gt;
+&lt;figure cla
+    
+    </summary>
+    
+      <category term="programming" scheme="http://rawsec.ml/categories/programming/"/>
+    
+      <category term="python" scheme="http://rawsec.ml/categories/programming/python/"/>
+    
+    
+      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
+    
+      <category term="programming" scheme="http://rawsec.ml/tags/programming/"/>
+    
+      <category term="python" scheme="http://rawsec.ml/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>ArchLinux - Temporarily resize /tmp partition</title>
@@ -327,106 +366,6 @@
   </entry>
   
   <entry>
-    <title>CSAW CTF - 50 - Kill - Forensics</title>
-    <link href="http://rawsec.ml/en/CSAW-2016-50-kill-forensics/"/>
-    <id>http://rawsec.ml/en/CSAW-2016-50-kill-forensics/</id>
-    <published>2016-09-17T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.498Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
-<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Is kill can fix? Sign the autopsy file?</p>
-<p><a href="https://ctf.csaw.io/static/uploads/a23ef5ecca7f30b77f59f21dba413b07/kill.pcapng" target="_blank" rel="external">kill.pcapng</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
-<li>If you look at the presumed PcapNg file you can see it is certainly broken because you can’t open it with <a href="https://www.wireshark.org/" target="_blank" rel="external">Whireshark</a> and the <code>file</code> command shows it as raw data.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #file kill.pcapng</div><div class="line">kill.pcapng: data</div></pre></td></tr></table></figure>
-<ul>
-<li>It’s certainly more than just a wrong header signature so we’ll use the <a href="https://f00l.de/pcapfix/" target="_blank" rel="external">pcapcfix</a> tool  to fix this.</li>
-<li>As there is no more header we have to use <code>--pcapng</code> option because default behaviour of the tool is to repair as a simple pcap file.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #/root/CTF/tools/pcapfix-1.1.0/pcapfix --pcapng kill.pcapng</div><div class="line">pcapfix 1.1.0 (c) 2012-2014 Robert Krause</div><div class="line"></div><div class="line">[*] Reading from file: kill.pcapng</div><div class="line">[*] Writing to file: fixed_kill.pcapng</div><div class="line">[*] File size: 2288848 bytes.</div><div class="line">[*] Unknown file type. Assuming PCAPNG format.</div><div class="line">[-] Unknown block type!: 0xaaddddaa ==&gt; SKIPPING.</div><div class="line">[-] Block size mismatch (0x1a2b3c4d != 0x0000008c) ==&gt; CORRECTED.</div><div class="line">[-] Found 128 bytes of unknown data ==&gt; SKIPPING.</div><div class="line">[-] No Section Block header found ==&gt; CREATING.</div><div class="line">[*] Progress:  20.02 %</div><div class="line">[*] Progress:  40.01 %</div><div class="line">[*] Progress:  60.04 %</div><div class="line">[*] Progress:  80.05 %</div><div class="line">[+] SUCCESS: 4 Corruption(s) fixed!</div></pre></td></tr></table></figure>
-<ul>
-<li>Now look at the file, it seems better!</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #file fixed_kill.pcapng</div><div class="line">fixed_kill.pcapng: pcap-ng capture file - version 1.0</div></pre></td></tr></table></figure>
-<ul>
-<li>Now open the Pcap-Ng file with wireshark.</li>
-<li>This is mainly a SFTP exchange so it may be interesting to look at downloaded filess with this filter: Filter <code>ftp.request.command == STOR</code>.</li>
-<li>Filter show us 7 downloaded files at frame 53, 130, 693, 760, 813, 2325 and 2480. 5 jpg files (image) and 2 mp4 files (video).</li>
-<li>So let’s extract images first. For that we need the jpg header file signature. It can be found here <a href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank" rel="external">on Wikipedia</a>.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JPEG RAW `FF D8 FF DB`</div><div class="line">JFIF begin with `FF D8 FF E0`</div><div class="line">EXIF `FF D8 FF E1`</div></pre></td></tr></table></figure>
-<ul>
-<li>The one interesting for us is <strong>JFIF</strong>.</li>
-<li>Press <code>CTRL + F</code>, select <strong>Hex value</strong> as <strong>Display filter</strong>.</li>
-<li>Note that it’s not necessary as the begining of the stream is not far after the STOR request command.</li>
-<li>We won’t need to extract mp4 file, flag is in one of the images.</li>
-<li>Now there is two way to do it: the smart way and the dumb way.</li>
-<li><strong>Dumb way</strong>: see the flag in the ASCII representation of the frame 696 (girls.jpg). Ok it works, but if the flag have be not so badly hidden you won’t have seen it, for example if it was display on the image.</li>
-<li><strong>Smart way</strong>: Let’s extract images.</li>
-<li>Now that we know where are the files stream, we can extract files as mention:<ul>
-<li>Right click on the first frame of the stream.</li>
-<li>Click on <em>Follow TCP Stream</em>.</li>
-<li>Select <em>Raw</em> representation.</li>
-<li>Save it on your disk.</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>Do the same with next images.</li>
-</ul>
-<ul>
-<li>We can note that all images are seeable execpt girls.jpg. So what? A broken file again? Not really, if you want to see the file header in order to fix it, you discover that the flag was just injected in the file header.</li>
-<li>Let’s see the raw hex dump of the image:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #xxd -l83 extract_girls.jpg</div><div class="line">00000000: ffd8 ffe0 bae0 4a46 4946 0001 0101 0001  ......JFIF......</div><div class="line">00000010: 0001 0000 fffe 003d 666c 6167 7b72 6f73  .......=flag&#123;ros</div><div class="line">00000020: 6573 5f72 5f62 6c75 655f 7669 6f6c 6574  es_r_blue_violet</div><div class="line">00000030: 735f 725f 7233 645f 6d61 7962 335f 6861  s_r_r3d_mayb3_ha</div><div class="line">00000040: 7261 6d62 6165 5f69 735f 6e6f 745f 6b69  rambae_is_not_ki</div><div class="line">00000050: 6c6c 7d                                  ll&#125;</div></pre></td></tr></table></figure>
-<p>Thanks to <a href="https://shankaraman.wordpress.com/tag/how-to-extract-ftp-files-from-wireshark-packet/" target="_blank" rel="external">Shankar Raman</a>.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CSAW CTF - 10 - Music to my ears - Reconnaissance</title>
     <link href="http://rawsec.ml/en/CSAW-2016-10-Music-to-my-ears-Recon/"/>
     <id>http://rawsec.ml/en/CSAW-2016-10-Music-to-my-ears-Recon/</id>
@@ -562,6 +501,106 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSAW CTF - 50 - Kill - Forensics</title>
+    <link href="http://rawsec.ml/en/CSAW-2016-50-kill-forensics/"/>
+    <id>http://rawsec.ml/en/CSAW-2016-50-kill-forensics/</id>
+    <published>2016-09-17T22:00:00.000Z</published>
+    <updated>2016-10-12T21:07:54.498Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
+<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Is kill can fix? Sign the autopsy file?</p>
+<p><a href="https://ctf.csaw.io/static/uploads/a23ef5ecca7f30b77f59f21dba413b07/kill.pcapng" target="_blank" rel="external">kill.pcapng</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<li>If you look at the presumed PcapNg file you can see it is certainly broken because you can’t open it with <a href="https://www.wireshark.org/" target="_blank" rel="external">Whireshark</a> and the <code>file</code> command shows it as raw data.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #file kill.pcapng</div><div class="line">kill.pcapng: data</div></pre></td></tr></table></figure>
+<ul>
+<li>It’s certainly more than just a wrong header signature so we’ll use the <a href="https://f00l.de/pcapfix/" target="_blank" rel="external">pcapcfix</a> tool  to fix this.</li>
+<li>As there is no more header we have to use <code>--pcapng</code> option because default behaviour of the tool is to repair as a simple pcap file.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #/root/CTF/tools/pcapfix-1.1.0/pcapfix --pcapng kill.pcapng</div><div class="line">pcapfix 1.1.0 (c) 2012-2014 Robert Krause</div><div class="line"></div><div class="line">[*] Reading from file: kill.pcapng</div><div class="line">[*] Writing to file: fixed_kill.pcapng</div><div class="line">[*] File size: 2288848 bytes.</div><div class="line">[*] Unknown file type. Assuming PCAPNG format.</div><div class="line">[-] Unknown block type!: 0xaaddddaa ==&gt; SKIPPING.</div><div class="line">[-] Block size mismatch (0x1a2b3c4d != 0x0000008c) ==&gt; CORRECTED.</div><div class="line">[-] Found 128 bytes of unknown data ==&gt; SKIPPING.</div><div class="line">[-] No Section Block header found ==&gt; CREATING.</div><div class="line">[*] Progress:  20.02 %</div><div class="line">[*] Progress:  40.01 %</div><div class="line">[*] Progress:  60.04 %</div><div class="line">[*] Progress:  80.05 %</div><div class="line">[+] SUCCESS: 4 Corruption(s) fixed!</div></pre></td></tr></table></figure>
+<ul>
+<li>Now look at the file, it seems better!</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #file fixed_kill.pcapng</div><div class="line">fixed_kill.pcapng: pcap-ng capture file - version 1.0</div></pre></td></tr></table></figure>
+<ul>
+<li>Now open the Pcap-Ng file with wireshark.</li>
+<li>This is mainly a SFTP exchange so it may be interesting to look at downloaded filess with this filter: Filter <code>ftp.request.command == STOR</code>.</li>
+<li>Filter show us 7 downloaded files at frame 53, 130, 693, 760, 813, 2325 and 2480. 5 jpg files (image) and 2 mp4 files (video).</li>
+<li>So let’s extract images first. For that we need the jpg header file signature. It can be found here <a href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank" rel="external">on Wikipedia</a>.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JPEG RAW `FF D8 FF DB`</div><div class="line">JFIF begin with `FF D8 FF E0`</div><div class="line">EXIF `FF D8 FF E1`</div></pre></td></tr></table></figure>
+<ul>
+<li>The one interesting for us is <strong>JFIF</strong>.</li>
+<li>Press <code>CTRL + F</code>, select <strong>Hex value</strong> as <strong>Display filter</strong>.</li>
+<li>Note that it’s not necessary as the begining of the stream is not far after the STOR request command.</li>
+<li>We won’t need to extract mp4 file, flag is in one of the images.</li>
+<li>Now there is two way to do it: the smart way and the dumb way.</li>
+<li><strong>Dumb way</strong>: see the flag in the ASCII representation of the frame 696 (girls.jpg). Ok it works, but if the flag have be not so badly hidden you won’t have seen it, for example if it was display on the image.</li>
+<li><strong>Smart way</strong>: Let’s extract images.</li>
+<li>Now that we know where are the files stream, we can extract files as mention:<ul>
+<li>Right click on the first frame of the stream.</li>
+<li>Click on <em>Follow TCP Stream</em>.</li>
+<li>Select <em>Raw</em> representation.</li>
+<li>Save it on your disk.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Do the same with next images.</li>
+</ul>
+<ul>
+<li>We can note that all images are seeable execpt girls.jpg. So what? A broken file again? Not really, if you want to see the file header in order to fix it, you discover that the flag was just injected in the file header.</li>
+<li>Let’s see the raw hex dump of the image:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #xxd -l83 extract_girls.jpg</div><div class="line">00000000: ffd8 ffe0 bae0 4a46 4946 0001 0101 0001  ......JFIF......</div><div class="line">00000010: 0001 0000 fffe 003d 666c 6167 7b72 6f73  .......=flag&#123;ros</div><div class="line">00000020: 6573 5f72 5f62 6c75 655f 7669 6f6c 6574  es_r_blue_violet</div><div class="line">00000030: 735f 725f 7233 645f 6d61 7962 335f 6861  s_r_r3d_mayb3_ha</div><div class="line">00000040: 7261 6d62 6165 5f69 735f 6e6f 745f 6b69  rambae_is_not_ki</div><div class="line">00000050: 6c6c 7d                                  ll&#125;</div></pre></td></tr></table></figure>
+<p>Thanks to <a href="https://shankaraman.wordpress.com/tag/how-to-extract-ftp-files-from-wireshark-packet/" target="_blank" rel="external">Shankar Raman</a>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
     
   </entry>
   
@@ -950,6 +989,69 @@
   </entry>
   
   <entry>
+    <title>CTF(x) - 50 - crash - Forensics</title>
+    <link href="http://rawsec.ml/en/CTFx-50-crash-forensics/"/>
+    <id>http://rawsec.ml/en/CTFx-50-crash-forensics/</id>
+    <published>2016-08-26T22:00:00.000Z</published>
+    <updated>2016-10-12T21:07:54.522Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : CTF(x) 2016</li>
+<li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>defund was about to give this flag away until his computer crashed.</p>
+<p>file: <a href="http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">flag.zip</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR: <a href="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq" target="_blank" rel="external"><img src="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png" alt="asciicast"></a></p>
+<ul>
+<li><code>flag.zip</code> contains <code>.flag.txt.swp</code> and <code>flag.txt</code></li>
+<li>Extract the archive: <code>unzip flag.zip</code></li>
+<li>Recover/restore the file with the swap file: <code>vim -r flag/flag.txt</code></li>
+<li>You get some ASCII art of the flag: <code>ctf(v1m_is_be77er_than_3macs)</code>.</li>
+</ul>
+<p>Extract of VIM man page:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r          List swap files, with information about using them for recovery.</div><div class="line"></div><div class="line">-r &#123;file&#125;   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a</div><div class="line">            file with the same filename as the text file with &quot;.swp&quot; appended.  See &quot;:help recovery&quot;.</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CTF(x) - 50 - λ - Cryptography</title>
     <link href="http://rawsec.ml/en/CTFx-50-lambda-cryptography/"/>
     <id>http://rawsec.ml/en/CTFx-50-lambda-cryptography/</id>
@@ -1031,134 +1133,9 @@
   </entry>
   
   <entry>
-    <title>CTF(x) - 50 - crash - Forensics</title>
-    <link href="http://rawsec.ml/en/CTFx-50-crash-forensics/"/>
-    <id>http://rawsec.ml/en/CTFx-50-crash-forensics/</id>
-    <published>2016-08-26T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.522Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CTF(x) 2016</li>
-<li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>defund was about to give this flag away until his computer crashed.</p>
-<p>file: <a href="http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">flag.zip</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR: <a href="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq" target="_blank" rel="external"><img src="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png" alt="asciicast"></a></p>
-<ul>
-<li><code>flag.zip</code> contains <code>.flag.txt.swp</code> and <code>flag.txt</code></li>
-<li>Extract the archive: <code>unzip flag.zip</code></li>
-<li>Recover/restore the file with the swap file: <code>vim -r flag/flag.txt</code></li>
-<li>You get some ASCII art of the flag: <code>ctf(v1m_is_be77er_than_3macs)</code>.</li>
-</ul>
-<p>Extract of VIM man page:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r          List swap files, with information about using them for recovery.</div><div class="line"></div><div class="line">-r &#123;file&#125;   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a</div><div class="line">            file with the same filename as the text file with &quot;.swp&quot; appended.  See &quot;:help recovery&quot;.</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 35 - IRC I - Misc</title>
-    <link href="http://rawsec.ml/en/IceCTF-35-IRC-1-Misc/"/>
-    <id>http://rawsec.ml/en/IceCTF-35-IRC-1-Misc/</id>
-    <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.502Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : IceCTF 2016</li>
-<li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>There is someone sharing flags on our IRC server, can you find him and stop him? glitch.is:6667</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Connect to the IRC server (ex: with <a href="https://client02.chat.mibbit.com/" target="_blank" rel="external">mibbit</a> if you have no IRC client installed).</li>
-<li>On glitch.is home use the <code>/list</code> to list all the channels on the server.</li>
-<li>There is a channel named <code>#6470e394cb_flagshare</code>.</li>
-<li>Join it <code>/join #6470e394cb_flagshare</code>.</li>
-<li>Display the topic <code>/topic</code> which is <em>Get your flags here! while they’re hot! IceCTF{pL3AsE_D0n7_5h4re_fL495_JUsT_doNT}</em>.</li>
-</ol>
-<p><strong>Note</strong>: Here a <a href="https://en.wikipedia.org/wiki/List_of_Internet_Relay_Chat_commands" target="_blank" rel="external">List of IRC commands</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF - 50 - Vape Nation - Stego</title>
-    <link href="http://rawsec.ml/en/IceCTF-50-Vape-Nation-Stego/"/>
-    <id>http://rawsec.ml/en/IceCTF-50-Vape-Nation-Stego/</id>
+    <title>IceCTF - 40 - Search - Misc</title>
+    <link href="http://rawsec.ml/en/IceCTF-40-Search-Misc/"/>
+    <id>http://rawsec.ml/en/IceCTF-40-Search-Misc/</id>
     <published>2016-08-24T22:00:00.000Z</published>
     <updated>2016-10-12T21:07:54.488Z</updated>
     
@@ -1185,12 +1162,15 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Go Green! <a href="https://play.icec.tf/problem-static/vape_nation_7d550b3069428e39775f31e7299cd354c721459043cf1a077bb388f4f531d459.png" target="_blank" rel="external">vape_nation.png</a></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>There’s something about this domain… <a href="http://search.icec.tf/" target="_blank" rel="external">search.icec.tf</a>, I don’t see anything, but maybe its all about the conTEXT.</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Open <code>vape_nation.png</code> with <a href="http://www.caesum.com/handbook/Stegsolve.jar" target="_blank" rel="external">StegSolve</a>.</li>
-<li>Description said <strong>Go Green</strong> so just do it!</li>
-<li>Green plane 0 contain the flag: <code>IceCTF{420_CuR35_c4NCEr}</code>.</li>
+<li>Default behaviour of main dns lookup utilities (like nslookup or dig) is to look for A type record.</li>
+<li>But we want to look at TXT type record.</li>
+<li>So instead of using <code>dig search.icec.tf/</code> (eq. <code>dig -t A search.icec.tf/</code>),</li>
+<li>we’ll use <code>dig -t TXT search.icec.tf/</code>.</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig -t A search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; -t A search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 21856</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	A</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">icec.tf.		300	IN	SOA	bob.ns.cloudflare.com. dns.cloudflare.com. 2022260330 10000 2400 604800 3600</div><div class="line"></div><div class="line">;; Query time: 88 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:45:54 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 104</div><div class="line"></div><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 41552</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	A</div><div class="line"></div><div class="line">;; Query time: 0 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:46:07 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 43</div><div class="line"></div><div class="line">┌─[root@parrot]─[~/CTF/IceCTF/2016]</div><div class="line">└──╼ #dig -t TXT search.icec.tf</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; -t TXT search.icec.tf</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 35890</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;search.icec.tf.			IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">search.icec.tf.		300	IN	TXT	&quot;IceCTF&#123;flag5_all_0v3r_the_Plac3&#125;&quot;</div><div class="line"></div><div class="line">;; Query time: 61 msec</div><div class="line">;; SERVER: 127.0.0.1#53(127.0.0.1)</div><div class="line">;; WHEN: Wed Aug 17 22:46:16 CEST 2016</div><div class="line">;; MSG SIZE  rcvd: 88</div></pre></td></tr></table></figure>
+<p>For more details about DNS record types, see the <a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types" target="_blank" rel="external">List of DNS record types</a>.</p>
 ]]></content>
     
     <summary type="html">
@@ -1210,16 +1190,16 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="stegano" scheme="http://rawsec.ml/tags/stegano/"/>
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
   <entry>
-    <title>IceCTF - 50 - Corrupt Transmission - Forensics</title>
-    <link href="http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/"/>
-    <id>http://rawsec.ml/en/IceCTF-50-Corrupt-Tansmission-Forencics/</id>
+    <title>IceCTF - 45 - Time Traveler - Forensics</title>
+    <link href="http://rawsec.ml/en/IceCTF-45-Time-Traveler-Forencics/"/>
+    <id>http://rawsec.ml/en/IceCTF-45-Time-Traveler-Forencics/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.525Z</updated>
+    <updated>2016-10-12T21:07:54.532Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1244,33 +1224,14 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We intercepted this image, but it must have gotten corrupted during the transmission. Can you try and fix it? <a href="https://play.icec.tf/problem-static/corrupt_92cee405924ad39fb513e3ef910699b79bb6d45cc5046c051eb9aab3546e22c3.png" target="_blank" rel="external">corrupt.png</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Check the file type:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file corrupt.png</div><div class="line">corrupt.png: data</div></pre></td></tr></table></figure>
-</li>
-<li><p>This PNG is clearly corrupted, check what’s wrong:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pngcheck corrupt.png</div><div class="line">corrupt.png:  CORRUPTED by text conversion</div><div class="line">ERROR: corrupt.png</div><div class="line"></div><div class="line">pngcheck -v corrupt.png</div><div class="line">File: corrupt.png (469363 bytes)</div><div class="line">  File is CORRUPTED.  It seems to have suffered EOL conversion.</div><div class="line">  It was probably transmitted in text mode.</div><div class="line">ERRORS DETECTED in corrupt.png</div></pre></td></tr></table></figure>
-</li>
-<li><p>This kind of error may occurs when an image (binary) was downloaded as ASCII text.</p>
-</li>
-<li><p>First, we’ll check the PNG header with <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png</div><div class="line">00000000: 9050 4e47 0e1a 0a1b                      .PNG....</div></pre></td></tr></table></figure>
-</li>
-<li><p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature" target="_blank" rel="external">PNG spec</a> tell us that not the right header, good header should be:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(decimal)              137  80  78  71  13  10  26  10</div><div class="line">(hexadecimal)           89  50  4e  47  0d  0a  1a  0a</div><div class="line">(ASCII C notation)    \211   P   N   G  \r  \n \032 \n</div></pre></td></tr></table></figure>
-</li>
-<li><p>Let’s fix it with <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">HT</a> hex editor.</p>
-</li>
-<li><p>Now it sounds right:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png.fix</div><div class="line">00000000: 8950 4e47 0d0a 1a0a                      .PNG....</div><div class="line"></div><div class="line">pngcheck corrupt.png.fix</div><div class="line">corrupt.png.fix  additional data after IEND chunk</div><div class="line">ERROR: corrupt.png.fix</div></pre></td></tr></table></figure>
-</li>
-<li><p>There is still an error but now PNG is recognized and we can display the image:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">file corrupt.png.fix</div><div class="line">corrupt.png.fix: PNG image data, 500 x 408, 8-bit/color RGBA, non-interlaced</div><div class="line"></div><div class="line">pngcheck -v corrupt.png.fix</div><div class="line">File: corrupt.png.fix (469363 bytes)</div><div class="line">  chunk IHDR at offset 0x0000c, length 13</div><div class="line">    500 x 408 image, 32-bit RGB+alpha, non-interlaced</div><div class="line">  chunk bKGD at offset 0x00025, length 6</div><div class="line">    red = 0x00ff, green = 0x00ff, blue = 0x00ff</div><div class="line">  chunk pHYs at offset 0x00037, length 9: 2835x2835 pixels/meter (72 dpi)</div><div class="line">  chunk tIME at offset 0x0004c, length 7: 20 Jun 2016 03:20:08 UTC</div><div class="line">  chunk IDAT at offset 0x0005f, length 8192</div><div class="line">    zlib: deflated, 32K window, maximum compression</div><div class="line">  chunk IDAT at offset 0x0206b, length 8192</div><div class="line">  chunk IDAT at offset 0x04077, length 8192</div><div class="line">  chunk IDAT at offset 0x06083, length 8192</div><div class="line">  chunk IDAT at offset 0x0808f, length 8192</div><div class="line">  chunk IDAT at offset 0x0a09b, length 8192</div><div class="line">  chunk IDAT at offset 0x0c0a7, length 8192</div><div class="line">  chunk IDAT at offset 0x0e0b3, length 8192</div><div class="line">  chunk IDAT at offset 0x100bf, length 8192</div><div class="line">  chunk IDAT at offset 0x120cb, length 8192</div><div class="line">  chunk IDAT at offset 0x140d7, length 8192</div><div class="line">  chunk IDAT at offset 0x160e3, length 8192</div><div class="line">  chunk IDAT at offset 0x180ef, length 8192</div><div class="line">  chunk IDAT at offset 0x1a0fb, length 8192</div><div class="line">  chunk IDAT at offset 0x1c107, length 8192</div><div class="line">  chunk IDAT at offset 0x1e113, length 8192</div><div class="line">  chunk IDAT at offset 0x2011f, length 8192</div><div class="line">  chunk IDAT at offset 0x2212b, length 8192</div><div class="line">  chunk IDAT at offset 0x24137, length 8192</div><div class="line">  chunk IDAT at offset 0x26143, length 8192</div><div class="line">  chunk IDAT at offset 0x2814f, length 8192</div><div class="line">  chunk IDAT at offset 0x2a15b, length 8192</div><div class="line">  chunk IDAT at offset 0x2c167, length 8192</div><div class="line">  chunk IDAT at offset 0x2e173, length 8192</div><div class="line">  chunk IDAT at offset 0x3017f, length 8192</div><div class="line">  chunk IDAT at offset 0x3218b, length 8192</div><div class="line">  chunk IDAT at offset 0x34197, length 8192</div><div class="line">  chunk IDAT at offset 0x361a3, length 8192</div><div class="line">  chunk IDAT at offset 0x381af, length 8192</div><div class="line">  chunk IDAT at offset 0x3a1bb, length 8192</div><div class="line">  chunk IDAT at offset 0x3c1c7, length 8192</div><div class="line">  chunk IDAT at offset 0x3e1d3, length 8192</div><div class="line">  chunk IDAT at offset 0x401df, length 8192</div><div class="line">  chunk IDAT at offset 0x421eb, length 8192</div><div class="line">  chunk IDAT at offset 0x441f7, length 8192</div><div class="line">  chunk IDAT at offset 0x46203, length 8192</div><div class="line">  chunk IDAT at offset 0x4820f, length 8192</div><div class="line">  chunk IDAT at offset 0x4a21b, length 8192</div><div class="line">  chunk IDAT at offset 0x4c227, length 8192</div><div class="line">  chunk IDAT at offset 0x4e233, length 8192</div><div class="line">  chunk IDAT at offset 0x5023f, length 8192</div><div class="line">  chunk IDAT at offset 0x5224b, length 8192</div><div class="line">  chunk IDAT at offset 0x54257, length 8192</div><div class="line">  chunk IDAT at offset 0x56263, length 8192</div><div class="line">  chunk IDAT at offset 0x5826f, length 8192</div><div class="line">  chunk IDAT at offset 0x5a27b, length 8192</div><div class="line">  chunk IDAT at offset 0x5c287, length 8192</div><div class="line">  chunk IDAT at offset 0x5e293, length 8192</div><div class="line">  chunk IDAT at offset 0x6029f, length 8192</div><div class="line">  chunk IDAT at offset 0x622ab, length 8192</div><div class="line">  chunk IDAT at offset 0x642b7, length 8192</div><div class="line">  chunk IDAT at offset 0x662c3, length 8192</div><div class="line">  chunk IDAT at offset 0x682cf, length 8192</div><div class="line">  chunk IDAT at offset 0x6a2db, length 8192</div><div class="line">  chunk IDAT at offset 0x6c2e7, length 8192</div><div class="line">  chunk IDAT at offset 0x6e2f3, length 8192</div><div class="line">  chunk IDAT at offset 0x702ff, length 8192</div><div class="line">  chunk IDAT at offset 0x7230b, length 1619</div><div class="line">  chunk IEND at offset 0x7296a, length 0</div><div class="line">  additional data after IEND chunk</div><div class="line">ERRORS DETECTED in corrupt.png.fix</div><div class="line"></div><div class="line">display corrupt.png.fix</div></pre></td></tr></table></figure>
-</li>
-<li><p>Flag is <code>IceCTF{t1s_but_4_5cr4tch}</code>.</p>
-</li>
-</ol>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I can assure you that the flag was on <a href="http://time-traveler.icec.tf/" target="_blank" rel="external">this website</a> at some point in time.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<li>Use the <a href="https://archive.org/web/" target="_blank" rel="external">WaybackMachine</a> of Internet Archive.</li>
+<li>Enter the URL <a href="http://time-traveler.icec.tf/" target="_blank" rel="external"><code>http://time-traveler.icec.tf/</code></a>.</li>
+<li>Select the save point and get the flag: <code>IceCTF{Th3y&#39;11_n3v4r_f1|\|d_m4h_fl3g_1n_th3_p45t}</code>.</li>
+</ul>
+<p><strong>Similar challenge</strong>: <a href="http://rawsec.ml/en/ABCTF-50-Archive-Me-Reconaissance/">ABCTF - 50 - Archive Me - Reconaissance</a></p>
+<p><strong>POV</strong>: I think it’s more a Reconaissance challenge than a Forensics one. But you know challenge classification in CTF…</p>
 ]]></content>
     
     <summary type="html">
@@ -1295,11 +1256,11 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 55 - Demo - Pwn</title>
-    <link href="http://rawsec.ml/en/IceCTF-55-Demo-Pwn/"/>
-    <id>http://rawsec.ml/en/IceCTF-55-Demo-Pwn/</id>
+    <title>IceCTF - 45 - Hidden in Plain Sight - ReverseEngineering</title>
+    <link href="http://rawsec.ml/en/IceCTF-45-Hidden-in-Plain-Sight-ReverseEngineering/"/>
+    <id>http://rawsec.ml/en/IceCTF-45-Hidden-in-Plain-Sight-ReverseEngineering/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.508Z</updated>
+    <updated>2016-10-12T21:07:54.542Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1324,31 +1285,8 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I found this awesome premium shell, but my demo version just ran out… can you help me crack it? <code>/home/demo/</code> on the shell.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Connect to the shell provided by IceCTF.</li>
-<li>Go to <code>/home/demo/</code>.</li>
-<li><p>Our goal is to display <code>flag.txt</code> but it is impossible ofr the moment:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ cat flag.txt</div><div class="line">cat: flag.txt: Permission denied</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ sh</div><div class="line">$ cat /home/demo/flag.txt</div><div class="line">cat: /home/demo/flag.txt: Permission denied</div></pre></td></tr></table></figure>
-</li>
-<li><p>Display <code>demo.c</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#define _GNU_SOURCE</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;libgen.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">void give_shell() &#123;</div><div class="line">    gid_t gid = getegid();</div><div class="line">    setresgid(gid, gid, gid);</div><div class="line">    system(&quot;/bin/sh&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">    if(strncmp(basename(getenv(&quot;_&quot;)), &quot;icesh&quot;, 6) == 0)&#123;</div><div class="line">        give_shell();</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        printf(&quot;I&apos;m sorry, your free trial has ended.\n&quot;);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>To call <code>give_shell()</code> we have to bypass the if statement.</p>
-</li>
-<li>We need the <code>_</code> environment variable to be <code>_=icesh</code>.</li>
-<li><p>But our zsh shell don’t allow us to change: <code>_</code> is read-only and we can’t make it writable.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ export \_=icesh</div><div class="line">zsh: read-only variable: _</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ typeset +rx \_=icesh</div><div class="line">typeset: _: can&apos;t change type of a special parameter</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>_</code> contain the name of the last command but launching <code>icesh</code> and then <code>./demo</code> doesn’t work in this environment because the last command is <code>./demo</code> so <code>_=./demo</code>.</p>
-</li>
-<li>As <code>give_shell()</code> will give us a <code>/bin/sh</code>, let’s try with it.</li>
-<li>Start a <code>/bin/sh</code>.</li>
-<li>With <code>/bin/sh</code>, <code>_</code> contain the last command before last one, so running <code>icesh</code> and then <code>./demo</code> will work: <code>_=icesh</code>.</li>
-<li>So that launch <code>give_shell()</code> and give a <code>/bin/sh</code> enhanced with special gid instead of having <em>I’m sorry, your free trial has ended.</em> printed.</li>
-<li>With this empowered shell we can display the <code>flag.txt</code> file:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat /home/demo/flag.txt</div><div class="line">IceCTF&#123;wH0_WoU1d_3vr_7Ru5t_4rgV&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Make sure you take a real close look at it, it should be right there! <code>/home/plain_sight/</code> or download it <a href="https://play.icec.tf/problem-static/828644c3ad8ccfa14b86a69dccd36f2b-plain_sight_df5d2c1da50110458fa00d0db6586b23cd67317c7f7b95f4a092d645a4570296" target="_blank" rel="external">here</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Open this binary with an hex editor (ex: <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">ht</a>, <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>, <a href="http://manpages.org/hexeditor" target="_blank" rel="external">hexeditor</a>, <a href="http://home.gna.org/bless/" target="_blank" rel="external">bless</a>, <a href="http://wxhexeditor.sourceforge.net/home.php" target="_blank" rel="external">wxHexEditor</a> by preference order)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">00000510: ec0c 50e8 38fe ffff 83c4 10b0 49b0 63b0  ..P.8.......I.c.</div><div class="line">00000520: 65b0 43b0 54b0 46b0 7bb0 6cb0 6fb0 6fb0  e.C.T.F.&#123;.l.o.o.</div><div class="line">00000530: 6bb0 5fb0 6db0 6fb0 6db0 5fb0 49b0 5fb0  k._.m.o.m._.I._.</div><div class="line">00000540: 66b0 6fb0 75b0 6eb0 64b0 5fb0 69b0 74b0  f.o.u.n.d._.i.t.</div><div class="line">00000550: 7dc7 45f4 0000 0000 eb2f 83ec 0c6a 01e8  &#125;.E....../...j..</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
@@ -1368,7 +1306,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="pwn" scheme="http://rawsec.ml/tags/pwn/"/>
+      <category term="reverse" scheme="http://rawsec.ml/tags/reverse/"/>
     
   </entry>
   

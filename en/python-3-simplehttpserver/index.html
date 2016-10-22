@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Python 3 &quot;No module named SimpleHTTPServer&quot; | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="linux,programming,python" />
+    
+    <meta name="description" content="If the default python on your machine is python 3 so running the following command will result an error:
+12$ python -m SimpleHTTPServerpython: No module named SimpleHTTPServer
+So use instead:
+1python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 3 "No module named SimpleHTTPServer"">
+<meta property="og:url" content="http://rawsec.ml/en/python-3-simplehttpserver/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="If the default python on your machine is python 3 so running the following command will result an error:
+12$ python -m SimpleHTTPServerpython: No module named SimpleHTTPServer
+So use instead:
+1python">
+<meta property="og:image" content="http://rawsec.ml/images/programming.jpg">
+<meta property="og:updated_time" content="2016-10-22T21:57:52.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 3 "No module named SimpleHTTPServer"">
+<meta name="twitter:description" content="If the default python on your machine is python 3 so running the following command will result an error:
+12$ python -m SimpleHTTPServerpython: No module named SimpleHTTPServer
+So use instead:
+1python">
+<meta name="twitter:image" content="http://rawsec.ml/images/programming.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/programming/">programming</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/programming/python/">python</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-python-3-simplehttpserver" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Python 3 &quot;No module named SimpleHTTPServer&quot;
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/python-3-simplehttpserver/" class="article-date">
+    <time datetime="2016-10-20T22:00:00.000Z" itemprop="datePublished">Friday 21 October 2016 (2016-10-21)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/programming/">programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>If the default <strong>python</strong> on your machine is python 3 so running the following command will result an error:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python -m SimpleHTTPServer</div><div class="line">python: No module named SimpleHTTPServer</div></pre></td></tr></table></figure>
+<p>So use instead:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -m http.server</div></pre></td></tr></table></figure>
+<p>The <a href="https://docs.python.org/2/library/simplehttpserver.html" target="_blank" rel="external">python 2.7 doc</a> warns:</p>
+<blockquote>
+<p><strong>Note :</strong> The <a href="https://docs.python.org/2/library/simplehttpserver.html#module-SimpleHTTPServer" target="_blank" rel="external"><code>SimpleHTTPServer</code></a> module has been merged into <code>http.server</code> in Python 3. The <a href="https://docs.python.org/2/glossary.html#term-2to3" target="_blank" rel="external">2to3</a> tool will automatically adapt imports when converting your sources to Python 3.</p>
+</blockquote>
+<p>You can also check the <a href="https://docs.python.org/3.5/library/http.server.html" target="_blank" rel="external">python 3.5 doc</a>.</p>
+<p>Note that on some machines <code>python</code> redirects to <em>python 2</em> and on some others to <em>python 3</em>, so if you want a command that always works use <code>python3 -m http.server</code> or <code>python2 -m SimpleHTTPServer</code>.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://rawsec.ml/en/python-3-simplehttpserver/" data-id="ciulqy8f70000paj30l7e6kbt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/en/archlinux-temporarily-resize-tmp-partition/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">ArchLinux - Temporarily resize /tmp partition</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/python-3-simplehttpserver/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/programming.jpg)" alt="Python 3 &quot;No module named SimpleHTTPServer&quot;" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/programming/">programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/programming/python/">python</a></p>
+                            <p class="item-title"><a href="/en/python-3-simplehttpserver/" class="title">Python 3 &quot;No module named SimpleHTTPServer&quot;</a></p>
+                            <p class="item-date"><time datetime="2016-10-20T22:00:00.000Z" itemprop="datePublished">Friday 21 October 2016 (2016-10-21)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/archlinux-temporarily-resize-tmp-partition/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/tux-293844_640.png)" alt="ArchLinux - Temporarily resize /tmp partition" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/linux/archlinux/">archlinux</a></p>
+                            <p class="item-title"><a href="/en/archlinux-temporarily-resize-tmp-partition/" class="title">ArchLinux - Temporarily resize /tmp partition</a></p>
+                            <p class="item-date"><time datetime="2016-10-14T22:00:00.000Z" itemprop="datePublished">Saturday 15 October 2016 (2016-10-15)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/proxy-linux/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/tux-293844_640.png)" alt="Setup a proxy under Linux" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a></p>
+                            <p class="item-title"><a href="/en/proxy-linux/" class="title">Setup a proxy under Linux</a></p>
+                            <p class="item-date"><time datetime="2016-10-12T22:00:00.000Z" itemprop="datePublished">Thursday 13 October 2016 (2016-10-13)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/2-less-known-tricks-spoofing-extensions/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="2 less known tricks of spoofing extensions on Windows" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/windows/">windows</a></p>
+                            <p class="item-title"><a href="/en/2-less-known-tricks-spoofing-extensions/" class="title">2 less known tricks of spoofing extensions on Windows</a></p>
+                            <p class="item-date"><time datetime="2016-10-12T22:00:00.000Z" itemprop="datePublished">Thursday 13 October 2016 (2016-10-13)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/archlinux-setup-sftp-user-deluge/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/tux-293844_640.png)" alt="ArchLinux - Setup an SFTP user for Deluge" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/linux/archlinux/">archlinux</a></p>
+                            <p class="item-title"><a href="/en/archlinux-setup-sftp-user-deluge/" class="title">ArchLinux - Setup an SFTP user for Deluge</a></p>
+                            <p class="item-date"><time datetime="2016-09-26T22:00:00.000Z" itemprop="datePublished">Tuesday 27 September 2016 (2016-09-27)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">24</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">63</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/">operating system</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/windows/">windows</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">52</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 12.86px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.71px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.71px;">centos</a> <a href="/tags/crypto/" style="font-size: 15.71px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.29px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensic/" style="font-size: 10px;">forensic</a> <a href="/tags/forensics/" style="font-size: 15px;">forensics</a> <a href="/tags/git/" style="font-size: 11.43px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.71px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.71px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/misc/" style="font-size: 15px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.71px;">netbios</a> <a href="/tags/news/" style="font-size: 14.29px;">news</a> <a href="/tags/opensuse/" style="font-size: 13.57px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.71px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 11.43px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.71px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 10.71px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.71px;">reverse</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.71px;">ssh</a> <a href="/tags/stegano/" style="font-size: 10.71px;">stegano</a> <a href="/tags/system/" style="font-size: 17.86px;">system</a> <a href="/tags/tor/" style="font-size: 10.71px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.71px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.71px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 16.43px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.71px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 17.14px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 12.14px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.29px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'http://rawsec.ml/en/python-3-simplehttpserver/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
