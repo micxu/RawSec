@@ -6,7 +6,7 @@
     <title>Virtualbox : shared folder with guest | RawSec</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="linux,system,virtualization" />
+        <meta name="keywords" content="virtualization,linux,system" />
     
     <meta name="description" content="This how-to works independently of the host platform.
 On virtualbox :
@@ -25,7 +25,7 @@ Open the Configuration window of the VM (guest)
 Select Shared folder on the left menu
 Click on the icon corresponding to Add a sh">
 <meta property="og:image" content="http://rawsec.ml/images/tux-293844_640.png">
-<meta property="og:updated_time" content="2016-10-12T21:07:54.502Z">
+<meta property="og:updated_time" content="2016-11-03T17:31:22.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Virtualbox : shared folder with guest">
 <meta name="twitter:description" content="This how-to works independently of the host platform.
@@ -203,16 +203,20 @@ ga('send', 'pageview');
 </ol>
 <p>On the guest VM:</p>
 <ol>
-<li><p>Create a folder (an existant one can be used), ex: </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /home/user/vbox-shared</div></pre></td></tr></table></figure>
-</li>
-<li><p>Mount the shared folder and is file system as root, ex:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount -t vboxsf [FOLDER_NAME] [GUEST_PATH]</div></pre></td></tr></table></figure>
-</li>
+<li>Create a folder (an existant one can be used), ex:</li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir /home/user/vbox-shared</div></pre></td></tr></table></figure>
+<ol>
+<li>Mount the shared folder and is file system as root, ex:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mount -t vboxsf [FOLDER_NAME] [GUEST_PATH]</span></div></pre></td></tr></table></figure>
 <p>with <code>[FOLDER_NAME]</code> the name of the shared folder created on virtualbox and <code>[GUEST_PATH]</code> the folder path where the share file system have to be mounted.</p>
-<p>So here that will give:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount -t vboxsf folder-shared /home/user/vbox-shared</div></pre></td></tr></table></figure></p>
-<p><strong>Note</strong> : Even if a parmanent shared folder was created, the mount command will have to be runned each time the guest restart.</p>
+<p>So here that will give:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mount -t vboxsf folder-shared /home/user/vbox-shared</span></div></pre></td></tr></table></figure>
+<p><strong>Note</strong> : Even if a permanent shared folder was created, the mount command will have to be runned each time the guest restart.</p>
+<p>Mounting a file system requires root privileges, but instead of mounting the file system as roor like previously, it’s preferable to mount it as a user:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mount -t vboxsf -o <span class="built_in">umask</span>=0022,gid=1000,uid=1000 folder-shared /home/user/vbox-shared</div></pre></td></tr></table></figure>
+<p>Where the <em>gid</em> and <em>uid</em> value math with the ones of the user (it can be check with the <code>id</code> command).</p>
 
         </div>
         <footer class="article-footer">
@@ -220,7 +224,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/virtualbox-shared-folder-with-guest/" data-id="ciucmb11v00aehwj3ewt7sosa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/virtualbox-shared-folder-with-guest/" data-id="civ2mrt5a00bg65j33tl62q9a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -428,26 +432,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/proxy-linux/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/tux-293844_640.png)" alt="Setup a proxy under Linux" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a></p>
-                            <p class="item-title"><a href="/en/proxy-linux/" class="title">Setup a proxy under Linux</a></p>
-                            <p class="item-date"><time datetime="2016-10-12T22:00:00.000Z" itemprop="datePublished">Thursday 13 October 2016 (2016-10-13)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/2-less-known-tricks-spoofing-extensions/" class="thumbnail">
     
     
@@ -461,6 +445,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/windows/">windows</a></p>
                             <p class="item-title"><a href="/en/2-less-known-tricks-spoofing-extensions/" class="title">2 less known tricks of spoofing extensions on Windows</a></p>
+                            <p class="item-date"><time datetime="2016-10-12T22:00:00.000Z" itemprop="datePublished">Thursday 13 October 2016 (2016-10-13)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/proxy-linux/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/tux-293844_640.png)" alt="Setup a proxy under Linux" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a></p>
+                            <p class="item-title"><a href="/en/proxy-linux/" class="title">Setup a proxy under Linux</a></p>
                             <p class="item-date"><time datetime="2016-10-12T22:00:00.000Z" itemprop="datePublished">Thursday 13 October 2016 (2016-10-13)</time></p>
                         </div>
                     </li>
