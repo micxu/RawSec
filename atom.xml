@@ -16,6 +16,79 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Hack The Vote 2016 - 50 - TOPKEK - Misc</title>
+    <link href="http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/"/>
+    <id>http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/</id>
+    <published>2016-11-04T23:00:00.000Z</published>
+    <updated>2016-11-05T17:33:07.876Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : Hack The Vote 2016</li>
+<li><strong>Website</strong> : <a href="https://pwn.voting/" target="_blank" rel="external">https://pwn.voting/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/345" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>A CNN reporter had only one question that she couldn’t get off her mind</p>
+<blockquote>
+<p>   Do we even know, who is this 4 CHAN???</p>
+</blockquote>
+<p>So she set out to find who this 400lb hacker is. During her investigation, she came across this cryptic message on some politically incorrect forum online, can you figure out what it means?</p>
+<p><a href="https://s3.amazonaws.com/hackthevote/kek.43319559636b94db1c945834340b65d68f90b6ecbb70925f7b24f6efc5c2524e.txt" target="_blank" rel="external">kek</a></p>
+<p>author’s irc nick: krx</p>
+</blockquote>
+<p><strong>Note</strong>: This challenge was classified as <em>Crypto</em> but is <em>Misc</em>.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The content of the file looks like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!!</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>This looks like an esoteric language (like Ook) but it’s not.</p>
+<p><strong>N.B.:</strong> According to <a href="http://fr.urbandictionary.com/define.php?term=topkek" target="_blank" rel="external">1</a>, <a href="https://encyclopediadramatica.se/Topkek" target="_blank" rel="external">2</a> and <a href="http://knowyourmeme.com/memes/topkek" target="_blank" rel="external">3</a>, <em>kek</em> is derivated of <em>lel</em> that is a derivated of <em>lol</em>, and <em>topkek</em> is a cake trademark popular on <code>/s4s</code> chan of 4Chan because of its similarity with <em>toplel</em> which means <em>super funny</em>. (Knowing that is useless for the challenge).</p>
+<p>There is only two keyword <code>TOP</code> and <code>KEK</code> and they seem pretty useless. So let’s assume that it is binary: (<code>TOP</code> = 0 &amp;&amp; <code>KEK</code> = 1) or (<code>TOP</code> = 1 &amp;&amp; <code>KEK</code> = 0).</p>
+<p>We noticed there is between 1 and 5 exclamation marks following each keywords so let’s assume that is the number of times that 0 or 1 is repeated.</p>
+<p>Here is my script:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="comment"># read the file</span></div><div class="line">file = File.open(<span class="string">'kek.txt'</span>, <span class="string">'r+t'</span>)</div><div class="line">data = file.read</div><div class="line">file.close</div><div class="line">puts <span class="string">"Original: \n"</span> + data + <span class="string">"\n\n"</span></div><div class="line"></div><div class="line"><span class="comment"># Assume that TOP = 1, KEK = 0, and ! the number of time they appear</span></div><div class="line">topkek_to_binary = <span class="string">""</span></div><div class="line">data.split(<span class="string">" "</span>).each <span class="keyword">do</span> <span class="params">|bool|</span></div><div class="line">  <span class="keyword">if</span> bool.match(<span class="regexp">/TOP/</span>)</div><div class="line">    marks = bool.sub(<span class="string">'TOP'</span>, <span class="string">''</span>) <span class="comment"># keeping only the marks</span></div><div class="line">    bin = marks.gsub(<span class="string">'!'</span>, <span class="string">'1'</span>) <span class="comment"># replacing marks with 0</span></div><div class="line">    topkek_to_binary.concat(bin)</div><div class="line">  <span class="keyword">elsif</span> bool.match(<span class="regexp">/KEK/</span>)</div><div class="line">    marks = bool.sub(<span class="string">'KEK'</span>, <span class="string">''</span>) <span class="comment"># keeping only the marks</span></div><div class="line">    bin = marks.gsub(<span class="string">'!'</span>, <span class="string">'0'</span>) <span class="comment"># replacing marks with 0</span></div><div class="line">    topkek_to_binary.concat(bin)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">puts <span class="string">"Binary: \n"</span> + topkek_to_binary + <span class="string">"\n\n"</span></div><div class="line"></div><div class="line"><span class="comment"># Let's convert it into ASCII</span></div><div class="line">puts <span class="string">"ASCII: \n"</span> + [topkek_to_binary].pack(<span class="string">"B*"</span>)</div></pre></td></tr></table></figure>
+<p>Here is the output of the script:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Original:</div><div class="line">KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK!!!!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP! KEK!! TOP! KEK!!!! TOP!!! KEK! TOP! KEK!!! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP!!! KEK!!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK!! TOP! KEK!!! TOP!! KEK!! TOP!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!!!! KEK!! TOP! KEK!! TOP!! KEK!!!!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP!!! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK! TOP!!!!! KEK! TOP!</div><div class="line"></div><div class="line">Binary:</div><div class="line">0110011001101100011000010110011101111011010101000011000001101111001100000110111100110000011011110011000001101111001100000101000001011111010111110101111101011111010111110101111100110001011011010101111101101000001101000101011000110001011011100100011101011111010001100111010101001110010111110111001000110001011001110100100001110100010111110110111000110000010101110101111100110100010100100011001101011111011110010011000001110101010111110110100000110100011101100011000101101110011001110101111101100110011101010110111001011111010111110101111101011111010111110101111101001011001100110100101100100001001000010010000101111101</div><div class="line"></div><div class="line">ASCII: +</div><div class="line">flag&#123;T0o0o0o0o0P______1m_h4V1nG_FuN_r1gHt_n0W_4R3_y0u_h4v1ng_fun______K3K!!!&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hack The Vote 2016 - 250 - Trump likes colors - Steganography</title>
     <link href="http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/"/>
     <id>http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/</id>
@@ -88,79 +161,6 @@
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hack The Vote 2016 - 50 - TOPKEK - Misc</title>
-    <link href="http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/"/>
-    <id>http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/</id>
-    <published>2016-11-04T23:00:00.000Z</published>
-    <updated>2016-11-05T17:33:07.876Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Hack The Vote 2016</li>
-<li><strong>Website</strong> : <a href="https://pwn.voting/" target="_blank" rel="external">https://pwn.voting/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/345" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>A CNN reporter had only one question that she couldn’t get off her mind</p>
-<blockquote>
-<p>   Do we even know, who is this 4 CHAN???</p>
-</blockquote>
-<p>So she set out to find who this 400lb hacker is. During her investigation, she came across this cryptic message on some politically incorrect forum online, can you figure out what it means?</p>
-<p><a href="https://s3.amazonaws.com/hackthevote/kek.43319559636b94db1c945834340b65d68f90b6ecbb70925f7b24f6efc5c2524e.txt" target="_blank" rel="external">kek</a></p>
-<p>author’s irc nick: krx</p>
-</blockquote>
-<p><strong>Note</strong>: This challenge was classified as <em>Crypto</em> but is <em>Misc</em>.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The content of the file looks like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!!</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<p>This looks like an esoteric language (like Ook) but it’s not.</p>
-<p><strong>N.B.:</strong> According to <a href="http://fr.urbandictionary.com/define.php?term=topkek" target="_blank" rel="external">1</a>, <a href="https://encyclopediadramatica.se/Topkek" target="_blank" rel="external">2</a> and <a href="http://knowyourmeme.com/memes/topkek" target="_blank" rel="external">3</a>, <em>kek</em> is derivated of <em>lel</em> that is a derivated of <em>lol</em>, and <em>topkek</em> is a cake trademark popular on <code>/s4s</code> chan of 4Chan because of its similarity with <em>toplel</em> which means <em>super funny</em>. (Knowing that is useless for the challenge).</p>
-<p>There is only two keyword <code>TOP</code> and <code>KEK</code> and they seem pretty useless. So let’s assume that it is binary: (<code>TOP</code> = 0 &amp;&amp; <code>KEK</code> = 1) or (<code>TOP</code> = 1 &amp;&amp; <code>KEK</code> = 0).</p>
-<p>We noticed there is between 1 and 5 exclamation marks following each keywords so let’s assume that is the number of times that 0 or 1 is repeated.</p>
-<p>Here is my script:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="comment"># read the file</span></div><div class="line">file = File.open(<span class="string">'kek.txt'</span>, <span class="string">'r+t'</span>)</div><div class="line">data = file.read</div><div class="line">file.close</div><div class="line">puts <span class="string">"Original: \n"</span> + data + <span class="string">"\n\n"</span></div><div class="line"></div><div class="line"><span class="comment"># Assume that TOP = 1, KEK = 0, and ! the number of time they appear</span></div><div class="line">topkek_to_binary = <span class="string">""</span></div><div class="line">data.split(<span class="string">" "</span>).each <span class="keyword">do</span> <span class="params">|bool|</span></div><div class="line">  <span class="keyword">if</span> bool.match(<span class="regexp">/TOP/</span>)</div><div class="line">    marks = bool.sub(<span class="string">'TOP'</span>, <span class="string">''</span>) <span class="comment"># keeping only the marks</span></div><div class="line">    bin = marks.gsub(<span class="string">'!'</span>, <span class="string">'1'</span>) <span class="comment"># replacing marks with 0</span></div><div class="line">    topkek_to_binary.concat(bin)</div><div class="line">  <span class="keyword">elsif</span> bool.match(<span class="regexp">/KEK/</span>)</div><div class="line">    marks = bool.sub(<span class="string">'KEK'</span>, <span class="string">''</span>) <span class="comment"># keeping only the marks</span></div><div class="line">    bin = marks.gsub(<span class="string">'!'</span>, <span class="string">'0'</span>) <span class="comment"># replacing marks with 0</span></div><div class="line">    topkek_to_binary.concat(bin)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">puts <span class="string">"Binary: \n"</span> + topkek_to_binary + <span class="string">"\n\n"</span></div><div class="line"></div><div class="line"><span class="comment"># Let's convert it into ASCII</span></div><div class="line">puts <span class="string">"ASCII: \n"</span> + [topkek_to_binary].pack(<span class="string">"B*"</span>)</div></pre></td></tr></table></figure>
-<p>Here is the output of the script:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Original:</div><div class="line">KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK!!!!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP! KEK!! TOP! KEK!!!! TOP!!! KEK! TOP! KEK!!! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP!!! KEK!!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK!! TOP! KEK!!! TOP!! KEK!! TOP!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!!!! KEK!! TOP! KEK!! TOP!! KEK!!!!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP!!! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK! TOP!!!!! KEK! TOP!</div><div class="line"></div><div class="line">Binary:</div><div class="line">0110011001101100011000010110011101111011010101000011000001101111001100000110111100110000011011110011000001101111001100000101000001011111010111110101111101011111010111110101111100110001011011010101111101101000001101000101011000110001011011100100011101011111010001100111010101001110010111110111001000110001011001110100100001110100010111110110111000110000010101110101111100110100010100100011001101011111011110010011000001110101010111110110100000110100011101100011000101101110011001110101111101100110011101010110111001011111010111110101111101011111010111110101111101001011001100110100101100100001001000010010000101111101</div><div class="line"></div><div class="line">ASCII: +</div><div class="line">flag&#123;T0o0o0o0o0P______1m_h4V1nG_FuN_r1gHt_n0W_4R3_y0u_h4v1ng_fun______K3K!!!&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
@@ -240,6 +240,42 @@
   </entry>
   
   <entry>
+    <title>Setup a proxy under Linux</title>
+    <link href="http://rawsec.ml/en/proxy-linux/"/>
+    <id>http://rawsec.ml/en/proxy-linux/</id>
+    <published>2016-10-12T22:00:00.000Z</published>
+    <updated>2016-10-13T17:48:40.228Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Environment-variables"><a href="#Environment-variables" class="headerlink" title="Environment variables"></a>Environment variables</h2><p>Lot of programs (such as wget, curl, pacman, …) use environment variables to determine the proxy of a given protocol.</p>
+<p>Environment variables can be added per user in their <code>.bashrc</code> or <code>.zshrc</code> shell profile file with something like <code>export KEY=value</code>. The advantage is that variables can be used in order to avoid repeating the same proxy several times.</p>
+<p>Or <code>/etc/environment</code> file stores the system-wide variables initialized upon user login. Or you can use <code>/etc/syconfig/proxy</code> under openSUSE.</p>
+<p>To add proxy settings one time for everyone, you can execute the following script with sudo privilege (because you need to write into a system file: <code>/etc/environment</code>).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">file=/etc/environment</div><div class="line"></div><div class="line">http_proxy=http://proxy.example.org:8080/</div><div class="line">HTTP_PROXY=<span class="variable">$http_proxy</span></div><div class="line">https_proxy=<span class="variable">$http_proxy</span></div><div class="line">HTTPS_PROXY=<span class="variable">$https_proxy</span></div><div class="line">ftp_proxy=<span class="variable">$http_proxy</span></div><div class="line">FTP_PROXY=<span class="variable">$ftp_proxy</span></div><div class="line">rsync_proxy=<span class="variable">$http_proxy</span></div><div class="line">RSYNC_PROXY=<span class="variable">$rsync_proxy</span></div><div class="line">no_proxy=<span class="string">"localhost,127.0.0.1,localaddress,.localdomain.com"</span></div><div class="line">NO_PROXY=<span class="variable">$no_proxy</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"http_proxy=<span class="variable">$http_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTP_PROXY=<span class="variable">$HTTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"https_proxy=<span class="variable">$https_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTPS_PROXY=<span class="variable">$HTTPS_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"ftp_proxy=<span class="variable">$ftp_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"FTP_PROXY=<span class="variable">$FTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"rsync_proxy=<span class="variable">$rsync_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"RSYNC_PROXY=<span class="variable">$RSYNC_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"no_proxy=<span class="variable">$no_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"NO_PROXY=<span class="variable">$NO_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div></pre></td></tr></table></figure>
+<h2 id="Proxy-settings-on-GNOME3"><a href="#Proxy-settings-on-GNOME3" class="headerlink" title="Proxy settings on GNOME3"></a>Proxy settings on GNOME3</h2><p>Some other graphical programs (such as Chromium or Rhythmbox) ignore those environment variables and use gnome (GTK3) settings. These settings can be modified through the gnome-control-center front end and also through gsettings (see the example below).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gsettings set org.gnome.system.proxy mode &apos;manual&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http port 8080</div><div class="line">gsettings set org.gnome.system.proxy.ftp host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.ftp port 8080</div><div class="line">gsettings set org.gnome.system.proxy.https host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.https port 8080</div><div class="line">gsettings set org.gnome.system.proxy ignore-hosts &quot;[&apos;localhost&apos;, &apos;127.0.0.0/8&apos;, &apos;10.0.0.0/8&apos;, &apos;192.168.0.0/16&apos;, &apos;172.16.0.0/12&apos; , &apos;*.localdomain.com&apos; ]&quot;</div></pre></td></tr></table></figure>
+<h2 id="Package-managers"><a href="#Package-managers" class="headerlink" title="Package managers"></a>Package managers</h2><p>Since you are using awesome tools like <a href="https://en.opensuse.org/Portal:Zypper" target="_blank" rel="external">zypper</a> (openSUSE) or <a href="https://wiki.archlinux.org/index.php/pacman" target="_blank" rel="external">pacman</a> (ArchLinux) you will probably don’t care about the following paragraph.</p>
+<p>But users of apt-get or aptitue will need an additional step to use their package manager working with a proxy. They will need to edit <code>/etc/apt/apt.conf.d/proxy</code> and include the following lines:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Acquire::http::proxy &quot;http://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::ftp::proxy &quot;ftp://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::https::proxy &quot;https://proxy.example.org:8080/&quot;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Environment-variables&quot;&gt;&lt;a href=&quot;#Environment-variables&quot; class=&quot;headerlink&quot; title=&quot;Environment variables&quot;&gt;&lt;/a&gt;Environment variables&lt;/
+    
+    </summary>
+    
+      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
+    
+      <category term="system" scheme="http://rawsec.ml/tags/system/"/>
+    
+      <category term="proxy" scheme="http://rawsec.ml/tags/proxy/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2 less known tricks of spoofing extensions on Windows</title>
     <link href="http://rawsec.ml/en/2-less-known-tricks-spoofing-extensions/"/>
     <id>http://rawsec.ml/en/2-less-known-tricks-spoofing-extensions/</id>
@@ -281,42 +317,6 @@
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
       <category term="windows" scheme="http://rawsec.ml/tags/windows/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Setup a proxy under Linux</title>
-    <link href="http://rawsec.ml/en/proxy-linux/"/>
-    <id>http://rawsec.ml/en/proxy-linux/</id>
-    <published>2016-10-12T22:00:00.000Z</published>
-    <updated>2016-10-13T17:48:40.228Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Environment-variables"><a href="#Environment-variables" class="headerlink" title="Environment variables"></a>Environment variables</h2><p>Lot of programs (such as wget, curl, pacman, …) use environment variables to determine the proxy of a given protocol.</p>
-<p>Environment variables can be added per user in their <code>.bashrc</code> or <code>.zshrc</code> shell profile file with something like <code>export KEY=value</code>. The advantage is that variables can be used in order to avoid repeating the same proxy several times.</p>
-<p>Or <code>/etc/environment</code> file stores the system-wide variables initialized upon user login. Or you can use <code>/etc/syconfig/proxy</code> under openSUSE.</p>
-<p>To add proxy settings one time for everyone, you can execute the following script with sudo privilege (because you need to write into a system file: <code>/etc/environment</code>).</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">file=/etc/environment</div><div class="line"></div><div class="line">http_proxy=http://proxy.example.org:8080/</div><div class="line">HTTP_PROXY=<span class="variable">$http_proxy</span></div><div class="line">https_proxy=<span class="variable">$http_proxy</span></div><div class="line">HTTPS_PROXY=<span class="variable">$https_proxy</span></div><div class="line">ftp_proxy=<span class="variable">$http_proxy</span></div><div class="line">FTP_PROXY=<span class="variable">$ftp_proxy</span></div><div class="line">rsync_proxy=<span class="variable">$http_proxy</span></div><div class="line">RSYNC_PROXY=<span class="variable">$rsync_proxy</span></div><div class="line">no_proxy=<span class="string">"localhost,127.0.0.1,localaddress,.localdomain.com"</span></div><div class="line">NO_PROXY=<span class="variable">$no_proxy</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"http_proxy=<span class="variable">$http_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTP_PROXY=<span class="variable">$HTTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"https_proxy=<span class="variable">$https_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTPS_PROXY=<span class="variable">$HTTPS_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"ftp_proxy=<span class="variable">$ftp_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"FTP_PROXY=<span class="variable">$FTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"rsync_proxy=<span class="variable">$rsync_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"RSYNC_PROXY=<span class="variable">$RSYNC_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"no_proxy=<span class="variable">$no_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"NO_PROXY=<span class="variable">$NO_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div></pre></td></tr></table></figure>
-<h2 id="Proxy-settings-on-GNOME3"><a href="#Proxy-settings-on-GNOME3" class="headerlink" title="Proxy settings on GNOME3"></a>Proxy settings on GNOME3</h2><p>Some other graphical programs (such as Chromium or Rhythmbox) ignore those environment variables and use gnome (GTK3) settings. These settings can be modified through the gnome-control-center front end and also through gsettings (see the example below).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gsettings set org.gnome.system.proxy mode &apos;manual&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http port 8080</div><div class="line">gsettings set org.gnome.system.proxy.ftp host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.ftp port 8080</div><div class="line">gsettings set org.gnome.system.proxy.https host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.https port 8080</div><div class="line">gsettings set org.gnome.system.proxy ignore-hosts &quot;[&apos;localhost&apos;, &apos;127.0.0.0/8&apos;, &apos;10.0.0.0/8&apos;, &apos;192.168.0.0/16&apos;, &apos;172.16.0.0/12&apos; , &apos;*.localdomain.com&apos; ]&quot;</div></pre></td></tr></table></figure>
-<h2 id="Package-managers"><a href="#Package-managers" class="headerlink" title="Package managers"></a>Package managers</h2><p>Since you are using awesome tools like <a href="https://en.opensuse.org/Portal:Zypper" target="_blank" rel="external">zypper</a> (openSUSE) or <a href="https://wiki.archlinux.org/index.php/pacman" target="_blank" rel="external">pacman</a> (ArchLinux) you will probably don’t care about the following paragraph.</p>
-<p>But users of apt-get or aptitue will need an additional step to use their package manager working with a proxy. They will need to edit <code>/etc/apt/apt.conf.d/proxy</code> and include the following lines:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Acquire::http::proxy &quot;http://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::ftp::proxy &quot;ftp://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::https::proxy &quot;https://proxy.example.org:8080/&quot;;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Environment-variables&quot;&gt;&lt;a href=&quot;#Environment-variables&quot; class=&quot;headerlink&quot; title=&quot;Environment variables&quot;&gt;&lt;/a&gt;Environment variables&lt;/
-    
-    </summary>
-    
-      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
-    
-      <category term="system" scheme="http://rawsec.ml/tags/system/"/>
-    
-      <category term="proxy" scheme="http://rawsec.ml/tags/proxy/"/>
     
   </entry>
   
@@ -583,6 +583,138 @@
   </entry>
   
   <entry>
+    <title>CSAW CTF - 100 - Rgexepire - Misc</title>
+    <link href="http://rawsec.ml/en/CSAW-2016-100-Regexpire-misc/"/>
+    <id>http://rawsec.ml/en/CSAW-2016-100-Regexpire-misc/</id>
+    <published>2016-09-17T22:00:00.000Z</published>
+    <updated>2016-10-12T21:07:54.498Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
+<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I thought I found a perfect match but she ended up being my regEx girlfriend.</p>
+<p><code>nc misc.chal.csaw.io 8001</code></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>It was very similar with <a href="https://backdoor.sdslabs.co/challenges/ISOLVE" target="_blank" rel="external">ISolve from BackdoorCTF 2016</a>.</p>
+<p>I made 3 scripts to solve this:</p>
+<ul>
+<li>In Python with <a href="https://pypi.python.org/pypi/rstr/2.2.4" target="_blank" rel="external">rstr.xeger</a> (inspired by <a href="https://github.com/p4-team/ctf/tree/master/2016-06-04-backdoor-ctf/ppc_isolve" target="_blank" rel="external">p4</a>)</li>
+<li>In Ruby with <a href="https://rubygems.org/gems/regexp-examples/versions/1.2.0" target="_blank" rel="external">regexp-examples</a></li>
+<li>In Bash with <a href="https://github.com/asciimoo/exrex" target="_blank" rel="external">exrex</a> (simplified version)</li>
+</ul>
+<p>I flaged with the Python one, the Ruby one work well too and the Bash one work badly due to the dirty way exrex handle regex. Here a proof of success (after the end of the CTF) :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">to solve = &apos;(wolf|gazelle)*[V8xqjx0A8]+[AoqoYnDiu]i3b+[ukqUrDlf]xf+(tomato|elephant)*(clinton|tomato)&apos;</div><div class="line">solution  = wolfgazellegazellegazellewolfwolfgazelle88xj8Ajx0xAjqx8xxAx8088AqVV0jV8Axjxx8qjV8x8qV0x8V0ii3bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbqxffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftomatotomatoelephantelephanttomatoelephanttomatotomatoelephanttomatoelephanttomatoelephantelephantelephanttomatotomatotomatotomatoelephantelephanttomatotomatoelephantelephanttomatotomatoelephanttomatoelephantelephanttomatoelephanttomatotomato</div><div class="line">D*[i-r]*(dolphin|sloth)(clinton|giraffe)[nNAUqCu]z4*\d+DM*v&#123;9&#125;[e-j](fish|cat)(penguin|sloth)+(chair|clinton)&#123;7&#125;</div><div class="line">to solve = &apos;D*[i-r]*(dolphin|sloth)(clinton|giraffe)[nNAUqCu]z4*1+DM*v&#123;9&#125;[e-j](fish|cat)(penguin|sloth)+(chair|clinton)&#123;7&#125;&apos;</div><div class="line">solution  = DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDmkpkoijmnrniprlknjppmmrjnlqqpjilrnqjmimkkmrndolphinclintonqz444444444444444444444444444444444444444444111111111111111111111111111111111111111111111111111111111111111111111111DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMvvvvvvvvvhfishpenguinslothpenguinslothpenguinpenguinpenguinslothpenguinslothpenguinpenguinpenguinslothpenguinpenguinpenguinslothslothslothslothpenguinslothpenguinslothpenguinslothpenguinslothpenguinpenguinslothslothpenguinpenguinslothpenguinslothpenguinpenguinslothpenguinpenguinslothslothpenguinslothpenguinchairchairchairclintonchairclintonchair</div><div class="line">flag&#123;^regularly_express_yourself$&#125;</div><div class="line">to solve = &apos;flag&#123;^regularly_express_yourself$&#125;&apos;</div><div class="line">solution  = flag&#123;regularly_express_yourself&#125;</div></pre></td></tr></table></figure>
+<p>Python:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> rstr</div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wrapper_reg</span><span class="params">(s)</span>:</span></div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[W]&#123;1&#125;'</span>, <span class="string">' '</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[W]&#123;1&#125;'</span>, <span class="string">'a'</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[d]&#123;1&#125;'</span>, <span class="string">'1'</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[D]&#123;1&#125;'</span>, <span class="string">'#'</span>, s)</div><div class="line">  <span class="keyword">return</span> s</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line">def wrapper(s):</div><div class="line">  s = re.sub('\s+', '\t', s)</div><div class="line">  s = re.sub('[^0-9a-zA-Z\s]+', '#', s)</div><div class="line">  return s</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">recvuntil</span><span class="params">(s)</span>:</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9999</span>):</div><div class="line">        c = s.recv(<span class="number">1</span>)</div><div class="line">        <span class="keyword">if</span>(c == <span class="string">'\n'</span>):</div><div class="line">            <span class="keyword">break</span></div><div class="line">        data += c</div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    url = <span class="string">"misc.chal.csaw.io"</span></div><div class="line">    port = <span class="number">8001</span></div><div class="line">    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    s.connect((url, port))</div><div class="line">    i = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</div><div class="line">            task = recvuntil(s)</div><div class="line">            print(task)</div><div class="line">            i = <span class="number">1</span></div><div class="line">        task = recvuntil(s)</div><div class="line">        print(task)</div><div class="line">        to_solve = task</div><div class="line">        <span class="keyword">if</span> len(to_solve) == <span class="number">0</span>:</div><div class="line">            print(task)</div><div class="line">        <span class="keyword">elif</span>(to_solve == <span class="string">'Irregular'</span> <span class="keyword">or</span> to_solve == <span class="string">'Timeout'</span>):</div><div class="line">            <span class="keyword">break</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            to_solve = wrapper_reg(to_solve)</div><div class="line">            print(<span class="string">"to solve = '%s'"</span> % to_solve)</div><div class="line">            solution = rstr.xeger(to_solve).replace(<span class="string">'\n'</span>,<span class="string">''</span>)</div><div class="line">            <span class="comment">#solution = wrapper(solution)</span></div><div class="line">            print(<span class="string">"solution  = %s"</span> % solution)</div><div class="line">            s.sendall(solution + <span class="string">"\n"</span>)</div><div class="line">        sleep(<span class="number">0.1</span>)</div><div class="line"></div><div class="line">main()</div></pre></td></tr></table></figure>
+<p>Ruby:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### Dependencies ###</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'regexp-examples'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### Functions ###</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(s)</span></span></div><div class="line">  s = s.gsub(<span class="string">'\s+'</span>, <span class="string">'\t'</span>)</div><div class="line">  s = s.gsub(<span class="string">'[^0-9a-zA-Z\s]+'</span>, <span class="string">'#'</span>)</div><div class="line">  <span class="keyword">return</span> s</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### Main ###</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __FILE_<span class="number">_</span> == $0</div><div class="line">  hostname = <span class="string">'misc.chal.csaw.io'</span></div><div class="line">  port = <span class="number">8001</span></div><div class="line"></div><div class="line">  s = TCPSocket.open(hostname, port)</div><div class="line">  output = <span class="string">""</span></div><div class="line">  exit_test = <span class="literal">nil</span></div><div class="line"></div><div class="line">  <span class="comment"># pass Can you match these regexes?</span></div><div class="line">  line = s.gets</div><div class="line">  puts line.chop</div><div class="line"></div><div class="line">  <span class="keyword">while</span> <span class="keyword">not</span> exit_test</div><div class="line">    line = s.gets       <span class="comment"># Read lines from the socket</span></div><div class="line">    puts line.chop      <span class="comment"># And print with platform line terminator</span></div><div class="line">    output = output.concat(line)</div><div class="line"></div><div class="line">    <span class="comment"># stop = /Can you match these regexes?\s+(.*)/.match(output)</span></div><div class="line">    stop = <span class="literal">true</span></div><div class="line">    <span class="keyword">if</span> stop</div><div class="line">      reg_test = output.match(<span class="regexp">/(.*)/</span>)</div><div class="line">      reg = <span class="regexp">/<span class="subst">#&#123;reg_test[<span class="number">1</span>]&#125;</span>/</span></div><div class="line">      example = reg.random_example</div><div class="line">      example = wrapper(example)</div><div class="line">      <span class="keyword">if</span> example != <span class="literal">nil</span></div><div class="line">        puts <span class="string">"solution :"</span> + example</div><div class="line">      <span class="keyword">end</span></div><div class="line">      s.puts(example.gsub(<span class="string">'\n'</span>, <span class="string">''</span>))</div><div class="line">      s.flush</div><div class="line">      output = <span class="string">""</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    exit_test = <span class="regexp">/Failed regex/</span>.match(output)</div><div class="line">    <span class="keyword">if</span> exit_test</div><div class="line">      exit(<span class="number">1</span>)</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">  s.close               <span class="comment"># Close the socket when done</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>Bash:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#######</span></div><div class="line"><span class="comment">#Config</span></div><div class="line"></div><div class="line">URL=<span class="string">"misc.chal.csaw.io"</span></div><div class="line">PORT=8001</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#####</span></div><div class="line"><span class="comment">#Main</span></div><div class="line"></div><div class="line">OUT=<span class="string">""</span></div><div class="line"></div><div class="line"><span class="comment"># Open socket</span></div><div class="line"><span class="built_in">exec</span> 3&lt;&gt;/dev/tcp/<span class="variable">$&#123;URL&#125;</span>/<span class="variable">$&#123;PORT&#125;</span></div><div class="line"></div><div class="line"><span class="built_in">read</span> LINE &lt;&amp;3</div><div class="line"><span class="built_in">echo</span> <span class="variable">$LINE</span> &gt;&amp;1</div><div class="line"><span class="keyword">while</span> [ -z <span class="string">"<span class="variable">$EXIT</span>"</span> ]</div><div class="line"><span class="keyword">do</span></div><div class="line"></div><div class="line">	<span class="built_in">read</span> LINE &lt;&amp;3</div><div class="line">	<span class="built_in">echo</span> <span class="variable">$LINE</span> &gt;&amp;1</div><div class="line">	exrex -r <span class="string">"<span class="variable">$LINE</span>"</span> &gt;&amp;3</div><div class="line">	OUT=<span class="string">""</span></div><div class="line"></div><div class="line">	EXIT=$( <span class="built_in">echo</span> <span class="string">"<span class="variable">$OUT</span>"</span> | awk <span class="string">'/Irregular/ &#123; getline; print $0 &#125;'</span> )</div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
+<p>My point of view: This kind of chanllenge is tricky due to bad implementation of regex server and/or regex solver so you always need to fix/wrap regex answers/solutions. I think it’s better to put a short timeout (&lt;1s) rather than a lot a steps (100+) to prevent humans to do it by hand because the more steps there are the more chances you have to get a bug. I think the goal of the challenge is to make user script, use regex and parsing, use socket but not to correct/complete other’s tools.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSAW CTF - 25 - Coinslot - Misc</title>
+    <link href="http://rawsec.ml/en/CSAW-2016-25-coinslot-misc/"/>
+    <id>http://rawsec.ml/en/CSAW-2016-25-coinslot-misc/</id>
+    <published>2016-09-17T22:00:00.000Z</published>
+    <updated>2016-10-12T21:07:54.495Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
+<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><em>#Hope #Change #Obama2008</em></p>
+<p><code>nc misc.chal.csaw.io 8000</code></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The problem here is to split up a sum of money into its equivalent in bills and coins (minimum).</p>
+<p>Here we have to script again:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python2</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div><div class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> *</div><div class="line"></div><div class="line"></div><div class="line">total = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">recvuntil</span><span class="params">(s, pattern, tryouts)</span>:</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(tryouts):</div><div class="line">        <span class="comment"># sleep(1)</span></div><div class="line">        data += s.recv(<span class="number">9999</span>)</div><div class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> data:</div><div class="line">            <span class="keyword">return</span> data</div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(bills)</span>:</span></div><div class="line">    <span class="keyword">global</span> total</div><div class="line">    times = Decimal(str(total)) / Decimal(str(bills))</div><div class="line">    <span class="keyword">if</span> times &gt;= <span class="number">1</span>:</div><div class="line">        total = Decimal(str(total)) - Decimal(str(int(times))) * Decimal(str(bills))</div><div class="line">    <span class="keyword">return</span> int(times)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> total</div><div class="line">    url = <span class="string">"misc.chal.csaw.io"</span></div><div class="line">    port = <span class="number">8000</span></div><div class="line">    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    s.connect((url, port))</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        task = recvuntil(s, <span class="string">"$10,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">        print(task)</div><div class="line">        total = re.findall(<span class="string">"\$(.*)\s+\$10,000 bills:"</span>, task)</div><div class="line">        <span class="keyword">if</span> len(total) == <span class="number">0</span>:</div><div class="line">            print(task)</div><div class="line">            sleep(<span class="number">10</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># print(total[0])</span></div><div class="line">            total = Decimal(str(total[<span class="number">0</span>]))</div><div class="line"></div><div class="line">            <span class="comment"># $10,000 bills:</span></div><div class="line">            to_send = str(calc(<span class="number">10000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $5,000 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$5,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">5000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $1,000 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$1,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">1000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $500 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$500 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">500</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $100 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$100 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">100</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $50 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$50 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">50</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $20 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$20 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">20</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $10 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$10 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">10</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $5 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$5 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">5</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $1 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$1 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">1</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># half-dollars (50c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"half-dollars (50c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.50</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># quarters (25c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"quarters (25c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.25</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># dimes (10c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"dimes (10c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.10</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># nickels (5c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"nickels (5c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.05</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># pennies (1c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"pennies (1c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.01</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">main()</div></pre></td></tr></table></figure>
+<p>Oh yeah this script is dirty and can be a lot more functional but you know in CTF all is a matter of time…</p>
+<p>Proof of flag:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">$22479.22</div><div class="line">$10,000 bills:</div><div class="line">2</div><div class="line">$5,000 bills:</div><div class="line">0</div><div class="line">$1,000 bills:</div><div class="line">2</div><div class="line">$500 bills:</div><div class="line">0</div><div class="line">$100 bills:</div><div class="line">4</div><div class="line">$50 bills:</div><div class="line">1</div><div class="line">$20 bills:</div><div class="line">1</div><div class="line">$10 bills:</div><div class="line">0</div><div class="line">$5 bills:</div><div class="line">1</div><div class="line">$1 bills:</div><div class="line">4</div><div class="line">half-dollars (50c):</div><div class="line">0</div><div class="line">quarters (25c):</div><div class="line">0</div><div class="line">dimes (10c):</div><div class="line">2</div><div class="line">nickels (5c):</div><div class="line">0</div><div class="line">pennies (1c):</div><div class="line">2</div><div class="line">correct!</div><div class="line">flag&#123;started-from-the-bottom-now-my-whole-team-fucking-here&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CSAW CTF - 50 - Kill - Forensics</title>
     <link href="http://rawsec.ml/en/CSAW-2016-50-kill-forensics/"/>
     <id>http://rawsec.ml/en/CSAW-2016-50-kill-forensics/</id>
@@ -679,138 +811,6 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSAW CTF - 25 - Coinslot - Misc</title>
-    <link href="http://rawsec.ml/en/CSAW-2016-25-coinslot-misc/"/>
-    <id>http://rawsec.ml/en/CSAW-2016-25-coinslot-misc/</id>
-    <published>2016-09-17T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.495Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
-<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><em>#Hope #Change #Obama2008</em></p>
-<p><code>nc misc.chal.csaw.io 8000</code></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The problem here is to split up a sum of money into its equivalent in bills and coins (minimum).</p>
-<p>Here we have to script again:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python2</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div><div class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> *</div><div class="line"></div><div class="line"></div><div class="line">total = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">recvuntil</span><span class="params">(s, pattern, tryouts)</span>:</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(tryouts):</div><div class="line">        <span class="comment"># sleep(1)</span></div><div class="line">        data += s.recv(<span class="number">9999</span>)</div><div class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> data:</div><div class="line">            <span class="keyword">return</span> data</div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(bills)</span>:</span></div><div class="line">    <span class="keyword">global</span> total</div><div class="line">    times = Decimal(str(total)) / Decimal(str(bills))</div><div class="line">    <span class="keyword">if</span> times &gt;= <span class="number">1</span>:</div><div class="line">        total = Decimal(str(total)) - Decimal(str(int(times))) * Decimal(str(bills))</div><div class="line">    <span class="keyword">return</span> int(times)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> total</div><div class="line">    url = <span class="string">"misc.chal.csaw.io"</span></div><div class="line">    port = <span class="number">8000</span></div><div class="line">    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    s.connect((url, port))</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        task = recvuntil(s, <span class="string">"$10,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">        print(task)</div><div class="line">        total = re.findall(<span class="string">"\$(.*)\s+\$10,000 bills:"</span>, task)</div><div class="line">        <span class="keyword">if</span> len(total) == <span class="number">0</span>:</div><div class="line">            print(task)</div><div class="line">            sleep(<span class="number">10</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># print(total[0])</span></div><div class="line">            total = Decimal(str(total[<span class="number">0</span>]))</div><div class="line"></div><div class="line">            <span class="comment"># $10,000 bills:</span></div><div class="line">            to_send = str(calc(<span class="number">10000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $5,000 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$5,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">5000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $1,000 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$1,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">1000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $500 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$500 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">500</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $100 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$100 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">100</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $50 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$50 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">50</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $20 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$20 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">20</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $10 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$10 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">10</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $5 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$5 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">5</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $1 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$1 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">1</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># half-dollars (50c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"half-dollars (50c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.50</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># quarters (25c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"quarters (25c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.25</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># dimes (10c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"dimes (10c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.10</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># nickels (5c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"nickels (5c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.05</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># pennies (1c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"pennies (1c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.01</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">main()</div></pre></td></tr></table></figure>
-<p>Oh yeah this script is dirty and can be a lot more functional but you know in CTF all is a matter of time…</p>
-<p>Proof of flag:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">$22479.22</div><div class="line">$10,000 bills:</div><div class="line">2</div><div class="line">$5,000 bills:</div><div class="line">0</div><div class="line">$1,000 bills:</div><div class="line">2</div><div class="line">$500 bills:</div><div class="line">0</div><div class="line">$100 bills:</div><div class="line">4</div><div class="line">$50 bills:</div><div class="line">1</div><div class="line">$20 bills:</div><div class="line">1</div><div class="line">$10 bills:</div><div class="line">0</div><div class="line">$5 bills:</div><div class="line">1</div><div class="line">$1 bills:</div><div class="line">4</div><div class="line">half-dollars (50c):</div><div class="line">0</div><div class="line">quarters (25c):</div><div class="line">0</div><div class="line">dimes (10c):</div><div class="line">2</div><div class="line">nickels (5c):</div><div class="line">0</div><div class="line">pennies (1c):</div><div class="line">2</div><div class="line">correct!</div><div class="line">flag&#123;started-from-the-bottom-now-my-whole-team-fucking-here&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSAW CTF - 100 - Rgexepire - Misc</title>
-    <link href="http://rawsec.ml/en/CSAW-2016-100-Regexpire-misc/"/>
-    <id>http://rawsec.ml/en/CSAW-2016-100-Regexpire-misc/</id>
-    <published>2016-09-17T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.498Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
-<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I thought I found a perfect match but she ended up being my regEx girlfriend.</p>
-<p><code>nc misc.chal.csaw.io 8001</code></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>It was very similar with <a href="https://backdoor.sdslabs.co/challenges/ISOLVE" target="_blank" rel="external">ISolve from BackdoorCTF 2016</a>.</p>
-<p>I made 3 scripts to solve this:</p>
-<ul>
-<li>In Python with <a href="https://pypi.python.org/pypi/rstr/2.2.4" target="_blank" rel="external">rstr.xeger</a> (inspired by <a href="https://github.com/p4-team/ctf/tree/master/2016-06-04-backdoor-ctf/ppc_isolve" target="_blank" rel="external">p4</a>)</li>
-<li>In Ruby with <a href="https://rubygems.org/gems/regexp-examples/versions/1.2.0" target="_blank" rel="external">regexp-examples</a></li>
-<li>In Bash with <a href="https://github.com/asciimoo/exrex" target="_blank" rel="external">exrex</a> (simplified version)</li>
-</ul>
-<p>I flaged with the Python one, the Ruby one work well too and the Bash one work badly due to the dirty way exrex handle regex. Here a proof of success (after the end of the CTF) :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">to solve = &apos;(wolf|gazelle)*[V8xqjx0A8]+[AoqoYnDiu]i3b+[ukqUrDlf]xf+(tomato|elephant)*(clinton|tomato)&apos;</div><div class="line">solution  = wolfgazellegazellegazellewolfwolfgazelle88xj8Ajx0xAjqx8xxAx8088AqVV0jV8Axjxx8qjV8x8qV0x8V0ii3bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbqxffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftomatotomatoelephantelephanttomatoelephanttomatotomatoelephanttomatoelephanttomatoelephantelephantelephanttomatotomatotomatotomatoelephantelephanttomatotomatoelephantelephanttomatotomatoelephanttomatoelephantelephanttomatoelephanttomatotomato</div><div class="line">D*[i-r]*(dolphin|sloth)(clinton|giraffe)[nNAUqCu]z4*\d+DM*v&#123;9&#125;[e-j](fish|cat)(penguin|sloth)+(chair|clinton)&#123;7&#125;</div><div class="line">to solve = &apos;D*[i-r]*(dolphin|sloth)(clinton|giraffe)[nNAUqCu]z4*1+DM*v&#123;9&#125;[e-j](fish|cat)(penguin|sloth)+(chair|clinton)&#123;7&#125;&apos;</div><div class="line">solution  = DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDmkpkoijmnrniprlknjppmmrjnlqqpjilrnqjmimkkmrndolphinclintonqz444444444444444444444444444444444444444444111111111111111111111111111111111111111111111111111111111111111111111111DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMvvvvvvvvvhfishpenguinslothpenguinslothpenguinpenguinpenguinslothpenguinslothpenguinpenguinpenguinslothpenguinpenguinpenguinslothslothslothslothpenguinslothpenguinslothpenguinslothpenguinslothpenguinpenguinslothslothpenguinpenguinslothpenguinslothpenguinpenguinslothpenguinpenguinslothslothpenguinslothpenguinchairchairchairclintonchairclintonchair</div><div class="line">flag&#123;^regularly_express_yourself$&#125;</div><div class="line">to solve = &apos;flag&#123;^regularly_express_yourself$&#125;&apos;</div><div class="line">solution  = flag&#123;regularly_express_yourself&#125;</div></pre></td></tr></table></figure>
-<p>Python:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> rstr</div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wrapper_reg</span><span class="params">(s)</span>:</span></div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[W]&#123;1&#125;'</span>, <span class="string">' '</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[W]&#123;1&#125;'</span>, <span class="string">'a'</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[d]&#123;1&#125;'</span>, <span class="string">'1'</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[D]&#123;1&#125;'</span>, <span class="string">'#'</span>, s)</div><div class="line">  <span class="keyword">return</span> s</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line">def wrapper(s):</div><div class="line">  s = re.sub('\s+', '\t', s)</div><div class="line">  s = re.sub('[^0-9a-zA-Z\s]+', '#', s)</div><div class="line">  return s</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">recvuntil</span><span class="params">(s)</span>:</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9999</span>):</div><div class="line">        c = s.recv(<span class="number">1</span>)</div><div class="line">        <span class="keyword">if</span>(c == <span class="string">'\n'</span>):</div><div class="line">            <span class="keyword">break</span></div><div class="line">        data += c</div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    url = <span class="string">"misc.chal.csaw.io"</span></div><div class="line">    port = <span class="number">8001</span></div><div class="line">    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    s.connect((url, port))</div><div class="line">    i = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</div><div class="line">            task = recvuntil(s)</div><div class="line">            print(task)</div><div class="line">            i = <span class="number">1</span></div><div class="line">        task = recvuntil(s)</div><div class="line">        print(task)</div><div class="line">        to_solve = task</div><div class="line">        <span class="keyword">if</span> len(to_solve) == <span class="number">0</span>:</div><div class="line">            print(task)</div><div class="line">        <span class="keyword">elif</span>(to_solve == <span class="string">'Irregular'</span> <span class="keyword">or</span> to_solve == <span class="string">'Timeout'</span>):</div><div class="line">            <span class="keyword">break</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            to_solve = wrapper_reg(to_solve)</div><div class="line">            print(<span class="string">"to solve = '%s'"</span> % to_solve)</div><div class="line">            solution = rstr.xeger(to_solve).replace(<span class="string">'\n'</span>,<span class="string">''</span>)</div><div class="line">            <span class="comment">#solution = wrapper(solution)</span></div><div class="line">            print(<span class="string">"solution  = %s"</span> % solution)</div><div class="line">            s.sendall(solution + <span class="string">"\n"</span>)</div><div class="line">        sleep(<span class="number">0.1</span>)</div><div class="line"></div><div class="line">main()</div></pre></td></tr></table></figure>
-<p>Ruby:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### Dependencies ###</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'regexp-examples'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### Functions ###</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(s)</span></span></div><div class="line">  s = s.gsub(<span class="string">'\s+'</span>, <span class="string">'\t'</span>)</div><div class="line">  s = s.gsub(<span class="string">'[^0-9a-zA-Z\s]+'</span>, <span class="string">'#'</span>)</div><div class="line">  <span class="keyword">return</span> s</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### Main ###</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __FILE_<span class="number">_</span> == $0</div><div class="line">  hostname = <span class="string">'misc.chal.csaw.io'</span></div><div class="line">  port = <span class="number">8001</span></div><div class="line"></div><div class="line">  s = TCPSocket.open(hostname, port)</div><div class="line">  output = <span class="string">""</span></div><div class="line">  exit_test = <span class="literal">nil</span></div><div class="line"></div><div class="line">  <span class="comment"># pass Can you match these regexes?</span></div><div class="line">  line = s.gets</div><div class="line">  puts line.chop</div><div class="line"></div><div class="line">  <span class="keyword">while</span> <span class="keyword">not</span> exit_test</div><div class="line">    line = s.gets       <span class="comment"># Read lines from the socket</span></div><div class="line">    puts line.chop      <span class="comment"># And print with platform line terminator</span></div><div class="line">    output = output.concat(line)</div><div class="line"></div><div class="line">    <span class="comment"># stop = /Can you match these regexes?\s+(.*)/.match(output)</span></div><div class="line">    stop = <span class="literal">true</span></div><div class="line">    <span class="keyword">if</span> stop</div><div class="line">      reg_test = output.match(<span class="regexp">/(.*)/</span>)</div><div class="line">      reg = <span class="regexp">/<span class="subst">#&#123;reg_test[<span class="number">1</span>]&#125;</span>/</span></div><div class="line">      example = reg.random_example</div><div class="line">      example = wrapper(example)</div><div class="line">      <span class="keyword">if</span> example != <span class="literal">nil</span></div><div class="line">        puts <span class="string">"solution :"</span> + example</div><div class="line">      <span class="keyword">end</span></div><div class="line">      s.puts(example.gsub(<span class="string">'\n'</span>, <span class="string">''</span>))</div><div class="line">      s.flush</div><div class="line">      output = <span class="string">""</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    exit_test = <span class="regexp">/Failed regex/</span>.match(output)</div><div class="line">    <span class="keyword">if</span> exit_test</div><div class="line">      exit(<span class="number">1</span>)</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">  s.close               <span class="comment"># Close the socket when done</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>Bash:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#######</span></div><div class="line"><span class="comment">#Config</span></div><div class="line"></div><div class="line">URL=<span class="string">"misc.chal.csaw.io"</span></div><div class="line">PORT=8001</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#####</span></div><div class="line"><span class="comment">#Main</span></div><div class="line"></div><div class="line">OUT=<span class="string">""</span></div><div class="line"></div><div class="line"><span class="comment"># Open socket</span></div><div class="line"><span class="built_in">exec</span> 3&lt;&gt;/dev/tcp/<span class="variable">$&#123;URL&#125;</span>/<span class="variable">$&#123;PORT&#125;</span></div><div class="line"></div><div class="line"><span class="built_in">read</span> LINE &lt;&amp;3</div><div class="line"><span class="built_in">echo</span> <span class="variable">$LINE</span> &gt;&amp;1</div><div class="line"><span class="keyword">while</span> [ -z <span class="string">"<span class="variable">$EXIT</span>"</span> ]</div><div class="line"><span class="keyword">do</span></div><div class="line"></div><div class="line">	<span class="built_in">read</span> LINE &lt;&amp;3</div><div class="line">	<span class="built_in">echo</span> <span class="variable">$LINE</span> &gt;&amp;1</div><div class="line">	exrex -r <span class="string">"<span class="variable">$LINE</span>"</span> &gt;&amp;3</div><div class="line">	OUT=<span class="string">""</span></div><div class="line"></div><div class="line">	EXIT=$( <span class="built_in">echo</span> <span class="string">"<span class="variable">$OUT</span>"</span> | awk <span class="string">'/Irregular/ &#123; getline; print $0 &#125;'</span> )</div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
-<p>My point of view: This kind of chanllenge is tricky due to bad implementation of regex server and/or regex solver so you always need to fix/wrap regex answers/solutions. I think it’s better to put a short timeout (&lt;1s) rather than a lot a steps (100+) to prevent humans to do it by hand because the more steps there are the more chances you have to get a bug. I think the goal of the challenge is to make user script, use regex and parsing, use socket but not to correct/complete other’s tools.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
@@ -1138,69 +1138,6 @@
   </entry>
   
   <entry>
-    <title>CTF(x) - 50 - crash - Forensics</title>
-    <link href="http://rawsec.ml/en/CTFx-2016-CTFx-50-crash-forensics/"/>
-    <id>http://rawsec.ml/en/CTFx-2016-CTFx-50-crash-forensics/</id>
-    <published>2016-08-26T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.522Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CTF(x) 2016</li>
-<li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>defund was about to give this flag away until his computer crashed.</p>
-<p>file: <a href="http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">flag.zip</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR: <a href="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq" target="_blank" rel="external"><img src="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png" alt="asciicast"></a></p>
-<ul>
-<li><code>flag.zip</code> contains <code>.flag.txt.swp</code> and <code>flag.txt</code></li>
-<li>Extract the archive: <code>unzip flag.zip</code></li>
-<li>Recover/restore the file with the swap file: <code>vim -r flag/flag.txt</code></li>
-<li>You get some ASCII art of the flag: <code>ctf(v1m_is_be77er_than_3macs)</code>.</li>
-</ul>
-<p>Extract of VIM man page:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r          List swap files, with information about using them for recovery.</div><div class="line"></div><div class="line">-r &#123;file&#125;   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a</div><div class="line">            file with the same filename as the text file with &quot;.swp&quot; appended.  See &quot;:help recovery&quot;.</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CTF(x) - 50 - λ - Cryptography</title>
     <link href="http://rawsec.ml/en/CTFx-2016-CTFx-50-lambda-cryptography/"/>
     <id>http://rawsec.ml/en/CTFx-2016-CTFx-50-lambda-cryptography/</id>
@@ -1282,11 +1219,74 @@
   </entry>
   
   <entry>
-    <title>IceCTF - 45 - Toke - Web</title>
-    <link href="http://rawsec.ml/en/IceCTF-2016-IceCTF-45-Toke-Web/"/>
-    <id>http://rawsec.ml/en/IceCTF-2016-IceCTF-45-Toke-Web/</id>
+    <title>CTF(x) - 50 - crash - Forensics</title>
+    <link href="http://rawsec.ml/en/CTFx-2016-CTFx-50-crash-forensics/"/>
+    <id>http://rawsec.ml/en/CTFx-2016-CTFx-50-crash-forensics/</id>
+    <published>2016-08-26T22:00:00.000Z</published>
+    <updated>2016-10-12T21:07:54.522Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : CTF(x) 2016</li>
+<li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>defund was about to give this flag away until his computer crashed.</p>
+<p>file: <a href="http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">flag.zip</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR: <a href="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq" target="_blank" rel="external"><img src="https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png" alt="asciicast"></a></p>
+<ul>
+<li><code>flag.zip</code> contains <code>.flag.txt.swp</code> and <code>flag.txt</code></li>
+<li>Extract the archive: <code>unzip flag.zip</code></li>
+<li>Recover/restore the file with the swap file: <code>vim -r flag/flag.txt</code></li>
+<li>You get some ASCII art of the flag: <code>ctf(v1m_is_be77er_than_3macs)</code>.</li>
+</ul>
+<p>Extract of VIM man page:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r          List swap files, with information about using them for recovery.</div><div class="line"></div><div class="line">-r &#123;file&#125;   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a</div><div class="line">            file with the same filename as the text file with &quot;.swp&quot; appended.  See &quot;:help recovery&quot;.</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IceCTF - 30 - Move Along - Web</title>
+    <link href="http://rawsec.ml/en/IceCTF-2016-IceCTF-30-Move-Along-Web/"/>
+    <id>http://rawsec.ml/en/IceCTF-2016-IceCTF-30-Move-Along-Web/</id>
     <published>2016-08-24T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.505Z</updated>
+    <updated>2016-10-12T21:07:54.478Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1311,21 +1311,14 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I have a feeling they were pretty high when they made <a href="http://toke.vuln.icec.tf/" target="_blank" rel="external">this website…</a></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><a href="http://move-along.vuln.icec.tf/" target="_blank" rel="external">This site</a> seems awfully suspicious, do you think you can figure out what they’re hiding?</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Register a user an login with it.</li>
-<li>With your browser network analyser loot at cookies in response header of the HTTP request: <code>Set-Cookie: jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0;</code>.</li>
-<li><strong>JWT</strong> stands for <strong>JSON Web Tokens</strong> and is composed of 3 parts:<ul>
-<li>Part1: Header, is base64 encoded, show hash algorithm.</li>
-<li>Part2: Payload, base64 encoded, content.</li>
-<li>Part3: Signature, signature, concatenation of header + content and then encoded with the hash algorithm contained in the header.</li>
-</ul>
-</li>
-<li>So <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0</code> match with <code>header.payload.signature</code>.</li>
-<li>So we get:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">printf &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot; | base64 -d</div><div class="line">&#123;&quot;alg&quot;:&quot;HS256&quot;,&quot;typ&quot;:&quot;JWT&quot;&#125;</div><div class="line"></div><div class="line">printf &quot;eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ&quot; | base64 -d</div><div class="line">&#123;&quot;flag&quot;:&quot;IceCTF&#123;jW7_t0K3ns_4Re_nO_p14CE_fOR_53CrE7S&#125;&quot;,&quot;user&quot;:&quot;aza&quot;&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>Display source code <code>CTRL + U</code>.</li>
+<li>The page is only including an image <a href="http://move-along.vuln.icec.tf/move_along/nothing-to-see-here.jpg" target="_blank" rel="external"><code>http://move-along.vuln.icec.tf/move_along/nothing-to-see-here.jpg</code></a>.</li>
+<li>See the <code>move_along/</code> sub-folder and go in it <a href="http://move-along.vuln.icec.tf/move_along/" target="_blank" rel="external"><code>move_along/</code></a></li>
+<li>Nginx listing functionnality is not disabled so we can see there is a sub-folder [<code>0f76da769d67e021518f05b552406ff6/</code>][secretfolde] (dirb won’t work).</li>
+<li>There is a secret image <a href="http://move-along.vuln.icec.tf/move_along/0f76da769d67e021518f05b552406ff6/secret.jpg" target="_blank" rel="external"><code>secret.jpg</code></a> containing the flag <code>IceCTF{tH3_c4t_15_Ou7_oF_THe_b49}</code>.</li>
 </ol>
-<p>An introduction to JSON Web Tokens is available <a href="https://jwt.io/introduction/" target="_blank" rel="external">here</a>.</p>
 ]]></content>
     
     <summary type="html">
