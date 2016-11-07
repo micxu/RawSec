@@ -1,0 +1,117 @@
+---
+layout: post
+title: "Writeups - Crypto - Oups it's all mixed"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2016/05/26
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+Date        | By    | Version | Comment
+---         | ---   | ---     | ---
+03/05/2016  | noraj | 1.0     | Creation
+
+### Name
+
+*Oups it's all mixed*
+
+### Category
+
+*Cryptography*
+
+### Wording
+
+Decipher the following flag:
+`eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC`
+
+### Data(s)
+`+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/`
+
+### Equipment(s)
+
+A computer with an OS (preferably UNIX)
+
+### Hint(s)
+
+The name title is a hint.
+
+### Help
+
+Base64
+
+### Difficulty
+
+Easy / Medium
+
+## Solution
+
+### Methodology
+
+1. Identify that is a base64 string
+2. Decode the base64 string and observe only garbage
+3. Look at the provided data and analyse it
+4. Identify the data as a base64 alphabet (64 characters = 26 lowercase letters + 26 uppercase letters + 10 number + `+` + `/`)
+5. Realize that the alphabet is non standard but a mixed alphabet
+6. Write a script that will translate one alphabet to the other and pick up the output standard base64 string and then decode it
+
+Some scrip examples below.
+
+#### Python 2
+
+```python
+#!/usr/bin/python2                                                                               
+# made with python 2.7.9
+
+import base64
+import sys
+import string
+
+base64_mixed_alphabet =     '+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'
+base64_standard_alphabet =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+
+s = 'eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC'
+
+s_unmixed = s.translate(string.maketrans(base64_mixed_alphabet, base64_standard_alphabet))
+
+s_unb64 = base64.urlsafe_b64decode(s_unmixed)
+```
+
+#### Python 3
+
+```python
+#!/usr/bin/python3                                                      
+# made with python 3.4.1
+
+import base64
+
+base64_mixed_alphabet =     '+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'
+base64_standard_alphabet =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+
+s = 'eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC'
+
+s_unmixed = s.translate(str.maketrans(base64_mixed_alphabet, base64_standard_alphabet))
+
+s_unb64 = base64.urlsafe_b64decode(s_unmixed.encode('utf-8'))
+s_unb64 = s_unb64.decode('utf-8') # byte to string
+```
+
+#### Bash
+
+```bash
+# made with bash 4.2.47
+echo "eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC" | tr '+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/' 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/' | base64 -di && echo "\n"
+```
+
+### Flag
+
+`FLAG{Yesthatisjustabase64string}`

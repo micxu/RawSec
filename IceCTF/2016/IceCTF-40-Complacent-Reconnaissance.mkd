@@ -1,0 +1,60 @@
+---
+layout: post
+title: "IceCTF - 40 - Complacent - Reconnaissance"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - reconnaissance
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+These silly bankers have gotten pretty complacent with their self signed SSL certificate. I wonder if there's anything in there. complacent.vuln.icec.tf
+
+## Solution
+
+With Mozilla Firefox (method 1):
+1. Go to [https://complacent.vuln.icec.tf/](https://complacent.vuln.icec.tf/).
+2. Accept security exceptions.
+3. Open the **Inspect Element** pannel.
+4. Go to the **Network** tab and reload.
+5. Select the main GET request.
+6. Select the **Security** tab.
+7. The **Certificate: Organizational Unit (OU)** is **Flag: IceCTF{this_1nformation_wasnt_h1dd3n_at_a11}**.
+
+or
+
+With Mozilla Firefox (method 2):
+1. Go to [https://complacent.vuln.icec.tf/](https://complacent.vuln.icec.tf/).
+2. Accept security exceptions.
+3. Click on the lock next to the URL bar.
+4. Then click on the arrow at the right of the little pop-up.
+5. Click on **More Information** button.
+6. Go to the **Security** tab.
+7. Click on the **View Certificate** button.
+8. Look at infos in the **General** tab.
+9. The **Certificate: Organizational Unit (OU)** is **Flag: IceCTF{this_1nformation_wasnt_h1dd3n_at_a11}**.
+
+PS: there is a lot of other methods

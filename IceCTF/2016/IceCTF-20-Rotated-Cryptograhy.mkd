@@ -1,0 +1,68 @@
+---
+layout: post
+title: "IceCTF - 20 - Rotated! - Cryptography"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+They went and ROTated the flag by 5 and then ROTated it by 8! The scoundrels! Anyway once they were done this was all that was left VprPGS{jnvg_bar_cyhf_1_vf_3?}
+
+## Solution
+
+1. A ROT13 Caesar cipher again. `5 + 8 = 13` right?
+2. Let's use a script:
+```python
+#!/usr/bin/python
+
+import sys
+import string
+
+def caesar(plaintext, shift):
+    alphabet_lower = string.ascii_lowercase
+    alphabet_upper = string.ascii_uppercase
+
+    shifted_alphabet_lower = alphabet_lower[shift:] + alphabet_lower[:shift]
+    shifted_alphabet_upper = alphabet_upper[shift:] + alphabet_upper[:shift]
+
+    alphabet = alphabet_lower + alphabet_upper
+    shifted_alphabet = shifted_alphabet_lower + shifted_alphabet_upper
+
+    if (sys.version_info > (3, 0)):
+        # made with python 3.5.2
+        table = str.maketrans(alphabet, shifted_alphabet)
+    else:
+        # made with python 2.7.12
+        table = string.maketrans(alphabet, shifted_alphabet)
+
+    return plaintext.translate(table)
+
+rot = 'VprPGS{jnvg_bar_cyhf_1_vf_3?}'
+print(caesar(rot, 5 + 8))
+```
+3. Flag: `IceCTF{wait_one_plus_1_is_3?}`.

@@ -1,0 +1,32 @@
+---
+layout: post
+title: "Git changing remote URLs"
+date: 2016/06/20
+lang: en
+categories:
+- misc
+tags:
+- git
+thumbnail: /images/git.png
+---
+`git remote set-url <name> <newurl>` command changes existing remote repository URL.
+
+For example, to switch from a github repository from HTTPS to SSH:
+1. Change the current working directory to local project.
+2. List existing remotes in order to get the name of the remote to change.
+```git
+git remote -v
+origin  https://github.com/shark-oxi/RawSec.git (fetch)
+origin  https://github.com/shark-oxi/RawSec.git (push)
+```
+3. Change remote's URL from HTTPS to SSH with the `git remote set-url` command.
+```git
+git remote set-url origin git@github.com:shark-oxi/RawSec.git
+```
+4. Verify that the remote URL has changed.
+```git
+git remote -v
+origin  git@github.com:shark-oxi/RawSec.git (fetch)
+origin  git@github.com:shark-oxi/RawSec.git (push)
+```
+

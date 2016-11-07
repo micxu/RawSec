@@ -1,0 +1,44 @@
+---
+layout: post
+title: "School CTF - 100 - n4M3 - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensics
+date: 2016/11/07
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : School CTF 2016
+- **Website** : [https://school-ctf.org/](https://school-ctf.org/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/384)
+
+### Description
+
+> Johny Droptables went on the trail of hackers \_xXx\_-=BoStOnSkIe\_Pu$$ies\_1337=-\_xXx\_. You can get the login of one of them.
+>
+> The flag is the login of the hacker.
+>
+> [malware](https://school-ctf.org/files/malware_2d8365fd8ff77417c63714e2d91736fbd5de74d9.zip)
+
+## Solution
+
+Unzip and open `malware.exe` with an hex editor. You will see a Windows PATH `c:\users\b05t0n_n491b4t0r_133\[...]`. So we got the login of the guy.
+
+Flag: `SchoolCTF{b05t0n_n491b4t0r_133}`.

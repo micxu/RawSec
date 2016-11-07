@@ -1,0 +1,22 @@
+---
+layout: post
+title: "Virtualbox : change the UUID of a virtual disk"
+date: 2016/07/06
+lang: en
+categories: 
+- linux
+tags:
+- linux
+- virtualization
+- system
+thumbnail: /images/tux-293844_640.png
+---
+To change the UUID of a virtual disk:
+```
+VBoxManage internalcommands sethduuid <filepath> [<uuid>]
+```
+
+## Examples
+
+* With a vdi disk : `VBoxManage internalcommands sethduuid disk.vdi`
+* With a vmdk disk and choosing the UUID : `VBoxManage internalcommands sethduuid disk.vmdk e4f44ef2-524a-1d28-b74b-f7fea9bc855`

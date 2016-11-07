@@ -1,0 +1,25 @@
+---
+layout: post
+title: "How to manually configure Firefox / Waterfox language"
+date: 2016/05/21
+lang: en
+categories: 
+- misc 
+tags:
+- firefox
+thumbnail: /images/firefox-logo.png
+---
+* Go to [https://ftp.mozilla.org/pub/firefox/releases/](https://ftp.mozilla.org/pub/firefox/releases/)
+* Choose the Firefox version, ex: `46.0`
+* Choos the architecture, ex: `linux-x86_64`
+* Go into the `xpi` folder
+* Choose a language, ex: `fr.xpi`
+* Click on the choosen language xpi file and enable the patch
+* Restart Firefox
+* In the URL navigation bar, wirte `about:config`
+* In the `Filter` field, write `general.useragent.locale`  
+* Double-click on the key to edit it and eplace the value `en-US` with `fr-FR` for example
+* Restart Firefox
+
+Firefox / Waterfox is now in the newly configured language.
+

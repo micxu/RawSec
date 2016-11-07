@@ -1,0 +1,87 @@
+---
+layout: post
+title: "How to find out the Linux distribution name and version"
+date: 2016/05/05
+lang: en
+categories: 
+- linux
+tags:
+- linux
+- system
+thumbnail: /images/tux-293844_640.png
+---
+There is the old method `cat /etc/*-release` to match distribution release file.
+
+For example on openSUSE this will match with `/etc/SuSE-release`.
+
+This method is deprecated and will be removed in the future.
+
+```bash
+cat /etc/*-release
+NAME="openSUSE Leap"
+VERSION="42.1"
+VERSION_ID="42.1"
+PRETTY_NAME="openSUSE Leap 42.1 (x86_64)"
+ID=opensuse
+ANSI_COLOR="0;32"
+CPE_NAME="cpe:/o:opensuse:opensuse:42.1"
+BUG_REPORT_URL="https://bugs.opensuse.org"
+HOME_URL="https://opensuse.org/"
+ID_LIKE="suse"
+openSUSE 42.1 (x86_64)
+VERSION = 42.1
+CODENAME = Malachite
+# /etc/SuSE-release is deprecated and will be removed in the future, use /etc/os-release instead
+```
+
+There is a more modern and more universal method `cat /etc/os-release`.
+
+```bash
+cat /etc/os-release
+NAME="openSUSE Leap"
+VERSION="42.1"
+VERSION_ID="42.1"
+PRETTY_NAME="openSUSE Leap 42.1 (x86_64)"
+ID=opensuse
+ANSI_COLOR="0;32"
+CPE_NAME="cpe:/o:opensuse:opensuse:42.1"
+BUG_REPORT_URL="https://bugs.opensuse.org"
+HOME_URL="https://opensuse.org/"
+ID_LIKE="suse"
+```
+
+There is also a command with a more concise output `lsb_release -a`.
+
+```bash
+lsb_release -a
+LSB Version:  core-5.0-amd64:core-5.0-noarch
+Distributor ID: SUSE LINUX
+Description:  openSUSE Leap 42.1 (x86_64)
+Release:  42.1
+Codename: n/a
+```
+
+To know the kernel version there is the *uname* command:
+* `uname -a` to have all informations
+* `uname -rs` to have kernel name and version only
+* `uname -m` to have architecture type
+
+```bash
+uname -a
+Linux linux-7o7a.site 4.1.20-11-default #1 SMP PREEMPT Fri Mar 18 14:42:07 UTC 2016 (0a392b2) x86_64 x86_64 x86_64 GNU/Linux
+```
+```bash
+uname -rs
+Linux 4.1.20-11-default
+```
+```bash
+uname -m
+x86_64
+```
+
+An alternative method is to see the `/proc/version` file that is showing kernel version and gcc version used to build it.
+
+```bash
+cat /proc/version
+Linux version 4.1.20-11-default (geeko@buildhost) (gcc version 4.8.5 (SUSE Linux) ) #1 SMP PREEMPT Fri Mar 18 14:42:07 UTC 2016 (0a392b2)
+```

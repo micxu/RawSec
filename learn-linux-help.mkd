@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Learn Linux: Help"
+date: 2014/09/07
+lang: en
+categories:
+- linux
+tags:
+- linux
+thumbnail: /images/tux-293844_640.png
+---
+What is the `man`? Let's see what it says itself:
+```
+$ man -f man
+man (1)              - an interface to the on-line reference manuals
+man (7)              - macros to format man pages
+man (1p)             - display system documentation
+```
+
+Command                     | Description
+-------                     | -----------
+**man**                     | Explanation manual for commands and files
+**man -f** *or* **whatis**  | Short description for a command
+**man -k** *or* **apropos** | Commands list containing the argument keyword
+
+Examples:
+```
+$ man -f unzip
+unzip (1)            - list, test and extract compressed files in a ZIP archive
+
+$ man -k unzip
+bunzip2 (1)          - a block-sorting file compressor, v1.0.6
+funzip (1)           - filter for extracting from a ZIP archive in a pipe
+gunzip (1)           - compress or expand files
+hunzip (1)           - decompress and decrypt hzip files to the standard output
+mtx-unzip (1)        - (sujet inconnu)
+unzip (1)            - list, test and extract compressed files in a ZIP archive
+unzipsfx (1)         - self-extracting stub for prepending to ZIP archives
+```

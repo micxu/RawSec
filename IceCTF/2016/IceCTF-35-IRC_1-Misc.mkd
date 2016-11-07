@@ -1,0 +1,46 @@
+---
+layout: post
+title: "IceCTF - 35 - IRC I - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+There is someone sharing flags on our IRC server, can you find him and stop him? glitch.is:6667
+
+## Solution
+
+1. Connect to the IRC server (ex: with [mibbit][mibbit] if you have no IRC client installed).
+2. On glitch.is home use the `/list` to list all the channels on the server.
+3. There is a channel named `#6470e394cb_flagshare`.
+4. Join it `/join #6470e394cb_flagshare`.
+5. Display the topic `/topic` which is *Get your flags here! while they're hot! IceCTF{pL3AsE_D0n7_5h4re_fL495_JUsT_doNT}*.
+
+**Note**: Here a [List of IRC commands](https://en.wikipedia.org/wiki/List_of_Internet_Relay_Chat_commands)
+
+[mibbit]:https://client02.chat.mibbit.com/

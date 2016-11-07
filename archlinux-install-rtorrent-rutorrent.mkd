@@ -1,0 +1,465 @@
+---
+layout: post
+title: "ArchLinux - Install rTorrent and ruTorrent"
+date: 2016/09/14
+lang: en
+categories:
+- linux
+- archlinux
+tags:
+- linux
+- archlinux
+thumbnail: /images/tux-293844_640.png
+---
+# Warning: Post in construction
+
+## Install rTorrent
+
+As rTorrent package is always up-to-date on Arch repository, it's not needed to compile it.
+
++ Install [rtorrent][rtorrent]:
+
+```
+# pacman -S rtorrent
+```
+
+[rtorrent]:https://www.archlinux.org/packages/?q=rtorrent
+
+## Install ruTorrent
+
++ Create the web server root directory if it doesn't already exist:
+
+```
+# mkdir -p /srv/http
+```
+
++ Go to the web server folder and clone the [ruTorrent][ruTorrent] git repository into it:
+
+```
+$ cd /srv/http
+# git clone https://github.com/Novik/ruTorrent.git rutorrent
+```
+
+[ruTorrent]:https://github.com/Novik/ruTorrent.git
+
+## Install Nginx
+
++ Install [nginx-mainline][nginx-mainline]:
+
+```
+# pacman -S nginx-mainline
+```
+
++ Enable and start nginx:
+
+```
+# systemctl enable nginx.service
+# systemctl start nginx.service
+```
+
+[nginx-mainline]:https://www.archlinux.org/packages/?name=nginx-mainline
+
+## Install and configure PHP
+
++ Install [php][php]:
+
+```
+# pacman -S php
+```
+
++ Install [php-fpm][php-fpm]:
+
+```
+# pacman -S php-fpm
+```
+
++ Open php configuration:
+
+```
+# vim /etc/php/php.ini
+```
+
++ Disable php exposure ([expose_php][expose_php]):
+
+```
+expose_php = Off
+```
+
++ Enable file uploads ([file_uploads][file_uploads]):
+
+```
+file_uploads = On
+```
+
++ Set max size of post data allowed ([post_max_size][post_max_size])
+
+```
+post_max_size = 15M
+```
+
++ Set the maximum size of an uploaded file ([upload_max_filesize][upload_max_filesize]):
+
+```
+upload_max_filesize = 15M
+```
+
++ Set the timezone ([date.timezone][date.timezone]).
++ For more security, limit the files that can be accessed by php ([open_basedir][open_basedir]):
+
+```
+open_basedir = /srv/http
+```
+
++ Enable and start php-fpm:
+
+```
+# systemctl enable php-fpm
+# systemctl start php-fpm
+```
+
+[php]:https://www.archlinux.org/packages/?sort=&q=php&maintainer=&flagged=
+[php-fpm]:https://www.archlinux.org/packages/?name=php-fpm
+[expose_php]:http://php.net/manual/en/ini.core.php#ini.expose-php
+[file_uploads]:http://php.net/manual/en/ini.core.php#ini.file-uploads
+[post_max_size]:http://php.net/manual/en/ini.core.php#ini.post-max-size
+[upload_max_filesize]:http://php.net/manual/en/ini.core.php#ini.upload-max-filesize
+[date.timezone]:http://php.net/manual/en/datetime.configuration.php#ini.date.timezone
+[open_basedir]:http://php.net/manual/en/ini.core.php#ini.open-basedir
+
+## Configure Nginx
+
++ Change the default conf:
+
+```
+# mkdir /etc/nginx/auth
+# mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.default
+# vim /etc/nginx/nginx.conf
+```
+
++ And add this conf:
+
+```
+user http;
+worker_processes auto;
+# PID error: https://bugs.archlinux.org/task/46500
+# pid /run/nginx.pid;
+
+events {
+	worker_connections 1024;
+	multi_accept on;
+	use epoll;
+}
+
+http {
+
+	charset UTF-8;
+
+	##
+	# Basic Settings
+	##
+	server_names_hash_bucket_size 64;
+	sendfile on;
+	tcp_nopush on;
+	tcp_nodelay on;
+	keepalive_timeout 65;
+	types_hash_max_size 2048;
+	server_tokens off;
+
+	# server_names_hash_bucket_size 64;
+	# server_name_in_redirect off;
+
+	include /etc/nginx/mime.types;
+	default_type application/octet-stream;
+
+
+	##
+	# Logging Settings
+	##
+
+	access_log /var/log/nginx/access.log;
+	error_log /var/log/nginx/error.log;
+
+	##
+	# Gzip Settings
+	##
+
+	gzip on;
+	gzip_disable "msie6";
+
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	gzip_buffers 16 8k;
+	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript
+
+	##
+	# Virtual Host Configs
+	##
+
+	include /etc/nginx/conf.d/*.conf;
+	include /etc/nginx/servers-enabled/*;
+}
+```
+
++ Create following directories:
+
+```
+# mkdir /etc/nginx/servers-available
+# mkdir /etc/nginx/servers-enabled
+```
+
++ Create the server domain config:
+
+```
+# vim /etc/nginx/servers-available/seedbox
+```
+
++ And add the conf:
+
+```
+server {
+ listen 80;
+ listen [::]:80;
+ # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
+ return 301 https://$host$request_uri;
+}
+
+#------------------------------------------------------------------------
+# BLOCK SERVEUR HTTPS
+#
+server {
+
+ listen 443 ssl http2;
+ server_name seedbox;
+ root /srv/http/rutorrent;
+ index index.php index.html index.htm;
+
+#------------------------------------------------------------------------
+# SSL
+#
+ ssl_certificate /etc/nginx/ssl/seedbox.crt;
+ ssl_certificate_key /etc/nginx/ssl/seedbox.key;
+
+ ssl_protocols TLSv1.2;
+ ssl_ciphers EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;
+ ssl_ecdh_curve secp384r1;
+ ssl_prefer_server_ciphers on;
+
+ # ssl optimizations
+ ssl_session_timeout 5m;
+ ssl_session_cache shared:SSL:20m;
+ ssl_session_tickets on;
+
+
+#------------------------------------------------------------------------
+# SECURITY
+
+ add_header X-XSS-Protection "1; mode=block";
+ auth_basic "Restricted Area";
+ auth_basic_user_file "/etc/nginx/auth/seedbox_auth";
+
+#------------------------------------------------------------------------
+# PHP
+#
+ location / {
+ index index.php index.html index.htm;
+ try_files $uri $uri/ /index.php?$args;
+ }
+
+ location ~ \.php$ {
+ try_files $uri =404;
+ fastcgi_split_path_info ^(.+\.php)(/.+)$;
+ fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+ fastcgi_index index.php;
+ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+ include fastcgi_params; }
+
+ location ^~ /conf/ {
+ deny all;
+ }
+
+ location ^~ /share/ {
+ deny all;
+ }
+}
+```
+
++ Enable the server:
+
+```
+# ln -s /etc/nginx/servers-available/seedbox /etc/nginx/servers-enabled/seedbox
+```
+
+## Configure SSL
+
+We will both view self-signed certificate and Let's Encrypt ones.
+
+### Self-signed
+
++ Add certificate folder:
+
+```
+# mkdir /etc/nginx/ssl
+```
+
++ Generate self-signed certificate:
+
+```
+# cd /etc/nginx/ssl
+# openssl ecparam -genkey -name secp384r1 -out seedbox.key
+# openssl req -new -key seedbox.key -sha256 -out seedbox.csr
+# openssl req -x509 -days 3650 -sha256 -key seedbox.key -in seedbox.csr -out seedbox.crt
+```
+
++ Modify files rights:
+
+```
+# chmod 644 /etc/nginx/ssl/*.crt
+# chmod 640 /etc/nginx/ssl/*.key
+```
+
+### Let's Encrypt
+
+TODO
+
+## Add an user
+
++ Create an user:
+
+```
+# useradd --shell /bin/bash --create-home sdbox
+# passwd sdbox
+```
+
++ Create needed folder for rtorrent:
+
+```
+# mkdir -p /home/sdbox/{torrents,watch,.session}
+```
+
++ Create rtorrent config file:
+
+```
+# vim /home/sdbox/.rtorrent.rc
+```
+
++ Paste the config:
+
+```
+scgi_port = 127.0.0.1:5001
+encoding_list = UTF-8
+port_range = 45000-65000
+port_random = no
+check_hash = no
+directory = /home/sdbox/torrents
+session = /home/sdbox/.session
+encryption = allow_incoming, try_outgoing, enable_retry
+schedule = watch_directory,1,1,"load_start=/home/sdbox/watch/*.torrent"
+schedule = untied_directory,5,5,"stop_untied=/home/sdbox/watch/*.torrent"
+use_udp_trackers = yes
+dht = off
+peer_exchange = no
+min_peers = 40
+max_peers = 100
+min_peers_seed = 10
+max_peers_seed = 50
+max_uploads = 15
+execute = {sh,-c,/usr/bin/php /srv/http/rutorrent/php/initplugins.php sdbox &}
+schedule = espace_disque_insuffisant,1,30,close_low_diskspace=500M
+```
+
++ Give user permissions:
+
+```
+# chown --recursive sdbox:sdbox /home/sdbox
+# chown root:root /home/sdbox
+# chmod 755 /home/sdbox
+```
+
++ Edit the virtual server conf:
+
+```
+# vim /etc/nginx/servers-available/seedbox
+```
+
++ Add the conf:
+
+```
+ location /SDBOX
+{
+ include scgi_params;
+ scgi_pass 127.0.0.1:5001;
+ auth_basic "Restricted Area";
+ auth_basic_user_file "/etc/nginx/auth/seedbox_auth sdbox";
+ }
+```
+
++ In order to do not install apache-tools, manually generate the auth file  for sdbox user (it will write over the file and don't forget to change the password in the command):
+
+```
+$ echo -n "sdbox:" | sudo tee /etc/nginx/auth/seedbox_auth && openssl passwd -apr1 password | sudo tee -a /etc/nginx/auth/seedbox_auth
+```
+
++ Protect the authentification file:
+
+```
+# chmod 600 /etc/nginx/auth/seedbox_auth
+# chown http:http /etc/nginx/auth/*
+```
+
++ Create ruTorrent config file:
+
+```
+# mkdir /srv/http/rutorrent/conf/users/sdbox
+# vim /srv/http/rutorrent/conf/users/sdbox/config.php
+```
+
++ And add the content:
+
+```
+<?php
+
+$pathToExternals['curl'] = '/usr/bin/curl';
+$topDirectory = '/home/sdbox';
+$scgi_port = 5001;
+$scgi_host = '127.0.0.1';
+$XMLRPCMountPoint = '/SDBOX';
+```
+
++ Correct permissions:
+
+```
+# chown -R http:http /srv/http
+# systemctl restart nginx.service
+```
+
+## Create a rTorrent service
+
++ Create the file `/etc/systemd/user/rtorrent.service` containing:
+
+```
+[Unit]
+Description=rTorrent Daemon
+After=network.target
+
+[Service]
+Type=forking
+KillMode=none
+User=sdbox
+ExecStart=/usr/bin/tmux new-session -c /mnt/storage/rtorrent -s rtorrent -n rtorrent -d rtorrent
+ExecStop=/usr/bin/bash -c "/usr/bin/tmux send-keys -t rtorrent C-q && while pidof rtorrent > /dev/null; do sleep 0.5; done"
+WorkingDirectory=/home/sdbox/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
++ Enable rtorrent at boot time and manually start it:
+
+```
+$ systemctl --user enable rtorrent
+$ systemctl --user start rtorrent
+```
+
+**Source**: [sdbox](https://www.sdbox.net/noobunschool/seedbox/installer-une-seedbox/), [wiki archlinux](https://wiki.archlinux.org/index.php/RTorrent#Installation)

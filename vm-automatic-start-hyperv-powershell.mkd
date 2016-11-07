@@ -1,0 +1,50 @@
+---
+layout: post
+title: "How to configure VM Auto Start in Hyper-V with PowerShell"
+date: 2016/04/07
+lang: en
+categories:
+- windows
+tags:
+- virtualization
+- windows
+- hyper-v
+thumbnail: /images/Windows_logo.svg
+---
+## VM automatic action at Hyper-V start up
+
+```
+Set-VM [VM_NAME] -AutomaticStartAction [Option]
+```
+
+With :
+* [VM_NAME] : The VM name
+* [Option] :
+    + Nothing : When the host is powered on, the VM will do nothing
+    + StartIfRunning : The VM will start only if it was running when the host was stopped
+    + Start : The VM will start up automatically not matter what state the VM was in previously
+
+## Change startup delay
+
+```
+Set-VM [VM_NAME] -AutomaticStartDelay [Delay]
+```
+
+With :
+* [VM_NAME] : The VM name
+* [Delay] : Delay in second
+
+## Display VM Start action and delay
+
+All :
+```
+Get-VM -VMName * | Select-Object VMName,AutomaticStartAction,AutomaticStartDelay
+```
+
+One :
+```
+Get-VM -VMName [VM_NAME] | Select-Object VMName,AutomaticStartAction,AutomaticStartDelay
+```
+
+With :
+* [VM_NAME] : The VM name

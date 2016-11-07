@@ -1,0 +1,50 @@
+---
+layout: post
+title: "ABCTF - 50 - Archive Me - Reconaissance"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - guessing
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+If you could look at our website from a while ago im sure the flag would be there...
+
+## Solution
+
+1. Ok so we are looking for a cached version of `http://abctf.xyz/`
+2. There is two main services:
+  * Google Web Cache
+  * Archive.org and his WayBack Machine
+3. You can immediatly forget Google cache because it only keep the last cache and the title of the challenge is *Archive Me* so there is more chances that we have to use Archive.org
+4. You can try [Google Web Cache][google] anyway but there is nothing interesting.
+5. Now lets try [Archive.org][archive]: The website was saved 2 times on May 10, 2016 at [19:17:53][17] and at [19:23:07][23].
+6. By default the one shown is the one at 19:17:53 which is not the good one but on the other you can see `ABCTF{Archives_are_useful!}` one the hoem page
+
+[archive]:https://web.archive.org/web/20080101000000*/http://abctf.xyz
+[17]:https://web.archive.org/web/20160510191753/http://abctf.xyz
+[23]:https://web.archive.org/web/20160510192307/http://abctf.xyz
+[google]:https://webcache.googleusercontent.com/search?q=cache:http://abctf.xyz/

@@ -1,0 +1,61 @@
+---
+layout: post
+title: "IceCTF - 50 - Flag Storage - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+What a cheat, I was promised a flag and I can't even log in. Can you get in for me? [flagstorage.vuln.icec.tf](http://flagstorage.vuln.icec.tf/). They seem to hash their passwords, but I think the problem is somehow related to [this](https://en.wikipedia.org/wiki/SQL_injection).
+
+## Solution
+
+1. Look at the source code:
+```js
+<script>
+$(function(){
+    var updatePassword = function(e){
+        // hash client side for better security, never leak the pw over the wire
+        var sha = new jsSHA("SHA-256", "TEXT");
+        sha.update($(this).val());
+        $("#password").val(sha.getHash("HEX"));
+    };
+    $("#password_plain").on("change", updatePassword);
+    $("#form").on("submit", updatePassword);
+});
+</script>
+```
+2. Script will send our password hashed on the network instead of plain text.
+2. Login with random credentials.
+3. Open your browser network analyser and see the POST params: `username` and `password_plain` that you filled + `password` containing `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+4. `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` is the SHA256 hash of the null string according to [this][this1] or if you try with [https://crackstation.net/](https://crackstation.net/).
+5. Description of the challenge tell us it's an SQLi so may be we need to inject username and let password_plain null so our hashed password will correspond to the hash we found.
+6. Try a classic username: `' OR 1=1 #` and null password instead of random password.
+7. We get the flag: `IceCTF{why_would_you_even_do_anything_client_side}`.
+
+[this1]:http://www.di-mgt.com.au/sha_testvectors.html

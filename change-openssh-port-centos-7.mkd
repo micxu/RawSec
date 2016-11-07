@@ -1,0 +1,73 @@
+---
+layout: post
+lang: en
+title: 'How to change OpenSSH port on CentOS 7'
+date: 2016/03/03
+categories:
+  - security
+  - "operating system"
+  - centos
+tags:
+  - security
+  - linux
+  - centos
+  - ssh
+thumbnail: /images/security-265130_640.jpg 
+---
+## Before beginning
+
+These are the steps to do on the SSH server.
+
+Be sure to do all the steps before exiting SSH connection if you are connected via SSH.
+
+This config was tested for default CentOS 7 iso.
+
+## Change the SSH port
+
+You can start by backup your current SSH configuration :
+
+```
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bck
+```
+
+You can now open the default SSH configuration file :
+
+```
+sudo vi /etc/ssh/sshd_config
+```
+
+Un-comment the `Port` line and change the value.
+
+```
+Port 44223
+```
+
+Save the file.
+
+By default, SELinux only allow port 22 for SSH. So you need to enable the new port through SELinux :
+
+```
+sudo semanage port -a -t ssh_port_t -p tcp 44223
+```
+
+You can now restart the SSH server :
+
+```
+sudo systemctl restart sshd.service
+```
+
+Verify that SSH is now running on the new port :
+
+```
+ss -tnlp | grep ssh
+```
+
+You may want to try the SSH connexion with another user before exiting your current SSH session.
+
+You can now use the new port number :
+
+```
+ssh user@example.com -p 44223
+```
+
+That's it !

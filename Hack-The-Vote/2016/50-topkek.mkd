@@ -1,0 +1,104 @@
+---
+layout: post
+title: "Hack The Vote 2016 - 50 - TOPKEK - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/11/05
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Hack The Vote 2016
+- **Website** : [https://pwn.voting/](https://pwn.voting/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/345)
+
+### Description
+
+> A CNN reporter had only one question that she couldn't get off her mind
+>
+> >    Do we even know, who is this 4 CHAN???
+>
+>So she set out to find who this 400lb hacker is. During her investigation, she came across this cryptic message on some politically incorrect forum online, can you figure out what it means?
+>
+> [kek](https://s3.amazonaws.com/hackthevote/kek.43319559636b94db1c945834340b65d68f90b6ecbb70925f7b24f6efc5c2524e.txt)
+>
+> author's irc nick: krx
+
+**Note**: This challenge was classified as *Crypto* but is *Misc*.
+
+## Solution
+
+The content of the file looks like this:
+
+```
+KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!!
+[...]
+```
+
+This looks like an esoteric language (like Ook) but it's not.
+
+**N.B.:** According to [1](http://fr.urbandictionary.com/define.php?term=topkek), [2](https://encyclopediadramatica.se/Topkek) and [3](http://knowyourmeme.com/memes/topkek), *kek* is derivated of *lel* that is a derivated of *lol*, and *topkek* is a cake trademark popular on `/s4s` chan of 4Chan because of its similarity with *toplel* which means *super funny*. (Knowing that is useless for the challenge).
+
+There is only two keyword `TOP` and `KEK` and they seem pretty useless. So let's assume that it is binary: (`TOP` = 0 && `KEK` = 1) or (`TOP` = 1 && `KEK` = 0).
+
+We noticed there is between 1 and 5 exclamation marks following each keywords so let's assume that is the number of times that 0 or 1 is repeated.
+
+Here is my script:
+
+```ruby
+#!/usr/bin/env ruby
+
+# read the file
+file = File.open('kek.txt', 'r+t')
+data = file.read
+file.close
+puts "Original: \n" + data + "\n\n"
+
+# Assume that TOP = 1, KEK = 0, and ! the number of time they appear
+topkek_to_binary = ""
+data.split(" ").each do |bool|
+  if bool.match(/TOP/)
+    marks = bool.sub('TOP', '') # keeping only the marks
+    bin = marks.gsub('!', '1') # replacing marks with 0
+    topkek_to_binary.concat(bin)
+  elsif bool.match(/KEK/)
+    marks = bool.sub('KEK', '') # keeping only the marks
+    bin = marks.gsub('!', '0') # replacing marks with 0
+    topkek_to_binary.concat(bin)
+  end
+end
+puts "Binary: \n" + topkek_to_binary + "\n\n"
+
+# Let's convert it into ASCII
+puts "ASCII: \n" + [topkek_to_binary].pack("B*")
+```
+
+Here is the output of the script:
+
+```
+Original:
+KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK!!!!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP! KEK!! TOP! KEK!!!! TOP!!! KEK! TOP! KEK!!! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP!!! KEK!!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK!! TOP! KEK!!! TOP!! KEK!! TOP!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!!!! KEK!! TOP! KEK!! TOP!! KEK!!!!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP!!! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK! TOP!!!!! KEK! TOP!
+
+Binary:
+0110011001101100011000010110011101111011010101000011000001101111001100000110111100110000011011110011000001101111001100000101000001011111010111110101111101011111010111110101111100110001011011010101111101101000001101000101011000110001011011100100011101011111010001100111010101001110010111110111001000110001011001110100100001110100010111110110111000110000010101110101111100110100010100100011001101011111011110010011000001110101010111110110100000110100011101100011000101101110011001110101111101100110011101010110111001011111010111110101111101011111010111110101111101001011001100110100101100100001001000010010000101111101
+
+ASCII: +
+flag{T0o0o0o0o0P______1m_h4V1nG_FuN_r1gHt_n0W_4R3_y0u_h4v1ng_fun______K3K!!!}
+```

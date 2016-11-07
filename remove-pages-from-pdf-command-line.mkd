@@ -1,0 +1,22 @@
+---
+layout: post
+title: "How to remove pages from a PDF in command line on Linux"
+date: 2016/09/08
+lang: en
+categories:
+- linux
+tags:
+- linux
+thumbnail: /images/tux-293844_640.png
+---
+
+To remove pages from a PDF in command line on Linux, we'll use [PDFtk][pdftk].
+
+* Install **pdftk** with your favorite packet manager (ex: `sudo zypper install pdftk`)
+* And run one of those commands:
+    + To extract only one page: `pdftk original.pdf cat 12 output edited.pdf`.
+    + To keep only a range of pages: `pdftk original.pdf cat 3-26 output edited.pdf`.
+    + To  keep several range and some range without knowing page number (ex: end): `pdftk original.pdf cat 1-7 9-end output edited.pdf`.
+    + More examples [here](https://www.pdflabs.com/docs/pdftk-man-page/#dest-op-cat).
+
+[pdftk]:https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/ "PDFtk the pdf toolkit"

@@ -1,0 +1,74 @@
+---
+layout: post
+title: "Virtualbox : Export from VirtualBox and import to VMware ESXI"
+date: 2016/07/06
+lang: en
+categories: 
+- linux
+tags:
+- linux
+- virtualization
+- system
+thumbnail: /images/tux-293844_640.png
+---
+Version of software used:
+* VirtualBox 5.0.22
+* vSphere Client 5.1
+* VMware ESXI 5.1
+
+## Export to OVA/OVF
+
+From VirtualBox export the virtual machine : "File" > "Export Appliance".
+
+Then choose `OVF 1.0` format and don't check the write manifest file box.
+
+You now have a `.ova` file.
+
+## Edit OVF
+
+VMware ESXI is not good at all to import virtual machine from other virtual manager.
+
+So if you try to directly import your ova file you'll get an error message: `The OVF package requires unsupported hardware. Details: Line 25: Unsupported hardware family 'virtualbox-2.2'.`
+
+To fix it, unzip the `.ova` file (ignore extracting error), go into the folder and edit the `.ovf` file.
+
+Replace the following line:
+```
+<vssd:VirtualSystemType>virtualbox-2.2</vssd:VirtualSystemType>
+```
+with:
+```
+<vssd:VirtualSystemType>vmx-07</vssd:VirtualSystemType>
+```
+
+Note : if you didn't check *write manifest file* you won't have checksum problem, but if you did the easiest is to remove the `.mf` file. You can also re-generate the checksum `sha1sum file.ovf` and replace the value in the `.mf` file.
+
+## Import into ESXI
+
+You can now **try** to import the VM:
+* "File" > "Deploy OVF Template" > Select the freshly edited `.ovf` (ot the original `.ova`)
+* You may get an error: `The OVF package requires unsupported hardware. Details: Line 74: OVF hardware element 'ResourceType' with instance ID '6'. No support for the virtual hardware device type '35'.`
+
+To fix it, edit the `.ovf` file again. Go to the line mentioned in the error message and remvoe the whole item:
+```
+    <Item>
+        <rasd:AddressOnParent>3</rasd:AddressOnParent>
+        <rasd:AutomaticAllocation>false</rasd:AutomaticAllocation>
+        <rasd:Caption>sound</rasd:Caption>
+        <rasd:Description>Sound Card</rasd:Description>
+        <rasd:ElementName>sound</rasd:ElementName>
+        <rasd:InstanceID>6</rasd:InstanceID>
+        <rasd:ResourceSubType>ensoniq1371</rasd:ResourceSubType>
+        <rasd:ResourceType>35</rasd:ResourceType>
+    </Item>
+```
+
+That can be sound card, cd drive or some other optional drive.
+
+Note : if you still want to use `.mf` file don't forget to update the checksum.
+
+You can now try to import the `.ovf` again.
+
+Some other weird errors can occur but I won't be able to help you more...
+
+Note : if you use *Guest Additions* don't forget to change them (VirtualBox Guest Additions > VMware Guest Tools).

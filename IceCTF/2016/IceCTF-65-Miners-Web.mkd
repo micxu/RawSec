@@ -1,0 +1,63 @@
+---
+layout: post
+title: "IceCTF - 65 - Miners! - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+The miners website has been working on adding a login portal so that all miners can get the flag, but they haven't made any accounts! However, your boss demands the flag now! Can you get in anyway? [miners.vuln.icec.tf](miners.vuln.icec.tf)
+
+## Solution
+
+1. Notice that users database is empty!
+2. We have the source code:
+```php
+<?php
+include "config.php";
+$con = mysqli_connect($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASS, $MYSQL_DB);
+$username = $_POST["username"];
+$password = $_POST["password"];
+$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+$result = mysqli_query($con, $query);
+
+if (mysqli_num_rows($result) !== 1) {
+  echo "<h1>Login failed.</h1>";
+} else {
+  echo "<h1>Logged in!</h1>";
+  echo "<p>Your flag is: $FLAG</p>";
+}
+
+?>
+```
+3. Even if DB is empty we need the SQL request to generate 1 row: `mysqli_num_rows($result) !== 1`.
+4. To do that we will use and `UNION` with a non-empty `SELECT` request and we'll try to guess number of columns.
+5. Username: `' UNION SELECT 1,2,3 #` and Password: `random`.
+6. Flag: `IceCTF{the_miners_union_is_a_strong_one}`.
+
+**Note**: Database is MySQL.

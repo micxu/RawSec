@@ -1,0 +1,40 @@
+---
+layout: post
+title: "ABCTF - 10 - Caesar Salad - Cryptography"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+Most definitely the best salad around. Can you decrypt this for us?
+xyzqc{t3_qelrdeq_t3_k33a3a_lk3_lc_qe3p3}
+
+## Solution
+
+1. [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher) again.
+2. ROT-3: `abctf{w3_thought_w3_n33d3d_on3_of_th3s3}`

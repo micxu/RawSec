@@ -1,0 +1,28 @@
+---
+layout: post
+title: "FreeBSD 10.3 is here"
+date: 2016/04/06
+lang: en
+categories:
+- news
+- security
+tags:
+- news
+- bsd
+- system
+- update
+- security
+thumbnail: /images/License_icon-bsd.svg
+---
+FreeBSD update to version 10.3.
+
+Main improvments:
+
+* 15 security flaws patched
+* UEFI support
+* Gnome 3.16.2
+
+
+Full [Release Notes][relnotes] on official FreeBSD website.
+
+[relnotes]: https://www.freebsd.org/releases/10.3R/relnotes.html "FreeBSD 10.3-RELEASE Release Notes"

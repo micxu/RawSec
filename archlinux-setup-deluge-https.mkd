@@ -1,0 +1,65 @@
+---
+layout: post
+title: "ArchLinux - Setup Deluge to use HTTPS"
+date: 2016/09/25
+lang: en
+categories:
+- linux
+- archlinux
+tags:
+- linux
+- archlinux
+thumbnail: /images/tux-293844_640.png
+---
++ Stop `deluged` torrent process:
+
+```
+systemctl stop deluged.service
+```
+
++ Go into deluge ssl folder:
+
+```
+cd /srv/deluge/.config/deluge/ssl
+```
+
++ Backup or remove the old certificate and key:
+
+```
+mv daemon.cert daemon.cert.old && mv daemon.pkey daemon.pkey.old
+```
+
++ Generate the new deluge certificate and key:
+
+```
+openssl req -new -x509 -nodes -out deluge.cert.pem -keyout deluge.key.pem
+```
+
++ Answer questions for teh certificate.
++ Be sure to give the right ownership to certificate and key:
+
+```
+chown -R deluge:deluge /srv/deluge/.config/deluge/ssl
+```
+
++ Launch deluge web UI (User Interface) via http.
++ Open the **Preferences** menu, select **Interface** tab and check **Use SSL**.
++ Change **Private Key** into `ssl/deluge.key.pem` and **Certificate** into `ssl/deluge.cert.pem`.
++ Click **Apply** and then **Ok**.
++ Or instead of using the web UI, modify `/srv/deluge/.config/deluge/web.conf` (stopping `deluge-web` before is needed):
+  - "https": true,
+  - "pkey": "ssl/deluge.key.pem",
+  - "cert": "ssl/deluge.cert.pem",
++ Start `deluged` torrent process:
+
+```
+systemctl start deluged.service
+```
+
++ Restart `deluge-web` UI:
+
+```
+systemctl restart deluge-web.service
+```
+
++ Launch deluge web UI using https and enjoy.

@@ -1,0 +1,26 @@
+---
+layout: post
+title: "Creating a simple python package with Distutils and upload it to PyPI"
+date: 2016/07/27
+lang: en
+categories: 
+- programming
+- python
+tags:
+- linux
+- programming
+- python
+thumbnail: /images/programming.jpg
+---
+
+I made a quick summurizing slideshow on how to create a simple python package with Distutils and upload it to PyPI.
+
+Ressources:
+* [Slidehow][slideshow]
+* [Slideshow sources][sources]
+* [Package example][example]
+
+[slideshow]:https://noraj1337.github.io/Create-python-package-presentation/
+[sources]:https://github.com/noraj1337/Create-python-package-presentation
+[example]:https://github.com/noraj1337/CTF-tools/tree/master/Web/lfi_url_encoding
+

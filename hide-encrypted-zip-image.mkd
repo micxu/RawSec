@@ -1,0 +1,136 @@
+---
+layout: post
+title: "Hide AES-256 encrypted zip file in a JPEG image"
+lang: en
+categories:
+  - security
+tags:
+  - security
+  - stegano
+  - crypto
+date: 2016/06/13
+thumbnail: /images/security-265130_640.jpg
+---
+This how-to was made for Linux user.
+The user will need p7zip, exiv2 and optionally exif, exiftool, unzip.
+
+## Create an AES-256 encrypted zip file
+
+[7z][7z] (p7zip for Linux) can produce zip-format archives with encryption scheme.
+
+To add *file.txt* to *archive.zip* and cipher zip data with AES-256 :
+```
+7za a -tzip -pTHE_PASSWORD -mem=AES256 archive.zip file.txt 
+```
+
+To uncompress `unzip -p THE_PASSWORD archive.zip` or `7za e archive.zip` and provide password. It may also work with GUI archive manager.
+
+## Hide the zip into the image
+
+To do so, concatenate the zip an image data:
+```
+cat original_image.jpg archive.zip > new_image.jpg
+```
+
+Now check file type:
+```
+file new_image.jpg
+new_image.jpg: JPEG image data, JFIF standard 1.02
+```
+
+It seems like a normal jpeg image.
+
+But make a `strings` on it and see files that are in the zip (filenames in the zip are not ciphered, only their content is):
+```
+strings new_image.jpg
+
+[...]
+
+.Yyb
+M]Y]
+file.txt
+kBKMS!
+file.txt
+```
+
+The image is an archive too, so it can be extracted.
+
+Let's compare original zip archive and the jpeg one.
+
+Original zip archive:
+```
+unzip archive.zip
+Archive:  archive.zip
+   skipping: file.txt             need PK compat. v5.1 (can do v4.5)
+```
+
+Jpeg zip archive:
+```
+unzip new_image.jpg
+Archive:  new_image.jpg
+warning [new_image.jpg]:  35068 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+   skipping: file.txt             need PK compat. v5.1 (can do v4.5)
+```
+
+To really extract the archive use `unzip -p`, `7za e` or a GUI archive manager like explained in the previous part.
+
+## Hide the archive password into image metadata
+
+Here we'll hide password in image comment, it's not safe at all but it's just for fun.
+
+We'll hide the real password into jpeg comment and a fake password into exif user comment.
+
+Hide the password into jpeg comment:
+```
+exiv2 -c THE_PASSWORD modify new_image.jpg
+```
+
+Hide a fake password into exif user comment:
+```
+exiv2 -M"set Exif.Photo.UserComment FAKE_PASSWORD" new_image.jpg
+```
+
+Jpeg comment can be seen with:
+```
+exiv2 -p c new_image.jpg
+THE_PASSWORD
+```
+
+Exif user comment can be seen with:
+```
+exiv2 -p t new_image.jpg
+Exif.Image.ExifTag                           Long        1  26  
+Exif.Photo.UserComment                       Undefined  37  FAKE_PASSWORD
+```
+
+More datails are avaible at [exiv2 manpage][exiv2].
+
+## Why two different passwords and two different comments
+
+As I said put the password in metadata is not safe, everyone aware of steganography will know how to find it. But we can get confused more novice people.
+
+Novice in steganography often use only default behaviour of tools commands like `exiftool`, `exif` or less often `exiv2`.
+
+`exif` and `exiv2` default behaviour without options show only exif data but `exiftool` will show Exif, IPTC, XMP and image type dependent data.
+
+So novice that will only run `exif new_image.jpg` or `exiv2 new_image` will only see the fake password hidden in exif user comment:
+```
+exif new_image.jpg | grep -i comment
+User Comment        |FAKE_PASSWORD
+```
+
+```
+exiv2 new_image.jpg | grep -i comment
+Exif comment    : FAKE_PASSWORD
+```
+
+But
+```
+exiftool new_image.jpg | grep -i comment
+User Comment                    : FAKE_PASSWORD
+Comment                         : THE_PASSWORD
+```
+
+[7z]:http://www.7-zip.org/7z.html "7z Zip"
+[exiv2]:http://www.exiv2.org/manpage.html "Exiv2 manpage"

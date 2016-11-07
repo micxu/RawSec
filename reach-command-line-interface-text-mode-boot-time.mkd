@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Reach the command line interface (text mode) at boot time"
+date: 2014/08/03
+lang: en
+categories:
+- linux
+- opensuse
+tags:
+- linux
+- system
+- opensuse
+thumbnail: /images/tux-293844_640.png
+---
+This work with Grub2:
+* When you are on the bootloader, hover over your distribution name and press **e** (*e* for *edit*)
+* You can now add options in the window that just opened
+* On the line beginning with `linux`, add ` 3` at the end of the line (with a space)
+* Press **F10** to start
+
+PS : This modification is temporary, next start up openSUSE will boot normaly.:x

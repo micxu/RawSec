@@ -1,0 +1,46 @@
+---
+layout: post
+title: "IceCTF - 10 - Spotlight - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/08/16
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+Someone turned out the lights and now we can't find anything. Send halp! [spotlight](http://spotlight.vuln.icec.tf/)
+
+## Solution
+
+1. That's a little JS script that spotlight where the mouse is focused.
+2. `CTRL + U` ans show sources to find the JS script.
+3. The JS script is located at [this link][link js].
+4. And we find this line:
+```javascript
+console.log("DEBUG: IceCTF{5tup1d_d3v5_w1th_th31r_l095}");
+```
+
+[linkjs]:http://spotlight.vuln.icec.tf/spotlight.js

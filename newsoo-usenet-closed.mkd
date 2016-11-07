@@ -1,0 +1,30 @@
+---
+layout: post
+title: "Newsoo: a French Usenet access provider has been closed"
+lang: en
+categories:
+  - news
+  - warez
+tags:
+  - warez
+  - news
+  - piracy
+  - usenet
+date: 2016/03/27
+thumbnail: /images/Pirate_Flag.png
+---
+The man known as Optix, the owner of Newsoo, was taken into custody by the [DIPJ](https://en.wikipedia.org/wiki/Central_Directorate_of_the_Judicial_Police) the 2016/03/22.
+
+Newsoo was a French Usenet provider, the service was delivering 2 GB of pirated data per second.
+
+[Sacem](https://www.sacem.fr/) press charges against Newsoo.fr website on october 2014.
+
+Newsoo was an independant Usenet network, it was a French [Autonomous system](https://en.wikipedia.org/wiki/Autonomous_system_%28Internet%29) (AS203679).
+
+Optix, owner and administrator of Newsoo, is 26 years old and was offering access to pirated content Newsgroup for a price from 8€ to 20€.
+
+The website is now closed.
+
+Newsoo had 5000 customers and the man was managing the Usenet network as a legal business.
+
+During the arrest, 650 TB of data was blocked and 130 hard disk drivers was seized.

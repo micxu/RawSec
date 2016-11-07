@@ -1,0 +1,51 @@
+---
+layout: post
+title: "IceCTF - 45 - Hidden in Plain Sight - ReverseEngineering"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - reverse
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+Make sure you take a real close look at it, it should be right there! `/home/plain_sight/` or download it [here](https://play.icec.tf/problem-static/828644c3ad8ccfa14b86a69dccd36f2b-plain_sight_df5d2c1da50110458fa00d0db6586b23cd67317c7f7b95f4a092d645a4570296)
+
+## Solution
+
+Open this binary with an hex editor (ex: [ht][ht], [xxd][xxd], [hexeditor][hexeditor], [bless][bless], [wxHexEditor][wxHexEditor] by preference order)
+```
+00000510: ec0c 50e8 38fe ffff 83c4 10b0 49b0 63b0  ..P.8.......I.c.
+00000520: 65b0 43b0 54b0 46b0 7bb0 6cb0 6fb0 6fb0  e.C.T.F.{.l.o.o.
+00000530: 6bb0 5fb0 6db0 6fb0 6db0 5fb0 49b0 5fb0  k._.m.o.m._.I._.
+00000540: 66b0 6fb0 75b0 6eb0 64b0 5fb0 69b0 74b0  f.o.u.n.d._.i.t.
+00000550: 7dc7 45f4 0000 0000 eb2f 83ec 0c6a 01e8  }.E....../...j..
+```
+
+[ht]:http://hte.sourceforge.net/readme.html
+[xxd]:http://linuxcommand.org/man_pages/xxd1.html
+[hexeditor]:http://manpages.org/hexeditor
+[bless]:http://home.gna.org/bless/
+[wxHexEditor]:http://wxhexeditor.sourceforge.net/home.php

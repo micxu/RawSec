@@ -1,0 +1,55 @@
+---
+layout: post
+title: "Security-related OS"
+lang: en
+categories:
+  - security
+tags:
+  - security
+  - linux
+  - anonymity
+  - pentest
+  - privacy
+date: 2016/06/09
+updated: 2016/10/21
+thumbnail: /images/security-265130_640.jpg
+---
+* [Subgraph OS](https://subgraph.com/sgos/index.en.html) - security by compartmentalization (container)
+* [Qubes OS](https://www.qubes-os.org/) - security by compartmentalization (VM)
+* [Kali Linux](https://www.kali.org/) - penetration testing and security lab
+* [Parrot Security OS](https://www.parrotsec.org/) - penetration testing and security lab
+* [BlackArch Linux](https://blackarch.org/) - penetration testing and security lab
+* [Fedora Security Lab](https://labs.fedoraproject.org/security/) - penetration testing and security lab
+* [Tails](https://tails.boum.org/) - privacy and anonymity
+* [Alpine Linux](http://www.alpinelinux.org/) - security for routers, firewalls, VPNs, VoiP boxes and servers
+* [BackBox](https://backbox.org/) - penetration testing and security lab
+* [Wifislax](http://www.wifislax.com/) - penetration testing and security lab
+* [Pentoo](http://www.pentoo.ch/) - penetration testing and security lab
+* [URIX OS](http://urix.us/) - penetration testing, security lab and security-focused
+* [Whonix](https://www.whonix.org/) - privacy and anonymity
+* [REMnux](https://remnux.org/) - malware analysts and reverse-engineering
+* [TENS](https://www.spi.dod.mil/lipose.htm) - privacy and stealth
+* [Cyborg Hawk Linux](http://cyborg.ztrela.com/cyborg-hawk/) - penetration testing and security lab
+* [Cyborg Essentials](http://cyborg.ztrela.com/cyborg-essentials/) - penetration testing and security lab
+* [Security Onion](https://securityonion.net/) - network security monitoring and analysis
+
+| OS | Maturity | Security | Pentest | Based on |
+| --- | --- | --- | --- | --- |
+| Subgraph OS | ++ | ++ | No | Debian |
+| Qubes OS | +++ | +++ | No | Fedora |
+| Kali Linux | +++ | + | Yes | Debian |
+| Parrot Security OS | +++ | + | Yes | Debian |
+| BlackArch Linux | +++ | + | Yes | Arch |
+| Fedora Security Lab | +++ | + | Yes | Fedora |
+| Tails | +++ | + | No | Debian |
+| Alpine Linux | +++ | ++ | No | Independent |
+| BackBox | +++ | + | Yes | Ubuntu |
+| Wifislax | ++ | + | Yes | Slackware |
+| Pentoo | ++ | + | Yes | Gentoo |
+| URIX OS | ++ | ++ | Yes | openSUSE |
+| Whonix | +++ | ++ | No | Debian |
+| REMnux | +++ | + | No | Debian |
+| TENS | ++ | + | No | Thinstation |
+| Cyborg Hawk Linux | ++ | + | Yes | Ubuntu |
+| Cyborg Essentials | ++ | + | Yes | Debian |
+| Security Onion | ++ | + | No | Ubuntu |

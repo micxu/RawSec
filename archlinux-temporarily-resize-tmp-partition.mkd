@@ -1,0 +1,50 @@
+---
+layout: post
+title: "ArchLinux - Temporarily resize /tmp partition"
+date: 2016/10/15
+lang: en
+categories:
+- linux
+- archlinux
+tags:
+- linux
+- archlinux
+thumbnail: /images/tux-293844_640.png
+---
+## Context
+
+[tmpfs][tmpfs] is a temporary file system that resides in memory and/or swap partition(s).
+
+[tmpfs][tmpfs] is commonly used for `/tmp`. By default, a tmpfs has its maximum size set to half the total of RAM. Note that the actual memory/swap consumption depends on how much you fill it up, as tmpfs partitions do not consume any memory until it is actually needed.
+
+[tmpfs]:https://wiki.archlinux.org/index.php/Tmpfs
+
+Problem example: You want to build an Android development lab in a VM. You set VM RAM to **2GB**. So by default, `/tmp` size will be **1GB**. You begin to install [Android Studio][AS] but an error occured, telling you that there is not enough space on the disk. That's because `/tmp` is too small to contain all temporary downloads of Android Studio during the install process.
+
+[AS]:https://developer.android.com/studio/index.html
+
+## Fix
+
+For a problem like the prvious example, we don't want to do a permanent change as that's just a punctual need. So to fix the problem we'll temporarily increase the size of `/tmp`. It is posible because in our example the VM has 2GB RAM + 4GB SWAP, so we can increase a tmpfs partition up to 6GB.
+
+Before the resizing:
+
+```
+$ df /tmp                                           
+Filesystem     1K-blocks  Used Available Use% Mounted on
+tmpfs            1048576    84   1048492   1% /tmp
+```
+
+Temporary resize:
+
+```
+mount -o remount,size=4G,noatime /tmp
+```
+
+After the resizing:
+
+```
+$ df /tmp
+Filesystem     1K-blocks  Used Available Use% Mounted on
+tmpfs            4194304    80   4194224   1% /tmp
+```

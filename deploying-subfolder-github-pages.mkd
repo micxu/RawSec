@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Deploying a subfolder to GitHub Pages"
+date: 2016/07/27
+lang: en
+categories:
+- misc
+tags:
+- linux
+- git
+thumbnail: /images/git.png
+---
+You are building a website with a static site generator like [Hexo][hexo] or [Jekyll][jekyll]? You want to have website source code on GitHub and the website running on **gh-pages** without maintaining two Git repository? You need subtree!
+
+You are making slideshows with Reveal.js? You want to have slideshow source code on GitHub and the slideshow running on **gh-pages** without maintaining two Git repository? You need subtree!
+
+Sometimes it's useful to have a subfolder on **gh-pages** and all the source code on the **master** branch and all of that in the same root directory. In fact for all project that you want to see his source code hosted on GitHub and the building result living on gh-pages.
+
+For this example, I suppose you have a `build` folder under the project's root directory.
+
+1. Remove the `build` folder from the project's `.gitignore` file.
+2. Make git aware of the `build` folder:
+```
+git add build
+git commit -m "Preparing build/ for subtree"
+```
+3. Each time you re-build the project to a final release, use `subtree push` to send the build on the **gh-pages** branch on GitHub:
+```
+git subtree push --prefix build origin gh-pages
+```
+
+[hexo]:https://hexo.io/
+[jekyll]:https://jekyllrb.com/

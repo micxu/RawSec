@@ -1,0 +1,52 @@
+---
+layout: post
+title: "2 less known tricks of spoofing extensions on Windows"
+lang: en
+categories:
+  - security
+  - windows
+tags:
+  - security
+  - windows
+date: 2016/10/13
+thumbnail: /images/security-265130_640.jpg
+---
+## Well-known tricks
+
+Malware often tries to hide itself from being an obvious executable.
+
+Windows malwares may:
++ have crafted icons that are pretending to be real document files.
++ use double extensions such as `.pdf.exe` or `.doc.exe`, this is effective because by default Windows hides the extension so not aware users wouldn't notice this an an executable as they are only seeing `.pdf` or `.doc` .
++ use lesser known extensions of executable format like `.scr`.
+
+## PIF extension
+
+This trick is very effective because it hides the real extension even if the extension hiding feature is disabled.
+The `.pif` extension is hidden and the original icon too but the file is still executable.
+
+PIF means Program Information file, historically it was used for DOS program and is not used today because there is no more DOS applications. But Creating a PIF file for a DOS-based program creates a shortcut to the program executable and all the settings saved in the PIF are contained in the shortcut.
+
+This trick was used in 2016 by a [Petya/Mischa campaign in Poland](https://blog.malwarebytes.com/cybercrime/2016/09/lesser-known-tricks-of-spoofing-extensions/).
+
+## RTLO trick
+
+RTLO (Right To Left Override) trick uses the fact that some languages are being written from right side towards left but not the majority of countries.
+In order to support such languages, a Unicode character (`U+202e`) is used to do the switch between those two modes. It can be use maliciously, in order to displace the displayed extensions.
+
+
+You can use [this site](https://www.branah.com/unicode-converter) to see how it works.
+
+`file.exe` (unicode text) = `\u0066\u0069\u006c\u0065\u002e\u0065\u0078\u0065` (unicode)
+
+Just add the `\u202e` reverse character before the dot and you get:
+
+`file‮.exe` (unicode text) = `\u0066\u0069\u006c\u0065\u202e\u002e\u0065\u0078\u0065` (unicode)
+
+Now add the spoofed extension (e.g. `txt` works very well because its reverse is also `txt`):
+
+`file‮txt.exe` (unicode text) = `\u0066\u0069\u006c\u0065\u202e\u0074\u0078\u0074\u002e\u0065\u0078\u0065` (unicode)
+
+We get a `file.txt.exe` that looks like `fileexe.txt`.
+
+Source: [malwarebytes.com](https://blog.malwarebytes.com/cybercrime/2016/09/lesser-known-tricks-of-spoofing-extensions/)

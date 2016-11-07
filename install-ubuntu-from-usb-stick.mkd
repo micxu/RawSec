@@ -1,0 +1,71 @@
+---
+layout: post
+title: "How to make a bootable USB stick to install Ubuntu"
+date: 2012/12/18
+updated: 2016/03/10
+lang: en
+categories:
+  - linux
+  - ubuntu
+tag:
+  - linux
+  - ubuntu
+  - install
+thumbnail: /images/tux-293844_640.png
+---
+This tutorial was thinked for Windows users who want to install an easy to use Linux distibution.
+
+{% alert danger %}
+Before installing a Linux distribution, it's highly recommended to save all your datas.
+{% endalert %}
+
+{% alert danger %}
+It is highly recommended to perform a defragmentation before the install in order to avoid data loss.
+{% endalert%}
+
+## Step n°1 : Download the last Ubuntu version
+You can donwload the Ubuntu Desktop iso on the [official website](http://www.ubuntu.com/download/desktop).
+
+## Step n°2 : Download the last version of Linux Live USB Creator
+
+You can find Linux Live USB Creator on the [official website](http://www.linuxliveusb.com/en/download).
+
+Then just install it.
+
+## Step n°3 : Get the USB stick ready
+
+Launch Linux Live USB Creator. Choose the USB stick where you will install Ubuntu.
+
+Choose the iso you have just downloaded in the **Source** tab.
+
+Let the persistence to `0`.
+
+Check the option **Format the stick**.
+
+Clic on the lightning icon to launch the installation.
+
+## Step n°4 : Boot
+
+When the USB stick is ready, insert (plug) it in a usb port and restart your computer.
+
+To access to the *Boot menu* of your computer see the informations at boot time and press the right key or try the more common keys `Escape` or `F12`.
+
+{% alert warning %}
+For older materials you may not be able to boot with USB so you will have to burn a live CD or DVD.
+{% endalert %}
+
+In the Boot menu, choose your USB stick. A menu appear, choose *Installation* to directly install Ubuntu or *Try Ubuntu* to try it before installing.
+
+If you choosed *Try Ubuntu* you arrived on the desktop screen :
+![Ubuntu Desktop Screen](http://ubuntu-fr.org/sites/ubuntu-fr.org/files/screenshots/11.10/2_Bureau.png)
+
+You can try Ubuntu and install it when you are ready.
+
+## Step n°5 : Installation
+
+This article was only about preparing the USB stick but you can find lots of tutorial on *How to install Ubuntu* on the web.
+
+{% alert info %}
+You may find more info or method about creating bootable USB devices [here](https://help.ubuntu.com/community/Installation/FromUSBStick
+).
+{% endalert %}

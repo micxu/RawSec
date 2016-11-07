@@ -1,0 +1,57 @@
+---
+layout: post
+title: "Common upload flaws"
+date: 2016/09/21
+lang: en
+categories:
+- security
+tags:
+- security
+- web
+- php
+thumbnail: /images/security-265130_640.jpg
+---
+
+If a remote web server let you upload and execute scripts so this is beginning to turn turn bad.
+
+Here are some common upload flaws:
+- extensions blacklist
+- double extensions
+- MIME type
+- Null Byte
+
+## Extensions blacklist
+
+Blacklists are a bad idea in security.
+
+For example if a server check that there is no `.php` file extension uploaded. Ok, you may upload a php script saved as `.png` but even if it is include or publicly available you won't be able to execute it. So what? Did you know that a php server also interpret `.php2`, `.pwml`, `.phtml`?
+
+Whit a blacklist, an administrator can forget to add them all. So to protect you, a better solution will be to establish a whitelist of authorized extension instead of a blacklist of forbidden ones.
+
+## Double extensions
+
+A server is filtering authorized extensions and only `.jpg`, `.gif`, `.jpeg`, `.png` authorized.
+
+This kind of verification will only check the end extension with a regex matching what is after the dot in the filename.
+
+To bypass this just rename your files from `file.php` to `file.php.png`.
+
+In practice this is not so effective because the file have not the desired file extensions.
+
+To protect from this kind of attack don't trust filename, ignore them and rename the file with a hash. And before accepting it you may want to check what the file really is with the MIME type. Once uploaded on the server check again for example with file signature header and because it can be fake you can also you other methods. For example if you only allow png images use pngcheck to be sure that's really a png.
+
+## MIME type
+
+If an attacker name is php script `image.png` and temper his request and modify the content type from `application/octet-stream` to `image/png`, how can you know that's not an image?
+
+As said previously, don't trust client side, check again server side.
+
+## Null byte
+
+Double extensions works on the server but you can execute your script with an image extension? Let's fix that.
+
+Just usethe this old flaw: injection of a null byte, that will stop the php server reading the name of the file after the null byte.
+
+Name your script something like `script.php%00.png` and upload it. What's `%00`? It's the hexadecimal representation of the null byte encoded for http. How does it work? See my [post about LFI](/en/local-file-inclusion-vulnerability/#Null-Byte-Injection), I talked about Null Byte injection.
+
+To protect yourself still the same recommendation: check server side. You also need to keep your PHP version up to date because that flaw was corrected. And a more smart name parsing will only be better.

@@ -1,0 +1,53 @@
+---
+layout: post
+title: "CTF(x) - 50 - crash - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensics
+date: 2016/08/27
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : CTF(x) 2016
+- **Website** : [http://ctfx.io/](http://ctfx.io/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/348/)
+
+### Description
+
+defund was about to give this flag away until his computer crashed.
+
+file: [flag.zip](http://compete.ctfx.io/download?file_key=d983a3f5adb66783a09f142a6eb3a511e44f49048b9c59bcc305dba1e072ce3f&team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3)
+
+## Solution
+
+TL;DR: [![asciicast](https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq.png)](https://asciinema.org/a/3s2let38nbzjwp5a8nre2vonq)
+
++ `flag.zip` contains `.flag.txt.swp` and `flag.txt`
++ Extract the archive: `unzip flag.zip`
++ Recover/restore the file with the swap file: `vim -r flag/flag.txt`
++ You get some ASCII art of the flag: `ctf(v1m_is_be77er_than_3macs)`.
+
+Extract of VIM man page:
+```
+-r          List swap files, with information about using them for recovery.
+
+-r {file}   Recovery mode.  The swap file is used to recover a crashed editing session.  The swap file is a
+            file with the same filename as the text file with ".swp" appended.  See ":help recovery".
+```

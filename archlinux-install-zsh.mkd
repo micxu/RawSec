@@ -1,0 +1,63 @@
+---
+layout: post
+title: "ArchLinux - Install Zsh shell and oh-my-zsh"
+date: 2016/09/14
+lang: en
+categories:
+- linux
+- archlinux
+tags:
+- linux
+- archlinux
+thumbnail: /images/tux-293844_640.png
+---
+## Install Zsh
+
+* Before installing [zsh][zsh], see what shell is currently being used:
+
+```
+$ echo $SHELL
+```
+
+* Install [zsh][zsh]:
+
+```
+# pacman -S zsh
+```
+
+* For additional completion definitions, install the [zsh-completions][zsh-completions] package:
+
+```
+# pacman -S zsh-completions
+```
+
+* Make zsh has been installed correctly and configure it:
+
+```
+$ zsh
+```
+
+* Set zsh as default shell (list shells with `$ chsh -l`):
+
+```
+$ chsh -s /bin/zsh
+```
+
+[zsh]:https://www.archlinux.org/packages/?name=zsh
+[zsh-completions]:https://www.archlinux.org/packages/?name=zsh-completions
+
+## Install Oh My Zsh
+
+* Install dependencies:
+
+```
+# pacman -S curl git
+```
+
+* Install [oh-my-zsh][oh-my-zsh]:
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+[oh-my-zsh]:https://github.com/robbyrussell/oh-my-zsh

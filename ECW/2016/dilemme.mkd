@@ -1,0 +1,234 @@
+---
+layout: post
+title: "ECW - 150 - Dilemme - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/11/06
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : European Cyber Week CTF Quals 2016
+- **Website** : [challenge-ecw.fr](https://challenge-ecw.fr/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+
+### Description
+
+N.A.
+
+## Solution
+
+For this challenge we needed to solve a captcha and a QR code as faster as possible.
+
+For this I wrote a ruby script:
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'base64' # to decode base64 images
+require 'zxing' # to solve qr code
+require 'curb' # for get/post requests
+
+### Crawling the website to get the base64 QRCode ###
+hostname = 'https://challenge-ecw.fr/chals/divers200'
+
+c = Curl::Easy.new(hostname) do |curl|
+  curl.headers['Cookie'] = 'session=mySessionCookie'
+  curl.headers['Referer'] = hostname
+  curl.headers['Host'] = 'challenge-ecw.fr'
+  curl.headers['Connection'] = 'keep-alive'
+  curl.headers['Upgrade-Insecure-Requests'] = '1'
+  #curl.verbose = true
+end # Curl
+c.perform
+#puts c.body_str
+
+### Parse the output ###
+qrcode_b64 = c.body_str.match(/QRCode" src="data:image\/png;base64,(.*)" height/).captures[0]
+qrcode_file = 'qrcode.png'
+captcha_b64 = c.body_str.match(/Captcha" src="data:image\/png;base64,(.*)" height/).captures[0]
+captcha_file = 'captcha.png'
+
+### QRCode : base64 to png ###
+File.open(qrcode_file, 'wb') do |f|
+  f.write(Base64.decode64(qrcode_b64))
+end
+
+### Captcha : base64 to png ###
+File.open(captcha_file, 'wb') do |f|
+  f.write(Base64.decode64(captcha_b64))
+end
+
+### QRCode : png to text string ###
+qrcode_answer = ZXing.decode qrcode_file
+puts 'QRCode : '.concat(qrcode_answer)
+
+### Captcha : png to text string ###
+captcha_answer = `python2 myCaptchaSolver.py`.chomp
+puts 'Captcha : '.concat(captcha_answer)
+
+### Send the answer ###
+nonce = 'myNonce'
+c.http_post(Curl::PostField.content('captcha', captcha_answer),
+            Curl::PostField.content('qrcode', qrcode_answer),
+            Curl::PostField.content('nonce', nonce))
+c.perform
+puts c.body_str.match(/<center>(.*)<\/center>/).captures[0]
+
+# Redo the whole process one more time
+qrcode_b64 = c.body_str.match(/QRCode Win" src="data:image\/png;base64,(.*)" height/).captures[0]
+qrcode_file = 'qrcode.png'
+captcha_b64 = c.body_str.match(/Captcha Win" src="data:image\/png;base64,(.*)" height/).captures[0]
+captcha_file = 'captcha.png'
+File.open(qrcode_file, 'wb') do |f|
+  f.write(Base64.decode64(qrcode_b64))
+end
+File.open(captcha_file, 'wb') do |f|
+  f.write(Base64.decode64(captcha_b64))
+end
+qrcode_answer = ZXing.decode qrcode_file
+puts 'QRCode : '.concat(qrcode_answer)
+captcha_answer = `python2 myCaptchaSolver.py`.chomp
+puts 'Captcha : '.concat(captcha_answer)
+c.http_post(Curl::PostField.content('captcha', captcha_answer),
+            Curl::PostField.content('qrcode', qrcode_answer),
+            Curl::PostField.content('nonce', nonce))
+c.perform
+puts c.body_str.match(/<center>(.*)<\/center>/).captures[0]
+
+puts "Flag : " + captcha_answer + qrcode_answer
+
+### Wait for avoiding Jruby to crash ###
+sleep(0.5)
+
+### Remove temporary file ###
+File.delete(qrcode_file)
+File.delete(captcha_file)
+File.delete("output.gif")
+```
+
+Script is working but `curb` is not very quick and the `ZXing` ruby gem is just a port of the java version of `ZXing` with Jruby and is amazingly slow and buggy! So the whole script process take 9 seconds. That's too slow!
+
+Let's try to optimize the execution speed with more quicker tools:
+- replace `curb` gem using libcurb directly with `curl`
+- replace `ZXing` with a custom script using `PIl` and `pytesseract`
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'base64' # to decode base64 images
+
+### Crawling the website to get the base64 QRCode ###
+hostname = 'https://challenge-ecw.fr/chals/divers200'
+
+cookies = 'session=mySessionCookie'
+body_str = `curl https://challenge-ecw.fr/chals/divers200 --cookie '#{cookies}'`
+
+### Parse the output ###
+qrcode_b64 = body_str.match(/QRCode" src="data:image\/png;base64,(.*)" height/).captures[0]
+qrcode_file = 'qrcode.png'
+captcha_b64 = body_str.match(/Captcha" src="data:image\/png;base64,(.*)" height/).captures[0]
+captcha_file = 'captcha.png'
+
+### QRCode : base64 to png ###
+File.open(qrcode_file, 'wb') do |f|
+  f.write(Base64.decode64(qrcode_b64))
+end
+
+### Captcha : base64 to png ###
+File.open(captcha_file, 'wb') do |f|
+  f.write(Base64.decode64(captcha_b64))
+end
+
+### QRCode : png to text string ###
+qrcode_answer = `python2 myQRCodeSolver.py`.chomp
+puts 'QRCode : '.concat(qrcode_answer)
+
+### Captcha : png to text string ###
+captcha_answer = `python2 myCaptchaSolver.py`.chomp
+puts 'Captcha : '.concat(captcha_answer)
+
+
+### Send the answer ###
+nonce = 'myNonce'
+server_answer = `curl https://challenge-ecw.fr/chals/divers200 --cookie '#{cookies}' -X POST -F "captcha=#{captcha_answer}" -F "qrcode=#{qrcode_answer}" -F "nonce=#{nonce}"`
+puts '>>> ' + server_answer.match(/<center>(.*)<\/center>/).captures[0]
+
+# Redo the whole process one more time
+qrcode_b64 = server_answer.match(/QRCode Win" src="data:image\/png;base64,(.*)" height/).captures[0]
+qrcode_file = 'qrcode.png'
+captcha_b64 = server_answer.match(/Captcha Win" src="data:image\/png;base64,(.*)" height/).captures[0]
+captcha_file = 'captcha.png'
+File.open(qrcode_file, 'wb') do |f|
+  f.write(Base64.decode64(qrcode_b64))
+end
+File.open(captcha_file, 'wb') do |f|
+  f.write(Base64.decode64(captcha_b64))
+end
+qrcode_answer = `python2 myQRCodeSolver.py`.chomp
+puts 'QRCode : '.concat(qrcode_answer)
+captcha_answer = `python2 myCaptchaSolver.py`.chomp
+puts 'Captcha : '.concat(captcha_answer)
+
+puts "Flag : " + captcha_answer + qrcode_answer
+
+### Remove temporary file ###
+File.delete(qrcode_file)
+File.delete(captcha_file)
+File.delete("output.gif")
+```
+
+Here is my custom captcha solver `myCaptchaSolver.py`:
+
+```python
+from PIL import Image
+from pytesseract import image_to_string
+
+im = Image.open("captcha.png")
+im = im.convert("P")
+im2 = Image.new("P",im.size,255)
+
+im = im.convert("P")
+
+temp = {}
+
+for x in range(im.size[1]):
+  for y in range(im.size[0]):
+    pix = im.getpixel((y,x))
+    temp[pix] = pix
+    if pix == 1: # these are the numbers to get
+      im2.putpixel((y,x),0)
+
+im2.save("output.gif")
+
+
+im2.load()
+print (image_to_string(im2))
+```
+
+Here is my custom QR code solver `myQRCodeSolver.py`:
+
+```python
+import qrtools
+qr = qrtools.QR()
+qr.decode("qrcode.png")
+print qr.data
+```
+
+Flag: `ECW{20cbf8e17eb7e62936e3602b498776e6}`.

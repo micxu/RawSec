@@ -1,0 +1,63 @@
+---
+layout: post
+title: "Display repository list in comand-line on openSUSE"
+lang: en
+categories:
+- linux
+- opensuse
+tags:
+- linux
+- opensuse
+- system
+date: 2014/08/03
+thumbnail: /images/tux-293844_640.png
+---
+To display the repository list in command line you can use :
+
+```
+zypper lr
+#  | Alias                     | Name                                       | Enabled | GPG Check | Refresh
+---+---------------------------+--------------------------------------------+---------+-----------+--------
+ 1 | Bumblebee                 | Bumblebee                                  | No      | ----      | Yes    
+ 2 | Java_packages             | Factory Java packages (openSUSE_Leap_42.1) | Yes     | (r ) Yes  | No     
+ 3 | Nvidia                    | Nvidia                                     | No      | ----      | Yes    
+ 4 | devel_languages_python    | Python Modules (openSUSE_Leap_42.1)        | Yes     | (r ) Yes  | No     
+ 5 | local_RPMs                | local RPMs                                 | Yes     | ( p) Yes  | Yes    
+ 6 | packman                   | packman                                    | Yes     | (r ) Yes  | Yes    
+ 7 | repo-debug                | openSUSE-Leap-42.1-Debug                   | No      | ----      | Yes    
+ 8 | repo-debug-non-oss        | openSUSE-Leap-42.1-Debug-Non-Oss           | No      | ----      | Yes    
+ 9 | repo-debug-update         | openSUSE-Leap-42.1-Update-Debug            | No      | ----      | Yes    
+10 | repo-debug-update-non-oss | openSUSE-Leap-42.1-Update-Debug-Non-Oss    | No      | ----      | Yes    
+11 | repo-non-oss              | openSUSE-Leap-42.1-Non-Oss                 | Yes     | (r ) Yes  | Yes    
+12 | repo-oss                  | openSUSE-Leap-42.1-Oss                     | Yes     | (r ) Yes  | Yes    
+13 | repo-source               | openSUSE-Leap-42.1-Source                  | No      | ----      | Yes    
+14 | repo-update               | openSUSE-Leap-42.1-Update                  | Yes     | (r ) Yes  | Yes    
+15 | repo-update-non-oss       | openSUSE-Leap-42.1-Update-Non-Oss          | Yes     | (r ) Yes  | Yes    
+```
+
+Or for more details:
+```
+zypper lr -d
+#  | Alias                     | Name                                       | Enabled | GPG Check | Refresh | Priority | Type     | URI                                                                                    | Service
+---+---------------------------+--------------------------------------------+---------+-----------+---------+----------+----------+----------------------------------------------------------------------------------------+--------
+ 1 | Bumblebee                 | Bumblebee                                  | No      | ----      | Yes     |   99     | rpm-md   | http://download.opensuse.org/repositories/X11:/Bumblebee/openSUSE_Leap_42.1/           |        
+ 2 | Java_packages             | Factory Java packages (openSUSE_Leap_42.1) | Yes     | (r ) Yes  | No      |   99     | rpm-md   | http://download.opensuse.org/repositories/Java:/packages/openSUSE_Leap_42.1/           |        
+ 3 | Nvidia                    | Nvidia                                     | No      | ----      | Yes     |   99     | rpm-md   | ftp://download.nvidia.com/opensuse/leap/42.1/                                          |        
+ 4 | devel_languages_python    | Python Modules (openSUSE_Leap_42.1)        | Yes     | (r ) Yes  | No      |   98     | rpm-md   | http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.1/ |        
+ 5 | local_RPMs                | local RPMs                                 | Yes     | ( p) Yes  | Yes     |   99     | plaindir | dir:///home/shark/localRMPS                                                            |        
+ 6 | packman                   | packman                                    | Yes     | (r ) Yes  | Yes     |   99     | rpm-md   | http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_42.1/                     |        
+ 7 | repo-debug                | openSUSE-Leap-42.1-Debug                   | No      | ----      | Yes     |   99     | NONE     | http://download.opensuse.org/debug/distribution/leap/42.1/repo/oss/                    |        
+ 8 | repo-debug-non-oss        | openSUSE-Leap-42.1-Debug-Non-Oss           | No      | ----      | Yes     |   99     | NONE     | http://download.opensuse.org/debug/distribution/leap/42.1/repo/non-oss/                |        
+ 9 | repo-debug-update         | openSUSE-Leap-42.1-Update-Debug            | No      | ----      | Yes     |   99     | NONE     | http://download.opensuse.org/debug/update/leap/42.1/oss                                |        
+10 | repo-debug-update-non-oss | openSUSE-Leap-42.1-Update-Debug-Non-Oss    | No      | ----      | Yes     |   99     | NONE     | http://download.opensuse.org/debug/update/leap/42.1/non-oss/                           |        
+11 | repo-non-oss              | openSUSE-Leap-42.1-Non-Oss                 | Yes     | (r ) Yes  | Yes     |   99     | yast2    | http://download.opensuse.org/distribution/leap/42.1/repo/non-oss/                      |        
+12 | repo-oss                  | openSUSE-Leap-42.1-Oss                     | Yes     | (r ) Yes  | Yes     |   99     | yast2    | http://download.opensuse.org/distribution/leap/42.1/repo/oss/                          |        
+13 | repo-source               | openSUSE-Leap-42.1-Source                  | No      | ----      | Yes     |   99     | NONE     | http://download.opensuse.org/source/distribution/leap/42.1/repo/oss/                   |        
+14 | repo-update               | openSUSE-Leap-42.1-Update                  | Yes     | (r ) Yes  | Yes     |   99     | rpm-md   | http://download.opensuse.org/update/leap/42.1/oss/                                     |        
+15 | repo-update-non-oss       | openSUSE-Leap-42.1-Update-Non-Oss          | Yes     | (r ) Yes  | Yes     |   99     | rpm-md   | http://download.opensuse.org/update/leap/42.1/non-oss/                                 |        
+```
+
+To export/save your repository list:
+```
+sudo zypper repos -e myreposbackup.repo
+```

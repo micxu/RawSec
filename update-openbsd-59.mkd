@@ -1,0 +1,31 @@
+---
+layout: post
+title: "OpenBSD 5.9 is here"
+date: 2016/04/06
+lang: en
+categories:
+- news
+tags:
+- news
+- bsd
+- system
+- update
+- security
+thumbnail: /images/License_icon-bsd.svg
+---
+OpenBSD update to version 5.9.
+
+Main improvments:
+
+* [Pledge][] - a new mitigation mechanism
+  + process in restricted mode
+  + security improved
+  + 70% of user components converted
+* WiFi 802.11n
+* multithread network pile
+* [Xen][] support improved (better performance when OpenBSD is virtualized)
+* UEFI support
+* GUID (GPT) partition table support
+
+[Pledge]: http://man.openbsd.org/OpenBSD-current/man2/pledge.2 "Pledge(2) man page"
+[Xen]: http://www.xenproject.org/ "Xen Project Website"

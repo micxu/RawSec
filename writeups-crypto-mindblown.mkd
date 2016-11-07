@@ -1,0 +1,176 @@
+---
+layout: post
+title: "Writeups - Crypto - MindBlown"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2016/05/26
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+Date        | By    | Version | Comment
+---         | ---   | ---     | ---
+05/06/2016  | noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : BackdoorCTF 2016
+- **Website** : [https://backdoor.sdslabs.co](https://backdoor.sdslabs.co/competitions/backdoorctf16/leaderboard)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/314)
+
+### Name
+
+*MindBlown*
+
+### Category
+
+*Cryptography*
+
+### Wording
+
+> Recently Chintu made a login service to secure his flag.
+> But we managed to get the authentification logic to be found *here*.
+> Can you help us to get his flag?
+> Find the login form *here*.
+
+![Wording page](http://i.imgur.com/moXsMFi.png)
+
+### Data(s)
+
+```javascript
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 9898;
+var crypto = require('crypto');
+var bodyParser = require('body-parser')
+var salt = 'somestring';
+var iteration = /// some number here;
+var keylength = // some number here;
+
+app.post('/login', function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    if (username !== 'chintu') {
+        res.send('Username is wrong');
+        return;
+    }
+    if (crypto.pbkdf2Sync(password, salt, iteration, keylength).toString() === hashOfPassword) {
+        if (password === 'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg') {
+            // some logic here and return something
+        } else {
+            // return flag here
+        }
+    } else {
+        res.send('Password is wrong');
+    }
+});
+```
+
+### Equipment(s)
+
+* A computer with an OS (preferably UNIX)
+* Internet access
+
+### Hint(s)
+
+None
+
+### Help
+
+None
+
+### Difficulty
+
+Medium
+
+## Solution
+
+### Methodology
+
+1. Take a look at the *logic* source code.
+2. `if (username !== 'chintu')` clearly indicates that the username is `chintu`
+3. `if (password === 'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg')` let us believe that the password is `complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg` but it's not. If you try this password you will get this message : *Hacker got you! I know my password was leaked, won't give you my flag.*
+![Hacker got you!](http://i.imgur.com/4CnRxOv.png)
+4. In fact, that is the else statement that returns the flag.
+5. So we have to validate the root if statement `if (crypto.pbkdf2Sync(password, salt, iteration, keylength).toString() === hashOfPassword)` with another password than `complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg`.
+6. We can see that [`crypto.pbkdf2Sync`][pbkdf2sync] is kind of a hash method. So let's look for more information about it. (it's a Node.js / JavaScript method)
+7. We'll try to create a [PBKDF2][pbkdf2] + [HMAC][hmac] hash [collision][collision]. For more details see the *PBKDF2 + HMAC collision explanation* part below.
+8. Enter the collision password `e6~n22k81<[p"k5hhV6*`.
+![login](http://i.imgur.com/h1A7umA.png)
+9. Here you are.
+![flag](http://i.imgur.com/eZFIWTI.png)
+
+#### PBKDF2 + HMAC collision explanation
+
+**Inspired by** [mathiasbynens.be][mathiasbynens.be]
+
+PBKDF2 is a widely used method to derive a key.
+
+Minimal arguments are:
+* password
+* salt
+* number of iterations
+* key length
+
+As said in [RFC2898][rfc2898], default is to use HMAC with [SHA-1][sha1] hash function.
+
+> HMAC has an interesting property: if a supplied key is longer than the block size of the hash function that’s being used, it uses the hash of the key rather than the key itself.
+
+> SHA-1 has a block size of 512 bits, which equals 64 bytes.
+
+> So in this case, if the supplied key takes up more than 64 bytes, then SHA1(key) is used as the key.
+
+In this challenge password is 65 bytes long:
+```bash
+echo -n 'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg' | wc -c
+65
+```
+
+> Note that the collision password always has a length of 20 characters, because SHA1 hashes always consist of exactly 40 hexadecimal digits representing 20 bytes. One byte, i.e. two hexadecimal digits are used for each character in the colliding password.
+
+Here, how to generate the collision password:
+```bash
+echo -n 'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg' | sha1sum | xxd -r -p
+e6~n22k81<[p"k5hhV6*
+```
+
+Note that:
+* `-n` option of `echo` *do not output the trailing newline* else generated password would be wrong.
+* `xxd` - make a hexdump or do the reverse.
+    * `-r` or `-revert`: convert hexdump into binary.
+    * `-p` or `-ps` or `-postscript` or `-plain`: output in postscript continuous hexdump style. Also known as plain hexdump style.
+    * `-r -p`: Use the combination -r -p to read plain hexadecimal dumps without line number information and without a particular column  layout.
+
+That is why `complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg` and `e6~n22k81<[p"k5hhV6*` have the same PBKDF2-HMAC-SHA1 hash.
+
+There is an infinity of PBKDF2-HMAC-SHA1 collisions.
+
+> While it’s easy to find a collision for any given string larger than 64 bytes (just run the above Bash command), it gets trickier if you want the colliding password to consist of readable ASCII characters only. SHA1 hashes can contain any hexadecimal digits, and converting such a hash back into a string is likely to result in at least one character outside of the printable ASCII range (`[\x20-\x7E]`).
+
+To see how to choose a prefix for the colliding password go to [link][[mathiasbynens.be].
+
+### Flag
+
+> Since Backdoor is an always-online CTF platform, and not a one time contest, we kindly request you to not publish flags for the challenges in your writeups.
+> Writeups are an excellent way to share knowledge and help others learn. In Backdoor, challenges are shifted from a contest to the Practice section, where people can continue to attempt them after the contest is over. It would be very unfair to participants if the flags for the problems were easily available in writeups online.
+> Hence, we kindly request to not publish flags of the problems that you solve. Here is an example of an excellent writeup which refrains from giving the complete solution.
+
+
+[pbkdf2]:https://en.wikipedia.org/wiki/PBKDF2 "PBKDF2 Wikipedia page"
+[hmac]:https://en.wikipedia.org/wiki/Hash-based_message_authentication_code "HMAC Wikipedia page"
+[collision]:https://en.wikipedia.org/wiki/Collision_attack "Collision attack"
+[pbkdf2sync]:https://nodejs.org/api/crypto.html#crypto_crypto_pbkdf2sync_password_salt_iterations_keylen_digest "Node.js pbkdf2Sync method"
+[rfc2898]:https://tools.ietf.org/html/rfc2898#appendix-A.2 "RFC 2898"
+[sha1]:https://en.wikipedia.org/wiki/SHA-1 "SHA-1 Wikipedia page"
+[mathiasbynens.be]:https://mathiasbynens.be/notes/pbkdf2-hmac "PBKDF2+HMAC hash collisions explained"

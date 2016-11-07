@@ -1,0 +1,42 @@
+---
+layout: post
+title: "ECW - 50 - Ave, César! - Cryptography"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2016/11/06
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : European Cyber Week CTF Quals 2016
+- **Website** : [challenge-ecw.fr](https://challenge-ecw.fr/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+
+### Description
+
+N.A.
+
+## Solution
+
+This was not Caesar as title suggested but Vigenere code, a troll I guess...
+
+With some frequency analysis and bruteforce we found:
+* The key was: `contest`.
+* And the message was: `remporte cette epreuve grace au flag ecw accolade ouvrante d huit c trois un cinq cinq c huit six a six eef un huit db huit quatre cinq trois un sept b huit b cinq a sept deux accolade fermante. les chiffres et caracteres speciaux ont ete remplaces par leur nom textuel.`.
+* That gave us the flag: `ECW{d8c3155c86a6eef18db845317b8b5a72}`.

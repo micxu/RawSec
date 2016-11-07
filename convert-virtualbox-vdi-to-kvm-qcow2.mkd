@@ -1,0 +1,41 @@
+---
+layout: post
+title: "How to convert VirtualBox vdi to KVM qcow2"
+date: 2016/04/13
+lang: en
+categories:
+- linux
+tags:
+- linux
+- system
+- virtualization
+- qemu
+- kvm
+- virtualbox
+thumbnail: /images/tux-293844_640.png
+---
+`VBoxManage` can't directly convert vdi to qcow2, so there is two options :
+* With `VBoxManage` convert vdi to raw and with `qemu-img` convert raw to qcow2
+* With `qemu-img` convert vdi to qcow2
+
+**Notes** : vdi are compressed and raw images are not so you will need to leave enough disk space for entire uncompressed disk.
+qcow2 images are compressed too and automaticaly sized.
+
+## Method with intermediate
+
+1. Make sure the VirtualBox VM is shutdown
+2. Convert the vdi to a raw disk images
+```
+VBoxManage clonehd --format raw vm.vdi vm.raw
+```
+3. Convert the raw to qcow2 disk images
+```
+qemu-img convert -f raw vm.raw -O qcow2 vm.qcow2
+```
+
+## Direct method
+
+`qemu-img` support VDI, so it can be convert directly:
+```
+qemu-img convert -f vdi vm.vdi -O qcow2 vm.qcow2
+```

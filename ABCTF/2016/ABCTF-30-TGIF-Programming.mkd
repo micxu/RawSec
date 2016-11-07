@@ -1,0 +1,77 @@
+---
+layout: post
+title: "ABCTF - 30 - TGIF - Programming"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - programming
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+Friday is the best day of the week, and so I really want to know how many Fridays there are in [this][this] file. But, with a twist. I want to know how many Fridays there are one year later than each date.
+[this]:https://gist.github.com/LiamRahav/0cbf82b8bc3a41deafc0403f1b1dd573 "Gist"
+
+**Hint**: For example, if you got November 21, 2001, I want to know if November 21, 2002 is a Friday. Also, the answer is in the format ABCTF{}
+
+**Note**: TGIF stands for *Thank God It's Friday*
+
+## Solution
+
+1. Write a script that parse the *date.txt* file and count the number of Friday
+```python
+#!/usr/bin/env python2
+import locale
+
+from datetime import datetime
+import calendar
+
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+calendar.setfirstweekday(calendar.MONDAY)
+
+# strptime : https://docs.python.org/2/library/datetime.html#datetime.datetime.strptime
+# format : https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
+
+date_format = '%B %d, %Y'
+i = 0
+
+with open('date.txt', 'r') as date_file:
+    for line in date_file:
+        date_string = line.rstrip()
+        date_object = datetime.strptime(date_string, date_format)
+        if not (calendar.isleap(date_object.year) and date_object.day == 29):
+            date_object = date_object.replace(year = date_object.year + 1)
+            if date_object.isoweekday() == 5: # Friday
+                i += 1
+
+print('ABCTF{' + str(i) + '}')
+```
+2. This instruction `if not (calendar.isleap(date_object.year) and date_object.day == 29) :` was to avoid bug with `February 29, 2004` because 2004 was a leap year and that `February 29, 2005` is not existing so.
+3. So when running my script I got:
+```
+python3 date.py
+ABCTF{193}
+```
+4. That's not the good flag but maybe that is because of the 29 of February so I tried `ABCTF{194}` and it's good!

@@ -1,0 +1,54 @@
+---
+layout: post
+title: "IceCTF - 45 - Toke - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+I have a feeling they were pretty high when they made [this website...](http://toke.vuln.icec.tf/)
+
+## Solution
+
+1. Register a user an login with it.
+2. With your browser network analyser loot at cookies in response header of the HTTP request: `Set-Cookie: jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0;`.
+3. **JWT** stands for **JSON Web Tokens** and is composed of 3 parts:
+    + Part1: Header, is base64 encoded, show hash algorithm.
+    + Part2: Payload, base64 encoded, content.
+    + Part3: Signature, signature, concatenation of header + content and then encoded with the hash algorithm contained in the header.
+4. So `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ.Zfl286kFvhPrNJG-dtoTjbPU7OxlUdTW_XKEL679uU0` match with `header.payload.signature`.
+5. So we get:
+```
+printf "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" | base64 -d
+{"alg":"HS256","typ":"JWT"}
+
+printf "eyJmbGFnIjoiSWNlQ1RGe2pXN190MEszbnNfNFJlX25PX3AxNENFX2ZPUl81M0NyRTdTfSIsInVzZXIiOiJhemEifQ" | base64 -d
+{"flag":"IceCTF{jW7_t0K3ns_4Re_nO_p14CE_fOR_53CrE7S}","user":"aza"}
+```
+
+An introduction to JSON Web Tokens is available [here](https://jwt.io/introduction/).

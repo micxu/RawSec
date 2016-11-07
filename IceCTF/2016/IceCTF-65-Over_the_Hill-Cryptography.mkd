@@ -1,0 +1,71 @@
+---
+layout: post
+title: "IceCTF - 65 - Over the Hill - Cryptography"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+Over the hills and far away... many times I've gazed, many times been bitten. Many dreams come true and some have silver linings, I live for my dream of a decrypted flag. [crypted](https://play.icec.tf/problem-static/crypted_f882bf357c6893d7efcb02cee40f95145a48191bd4ab0fa6a8bf4fedbb69db72)
+
+### Description
+
+1. Challenge's title is **Over the Hill** like the [Hill cipher][wikipedia] polygraphic substitution. Looking for **ciphering matrix** in a search engine will help you find it.
+2. Since coding is own method can take some time and because [dCode][dcode] won't work for [Hill cipher][wikipedia]: we will write a script using [SymPy][sympy] python library.
+3. Crypto examples avaible [here][crypto].
+4. Install [SymPy][sympy]: `pip install sympy`.
+5. Here's the script:
+```python
+from sympy.crypto.crypto import decipher_hill
+from sympy import Matrix
+
+alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789_{}"
+
+matrix = [[54, 53, 28, 20, 54, 15, 12, 7],
+          [32, 14, 24, 5, 63, 12, 50, 52],
+          [63, 59, 40, 18, 55, 33, 17, 3],
+          [63, 34, 5, 4, 56, 10, 53, 16],
+          [35, 43, 45, 53, 12, 42, 35, 37],
+          [20, 59, 42, 10, 46, 56, 12, 61],
+          [26, 39, 27, 59, 44, 54, 23, 56],
+          [32, 31, 56, 47, 31, 2, 29, 41]]
+
+ciphertext = "7Nv7}dI9hD9qGmP}CR_5wJDdkj4CKxd45rko1cj51DpHPnNDb__EXDotSRCP8ZCQ"
+
+key = Matrix(matrix)
+
+pt = decipher_hill(ciphertext, key, alphabet)
+
+print(pt)
+```
+6. And here's the flag: `IceCTF{linear_algebra_plus_led_zeppelin_are_a_beautiful_m1xture}`.
+
+[wikipedia]:https://en.wikipedia.org/wiki/Hill_cipher
+[dcode]:http://www.dcode.fr/hill-cipher
+[sympy]:http://docs.sympy.org/latest/index.html
+[crypto]:http://docs.sympy.org/dev/modules/crypto.html

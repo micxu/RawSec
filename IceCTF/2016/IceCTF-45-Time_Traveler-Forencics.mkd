@@ -1,0 +1,47 @@
+---
+layout: post
+title: "IceCTF - 45 - Time Traveler - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensics
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+I can assure you that the flag was on [this website][website] at some point in time.
+
+## Solution
+
++ Use the [WaybackMachine][wm] of Internet Archive.
++ Enter the URL [`http://time-traveler.icec.tf/`][website].
++ Select the save point and get the flag: `IceCTF{Th3y'11_n3v4r_f1|\|d_m4h_fl3g_1n_th3_p45t}`.
+
+**Similar challenge**: [ABCTF - 50 - Archive Me - Reconaissance](http://rawsec.ml/en/ABCTF-50-Archive-Me-Reconaissance/)
+
+**POV**: I think it's more a Reconaissance challenge than a Forensics one. But you know challenge classification in CTF...
+
+[website]:http://time-traveler.icec.tf/
+[wm]:https://archive.org/web/

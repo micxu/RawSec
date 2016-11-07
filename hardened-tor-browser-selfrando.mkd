@@ -1,0 +1,37 @@
+---
+layout: post
+title: "Hardened Tor Browser with Selfrando"
+lang: en
+categories:
+  - news
+  - security
+tags:
+  - security
+  - news
+  - tor 
+date: 2016/06/21
+thumbnail: /images/security-265130_640.jpg
+---
+6 June 2016, the Tor Project announced a hardened version of Tor Browser: `6.5a1-hardened`.
+
+Here some links:
+* Download page for [hardened builds][hardenedbuilds] (only avaible for Linux at this time).
+* [Distribution directory][distribution].
+* Official [announcement] by the Tor Project.
+* Firefox [security updates][secupdates]
+
+In order to prevent intelligence agencies to de-anonymize Tor users using exploits, Tor hardened version includes Selfrando.
+
+[Selfrando][selfrando] is a load-time randomization software that aims to improve security over standard address space layout randomization (ASLR) techniques.
+
+Selfrando doesn't overhead performance very much (less than 1%) and doesn't need too many chnages in the existing Tor Browser code.
+
+For more details, researcehrs from University of California published a [report] entitled *Selfrando: Securing the Tor Browser against De-anonymization Exploits*.
+
+[hardenedbuilds]:https://www.torproject.org/projects/torbrowser.html.en#downloads-hardened "Download page for hardened builds"
+[distribution]:https://dist.torproject.org/torbrowser/6.5a1-hardened/ "Distribution directory"
+[announcement]:https://blog.torproject.org/blog/tor-browser-65a1-hardened-released "Ofiicial announcement"
+[secupdates]:https://www.mozilla.org/en-US/security/known-vulnerabilities/firefox-esr/#firefoxesr45.2 "Firefox security updates"
+[selfrando]:https://github.com/immunant/selfrando "Selfrando"
+[report]:https://www.ics.uci.edu/%7Eperl/pets16_selfrando.pdf "Selfrando: Securing the Tor Browser against De-anonymization Exploits"
+

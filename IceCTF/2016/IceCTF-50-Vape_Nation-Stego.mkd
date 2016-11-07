@@ -1,0 +1,42 @@
+---
+layout: post
+title: "IceCTF - 50 - Vape Nation - Stego"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - stegano
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+Go Green! [vape_nation.png](https://play.icec.tf/problem-static/vape_nation_7d550b3069428e39775f31e7299cd354c721459043cf1a077bb388f4f531d459.png)
+
+## Solution
+
+1. Open `vape_nation.png` with [StegSolve][stegsolve].
+2. Description said **Go Green** so just do it!
+3. Green plane 0 contain the flag: `IceCTF{420_CuR35_c4NCEr}`.
+
+[stegsolve]:http://www.caesum.com/handbook/Stegsolve.jar

@@ -1,0 +1,14 @@
+---
+layout: post
+title: "Qwant Lite : a refined version"
+date: 2015/10/05
+lang: en
+categories:
+- news
+tags:
+- news
+thumbnail: /images/news.jpg
+---
+The lite version of Qwant is avaible [here][qwant]. It' a version without JavaScript and without CSS3 so it's more retro-compatible as possible.
+
+[qwant]:https://lite.qwant.com/ "Qwant Lite"

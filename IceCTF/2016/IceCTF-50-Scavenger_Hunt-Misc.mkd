@@ -1,0 +1,40 @@
+---
+layout: post
+title: "IceCTF - 50 - Scavenger Hunt - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+There is a flag hidden somewhere on our website, do you think you can find it? Good luck!
+
+## Solution
+
+1. Go to the [sponsors](https://icec.tf/sponsors) page.
+2. `CTRL + U`: look at source code.
+3. `<img class="activator" src="/static/images/logos/syndis.png" alt="IceCTF{Y0u_c4n7_533_ME_iM_h1Din9}">`: that's it.

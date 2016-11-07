@@ -1,0 +1,47 @@
+---
+layout: post
+title: "ASIS CTF Finals 2016 - 3 - CTF 101 - Trivia"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - trivia
+date: 2016/09/11
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ASIS CTF Finals 2016
+- **Website** : [http://asis-ctf.ir/](http://asis-ctf.ir/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/327)
+
+### Description
+
+Watch your heads!
+
+## Solution
+
+One-liners will be happy:
+
+```
+┌─[root@parrot]─[~/CTF]
+└──╼ #curl https://asis-ctf.ir/challenges/ --head | tr -d '\r' | sed -En 's/^Flag: (.*); base64/\1/p' | base64 -d
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+ASIS{31a483900b8576426cccdf55402b9dd6}
+```

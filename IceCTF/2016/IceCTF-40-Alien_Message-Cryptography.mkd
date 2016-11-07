@@ -1,0 +1,52 @@
+---
+layout: post
+title: "IceCTF - 40 - Alien Message - Cryptography"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+We found this [suspicous image][img] online and it looked like it had been planted there by an alien life form. Can you see if you can figure out what they're trying to tell us?
+
+## Solution
+
++ I was pretty sure this picture contein normal text written with a special font so I began to look for alien font/code.
++ Thanks to [this][article] article I found it was the **Alienese I** font from *Futurama*.
++ Quote from [futurama.wikia.com][wikia]:
+> The first language, a simple substitution cipher, was solved almost instantly.
+
++ So I looked for decoders for a faster result: I found one here [cs.oswego.edu][oswego] and one here [gotfuturama.com][gotfuturama]
++ **Flag**: `IceCTF{good_n3wz_3veryon3_1_l1k3_fu7ur4ma_4nd_th3ir_4maz1ng_3as7er_39g5}`
+
+**POV**: This challenge? Cryptography? Really? ... I deplore to still have this kind of challenge in CTF. That's nothing but a lost of time and that have nothing to do with security. That's even not stego because from the beginning we know that's just a font, it's just pain!
+
+[img]:https://play.icec.tf/problem-static/alien_message_b84f283848b7f34fd4c7529186e66e120b0a374c9d0f2a225b0a7a215716afb5.png
+[article]:http://io9.gizmodo.com/5218119/13-alien-languages-you-can-actually-read
+[wikia]:http://futurama.wikia.com/wiki/Alienese
+[oswego]:http://cs.oswego.edu/~dreichel/alienese_decoder/
+[gotfuturama]:http://www.gotfuturama.com/Interactive/AlienCodec/

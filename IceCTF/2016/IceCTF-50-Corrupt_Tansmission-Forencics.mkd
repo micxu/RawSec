@@ -1,0 +1,159 @@
+---
+layout: post
+title: "IceCTF - 50 - Corrupt Transmission - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensics
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+We intercepted this image, but it must have gotten corrupted during the transmission. Can you try and fix it? [corrupt.png](https://play.icec.tf/problem-static/corrupt_92cee405924ad39fb513e3ef910699b79bb6d45cc5046c051eb9aab3546e22c3.png)
+
+## Solution
+
+1. Check the file type:
+```
+file corrupt.png
+corrupt.png: data
+```
+2. This PNG is clearly corrupted, check what's wrong:
+```
+pngcheck corrupt.png
+corrupt.png:  CORRUPTED by text conversion
+ERROR: corrupt.png
+
+pngcheck -v corrupt.png
+File: corrupt.png (469363 bytes)
+  File is CORRUPTED.  It seems to have suffered EOL conversion.
+  It was probably transmitted in text mode.
+ERRORS DETECTED in corrupt.png
+```
+3. This kind of error may occurs when an image (binary) was downloaded as ASCII text.
+4. First, we'll check the PNG header with [xxd][xxd]:
+```
+xxd -l8 corrupt.png
+00000000: 9050 4e47 0e1a 0a1b                      .PNG....
+```
+5. [PNG spec][pngsig] tell us that not the right header, good header should be:
+```
+(decimal)              137  80  78  71  13  10  26  10
+(hexadecimal)           89  50  4e  47  0d  0a  1a  0a
+(ASCII C notation)    \211   P   N   G  \r  \n \032 \n
+```
+6. Let's fix it with [HT][hte] hex editor.
+7. Now it sounds right:
+```
+xxd -l8 corrupt.png.fix
+00000000: 8950 4e47 0d0a 1a0a                      .PNG....
+
+pngcheck corrupt.png.fix
+corrupt.png.fix  additional data after IEND chunk
+ERROR: corrupt.png.fix
+```
+8. There is still an error but now PNG is recognized and we can display the image:
+```
+file corrupt.png.fix
+corrupt.png.fix: PNG image data, 500 x 408, 8-bit/color RGBA, non-interlaced
+
+pngcheck -v corrupt.png.fix
+File: corrupt.png.fix (469363 bytes)
+  chunk IHDR at offset 0x0000c, length 13
+    500 x 408 image, 32-bit RGB+alpha, non-interlaced
+  chunk bKGD at offset 0x00025, length 6
+    red = 0x00ff, green = 0x00ff, blue = 0x00ff
+  chunk pHYs at offset 0x00037, length 9: 2835x2835 pixels/meter (72 dpi)
+  chunk tIME at offset 0x0004c, length 7: 20 Jun 2016 03:20:08 UTC
+  chunk IDAT at offset 0x0005f, length 8192
+    zlib: deflated, 32K window, maximum compression
+  chunk IDAT at offset 0x0206b, length 8192
+  chunk IDAT at offset 0x04077, length 8192
+  chunk IDAT at offset 0x06083, length 8192
+  chunk IDAT at offset 0x0808f, length 8192
+  chunk IDAT at offset 0x0a09b, length 8192
+  chunk IDAT at offset 0x0c0a7, length 8192
+  chunk IDAT at offset 0x0e0b3, length 8192
+  chunk IDAT at offset 0x100bf, length 8192
+  chunk IDAT at offset 0x120cb, length 8192
+  chunk IDAT at offset 0x140d7, length 8192
+  chunk IDAT at offset 0x160e3, length 8192
+  chunk IDAT at offset 0x180ef, length 8192
+  chunk IDAT at offset 0x1a0fb, length 8192
+  chunk IDAT at offset 0x1c107, length 8192
+  chunk IDAT at offset 0x1e113, length 8192
+  chunk IDAT at offset 0x2011f, length 8192
+  chunk IDAT at offset 0x2212b, length 8192
+  chunk IDAT at offset 0x24137, length 8192
+  chunk IDAT at offset 0x26143, length 8192
+  chunk IDAT at offset 0x2814f, length 8192
+  chunk IDAT at offset 0x2a15b, length 8192
+  chunk IDAT at offset 0x2c167, length 8192
+  chunk IDAT at offset 0x2e173, length 8192
+  chunk IDAT at offset 0x3017f, length 8192
+  chunk IDAT at offset 0x3218b, length 8192
+  chunk IDAT at offset 0x34197, length 8192
+  chunk IDAT at offset 0x361a3, length 8192
+  chunk IDAT at offset 0x381af, length 8192
+  chunk IDAT at offset 0x3a1bb, length 8192
+  chunk IDAT at offset 0x3c1c7, length 8192
+  chunk IDAT at offset 0x3e1d3, length 8192
+  chunk IDAT at offset 0x401df, length 8192
+  chunk IDAT at offset 0x421eb, length 8192
+  chunk IDAT at offset 0x441f7, length 8192
+  chunk IDAT at offset 0x46203, length 8192
+  chunk IDAT at offset 0x4820f, length 8192
+  chunk IDAT at offset 0x4a21b, length 8192
+  chunk IDAT at offset 0x4c227, length 8192
+  chunk IDAT at offset 0x4e233, length 8192
+  chunk IDAT at offset 0x5023f, length 8192
+  chunk IDAT at offset 0x5224b, length 8192
+  chunk IDAT at offset 0x54257, length 8192
+  chunk IDAT at offset 0x56263, length 8192
+  chunk IDAT at offset 0x5826f, length 8192
+  chunk IDAT at offset 0x5a27b, length 8192
+  chunk IDAT at offset 0x5c287, length 8192
+  chunk IDAT at offset 0x5e293, length 8192
+  chunk IDAT at offset 0x6029f, length 8192
+  chunk IDAT at offset 0x622ab, length 8192
+  chunk IDAT at offset 0x642b7, length 8192
+  chunk IDAT at offset 0x662c3, length 8192
+  chunk IDAT at offset 0x682cf, length 8192
+  chunk IDAT at offset 0x6a2db, length 8192
+  chunk IDAT at offset 0x6c2e7, length 8192
+  chunk IDAT at offset 0x6e2f3, length 8192
+  chunk IDAT at offset 0x702ff, length 8192
+  chunk IDAT at offset 0x7230b, length 1619
+  chunk IEND at offset 0x7296a, length 0
+  additional data after IEND chunk
+ERRORS DETECTED in corrupt.png.fix
+
+display corrupt.png.fix
+```
+9. Flag is `IceCTF{t1s_but_4_5cr4tch}`.
+
+[xxd]:http://linuxcommand.org/man_pages/xxd1.html
+[hte]:http://hte.sourceforge.net/readme.html
+[pngsig]:http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature

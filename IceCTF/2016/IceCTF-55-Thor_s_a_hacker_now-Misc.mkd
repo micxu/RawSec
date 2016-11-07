@@ -1,0 +1,52 @@
+---
+layout: post
+title: "IceCTF - 55 - Thor's a hacker now - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+Thor has been staring at this for hours and he can't make any sense out of it, can you help him figure out what it is? [thor.txt](https://play.icec.tf/problem-static/thor_7101f3b9690d5dc6c3afefa49d82e0526b278ec1c564139369ad22c28721d4cf.txt)
+
+## Solution
+
+1. `thor.txt` is an xxd dump so just reverse it to get the binary: `xxd -r thor.txt > thor.lz`.
+2. Check what the binary looks like:
+```
+file thor.lz
+thor.lz: lzip compressed data, version: 1
+```
+3. We'll need he **lzip** lib and utility to manage that: `apt-get install lzip`.
+4. Let's uncompress the archive: `lzip -d thor.lz`.
+5. Now we get an image:
+```
+file thor
+thor: JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, little-endian, direntries=5, xresolution=74, yresolution=82, resolutionunit=2, software=GIMP 2.8.18], progressive, precision 8, 1600x680, frames 3
+```
+6. Just display it: `display thor`.
+7. `IceCTF{h3XduMp1N9_l1K3_A_r341_B14Ckh47}`

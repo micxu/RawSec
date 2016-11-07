@@ -1,0 +1,109 @@
+---
+layout: post
+title: "IceCTF - 40 - Search - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+There's something about this domain... [search.icec.tf](http://search.icec.tf/), I don't see anything, but maybe its all about the conTEXT.
+
+## Solution
+
+1. Default behaviour of main dns lookup utilities (like nslookup or dig) is to look for A type record.
+2. But we want to look at TXT type record.
+3. So instead of using `dig search.icec.tf/` (eq. `dig -t A search.icec.tf/`),
+4. we'll use `dig -t TXT search.icec.tf/`.
+
+```
+┌─[root@parrot]─[~/CTF/IceCTF/2016]
+└──╼ #dig -t A search.icec.tf
+
+; <<>> DiG 9.10.3-P4-Debian <<>> -t A search.icec.tf
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 21856
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;search.icec.tf.			IN	A
+
+;; AUTHORITY SECTION:
+icec.tf.		300	IN	SOA	bob.ns.cloudflare.com. dns.cloudflare.com. 2022260330 10000 2400 604800 3600
+
+;; Query time: 88 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Wed Aug 17 22:45:54 CEST 2016
+;; MSG SIZE  rcvd: 104
+
+┌─[root@parrot]─[~/CTF/IceCTF/2016]
+└──╼ #dig search.icec.tf
+
+; <<>> DiG 9.10.3-P4-Debian <<>> search.icec.tf
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 41552
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;search.icec.tf.			IN	A
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Wed Aug 17 22:46:07 CEST 2016
+;; MSG SIZE  rcvd: 43
+
+┌─[root@parrot]─[~/CTF/IceCTF/2016]
+└──╼ #dig -t TXT search.icec.tf
+
+; <<>> DiG 9.10.3-P4-Debian <<>> -t TXT search.icec.tf
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 35890
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;search.icec.tf.			IN	TXT
+
+;; ANSWER SECTION:
+search.icec.tf.		300	IN	TXT	"IceCTF{flag5_all_0v3r_the_Plac3}"
+
+;; Query time: 61 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Wed Aug 17 22:46:16 CEST 2016
+;; MSG SIZE  rcvd: 88
+
+```
+
+For more details about DNS record types, see the [List of DNS record types](https://en.wikipedia.org/wiki/List_of_DNS_record_types).

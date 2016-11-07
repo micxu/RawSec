@@ -1,0 +1,92 @@
+---
+layout: post
+title: "ABCTF - 60 - MoonWalk - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensics
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By      | Translated by | Version | Comment
+| ---     | ---           | ---     | ---
+| Chill3d | noraj         | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+There is something a little off about [this][this] picture. If you could help us we could give you some points! Just find us a flag!
+[this]:https://mega.nz/#!q0UyATRS!k2MYymbvEHYy9nVA0awvKMwgKvrEIrPkZ2stcMuGf-E
+
+## TL;DR
+
+[![asciicast](https://asciinema.org/a/ey10oy210mavohq785cvw9m88.png)](https://asciinema.org/a/ey10oy210mavohq785cvw9m88)
+
+## Solution
+
+1. First, we'll check file type:
+```
+file PurpleThing.png
+PurpleThing.png: PNG image data, 3200 x 2953, 8-bit/color RGBA, non-interlaced
+```
+2. Because it's a Forensics challenge, we can look for other files hidden in this image:
+```
+binwalk PurpleThing.png
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             PNG image, 3200 x 2953, 8-bit/color RGBA, non-interlaced
+85            0x55            Zlib compressed data, best compression
+2757          0xAC5           Zlib compressed data, best compression
+765455        0xBAE0F         JPEG image data, JFIF standard 1.01
+765485        0xBAE2D         TIFF image data, big-endian, offset of first image directory: 8
+1809691       0x1B9D1B        StuffIt Deluxe Segment (data): f
+```
+3. Hilights on the JPEG file found: intersting!
+4. So we'll launch a filecarving tool to inspect the file and look for magic headers to recover hidden files:
+```
+foremost -v PurpleThing.png
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Thu Jul 21 22:20:19 2016
+Invocation: foremost -v PurpleThing.png
+Output directory: /root/CTF/ABCTF/60-MoonWalk-Forensics/output
+Configuration file: /etc/foremost.conf
+Processing: PurpleThing.png
+|------------------------------------------------------------------
+File: PurpleThing.png
+Start: Thu Jul 21 22:20:19 2016
+Length: 2 MB (2354256 bytes)
+
+Num	 Name (bs=512)	       Size	 File Offset	 Comment
+
+0:	00001495.jpg 	       1 MB 	     765455 	 
+*|
+Finish: Thu Jul 21 22:20:20 2016
+
+1 FILES EXTRACTED
+
+jpg:= 1
+------------------------------------------------------------------
+
+Foremost finished at Thu Jul 21 22:20:20 2016
+```
+5. Now let's see the image: `display output/jpg/00001495.jpg`
+6. We find the flag: `ABCTF{PNG_S0_C00l}`

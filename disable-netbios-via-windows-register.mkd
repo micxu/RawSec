@@ -1,0 +1,28 @@
+---
+layout: post
+title: "Disable NetBIOS  via Windows register"
+date: 2015/12/20
+lang: en
+categories:
+- security
+- "operating system"
+- windows
+tags:
+- security
+- windows
+- netbios
+thumbnail: /images/security-265130_640.jpg
+---
+NetBIOS is a very old protocol wich is no more interesting today except in some particular cases.
+
+To disable it with the Windows register there are only a few steps :
++ Launch the register editor (regedit.exe)
++ Go to `HKLM\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces`
++ Select each interface
++ Each interface wich have a paramater `NetbiosOptions` put to `0` or `1` must be change to `2` and then clic **OK**
++ Close the register editor
+
+The parameter `SetTcpipNetbios` can have these value :
+* `0` – Use NetBIOS parameters from DHCP server
+* `1` – Enable NetBIOS via TCP/IP
+* `2` – Disable NetBIOS via TCP/IP

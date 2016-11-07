@@ -1,0 +1,55 @@
+---
+layout: post
+title: "CSAW CTF - 10 - Music to my ears - Reconnaissance"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - reconnaissance
+date: 2016/09/18
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : CSAW CTF Qualification Round 2016
+- **Website** : [https://ctf.csaw.io/](https://ctf.csaw.io/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/347)
+
+### Description
+
+Yo fam have you listened to my mixtape?
+
+`user:1245880440:playlist:7bUFR2ujh1p3GfArxM0dHE`
+
+Hint: The recon spans multiple sites.
+
+Author: breadchris
+
+Hint 2 was an image of a beet.
+
+## Solution
+
+**Note**: I didn't finished the challenge.
+
++ We have to look for an user and a playlist.
++ Spotify look like to only big website to use a number id as username, so forge the URL like this:  [https://play.spotify.com/user/1245880440/playlist/7bUFR2ujh1p3GfArxM0dHE](https://play.spotify.com/user/1245880440/playlist/7bUFR2ujh1p3GfArxM0dHE).
++ So we got a playlist named **Awesome CTF Music Mix Vol. 1**. It's certainly the good one. The user is **Chris Topher**.
++ Take the 1st letter of each songs: **CHECKOUTTHELASTRADIOSTATION**. What is the last radio station? A link with WGU-20 ? Last.fm ? I didn't find.
++ The second hint is an image of a beet so we can directly think about [beets.io/](http://beets.io/).
++ No more clue  to go further.
+
+My point of view: CTF organizers, PLEASE, stop to put this kind of useless challenges that make us loose our time and that have no link with cyber-security.

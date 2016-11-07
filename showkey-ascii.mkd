@@ -1,0 +1,47 @@
+---
+layout: post
+title: "Examine the codes sent by the keyboard"
+date: 2016/04/02
+lang: en
+categories:
+- linux
+tags:
+- linux
+- system
+thumbnail: /images/tux-293844_640.png
+---
+A usefull command if are want to read keyboard input : `showkey`. Very useful to know keycodes when programming.
+
+## What is showkey ?
+
+showkey - examine the codes sent by the keyboard
+
+## How does it work ?
+
+`showkey` have only 3 options (4 with help) :
+* `-s --scancodes` : Starts showkey in scan code dump mode.
+* `-k --keycodes` : Starts showkey in keycode dump mode. This is the default, when no command line options are present.
+* `-a --ascii` : Starts showkey in `ascii' dump mode.
+
+Note : Only `-a` will fully works on X mode (with a graphical terminal), `-s` and `-k` mode may work on X mode if you have root permissions else use a text console (TTY 1 to 6).
+
+## Example
+
+```
+showkey -a
+
+Press any keys - Ctrl-D will terminate this program
+
+a    97 0141 0x61
+z   122 0172 0x7a
+e   101 0145 0x65
+r   114 0162 0x72
+t   116 0164 0x74
+y   121 0171 0x79
+_    95 0137 0x5f
+?    63 0077 0x3f
+^?  127 0177 0x7f
+^M   13 0015 0x0d
+^C    3 0003 0x03
+^D    4 0004 0x04
+```

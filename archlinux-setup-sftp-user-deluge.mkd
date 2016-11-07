@@ -1,0 +1,103 @@
+---
+layout: post
+title: "ArchLinux - Setup an SFTP user for Deluge"
+date: 2016/09/27
+lang: en
+categories:
+- linux
+- archlinux
+tags:
+- linux
+- archlinux
+thumbnail: /images/tux-293844_640.png
+---
+## Requirement
+
+Deluge is already installed, configured and working.
+
+The deluge user looks like: `deluge:x:125:125:Deluge user:/srv/deluge:/bin/false`.
+
+A SSH server is already installed, configured and working.
+
+## SFTP setup
+
++ Create the sftp user and add it to the deluge group (this will allow him to access to `/srv/deluge/`):
+
+```
+# useradd sftpuser -d /home/sftpuser -G deluge
+```
+
++ Modify the sshd config (`/etc/ssh/sshd_config`) and add this lines:
+
+```
+Match User sftpuser
+  ChrootDirectory %h
+  ForceCommand internal-sftp
+  AllowTcpForwarding no
+  PermitTunnel no
+  X11Forwarding no
+```
+
++ Restart the sshd server:
+
+```
+# systemctl restart sshd.service
+```
+
++ Change chroot directory rights, this is required or sftp won't let you connect. The home directory must be owned as root and not writable by another user or group. This includes the path leading to the directory.
+
+```
+# chown root:root /home/sftpuser
+```
+
++ You won't we to connect in sftp if you user have `/bin/false` shell as it's not defined in the `/etc/shells`. To disable normal ssh login, add `/bin/false` in `/etc/shells` and change sftpuser shell:
+
+```
+# usermod -s /bin/false sftpuser
+```
+
++ Test ssh access: (access should be refuse if `/bin/false` is used)
+
+```
+# ssh sftpuser@localhost -p $SSH_PORT$
+```
+
++ Test sftp access: (sftp user should be placed in the chroot environment)
+
+```
+# sftp sftpuser@localhost -P $SSH_PORT$
+```
+
++ Create the torrent folder to let sftp user access to deluge download folder:
+
+```
+# mkdir /home/sftpuser/torrent
+```
+
++ Give the torrent folder the appropriate rights:
+
+```
+# chown sftpuser:sftpuser /home/sftpuser/torrent
+```
+
+As sftpuser will be chrooted in his home directory (`/home/sftpuser/`) he won't be able to access `/srv/deluge/Downloads` even if he has rights (he is in deluge group) and a symbolic link like `ln -s /srv/deluge/Downloads /home/sftpuser/deluge` won't work because it is outside the chroot environment. For sftpuser accessing via sftp to the chroot environment, `/home/sftpuser/` will be the root directory `/` so the symbolic link to `/srv/deluge/Downloads` will in fact be wrong as `/home/sftpuser/srv/deluge/Downloads` doesn't exist.
+
+We can't directly chroot sftpuser in `/srv/deluge/Downloads` because that will require to change the `/srv/deluge/Downloads/` folder ownership to `root:root` and so deluge user won't be able to access it anymore.
+
+We must chroot sftp user because letting him access to the whole system would be a security issue.
+
+So we will give sftp user two home directory: one SFTP home that is locked down by root (`/home/sftpuser/`) and one home he can write to (`/home/sftpuser/torrent/`) so sshd will be satisfied and the system will remain secure. To do that, we will make the deluge folder (the writable home directory) appear as a subdirectory inside the SFTP home directory:
+
+```
+# mount --bind /srv/deluge/Downloads /home/sftpuser/torrent
+```
+
+We can also add this into `/etc/fstab` to make this configuration permanent even after a reboot:
+
+```
+# echo '/srv/deluge/Downloads /home/sftpuser/torrent none bind' >> /etc/fstab
+```
+
+SFTP user is now ready to access the deluge download folder via SFTP.
+
+Thanks to the great [ArchLinux wiki](https://wiki.archlinux.org/index.php/SFTP_chroot).

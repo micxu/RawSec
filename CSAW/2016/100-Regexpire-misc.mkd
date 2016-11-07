@@ -1,0 +1,220 @@
+---
+layout: post
+title: "CSAW CTF - 100 - Rgexepire - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/09/18
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : CSAW CTF Qualification Round 2016
+- **Website** : [https://ctf.csaw.io/](https://ctf.csaw.io/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/347)
+
+### Description
+
+I thought I found a perfect match but she ended up being my regEx girlfriend.
+
+`nc misc.chal.csaw.io 8001`
+
+## Solution
+
+It was very similar with [ISolve from BackdoorCTF 2016](https://backdoor.sdslabs.co/challenges/ISOLVE).
+
+I made 3 scripts to solve this:
++ In Python with [rstr.xeger](https://pypi.python.org/pypi/rstr/2.2.4) (inspired by [p4](https://github.com/p4-team/ctf/tree/master/2016-06-04-backdoor-ctf/ppc_isolve))
++ In Ruby with [regexp-examples](https://rubygems.org/gems/regexp-examples/versions/1.2.0)
++ In Bash with [exrex](https://github.com/asciimoo/exrex) (simplified version)
+
+I flaged with the Python one, the Ruby one work well too and the Bash one work badly due to the dirty way exrex handle regex. Here a proof of success (after the end of the CTF) :
+
+```
+to solve = '(wolf|gazelle)*[V8xqjx0A8]+[AoqoYnDiu]i3b+[ukqUrDlf]xf+(tomato|elephant)*(clinton|tomato)'
+solution  = wolfgazellegazellegazellewolfwolfgazelle88xj8Ajx0xAjqx8xxAx8088AqVV0jV8Axjxx8qjV8x8qV0x8V0ii3bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbqxffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftomatotomatoelephantelephanttomatoelephanttomatotomatoelephanttomatoelephanttomatoelephantelephantelephanttomatotomatotomatotomatoelephantelephanttomatotomatoelephantelephanttomatotomatoelephanttomatoelephantelephanttomatoelephanttomatotomato
+D*[i-r]*(dolphin|sloth)(clinton|giraffe)[nNAUqCu]z4*\d+DM*v{9}[e-j](fish|cat)(penguin|sloth)+(chair|clinton){7}
+to solve = 'D*[i-r]*(dolphin|sloth)(clinton|giraffe)[nNAUqCu]z4*1+DM*v{9}[e-j](fish|cat)(penguin|sloth)+(chair|clinton){7}'
+solution  = DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDmkpkoijmnrniprlknjppmmrjnlqqpjilrnqjmimkkmrndolphinclintonqz444444444444444444444444444444444444444444111111111111111111111111111111111111111111111111111111111111111111111111DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMvvvvvvvvvhfishpenguinslothpenguinslothpenguinpenguinpenguinslothpenguinslothpenguinpenguinpenguinslothpenguinpenguinpenguinslothslothslothslothpenguinslothpenguinslothpenguinslothpenguinslothpenguinpenguinslothslothpenguinpenguinslothpenguinslothpenguinpenguinslothpenguinpenguinslothslothpenguinslothpenguinchairchairchairclintonchairclintonchair
+flag{^regularly_express_yourself$}
+to solve = 'flag{^regularly_express_yourself$}'
+solution  = flag{regularly_express_yourself}
+```
+
+Python:
+
+```python
+#!/usr/bin/env python
+
+import rstr
+import socket
+import re
+from time import sleep
+
+def wrapper_reg(s):
+  s = re.sub('[\\\]{1}[W]{1}', ' ', s)
+  s = re.sub('[\\\]{1}[W]{1}', 'a', s)
+  s = re.sub('[\\\]{1}[d]{1}', '1', s)
+  s = re.sub('[\\\]{1}[D]{1}', '#', s)
+  return s
+
+"""
+def wrapper(s):
+  s = re.sub('\s+', '\t', s)
+  s = re.sub('[^0-9a-zA-Z\s]+', '#', s)
+  return s
+"""
+
+def recvuntil(s):
+    data = ""
+    for i in range(9999):
+        c = s.recv(1)
+        if(c == '\n'):
+            break
+        data += c
+    return data
+
+
+def main():
+    url = "misc.chal.csaw.io"
+    port = 8001
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((url, port))
+    i = 0
+    while True:
+        if i == 0:
+            task = recvuntil(s)
+            print(task)
+            i = 1
+        task = recvuntil(s)
+        print(task)
+        to_solve = task
+        if len(to_solve) == 0:
+            print(task)
+        elif(to_solve == 'Irregular' or to_solve == 'Timeout'):
+            break
+        else:
+            to_solve = wrapper_reg(to_solve)
+            print("to solve = '%s'" % to_solve)
+            solution = rstr.xeger(to_solve).replace('\n','')
+            #solution = wrapper(solution)
+            print("solution  = %s" % solution)
+            s.sendall(solution + "\n")
+        sleep(0.1)
+
+main()
+```
+
+Ruby:
+
+```ruby
+#!/usr/bin/env ruby
+
+
+### Dependencies ###
+
+require 'regexp-examples'
+require 'socket'
+
+
+
+### Functions ###
+
+def wrapper(s)
+  s = s.gsub('\s+', '\t')
+  s = s.gsub('[^0-9a-zA-Z\s]+', '#')
+  return s
+end
+
+### Main ###
+
+if __FILE__ == $0
+  hostname = 'misc.chal.csaw.io'
+  port = 8001
+
+  s = TCPSocket.open(hostname, port)
+  output = ""
+  exit_test = nil
+
+  # pass Can you match these regexes?
+  line = s.gets
+  puts line.chop
+
+  while not exit_test
+    line = s.gets       # Read lines from the socket
+    puts line.chop      # And print with platform line terminator
+    output = output.concat(line)
+
+    # stop = /Can you match these regexes?\s+(.*)/.match(output)
+    stop = true
+    if stop
+      reg_test = output.match(/(.*)/)
+      reg = /#{reg_test[1]}/
+      example = reg.random_example
+      example = wrapper(example)
+      if example != nil
+        puts "solution :" + example
+      end
+      s.puts(example.gsub('\n', ''))
+      s.flush
+      output = ""
+    end
+    exit_test = /Failed regex/.match(output)
+    if exit_test
+      exit(1)
+    end
+  end
+  s.close               # Close the socket when done
+end
+```
+Bash:
+
+```bash
+#!/bin/bash
+
+#######
+#Config
+
+URL="misc.chal.csaw.io"
+PORT=8001
+
+
+#####
+#Main
+
+OUT=""
+
+# Open socket
+exec 3<>/dev/tcp/${URL}/${PORT}
+
+read LINE <&3
+echo $LINE >&1
+while [ -z "$EXIT" ]
+do
+
+	read LINE <&3
+	echo $LINE >&1
+	exrex -r "$LINE" >&3
+	OUT=""
+
+	EXIT=$( echo "$OUT" | awk '/Irregular/ { getline; print $0 }' )
+done
+```
+
+My point of view: This kind of chanllenge is tricky due to bad implementation of regex server and/or regex solver so you always need to fix/wrap regex answers/solutions. I think it's better to put a short timeout (<1s) rather than a lot a steps (100+) to prevent humans to do it by hand because the more steps there are the more chances you have to get a bug. I think the goal of the challenge is to make user script, use regex and parsing, use socket but not to correct/complete other's tools.

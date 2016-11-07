@@ -1,0 +1,120 @@
+---
+layout: post
+title: "CTF(x) - 50 - λ - Cryptography"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2016/08/27
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : CTF(x) 2016
+- **Website** : [http://ctfx.io/](http://ctfx.io/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/348/)
+
+### Description
+
+I used this program to encrypt a flag. The output was:
+n1s4_t1An(f1ctdb@mpl_h3)m3lp3y__Eas
+
+file: [λ.py](http://compete.ctfx.io/download?file_key=e1f0efcd2db9d3a57ece97805fca95a877b9df1a480f52ef71e086f779a9be6e&team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3)
+
+## Solution
+
+TL;DR : that solution is just a trick not a smart de-obfuscation.
+
++ Here is the code of the `λ.py`:
+
+```python
+print (lambda j,m:(lambda f,t:t if len(t) <= 1 else j([f(f,x)for x in m(j,m(reversed,(lambda s:zip(*[iter(s)]*(len(s)/2)))(t+"\x01"*(len(t)%2))))]))(lambda f,t:t if len(t) <= 1 else j([f(f,x)for x in m(j,m(reversed,(lambda s: zip(*[iter(s)]*(len(s)/2)))(t+"\x01"*(len(t)%2))))]),raw_input("Plaintext:")))(''.join,map).replace("\x01","")
+```
+
++ It's clear that the code is obfuscated, but even beautified it's still a mess.
++ So as I don't want my brain to blow trying to de-obfuscate this, I got around.
++ I realized that, with enought iteration, we gan get back the original string. So I modified the code to "brute-force" the good combination:
+
+```python
+# Modiied code
+mixed_flag = "n1s4_t1An(f1ctdb@mpl_h3)m3lp3y__Eas"
+
+for i in range(100):
+    old_mixed_flag = mixed_flag
+    mixed_flag = (lambda j, m: (lambda f, t: t
+        if len(t) <= 1
+        else j([f(f, x) for x in m(j, m(reversed, (lambda s: zip( * [iter(s)] * (len(s) / 2)))(t + "\x01" * (len(t) % 2))))]))(lambda f, t: t
+        if len(t) <= 1
+    else j([f(f, x) for x in m(j, m(reversed, (lambda s: zip( * [iter(s)] * (len(s) / 2)))(t + "\x01" * (len(t) % 2))))]), old_mixed_flag))(''.join, map).replace("\x01", "")
+    print(str(i) + " " + mixed_flag)
+```
+
++ Here the non-filtered output, that's quite long:
+
+
+```
+┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]
+└──╼ #python lambda_λ.py
+0 c1t(fm@db4s_n1nAt1_y_p3sEah_3pll3)m
+1 n_14s1tnA(tfc1bdm@lpl_3m3)p_3_yhasE
+2 cf1(t@mbd41sn_An1ty_h_3Eas_l3lpp)m3
+[...]
+97 n_14s1tnA(tfc1bdm@lph_3m3)_l3_ypasE
+98 cf1(t@mbd41sn_An1ty_pl3Eas_h3lp_)m3
+99 ns_41t1An(1tcfdb@mpl_h33)mlp3y__sEa
+```
+
++ Now let's see what begins with `ctf(`
+
+```
+┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]
+└──╼ #python lambda_λ.py | grep 'ctf('
+4 ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)
+10 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)
+16 ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)
+22 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)
+28 ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)
+34 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)
+40 ctf(1m@db4_1nsnAt1_y_p3asEh_3pllm3)
+46 ctf(1@mbd4_1nsAn1ty_l_3asEp_3lphm3)
+52 ctf(1m@db4_1nsnAt1_yh_3asE_l3plpm3)
+58 ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)
+64 ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)
+70 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)
+76 ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)
+82 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)
+88 ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)
+94 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)
+```
+
++ That begins to make sense, more filtering:
+
+```
+┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]
+└──╼ #python lambda_λ.py | grep 'ctf(1@mbd4_1nsAn1ty_'
+10 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)
+22 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)
+34 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)
+46 ctf(1@mbd4_1nsAn1ty_l_3asEp_3lphm3)
+58 ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)
+70 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)
+82 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)
+94 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)
+```
+
++ Not so hard: `58 ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)`.

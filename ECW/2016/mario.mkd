@@ -1,0 +1,118 @@
+---
+layout: post
+title: "ECW - 50 - Mario - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/11/06
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : European Cyber Week CTF Quals 2016
+- **Website** : [challenge-ecw.fr](https://challenge-ecw.fr/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+
+### Description
+
+N.A.
+
+## Solution
+
+Donwload the mario music on the web page and let's analyse it with binwalk:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/ECW/2016]
+$ binwalk hurry-overworld.wav                                                                                                                                                                                                               
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+1288          0x508           YAFFS filesystem
+16416         0x4020          YAFFS filesystem
+137724        0x219FC         MySQL ISAM compressed data file Version 1
+432662        0x69A16         YAFFS filesystem
+530464        0x81820         YAFFS filesystem
+1631770       0x18E61A        YAFFS filesystem
+1749494       0x1AB1F6        MySQL MISAM index file Version 5
+2335928       0x23A4B8        MySQL ISAM index file Version 1
+4111020       0x3EBAAC        MySQL MISAM compressed data file Version 2
+9465612       0x906F0C        YAFFS filesystem
+11467052      0xAEF92C        PNG image, 883 x 648, 8-bit/color RGBA, non-interlaced
+11467151      0xAEF98F        Zlib compressed data, best compression
+```
+
+Did you see the embed PNG? Let's extract it with *foremost*.
+
+Now we can check the image file.
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/ECW/2016]
+$ file mario-hidden.png
+mario-hidden.png: PNG image data, 883 x 648, 8-bit/color RGBA, non-interlaced
+```
+
+Just by displaying it we have seen: `ECW{3a2ef8a1`.
+
+![flag part 1](http://i.imgur.com/Z8XcV5i.png)
+
+Now let's see where is the second part of the flag!
+
+This challenge seems to be a steganography one. Let's check a classic: LSB.
+
+Nothing in the picture so let's check the `.wav`.
+
+I found a [writeup](https://ethackal.github.io/2015/10/05/derbycon-ctf-wav-steganography/) talking about LSB in a WAV file.
+
+Perfect it's using my favorite scripting language (Ruby) and [this ruby gem](https://github.com/shokai/ruby-wav-file).
+
+We used the same script as in the writup:
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'wav-file'
+
+wav = open("hurry-overworld.wav")
+format = WavFile::readFormat(wav)
+# puts format
+chunk = WavFile::readDataChunk(wav)
+
+wav.close
+
+wavs = chunk.data.unpack('s*')
+lsb = wavs.map{|sample| sample[0]}.join
+flag = lsb[(lsb.index('1'))..-1]
+puts [flag].pack('b*')
+```
+
+Here is what we retrived we the script:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/ECW/2016]
+$ ./mario-wav-lsb.rb > out
+
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/ECW/2016]
+$ file out
+out: PNG image data, 900 x 675, 8-bit/color RGBA, non-interlaced
+```
+
+Display the new image and get the second part of the flag: `ccf280865a1ef96bdb0c901c}`.
+
+![flag part 2](http://i.imgur.com/5733RGM.png)
+
+Flag: `ECW{3a2ef8a1ccf280865a1ef96bdb0c901c}`.

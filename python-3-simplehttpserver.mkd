@@ -1,0 +1,36 @@
+---
+layout: post
+title: 'Python 3 "No module named SimpleHTTPServer"'
+date: 2016/10/21
+lang: en
+categories:
+- programming
+- python
+tags:
+- linux
+- programming
+- python
+thumbnail: /images/programming.jpg
+---
+If the default **python** on your machine is python 3 so running the following command will result an error:
+
+```
+$ python -m SimpleHTTPServer
+python: No module named SimpleHTTPServer
+```
+
+So use instead:
+
+```
+python -m http.server
+```
+
+The [python 2.7 doc][py27doc] warns:
+> **Note :** The [`SimpleHTTPServer`](https://docs.python.org/2/library/simplehttpserver.html#module-SimpleHTTPServer) module has been merged into `http.server` in Python 3. The [2to3](https://docs.python.org/2/glossary.html#term-2to3) tool will automatically adapt imports when converting your sources to Python 3.
+
+You can also check the [python 3.5 doc][py35doc].
+
+Note that on some machines `python` redirects to *python 2* and on some others to *python 3*, so if you want a command that always works use `python3 -m http.server` or `python2 -m SimpleHTTPServer`.
+
+[py27doc]:https://docs.python.org/2/library/simplehttpserver.html
+[py35doc]:https://docs.python.org/3.5/library/http.server.html

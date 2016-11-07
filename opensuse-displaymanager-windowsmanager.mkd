@@ -1,0 +1,64 @@
+---
+layout: post
+title: "DISPLAYMANAGER and WINDOWSMANAGER"
+date: 2014/08/03
+lang: en
+categories:
+- linux
+- opensuse
+tags:
+- linux
+- opensuse
+thumbnail: /images/tux-293844_640.png
+---
+## Change of Display Manager
+
+Pass root
+```bash
+sudo -i
+```
+
+Then open `/etc/sysconfig/displaymanager` with a text editor.
+```bash
+vim /etc/sysconfig/displaymanager
+```
+
+Display Manager can be changed at line `DISPLAYMANAGER="XXX"`
+
+Display Manager also called Login Manager can be modified as explained previously.
+
+Main managers are:
+* [LightDM][lightdm] for [Unity][unity]
+* [GDM][gdm] for [GNOME][gnome]
+* [KDM][kdm] for [KDE][kde]
+* [XDM][xdm] for [X Window][xwindow]
+* [Entrance][entrance] for [Enlightenment][enlightenment]
+
+For more manager, see [here][moremanager].
+
+If you have trouble with a manager you can temporarily replace it with `xdm` : `DISPLAYMANAGER="xdm"`.
+
+## Change of Window Manager
+
+To change of window manager laso called desktop manager, open `/etc/sysconfig/windowmanager`.
+```bash
+vim /etc/sysconfig/windowmanager
+```
+
+At line `DEFAULT_WM="XXX"`,replace `XXX` with one of these manager : gnome, kde, xfce, lxde, enlightenment, icewm, cinnamon.
+For example `DEFAULT_WM="xfce"`.
+
+The a reboot it's needed.
+
+[lightdm]:https://en.wikipedia.org/wiki/LightDM "Wikipedia : LightDM"
+[unity]:https://en.wikipedia.org/wiki/Unity_%28user_interface%29 "Wikipedia : Unity"
+[gdm]:https://en.wikipedia.org/wiki/GNOME_Display_Manager "Wikipedia : GDM"
+[gnome]:https://en.wikipedia.org/wiki/GNOME "Wikipedia : GNOME"
+[kdm]:https://en.wikipedia.org/wiki/KDE_Display_Manager "Wikipedia : KDM"
+[kde]:https://en.wikipedia.org/wiki/KDE "Wikipedia : KDE"
+[xdm]:https://en.wikipedia.org/wiki/XDM_%28display_manager%29 "Wikipedia : XDM"
+[xwindow]:https://en.wikipedia.org/wiki/X_Window_System "Wikipedia : X Window"
+[entrance]:https://en.wikipedia.org/wiki/Entrance_%28display_manager%29 "Wikipedia : Entrance"
+[enlightenment]:https://en.wikipedia.org/wiki/Enlightenment_%28software%29 "Wikipedia : Enlightenment"
+[moremanager]:https://en.wikipedia.org/wiki/X_display_manager_%28program_type%29#Some_implementations "Wikipedia Some implementations"
+

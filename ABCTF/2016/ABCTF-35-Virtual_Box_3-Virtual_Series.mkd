@@ -1,0 +1,49 @@
+---
+layout: post
+title: "ABCTF - 35 - Virtual Box 3 - Virtual Series"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - virtualization
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+This mysterious file was left here, but I have no idea how to open it. Do you? I left it in a folder named 2016 just for you.
+
+## Solution
+
+1. Go to `C:\My Documents\2016` and there is `flagfour.xlsx` but we don't have Excel
+2. Extract the file with a floppy disk
+	- On your host create a floppy disk: `fallocate -l 1474560 floppy.vfd`
+	- Mount it on the Win98 VM
+	- Format it
+	- Copy `flagfour.xlsx` on it
+	- Eject the floppy
+3. Retrieve the file on your host
+	- Mount the image with a loopback device: `sudo mount -o loop floppy.vfd /tmp/floppy`
+	- Open with libreoffice `libreoffice /tmp/floppy/flagfour.xlsx`
+	- Content is *ABCTF{FR0M_THE_FUTURE}*
+4. Enjoy the flag!

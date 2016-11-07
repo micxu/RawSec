@@ -1,0 +1,50 @@
+---
+layout: post
+title: "Virtualbox : shared folder with guest"
+date: 2016/05/21
+lang: en
+categories:
+- linux
+tags:
+- linux
+- virtualization
+- system
+thumbnail: /images/tux-293844_640.png
+---
+This how-to works independently of the host platform.
+
+On virtualbox :
+1. Open the *Configuration* window of the VM (guest)
+2. Select *Shared folder* on the left menu
+3. Click on the icon corresponding to *Add a shared folder*
+4. Complete `Folder path` and `Folder name` fields, ex: `/folder/to/share` and `folder-shared`
+
+On the guest VM:
+1. Create a folder (an existant one can be used), ex:
+
+```bash
+$ mkdir /home/user/vbox-shared
+```
+2. Mount the shared folder and is file system as root, ex:
+
+```bash
+# mount -t vboxsf [FOLDER_NAME] [GUEST_PATH]
+```
+
+with `[FOLDER_NAME]` the name of the shared folder created on virtualbox and `[GUEST_PATH]` the folder path where the share file system have to be mounted.
+
+So here that will give:
+
+```bash
+# mount -t vboxsf folder-shared /home/user/vbox-shared
+```
+
+**Note** : Even if a permanent shared folder was created, the mount command will have to be runned each time the guest restart.
+
+Mounting a file system requires root privileges, but instead of mounting the file system as roor like previously, it's preferable to mount it as a user:
+
+```bash
+$ mount -t vboxsf -o umask=0022,gid=1000,uid=1000 folder-shared /home/user/vbox-shared
+```
+
+Where the *gid* and *uid* value math with the ones of the user (it can be check with the `id` command).

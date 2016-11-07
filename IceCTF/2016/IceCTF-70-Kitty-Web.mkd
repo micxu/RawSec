@@ -1,0 +1,87 @@
+---
+layout: post
+title: "IceCTF - 70 - Kitty - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+They managed to secure their website this time and moved the hashing to the server :(. We managed to leak this hash of the admin's password though! `c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a`. Can you get the flag? [kitty.vuln.icec.tf](kitty.vuln.icec.tf)
+
+## Solution
+
+1. Try to identify the hash:
+```
+# hashid "c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a"
+Analyzing 'c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a'
+[+] Snefru-256
+[+] SHA-256
+[+] RIPEMD-256
+[+] Haval-256
+[+] GOST R 34.11-94
+[+] GOST CryptoPro S-Box
+[+] SHA3-256
+[+] Skein-256
+[+] Skein-512(256)
+
+# hash-identifier
+   #########################################################################
+   #	 __  __ 		    __		 ______    _____	   #
+   #	/\ \/\ \		   /\ \ 	/\__  _\  /\  _ `\	   #
+   #	\ \ \_\ \     __      ____ \ \ \___	\/_/\ \/  \ \ \/\ \	   #
+   #	 \ \  _  \  /'__`\   / ,__\ \ \  _ `\	   \ \ \   \ \ \ \ \	   #
+   #	  \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \	    \_\ \__ \ \ \_\ \	   #
+   #	   \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/	   #
+   #	    \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.1 #
+   #								 By Zion3R #
+   #							www.Blackploit.com #
+   #						       Root@Blackploit.com #
+   #########################################################################
+
+   -------------------------------------------------------------------------
+ HASH: c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a
+
+Possible Hashs:
+[+]  SHA-256
+[+]  Haval-256
+
+Least Possible Hashs:
+[+]  GOST R 34.11-94
+[+]  RipeMD-256
+[+]  SNEFRU-256
+[+]  SHA-256(HMAC)
+[+]  Haval-256(HMAC)
+[+]  RipeMD-256(HMAC)
+[+]  SNEFRU-256(HMAC)
+[+]  SHA-256(md5($pass))
+[+]  SHA-256(sha1($pass))
+```
+2. That's most probably a SHA-256 hash.
+3. Try an [online service](https://md5hashing.net/hash/sha256/c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a) to get the decoded password: `Vo83*`.
+4. Log in with Username: `admin` and Password: `Vo83*`.
+5. Flag: `IceCTF{i_guess_hashing_isnt_everything_in_this_world}`.

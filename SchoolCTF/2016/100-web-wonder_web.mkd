@@ -1,0 +1,111 @@
+---
+layout: post
+title: "School CTF - 100 - Wonder Web - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/07
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : School CTF 2016
+- **Website** : [https://school-ctf.org/](https://school-ctf.org/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/384)
+
+### Description
+
+> In the year 2337 we finally secured the WEB! Now we have headers for anything you want. Everybody can make their site secure just by setting ALL the headers on the server.
+>
+> I just ported a demo page from the future to your time, so you can look how wonderful it is!
+>
+> http://wonder.task.school-ctf.org
+
+## Solution
+
+As the description suggests, let's take a look at headers:
+
+```
+Allow-Siri-Google-Cortana-Search-Clients: 1
+Anti-HPKP-Suicide: ignoreAfter=6000000
+Browser-Restrict: openInNewTab=false; noRefererFromHere=1
+Check-CDN-Revocation-List: 1; ignoreIfError;
+Connection: keep-alive
+Content-Encoding: gzip
+Content-Meaning: none; flag-part-number=5 part-content=54f3};
+Content-Type: text/html; charset=utf-8
+Date: Sun, 06 Nov 2016 11:46:31 GMT
+Flag-First-Part-Is-Here: encoding=base64; part1=U2Nob29sQ1RGezUwbTNkNHk=;
+Flag-Parts-Connector: character=_; charCode=95; hexCharCode=0x5f;
+Flag-Security-Policy: headers, ecnryption=none,
+Server: nginx/1.4.6 (Ubuntu)
+Set-Cookie: uselessCookie=uselessVal; Secure; StoreEncrypted=1; ExtensionsCanRead=0; DeleteOnBrowserExit=1l
+Strict-Transport-Security-I-Broke-Something-Please-Downgrade-If-Error: 1
+Task: category=joy; ucucuga=sure; encoding=none; justString=true; flagPresent=1; flagPart2=17; flagPart4=b3
+Transfer-Encoding: chunked
+X-Bug-Bounty: openRedirects=false; logoutCSRF=false; selfXSS=false;
+X-Content-Config: blink-origin-in-addressbar, disable-addressbar-copy-paste, disable-javascript-history-api
+X-Do-Not-Link-From-These-Sites: /blacklist.txt
+X-FRAME-Restrict: minhsize:100px; minvsize:100px; readable
+X-Frame-Options: SAMEORIGIN
+X-Header: meaning=none;
+X-If-You-Read-This-Join-Tomsk-State-University: additional-points=5; url=http://www.fpmk.tsu.ru/node/474;
+X-Ignore-CSP-Whitelists: 1
+X-Mouse-Disable-Click-After-Page: 3 secodns
+X-Nikita-Please-Add-This-Header: False
+X-Order-To-KFC: order=coffee; order=fried-potato; transport=SASHA
+X-Papper-Compatibility: disallow
+X-ShellShock-vector: (){;}; echo "Want flag?"; python -c 'part3="77316c6c"; print part3.decode("hex")'
+X-Super-Hero-Status: False
+X-Window-Restrictions: disallow-from-window-open
+X-XXX-Movie: url=goo.gl/0kGizJ
+Y-Toilet-Papper-Compatibility: allow
+content-security-policy: real-strict-dynamic
+strict-transport-security: max-age=31536000000000000
+x-xss-protection: -1; mode=ignoreheader
+```
+
+Ok... such a mess... and such a troll challenge!
+
+Part 1:
+
+```
+$ echo -n "U2Nob29sQ1RGezUwbTNkNHk=" | base64 -d                               
+SchoolCTF{50m3d4y_17_w1ll_b3_54f3}
+```
+
+Part 2 & part 4:
+
+```
+flagPart2=17; flagPart4=b3
+```
+
+Part 3 (don't run the fork bomb):
+
+```
+python -c 'part3="77316c6c"; print part3.decode("hex")'
+```
+
+Part 5:
+
+```
+Content-Meaning: none; flag-part-number=5 part-content=54f3};
+```
+
+Flag: `SchoolCTF{50m3d4y_17_w1ll_b3_54f3}`.

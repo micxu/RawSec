@@ -1,0 +1,79 @@
+---
+layout: post
+title: "Setup a proxy under Linux"
+date: 2016/10/13
+lang: en
+categories:
+- linux
+tags:
+- linux
+- system
+- proxy
+thumbnail: /images/tux-293844_640.png
+---
+## Environment variables
+
+Lot of programs (such as wget, curl, pacman, ...) use environment variables to determine the proxy of a given protocol.
+
+Environment variables can be added per user in their `.bashrc` or `.zshrc` shell profile file with something like `export KEY=value`. The advantage is that variables can be used in order to avoid repeating the same proxy several times.
+
+Or `/etc/environment` file stores the system-wide variables initialized upon user login. Or you can use `/etc/syconfig/proxy` under openSUSE.
+
+To add proxy settings one time for everyone, you can execute the following script with sudo privilege (because you need to write into a system file: `/etc/environment`).
+
+```bash
+#!/bin/bash
+file=/etc/environment
+
+http_proxy=http://proxy.example.org:8080/
+HTTP_PROXY=$http_proxy
+https_proxy=$http_proxy
+HTTPS_PROXY=$https_proxy
+ftp_proxy=$http_proxy
+FTP_PROXY=$ftp_proxy
+rsync_proxy=$http_proxy
+RSYNC_PROXY=$rsync_proxy
+no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+NO_PROXY=$no_proxy
+
+echo "http_proxy=$http_proxy" >> $file
+echo "HTTP_PROXY=$HTTP_PROXY" >> $file
+echo "https_proxy=$https_proxy" >> $file
+echo "HTTPS_PROXY=$HTTPS_PROXY" >> $file
+echo "ftp_proxy=$ftp_proxy" >> $file
+echo "FTP_PROXY=$FTP_PROXY" >> $file
+echo "rsync_proxy=$rsync_proxy" >> $file
+echo "RSYNC_PROXY=$RSYNC_PROXY" >> $file
+echo "no_proxy=$no_proxy" >> $file
+echo "NO_PROXY=$NO_PROXY" >> $file
+```
+
+## Proxy settings on GNOME3
+
+Some other graphical programs (such as Chromium or Rhythmbox) ignore those environment variables and use gnome (GTK3) settings. These settings can be modified through the gnome-control-center front end and also through gsettings (see the example below).
+
+```
+gsettings set org.gnome.system.proxy mode 'manual'
+gsettings set org.gnome.system.proxy.http host 'proxy.example.org'
+gsettings set org.gnome.system.proxy.http port 8080
+gsettings set org.gnome.system.proxy.ftp host 'proxy.example.org'
+gsettings set org.gnome.system.proxy.ftp port 8080
+gsettings set org.gnome.system.proxy.https host 'proxy.example.org'
+gsettings set org.gnome.system.proxy.https port 8080
+gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12' , '*.localdomain.com' ]"
+```
+
+## Package managers
+
+Since you are using awesome tools like [zypper][zypper] (openSUSE) or [pacman][pacman] (ArchLinux) you will probably don't care about the following paragraph.
+
+[zypper]:https://en.opensuse.org/Portal:Zypper
+[pacman]:https://wiki.archlinux.org/index.php/pacman
+
+But users of apt-get or aptitue will need an additional step to use their package manager working with a proxy. They will need to edit `/etc/apt/apt.conf.d/proxy` and include the following lines:
+
+```
+Acquire::http::proxy "http://proxy.example.org:8080/";
+Acquire::ftp::proxy "ftp://proxy.example.org:8080/";
+Acquire::https::proxy "https://proxy.example.org:8080/";
+```

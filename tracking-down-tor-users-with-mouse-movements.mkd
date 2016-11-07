@@ -1,0 +1,52 @@
+---
+layout: post
+title: "Tracking down Tor users with mouse movements"
+lang: en
+categories:
+  - news
+  - security
+tags:
+  - security
+  - news
+  - tor
+date: 2016/04/18
+thumbnail: /images/security-265130_640.jpg
+---
+Jose Carlos Norte, security researcher, wrote [a post][1] detailing how Tor Browser users can be uniquely fingerprinted using the mouse wheel, mouse speed, a CPU benchmark, and “getClientRects”.
+
+
+POCs (proof-of-concept) can be tested [here][2] and [here][3].
+Fingerprinting method rely on javascript.
+
+
+Each method alone is not very accurate but crossing data from mouse wheel speed, mouse cursor speed (effectively enhanced by personal OS mouse sensitivity preferences and preferred set of gestures), trackpad movements, Javascript CPU informations, and getClientRects() function makes the fingerprint very unique.
+
+
+Here an example of datas that can be collected with JavaScript:
+```
+Client rects:
+{"x":131.5,"y":462,"width":724,"height":19,"top":462,"right":855.5,"bottom"
+:481,"left":131.5}
+scrolling milis:
+[2,2,0,3,0,1,0,2,3,0,0,3,1,2,2,1,2,1,4,4,35,2,1,3,0,1,0,3,0,1,0,3,0,1,0,3,1
+,0,3,1,3,0,1,3,2,4,4,8,44,4,1,4,4,405,2,3,2,1,3,1,3,57,2,0,2,2,0,2,2,4,60,2
+,0,2,2,0,2,2,6,54,2,2,2,0,2,1,4,8]
+scrolling deltas:
+[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+Biggest mouse step: 65
+In a few seconds, the result of the CPU benchmark will appear, please
+wait...
+CPU Mean: 3245
+```
+
+
+The effectiveness of these methods is dependent upon the ability of the attackers to measure time accurately on Tor at the 1-millisecond level which is pretty difficult on Tor.
+
+
+We already known that JavaScript was dangerous for security and anonimity and that tools like NoScript exist to avoid those problems.
+
+[1]:http://jcarlosnorte.com/security/2016/03/06/advanced-tor-browser-fingerprinting.html "Advanced Tor browser fingerprinting"
+[2]:http://jcarlosnorte.com/assets/ubercookie/ "Ubercookie"
+[3]:http://jcarlosnorte.com/assets/fingerprint/ "Fingerprint"

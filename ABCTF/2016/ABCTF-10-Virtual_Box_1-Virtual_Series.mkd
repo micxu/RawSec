@@ -1,0 +1,45 @@
+---
+layout: post
+title: "ABCTF - 10 - Virtual Box 1 - Virtual Series"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - virtualization
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+Do you know how to use a VM? Download the Virtual Machine [here][here].
+[here]:https://drive.google.com/file/d/0B8VLfRLAO8TEZTVKRzUySTI4YVU/
+
+## Solution
+
+1. Start the Windows 98 VM
+2. `C:\WINDOWS\Desktop\flag 1.doc` is on Desktop, content:
+```
+You did it.
+ABCTF{FREE_P0INTS}
+```
+3. Easy!

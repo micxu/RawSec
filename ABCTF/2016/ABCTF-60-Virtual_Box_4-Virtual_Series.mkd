@@ -1,0 +1,43 @@
+---
+layout: post
+title: "ABCTF - 60 - Virtual Box 4 - Virtual Series"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - virtualization
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+What's this?
+
+## Solution
+
+- *Start > Documents > whats this* (it's a recent file)
+- Open it > Content is: *where am i?*
+- *Start > Documents > whats this*
+- Right click > Properties
+- File is in: `C:\Program Files\Outlook Express\ABCTF{Y0U_F0UND_ME}\what this.txt`
+- I let find you the flag :D

@@ -1,0 +1,48 @@
+---
+layout: post
+title: "IceCTF - 30 - Move Along - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+[This site][site] seems awfully suspicious, do you think you can figure out what they're hiding?
+
+## Solution
+
+1. Display source code `CTRL + U`.
+2. The page is only including an image [`http://move-along.vuln.icec.tf/move_along/nothing-to-see-here.jpg`][image].
+3. See the `move_along/` sub-folder and go in it [`move_along/`][folder]
+4. Nginx listing functionnality is not disabled so we can see there is a sub-folder [`0f76da769d67e021518f05b552406ff6/`][secretfolde] (dirb won't work).
+5. There is a secret image [`secret.jpg`][secretimage] containing the flag `IceCTF{tH3_c4t_15_Ou7_oF_THe_b49}`.
+
+[site]:http://move-along.vuln.icec.tf/
+[image]:http://move-along.vuln.icec.tf/move_along/nothing-to-see-here.jpg
+[folder]:http://move-along.vuln.icec.tf/move_along/
+[secretfolder]:http://move-along.vuln.icec.tf/move_along/0f76da769d67e021518f05b552406ff6/
+[secretimage]:http://move-along.vuln.icec.tf/move_along/0f76da769d67e021518f05b552406ff6/secret.jpg

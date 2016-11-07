@@ -1,0 +1,40 @@
+---
+layout: post
+title: "ABCTF - 15 - Virtual Box 2 - Virtual Series"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - virtualization
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+Darn, I found this flag so I put it in flag 1.doc but I can't seem to be able to see it anymore.
+
+## Solution
+
+1. Go into `C:\WINDOWS\Desktop\flag 1.doc`
+2. Edit > Select All > Color > Black
+3. You now see **ABCTF{H1DDEN_AWAY}**

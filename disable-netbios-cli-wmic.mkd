@@ -1,0 +1,45 @@
+---
+layout: post
+title: "Disable NetBIOS in CLI with WMIC"
+date: 2015/12/20
+lang: en
+categories:
+- security
+- "operating system"
+- windows
+tags:
+- security
+- windows
+- netbios
+thumbnail: /images/security-265130_640.jpg
+---
+NetBIOS is a very old protocol wich is no more interesting today except in some particular cases. But it has a large number of security flaws.
+
+We can use WMIC (Microsoft Windows Management Instrumentation Command-line) to disable it.
+
+Before disabling it we will see wich network interfaces are using it:
+* With `cmd.exe`:
+```
+bat wmic nicconfig get caption,index,TcpipNetbiosOptions
+```
+* With `PowerShell`:
+```
+wmic nicconfig get "caption,index,TcpipNetbiosOptions"
+```
+
+Then you will need administrator power to run the following commands:
+* If you want to disable NetBIOS for one network interface only, identify it index number and run:
+```
+wmic nicconfig where index=5 call SetTcpipNetbios 2
+```
+
+* If you want to disable NetBIOS for all network interfaces run:
+```
+wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
+wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
+```
+
+`SetTcpipNetbios` can take this values:
+* `0` – Use NetBIOS parameters from DHCP server
+* `1` – Enable NetBIOS via TCP/IP
+* `2` - Disable NetBIOS via TCP/IP

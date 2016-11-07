@@ -1,0 +1,113 @@
+---
+layout: post
+title: "Know status and health battery in command-line"
+date: 2014/08/03
+lang: en
+categories:
+- linux
+tags:
+- linux
+- system
+- opensuse
+thumbnail: /images/tux-293844_640.png
+---
+To see your battery infos you can use acpi if you have it or directly see system files.
+
+## Upower command
+
+In both case you can use `upower` command to get some usefull infos:
+
+```bash
+upower -i /org/freedesktop/UPower/devices/battery_BAT0
+```
+
+Example output:
+
+```
+  native-path:          BAT0
+  vendor:               ASUSTeK
+  model:                N56--52
+  power supply:         yes
+  updated:              ven. 01 avril 2016 08:58:27 CEST (99 seconds ago)
+  has history:          yes
+  has statistics:       yes
+  battery
+    present:             yes
+    rechargeable:        yes
+    state:               fully-charged
+    warning-level:       none
+    energy:              41,162 Wh
+    energy-empty:        0 Wh
+    energy-full:         43,054 Wh
+    energy-full-design:  57,2 Wh
+    energy-rate:         0 W
+    voltage:             12,377 V
+    percentage:          95%
+    capacity:            75,2692%
+    technology:          lithium-ion
+    icon-name:          'battery-full-charged-symbolic'
+```
+
+## With acpi
+
+Many distributions don't use it so if you want to install it you can do:
+
+```bash
+sudo zypper in acpi
+```
+
+OR
+
+```bash
+sudo yum install acpi && sudo yum install acpitool
+```
+
+OR
+
+```bash
+sudo apt-get install acpi && sudo apt-get install acpitool
+```
+
+To check is you have it installed:
+
+```bash
+acpi -V
+```
+
+You can see **battery health**:
+```bash
+cat /proc/acpi/battery/BAT0/info
+```
+
+
+and the **battery status**:
+```bash
+cat /proc/acpi/battery/BAT0/state
+```
+
+OR
+
+```bash
+acpi
+```
+
+You can also display ac adpter information:
+```bash
+acpi -a
+```
+
+You can show thermal information:
+```bash
+acpi -t
+```
+
+OR
+
+```bash
+cat /proc/acpi/thermal_zone/THM/temperature
+```
+
+
+## Without acpi
+
+Without acpi you will need to browse `/sys/class/power_supply/BAT0` directory and display files that are inside.

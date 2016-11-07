@@ -1,0 +1,39 @@
+---
+layout: post
+title: "How to install VirtualBox Guest Additions on Debian-based Linux distributions"
+date: 2016/06/09
+lang: en
+categories:
+- linux
+- debian
+tags:
+- linux
+- system
+- virtualization
+- virtualbox
+- debian
+thumbnail: /images/tux-293844_640.png
+---
+Here is how to install VirtualBox Guest Additions on Debian-based Linux distributions like Parrot Security OS, Kali Linux, Tails, Whonix or REMnux.
+
+With VirtualBox Guest Additions it become possible to resize desktop while resizing the VirtualBox window or share a folder between host and guest.
+
+## Download and mount
+
+* Start the VM
+* In VirtualBox window, in *Devices* menu, choose *Insert Guest Additions CD image*
+* If there are not yet here, choose *Download* and *Insert*
+* Mount the CD: `mount /media/cdrom/`
+
+## Install VirtualBox Guest Additions
+
+Open a terminal and as root write:
+```bash
+apt-get install build-essential dkms gcc linux-headers-`uname -r`
+mkdir /tmp/vboxadd
+cp -r /media/cdrom0/* /tmp/vboxadd/
+cd /tmp/vboxadd/
+./VBoxLinuxAdditions.run
+```
+
+And then restart: `shutdown -r now`

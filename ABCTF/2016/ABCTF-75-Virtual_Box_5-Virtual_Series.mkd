@@ -1,0 +1,43 @@
+---
+layout: post
+title: "ABCTF - 75 - Virtual Box 5 - Virtual Series"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - virtualization
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+I accidentaly closed out this odd message I found. Can you get it back?
+
+## Solution
+
+1. Open Internet Explorer (IE)
+2. Open the historic
+3. There is a picture, it's text in Wingdings 3 font
+4. [Translate it][matching] to a normal police: `ABCTF{ITS_C00L_L00KING_BACK}`
+
+[matching]:https://www.fonts.com/font/microsoft-corporation/wingdings/3

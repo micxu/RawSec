@@ -1,0 +1,29 @@
+---
+layout: post
+title: "Adding an existing local project to a new remote git repository"
+date: 2016/07/28
+lang: en
+categories:
+- misc
+tags:
+- linux
+- git
+thumbnail: /images/git.png
+---
+
+You want to put your project on a remote [Git][git] repository like [GitHub][github], [Bitbucket][bitbucket], [Gitlab][gitlab] or [Gogs][gogs] to share and collaborate?
+
+Follow the following steps:
+1. Create a new repository on one of the git service quoted before and let it empty.
+2. In your terminal, go into your local project.
+3. Initialize the local repository as a Git repository: `git init`
+4. Add the wanted files in the your local repository with `git add file` or add the entire repository with `git add .`. Files will be staged for the first commit.
+5. Commit the staged files: `git commit -m "first commit"`.
+6. In your terminal, add the URL of the remote repository: `git remote add origin https://example.com/examle.git`.
+7. And push the changes to the remote Git repository: `git push -u origin master`.
+
+[git]:https://git-scm.com/
+[github]:https://github.com/
+[bitbucket]:https://bitbucket.org/
+[gitlab]:https://gitlab.com/
+[gogs]:https://gogs.io/

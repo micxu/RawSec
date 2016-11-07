@@ -1,0 +1,26 @@
+---
+layout: post
+title: "How to know the graphic controller under Linux"
+date: 2014/08/03
+lang: en
+categories: 
+- linux
+tags:
+- linux
+- graphic
+- system
+thumbnail: /images/tux-293844_640.png
+---
+To know your 3D graphic(s) controller(s) working (GPU or/and chipset) with your VGA output you can run the following command :
+
+```bash
+/sbin/lspci | egrep 'VGA|3D'
+```
+
+Example :
+
+```bash
+/sbin/lspci | egrep 'VGA|3D'
+00:02.0 VGA compatible controller: Intel Corporation 3rd Gen Core processor Graphics Controller (rev 09)
+01:00.0 VGA compatible controller: NVIDIA Corporation GF108M [GeForce GT 630M] (rev a1)
+```

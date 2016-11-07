@@ -1,0 +1,32 @@
+---
+layout: post
+title: "Pastejacking vs clipboard hijacking"
+lang: en
+categories:
+  - news
+  - security
+tags:
+  - security
+  - news 
+date: 2016/06/02
+thumbnail: /images/security-265130_640.jpg
+---
+## Clipboard hijacking
+
+It as been possible for a long time to use css to append malicious content to the clipboard. Users doesn't notine anything and may execute unwanted commands.
+
+This type of attack is called clipboard hijacking and is dangerous when the user copies something from the web inside his terminal.
+
+## Pastejacking
+
+Dylan Ayrey, security researcher, published a variation of this attack that use only JavaScript.
+Difference with clipboard hijacking, is that pastejacking can copy text after an event.
+With clipboard hijacking user has to copy the full text but with pastejacking one character is enough.
+
+## Versus
+
+Pastejacking is more powerfull but is easier to block : user has just to block JavaScript in his browser or use a plugin such as [NoScript][noscript].
+
+Clipbboard hijacking is less threatening but harder to block, user will need an add-on for his terminal, for example, that blocks copied text containing line feeds.
+
+[noscript]:https://noscript.net/ "NoScript"

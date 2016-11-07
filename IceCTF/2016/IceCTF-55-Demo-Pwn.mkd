@@ -1,0 +1,92 @@
+---
+layout: post
+title: "IceCTF - 55 - Demo - Pwn"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - pwn
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+I found this awesome premium shell, but my demo version just ran out... can you help me crack it? `/home/demo/` on the shell.
+
+## Solution
+
+1. Connect to the shell provided by IceCTF.
+2. Go to `/home/demo/`.
+3. Our goal is to display `flag.txt` but it is impossible ofr the moment:
+```
+[ctf-578@icectf-shell-2016 /home/demo]$ cat flag.txt
+cat: flag.txt: Permission denied
+[ctf-578@icectf-shell-2016 /home/demo]$ sh
+$ cat /home/demo/flag.txt
+cat: /home/demo/flag.txt: Permission denied
+```
+3. Display `demo.c`
+```
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <libgen.h>
+#include <string.h>
+
+void give_shell() {
+    gid_t gid = getegid();
+    setresgid(gid, gid, gid);
+    system("/bin/sh");
+}
+
+int main(int argc, char *argv[]) {
+    if(strncmp(basename(getenv("_")), "icesh", 6) == 0){
+        give_shell();
+    }
+    else {
+        printf("I'm sorry, your free trial has ended.\n");
+    }
+    return 0;
+}
+```
+4. To call `give_shell()` we have to bypass the if statement.
+5. We need the `_` environment variable to be `_=icesh`.
+6. But our zsh shell don't allow us to change: `_` is read-only and we can't make it writable.
+```
+[ctf-578@icectf-shell-2016 /home/demo]$ export \_=icesh
+zsh: read-only variable: _
+[ctf-578@icectf-shell-2016 /home/demo]$ typeset +rx \_=icesh
+typeset: _: can't change type of a special parameter
+```
+7. `_` contain the name of the last command but launching `icesh` and then `./demo` doesn't work in this environment because the last command is `./demo` so `_=./demo`.
+8. As `give_shell()` will give us a `/bin/sh`, let's try with it.
+9. Start a `/bin/sh`.
+10. With `/bin/sh`, `_` contain the last command before last one, so running `icesh` and then `./demo` will work: `_=icesh`.
+11. So that launch `give_shell()` and give a `/bin/sh` enhanced with special gid instead of having *I'm sorry, your free trial has ended.* printed.
+12. With this empowered shell we can display the `flag.txt` file:
+```
+$ cat /home/demo/flag.txt
+IceCTF{wH0_WoU1d_3vr_7Ru5t_4rgV}
+```

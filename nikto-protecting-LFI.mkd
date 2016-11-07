@@ -1,0 +1,44 @@
+---
+layout: post
+title: "Nikto : protect your Apache server against a LFI vulnerability"
+lang: en
+categories:
+  - security
+tags:
+  - security
+  - vulnerability
+  - apache
+  - lfi
+date: 2016/07/07
+thumbnail: /images/security-265130_640.jpg
+---
+## Goal
+
+How to protect your apache server against a LFI vulnerability that can be found with [Nikto
+](https://cirt.net/Nikto2).
+
+```
+/autohtml.php?op=modload&mainfile=x&name=/etc/passwd : php-proxima 6.0 and below allows arbitrary files to be retrieved.
+```
+
+## Nikto test
+
+[https://raw.githubusercontent.com/sullo/nikto/master/program/databases/db_tests](https://raw.githubusercontent.com/sullo/nikto/master/program/databases/db_tests)
+```
+"000548","9028","5","/autohtml.php?op=modload&mainfile=x&name=/etc/passwd","GET","root:","","","","","php-proxima 6.0 and below allows arbitrary files to be retrieved.","",""
+```
+
+## Protection
+
+To do so, you have to disable trailing pathname by disabling the [`AcceptPathInfo`](https://httpd.apache.org/docs/2.4/fr/mod/core.html#acceptpathinfo) directive:
+* For example edit your vhost configuration: 
+    - `vim /etc/apache2/vhosts.d/vhostname.conf` (openSUSE)
+    - `vim /etc/apache2/sites-available/example.com.conf` (Debian/Ubuntu)
+    - `vim /etc/httpd/sites-available/example.com.conf` (CentOS/RHEL/Fedora)
+* And in the `<Directory>` section add the directive `AcceptPathInfo Off` or turn it to *Off* if already existing
+* Save your config file
+* Restart apache: 
+    - `systemctl restart apache2.service` (openSUSE)
+    - `service apache2 restart` (Debian/Ubuntu)
+    - `systemctl restart httpd.service` (CentOS/RHEL/Fedora)
+    - `apachectl restart` (generic)

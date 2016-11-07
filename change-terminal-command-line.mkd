@@ -1,0 +1,23 @@
+---
+layout: post
+title: "How to change of terminal in command-line with Linux"
+date: 2015/09/18
+lang: en
+categories:
+- linux
+tags:
+- linux
+- system
+thumbnail: /images/tux-293844_640.png
+---
+Changing of TTY (TeleTYpewriter), *text console* or *text terminal* without keyboard shortcut may be useful for remote administration or virtualization.
+So to change of TTY in CLI (Command-Line Interface) you need root power:
+```bash
+chvt N
+```
+where `N` is the terminal number.
+
+And if you want to know witch terminal you are using you can use:
+```bash
+fgconsole
+```

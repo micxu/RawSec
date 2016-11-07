@@ -1,0 +1,176 @@
+---
+layout: post
+title: "Hack The Vote 2016 - 250 - Trump likes colors - Steganography"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - stegano
+date: 2016/11/05
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Hack The Vote 2016
+- **Website** : [https://pwn.voting/](https://pwn.voting/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/345)
+
+### Description
+
+> Somebody leAked TrumP's favorite colors, looks like they used a really esoteric format. Some chiNese hacker named "DanGer Mouse" provided us the leak, getting this crucial info could really sway voters at the polls!
+>
+> [trump_likes_colors.png](https://s3.amazonaws.com/hackthevote/trump_likes_colors.bcddf8152cf2848c058310655c280a7dbb4f22fcc3687f00a26b6e9a57657dc4.png)
+>
+> author's irc nick: nihliphobe
+
+
+**Note**: This challenge was classified as *Forensics* but is *Steganography*.
+
+## Solution
+
+**TL;DR :** this is a incomplete solving, we didn't go until the end of this challenge.
+
+The description is talking about `DanGer Mouse`, search for it, it looks like a website about esoteric languages and algorithms (http://www.dangermouse.net/esoteric/).
+
+Look at the histogram of the image:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]
+$ convert trump_likes_colors.png histogram:- | identify -format %c -
+    249552: (  0,  0,  0) #000000 black
+         1: (  0,  0,192) #0000C0 srgb(0,0,192)
+       102: (  0,  0,255) #0000FF blue
+         1: (  0,192,  0) #00C000 srgb(0,192,0)
+         1: (  0,192,192) #00C0C0 srgb(0,192,192)
+        48: (  0,255,  0) #00FF00 lime
+        48: (  0,255,255) #00FFFF cyan
+         2: (192,  0,  0) #C00000 srgb(192,0,0)
+         1: (192,  0,192) #C000C0 srgb(192,0,192)
+         1: (192,192,  0) #C0C000 srgb(192,192,0)
+        83: (255,  0,  0) #FF0000 red
+       103: (255,  0,255) #FF00FF magenta
+        51: (255,255,  0) #FFFF00 yellow
+         6: (255,255,255) #FFFFFF white
+```
+
+The colors used seem to be only the ones used in [PIET](http://www.dangermouse.net/esoteric/piet.html) language.
+
+There is a programm implementing PIET: `npiet`, we used it to run the programm.
+
+**N.B.:** As we can see in the [gallery](https://www.bertnase.de/npiet/picture.html). Vertical lines are an easy way to store a string, so our image must contain a string with the favorite color of Trump.
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]
+$ npiet trump_likes_colors.png
+#ff0000
+```
+
+So the programm gave us the favorite color of Trump:
+`#ff0000` = Red = rgb(255, 0, 0) = hsl(0, 100%, 50%).
+
+The description let us think that was that we were looking for but IRC moderators told us that was not the end.
+
+So I checked the trace of the programm:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]
+$ npiet -t trump_likes_colors.png
+
+trace: step 0  (0,0/r,l nR -> 1,0/r,l dR):
+action: push, value 35
+trace: stack (1 values): 35
+
+trace: step 1  (1,0/r,l dR -> 2,0/r,l nM):
+action: out(char)
+#
+trace: stack is empty
+
+trace: step 2  (2,0/r,l nM -> 3,0/r,l dM):
+action: push, value 102
+trace: stack (1 values): 102
+
+trace: step 3  (3,0/r,l dM -> 4,0/r,l nB):
+action: out(char)
+f
+trace: stack is empty
+
+trace: step 4  (4,0/r,l nB -> 5,0/r,l dB):
+action: push, value 102
+trace: stack (1 values): 102
+
+trace: step 5  (5,0/r,l dB -> 6,0/r,l nC):
+action: out(char)
+f
+trace: stack is empty
+
+trace: step 6  (6,0/r,l nC -> 7,0/r,l dC):
+action: push, value 48
+trace: stack (1 values): 48
+
+trace: step 7  (7,0/r,l dC -> 8,0/r,l nG):
+action: out(char)
+0
+trace: stack is empty
+
+trace: step 8  (8,0/r,l nG -> 9,0/r,l dG):
+action: push, value 48
+trace: stack (1 values): 48
+
+trace: step 9  (9,0/r,l dG -> 10,0/r,l nY):
+action: out(char)
+0
+trace: stack is empty
+
+trace: step 10  (10,0/r,l nY -> 11,0/r,l dY):
+action: push, value 48
+trace: stack (1 values): 48
+
+trace: step 11  (11,0/r,l dY -> 12,0/r,l nR):
+action: out(char)
+0
+trace: stack is empty
+
+trace: step 12  (12,0/r,l nR -> 13,0/r,l dR):
+action: push, value 48
+trace: stack (1 values): 48
+
+trace: step 13  (13,0/r,l dR -> 14,0/r,l nM):
+action: out(char)
+0
+trace: stack is empty
+trace: entering white block at 16,0 (like the perl interpreter would)...
+
+trace: step 14  (14,0/r,l nM -> 16,0/r,l WW):
+trace: special case: we at a white codel - continuing
+trace: entering white block at 16,3 (like the perl interpreter would)...
+
+trace: step 15  (16,0/r,l WW -> 16,3/d,r WW):
+trace: special case: we at a white codel - continuing
+trace: white cell(s) crossed - continuing with no command at 14,3...
+
+trace: step 16  (16,3/d,r WW -> 14,3/l,l nY):
+```
+
+Seems there is nothing interesting.
+
+I also genererated the image trace:
+
+![](http://i.imgur.com/wOE90pQ.png)
+
+That only show us that char as pushed one by one, and there is not loop or conditional statements.
+
+So maybe there was something to do with the capital letters in the description?

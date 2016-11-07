@@ -1,0 +1,157 @@
+---
+layout: post
+title: "ABCTF - 50 - Java Madness - Reverse Engineering"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - reverse
+date: 2016/07/23
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : ABCTF 2016
+- **Website** : [http://abctf.xyz/](http://abctf.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy - Student
+- **CTF Time** : [link](https://ctftime.org/event/333)
+
+### Description
+
+Hey if you can get [this][this] to pass some tests you could probably have the flag.
+[this]:https://mega.nz/#!DpVk3QII!0q_VFSxC2v0bjwodRIPT2UhJTTK3qvYsDMD7JL3qfPo
+
+## Solution
+
+1. Here is the java source code:
+```java
+public class what_the_hack {
+
+	public static void main(String[] args) {
+
+		String check = "";
+
+		if(args.length != 5){
+			System.out.println("Almost! (;");
+		}
+
+		else {
+			for(int i = args.length - 1; i >= 0; i--){
+				System.out.println(i);
+				for(int j = args[i].length() - 1; j >= 0; j--){
+					check += args[i].charAt(j);
+					System.out.println(args[i].charAt(j));
+				}
+			}
+
+			if(check.equals("abctf is the coolest ctf")){
+				System.out.println("Flag: " + "ABCTF{" + args[0] + args[1] + args[2] +args[3] + args[4] + "}");
+			}
+			else{
+				System.out.println(check);
+			}
+		}
+	}
+}
+```
+
+2. Compile the code: `javac what_the_hack.java`
+3. Run it:
+```
+java what_the_hack
+Almost! (;
+```
+4. Analyse the code, there must be 5 strings args:
+```
+java what_the_hack a b c d e
+4
+e
+3
+d
+2
+c
+1
+b
+0
+a
+edcba
+```
+5. By analysing the code we understand that the software display the position of the arg and is content in the reverse order and that the valid check must be `abctf is the coolest ctf`
+6. So write `abctf is the coolest ctf` to reverse it:
+```
+java what_the_hack abctf is the coolest ctf
+4
+f
+t
+c
+3
+t
+s
+e
+l
+o
+o
+c
+2
+e
+h
+t
+1
+s
+i
+0
+f
+t
+c
+b
+a
+ftctseloocehtsiftcba
+```
+7. `ftctseloocehtsiftcba` is the reverse but we need to space it:
+```
+java what_the_hack 'ftc' ' tselooc' ' eht' ' si' ' ftcba'
+4
+a
+b
+c
+t
+f
+
+3
+i
+s
+
+2
+t
+h
+e
+
+1
+c
+o
+o
+l
+e
+s
+t
+
+0
+c
+t
+f
+Flag: ABCTF{ftc tselooc eht si ftcba}
+```
+8. We got it!

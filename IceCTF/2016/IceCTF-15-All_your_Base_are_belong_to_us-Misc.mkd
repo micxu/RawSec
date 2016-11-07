@@ -1,0 +1,58 @@
+---
+layout: post
+title: "IceCTF - 15 - All your Base are belong to us - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/08/25
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : IceCTF 2016
+- **Website** : [https://icec.tf/](https://icec.tf/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/319)
+
+### Description
+
+What a mess... we got a raw flag but now what do we do... [flag.txt](https://play.icec.tf/problem-static/flag_63c24d48595eae318c9a174f37ffb0f128758e5c16fea0ffebf12b0ba5f5b26a.txt)
+
+## Solution
+
+1. Look at the file:
+```
+cat flag.txt
+01001001 01100011 01100101 01000011 01010100 01000110 01111011 01100001 01101100 00110001 01011111
+01101101 01111001 01011111 01100010 01100001 01110011 01100101 01110011 01011111 01100001 01110010
+01100101 01011111 01111001 01101111 01110101 01110010 01110011 01011111 01100001 01101110 01100100
+01011111 01100001 01101100 01101100 01011111 01111001 00110000 01110101 01110010 01011111 01100010
+01100001 01110011 01100101 01110011 01011111 01100001 01110010 01100101 01011111 01101101 01101001
+01101110 01100101 01111101
+```
+2. It's binary, so convert it to ASCII (with a python script):
+```python
+with open("flag.txt", "r") as fh:
+    data = fh.read()
+    bindata = "".join(data.split())
+
+    intdata = int(bindata, 2)
+    strdata = intdata.to_bytes((intdata.bit_length() + 7) // 8, 'big').decode()
+    print(strdata)
+```
+3. We get the flag: `IceCTF{al1_my_bases_are_yours_and_all_y0ur_bases_are_mine}`.

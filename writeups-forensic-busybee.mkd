@@ -1,0 +1,126 @@
+---
+layout: post
+title: "Writeups - Forensic - BusyBee"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensic
+date: 2016/07/02
+thumbnail: /images/security-265130_640.jpg
+---
+## Informations
+
+### Version
+
+Date        | By    | Version | Comment
+---         | ---   | ---     | ---
+05/06/2016  | noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : BackdoorCTF 2016
+- **Website** : [https://backdoor.sdslabs.co](https://backdoor.sdslabs.co/competitions/backdoorctf16/leaderboard)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/314)
+
+### Name
+
+*BusyBee*
+
+### Category
+
+*Forensic*
+
+### Wording
+
+>  A deadly virus is killing bees in Busybee's village Busybox, India. Unfortuantely, you have to go to the village to fight the infection. Get the flag virus out of the infected files.
+> Village address: http://hack.bckdr.in/BUSYBEE/infected.tar
+> Created by: Ashish Chaudhary
+
+### Data(s)
+
+[link](http://hack.bckdr.in/BUSYBEE/infected.tar)
+
+## Solution
+
+### Methodology
+
+1. Untar the datas: `tar xaf infected.tar`
+2. List the content of the directory:
+```
+ls -AgG
+total 2332
+drwxr-xr-x 2    4096 Jun  3 18:13 2b0fbc0e1ac044737fd881cff8164bb5a2c7bfbf90c40c87de3c3435f2c6a94e
+drwxr-xr-x 4    4096 Jul  2 19:01 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7
+drwxr-xr-x 2    4096 Jun  3 18:13 d51a083a3b01fe8c58086903595b91fc975de59a9e9ececec755df384a181026
+-rw-r--r-- 1    1344 Jun  3 18:13 eaa21323de5e2cce7078df3af4dd292181114dfc94be761b948657efbe3af26b.json
+-rw-r--r-- 1 2362880 Jun  6 08:17 infected.tar
+-rw-r--r-- 1     373 Jan  1  1970 manifest.json
+-rw-r--r-- 1     106 Jan  1  1970 repositories
+```
+3. Display `repositories` file, it looks interesting:
+```
+cat repositories
+{"busybox-1.24.1-infected":{"latest":"983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7"}}
+```
+4. `983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7`: show us which folder is infected, so display its content:
+```
+ls -AgG 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7/
+total 1020
+-rw-r--r-- 1       3 Jun  3 18:13 VERSION
+-rw-r--r-- 1     907 Jun  3 18:13 json
+-rw-r--r-- 1 1035776 Jun  3 18:13 layer.tar
+```
+5. Go into `983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7`, untar `layer.tar`, and display:
+```
+cd 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7
+tar xaf layer.tar
+ls -AgGR
+.:
+total 1028
+-rw-r--r-- 1       3 Jun  3 18:13 VERSION
+drwxr-xr-x 2    4096 Jun  3 18:11 bin
+-rw-r--r-- 1     907 Jun  3 18:13 json
+-rw-r--r-- 1 1035776 Jun  3 18:13 layer.tar
+drwxr-xr-x 2    4096 Jun  3 18:09 root
+
+./bin:
+total 2016
+-rwxr-xr-x 2 1031328 Jun  3 18:11 cat
+-rwxr-xr-x 2 1031328 Jun  3 18:11 sha1sum
+
+./root:
+total 4
+-rw------- 1 44 Jun  3 18:12 .ash_history
+```
+6. `root/.ash_history` looks intersting:
+```
+cat root/.ash_history
+not so easy bru - the infections is intense
+```
+7. ... but is not. So let's see what are the binaries:
+```
+cat bin/sha1sum
+[...]
+THIS IS WHAT YOU ARE LOOKING FOR:    0n3_n00b_ru1n5_0n3_hundr3d_pr05
+```
+8. The last line of the binary shows us what we are looking for `0n3_n00b_ru1n5_0n3_hundr3d_pr05` (1337 : `one noob ruins one hundred pros`)
+9. Try to sha256 it:
+```
+echo -n "0n3_n00b_ru1n5_0n3_hundr3d_pr05" | sha256sum
+0743a3265649702df53b083056b2f426d20e449cd68210384ff0ff159f3867fa
+```
+
+PS : You could have seen that the repository has the structure of a [docker image](https://github.com/docker/docker/blob/master/image/spec/v1.md) and try to load and build it.
+
+### Flag
+
+> Since Backdoor is an always-online CTF platform, and not a one time contest, we kindly request you to not publish flags for the challenges in your writeups.
+> Writeups are an excellent way to share knowledge and help others learn. In Backdoor, challenges are shifted from a contest to the Practice section, where people can continue to attempt them after the contest is over. It would be very unfair to participants if the flags for the problems were easily available in writeups online.
+> Hence, we kindly request to not publish flags of the problems that you solve. Here is an example of an excellent writeup which refrains from giving the complete solution.
