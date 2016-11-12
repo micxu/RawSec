@@ -8,35 +8,35 @@
     
         <meta name="keywords" content="linux,archlinux" />
     
-    <meta name="description" content="Warning: Post in constructionInstall rTorrentAs rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.
+    <meta name="description" content="Install rTorrentAs rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.
 
 Install rtorrent:
 
 1# pacman -S rtorrent
 Install ruTorrent
-Cre">
+Create the web server root direc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ArchLinux - Install rTorrent and ruTorrent">
 <meta property="og:url" content="http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="Warning: Post in constructionInstall rTorrentAs rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.
+<meta property="og:description" content="Install rTorrentAs rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.
 
 Install rtorrent:
 
 1# pacman -S rtorrent
 Install ruTorrent
-Cre">
+Create the web server root direc">
 <meta property="og:image" content="http://rawsec.ml/images/tux-293844_640.png">
-<meta property="og:updated_time" content="2016-10-12T21:07:54.498Z">
+<meta property="og:updated_time" content="2016-11-12T22:30:31.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArchLinux - Install rTorrent and ruTorrent">
-<meta name="twitter:description" content="Warning: Post in constructionInstall rTorrentAs rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.
+<meta name="twitter:description" content="Install rTorrentAs rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.
 
 Install rtorrent:
 
 1# pacman -S rtorrent
 Install ruTorrent
-Cre">
+Create the web server root direc">
 <meta name="twitter:image" content="http://rawsec.ml/images/tux-293844_640.png">
     
 
@@ -196,7 +196,7 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h1 id="Warning-Post-in-construction"><a href="#Warning-Post-in-construction" class="headerlink" title="Warning: Post in construction"></a>Warning: Post in construction</h1><h2 id="Install-rTorrent"><a href="#Install-rTorrent" class="headerlink" title="Install rTorrent"></a>Install rTorrent</h2><p>As rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.</p>
+            <h2 id="Install-rTorrent"><a href="#Install-rTorrent" class="headerlink" title="Install rTorrent"></a>Install rTorrent</h2><p>As rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.</p>
 <ul>
 <li>Install <a href="https://www.archlinux.org/packages/?q=rtorrent" target="_blank" rel="external">rtorrent</a>:</li>
 </ul>
@@ -204,11 +204,11 @@ ga('send', 'pageview');
 <h2 id="Install-ruTorrent"><a href="#Install-ruTorrent" class="headerlink" title="Install ruTorrent"></a>Install ruTorrent</h2><ul>
 <li>Create the web server root directory if it doesn’t already exist:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir -p /srv/http</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir -p /usr/share/nginx/html/</div></pre></td></tr></table></figure>
 <ul>
 <li>Go to the web server folder and clone the <a href="https://github.com/Novik/ruTorrent.git" target="_blank" rel="external">ruTorrent</a> git repository into it:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /srv/http</div><div class="line"># git clone https://github.com/Novik/ruTorrent.git rutorrent</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /usr/share/nginx/html/</div><div class="line"># git clone https://github.com/Novik/ruTorrent.git rutorrent</div></pre></td></tr></table></figure>
 <h2 id="Install-Nginx"><a href="#Install-Nginx" class="headerlink" title="Install Nginx"></a>Install Nginx</h2><ul>
 <li>Install <a href="https://www.archlinux.org/packages/?name=nginx-mainline" target="_blank" rel="external">nginx-mainline</a>:</li>
 </ul>
@@ -249,7 +249,7 @@ ga('send', 'pageview');
 <li>Set the timezone (<a href="http://php.net/manual/en/datetime.configuration.php#ini.date.timezone" target="_blank" rel="external">date.timezone</a>).</li>
 <li>For more security, limit the files that can be accessed by php (<a href="http://php.net/manual/en/ini.core.php#ini.open-basedir" target="_blank" rel="external">open_basedir</a>):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open_basedir = /srv/http</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open_basedir = /usr/share/nginx/html/rutorrent</div></pre></td></tr></table></figure>
 <ul>
 <li>Enable and start php-fpm:</li>
 </ul>
@@ -261,7 +261,7 @@ ga('send', 'pageview');
 <ul>
 <li>And add this conf:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">user http;</div><div class="line">worker_processes auto;</div><div class="line"># PID error: https://bugs.archlinux.org/task/46500</div><div class="line"># pid /run/nginx.pid;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">	worker_connections 1024;</div><div class="line">	multi_accept on;</div><div class="line">	use epoll;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">	charset UTF-8;</div><div class="line"></div><div class="line">	##</div><div class="line">	# Basic Settings</div><div class="line">	##</div><div class="line">	server_names_hash_bucket_size 64;</div><div class="line">	sendfile on;</div><div class="line">	tcp_nopush on;</div><div class="line">	tcp_nodelay on;</div><div class="line">	keepalive_timeout 65;</div><div class="line">	types_hash_max_size 2048;</div><div class="line">	server_tokens off;</div><div class="line"></div><div class="line">	# server_names_hash_bucket_size 64;</div><div class="line">	# server_name_in_redirect off;</div><div class="line"></div><div class="line">	include /etc/nginx/mime.types;</div><div class="line">	default_type application/octet-stream;</div><div class="line"></div><div class="line"></div><div class="line">	##</div><div class="line">	# Logging Settings</div><div class="line">	##</div><div class="line"></div><div class="line">	access_log /var/log/nginx/access.log;</div><div class="line">	error_log /var/log/nginx/error.log;</div><div class="line"></div><div class="line">	##</div><div class="line">	# Gzip Settings</div><div class="line">	##</div><div class="line"></div><div class="line">	gzip on;</div><div class="line">	gzip_disable &quot;msie6&quot;;</div><div class="line"></div><div class="line">	gzip_vary on;</div><div class="line">	gzip_proxied any;</div><div class="line">	gzip_comp_level 6;</div><div class="line">	gzip_buffers 16 8k;</div><div class="line">	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript</div><div class="line"></div><div class="line">	##</div><div class="line">	# Virtual Host Configs</div><div class="line">	##</div><div class="line"></div><div class="line">	include /etc/nginx/conf.d/*.conf;</div><div class="line">	include /etc/nginx/servers-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">user http;</div><div class="line">worker_processes auto;</div><div class="line"># PID error: https://bugs.archlinux.org/task/46500</div><div class="line"># pid /run/nginx.pid;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">	worker_connections 1024;</div><div class="line">	multi_accept on;</div><div class="line">	use epoll;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">	charset UTF-8;</div><div class="line"></div><div class="line">	##</div><div class="line">	# Basic Settings</div><div class="line">	##</div><div class="line">	server_names_hash_bucket_size 64;</div><div class="line">	sendfile on;</div><div class="line">	tcp_nopush on;</div><div class="line">	tcp_nodelay on;</div><div class="line">	keepalive_timeout 65;</div><div class="line">	types_hash_max_size 2048;</div><div class="line">	server_tokens off;</div><div class="line"></div><div class="line">	# server_name_in_redirect off;</div><div class="line"></div><div class="line">	include /etc/nginx/mime.types;</div><div class="line">	default_type application/octet-stream;</div><div class="line"></div><div class="line"></div><div class="line">	##</div><div class="line">	# Logging Settings</div><div class="line">	##</div><div class="line"></div><div class="line">	access_log /var/log/nginx/access.log;</div><div class="line">	error_log /var/log/nginx/error.log;</div><div class="line"></div><div class="line">	##</div><div class="line">	# Gzip Settings</div><div class="line">	##</div><div class="line"></div><div class="line">	gzip on;</div><div class="line">	gzip_disable &quot;msie6&quot;;</div><div class="line"></div><div class="line">	gzip_vary on;</div><div class="line">	gzip_proxied any;</div><div class="line">	gzip_comp_level 6;</div><div class="line">	gzip_buffers 16 8k;</div><div class="line">	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript</div><div class="line"></div><div class="line">	##</div><div class="line">	# Virtual Host Configs</div><div class="line">	##</div><div class="line"></div><div class="line">	include /etc/nginx/servers-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li>Create following directories:</li>
 </ul>
@@ -273,11 +273,12 @@ ga('send', 'pageview');
 <ul>
 <li>And add the conf:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line"> listen 80;</div><div class="line"> listen [::]:80;</div><div class="line"> # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.</div><div class="line"> return 301 https://$host$request_uri;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># BLOCK SERVEUR HTTPS</div><div class="line">#</div><div class="line">server &#123;</div><div class="line"></div><div class="line"> listen 443 ssl http2;</div><div class="line"> server_name seedbox;</div><div class="line"> root /srv/http/rutorrent;</div><div class="line"> index index.php index.html index.htm;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># SSL</div><div class="line">#</div><div class="line"> ssl_certificate /etc/nginx/ssl/seedbox.crt;</div><div class="line"> ssl_certificate_key /etc/nginx/ssl/seedbox.key;</div><div class="line"></div><div class="line"> ssl_protocols TLSv1.2;</div><div class="line"> ssl_ciphers EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;</div><div class="line"> ssl_ecdh_curve secp384r1;</div><div class="line"> ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line"> # ssl optimizations</div><div class="line"> ssl_session_timeout 5m;</div><div class="line"> ssl_session_cache shared:SSL:20m;</div><div class="line"> ssl_session_tickets on;</div><div class="line"></div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># SECURITY</div><div class="line"></div><div class="line"> add_header X-XSS-Protection &quot;1; mode=block&quot;;</div><div class="line"> auth_basic &quot;Restricted Area&quot;;</div><div class="line"> auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth&quot;;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># PHP</div><div class="line">#</div><div class="line"> location / &#123;</div><div class="line"> index index.php index.html index.htm;</div><div class="line"> try_files $uri $uri/ /index.php?$args;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> location ~ \.php$ &#123;</div><div class="line"> try_files $uri =404;</div><div class="line"> fastcgi_split_path_info ^(.+\.php)(/.+)$;</div><div class="line"> fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;</div><div class="line"> fastcgi_index index.php;</div><div class="line"> fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line"> include fastcgi_params; &#125;</div><div class="line"></div><div class="line"> location ^~ /conf/ &#123;</div><div class="line"> deny all;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> location ^~ /share/ &#123;</div><div class="line"> deny all;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line"> listen 80;</div><div class="line"> listen [::]:80;</div><div class="line"> # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.</div><div class="line"> return 301 https://$host$request_uri;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># BLOCK SERVEUR HTTPS</div><div class="line">#</div><div class="line">server &#123;</div><div class="line"></div><div class="line"> listen 443 ssl http2;</div><div class="line"> server_name seedbox.domain.example.org;</div><div class="line"> root /srv/http/rutorrent;</div><div class="line"> index index.php index.html index.htm;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># SSL</div><div class="line">#</div><div class="line"> ssl_certificate /etc/nginx/ssl/seedbox.crt;</div><div class="line"> ssl_certificate_key /etc/nginx/ssl/seedbox.key;</div><div class="line"></div><div class="line"> ssl_protocols TLSv1.2;</div><div class="line"> ssl_ciphers EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;</div><div class="line"> ssl_ecdh_curve secp384r1;</div><div class="line"> ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line"> # ssl optimizations</div><div class="line"> ssl_session_timeout 5m;</div><div class="line"> ssl_session_cache shared:SSL:20m;</div><div class="line"> ssl_session_tickets on;</div><div class="line"></div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># SECURITY</div><div class="line"></div><div class="line"> add_header X-XSS-Protection &quot;1; mode=block&quot;;</div><div class="line"> auth_basic &quot;Restricted Area&quot;;</div><div class="line"> auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth&quot;;</div><div class="line"></div><div class="line">#------------------------------------------------------------------------</div><div class="line"># PHP</div><div class="line">#</div><div class="line"> location / &#123;</div><div class="line"> index index.php index.html index.htm;</div><div class="line"> try_files $uri $uri/ /index.php?$args;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> location ~ \.php$ &#123;</div><div class="line"> try_files $uri =404;</div><div class="line"> fastcgi_split_path_info ^(.+\.php)(/.+)$;</div><div class="line"> fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;</div><div class="line"> fastcgi_index index.php;</div><div class="line"> fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line"> include fastcgi_params; &#125;</div><div class="line"></div><div class="line"> location ^~ /conf/ &#123;</div><div class="line"> deny all;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> location ^~ /share/ &#123;</div><div class="line"> deny all;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
+<li>Don’t forget to change <code>server_name seedbox.domain.example.org;</code> with your own domain and create a CNAME entry in your DNS configuration.</li>
 <li>Enable the server:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ln -s /etc/nginx/servers-available/seedbox /etc/nginx/servers-enabled/seedbox</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ln -s /etc/nginx/servers-available/seedbox.conf /etc/nginx/servers-enabled/seedbox.conf</div></pre></td></tr></table></figure>
 <h2 id="Configure-SSL"><a href="#Configure-SSL" class="headerlink" title="Configure SSL"></a>Configure SSL</h2><p>We will both view self-signed certificate and Let’s Encrypt ones.</p>
 <h3 id="Self-signed"><a href="#Self-signed" class="headerlink" title="Self-signed"></a>Self-signed</h3><ul>
 <li>Add certificate folder:</li>
@@ -331,23 +332,23 @@ ga('send', 'pageview');
 <ul>
 <li>Create ruTorrent config file:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /srv/http/rutorrent/conf/users/sdbox</div><div class="line"># vim /srv/http/rutorrent/conf/users/sdbox/config.php</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /usr/share/nginx/html/rutorrent/conf/users/sdbox</div><div class="line"># vim /usr/share/nginx/html/rutorrent/conf/users/sdbox/config.php</div></pre></td></tr></table></figure>
 <ul>
 <li>And add the content:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$pathToExternals[&apos;curl&apos;] = &apos;/usr/bin/curl&apos;;</div><div class="line">$topDirectory = &apos;/home/sdbox&apos;;</div><div class="line">$scgi_port = 5001;</div><div class="line">$scgi_host = &apos;127.0.0.1&apos;;</div><div class="line">$XMLRPCMountPoint = &apos;/SDBOX&apos;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$pathToExternals[&apos;curl&apos;] = &apos;/usr/bin/curl&apos;;</div><div class="line">$topDirectory = &apos;/home/sdbox&apos;;</div><div class="line">$scgi_port = 5001;</div><div class="line">$scgi_host = &apos;127.0.0.1&apos;;</div><div class="line">$XMLRPCMountPoint = &apos;/SDBOX&apos;;</div><div class="line">$tempDirectory = &apos;/usr/share/nginx/html/rutorrent/tmp/&apos;;</div></pre></td></tr></table></figure>
 <ul>
 <li>Correct permissions:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chown -R http:http /srv/http</div><div class="line"># systemctl restart nginx.service</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown -R http:http /usr/share/nginx/html/rutorrent</div><div class="line"># chmod 0777 /usr/share/nginx/html/rutorrent/share/&#123;settings,torrents,users&#125;</div><div class="line"># systemctl restart nginx.service</div></pre></td></tr></table></figure>
 <h2 id="Create-a-rTorrent-service"><a href="#Create-a-rTorrent-service" class="headerlink" title="Create a rTorrent service"></a>Create a rTorrent service</h2><ul>
-<li>Create the file <code>/etc/systemd/user/rtorrent.service</code> containing:</li>
+<li>Create the file <code>~/.config/systemd/user/rt.service</code> containing:</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=rTorrent Daemon</div><div class="line">After=network.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=forking</div><div class="line">KillMode=none</div><div class="line">User=sdbox</div><div class="line">ExecStart=/usr/bin/tmux new-session -c /mnt/storage/rtorrent -s rtorrent -n rtorrent -d rtorrent</div><div class="line">ExecStop=/usr/bin/bash -c &quot;/usr/bin/tmux send-keys -t rtorrent C-q &amp;&amp; while pidof rtorrent &gt; /dev/null; do sleep 0.5; done&quot;</div><div class="line">WorkingDirectory=/home/sdbox/</div><div class="line">Restart=on-failure</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure>
 <ul>
 <li>Enable rtorrent at boot time and manually start it:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ systemctl --user enable rtorrent</div><div class="line">$ systemctl --user start rtorrent</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ systemctl enable rtorrent</div><div class="line">$ systemctl start rtorrent</div></pre></td></tr></table></figure>
 <p><strong>Source</strong>: <a href="https://www.sdbox.net/noobunschool/seedbox/installer-une-seedbox/" target="_blank" rel="external">sdbox</a>, <a href="https://wiki.archlinux.org/index.php/RTorrent#Installation" target="_blank" rel="external">wiki archlinux</a></p>
 
         </div>
@@ -356,7 +357,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/" data-id="civ8o6tt0001ashj3zuqhlzki" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/" data-id="civfsdi8p0000ncj3odlny7h3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -492,20 +493,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/CSAW-2016-50-kill-forensics/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/archlinux-install-zsh/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            CSAW CTF - 50 - Kill - Forensics
+            ArchLinux - Install Zsh shell and oh-my-zsh
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/archlinux-install-zsh/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/ASIS-2016-ASIS-3-CTF-101-Trivia/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ArchLinux - Install Zsh shell and oh-my-zsh</p>
+        <p class="article-nav-title">ASIS CTF Finals 2016 - 3 - CTF 101 - Trivia</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -520,26 +521,6 @@ ga('send', 'pageview');
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/en/SchoolCTF-2016-100-web-wonder-web/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="School CTF - 100 - Wonder Web - Web" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/SchoolCTF-2016-100-web-wonder-web/" class="title">School CTF - 100 - Wonder Web - Web</a></p>
-                            <p class="item-date"><time datetime="2016-11-06T23:00:00.000Z" itemprop="datePublished">Monday 7 November 2016 (2016-11-07)</time></p>
-                        </div>
-                    </li>
                 
                     <li>
                         
@@ -564,10 +545,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/ECW-2016-Alternative-Persistent-Threat/" class="thumbnail">
+                            <a href="/en/SchoolCTF-2016-100-web-wonder-web/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ECW - 150 - Alternative Persistent Threat - Forensics" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="School CTF - 100 - Wonder Web - Web" class="thumbnail-image"></span>
     
     
 </a>
@@ -576,7 +557,27 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/ECW-2016-Alternative-Persistent-Threat/" class="title">ECW - 150 - Alternative Persistent Threat - Forensics</a></p>
+                            <p class="item-title"><a href="/en/SchoolCTF-2016-100-web-wonder-web/" class="title">School CTF - 100 - Wonder Web - Web</a></p>
+                            <p class="item-date"><time datetime="2016-11-06T23:00:00.000Z" itemprop="datePublished">Monday 7 November 2016 (2016-11-07)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/ECW-2016-carnet-dadresse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ECW - 150 - Carnet d&#39;adresses - Web" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/ECW-2016-carnet-dadresse/" class="title">ECW - 150 - Carnet d&#39;adresses - Web</a></p>
                             <p class="item-date"><time datetime="2016-11-05T23:00:00.000Z" itemprop="datePublished">Sunday 6 November 2016 (2016-11-06)</time></p>
                         </div>
                     </li>
@@ -584,10 +585,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/ECW-2016-authentification/" class="thumbnail">
+                            <a href="/en/ECW-2016-ave-cesar/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ECW - 50 - Authentification - Web" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ECW - 50 - Ave, César! - Cryptography" class="thumbnail-image"></span>
     
     
 </a>
@@ -596,7 +597,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/ECW-2016-authentification/" class="title">ECW - 50 - Authentification - Web</a></p>
+                            <p class="item-title"><a href="/en/ECW-2016-ave-cesar/" class="title">ECW - 50 - Ave, César! - Cryptography</a></p>
                             <p class="item-date"><time datetime="2016-11-05T23:00:00.000Z" itemprop="datePublished">Sunday 6 November 2016 (2016-11-06)</time></p>
                         </div>
                     </li>
@@ -604,10 +605,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/ECW-2016-pas-seulement-BSON/" class="thumbnail">
+                            <a href="/en/ECW-2016-mario/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ECW - 100 - Pas seulement BSON - Web" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="ECW - 50 - Mario - Misc" class="thumbnail-image"></span>
     
     
 </a>
@@ -616,7 +617,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/ECW-2016-pas-seulement-BSON/" class="title">ECW - 100 - Pas seulement BSON - Web</a></p>
+                            <p class="item-title"><a href="/en/ECW-2016-mario/" class="title">ECW - 50 - Mario - Misc</a></p>
                             <p class="item-date"><time datetime="2016-11-05T23:00:00.000Z" itemprop="datePublished">Sunday 6 November 2016 (2016-11-06)</time></p>
                         </div>
                     </li>
