@@ -2,6 +2,7 @@
 layout: post
 title: "ArchLinux - Install rTorrent and ruTorrent"
 date: 2016/09/14
+updated: 2016/11/13
 lang: en
 categories:
 - linux
@@ -11,7 +12,6 @@ tags:
 - archlinux
 thumbnail: /images/tux-293844_640.png
 ---
-# Warning: Post in construction
 
 ## Install rTorrent
 
@@ -30,13 +30,13 @@ As rTorrent package is always up-to-date on Arch repository, it's not needed to 
 + Create the web server root directory if it doesn't already exist:
 
 ```
-# mkdir -p /srv/http
+# mkdir -p /usr/share/nginx/html/
 ```
 
 + Go to the web server folder and clone the [ruTorrent][ruTorrent] git repository into it:
 
 ```
-$ cd /srv/http
+$ cd /usr/share/nginx/html/
 # git clone https://github.com/Novik/ruTorrent.git rutorrent
 ```
 
@@ -107,7 +107,7 @@ upload_max_filesize = 15M
 + For more security, limit the files that can be accessed by php ([open_basedir][open_basedir]):
 
 ```
-open_basedir = /srv/http
+open_basedir = /usr/share/nginx/html/rutorrent
 ```
 
 + Enable and start php-fpm:
@@ -165,7 +165,6 @@ http {
 	types_hash_max_size 2048;
 	server_tokens off;
 
-	# server_names_hash_bucket_size 64;
 	# server_name_in_redirect off;
 
 	include /etc/nginx/mime.types;
@@ -196,7 +195,6 @@ http {
 	# Virtual Host Configs
 	##
 
-	include /etc/nginx/conf.d/*.conf;
 	include /etc/nginx/servers-enabled/*;
 }
 ```
@@ -230,7 +228,7 @@ server {
 server {
 
  listen 443 ssl http2;
- server_name seedbox;
+ server_name seedbox.domain.example.org;
  root /srv/http/rutorrent;
  index index.php index.html index.htm;
 
@@ -284,10 +282,11 @@ server {
 }
 ```
 
++ Don't forget to change ` server_name seedbox.domain.example.org;` with your own domain and create a CNAME entry in your DNS configuration.
 + Enable the server:
 
 ```
-# ln -s /etc/nginx/servers-available/seedbox /etc/nginx/servers-enabled/seedbox
+# ln -s /etc/nginx/servers-available/seedbox.conf /etc/nginx/servers-enabled/seedbox.conf
 ```
 
 ## Configure SSL
@@ -410,8 +409,8 @@ $ echo -n "sdbox:" | sudo tee /etc/nginx/auth/seedbox_auth && openssl passwd -ap
 + Create ruTorrent config file:
 
 ```
-# mkdir /srv/http/rutorrent/conf/users/sdbox
-# vim /srv/http/rutorrent/conf/users/sdbox/config.php
+# mkdir /usr/share/nginx/html/rutorrent/conf/users/sdbox
+# vim /usr/share/nginx/html/rutorrent/conf/users/sdbox/config.php
 ```
 
 + And add the content:
@@ -424,18 +423,20 @@ $topDirectory = '/home/sdbox';
 $scgi_port = 5001;
 $scgi_host = '127.0.0.1';
 $XMLRPCMountPoint = '/SDBOX';
+$tempDirectory = '/usr/share/nginx/html/rutorrent/tmp/';
 ```
 
 + Correct permissions:
 
 ```
-# chown -R http:http /srv/http
+# chown -R http:http /usr/share/nginx/html/rutorrent
+# chmod 0777 /usr/share/nginx/html/rutorrent/share/{settings,torrents,users}
 # systemctl restart nginx.service
 ```
 
 ## Create a rTorrent service
 
-+ Create the file `/etc/systemd/user/rtorrent.service` containing:
++ Create the file `~/.config/systemd/user/rt.service` containing:
 
 ```
 [Unit]
@@ -458,8 +459,8 @@ WantedBy=multi-user.target
 + Enable rtorrent at boot time and manually start it:
 
 ```
-$ systemctl --user enable rtorrent
-$ systemctl --user start rtorrent
+$ systemctl enable rtorrent
+$ systemctl start rtorrent
 ```
 
 **Source**: [sdbox](https://www.sdbox.net/noobunschool/seedbox/installer-une-seedbox/), [wiki archlinux](https://wiki.archlinux.org/index.php/RTorrent#Installation)

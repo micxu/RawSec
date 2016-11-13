@@ -1,0 +1,77 @@
+---
+layout: post
+title: "ArchLinux - Monitor copy progression with Advanced Copy patch"
+date: 2016/11/13
+lang: en
+categories:
+- linux
+- archlinux
+tags:
+- linux
+- archlinux
+thumbnail: /images/tux-293844_640.png
+---
+
+![advcpmv](https://web.archive.org/web/20131115171331/http://beatex.org/web/advcopy/advcpmv-screen-20130313.png)
+
+> Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what's going on.
+
+It was written by Florian Zwicke and released under the GPL.
+
+Original website (http://beatex.org/web/advancedcopy.html) is dead but a backup git repository exist (https://github.com/atdt/advcpmv).
+
+## Compile from sources
+
+You will need [gcc][gcc], [make][make] and [patch][patch].
+
+[gcc]:https://www.archlinux.org/packages/core/x86_64/gcc/
+[make]:https://www.archlinux.org/packages/core/x86_64/make/
+[patch]:https://www.archlinux.org/packages/core/x86_64/patch/
+
+```
+$ wget http://ftp.gnu.org/gnu/coreutils/coreutils-8.21.tar.xz
+$ tar xvJf coreutils-8.21.tar.xz
+$ cd coreutils-8.21/
+$ wget https://raw.githubusercontent.com/atdt/advcpmv/master/advcpmv-0.5-8.21.patch
+$ patch -p1 -i advcpmv-0.5-8.21.patch
+$ ./configure
+$ make
+```
+
+The new programs are now located in src/cp and src/mv. Place them somewhere else:
+
+```
+$ sudo cp src/cp /usr/local/bin/cp
+$ sudo cp src/mv /usr/local/bin/mv
+```
+
+You can make some aliases, for example:
+
+```
+alias cpa='/usr/local/bin/cp -g'
+alias mva='/usr/local/bin/mv -g'
+```
+
+You may want this aliases to be permanent so place them in your `~/.zshrc` (or `~/.bashrc`) or create a profile script containing the two previous aliases:
+
+```
+# vim /etc/profile.d/alias-advcpmv.sh
+```
+
+And then create another profile script for `sudo` otherwise you won't be able to call the previous aliases with `sudo`.
+To be able to pass aliases to `sudo` create the following file:
+
+```
+# vim /etc/profile.d/alias-sudo.sh
+```
+
+Containing:
+
+```
+alias sudo='sudo '
+# whitespace ---^
+```
+
+## Running
+
+Now when using `cpa`, `sudo cpa -rn`, etc... you will use `/usr/local/bin/cp -g`, `sudo /usr/local/bin/cp -grn`, etc...
