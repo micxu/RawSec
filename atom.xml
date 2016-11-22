@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rawsec.ml/"/>
-  <updated>2016-11-22T21:02:36.559Z</updated>
+  <updated>2016-11-22T22:50:01.174Z</updated>
   <id>http://rawsec.ml/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://rawsec.ml/en/RC3CTF-2016-forensics-50-somepang/"/>
     <id>http://rawsec.ml/en/RC3CTF-2016-forensics-50-somepang/</id>
     <published>2016-11-21T23:00:00.000Z</published>
-    <updated>2016-11-22T21:02:36.559Z</updated>
+    <updated>2016-11-22T22:50:01.174Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -83,7 +83,7 @@
     <link href="http://rawsec.ml/en/RC3CTF-2016-forensics-300-breaking-news/"/>
     <id>http://rawsec.ml/en/RC3CTF-2016-forensics-300-breaking-news/</id>
     <published>2016-11-21T23:00:00.000Z</published>
-    <updated>2016-11-22T20:59:05.124Z</updated>
+    <updated>2016-11-22T22:50:01.174Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -148,7 +148,7 @@
     <link href="http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/"/>
     <id>http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/</id>
     <published>2016-11-21T23:00:00.000Z</published>
-    <updated>2016-11-22T21:05:09.729Z</updated>
+    <updated>2016-11-22T22:25:41.835Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -217,7 +217,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/QiwiInfosecCTF-2016-web-100-javascript/"/>
     <id>http://rawsec.ml/en/QiwiInfosecCTF-2016-web-100-javascript/</id>
     <published>2016-11-20T23:00:00.000Z</published>
-    <updated>2016-11-21T08:39:34.624Z</updated>
+    <updated>2016-11-22T22:50:01.201Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -284,7 +284,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/RC3CTF-2016-web-300-bork-bork/"/>
     <id>http://rawsec.ml/en/RC3CTF-2016-web-300-bork-bork/</id>
     <published>2016-11-20T23:00:00.000Z</published>
-    <updated>2016-11-21T09:52:29.271Z</updated>
+    <updated>2016-11-22T22:50:01.171Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -373,7 +373,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/"/>
     <id>http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/</id>
     <published>2016-11-20T23:00:00.000Z</published>
-    <updated>2016-11-21T09:28:40.987Z</updated>
+    <updated>2016-11-22T22:50:01.171Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -439,7 +439,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/"/>
     <id>http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/</id>
     <published>2016-11-20T23:00:00.000Z</published>
-    <updated>2016-11-21T09:28:40.984Z</updated>
+    <updated>2016-11-22T22:50:01.171Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -572,7 +572,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/SchoolCTF-2016-100-forensics-n4M3/"/>
     <id>http://rawsec.ml/en/SchoolCTF-2016-100-forensics-n4M3/</id>
     <published>2016-11-06T23:00:00.000Z</published>
-    <updated>2016-11-07T22:33:36.955Z</updated>
+    <updated>2016-11-22T22:50:01.131Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -632,7 +632,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/SchoolCTF-2016-100-web-wonder-web/"/>
     <id>http://rawsec.ml/en/SchoolCTF-2016-100-web-wonder-web/</id>
     <published>2016-11-06T23:00:00.000Z</published>
-    <updated>2016-11-07T22:33:36.958Z</updated>
+    <updated>2016-11-22T22:50:01.157Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -702,7 +702,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/ECW-2016-dilemme/"/>
     <id>http://rawsec.ml/en/ECW-2016-dilemme/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:52.883Z</updated>
+    <updated>2016-11-22T22:50:01.161Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -770,7 +770,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/"/>
     <id>http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:57.227Z</updated>
+    <updated>2016-11-22T22:50:01.164Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -833,7 +833,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/ECW-2016-mario/"/>
     <id>http://rawsec.ml/en/ECW-2016-mario/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:45:10.780Z</updated>
+    <updated>2016-11-22T22:50:01.161Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -905,7 +905,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/ECW-2016-carnet-dadresse/"/>
     <id>http://rawsec.ml/en/ECW-2016-carnet-dadresse/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:45:06.257Z</updated>
+    <updated>2016-11-22T22:50:01.167Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -990,7 +990,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/ECW-2016-ave-cesar/"/>
     <id>http://rawsec.ml/en/ECW-2016-ave-cesar/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:48.247Z</updated>
+    <updated>2016-11-22T22:50:01.161Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1050,7 +1050,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/ECW-2016-authentification/"/>
     <id>http://rawsec.ml/en/ECW-2016-authentification/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:45:01.537Z</updated>
+    <updated>2016-11-22T22:50:01.164Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1123,7 +1123,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/"/>
     <id>http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:43.303Z</updated>
+    <updated>2016-11-22T22:50:01.164Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1194,7 +1194,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/"/>
     <id>http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/</id>
     <published>2016-11-04T23:00:00.000Z</published>
-    <updated>2016-11-05T17:33:07.876Z</updated>
+    <updated>2016-11-22T22:50:01.201Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1270,7 +1270,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     <link href="http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/"/>
     <id>http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/</id>
     <published>2016-11-04T23:00:00.000Z</published>
-    <updated>2016-11-05T17:33:07.876Z</updated>
+    <updated>2016-11-22T22:50:01.201Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
