@@ -11,7 +11,7 @@ tags:
   - ctf
   - reverse
 date: 2016/08/25
-thumbnail: /images/security-265130_640.jpg
+thumbnail: /images/ctf.png
 ---
 ## Informations
 

@@ -11,7 +11,7 @@ tags:
   - ctf
   - guessing
 date: 2016/07/23
-thumbnail: /images/security-265130_640.jpg
+thumbnail: /images/ctf.png
 ---
 ## Informations
 

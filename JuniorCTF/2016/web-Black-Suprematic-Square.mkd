@@ -1,0 +1,89 @@
+---
+layout: post
+title: "Juniors CTF - 100 - Black Suprematic Square - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/27
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Juniors CTF 2016
+- **Website** : [juniors.ctf.org.ru](https://juniors.ctf.org.ru/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/391)
+
+### Description
+
+categories: trivial, web
+
+> ![](http://i.imgur.com/8QgIphK.jpg)
+>
+>  M.Iu.Lupanov
+
+source:
+
+```html
+[...]
+<div id="task_header">Black Suprematic Square</div>
+<div id="task_body">
+  <center>
+    <div style="width: 478px;">
+<img src = "http://juniors.ucoz.net/Black_Suprematic_Square.jpg" >
+<img src = "http://juniors.ucoz.net/Black_And_White_Symbols.jpg" width=0>
+</div>
+[...]
+```
+
+This image was hidden: ![](http://juniors.ucoz.net/Black_And_White_Symbols.jpg)
+
+## Solution
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––[~/CTF/JuniorCTF/2016]
+$ exiftool Black-Suprematic-Square/Black_And_White_Symbols.jpg
+ExifTool Version Number         : 10.20
+File Name                       : Black_And_White_Symbols.jpg
+Directory                       : Black-Suprematic-Square
+File Size                       : 76 kB
+File Modification Date/Time     : 2016:11:22 02:19:51+01:00
+File Access Date/Time           : 2016:11:25 16:15:54+01:00
+File Inode Change Date/Time     : 2016:11:25 16:15:54+01:00
+File Permissions                : rw-r--r--
+File Type                       : JPEG
+File Type Extension             : jpg
+MIME Type                       : image/jpeg
+JFIF Version                    : 1.01
+Resolution Unit                 : inches
+X Resolution                    : 72
+Y Resolution                    : 72
+Comment                         : aima0AiwahsidupaiToehoong1PhieruqueivahphieKah7uceetair9aiGae1eSsaedoo4becooShohhu8eifahXi7EJoh2gaephechei5chiP9
+Image Width                     : 477
+Image Height                    : 406
+Encoding Process                : Progressive DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)
+Image Size                      : 477x406
+Megapixels                      : 0.194
+```
+
+`aima0AiwahsidupaiToehoong1PhieruqueivahphieKah7uceetair9aiGae1eSsaedoo4becooShohhu8eifahXi7EJoh2gaephechei5chiP9` was the flag.
+
+**Feedback**: no flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like.

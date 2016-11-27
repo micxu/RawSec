@@ -1,0 +1,145 @@
+---
+layout: post
+title: "RC3 CTF - 200 - Bridge of Cyber - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/11/21
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : RC3 CTF 2016
+- **Website** : [http://ctf.rc3.club/](http://ctf.rc3.club/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/389)
+
+### Description
+
+> Welcome to the "Bridge of Cyber"! It's the same concept as the "Bridge of Death" in Holy Grail. Our DNS servers aren't very good at their job because they ask more questions then they answer. Let's see if you can get the flag from our DNS.
+>
+> Nameserver: ns-920.awsdns-51.net
+>
+> Domain: misc200.ctf.rc3.club
+
+## Solution
+
+What we know:
++ Domain: `misc200.ctf.rc3.club`
++ Name Server: `ns-920.awsdns-51.net`
++ We look for questions so probably TXT records
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]
+$ drill misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT
+;; ->>HEADER<<- opcode: QUERY, rcode: NOERROR, id: 21494
+;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0
+;; QUESTION SECTION:
+;; misc200.ctf.rc3.club.	IN	TXT
+
+;; ANSWER SECTION:
+misc200.ctf.rc3.club.	300	IN	TXT	"What is the air-speed velocity of an unladen swallow"
+
+;; AUTHORITY SECTION:
+misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.
+misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.
+misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.
+misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.
+
+;; ADDITIONAL SECTION:
+
+;; Query time: 225 msec
+;; SERVER: 205.251.195.152
+;; WHEN: Sun Nov 20 12:01:47 2016
+;; MSG SIZE  rcvd: 243
+```
+
+So we get the first question: "What is the air-speed velocity of an unladen swallow" is a question from "Bridge of Death" in Holy Grail of Monty Python.
+
+The answer is:
+
+> What do you mean? An African or European swallow?
+
+The first idea that matched "How to send the answer" was by prefixing the answer to the domain.
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]
+$ drill european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT
+[...]
+european.misc200.ctf.rc3.club.	300	IN	TXT	"The roundest knight at king arthurs table was sir cumference. He acquired his size from too much __"
+[...]
+```
+
+> The roundest knight at king Arthur’s round table was Sir Cumference. He acquired his size from too much pi.
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]
+$ drill pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT
+[...]
+pi.european.misc200.ctf.rc3.club.	300	IN	TXT	"What is it that no man ever yet did see, which never was, but always is to be?"
+[...]
+```
+
+> Tomorrow
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]
+$ drill tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT
+[...]
+tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	TXT	"My favorite things in life don't cost any money. It's really clear that the most precious resource we all have is ___"
+[...]
+```
+
+> My favorite things in life don't cost any money. It's really clear that the most precious resource we all have is time.
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]
+$ drill time.tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net ANY
+;; ->>HEADER<<- opcode: QUERY, rcode: NOERROR, id: 52009
+;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0
+;; QUESTION SECTION:
+;; time.tomorrow.pi.european.misc200.ctf.rc3.club.	IN	TYPE255
+
+;; ANSWER SECTION:
+time.tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	SPF	"RC3-2016-cyb3rxr05"
+
+;; AUTHORITY SECTION:
+misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.
+misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.
+misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.
+misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.
+
+;; ADDITIONAL SECTION:
+
+;; Query time: 5244 msec
+;; SERVER: 205.251.195.152
+;; WHEN: Sun Nov 20 19:48:48 2016
+;; MSG SIZE  rcvd: 235
+```
+
+So we get the flag: `RC3-2016-cyb3rxr05`.
+
+Or may be it was possible to do it with `african`:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]
+$ drill african.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT
+[...]
+african.misc200.ctf.rc3.club.	300	IN	TXT	"Why was the developer broke? He spent all of his"
+[...]
+```

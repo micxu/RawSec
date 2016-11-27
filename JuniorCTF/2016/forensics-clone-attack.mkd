@@ -1,0 +1,125 @@
+---
+layout: post
+title: "Juniors CTF - 200 - Clone Attack - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensics
+date: 2016/11/27
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Juniors CTF 2016
+- **Website** : [juniors.ctf.org.ru](https://juniors.ctf.org.ru/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/391)
+
+### Description
+
+categories: trivial, forensics
+
+>  Gravity Falls is under clones attack. Find the real Dipper and save the town
+>
+> https://yadi.sk/d/ekEIo3nwy22JC, http://juniors.ucoz.net/dipper2.png
+>
+> ![](https://i.imgbox.com/iiiv8xc8.png)
+>
+> Lupanov M.Iu.<br><br>
+
+## Solution
+
++ `dipper2.jpg` is useless.
++ unzip `dipper.7z`
++ We have 201 images:
+
+```
+[...]
+Ab9t2MDhgeCdtIWM.jpg  HjBQKJSOhcieolm4.jpg  n3dQQ0ZDx3S3UsBr.jpg  T1uPfBLnZwT4gnLy.jpg  zaDSq7pwGh4a38xy.jpg
+ABDOzIFq6epnCnhx.jpg  hk0hHu8tI5DkDyiV.jpg  N4M2CtJ7gr7Jzo9S.jpg  t1xoHMAR0IAkwfd7.jpg  Zb1RJWvpVjXFKfxq.jpg
+aBHn54lpn0JuymBI.jpg  HKjCtFdy5EL15cXH.jpg  N5muaN8pZFaQizT6.jpg  t2FNLj2HOKnT1naO.jpg  ZcAZFv16zVB2Xoih.jpg
+AbmIxXZ4ReLk7UYM.jpg  hlB31hrzrOU5RYQg.jpg  N5ZGl2k84vyFp5Br.jpg  t3sXG01KznKJiN9v.jpg  zCYJB6XDGlt8UB58.jpg
+ABNclrsAR0By1bUx.jpg  HLIqYcwvszKfJ2mh.jpg  n6bfa5irSSBzz1IU.jpg  t9IRCSMIJBrvArav.jpg  zD3o8PsmbXmRWNON.jpg
+ac9q61SRl4vlF0td.jpg  hmrrHYgpxaW6V6XU.jpg  n6BS4SVXzrkIRpsu.jpg  TBHJwtjbcXh2GYv9.jpg  zdd9UFYGdxytCbCz.jpg
+[...]
+```
+
++ Let's take a look at the first image:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]
+$ exiftool 07snLOxf2k0rRrT3.jpg
+ExifTool Version Number         : 10.20
+File Name                       : 07snLOxf2k0rRrT3.jpg
+Directory                       : .
+File Size                       : 26 kB
+File Modification Date/Time     : 2016:11:03 04:56:07+01:00
+File Access Date/Time           : 2016:11:25 16:47:44+01:00
+File Inode Change Date/Time     : 2016:11:25 16:48:53+01:00
+File Permissions                : rw-r--r--
+File Type                       : JPEG
+File Type Extension             : jpg
+MIME Type                       : image/jpeg
+JFIF Version                    : 1.01
+Resolution Unit                 : inches
+X Resolution                    : 72
+Y Resolution                    : 72
+Current IPTC Digest             : 1f6df1813fc08f735211d55b866d1cca
+Coded Character Set             : UTF8
+Envelope Record Version         : 4
+Object Name                     : Ксерокопия  номер  086
+Application Record Version      : 4
+Comment                         : Flag is MD5sum of this file. Its TRUE
+Image Width                     : 193
+Image Height                    : 400
+Encoding Process                : Progressive DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)
+Image Size                      : 193x400
+Megapixels                      : 0.077
+```
+
++ `Comment                         : Flag is MD5sum of this file. Its TRUE` but all images have the same comment.
++ `Object Name                     : Ксерокопия  номер  086` means `n° of copie 086`, let's fidn teh original:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]
+$ exiftool * | grep 'Object Name'
+[...]
+Object Name                     : Ксерокопия  номер  644
+Object Name                     : Оригинальный Диппер
+Object Name                     : Ксерокопия  номер  702
+[...]
+```
+
++ We found it, `Оригинальный Диппер` means `The original Dipper`:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]
+$ grep -r 'Оригинальный Диппер' ./
+Binary file ./atvF2wf1tfB2IkuV.jpg matches
+[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]
+$ md5sum atvF2wf1tfB2IkuV.jpg
+cd4d19b8471cecbc8ea7544de59db368  atvF2wf1tfB2IkuV.jpg
+```
+
++ `cd4d19b8471cecbc8ea7544de59db368` was the flag.
+
+![](https://i.imgbox.com/K5qOYSYB.jpg)
+
+**Feedback**: it's a international CTF, so please use only english, russian content everywhere is pain for non-russian

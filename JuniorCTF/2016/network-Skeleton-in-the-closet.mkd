@@ -1,0 +1,250 @@
+---
+layout: post
+title: "Juniors CTF - 500 - Skeleton in the closet - Joy"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - joy
+date: 2016/11/27
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Juniors CTF 2016
+- **Website** : [juniors.ctf.org.ru](https://juniors.ctf.org.ru/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/391)
+
+### Description
+
+categories: network, joy, admin
+
+> ![](http://i.imgur.com/bXKRRBB.png)
+>
+> ![](http://i.imgur.com/HnyYDnR.jpg)
+
+> #hint for task with jabber: try to use another clients because clients works differently with anonymous auth.
+
+## Solution
+
+```
+$ echo dipper lo-o-ssE-bo |tr ipodlEsb- ab0j1328.
+jabber 10.0.223.80
+```
+
+with pidgin & wireshark
+
++ domain: 10.0.223.80
++ server: 10.0.223.80
+
+change domaine to:
+mystery-hack.gravity.falls
+
++ domain: mystery-hack.gravity.falls
++ server: 10.0.223.80
+
+Pidgin can't be used because it doesn't support anonymous connection.
+
+Use [Profanity](http://profanity.im/) instead:
+
+```
+/connect anonymous@mystery-hack.gravity.falls server 10.0.223.80
+```
+
+Some people are connected:
+
+```
+dipper@mystery-hack.gravity.falls
+root
+ru2en@bot.talk.google.com
+stand
+```
+
+Let's talk to `dipper@mystery-hack.gravity.falls`:
+
+```
+/msg dipper@mystery-hack.gravity.falls hello
+```
+
+He told us:
++ Russian: `Я очень смышленый парень. Но сейчас не понимаю ни слова.`
++ English: `I am very clever guy. But now I do not understand a word.`
+
+We talked to `stand`:
++ Russian: `Это ты что сейчас сказал? Всегда четко формулируй, что тебе надо. Ты что, русского языка не понимаешь. Тогда тебе сюда: ru2en@bot.talk.google.com`
++ English: `That's what you have just said that? Always articulate what you need. What, you do not understand the Russian language. Then you here: ru2en@bot.talk.google.com`
+
+Admins said us that `ru2en@bot.talk.google.com` doesn't work and we need to use Google Translate and speak to `dipper@mystery-hack.gravity.falls` in russian only.
+
+We tried to invite him in a room but he didn't want to come in:
+
+```
+/join
+/room accept
+/invite dipper@mystery-hack.gravity.falls
+```
+
+We tried to get some infos about him:
+
+```
+/info dipper@mystery-hack.gravity.falls
+11:51:30 - dipper@mystery-hack.gravity.falls:
+11:51:30 - Subscription: none
+```
+
+We checked upload:
+
+```
+/sendfile /etc/hosts
+11:55:25 - XEP-0363 HTTP File Upload is not supported by the server
+```
+
+We added him in contact, check if he had a pgp public key, wanted to subscribe to his presence and allow him to see ours, but it seems he doesn't want to be our friend:
+
+```
+/roster add dipper@mystery-hack.gravity.falls
+/pgp contacts
+/sub request dipper@mystery-hack.gravity.falls
+/sub allow dipper@mystery-hack.gravity.falls
+/sub show dipper@mystery-hack.gravity.falls
+12:20:08 - Awaiting subscription responses from:
+12:20:08 -   dipper@mystery-hack.gravity.falls
+```
+
+Last activity requests are forbidden:
+
+```
+/lastactivity dipper@mystery-hack.gravity.falls
+12:24:27 - Last activity request failed for dipper@mystery-hack.gravity.falls: forbidden
+```
+
+Someone in the Telegram chat talked about `mabel`, so we tried:
+
+```
+/msg mabel@mystery-hack.gravity.falls hello
+```
+
+He said us:
++ russian: `Не понимаю, чего вы хотите? Я богиня разрушения!`
++ english: `I do not know what you want? I am the goddess of destruction!`
+
+Try to list rooms again, this times it works:
+
+```
+/rooms
+13:08:11 - Chat rooms at conference.mystery-hack.gravity.falls:
+13:08:11 -   hall@conference.mystery-hack.gravity.falls, (hall (12))
+13:08:11 -   dipper@conference.mystery-hack.gravity.falls, (dipper (1))
+13:08:11 -   flag_shop@conference.mystery-hack.gravity.falls, (flag_shop (4))
+```
+
+We joined hall (`/join hall`), there is some users:
++ Moderators: stan
++ Participants: dipper, Gideon, mabel, soos, wendy
++ Visitors: ctf players I suppose
+
+We talked to soos:
++ russian: `Чувак, я тебя не понимаю. Хотя мудрость - мое благословение и проклятие.`
++ english: `Dude, I do not understand you. Although wisdom - my blessing and a curse.`
+
+When we talk, giving only keywords, nobody understand us so let's try some complete sentences:
+
+
+To stan:
+
+```
+Me:
+Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)
+
+stan:
+Хотите флаг? (You want to flag?)
+Могу предложить флаг Конфедерации за сотку баксов. (I can offer the Confederate flag for a hundred bucks.)
+Пока рядом нет полиции - все законно! (While not near the police - all legally!)
+ХА-ХА-ХА!!! (Ha-ha-ha !!!)
+Если есть какие-то вопросы - обратитесь к soos (If you have any questions - please contact soos)
+```
+
+To soos:
+
+```
+Me:
+Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)
+
+soos:
+Можно вопрос, зачем тебе флаг? (It is possible to question, why do you a flag?)
+Лучше обратись к dipper, он специалист по загадкам. (Better to turn to the dipper, he riddles specialist.)
+Вообще-то я второстепенный персонаж. (Actually, I'm a minor character.)
+О боже, второстепенные персонажы погибают в первые пять минут. (Oh God, the secondary characters are killed in the first five minutes.)
+Что же делать? (What to do?)
+```
+
+Ok so let's talk to dipper:
+
+```
+Me:
+Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)
+
+dipper:
+Флаг? Причем тут флаг? (Flag? And the flag here?)
+Это очередная загадка Гравити Фолз?. (This is another mystery Gravity Falls ?.)
+Я ее обязательно разгадаю. (I'm sure it unravel.)
+Но сейчас мне некогда, у меня свидание с wendy. (But now I have no time, I have a date with wendy.)
+```
+
+Let's try wendy:
+
+```
+Me:
+Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)
+
+wendy:
+Флаг? Ну да. Почему бы и нет. (Flag? Well yes. Why not.)
+Хотя лучше утка. Или панда. (Although better duck. Or panda.)
+Но по животным у нас специалист mabel (But animals have specialist mabel)
+```
+
+mabel:
+
+```
+Me:
+Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)
+
+mabel:
+Флаг? Нелегально? Я легализую всё, что только можно!" (Flag? Illegally? I legalize everything that is possible!)
+Ой, забыла предстваиться. (Oh, I forgot to introduce myself.)
+Привет, я Мэйбл. Мне двенадцать. (Hi, I'm Mabel. I was twelve.)
+У меня есть waddles. Хотите пожениться? (I have waddles. Want to get married?)
+```
+
+waddles:
+
+```
+Me:
+Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)
+
+waddles:
+Флаг: 骨架 (Flag: 骨架)
+Досвидания. (Bye.)
+```
+
+And `骨架` in chinese means `skeleton`.
+
+We must submit the flag in chinese, not in english.
+
+**Note**: Jabber server was very unstable and we get a lot of *Lost connection.* messages. So we used `/reconnect 1`.
+
+**Feedback**: russian content everywhere, taht's pain for non-russian people, use english only. No flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like. This was a joy only challenge, there is no security in this challenge, so that must not be in a CTF or that should give very few points.

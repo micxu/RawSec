@@ -1,0 +1,89 @@
+---
+layout: post
+title: "Qiwi-Infosec CTF - 100 - javascript - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/21
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Qiwi-Infosec CTF-2016
+- **Website** : [https://qiwictf.ru/](https://qiwictf.ru/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/385)
+
+### Description
+
+> we don't want to make any interface. just solve it
+
+## Solution
+
+We have a packed javascript code:
+
+```javascript
+eval(function(p,a,c,k,e,d){e=function(c){return(c&lt;a?'':e(parseInt(c/a)))+((c=c%a)&gt;35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('18 10(){1a(1b("%o%p%9%3%8%g%a%9%0%1%9%3%a%5%1%6%e%8%2%7%0%F%b%0%0%0%0%j%4%2%0%3%c%4%2%e%0%d%0%G%u%M%D%1c%1d%N%16%11%13%14%17%15%R%w%19%1p%1l%Q%1m%P%1n%U%12%X%V%Y%4%i%3%5%1%o%t%c%g%z%1o%m%1e%9%a%L%1k%2%e%8%p%j%A%1j%1f%E%q%l%s%v%O%1g%n%1h%I%Z%r%1i%d%G%f%b%0%0%0%0%j%4%2%0%1%9%3%a%5%1%5%0%d%0%C%B%f%b%0%0%0%0%j%4%2%0%3%0%d%0%q%f%b%0%0%0%0%A%c%g%m%1%0%6%3%0%k%0%e%8%2%h%m%1%9%t%8%c%7%0%F%b%0%0%0%0%0%0%0%0%j%4%2%0%i%q%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%l%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%s%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%p%o%0%d%0%6%i%q%0%k%k%0%l%n%7%0%r%0%6%6%i%l%0%J%J%0%q%7%0%k%k%0%I%7%0%r%0%6%i%s%0%J%J%0%q%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%q%0%d%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%l%I%7%7%0%y%y%0%l%I%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%l%0%d%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%l%s%7%7%0%y%y%0%l%s%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%s%0%d%0%g%e%w%4%w%6%i%l%7%0%T%0%n%O%0%S%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%n%7%7%0%y%y%0%n%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%v%0%d%0%g%e%w%4%w%6%i%s%7%0%T%0%n%O%0%S%0%6%i%p%o%0%K%0%n%v%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%q%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%l%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%s%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%v%7%f%b%0%0%0%0%H%b%0%0%0%0%2%1%8%p%2%9%0%1%9%3%a%5%1%5%h%z%a%g%9%6%G%G%7%f%b%0%H%b%g%o%0%6%1%9%3%a%5%1%6%3%8%o%h%L%4%e%e%A%a%2%5%h%j%4%m%p%1%7%0%d%d%0%x%4%z%Q%s%w%11%w%z%3%z%N%A%5%N%Z%o%X%E%M%g%Y%9%U%E%V%E%Q%q%R%P%M%p%x%7%F%4%m%1%2%8%6%x%P%c%4%8%0%2%g%t%c%8%W%x%7%f%H%1%m%e%1%F%4%m%1%2%8%6%x%12%2%a%9%t%0%L%4%e%e%A%a%2%5%W%x%7%f%H%0%b"))}10();',62,88,'20|65|72|63|61|64|28|29|74|6E|6F|0A|68|3D|73|3B|69|2E|62|76|3C|31|6C|36|66|75|30|2B|32|67|41|33|4E|22|3E|6A|77|5D|5B|43|7A|7B|27|7D|38|7C|26|70|42|46|34|54|52|4D|3A|3F|56|59|21|58|5A|39|check|48|57|49|4A|4C|47|4B|function|4F|eval|unescape|44|45|6D|79|35|37|2F|78|71|51|53|55|6B|50'.split('|'),0,{}))
+```
+
+I used a javascript desobfuscator: http://matthewfl.com/unPacker.html.
+
+That gave me the following partially unpacked code:
+
+```javascript
+function check()
+	{
+	eval(unescape("%66%75%6E%63%74%69%6F%6E%20%65%6E%63%6F%64%65%28%73%74%72%29%20%7B%0A%20%20%20%20%76%61%72%20%63%68%61%72%73%20%3D%20%27%41%42%43%44%45%46%47%48%49%4A%4B%4C%4D%4E%4F%50%51%52%53%54%55%56%57%58%59%5A%61%62%63%64%65%66%67%68%69%6A%6B%6C%6D%6E%6F%70%71%72%73%74%75%76%77%78%79%7A%30%31%32%33%34%35%36%37%38%39%2B%2F%3D%27%3B%0A%20%20%20%20%76%61%72%20%65%6E%63%6F%64%65%64%20%3D%20%5B%5D%3B%0A%20%20%20%20%76%61%72%20%63%20%3D%20%30%3B%0A%20%20%20%20%77%68%69%6C%65%20%28%63%20%3C%20%73%74%72%2E%6C%65%6E%67%74%68%29%20%7B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%30%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%31%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%32%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%75%66%20%3D%20%28%62%30%20%3C%3C%20%31%36%29%20%2B%20%28%28%62%31%20%7C%7C%20%30%29%20%3C%3C%20%38%29%20%2B%20%28%62%32%20%7C%7C%20%30%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%30%20%3D%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%31%38%29%29%20%3E%3E%20%31%38%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%31%20%3D%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%31%32%29%29%20%3E%3E%20%31%32%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%32%20%3D%20%69%73%4E%61%4E%28%62%31%29%20%3F%20%36%34%20%3A%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%36%29%29%20%3E%3E%20%36%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%33%20%3D%20%69%73%4E%61%4E%28%62%32%29%20%3F%20%36%34%20%3A%20%28%62%75%66%20%26%20%36%33%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%30%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%31%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%32%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%33%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20%72%65%74%75%72%6E%20%65%6E%63%6F%64%65%64%2E%6A%6F%69%6E%28%27%27%29%3B%0A%20%7D%0A%69%66%20%28%65%6E%63%6F%64%65%28%63%74%66%2E%70%61%73%73%77%6F%72%64%2E%76%61%6C%75%65%29%20%3D%3D%20%22%61%6A%52%32%4E%48%4E%6A%63%6A%46%77%64%46%39%66%58%7A%42%69%5A%6E%56%7A%59%7A%52%30%4D%54%42%75%22%29%7B%61%6C%65%72%74%28%22%54%68%61%74%20%72%69%67%68%74%21%22%29%3B%7D%65%6C%73%65%7B%61%6C%65%72%74%28%22%57%72%6F%6E%67%20%70%61%73%73%77%6F%72%64%21%22%29%3B%7D%20%0A"))
+}
+check();
+```
+
+SO I ran the `uneascape()` function and that gave me this clear code:
+
+```javascript
+function encode(str) {
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+    var encoded = [];
+    var c = 0;
+    while (c < str.length) {
+        var b0 = str.charCodeAt(c++);
+        var b1 = str.charCodeAt(c++);
+        var b2 = str.charCodeAt(c++);
+        var buf = (b0 << 16) + ((b1 || 0) << 8) + (b2 || 0);
+        var i0 = (buf & (63 << 18)) >> 18;
+        var i1 = (buf & (63 << 12)) >> 12;
+        var i2 = isNaN(b1) ? 64 : (buf & (63 << 6)) >> 6;
+        var i3 = isNaN(b2) ? 64 : (buf & 63);
+        encoded[encoded.length] = chars.charAt(i0);
+        encoded[encoded.length] = chars.charAt(i1);
+        encoded[encoded.length] = chars.charAt(i2);
+        encoded[encoded.length] = chars.charAt(i3);
+    }
+    return encoded.join('');
+ }
+if (encode(ctf.password.value) == "ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu"){alert("That right!");}else{alert("Wrong password!");}
+```
+
+We can see that once encoded the password need to match `ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu`.
+
+Take a look: `var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';` is the base64 alphabet.
+Try to decode `ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu` in base64 and we get `j4v4scr1pt___0bfusc4t10n`.
+
+Just to check, execute `encode('j4v4scr1pt___0bfusc4t10n')` and you get `ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu`.
+
+So this obfuscated function is just doing base64. Our flag is `j4v4scr1pt___0bfusc4t10n`.

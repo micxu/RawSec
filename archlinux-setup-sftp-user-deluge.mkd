@@ -65,7 +65,7 @@ Match User sftpuser
 + Test sftp access: (sftp user should be placed in the chroot environment)
 
 ```
-# sftp sftpuser@localhost -P $SSH_PORT$
+# sftp -P $SSH_PORT$ sftpuser@localhost
 ```
 
 + Create the torrent folder to let sftp user access to deluge download folder:

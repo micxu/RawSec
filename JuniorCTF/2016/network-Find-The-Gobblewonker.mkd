@@ -1,0 +1,56 @@
+---
+layout: post
+title: "Juniors CTF - 100 - Find The Gobblewonker - Network"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - network
+date: 2016/11/27
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Juniors CTF 2016
+- **Website** : [juniors.ctf.org.ru](https://juniors.ctf.org.ru/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/391)
+
+### Description
+
+categories: trivial, network, admin, web
+
+> Do you want to find yourself on an island wih monsters?
+> Here are cordinates of it 10.0.17.131
+> But it's not as easy as it seems. You need a boat.
+> You will find the boat there: https://scoreboard.ctf.org.ru/vpn/YOU_TEAM_TOKEN.7z
+>
+> You'll need this boat for travelling to the other islands. Fair winds and following seas!
+>
+> ![](http://juniors.ucoz.net/hqdefault.jpg)
+>
+> M.Iu.Lupanov
+
+## Solution
+
++ Download your VPN archive.
++ Of course unzip it.
++ Connect with OpenVPN.
++ Go to `10.0.17.131`. And see:
+
+![](http://i.imgur.com/DcI9hAc.png)
+
+Flag was `q8mvbp8sFNPpFj2dZkEkweNEFdBIuhVYkEr2brnj2qstJ3QbAtklx0imht8pdb2PafDIXs3Sxojl3m5q`.

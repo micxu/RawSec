@@ -11,7 +11,7 @@ tags:
   - ctf
   - web
 date: 2016/08/16
-thumbnail: /images/security-265130_640.jpg
+thumbnail: /images/ctf.png
 ---
 ## Informations
 

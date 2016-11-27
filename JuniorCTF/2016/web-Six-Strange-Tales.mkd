@@ -1,0 +1,111 @@
+---
+layout: post
+title: "Juniors CTF - 300 - Six Strange Tales - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/27
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Juniors CTF 2016
+- **Website** : [juniors.ctf.org.ru](https://juniors.ctf.org.ru/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/391)
+
+### Description
+
+categories: web
+
+> ![](http://i.imgur.com/nuiH6tv.jpg)
+>
+> - Gruncle Stan, what's the secret of the six fingered hand?
+> - Can you see these codes? When the six fingered hand touches them, one of the Gravity Falls secrets opens!
+> - Gruncle, but how should we read the secret? From left to right or right to left? Or maybe upside down?
+> - It depends on whether you are a Christian, a Muslim or a Taoist...
+>
+> ![](http://i.imgur.com/GIYH3fA.png)
+>
+> Lupanov M.Iu.
+
+## Solution
+
+Let's see source code of the web page:
+
+```html
+[...]
+<canvas id="img" width="717" height="380">
+flag={fH7eAHJT3tXWD1e7afAvVfhcb}      
+</canvas>
+<script type="text/javascript"> <!--
+window.addEventListener('load', function () {
+var b = document.getElementById('img');
+var a = b.getContext('2d');
+var d = new Image();
+d.src = "http://i.imgur.com/GIYH3fA.png";
+d.addEventListener('load', function () {
+a.drawImage(this, 0, 0);
+k = 174;
+l = 345;
+m = 12;
+n = 89;
+o = 671;
+p = 18;
+q = 222;
+r = q-1;
+c="rgba(0,0,0,0)";
+if (navigator.userAgent == "Gravity Falls")
+c=c.replace(/(0)(\))/,"$1.5$2");
+a.fillStyle = c;         
+a.fillRect(q%m-6, k-3, n+r-q-2, 5-(p-q));
+a.fillRect(2*(q+1), p+1, n+r-q+2, l+16);
+a.fillRect(l+r-30, o%p-5, 2*l-600, q+5-p);
+a.fillRect(q%n+42, o%p-5, o-600+p+1, 2*(p+1));
+a.fillRect(176, o%p-5, 2*l-600, q/2*3+47);
+a.fillRect(2*k+p-100, q%m-6, o-600+p+1, n+r-m/2);
+a.fillRect(o%p-5, q%m-6, 2*l-604, k-p-4);
+a.fillRect(2*k+p-100, q/2*3-10, 3*m+p*3, (p+1)*3);
+a.fillRect(2*k+p-m+2, q%m-6,2*l-600, q+n+m-190);
+a.fillRect(2*k+p-10, k-p-m/3, o-600+p+1, r+m*2/3+p);
+a.fillRect(n-3, q-k+9, 2*(l-300), q+n+m);
+a.fillRect(l+q-31, q+m/2,2*l-600, k-p-m/3);
+a.fillRect(o-2*p-p/2, q%m-6, 2*l-600, q/2*3+47);
+},false);},false);
+// --></script>
+```
+
+`flag={fH7eAHJT3tXWD1e7afAvVfhcb}` is not the good flag, it needs transformations.
+
+We can see that we need a different user agent: `Gravity Falls`.
+
+We changed our user agent to `Gravity Falls` and reloaded the page, the image has changed:
+
+![](http://i.imgur.com/PT2D2mi.png)
+
+Let's mix them: `AhWae2Oh`, `Is4feeh3`, `ud2juD9a`, `aej8eeTh`, `Maiy2au0`, `dawu0Aeb`.
+
++ left to right: `AhWae2OhIs4feeh3ud2juD9aaej8eeThMaiy2au0dawu0Aeb`
++ right to left: `dawu0AebMaiy2au0aej8eeThud2juD9aIs4feeh3AhWae2Oh`
++ upside down: `Maiy2au0Is4feeh3aej8eeThAhWae2Ohdawu0Aebud2juD9a`
+
+http://gravityfalls.wikia.com/wiki/Scary-oke is no help.
+
+`AhWae2OhIs4feeh3ud2juD9aaej8eeThMaiy2au0dawu0Aeb` was the flag.
+
+**Feedback**: This is more a joy than a web and this isn't really about security. I'm tired to see challenge like that. No flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like.

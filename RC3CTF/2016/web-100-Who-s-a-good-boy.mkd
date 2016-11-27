@@ -1,0 +1,106 @@
+---
+layout: post
+title: "RC3 CTF - 100 - Who's a good boy - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/21
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : RC3 CTF 2016
+- **Website** : [http://ctf.rc3.club/](http://ctf.rc3.club/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/389)
+
+### Description
+
+> You’re trying to see the cute dog pictures on ctf.rc3.club. But every time you click on one of them, it brings you to a bad gateway.
+>
+> https://ctf.rc3.club:3000/
+>
+> -- Your friendly neighborhood webadmin
+
+## Solution
+
+We can see that one of the image is not like all others:
+
+```html
+[...]
+<img class="phil me up"
+src="http://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/doge-pattern-27481-2880x1800.jpg">
+<h4>the absolute mostest?</p>
+<img class="philarydufflebag"
+src="http://admissions.vanderbilt.edu/insidedores/doge/this-aint-the-RC3-flag-we're-getting-there-though.jpg">
+<h4>CTF flags!!1!</p>
+<img class="guys the flag is!"
+src="http://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/doge-pattern-27481-2880x1800.jpg">
+<h4>Find the Phil</p>
+[...]
+```
+
+But this image doesn't exist, and is not cached in the WayBackMachine.
+
+Each image has a different class:
+
+```html
+<img class="why hello there"
+<img class="try not to get too distracted"
+<img class="or infuriated"
+<img class="don't give up, you can do it!"
+<img class="hey, by the way"
+<img class="have you ever"
+<img class="heard of phil"
+<img class="phil's a good name"
+<img class="philly phil phil"
+<img class="philthy phil"
+<img class="now if only there was a way to philter out this nonsense"
+<img class="phil likes phalgs?"
+<img class="phil's gone phishing"
+<img class ="philet-o-phish"
+<img class= "philament"
+<img class = "philanthropy"
+<img class="phil me up"
+<img class="philarydufflebag"
+<img class="guys the flag is!"
+<img class="phil pills r phor phil's phlegm"
+<img class="not phil nor phlag"
+<img class=i like scary philms"
+<img class=phillllllyy"
+<img class= philadelphia"
+<img class="fill me up with dreams of phil"
+<img class="still not phil"
+<img class="also not phil"
+<img class="not phil"
+```
+
+See what is the mess in the css:
+
+```css
+[...]
+.philarydufflebag{
+
+/*hiya*/
+/*compress your frontend*/
+/*here's a flag :)*/
+flag:RC3-2016-CanineSS
+}
+```
+
+Flag was not well hidden: `RC3-2016-CanineSS`.

