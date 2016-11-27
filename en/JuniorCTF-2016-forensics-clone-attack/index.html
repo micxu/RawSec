@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Juniors CTF - 200 - Clone Attack - Forensics | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="security,writeups,ctf,forensics" />
+    
+    <meta name="description" content="InformationsVersion
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+Name : Juniors CTF 2016
+Website : juniors.ctf.org.ru
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+Descriptioncategories: triv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Juniors CTF - 200 - Clone Attack - Forensics">
+<meta property="og:url" content="http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="InformationsVersion
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+Name : Juniors CTF 2016
+Website : juniors.ctf.org.ru
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+Descriptioncategories: triv">
+<meta property="og:image" content="http://rawsec.ml/images/ctf.png">
+<meta property="og:updated_time" content="2016-11-27T21:54:59.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Juniors CTF - 200 - Clone Attack - Forensics">
+<meta name="twitter:description" content="InformationsVersion
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+Name : Juniors CTF 2016
+Website : juniors.ctf.org.ru
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+Descriptioncategories: triv">
+<meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/security/writeups/">writeups</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-JuniorCTF-2016-forensics-clone-attack" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Juniors CTF - 200 - Clone Attack - Forensics
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/JuniorCTF-2016-forensics-clone-attack/" class="article-date">
+    <time datetime="2016-11-26T23:00:00.000Z" itemprop="datePublished">Sunday 27 November 2016 (2016-11-27)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forensics/">forensics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeups/">writeups</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : Juniors CTF 2016</li>
+<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: trivial, forensics</p>
+<blockquote>
+<p> Gravity Falls is under clones attack. Find the real Dipper and save the town</p>
+<p><a href="https://yadi.sk/d/ekEIo3nwy22JC" target="_blank" rel="external">https://yadi.sk/d/ekEIo3nwy22JC</a>, <a href="http://juniors.ucoz.net/dipper2.png" target="_blank" rel="external">http://juniors.ucoz.net/dipper2.png</a></p>
+<p><img src="https://i.imgbox.com/iiiv8xc8.png" alt=""></p>
+<p>Lupanov M.Iu.<br><br></p>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<li><code>dipper2.jpg</code> is useless.</li>
+<li>unzip <code>dipper.7z</code></li>
+<li>We have 201 images:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">Ab9t2MDhgeCdtIWM.jpg  HjBQKJSOhcieolm4.jpg  n3dQQ0ZDx3S3UsBr.jpg  T1uPfBLnZwT4gnLy.jpg  zaDSq7pwGh4a38xy.jpg</div><div class="line">ABDOzIFq6epnCnhx.jpg  hk0hHu8tI5DkDyiV.jpg  N4M2CtJ7gr7Jzo9S.jpg  t1xoHMAR0IAkwfd7.jpg  Zb1RJWvpVjXFKfxq.jpg</div><div class="line">aBHn54lpn0JuymBI.jpg  HKjCtFdy5EL15cXH.jpg  N5muaN8pZFaQizT6.jpg  t2FNLj2HOKnT1naO.jpg  ZcAZFv16zVB2Xoih.jpg</div><div class="line">AbmIxXZ4ReLk7UYM.jpg  hlB31hrzrOU5RYQg.jpg  N5ZGl2k84vyFp5Br.jpg  t3sXG01KznKJiN9v.jpg  zCYJB6XDGlt8UB58.jpg</div><div class="line">ABNclrsAR0By1bUx.jpg  HLIqYcwvszKfJ2mh.jpg  n6bfa5irSSBzz1IU.jpg  t9IRCSMIJBrvArav.jpg  zD3o8PsmbXmRWNON.jpg</div><div class="line">ac9q61SRl4vlF0td.jpg  hmrrHYgpxaW6V6XU.jpg  n6BS4SVXzrkIRpsu.jpg  TBHJwtjbcXh2GYv9.jpg  zdd9UFYGdxytCbCz.jpg</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<ul>
+<li>Let’s take a look at the first image:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool 07snLOxf2k0rRrT3.jpg</div><div class="line">ExifTool Version Number         : 10.20</div><div class="line">File Name                       : 07snLOxf2k0rRrT3.jpg</div><div class="line">Directory                       : .</div><div class="line">File Size                       : 26 kB</div><div class="line">File Modification Date/Time     : 2016:11:03 04:56:07+01:00</div><div class="line">File Access Date/Time           : 2016:11:25 16:47:44+01:00</div><div class="line">File Inode Change Date/Time     : 2016:11:25 16:48:53+01:00</div><div class="line">File Permissions                : rw-r--r--</div><div class="line">File Type                       : JPEG</div><div class="line">File Type Extension             : jpg</div><div class="line">MIME Type                       : image/jpeg</div><div class="line">JFIF Version                    : 1.01</div><div class="line">Resolution Unit                 : inches</div><div class="line">X Resolution                    : 72</div><div class="line">Y Resolution                    : 72</div><div class="line">Current IPTC Digest             : 1f6df1813fc08f735211d55b866d1cca</div><div class="line">Coded Character Set             : UTF8</div><div class="line">Envelope Record Version         : 4</div><div class="line">Object Name                     : Ксерокопия  номер  086</div><div class="line">Application Record Version      : 4</div><div class="line">Comment                         : Flag is MD5sum of this file. Its TRUE</div><div class="line">Image Width                     : 193</div><div class="line">Image Height                    : 400</div><div class="line">Encoding Process                : Progressive DCT, Huffman coding</div><div class="line">Bits Per Sample                 : 8</div><div class="line">Color Components                : 3</div><div class="line">Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)</div><div class="line">Image Size                      : 193x400</div><div class="line">Megapixels                      : 0.077</div></pre></td></tr></table></figure>
+<ul>
+<li><code>Comment                         : Flag is MD5sum of this file. Its TRUE</code> but all images have the same comment.</li>
+<li><code>Object Name                     : Ксерокопия  номер  086</code> means <code>n° of copie 086</code>, let’s fidn teh original:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool * | grep &apos;Object Name&apos;</div><div class="line">[...]</div><div class="line">Object Name                     : Ксерокопия  номер  644</div><div class="line">Object Name                     : Оригинальный Диппер</div><div class="line">Object Name                     : Ксерокопия  номер  702</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<ul>
+<li>We found it, <code>Оригинальный Диппер</code> means <code>The original Dipper</code>:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ grep -r &apos;Оригинальный Диппер&apos; ./</div><div class="line">Binary file ./atvF2wf1tfB2IkuV.jpg matches</div><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ md5sum atvF2wf1tfB2IkuV.jpg</div><div class="line">cd4d19b8471cecbc8ea7544de59db368  atvF2wf1tfB2IkuV.jpg</div></pre></td></tr></table></figure>
+<ul>
+<li><code>cd4d19b8471cecbc8ea7544de59db368</code> was the flag.</li>
+</ul>
+<p><img src="https://i.imgbox.com/K5qOYSYB.jpg" alt=""></p>
+<p><strong>Feedback</strong>: it’s a international CTF, so please use only english, russian content everywhere is pain for non-russian</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/" data-id="ciw17j4jm00hqq1j3dhkvlnzb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Juniors CTF - 500 - Lost everything but hope - Forensics
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/en/JuniorCTF-2016-network-Skeleton-in-the-closet/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Juniors CTF - 500 - Skeleton in the closet - Joy</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/JuniorCTF-2016-network-Find-The-Gobblewonker/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Juniors CTF - 100 - Find The Gobblewonker - Network" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/JuniorCTF-2016-network-Find-The-Gobblewonker/" class="title">Juniors CTF - 100 - Find The Gobblewonker - Network</a></p>
+                            <p class="item-date"><time datetime="2016-11-26T23:00:00.000Z" itemprop="datePublished">Sunday 27 November 2016 (2016-11-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/JuniorCTF-2016-forensics-Dirty-Repo/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Juniors CTF - 400 - Dirty Repo - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/JuniorCTF-2016-forensics-Dirty-Repo/" class="title">Juniors CTF - 400 - Dirty Repo - Forensics</a></p>
+                            <p class="item-date"><time datetime="2016-11-26T23:00:00.000Z" itemprop="datePublished">Sunday 27 November 2016 (2016-11-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Juniors CTF - 500 - Lost everything but hope - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/" class="title">Juniors CTF - 500 - Lost everything but hope - Forensics</a></p>
+                            <p class="item-date"><time datetime="2016-11-26T23:00:00.000Z" itemprop="datePublished">Sunday 27 November 2016 (2016-11-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/JuniorCTF-2016-forensics-clone-attack/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Juniors CTF - 200 - Clone Attack - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/JuniorCTF-2016-forensics-clone-attack/" class="title">Juniors CTF - 200 - Clone Attack - Forensics</a></p>
+                            <p class="item-date"><time datetime="2016-11-26T23:00:00.000Z" itemprop="datePublished">Sunday 27 November 2016 (2016-11-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/JuniorCTF-2016-network-Skeleton-in-the-closet/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Juniors CTF - 500 - Skeleton in the closet - Joy" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/JuniorCTF-2016-network-Skeleton-in-the-closet/" class="title">Juniors CTF - 500 - Skeleton in the closet - Joy</a></p>
+                            <p class="item-date"><time datetime="2016-11-26T23:00:00.000Z" itemprop="datePublished">Sunday 27 November 2016 (2016-11-27)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">25</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/">operating system</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/operating-system/windows/">windows</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">79</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 13.08px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.77px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.77px;">centos</a> <a href="/tags/crypto/" style="font-size: 15.38px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.23px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensic/" style="font-size: 10px;">forensic</a> <a href="/tags/forensics/" style="font-size: 16.92px;">forensics</a> <a href="/tags/git/" style="font-size: 11.54px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.77px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.77px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.46px;">linux</a> <a href="/tags/misc/" style="font-size: 15.38px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.77px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 13.85px;">news</a> <a href="/tags/opensuse/" style="font-size: 13.08px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.77px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 11.54px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.77px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 11.54px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.77px;">reverse</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.77px;">ssh</a> <a href="/tags/stegano/" style="font-size: 11.54px;">stegano</a> <a href="/tags/system/" style="font-size: 16.15px;">system</a> <a href="/tags/tor/" style="font-size: 10.77px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.77px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.77px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 14.62px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.77px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 17.69px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 12.31px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.23px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
