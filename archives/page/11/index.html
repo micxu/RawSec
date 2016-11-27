@@ -352,60 +352,6 @@ Na
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/en/virtualbox-shared-folder-with-guest/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/tux-293844_640.png)" alt="Virtualbox : shared folder with guest" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/virtualbox-shared-folder-with-guest/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/linux/">linux</a>
-            </p>
-            <p class="date"><time datetime="2016-05-20T22:00:00.000Z" itemprop="datePublished">Saturday 21 May 2016 (2016-05-21)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/virtualbox-shared-folder-with-guest/">Virtualbox : shared folder with guest</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            This how-to works independently of the host platform.
-On virtualbox :
-
-Open the Configuration window of the VM (guest)
-Select Shared folder on the left menu
-Click on the icon corresponding to Add a sh
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/en/how-to-manually-configure-firefox-waterfox-language/" class="thumbnail">
     
     
@@ -445,6 +391,60 @@ Choos the architecture, ex: linux-x86_64
 Go into the xpi folder
 Choose a language, ex: fr.xpi
 Click on the cho
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/en/virtualbox-shared-folder-with-guest/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/tux-293844_640.png)" alt="Virtualbox : shared folder with guest" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/virtualbox-shared-folder-with-guest/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/linux/">linux</a>
+            </p>
+            <p class="date"><time datetime="2016-05-20T22:00:00.000Z" itemprop="datePublished">Saturday 21 May 2016 (2016-05-21)</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/en/virtualbox-shared-folder-with-guest/">Virtualbox : shared folder with guest</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            This how-to works independently of the host platform.
+On virtualbox :
+
+Open the Configuration window of the VM (guest)
+Select Shared folder on the left menu
+Click on the icon corresponding to Add a sh
         </p>
     </div>
 </article>
@@ -654,17 +654,17 @@ Notes : vdi are
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/en/disable-ssh-login-for-root-user/" class="thumbnail">
+        <a href="/en/vm-automatic-start-hyperv-powershell/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="How to disable SSH login for the root user" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Windows_logo.svg)" alt="How to configure VM Auto Start in Hyper-V with PowerShell" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/disable-ssh-login-for-root-user/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/vm-automatic-start-hyperv-powershell/">0</span>
     
 </span>
 
@@ -674,24 +674,25 @@ Notes : vdi are
         
         <div class="article-meta">
             <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/operating-system/">operating system</a>
+            <a class="article-category-link" href="/categories/windows/">windows</a>
             </p>
             <p class="date"><time datetime="2016-04-06T22:00:00.000Z" itemprop="datePublished">Thursday 7 April 2016 (2016-04-07)</time></p>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/en/disable-ssh-login-for-root-user/">How to disable SSH login for the root user</a>
+        <a href="/en/vm-automatic-start-hyperv-powershell/">How to configure VM Auto Start in Hyper-V with PowerShell</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-Create a new user. In the following example, we will name it bob.
-123root# adduser bobroot# id bobuid=1000(bob) gid=1000(bob) groupes=1000(bob)
+            VM automatic action at Hyper-V start up1Set-VM [VM_NAME] -AutomaticStartAction [Option]
+With :
 
-Set the password for the new user.
-12345root# passwd b
+[VM_NAME] : The VM name
+[Option] :
+Nothing : When the host is powered on, the VM will do nothing
+StartIf
         </p>
     </div>
 </article>

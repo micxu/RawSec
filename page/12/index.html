@@ -167,17 +167,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/en/vm-automatic-start-hyperv-powershell/" class="thumbnail">
+        <a href="/en/disable-ssh-login-for-root-user/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Windows_logo.svg)" alt="How to configure VM Auto Start in Hyper-V with PowerShell" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="How to disable SSH login for the root user" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/vm-automatic-start-hyperv-powershell/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/disable-ssh-login-for-root-user/">0</span>
     
 </span>
 
@@ -187,25 +187,24 @@ ga('send', 'pageview');
         
         <div class="article-meta">
             <p class="category">
-            <a class="article-category-link" href="/categories/windows/">windows</a>
+            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/operating-system/">operating system</a>
             </p>
             <p class="date"><time datetime="2016-04-06T22:00:00.000Z" itemprop="datePublished">Thursday 7 April 2016 (2016-04-07)</time></p>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/en/vm-automatic-start-hyperv-powershell/">How to configure VM Auto Start in Hyper-V with PowerShell</a>
+        <a href="/en/disable-ssh-login-for-root-user/">How to disable SSH login for the root user</a>
         </h1>
     
 
         <p class="article-excerpt">
-            VM automatic action at Hyper-V start up1Set-VM [VM_NAME] -AutomaticStartAction [Option]
-With :
+            
+Create a new user. In the following example, we will name it bob.
+123root# adduser bobroot# id bobuid=1000(bob) gid=1000(bob) groupes=1000(bob)
 
-[VM_NAME] : The VM name
-[Option] :
-Nothing : When the host is powered on, the VM will do nothing
-StartIf
+Set the password for the new user.
+12345root# passwd b
         </p>
     </div>
 </article>
