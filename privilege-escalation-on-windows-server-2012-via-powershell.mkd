@@ -1,0 +1,32 @@
+---
+layout: post
+title: "Privilege Escalation (EoP) on Windows Server 2012 via PowerShell (PS)"
+lang: en
+categories:
+  - security
+  - windows
+tags:
+  - security
+  - windows
+date: 2016/12/05
+thumbnail: /images/security-265130_640.jpg
+---
+1. Download [this powershell script](https://www.exploit-db.com/download/39719) and save it `39719.ps1`.
+2. Open an unprivileged powershell terminal.
+3. Go to the folder location where you saved the script.
+4. Source the script: `. .\39719.ps1`.
+5. Then type `Invoke-MS16-032`.
+6. Let the magic happens, you just got a **nt authority\system** `cmd.exe`.
+
+I tested it on Windows Server 2012 R2 Datacenter Edition 64 bits but author tested it on others Windows.
+
+You can read more about:
++ the exploit on [Exploit Database](https://www.exploit-db.com/exploits/39719/),
++ MS16-032 on [Google Project Zero](https://googleprojectzero.blogspot.co.uk/2016/03/exploiting-leaked-thread-handle.html).
+
+Script infos:
++ Author: Ruben Boonen (@FuzzySec)
++ Blog: http://www.fuzzysecurity.com/
++ License: BSD 3-Clause
++ Required Dependencies: PowerShell v2+
++ Optional Dependencies: None

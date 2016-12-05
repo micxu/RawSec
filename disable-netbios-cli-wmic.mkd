@@ -5,7 +5,6 @@ date: 2015/12/20
 lang: en
 categories:
 - security
-- "operating system"
 - windows
 tags:
 - security

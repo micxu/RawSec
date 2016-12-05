@@ -5,14 +5,13 @@ title: 'How to disable SSH login for the root user'
 date: 2016/04/07
 categories:
   - security
-  - "operating system"
   - centos
 tags:
   - security
   - linux
   - centos
   - ssh
-thumbnail: /images/security-265130_640.jpg 
+thumbnail: /images/security-265130_640.jpg
 ---
 1. Create a new user. In the following example, we will name it **bob**.
 ```

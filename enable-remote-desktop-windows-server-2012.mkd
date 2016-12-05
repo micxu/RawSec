@@ -1,0 +1,32 @@
+---
+layout: post
+title: "Enable Remote Desktop Protocol (RDP) on Windows Server 2012"
+lang: en
+categories:
+  - windows
+tags:
+  - windows
+date: 2016/12/05
+thumbnail: /images/Windows_logo.svg
+---
+To launch the Remote Desktop, there are two methods: CLI or GUI.
+From both you will be able to allow or not remote connections and choose users that can connect via RDP.
+
+## with Command Line Interface (CLI)
+
+1. Open `cmd.exe`.
+2. Type `SystemPropertiesRemote`.
+3. This command launches the **System Properties** window on the **Remote** tab.
+
+## with Graphical User Interface (GUI)
+
+1. Open the **Control Panel**, various ways:
+  + Press **Windows + X** and click **Control Panel**
+  + or from the Smart Screen (**Windows + C** and click **Start**) click **Control Panel**
+  + or move mouse to thr right upper side of screen and click **Settings** and then **Control Panel**
+  + or **Windows + R** and type `control`
+  + or type `control` in `cmd.exe`
+  + or via `Explorer.exe` (**Windows + E**) type **Control Panel** in teh adress bar
+  + etc... (easier with CLI right?).
+2. Click **Advance System Settings**, this launches the **System Properties**.
+3. Select the **Remote** tab.

@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Manage local users and groups on Windows Server 2012"
+lang: en
+categories:
+  - windows
+tags:
+  - windows
+date: 2016/12/05
+thumbnail: /images/Windows_logo.svg
+---
+1. Open **Server Manager**.
+2. Click **Tools**.
+3. Select **Computer Management**.
+4. Expand **Local Users and Groups**.
+5. Select **Users** or **Groups**.
+6. Double click on a user or a group.
+7. Do your stuff.
+
+**Note**: This works only for servers that are not Domain Controller (in this case just open **Active Directory Users and Computer**).
