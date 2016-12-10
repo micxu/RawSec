@@ -142,67 +142,6 @@
   </entry>
   
   <entry>
-    <title>Juniors CTF - 400 - Dirty Repo - Forensics</title>
-    <link href="http://rawsec.ml/en/JuniorCTF-2016-forensics-Dirty-Repo/"/>
-    <id>http://rawsec.ml/en/JuniorCTF-2016-forensics-Dirty-Repo/</id>
-    <published>2016-11-26T23:00:00.000Z</published>
-    <updated>2016-11-27T22:20:23.379Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chill3d</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Juniors CTF 2016</li>
-<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: admin, forensics</p>
-<blockquote>
-<p>Gruncle Stan loves money very much and doesn’t shun to use unacceptable tricks to get it. Not so far he started a new project with an aim to embezzlement of public funds. He hired some developers and decided to “borrow” source code. But one liberal-minded young man didn’t like, that Stan’s project is a plagiarism. This zealous fighter for justice decided to spoil one developer’s project. Try to find out, what the malefactor added.</p>
-<p>Here are all developers’ projects -&gt; WORKDIRS</p>
-</blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>In this challenge, we get a tar.gz file. In it, there are 20 tar.gz files containing git repo from openvpn.<br>So first, I unzip all tar.gz file, and I seek so differences between repos :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ diff -r comp_1 comp_2</div><div class="line">Binary files comp_1/openvpn/.git/index and comp_2/openvpn/.git/index are differents</div><div class="line">$ diff -r comp_1 comp_3</div><div class="line">$ diff -r comp_1 comp_4</div><div class="line">$ diff -r comp_1 comp_5</div><div class="line">132a133</div><div class="line">&gt; //FLAG -&gt; gRunCle_StAn_tHe_woRsT_coDeR</div></pre></td></tr></table></figure>
-<p>Flag : gRunCle_StAn_tHe_woRsT_coDeR</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Juniors CTF - 300 - Southern Cross - Cryptography</title>
     <link href="http://rawsec.ml/en/JuniorCTF-2016-crypto-southern-cross/"/>
     <id>http://rawsec.ml/en/JuniorCTF-2016-crypto-southern-cross/</id>
@@ -323,11 +262,11 @@
   </entry>
   
   <entry>
-    <title>Juniors CTF - 500 - Lost everything but hope - Forensics</title>
-    <link href="http://rawsec.ml/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/"/>
-    <id>http://rawsec.ml/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/</id>
+    <title>Juniors CTF - 400 - Dirty Repo - Forensics</title>
+    <link href="http://rawsec.ml/en/JuniorCTF-2016-forensics-Dirty-Repo/"/>
+    <id>http://rawsec.ml/en/JuniorCTF-2016-forensics-Dirty-Repo/</id>
     <published>2016-11-26T23:00:00.000Z</published>
-    <updated>2016-11-27T22:20:14.922Z</updated>
+    <updated>2016-11-27T22:20:23.379Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -352,27 +291,14 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p><img src="https://i.imgur.com/s9I4kim.jpg" alt="https://i.imgur.com/s9I4kim.jpg">  </p>
-<ul>
-<li><em>screams</em>  </li>
-<li>Mabel: What’s up, Gruncle???  </li>
-<li>Stan: I left a phone here and went to the store to sell something useless. When I got back I saw this  </li>
-<li><em>shows a broken mobile</em>  </li>
-<li>Mabel: OMG!  </li>
-<li>Soos: Gonna get some insulating tape.  </li>
-<li>Stan: Restore the justice!  </li>
-</ul>
-<p>A few hours later  </p>
-<ul>
-<li>Dipper: Hm, who could do this?.. Soos, I managed to restore some files, maybe you can help to find something. Will you?  </li>
-<li>Soos: Of course, Dipper.   </li>
-</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: admin, forensics</p>
+<blockquote>
+<p>Gruncle Stan loves money very much and doesn’t shun to use unacceptable tricks to get it. Not so far he started a new project with an aim to embezzlement of public funds. He hired some developers and decided to “borrow” source code. But one liberal-minded young man didn’t like, that Stan’s project is a plagiarism. This zealous fighter for justice decided to spoil one developer’s project. Try to find out, what the malefactor added.</p>
+<p>Here are all developers’ projects -&gt; WORKDIRS</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We have a <code>something.rar</code> file, and in it, there is a <code>sdcard</code> folder.<br>If we open it, we find data from an Android phone. After searching on the each folders, admin gave a <strong>hint</strong> on Telegram : <code>Someone who likes vkontakte</code>.</p>
-<p>So I opened the <code>.vkontakte</code> folder and search any clue. There was an ogg file named <code>397087112_439151831</code> with size of 1Ko so we couldn’t listen anything. I had the idea that a audio conversation must be between 2 account of vkontakt so the numbers are reprenting an id of these account…<br>Let’s see if we can get a profile page of these accounts on vk.com :smirk: !</p>
-<p>Go on <a href="https://vk.com/id397087112" target="_blank" rel="external">https://vk.com/id397087112</a>, we find a profile page of a pig nammed <code>Waddles Mabelpig</code>. This pig posted on the social network the flag !  </p>
-<p>Flag: <code>waddles_the_d3stroyer</code> :tada:</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>In this challenge, we get a tar.gz file. In it, there are 20 tar.gz files containing git repo from openvpn.<br>So first, I unzip all tar.gz file, and I seek so differences between repos :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ diff -r comp_1 comp_2</div><div class="line">Binary files comp_1/openvpn/.git/index and comp_2/openvpn/.git/index are differents</div><div class="line">$ diff -r comp_1 comp_3</div><div class="line">$ diff -r comp_1 comp_4</div><div class="line">$ diff -r comp_1 comp_5</div><div class="line">132a133</div><div class="line">&gt; //FLAG -&gt; gRunCle_StAn_tHe_woRsT_coDeR</div></pre></td></tr></table></figure>
+<p>Flag : gRunCle_StAn_tHe_woRsT_coDeR</p>
 ]]></content>
     
     <summary type="html">
@@ -457,6 +383,80 @@
 </ul>
 <p><img src="https://i.imgbox.com/K5qOYSYB.jpg" alt=""></p>
 <p><strong>Feedback</strong>: it’s a international CTF, so please use only english, russian content everywhere is pain for non-russian</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Juniors CTF - 500 - Lost everything but hope - Forensics</title>
+    <link href="http://rawsec.ml/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/"/>
+    <id>http://rawsec.ml/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/</id>
+    <published>2016-11-26T23:00:00.000Z</published>
+    <updated>2016-11-27T22:20:14.922Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chill3d</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : Juniors CTF 2016</li>
+<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p><img src="https://i.imgur.com/s9I4kim.jpg" alt="https://i.imgur.com/s9I4kim.jpg">  </p>
+<ul>
+<li><em>screams</em>  </li>
+<li>Mabel: What’s up, Gruncle???  </li>
+<li>Stan: I left a phone here and went to the store to sell something useless. When I got back I saw this  </li>
+<li><em>shows a broken mobile</em>  </li>
+<li>Mabel: OMG!  </li>
+<li>Soos: Gonna get some insulating tape.  </li>
+<li>Stan: Restore the justice!  </li>
+</ul>
+<p>A few hours later  </p>
+<ul>
+<li>Dipper: Hm, who could do this?.. Soos, I managed to restore some files, maybe you can help to find something. Will you?  </li>
+<li>Soos: Of course, Dipper.   </li>
+</ul>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We have a <code>something.rar</code> file, and in it, there is a <code>sdcard</code> folder.<br>If we open it, we find data from an Android phone. After searching on the each folders, admin gave a <strong>hint</strong> on Telegram : <code>Someone who likes vkontakte</code>.</p>
+<p>So I opened the <code>.vkontakte</code> folder and search any clue. There was an ogg file named <code>397087112_439151831</code> with size of 1Ko so we couldn’t listen anything. I had the idea that a audio conversation must be between 2 account of vkontakt so the numbers are reprenting an id of these account…<br>Let’s see if we can get a profile page of these accounts on vk.com :smirk: !</p>
+<p>Go on <a href="https://vk.com/id397087112" target="_blank" rel="external">https://vk.com/id397087112</a>, we find a profile page of a pig nammed <code>Waddles Mabelpig</code>. This pig posted on the social network the flag !  </p>
+<p>Flag: <code>waddles_the_d3stroyer</code> :tada:</p>
 ]]></content>
     
     <summary type="html">
@@ -1157,93 +1157,6 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
   </entry>
   
   <entry>
-    <title>RC3 CTF - 200 - Bridge of Cyber - Misc</title>
-    <link href="http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/"/>
-    <id>http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/</id>
-    <published>2016-11-20T23:00:00.000Z</published>
-    <updated>2016-11-22T22:50:01.171Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : RC3 CTF 2016</li>
-<li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>Welcome to the “Bridge of Cyber”! It’s the same concept as the “Bridge of Death” in Holy Grail. Our DNS servers aren’t very good at their job because they ask more questions then they answer. Let’s see if you can get the flag from our DNS.</p>
-<p>Nameserver: ns-920.awsdns-51.net</p>
-<p>Domain: misc200.ctf.rc3.club</p>
-</blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What we know:</p>
-<ul>
-<li>Domain: <code>misc200.ctf.rc3.club</code></li>
-<li>Name Server: <code>ns-920.awsdns-51.net</code></li>
-<li>We look for questions so probably TXT records</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 21494</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; misc200.ctf.rc3.club.	IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is the air-speed velocity of an unladen swallow&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 225 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 12:01:47 2016</div><div class="line">;; MSG SIZE  rcvd: 243</div></pre></td></tr></table></figure>
-<p>So we get the first question: “What is the air-speed velocity of an unladen swallow” is a question from “Bridge of Death” in Holy Grail of Monty Python.</p>
-<p>The answer is:</p>
-<blockquote>
-<p>What do you mean? An African or European swallow?</p>
-</blockquote>
-<p>The first idea that matched “How to send the answer” was by prefixing the answer to the domain.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;The roundest knight at king arthurs table was sir cumference. He acquired his size from too much __&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<blockquote>
-<p>The roundest knight at king Arthur’s round table was Sir Cumference. He acquired his size from too much pi.</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is it that no man ever yet did see, which never was, but always is to be?&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<blockquote>
-<p>Tomorrow</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;My favorite things in life don&apos;t cost any money. It&apos;s really clear that the most precious resource we all have is ___&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<blockquote>
-<p>My favorite things in life don’t cost any money. It’s really clear that the most precious resource we all have is time.</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill time.tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net ANY</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 52009</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; time.tomorrow.pi.european.misc200.ctf.rc3.club.	IN	TYPE255</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">time.tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	SPF	&quot;RC3-2016-cyb3rxr05&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 5244 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 19:48:48 2016</div><div class="line">;; MSG SIZE  rcvd: 235</div></pre></td></tr></table></figure>
-<p>So we get the flag: <code>RC3-2016-cyb3rxr05</code>.</p>
-<p>Or may be it was possible to do it with <code>african</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill african.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">african.misc200.ctf.rc3.club.	300	IN	TXT	&quot;Why was the developer broke? He spent all of his&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
-    
-  </entry>
-  
-  <entry>
     <title>RC3 CTF - 100 - Who&#39;s a good boy - Web</title>
     <link href="http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/"/>
     <id>http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/</id>
@@ -1395,6 +1308,93 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RC3 CTF - 200 - Bridge of Cyber - Misc</title>
+    <link href="http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/"/>
+    <id>http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/</id>
+    <published>2016-11-20T23:00:00.000Z</published>
+    <updated>2016-11-22T22:50:01.171Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : RC3 CTF 2016</li>
+<li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>Welcome to the “Bridge of Cyber”! It’s the same concept as the “Bridge of Death” in Holy Grail. Our DNS servers aren’t very good at their job because they ask more questions then they answer. Let’s see if you can get the flag from our DNS.</p>
+<p>Nameserver: ns-920.awsdns-51.net</p>
+<p>Domain: misc200.ctf.rc3.club</p>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What we know:</p>
+<ul>
+<li>Domain: <code>misc200.ctf.rc3.club</code></li>
+<li>Name Server: <code>ns-920.awsdns-51.net</code></li>
+<li>We look for questions so probably TXT records</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 21494</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; misc200.ctf.rc3.club.	IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is the air-speed velocity of an unladen swallow&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 225 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 12:01:47 2016</div><div class="line">;; MSG SIZE  rcvd: 243</div></pre></td></tr></table></figure>
+<p>So we get the first question: “What is the air-speed velocity of an unladen swallow” is a question from “Bridge of Death” in Holy Grail of Monty Python.</p>
+<p>The answer is:</p>
+<blockquote>
+<p>What do you mean? An African or European swallow?</p>
+</blockquote>
+<p>The first idea that matched “How to send the answer” was by prefixing the answer to the domain.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;The roundest knight at king arthurs table was sir cumference. He acquired his size from too much __&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>The roundest knight at king Arthur’s round table was Sir Cumference. He acquired his size from too much pi.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is it that no man ever yet did see, which never was, but always is to be?&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Tomorrow</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;My favorite things in life don&apos;t cost any money. It&apos;s really clear that the most precious resource we all have is ___&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>My favorite things in life don’t cost any money. It’s really clear that the most precious resource we all have is time.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill time.tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net ANY</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 52009</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; time.tomorrow.pi.european.misc200.ctf.rc3.club.	IN	TYPE255</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">time.tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	SPF	&quot;RC3-2016-cyb3rxr05&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 5244 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 19:48:48 2016</div><div class="line">;; MSG SIZE  rcvd: 235</div></pre></td></tr></table></figure>
+<p>So we get the flag: <code>RC3-2016-cyb3rxr05</code>.</p>
+<p>Or may be it was possible to do it with <code>african</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill african.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">african.misc200.ctf.rc3.club.	300	IN	TXT	&quot;Why was the developer broke? He spent all of his&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
