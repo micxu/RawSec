@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rawsec.ml/"/>
-  <updated>2016-12-05T23:31:48.367Z</updated>
+  <updated>2016-12-10T17:05:35.827Z</updated>
   <id>http://rawsec.ml/</id>
   
   <author>
@@ -14,6 +14,116 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SECCON - 100 - Memory Analysis - Forensics</title>
+    <link href="http://rawsec.ml/en/SECCON-2016-100-forensics-memory-analysis/"/>
+    <id>http://rawsec.ml/en/SECCON-2016-100-forensics-memory-analysis/</id>
+    <published>2016-12-09T23:00:00.000Z</published>
+    <updated>2016-12-10T17:05:35.827Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chill3d</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : SECCON 2016 Online CTF</li>
+<li><strong>Website</strong> : <a href="http://2016.seccon.jp/news/#124" target="_blank" rel="external">seccon.jp</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/354/" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>Find the website that the fake svchost is accessing.</p>
+<p>You can get the flag if you access the website!!</p>
+<p>The challenge files are huge, please download it first.</p>
+<p>Hint1: <a href="http://www.volatilityfoundation.org/" target="_blank" rel="external">http://www.volatilityfoundation.org/</a></p>
+<p>Hint2: Check the hosts file</p>
+<p>password: fjliejflsjiejlsiejee33cnc</p>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>For this challenge, we get a zip file wih a raw memory dump inside named <em>forensic_100.raw</em>.</p>
+<p>First, let’s determine which OS is this dump come from :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw imageinfo</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">INFO    : volatility.debug    : Determining profile based on KDBG search...</div><div class="line">          Suggested Profile(s) : WinXPSP2x86, WinXPSP3x86 (Instantiated with WinXPSP2x86)</div><div class="line">                     AS Layer1 : IA32PagedMemoryPae (Kernel AS)</div><div class="line">                     AS Layer2 : FileAddressSpace (/media/sf_Challenges/CTF/SECCON/forensic_100.raw)</div><div class="line">                      PAE type : PAE</div><div class="line">                           DTB : 0x34c000L</div><div class="line">                          KDBG : 0x80545ce0L</div><div class="line">          Number of Processors : 1</div><div class="line">     Image Type (Service Pack) : 3</div><div class="line">                KPCR for CPU 0 : 0xffdff000L</div><div class="line">             KUSER_SHARED_DATA : 0xffdf0000L</div><div class="line">           Image date and time : 2016-12-06 05:28:47 UTC+0000</div><div class="line">     Image local date and time : 2016-12-06 14:28:47 +0900</div></pre></td></tr></table></figure>
+<p>Check the hosts file as the second hint say :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw --profile=WinXPSP2x86 dumpfiles -Q 0x000000000217b748 --dump-dir=.</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">DataSectionObject 0x0217b748   None   \Device\HarddiskVolume1\WINDOWS\system32\drivers\etc\hosts</div><div class="line"></div><div class="line">➜ ls</div><div class="line">file.None.0x819a3008.dat  forensic_100.raw  memoryanalysis.zip</div><div class="line"></div><div class="line">➜ cat file.None.0x819a3008.dat</div><div class="line"># Copyright (c) 1993-1999 Microsoft Corp.</div><div class="line">#</div><div class="line"># This is a sample HOSTS file used by Microsoft TCP/IP for Windows.</div><div class="line">#</div><div class="line"># This file contains the mappings of IP addresses to host names. Each</div><div class="line"># entry should be kept on an individual line. The IP address should</div><div class="line"># be placed in the first column followed by the corresponding host name.</div><div class="line"># The IP address and the host name should be separated by at least one</div><div class="line"># space.</div><div class="line">#</div><div class="line"># Additionally, comments (such as these) may be inserted on individual</div><div class="line"># lines or following the machine name denoted by a &apos;#&apos; symbol.</div><div class="line">#</div><div class="line"># For example:</div><div class="line">#</div><div class="line">#      102.54.94.97     rhino.acme.com          # source server</div><div class="line">#       38.25.63.10     x.acme.com              # x client host</div><div class="line"></div><div class="line">127.0.0.1       localhost</div><div class="line">153.127.200.178    crattack.tistory.com #</div></pre></td></tr></table></figure>
+<p>So the DNS entry crattack.tistory.com is pointing on the 153.127.200.178 IP adress.</p>
+<p>List processus to see what was running when the memory was captured :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw --profile=WinXPSP2x86 pstree</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">Name                                                  Pid   PPid   Thds   Hnds Time</div><div class="line">-------------------------------------------------- ------ ------ ------ ------ ----</div><div class="line"> 0x8231f698:explorer.exe                             1556   1520     15    466 2016-12-06 05:27:10 UTC+0000</div><div class="line">. 0x821f8438:vmtoolsd.exe                            1856   1556      3    129 2016-12-06 05:27:11 UTC+0000</div><div class="line">. 0x819b4380:tcpview.exe                             3308   1556      2     84 2016-12-06 05:28:42 UTC+0000</div><div class="line">. 0x82267900:rundll32.exe                            1712   1556      2    144 2016-12-06 05:27:16 UTC+0000</div><div class="line">. 0x8216a5e8:DumpIt.exe                              3740   1556      1     25 2016-12-06 05:28:46 UTC+0000</div><div class="line">. 0x82170da0:ctfmon.exe                              1872   1556      1     87 2016-12-06 05:27:11 UTC+0000</div><div class="line"> 0x823c8660:System                                      4      0     58    259 1970-01-01 00:00:00 UTC+0000</div><div class="line">. 0x81a18020:smss.exe                                 540      4      3     19 2016-12-06 05:27:04 UTC+0000</div><div class="line">.. 0x82173da0:winlogon.exe                            628    540     24    541 2016-12-06 05:27:07 UTC+0000</div><div class="line">... 0x8216e670:services.exe                           672    628     15    286 2016-12-06 05:27:07 UTC+0000</div><div class="line">.... 0x81f46238:alg.exe                              2028    672      7    104 2016-12-06 05:27:16 UTC+0000</div><div class="line">.... 0x82312450:svchost.exe                          1036    672     87   1514 2016-12-06 05:27:08 UTC+0000</div><div class="line">..... 0x81f2cb20:wuauclt.exe                         3164   1036      5    107 2016-12-06 05:28:15 UTC+0000</div><div class="line">..... 0x82062b20:wuauclt.exe                          488   1036      7    132 2016-12-06 05:27:13 UTC+0000</div><div class="line">..... 0x81e56228:wscntfy.exe                          720   1036      1     37 2016-12-06 05:27:18 UTC+0000</div><div class="line">.... 0x82154880:vmacthlp.exe                          836    672      1     25 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x82151ca8:svchost.exe                           936    672     10    272 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x81e4b4b0:vmtoolsd.exe                          312    672      9    265 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81f92778:svchost.exe                          1088    672      7     83 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x81f00558:VGAuthService.e                       196    672      2     60 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81e18da0:svchost.exe                           848    672     20    216 2016-12-06 05:27:08 UTC+0000</div><div class="line">..... 0x81e89200:wmiprvse.exe                         596    848     12    255 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81e41928:svchost.exe                          1320    672     12    183 2016-12-06 05:27:10 UTC+0000</div><div class="line">.... 0x81f0dbe0:spoolsv.exe                          1644    672     15    133 2016-12-06 05:27:10 UTC+0000</div><div class="line">.... 0x81f65da0:svchost.exe                          1776    672      2     23 2016-12-06 05:27:10 UTC+0000</div><div class="line">..... 0x8225bda0:IEXPLORE.EXE                         380   1776     22    385 2016-12-06 05:27:19 UTC+0000</div><div class="line">...... 0x8229f7e8:IEXPLORE.EXE                       1080    380     19    397 2016-12-06 05:27:21 UTC+0000</div><div class="line">.... 0x81e4f560:svchost.exe                          1704    672      5    107 2016-12-06 05:27:10 UTC+0000</div><div class="line">... 0x81f8c9a0:lsass.exe                              684    628     26    374 2016-12-06 05:27:07 UTC+0000</div><div class="line">.. 0x81ef6da0:csrss.exe                               604    540     11    480 2016-12-06 05:27:07 UTC+0000</div><div class="line"> 0x81e886f0:GoogleUpdate.ex                           372   1984      7    138 2016-12-06 05:27:13 UTC+0000</div></pre></td></tr></table></figure>
+<p>We see a IEXPLORE.EXE. Why don’t check its history ?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw --profile=WinXPSP2x86 iehistory</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">**************************************************</div><div class="line">Process: 1080 IEXPLORE.EXE</div><div class="line">Cache type &quot;DEST&quot; at 0x201ca83</div><div class="line">Last modified: 2016-12-06 14:28:40 UTC+0000</div><div class="line">Last accessed: 2016-12-06 05:28:42 UTC+0000</div><div class="line">URL: SYSTEM@http://crattack.tistory.com/entry/Data-Science-import-pandas-as-pd</div><div class="line">Title: Security &amp;amp; Reverse :: [Data Science] Pandas - \),</div></pre></td></tr></table></figure>
+<p>If we visit this URL without matching the IP adress in the host file, we are on a CTF site. There is no flag on this site…</p>
+<p>But, if we match the IP adress with the URL, we have a file to download, and this file hold the flag :-)</p>
+<p>Flag : SECCON{_h3110_w3_h4ve_fun<em>w4rg4m3</em>}</p>
+<p><strong>Note</strong>: We could retrieve the IP adress with the connscan plugin, but it was impossible to determine that the crattack.tistory.com site was associated with this IP adress.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Manage local users and groups on Windows Server 2012</title>
+    <link href="http://rawsec.ml/en/manage-local-users-and-groups-on-windows-server-2012/"/>
+    <id>http://rawsec.ml/en/manage-local-users-and-groups-on-windows-server-2012/</id>
+    <published>2016-12-04T23:00:00.000Z</published>
+    <updated>2016-12-05T23:31:42.917Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li>Open <strong>Server Manager</strong>.</li>
+<li>Click <strong>Tools</strong>.</li>
+<li>Select <strong>Computer Management</strong>.</li>
+<li>Expand <strong>Local Users and Groups</strong>.</li>
+<li>Select <strong>Users</strong> or <strong>Groups</strong>.</li>
+<li>Double click on a user or a group.</li>
+<li>Do your stuff.</li>
+</ol>
+<p><strong>Note</strong>: This works only for servers that are not Domain Controller (in this case just open <strong>Active Directory Users and Computer</strong>).</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;Open &lt;strong&gt;Server Manager&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Click &lt;strong&gt;Tools&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;Computer Management&lt;/strong&gt;.&lt;
+    
+    </summary>
+    
+      <category term="windows" scheme="http://rawsec.ml/categories/windows/"/>
+    
+    
+      <category term="windows" scheme="http://rawsec.ml/tags/windows/"/>
+    
+  </entry>
   
   <entry>
     <title>Privilege Escalation (EoP) on Windows Server 2012 via PowerShell (PS)</title>
@@ -65,41 +175,6 @@
   </entry>
   
   <entry>
-    <title>Manage local users and groups on Windows Server 2012</title>
-    <link href="http://rawsec.ml/en/manage-local-users-and-groups-on-windows-server-2012/"/>
-    <id>http://rawsec.ml/en/manage-local-users-and-groups-on-windows-server-2012/</id>
-    <published>2016-12-04T23:00:00.000Z</published>
-    <updated>2016-12-05T23:31:42.917Z</updated>
-    
-    <content type="html"><![CDATA[<ol>
-<li>Open <strong>Server Manager</strong>.</li>
-<li>Click <strong>Tools</strong>.</li>
-<li>Select <strong>Computer Management</strong>.</li>
-<li>Expand <strong>Local Users and Groups</strong>.</li>
-<li>Select <strong>Users</strong> or <strong>Groups</strong>.</li>
-<li>Double click on a user or a group.</li>
-<li>Do your stuff.</li>
-</ol>
-<p><strong>Note</strong>: This works only for servers that are not Domain Controller (in this case just open <strong>Active Directory Users and Computer</strong>).</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;Open &lt;strong&gt;Server Manager&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;Click &lt;strong&gt;Tools&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;Select &lt;strong&gt;Computer Management&lt;/strong&gt;.&lt;
-    
-    </summary>
-    
-      <category term="windows" scheme="http://rawsec.ml/categories/windows/"/>
-    
-    
-      <category term="windows" scheme="http://rawsec.ml/tags/windows/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Enable Remote Desktop Protocol (RDP) on Windows Server 2012</title>
     <link href="http://rawsec.ml/en/enable-remote-desktop-windows-server-2012/"/>
     <id>http://rawsec.ml/en/enable-remote-desktop-windows-server-2012/</id>
@@ -142,11 +217,11 @@
   </entry>
   
   <entry>
-    <title>Juniors CTF - 300 - Southern Cross - Cryptography</title>
-    <link href="http://rawsec.ml/en/JuniorCTF-2016-crypto-southern-cross/"/>
-    <id>http://rawsec.ml/en/JuniorCTF-2016-crypto-southern-cross/</id>
+    <title>Juniors CTF - 500 - Skeleton in the closet - Joy</title>
+    <link href="http://rawsec.ml/en/JuniorCTF-2016-network-Skeleton-in-the-closet/"/>
+    <id>http://rawsec.ml/en/JuniorCTF-2016-network-Skeleton-in-the-closet/</id>
     <published>2016-11-26T23:00:00.000Z</published>
-    <updated>2016-11-27T21:54:59.188Z</updated>
+    <updated>2016-11-27T21:54:59.192Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -171,134 +246,88 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: crypto</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: network, joy, admin</p>
 <blockquote>
+<p><img src="http://i.imgur.com/bXKRRBB.png" alt=""></p>
+<p><img src="http://i.imgur.com/HnyYDnR.jpg" alt=""></p>
+<p>#hint for task with jabber: try to use another clients because clients works differently with anonymous auth.</p>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo dipper lo-o-ssE-bo |tr ipodlEsb- ab0j1328.</div><div class="line">jabber 10.0.223.80</div></pre></td></tr></table></figure>
+<p>with pidgin &amp; wireshark</p>
 <ul>
-<li>Wow, what’s this, Soos?</li>
-<li>It’s the Confederacy’s cipher disk with a help of which southerners encrypted their messages.</li>
-<li>How does it work?</li>
-<li>Look, Dipper. We need to encode the phrase MABLE EATS SPRINKLES. We don’t need any spaces so just delete them. We get MABLEEATSSPRINKLES. Then we have too choose a key. Let it be GRAVITY. And let’s go !!!</li>
+<li>domain: 10.0.223.80</li>
+<li>server: 10.0.223.80</li>
 </ul>
-<p><a href="https://youtu.be/Fpzrs-fcNKM" target="_blank" rel="external">https://youtu.be/Fpzrs-fcNKM</a></p>
-<p>You see, we’ve encrypted the phrase and here it is RBZTXYZJSKZBLQCEN</p>
+<p>change domaine to:<br>mystery-hack.gravity.falls</p>
 <ul>
-<li>Cool!</li>
-<li>Now I’ll encode a famous story and you’ll try to decode it. By the way, it’s much more interesting to read the whole story over, isn’t it?<br>….</li>
-<li>That’s complicated. Maybe I have to find a key at first. I’d better look for someone who is able to solve this…</li>
-<li>Don’t forget to reach to the end of the text! The ending is greatly important.</li>
+<li>domain: mystery-hack.gravity.falls</li>
+<li>server: 10.0.223.80</li>
 </ul>
-</blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Mmmh, it sounds like polyalphabetic substitution cipher, it looks like Vigenere.</p>
-<p>We have additional proofs, title is <code>Southern Cross</code> making a reference to the <code>Confederate cipher disks used in the Civil War</code> [<a href="http://ciphermachines.com/vigenere" target="_blank" rel="external">1</a>].</p>
-<p>The ciphertext is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UKPVOYDJZPAREJUCQBPCJPBEPZSLOGPBZXGSSDANTFQDPLVTRUOYSOOKBYPWIWRUSCJZSZESDBCERRIPWPSRERTBDOEUVPMIGZOSZNOHRUTLUJUJGZJMMATRITZZDJPAPWOHVSHSQIGJUVLBREIFBZBBOFETZZDTNIWWMOHVGWCMHAEXODTJWVSWYOOHVGSPLDNXICDMWOSUWOJVLCTVLZFDFEGZVVNUBEFIMTVSPCMYCIFSVQIDZBBNIGLVEXZPIBZHRZOXLZNPPLJNKISPVBIEFOYLNHFXSOBCEVOUTVZEIUVCMZRFVBOWMIWJQPADNGJSNMNOWPFOVVNTFHSIOTYFMNIMRZFREPZSVPFTNDCVTGZQHPIFGDMYTYFSYODNVFFHQOHKISTZKOJTWMQGIKJSDBCAKISCIDSVEPZBCHRORDQIAXFGECMEJVQSINATDCXXVNZFGEPZEABQFTVTZPBOWOECMOEBCETSWDXXODNOYLJFJIOCSYOUTCYECONBGWMVDVSCQBCERUHLKFIEHTZZXEKISPVBIEFSCLZSTFBOMYTFUVPOMOLORLVYUEDCFXGEUUVPMIGZOSLVYTVORPZOHVOXZPIBZHRZOKEIDVPLPPFOHSMXORMGAWMTZWSWGCECEHHWBUETIAWITYFSYODNVEFTDZRROREPZFZSSXIIAEEGFOBEJUSOBCAKUVPGMUEUVPMIGZOSQQATPZOCLNANBMLVYTYFFPIRAZUTFZOHVSCCLZRJTVLZFDFEGZVVNUCCMBDDSBZWAXOIOWYOOOGVHDCXHCPKRZVDVPFPINTYFDLANEEHSCAOHIPIRPOHVNWWTNTIVQVWPTWPFEPZRZDVAWXKVUCQBCEVYDCMNSTBFEPZYWPIYLOHVNSDAZNXFFDMMEEFWYBCESFZTMATYBHEPZSLOGPBZXGSSDARAJUOVQIGFOBZBCIEHAZZZSKJAFTVTZOULVYDROUPZJUJUVLVVQLBDFZVWYJZPJJBNBGVVJCBJBRBCIJJRPIJUKPTSQNHVBRHQOHKISMCOTVORZNCIJTWIACOFUSCACAILRZLNOEXODIGRVBRJLJSZOUEPZEOQFPANCRSGLNZWZUVOGIADJHPBCEJBTPMSPCPRPLOOKISECIEFG30000OWTBOCEOYLXUISSYKTTYFDLANEEHSCAOHIVGEBCEZSVPIYSTBGFIGLPPIEWATYFKTVYONTHZTJOBGCCBCEKIIYLZRTMCFLOHVDCYLPCKPFUMMKVEOEBCESFZWZJPVXVTKCSRHUPLYONOZZWNERORFVMEJJGEQIGRUVTAOUXTVLZFDFEGZVVNUCCMBDDSBZWEDTYUVPQMBFPHJQIAJUCFBXAEWODJVGKVAMTZDFVHZNOHVFLAZZSJDOCIIDIBBLEFWRSRWGDNKISTZCIXIVPMGEUCCZBNTFUVPMIGZOSEPZEEHWYMZRJVZWMILPBBRZTBLUKTAZRROHSMZNXJBPIXCFSRTVBTFPFOMMSIBDTLGYRXOJNMODUVPQIEIUHCIDNSVHMMAOIFHSQNWRTONKJMGMWDPZDKISPFKRVTGXMNSVOUPZMETPJPZZDWSCXJJBKJRMIGLJQSCAPAUFFEWIELUFLTDTPKIXXZDFVHZNCIJDOCEDTYBKTVXHVTHPZMIWMSLVYTFPYLBMITLWYBCEXBAPUMJFIBMQBDFHGTBOIEHCYBCETPOWBZNUFFFVRIKUWYOGYDBRPIRRFOUWMVDSZUTDDNXBBTUDTRUWZVJFRUOCOZTROREPZMVTGPVBEIUFFUKEUIWXEDTYBPLTGEOBQETTBVUKPMIHZTGSWPLUFFMTVDVTHSMXRVFYNPZVRMWPZJFZORFAORPSCWTZDFGTEWOHVHFZCIDKIIDQICIFODQIGKISDPVRVPTSQNCFNFLLZSZOHSMGOFUPJWIEJJLEPZATIHHWHICFGQZJMKISEIIKKISPVBIEFSCEVSFSRPZZDKPGEWKTYFFZJWEITKLDZDRESQQVNKBRTMPAEEDWCIGVERZEITYFGEMZPJMCAMDNKPHSMOHZDYHWJDJUVLBGIEFREPZTIBQVNDVVNWYCOEJPTNZVSYJBRBCRFVUSIOHZDYPBJFTIOAIMRRMPCWPGYUHSMHTFPDPVROFEGHPZRVUVCMZHFSGPAREIFHTMYTFMCHPVNXJBRJMAEDVPAJNVXODEVIKJBRNJRAPVYJDGUPUHPJWFVZOVZVVSFTLZBPOWRPOOIEOJIBAZOHSQNAEJALTOHVSCMJZRJEWGMNTVECQAVDUMSLVYBIJRWMVNUTSENMEVUVPGHOLOHPLOHVPHSMMTNPKTBCTYFPLOVCIPGDWIEGPAXMGAEEFZLZFRTHLVYWZUVOQNCIFHTWITYSCFOCTYFTZZZSKBBOCKAGSWXMQACMCYMGYXPFRMCEIFHSMVNZNOWBCAKCCCMWOSUWOJVLCTZTXKEUPBLUJSJZPZCGDVSOYLWRFLSLNJRVMSRBCEPTVZBCIDUVCWPGYUVPPZAUBHZVXERORDIODFXBEWCOCEONWPNTJZZNALZHVEUVDVTSNCMEWPFEPZPIFGPVOBPUVPBJRKVCFAORRJZEPZYYBREZVVVMZPLOHVRIPAOIFOCQBDMVXODVJLFOUPZNOSJUXIIYDJZPAVNUICFZNLRZPPBREVOHSMHAEEHSMNPIZSDBKOJTSEPVTTPIWLAOCMCHACAILRZLNOETVZZNENJHSBMAZMWYOMOGFOYLYRFQDPLWRZEZPXVNKFRLVYCIPDAMYTYBBVNPLCZCQBCEXSODAVLFOUEPZSKSSLUDNKISRWMGVCCMBDDSBZWWKEEFREPZSRDYOZZWFVHOWPBCFVLVYFLMGZNOHVOSLBKATLORMNOWDICZZNTZOYLOHVPBPAVCBPTRWGDRORNPPCBMSOEDTYUVPOGEVPTLKCICEGLGTOLPZOLJUSMSOMXKVEDTZVTVISNIGLVEXZGAUCMMEWYOUTCYGJUJBWOEZCFVZOLJIKZCFOJTRISLLAOIGWYIICZOUEPVTBOCNSNTYFVZZISFGTZNVNPUVTVBIEBFTHJNRXVLBVRVXSRWDNXUCOWVBFVHLPJSJGCCGJUSPPHMVIEUUZBGOEHHZEVIKISCMOHVZZWJZOEPICBMAZMPPNJRVEOJTDGYUWYBCEDPFYQIOYJUFMNSKIOEKVYLTSZNTOLSBWTXAISMOWPBCFTZZVWYJZPIISNFFPLOHVTOYOPIEFPZJRECMOYVZXKISQQMSKBBTUVLNFQZUZATSCDAWYAJBRWZSNFALLZAYBIWLDDEUKPIXCFSRTVOOKISXIMKJPBEPDSDPBPGOHVSSD3000015000IKIVDSTBNSYPFEWAWYBHTMSPVDHPLNAZEGSIMKUPRDWIKZDYTVBSFGHWGVTKISAIXKRHSDEDTYUVPBJEFGVTAWOFUOYLOHVOVPTJOBFRAMISZWSWGVTKISHMOSZESDWAHZTHTZZDYPFDMJLUCCWQQAITATOCTPOWRPKLRZSOWPTYFGLQYSCPKWGDWZTVEPVTJPFCMGOWZCFZNHREBEOJTYVFEAJDFJGLQYBFCVPIMTZMMMCOIKDOYBWEYFZAMYBFMWGIMSXPHATZNKZCQJJTKPASMGLXFHFAWOKITLZZNFVUSBJGVUTCMNHDPIYBNDROUTBNHRSYTKVNKISWXOHZOYTVCONGIYVTIKJGEPVTROSLAOEIOSCTDKVZCFKVNTPAPWPTYFFPIIDXJJPCNWVTHPZIFVMZZENCRSRDIIDJQOOMNIEUVPLZSGFFLLJBLTWYMNSNIOEXVRKPTEPZERTHHINYFVTCWHAEZKLGIENZCCSNTRUSDIDDJIOCSYOUTCYADTKJBRLJWEPBLJJUCESCIIDTISHQIGRUKTODWRTPZZIOEBTLZHIEVZDBZRTPIYBTIIBBLEVYWSCXPJMVXVPVDWRTGPDZNKFSYQOWRTOYIXCZESYBHYTPATVBWVTHTEVSNBZVQIACPBRBCEIPOOEDTYNMNTJTYFGTVVBLORWMHABJBQWMNVXMZZFCZUMTPVDROWOMVOWHCTVOHVSSLVYMRLWYTJTJPTXWIEPJOWEVYJGSWBGIBFWNWPLUECTBDCRNSEWVPCBQPWIEVWSYQIWYFFPBCEIPOONJRBFRLVYIUJRYBFNFXKSQXHWPFVBJTRLSTAOUUJSOIWOLUWENJRYBZQIIHFVFLVYTYFBTBJOBUVPTZFKIOYLOHRUBTOCTZSIYQITFUVPKVMGPTLEDLUXSDBNHFXHSIOWRTHCIQECMWYIHOEHHSMGIKUZPBJWETOYLDWVOHHMNTNJHSQOIMFCQBZNNPBOMMEUJTTEJUCEBEPVVVUICVZDFVHOQAFVSSYBDFZEHZWFTYFCEPZRIPOOWCIIFQVWIYFVRSIQEVORPLPPRCCFBOHVTOXMNAZEPZJOIUCOWTXHVFFQCGLPQVTTJSFQVTKVLZUOTVOTYFFZIYSNFHLSZIKTKSIOSZOGTLZOWVGEPVTDBYPAPSKVFYWPTKISHITWVECDPVRBECOAJNXPHFXVNUMSLVZDRHOTVNTRUFPMDDRHCZLYERMFLBCEIUVLBNOISSWWAYFVFYPVDEUVFZOHZNGPTABFCVPAVIUBULQIACNCDBKAKISEQXACMMDIHEYFFPIBRVFRMWWHVXODAPRVBTTZNTIBHPSDNUPTLKMONCOTBWUKCCWQQAIISWTKUCMIDBCRFVUSIGLIJUSBMETLCYEZDSFHEMMBVNCGQIOEIOOVOWVTVLZFICMPLOOHZTPZWYLVBUTVVNUXSWTCIKUVPBMAZMTZZCIXISCBDMSFFMWWTZEPLTGRVQZLKZDKISDXJICJBEPZBRHOYLOIVEHSMHOLUVZNDTKJUSBGYNJHSIXOIEKSMIHVMCZSZDLQHSMHOJUDCWHIEFBEWWJVDHEPVTYFGLERAJUVPUPZQMSZNNHRSYOWYSFOG45SMGDLQCYPDMNJHSWPTRXOGMMSKPDJWPRWVBYQISRJRMWWWZUVLOMIEXSRWOTFCSSQOTZOHSMWRVFNPAZTJUWWTNAZEGSIMKPPILQITXPWYBJHZUBZJMEVASMWWIYBHPBJTVMZJWPBLUHSMMERJBEIIYTIOYKZFFSPFBJNVPTFAWOCJJLZCEJQZPVOYKJFPLVNUISNIITTBFCGYOLCZPEZBVFBAIMDJNSLVYYFVGSIMKUPRDWIFFSHSZZEPFOCJJBJBWOYPIVUZJEZVVSWDSZDFVFWQQEJUCRMOHVSHTUZAEEORIDNZWSLTRAPTUTDZYFVODYPAIFRPIGAEEWEPJUXIHJWPWRTOXIIIMFVPIMDJPAPYPEVSGEWMIVTOMWPTPPIDPJOKJBZVZOIUKZUZNZOOAMXUCJOCEVYSVHTVZVVSPPTDEMFRPUIONJTJWPRVKIDBCAMJBLTDTKMSQCIWZUVXMNHRSYACOYFVFRCIUGBBOEZLCHSEWIBFMWGIMAEEJLUJSVJTJWPMVBBEWNHFPHDPJOKZCFJGATLVPIMTVEGZVJFRUOCIITLMODPVRBECOAJNJGONMWOIFOOMZPCZGZZMONGIWTJOBZCFLJNKLBZECONCOOQAEVMVPADGYFRLJJUKUVLBNOISSWWAYFVFYJMERLWYPDSCFUMWWTYFSIXMEJTWZVJNUPRDWISWBQPKCAEHSOQIAEJBDBVNKUCZVZOWDCWLAEIPQTBTMZOUWMYWZUVTVZXFSOMTZCLQWOQOYKISDWPLFGHSMHAETVZEZDZUGPTAFFSOXWHEEUZTSZAEFJTTAATFWYBCENJBOWROWBFPXPTRCZPPJUJFHCCGYSPPEQYBRMZHINNVWSCBJHZUHSMWRVFNPIBAZOHSMYEREZJ45WATYFTLTNEWSWPVYCIBQVMYAEETTTGEUUVPOJRXFKTBCAIPOCBCAKUVPEVLCTVFZGEUCONSRIKIWYLDGEBBEMXHFFGLVYBFMWGIMUEDCYAXIFVGLKXODQZTKZSNJTETTBFSSLEVYKISWINTFGHSMCOCESCAPPFGHSMNUETSEMSPIFGDVJTGVHEWOHVTHCMNSFGQLZMYZOUOWPBCFPFBVSJIOCSYOUTCYOVLCPDPLVWRZHSMROFEGDMZMVEHZNVDVGFZUCIJWWPEOHVSSGWGVVSWYPDSIJUSBCAEEHFZIEUUCEPZCLSJPLVRDPTLUVHFHOYGXHRJFSQNSRERWMRAJTHCIIGVMMFXCOCTHPZZDRORSMJPVOSOPDSVZSDIIDJBKSQNFVFHYWOIETHTZMUGTPFBMEJUWYOLUZFHWGJNKISPLBEFGOBCVRKFFPLJABESDSDADUSWTDNXZCFBCAKECOAJNFGHSMAIINCQLJDJPBOMXKVSKLTGSKSSPBWRFLSCAJPVOSOPDSVZSDXZASPRJBCETPBQQYEEUWLTXLVSYHINSKBBOQIGSZVTAXHRJFSMNIKBHTVBTFTDPIFTYFFPEVSRDCYNPSVEVFUJFNISPTNBVMCHIIDKISDMYAKJJPJPZQPTLVZLVDHCQXFROOSMHPVBPZLTSRJROWYSFOPWQIKZOUTUPSKIOGMAACMSYINLVFDTPVDRNCDBMEDBFVIWLVEFPIHWYBHTADTGFOMWYYDSKTTGIRNGDQMOWUFLKTWZMZTIHSZTCFBNIUFVPPVSTPAPBJSVUHWMCIJESLTDNOZNEPZMRSYPBXALHVEPDMJICCBNIIJTJWPRVNSXJZRPFGTZZMVNPPZRHRUWDFTZHVCEMYAKUCOITPVBPZLTOEFSTOCTPGWGMNIIUVPVOHRUGSQNPIJQPMSCLTSXMNAZEDPIWOUZFLBCEIOSCDJUJMMQWMSGFOVQIGFGWEJPTZWSMMZNKBZVQIGKPKTTGIRNGSMNAEPZONMIVORZNTOLSGXZYOUTCYIIDPPIAZVCKJQLTGYYBJPIXOIOSCQIXPAWEPJUXIHJWPMZHVEBCAKJGTBCOLHVEGJUDJUSBIOKSSXMHBVSHSIOHVTCWLTOLUVPAOOTLOE98QAHVTSEBGEJBHEPZMRSYPBKRZDSTBRICMHLSZEMFFJKZNKISSINIEUVPEJRCEOYLCIJICXMOOFUCOMGIMFFEPZSYBFPAOHVFLAZZSJJCYWIDFEGZVNFRDSNPVNXFRTVVNZOGEIITKPCYMJFTPZONZRFDWEGHIEHZPLRIKIWYMSOIBPWMXUGJRTBTTYFGZCGOWUVPUVNJICHMYIKTSWNAOIBAZUZNKMWVMVNVWWWNVCVJBEPZWZORZEJFRSSACOASMSSWPSVISHQGLJFHETZAKPBPMDGYUMQQQEJBWOLJDJPBMWGIMBFNIINFUQLZMYUPIMTZ</div></pre></td></tr></table></figure>
-<p>A statistic analysis give us <code>BOLIVOR</code> as KEY, that’s nearly the good one.</p>
-<p>At the begining of the clear text we can guess <code>TWENTY MILES</code> so by running a known text attack we found the true KEY: <code>BOLIVAR</code>.</p>
-<p>So the clear text is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TWENTYMILESWESTOFTUCSONTHESUNSETEXPRESSSTOPPEDATATANKTOTAKEONWATERBESIDESTHEAQUEOUSADDITIONTHEENGINEOFTHATFAMOUSFLYERACQUIREDSOMEOTHERTHINGSTHATWERENOTGOODFORITWHILETHEFIREMANWASLOWERINGTHEFEEDINGHOSEBOBTIDBALLSHARKDODSONANDAQUARTERBREDCREEKINDIANCALLEDJOHNBIGDOGCLIMBEDONTHEENGINEANDSHOWEDTHEENGINEERTHREEROUNDORIFICESINPIECESOFORDNANCETHATTHEYCARRIEDTHESEORIFICESSOIMPRESSEDTHEENGINEERWITHTHEIRPOSSIBILITIESTHATHERAISEDBOTHHANDSINAGESTURESUCHASACCOMPANIESTHEEJACULATIONDOTELLATTHECRISPCOMMANDOFSHARKDODSONWHOWASLEADEROFTHEATTACKINGFORCETHEENGINEERDESCENDEDTOTHEGROUNDANDUNCOUPLEDTHEENGINEANDTENDERTHENJOHNBIGDOGPERCHEDUPONTHECOALSPORTIVELYHELDTWOGUNSUPONTHEENGINEDRIVERANDTHEFIREMANANDSUGGESTEDTHATTHEYRUNTHEENGINEFIFTYYARDSAWAYANDTHEREAWAITFURTHERORDERSSHARKDODSONANDBOBTIDBALLSCORNINGTOPUTSUCHLOWGRADEOREASTHEPASSENGERSTHROUGHTHEMILLSTRUCKOUTFORTHERICHPOCKETOFTHEEXPRESSCARTHEYFOUNDTHEMESSENGERSERENEINTHEBELIEFTHATTHESUNSETEXPRESSWASTAKINGONNOTHINGMORESTIMULATINGANDDANGEROUSTHANAQUAPURAWHILEBOBWASKNOCKINGTHISIDEAOUTOFHISHEADWITHTHEBUTTENDOFHISSIXSHOOTERSHARKDODSONWASALREADYDOSINGTHEEXPRESSCARSAFEWITHDYNAMITETHESAFEEXPLODEDTOTHETUNEOF30000ALLGOLDANDCURRENCYTHEPASSENGERSTHRUSTTHEIRHEADSCASUALLYOUTOFTHEWINDOWSTOLOOKFORTHETHUNDERCLOUDTHECONDUCTORJERKEDATTHEBELLROPEWHICHSAGGEDDOWNLOOSEANDUNRESISTINGATHISTUGSHARKDODSONANDBOBTIDBALLWITHTHEIRBOOTYINASTOUTCANVASBAGTUMBLEDOUTOFTHEEXPRESSCARANDRANAWKWARDLYINTHEIRHIGHHEELEDBOOTSTOTHEENGINETHEENGINEERSULLENLYANGRYBUTWISERANTHEENGINEACCORDINGTOORDERSRAPIDLYAWAYFROMTHEINERTTRAINBUTBEFORETHISWASACCOMPLISHEDTHEEXPRESSMESSENGERRECOVEREDFROMBOBTIDBALLSPERSUADERTONEUTRALITYJUMPEDOUTOFHISCARWITHAWINCHESTERRIFLEANDTOOKATRICKINTHEGAMEMRJOHNBIGDOGSITTINGONTHECOALTENDERUNWITTINGLYMADEAWRONGLEADBYGIVINGANIMITATIONOFATARGETANDTHEMESSENGERTRUMPEDHIMWITHABALLEXACTLYBETWEENHISSHOULDERBLADESTHECREEKCHEVALIEROFINDUSTRYROLLEDOFFTOTHEGROUNDTHUSINCREASINGTHESHAREOFHISCOMRADESINTHELOOTBYONESIXTHEACHTWOMILESFROMTHETANKTHEENGINEERWASORDEREDTOSTOPTHEROBBERSWAVEDADEFIANTADIEUANDPLUNGEDDOWNTHESTEEPSLOPEINTOTHETHICKWOODSTHATLINEDTHETRACKFIVEMINUTESOFCRASHINGTHROUGHATHICKETOFCHAPARRALBROUGHTTHEMTOOPENWOODSWHERETHREEHORSESWERETIEDTOLOWHANGINGBRANCHESONEWASWAITINGFORJOHNBIGDOGWHOWOULDNEVERRIDEBYNIGHTORDAYAGAINTHISANIMALTHEROBBERSDIVESTEDOFSADDLEANDBRIDLEANDSETFREETHEYMOUNTEDTHEOTHERTWOWITHTHEBAGACROSSONEPOMMELANDRODEFASTANDWITHDISCRETIONTHROUGHTHEFORESTANDUPAPRIMEVALLONELYGORGEHERETHEANIMALTHATBOREBOBTIDBALLSLIPPEDONAMOSSYBOULDERANDBROKEAFORELEGTHEYSHOTHIMTHROUGHTHEHEADATONCEANDSATDOWNTOHOLDACOUNCILOFFLIGHTMADESECUREFORTHEPRESENTBYTHETORTUOUSTRAILTHEYHADTRAVELLEDTHEQUESTIONOFTIMEWASNOLONGERSOBIGMANYMILESANDHOURSLAYBETWEENTHEMANDTHESPRYESTPOSSETHATCOULDFOLLOWSHARKDODSONSHORSEWITHTRAILINGROPEANDDROPPEDBRIDLEPANTEDANDCROPPEDTHANKFULLYOFTHEGRASSALONGTHESTREAMINTHEGORGEBOBTIDBALLOPENEDTHESACKDREWOUTDOUBLEHANDFULSOFTHENEATPACKAGESOFCURRENCYANDTHEONESACKOFGOLDANDCHUCKLEDWITHTHEGLEEOFACHILDSAYYOUOLDDOUBLEDECKEDPIRATEHECALLEDJOYFULLYTODODSONYOUSAIDWECOULDDOITYOUGOTAHEADFORFINANCINGTHATKNOCKSTHEHORNSOFFOFANYTHINGINARIZONAWHATAREWEGOINGTODOABOUTAHOSSFORYOUBOBWEAINTGOTLONGTOWAITHERETHEYLLBEONOURTRAILBEFOREDAYLIGHTINTHEMORNINOHIGUESSTHATCAYUSEOFYOURNLLCARRYDOUBLEFORAWHILEANSWEREDTHESANGUINEBOBWELLANNEXTHEFIRSTANIMALWECOMEACROSSBYJINGOESWEMADEAHAULDIDNTWEACCORDINTOTHEMARKSONTHISMONEYTHERES3000015000APIECEITSSHORTOFWHATIEXPECTEDSAIDSHARKDODSONKICKINGSOFTLYATTHEPACKAGESWITHTHETOEOFHISBOOTANDTHENHELOOKEDPENSIVELYATTHEWETSIDESOFHISTIREDHORSEOLDBOLIVARSMIGHTYNIGHPLAYEDOUTHESAIDSLOWLYIWISHTHATSORRELOFYOURSHADNTGOTHURTSODOISAIDBOBHEARTILYBUTITCANTBEHELPEDBOLIVARSGOTPLENTYOFBOTTOMHELLGETUSBOTHFARENOUGHTOGETFRESHMOUNTSDANGITSHARKICANTHELPTHINKINHOWFUNNYITISTHATANEASTERNERLIKEYOUCANCOMEOUTHEREANDGIVEUSWESTERNFELLOWSCARDSANDSPADESINTHEDESPERADOBUSINESSWHATPARTOFTHEEASTWASYOUFROMANYWAYNEWYORKSTATESAIDSHARKDODSONSITTINGDOWNONABOULDERANDCHEWINGATWIGIWASBORNONAFARMINULSTERCOUNTYIRANAWAYFROMHOMEWHENIWASSEVENTEENITWASANACCIDENTMYCOMINGWESTIWASWALKINALONGTHEROADWITHMYCLOTHESINABUNDLEMAKINFORNEWYORKCITYIHADANIDEAOFGOINTHEREANDMAKINLOTSOFMONEYIALWAYSFELTLIKEICOULDDOITICAMETOAPLACEONEEVENINWHERETHEROADFORKEDANDIDIDNTKNOWWHICHFORKTOTAKEISTUDIEDABOUTITFORHALFANHOURANDTHENITOOKTHELEFTHANDTHATNIGHTIRUNINTOTHECAMPOFAWILDWESTSHOWTHATWASTRAVELLINAMONGTHELITTLETOWNSANDIWENTWESTWITHITIVEOFTENWONDEREDIFIWOULDNTHAVETURNEDOUTDIFFERENTIFIDTOOKTHEOTHERROADOHIRECKONYOUDHAVEENDEDUPABOUTTHESAMESAIDBOBTIDBALLCHEERFULLYPHILOSOPHICALITAINTTHEROADSWETAKEITSWHATSINSIDEOFUSTHATMAKESUSTURNOUTTHEWAYWEDOSHARKDODSONGOTUPANDLEANEDAGAINSTATREEIDAGOODDEALRATHERTHATSORRELOFYOURNHADNTHURTHIMSELFBOBHESAIDAGAINALMOSTPATHETICALLYSAMEHEREAGREEDBOBHEWASSUREAFIRSTRATEKINDOFACROWBAITBUTBOLIVARHELLPULLUSTHROUGHALLRIGHTRECKONWEDBETTERBEMOVINONHADNTWESHARKILLBAGTHISBOODLEAGINANDWELLHITTHETRAILFORHIGHERTIMBERBOBTIDBALLREPLACEDTHESPOILINTHEBAGANDTIEDTHEMOUTHOFITTIGHTLYWITHACORDWHENHELOOKEDUPTHEMOSTPROMINENTOBJECTTHATHESAWWASTHEMUZZLEOFSHARKDODSONS45HELDUPONHIMWITHOUTAWAVERSTOPYOURFUNNINSAIDBOBWITHAGRINWEGOTTOBEHITTINTHEBREEZESETSTILLSAIDSHARKYOUAINTGOINTOHITNOBREEZEBOBIHATETOTELLYOUBUTTHEREAINTANYCHANCEFORBUTONEOFUSBOLIVARHESPLENTYTIREDANDHECANTCARRYDOUBLEWEBEENPARDSMEANDYOUSHARKDODSONFORTHREEYEARBOBSAIDQUIETLYWEVERISKEDOURLIVESTOGETHERTIMEANDAGAINIVEALWAYSGIVEYOUASQUAREDEALANDITHOUGHTYOUWASAMANIVEHEARDSOMEQUEERSTORIESABOUTYOUSHOOTINONEORTWOMENINAPECULIARWAYBUTINEVERBELIEVEDEMNOWIFYOUREJUSTHAVINALITTLEFUNWITHMESHARKPUTYOURGUNUPANDWELLGETONBOLIVARANDVAMOSEIFYOUMEANTOSHOOTSHOOTYOUBLACKHEARTEDSONOFATARANTULASHARKDODSONSFACEBOREADEEPLYSORROWFULLOOKYOUDONTKNOWHOWBADIFEELHESIGHEDABOUTTHATSORRELOFYOURNBREAKINHISLEGBOBTHEEXPRESSIONONDODSONSFACECHANGEDINANINSTANTTOONEOFCOLDFEROCITYMINGLEDWITHINEXORABLECUPIDITYTHESOULOFTHEMANSHOWEDITSELFFORAMOMENTLIKEANEVILFACEINTHEWINDOWOFAREPUTABLEHOUSETRULYBOBTIDBALLWASNEVERTOHITTHEBREEZEAGAINTHEDEADLY45OFTHEFALSEFRIENDCRACKEDANDFILLEDTHEGORGEWITHAROARTHATTHEWALLSHURLEDBACKWITHINDIGNANTECHOESANDBOLIVARUNCONSCIOUSACCOMPLICESWIFTLYBOREAWAYTHELASTOFTHEHOLDERSUPOFTHESUNSETEXPRESSNOTPUTTOTHESTRESSOFCARRYINGDOUBLEBUTASSHARKDODSONGALLOPEDAWAYTHEWOODSSEEMEDTOFADEFROMHISVIEWTHEREVOLVERINHISRIGHTHANDTURNEDTOTHECURVEDARMOFAMAHOGANYCHAIRHISSADDLEWASSTRANGELYUPHOLSTEREDANDHEOPENEDHISEYESANDSAWHISFEETNOTINSTIRRUPSBUTRESTINGQUIETLYONTHEEDGEOFAQUARTEREDOAKDESKIAMTELLINGYOUTHATDODSONOFTHEFIRMOFDODSONDECKERWALLSTREETBROKERSOPENEDHISEYESPEABODYTHECONFIDENTIALCLERKWASSTANDINGBYHISCHAIRHESITATINGTOSPEAKTHEREWASACONFUSEDHUMOFWHEELSBELOWANDTHESEDATIVEBUZZOFANELECTRICFANAHEMPEABODYSAIDDODSONBLINKINGIMUSTHAVEFALLENASLEEPIHADAMOSTREMARKABLEDREAMWHATISITPEABODYMRWILLIAMSSIROFTRACYWILLIAMSISOUTSIDEHEHASCOMETOSETTLEHISDEALINXYZTHEMARKETCAUGHTHIMSHORTSIRIFYOUREMEMBERYESIREMEMBERWHATISXYZQUOTEDATTODAYPEABODYONEEIGHTYFIVESIRTHENTHATSHISPRICEEXCUSEMESAIDPEABODYRATHERNERVOUSLYFORSPEAKINGOFITBUTIVEBEENTALKINGTOWILLIAMSHESANOLDFRIENDOFYOURSMRDODSONANDYOUPRACTICALLYHAVEACORNERINXYZITHOUGHTYOUMIGHTTHATISITHOUGHTYOUMIGHTNOTREMEMBERTHATHESOLDYOUTHESTOCKAT98IFHESETTLESATTHEMARKETPRICEITWILLTAKEEVERYCENTHEHASINTHEWORLDANDHISHOMETOOTODELIVERTHESHARESTHEEXPRESSIONONDODSONSFACECHANGEDINANINSTANTTOONEOFCOLDFEROCITYMINGLEDWITHINEXORABLECUPIDITYTHESOULOFTHEMANSHOWEDITSELFFORAMOMENTLIKEANEVILFACEINTHEWINDOWOFAREPUTABLEHOUSEHEWILLSETTLEATONEEIGHTYFIVESAIDDODSONBOLIVARCANNOTCARRYDOUBLE</div></pre></td></tr></table></figure>
-<p><code>BOLIVAR</code> is not the flag. Let’s quickly look over the text, but we don’t want to spend too much time adding, so we fount the <a href="http://www.dominiopublico.gov.br/download/texto/gu001595.pdf" target="_blank" rel="external">original text</a> (Whirligigs, O. Henry, Chapter XIV,<br>THE ROADS WE TAKE, page 82).</p>
-<p>Because HTML is better than PDF (<a href="http://www.hymnsandcarolsofchristmas.com/Text/8whrl11h.htm#14" target="_blank" rel="external">http://www.hymnsandcarolsofchristmas.com/Text/8whrl11h.htm#14</a>):</p>
-<blockquote>
-<p>TWENTY miles West of Tucson, the “Sunset Express” stopped at a tank to take on water. Besides the aqueous, addition the engine of that famous flyer acquired some other things that were not good for it.</p>
-<p>While the fireman was lowering the feeding hose, Bob Tidball, “Shark” Dodson and a quarter-bred Creek Indian called John Big Dog climbed on the engine and showed the engineer three round orifices in pieces of ordnance that the carried. These orifices so impressed the engineer with their possibilities that he raised both hands in a gesture such as accompanies the ejaculation “Do tell!”</p>
-<p>At the crisp command of Shark Dodson, who was leader of the attacking force the engineer descended to the ground and uncoupled the engine and tender. Then John Big Dog, perched upon the coal, sportively held two guns upon the engine driver and the fireman, and suggested that they run the engine fifty yards away and there await further orders.</p>
-<p>Shark Dodson and Bob Tidball, scorning to put such low-grade ore as the passengers through the mill, struck out for the rich pocket of the express car. They found the messenger serene in the belief that the “Sunset Express” was taking on nothing more stimulating and dangerous than aqua pura. While Bob was knocking this idea out of his head with the butt-end of his six-shooter Shark Dodson was already dosing the express-car safe with dynamite.</p>
-<p>The safe exploded to the tune of $30,000, all gold and currency. The passengers thrust their heads casually out of the windows to look for the thunder-cloud. The conductor jerked at the bell-rope, which sagged down loose and unresisting, at his tug. Shark Dodson and Bob Tidball, with their booty in a stout canvas bag, tumbled out of the express car and ran awkwardly in their high-heeled boots to the engine.</p>
-<p>The engineer, sullenly angry but wise, ran the engine, according to orders, rapidly away from the inert train. But before this was accomplished the express messenger, recovered from Bob Tidball’s persuader to neutrality, jumped out of his car with a Winchester rifle and took a trick in the game. Mr. John Big Dog, sitting on the coal tender, unwittingly made a wrong lead by giving an imitation of a target, and the messenger trumped him. With a ball exactly between his shoulder blades the Creek chevalier of industry rolled off to the ground, thus increasing the share of his comrades in the loot by one-sixth each.</p>
-<p>Two miles from the tank the engineer was ordered to stop.</p>
-<p>The robbers waved a defiant adieu and plunged down the steep slope into the thick woods that lined the track. Five minutes of crashing through a thicket of chapparal brought them to open woods, where three horses were tied to low-hanging branches. One was waiting for John Big Dog, who would never ride by night or day again. This animal the robbers divested of saddle and bridle and set free. They mounted the other two with the bag across one pommel, and rode fast and with discre- tion through the forest and up a primeval, lonely gorge. Here the animal that bore Bob Tidball slipped on a mossy boulder and broke a foreleg. They shot him through the head at once and sat down to hold a council of flight. Made secure for the present by the tortuous trail they- had travelled, the question of time was no longer so big. Many miles and hours lay between them and the spryest posse that could follow. Shark Dodson’s horse, with trailing rope and dropped bridle, panted and cropped thankfully of the grass along the stream in the gorge. Bob Tidball opened the sack, drew out double handfuls of the neat packages of currency and the one sack of gold and chuckled with the glee of a child.</p>
-<p>“Say, you old double-decked pirate,” he called joyfully to Dodson, “you said we could do it – you got a head for financing that knocks the horns off of anything in Arizona.”</p>
-<p>“What are we going to do about a hoss for you, Bob? We ain’t got long to wait here. They’ll be on our trail before daylight in the mornin’.”</p>
-<p>“Oh, I guess that cayuse of yourn’ll carry double for a while,” answered the sanguine Bob. “We’ll annex the first animal we come across. By jingoes, we made a haul, didn’t we? Accordin’ to the marks on this money there’s $30,000 – $15,000 apiece!”</p>
-<p>“It’s short of what I expected,” said Shark Dodson, kicking softly at the packages with the toe of his boot and then he looked pensively at the wet sides of his tired horse.</p>
-<p>“Old Bolivar’s mighty nigh played out,” he said, slowly. “I wish that sorrel of yours hadn’t got hurt.”</p>
-<p>“So do I,” said Bob, heartily, “but it can’t be helped. Bolivar’s got plenty of bottom – he’ll get us both far enough to get fresh mounts. Dang it, Shark, I can’t belp thinkin’ how funny it is that an Easterner like you can come out here and give us Western fellows cards and spades in the desperado business. What part of the East was you from, anyway?”</p>
-<p>“New York State,” said Shark Dodson, sitting down on a boulder and chewing a twig. “I was born on a farm in Ulster County. I ran away from home when I was seventeen. It was an accident my coming West. I was walkin’ along the road with my clothes in a bundle, makin’ for New York City. I had an idea of goin’ there and makin’ lots of money. I always felt like I could do it. I came to a place one evenin’ where the road forked and I didn’t know which fork to take. I studied about it for half an hour, and then I took the left- hand. That night I run into the camp of a Wild West show that was travellin’ among the little towns, and I went West with it. I’ve often wondered if I wouldn’t have turned out different if I’d took the other road.”</p>
-<p>“Oh, I reckon you’d have ended up about the same,” said Bob Tidball, cheerfully philosophical. “It ain’t the roads we take; it’s what’s inside of us that makes us turn out the way we do.”</p>
-<p>Shark Dodson got up and leaned against a tree.</p>
-<p>“I’d a good deal rather that sorrel of yourn hadn’t hurt himself, Bob,” he said again, almost pathetically.</p>
-<p>“Same here,” agreed Bob; “he was sure a first-rate kind of a crowbait. But Bolivar, he’ll pull us through all right. Reckon we’d better be movin’ on, hadn’t we, Shark? I’ll bag this boodle ag’in and we’ll hit the trail for higher timber.”</p>
-<p>Bob Tidball replaced the spoil in the bag and tied the mouth of it tightly with a cord. When he looked up the most prominent object that he saw was the muzzle of Shark Dodson’s .45 held upon him without a waver.</p>
-<p>“Stop your funnin’,” said Bob, with a grin. “We got to be hittin’ the breeze.”</p>
-<p>“Set still,” said Shark. “You ain’t goin’ to hit no breeze, Bob. I hate to tell you, but there ain’t any chance for but one of us. Bolivar, he’s plenty tired, and he can’t carry double.”</p>
-<p>“We been pards, me and you, Shark Dodson, for three year,” Bob said quietly. “We’ve risked our lives together time and again. I’ve always give you a square deal, and I thought you was a man. I’ve heard some queer stories about you shootin’ one or two men in a peculiar way, but I never believed ‘em. Now if you’re just havin’ a little fun with me, Shark, put your gun up, and we’ll get on Bolivar and vamose. If you mean to shoot – shoot, you blackhearted son of a tarantula!”</p>
-<p>Shark Dodson’s face bore a deeply sorrowful look. “You don’t know how bad I feel,” he sighed, “about that sorrel of yourn breakin’ his leg, Bob.”</p>
-<p>The expression on Dodson’s face changed in an instant to one of cold ferocity mingled with inexorable cupidity. The soul of the man showed itself for a moment like an evil face in the window of a reputable house.</p>
-<p>Truly Bob Tidball was never to “hit the breeze” again. The deadly .45 of the false friend cracked and filled the gorge with a roar that the walls hurled back with indignant echoes. And Bolivar, unconscious accomplice, swiftly bore away the last of the holders-up of the “Sunset Express,” not put to the stress of “carrying double.”</p>
-<p>But as “Shark” Dodson galloped away the woods seemed to fade from his view; the revolver in his right hand turned to the curved arm of a mahogany chair; his saddle was strangely upholstered, and he opened his eyes and saw his feet, not in stirrups, but resting quietly on the edge of a quartered-oak desk.</p>
-<p>I am telling you that Dodson, of the firm of Dodson &amp; Decker, Wall Street brokers, opened his eyes. Peabody, the confidential clerk, was standing by his chair, hesitating to speak. There was a confused hum of wheels below, and the sedative buzz of an electric fan.</p>
-<p>“Ahem! Peabody,” said Dodson, blinking. “I must have fallen asleep. I had a most remarkable dream. What is it, Peabody?”</p>
-<p>“Mr. Williams, sir, of Tracy &amp; Williams, is outside. He has come to settle his deal in X. Y. Z. The market caught him short, sir, if you remember.”</p>
-<p>“Yes, I remember. What is X. Y. Z. quoted at to-day, Peabody?”</p>
-<p>“One eighty-five, sir.”</p>
-<p>“Then that’s his price.”</p>
-<p>“Excuse me,” said Peabody, rather nervously “for speaking of it, but I’ve been talking to Williams. He’s an old friend of yours, Mr. Dodson, and you practically have a corner in X. Y. Z. I thought you might – that is, I thought you might not remember that he sold you the stock at 98. If he settles at the market price it will take every cent he has in the world and his home too to deliver the shares.”</p>
-<p>The expression on Dodson’s face changed in an instant to one of cold ferocity mingled with inexorable cupidity. The soul of the man showed itself for a moment like an evil face in the window of a reputable house.</p>
-<p>“He will settle at one eighty-five,” said Dodson. “Bolivar cannot carry double.”</p>
-</blockquote>
-<p>Description said the end was very important so we tried <code>BOLIVARCANNOTCARRYDOUBLE</code> as flag. And that was the one.</p>
-<p><strong>Feedback</strong>: no flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like, here we just known that was at the end</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Juniors CTF - 400 - Dirty Repo - Forensics</title>
-    <link href="http://rawsec.ml/en/JuniorCTF-2016-forensics-Dirty-Repo/"/>
-    <id>http://rawsec.ml/en/JuniorCTF-2016-forensics-Dirty-Repo/</id>
-    <published>2016-11-26T23:00:00.000Z</published>
-    <updated>2016-11-27T22:20:23.379Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chill3d</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Juniors CTF 2016</li>
-<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
+<p>Pidgin can’t be used because it doesn’t support anonymous connection.</p>
+<p>Use <a href="http://profanity.im/" target="_blank" rel="external">Profanity</a> instead:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/connect anonymous@mystery-hack.gravity.falls server 10.0.223.80</div></pre></td></tr></table></figure>
+<p>Some people are connected:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dipper@mystery-hack.gravity.falls</div><div class="line">root</div><div class="line">ru2en@bot.talk.google.com</div><div class="line">stand</div></pre></td></tr></table></figure>
+<p>Let’s talk to <code>dipper@mystery-hack.gravity.falls</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/msg dipper@mystery-hack.gravity.falls hello</div></pre></td></tr></table></figure>
+<p>He told us:</p>
+<ul>
+<li>Russian: <code>Я очень смышленый парень. Но сейчас не понимаю ни слова.</code></li>
+<li>English: <code>I am very clever guy. But now I do not understand a word.</code></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: admin, forensics</p>
-<blockquote>
-<p>Gruncle Stan loves money very much and doesn’t shun to use unacceptable tricks to get it. Not so far he started a new project with an aim to embezzlement of public funds. He hired some developers and decided to “borrow” source code. But one liberal-minded young man didn’t like, that Stan’s project is a plagiarism. This zealous fighter for justice decided to spoil one developer’s project. Try to find out, what the malefactor added.</p>
-<p>Here are all developers’ projects -&gt; WORKDIRS</p>
-</blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>In this challenge, we get a tar.gz file. In it, there are 20 tar.gz files containing git repo from openvpn.<br>So first, I unzip all tar.gz file, and I seek so differences between repos :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ diff -r comp_1 comp_2</div><div class="line">Binary files comp_1/openvpn/.git/index and comp_2/openvpn/.git/index are differents</div><div class="line">$ diff -r comp_1 comp_3</div><div class="line">$ diff -r comp_1 comp_4</div><div class="line">$ diff -r comp_1 comp_5</div><div class="line">132a133</div><div class="line">&gt; //FLAG -&gt; gRunCle_StAn_tHe_woRsT_coDeR</div></pre></td></tr></table></figure>
-<p>Flag : gRunCle_StAn_tHe_woRsT_coDeR</p>
+<p>We talked to <code>stand</code>:</p>
+<ul>
+<li>Russian: <code>Это ты что сейчас сказал? Всегда четко формулируй, что тебе надо. Ты что, русского языка не понимаешь. Тогда тебе сюда: ru2en@bot.talk.google.com</code></li>
+<li>English: <code>That&#39;s what you have just said that? Always articulate what you need. What, you do not understand the Russian language. Then you here: ru2en@bot.talk.google.com</code></li>
+</ul>
+<p>Admins said us that <code>ru2en@bot.talk.google.com</code> doesn’t work and we need to use Google Translate and speak to <code>dipper@mystery-hack.gravity.falls</code> in russian only.</p>
+<p>We tried to invite him in a room but he didn’t want to come in:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/join</div><div class="line">/room accept</div><div class="line">/invite dipper@mystery-hack.gravity.falls</div></pre></td></tr></table></figure>
+<p>We tried to get some infos about him:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/info dipper@mystery-hack.gravity.falls</div><div class="line">11:51:30 - dipper@mystery-hack.gravity.falls:</div><div class="line">11:51:30 - Subscription: none</div></pre></td></tr></table></figure>
+<p>We checked upload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/sendfile /etc/hosts</div><div class="line">11:55:25 - XEP-0363 HTTP File Upload is not supported by the server</div></pre></td></tr></table></figure>
+<p>We added him in contact, check if he had a pgp public key, wanted to subscribe to his presence and allow him to see ours, but it seems he doesn’t want to be our friend:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/roster add dipper@mystery-hack.gravity.falls</div><div class="line">/pgp contacts</div><div class="line">/sub request dipper@mystery-hack.gravity.falls</div><div class="line">/sub allow dipper@mystery-hack.gravity.falls</div><div class="line">/sub show dipper@mystery-hack.gravity.falls</div><div class="line">12:20:08 - Awaiting subscription responses from:</div><div class="line">12:20:08 -   dipper@mystery-hack.gravity.falls</div></pre></td></tr></table></figure>
+<p>Last activity requests are forbidden:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/lastactivity dipper@mystery-hack.gravity.falls</div><div class="line">12:24:27 - Last activity request failed for dipper@mystery-hack.gravity.falls: forbidden</div></pre></td></tr></table></figure>
+<p>Someone in the Telegram chat talked about <code>mabel</code>, so we tried:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/msg mabel@mystery-hack.gravity.falls hello</div></pre></td></tr></table></figure>
+<p>He said us:</p>
+<ul>
+<li>russian: <code>Не понимаю, чего вы хотите? Я богиня разрушения!</code></li>
+<li>english: <code>I do not know what you want? I am the goddess of destruction!</code></li>
+</ul>
+<p>Try to list rooms again, this times it works:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/rooms</div><div class="line">13:08:11 - Chat rooms at conference.mystery-hack.gravity.falls:</div><div class="line">13:08:11 -   hall@conference.mystery-hack.gravity.falls, (hall (12))</div><div class="line">13:08:11 -   dipper@conference.mystery-hack.gravity.falls, (dipper (1))</div><div class="line">13:08:11 -   flag_shop@conference.mystery-hack.gravity.falls, (flag_shop (4))</div></pre></td></tr></table></figure>
+<p>We joined hall (<code>/join hall</code>), there is some users:</p>
+<ul>
+<li>Moderators: stan</li>
+<li>Participants: dipper, Gideon, mabel, soos, wendy</li>
+<li>Visitors: ctf players I suppose</li>
+</ul>
+<p>We talked to soos:</p>
+<ul>
+<li>russian: <code>Чувак, я тебя не понимаю. Хотя мудрость - мое благословение и проклятие.</code></li>
+<li>english: <code>Dude, I do not understand you. Although wisdom - my blessing and a curse.</code></li>
+</ul>
+<p>When we talk, giving only keywords, nobody understand us so let’s try some complete sentences:</p>
+<p>To stan:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">stan:</div><div class="line">Хотите флаг? (You want to flag?)</div><div class="line">Могу предложить флаг Конфедерации за сотку баксов. (I can offer the Confederate flag for a hundred bucks.)</div><div class="line">Пока рядом нет полиции - все законно! (While not near the police - all legally!)</div><div class="line">ХА-ХА-ХА!!! (Ha-ha-ha !!!)</div><div class="line">Если есть какие-то вопросы - обратитесь к soos (If you have any questions - please contact soos)</div></pre></td></tr></table></figure>
+<p>To soos:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">soos:</div><div class="line">Можно вопрос, зачем тебе флаг? (It is possible to question, why do you a flag?)</div><div class="line">Лучше обратись к dipper, он специалист по загадкам. (Better to turn to the dipper, he riddles specialist.)</div><div class="line">Вообще-то я второстепенный персонаж. (Actually, I&apos;m a minor character.)</div><div class="line">О боже, второстепенные персонажы погибают в первые пять минут. (Oh God, the secondary characters are killed in the first five minutes.)</div><div class="line">Что же делать? (What to do?)</div></pre></td></tr></table></figure>
+<p>Ok so let’s talk to dipper:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">dipper:</div><div class="line">Флаг? Причем тут флаг? (Flag? And the flag here?)</div><div class="line">Это очередная загадка Гравити Фолз?. (This is another mystery Gravity Falls ?.)</div><div class="line">Я ее обязательно разгадаю. (I&apos;m sure it unravel.)</div><div class="line">Но сейчас мне некогда, у меня свидание с wendy. (But now I have no time, I have a date with wendy.)</div></pre></td></tr></table></figure>
+<p>Let’s try wendy:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">wendy:</div><div class="line">Флаг? Ну да. Почему бы и нет. (Flag? Well yes. Why not.)</div><div class="line">Хотя лучше утка. Или панда. (Although better duck. Or panda.)</div><div class="line">Но по животным у нас специалист mabel (But animals have specialist mabel)</div></pre></td></tr></table></figure>
+<p>mabel:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">mabel:</div><div class="line">Флаг? Нелегально? Я легализую всё, что только можно!&quot; (Flag? Illegally? I legalize everything that is possible!)</div><div class="line">Ой, забыла предстваиться. (Oh, I forgot to introduce myself.)</div><div class="line">Привет, я Мэйбл. Мне двенадцать. (Hi, I&apos;m Mabel. I was twelve.)</div><div class="line">У меня есть waddles. Хотите пожениться? (I have waddles. Want to get married?)</div></pre></td></tr></table></figure>
+<p>waddles:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">waddles:</div><div class="line">Флаг: 骨架 (Flag: 骨架)</div><div class="line">Досвидания. (Bye.)</div></pre></td></tr></table></figure>
+<p>And <code>骨架</code> in chinese means <code>skeleton</code>.</p>
+<p>We must submit the flag in chinese, not in english.</p>
+<p><strong>Note</strong>: Jabber server was very unstable and we get a lot of <em>Lost connection.</em> messages. So we used <code>/reconnect 1</code>.</p>
+<p><strong>Feedback</strong>: russian content everywhere, taht’s pain for non-russian people, use english only. No flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like. This was a joy only challenge, there is no security in this challenge, so that must not be in a CTF or that should give very few points.</p>
 ]]></content>
     
     <summary type="html">
@@ -318,91 +347,7 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Juniors CTF - 200 - Clone Attack - Forensics</title>
-    <link href="http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/"/>
-    <id>http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/</id>
-    <published>2016-11-26T23:00:00.000Z</published>
-    <updated>2016-11-27T21:54:59.188Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Juniors CTF 2016</li>
-<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: trivial, forensics</p>
-<blockquote>
-<p> Gravity Falls is under clones attack. Find the real Dipper and save the town</p>
-<p><a href="https://yadi.sk/d/ekEIo3nwy22JC" target="_blank" rel="external">https://yadi.sk/d/ekEIo3nwy22JC</a>, <a href="http://juniors.ucoz.net/dipper2.png" target="_blank" rel="external">http://juniors.ucoz.net/dipper2.png</a></p>
-<p><img src="https://i.imgbox.com/iiiv8xc8.png" alt=""></p>
-<p>Lupanov M.Iu.<br><br></p>
-</blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
-<li><code>dipper2.jpg</code> is useless.</li>
-<li>unzip <code>dipper.7z</code></li>
-<li>We have 201 images:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">Ab9t2MDhgeCdtIWM.jpg  HjBQKJSOhcieolm4.jpg  n3dQQ0ZDx3S3UsBr.jpg  T1uPfBLnZwT4gnLy.jpg  zaDSq7pwGh4a38xy.jpg</div><div class="line">ABDOzIFq6epnCnhx.jpg  hk0hHu8tI5DkDyiV.jpg  N4M2CtJ7gr7Jzo9S.jpg  t1xoHMAR0IAkwfd7.jpg  Zb1RJWvpVjXFKfxq.jpg</div><div class="line">aBHn54lpn0JuymBI.jpg  HKjCtFdy5EL15cXH.jpg  N5muaN8pZFaQizT6.jpg  t2FNLj2HOKnT1naO.jpg  ZcAZFv16zVB2Xoih.jpg</div><div class="line">AbmIxXZ4ReLk7UYM.jpg  hlB31hrzrOU5RYQg.jpg  N5ZGl2k84vyFp5Br.jpg  t3sXG01KznKJiN9v.jpg  zCYJB6XDGlt8UB58.jpg</div><div class="line">ABNclrsAR0By1bUx.jpg  HLIqYcwvszKfJ2mh.jpg  n6bfa5irSSBzz1IU.jpg  t9IRCSMIJBrvArav.jpg  zD3o8PsmbXmRWNON.jpg</div><div class="line">ac9q61SRl4vlF0td.jpg  hmrrHYgpxaW6V6XU.jpg  n6BS4SVXzrkIRpsu.jpg  TBHJwtjbcXh2GYv9.jpg  zdd9UFYGdxytCbCz.jpg</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<ul>
-<li>Let’s take a look at the first image:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool 07snLOxf2k0rRrT3.jpg</div><div class="line">ExifTool Version Number         : 10.20</div><div class="line">File Name                       : 07snLOxf2k0rRrT3.jpg</div><div class="line">Directory                       : .</div><div class="line">File Size                       : 26 kB</div><div class="line">File Modification Date/Time     : 2016:11:03 04:56:07+01:00</div><div class="line">File Access Date/Time           : 2016:11:25 16:47:44+01:00</div><div class="line">File Inode Change Date/Time     : 2016:11:25 16:48:53+01:00</div><div class="line">File Permissions                : rw-r--r--</div><div class="line">File Type                       : JPEG</div><div class="line">File Type Extension             : jpg</div><div class="line">MIME Type                       : image/jpeg</div><div class="line">JFIF Version                    : 1.01</div><div class="line">Resolution Unit                 : inches</div><div class="line">X Resolution                    : 72</div><div class="line">Y Resolution                    : 72</div><div class="line">Current IPTC Digest             : 1f6df1813fc08f735211d55b866d1cca</div><div class="line">Coded Character Set             : UTF8</div><div class="line">Envelope Record Version         : 4</div><div class="line">Object Name                     : Ксерокопия  номер  086</div><div class="line">Application Record Version      : 4</div><div class="line">Comment                         : Flag is MD5sum of this file. Its TRUE</div><div class="line">Image Width                     : 193</div><div class="line">Image Height                    : 400</div><div class="line">Encoding Process                : Progressive DCT, Huffman coding</div><div class="line">Bits Per Sample                 : 8</div><div class="line">Color Components                : 3</div><div class="line">Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)</div><div class="line">Image Size                      : 193x400</div><div class="line">Megapixels                      : 0.077</div></pre></td></tr></table></figure>
-<ul>
-<li><code>Comment                         : Flag is MD5sum of this file. Its TRUE</code> but all images have the same comment.</li>
-<li><code>Object Name                     : Ксерокопия  номер  086</code> means <code>n° of copie 086</code>, let’s fidn teh original:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool * | grep &apos;Object Name&apos;</div><div class="line">[...]</div><div class="line">Object Name                     : Ксерокопия  номер  644</div><div class="line">Object Name                     : Оригинальный Диппер</div><div class="line">Object Name                     : Ксерокопия  номер  702</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<ul>
-<li>We found it, <code>Оригинальный Диппер</code> means <code>The original Dipper</code>:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ grep -r &apos;Оригинальный Диппер&apos; ./</div><div class="line">Binary file ./atvF2wf1tfB2IkuV.jpg matches</div><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ md5sum atvF2wf1tfB2IkuV.jpg</div><div class="line">cd4d19b8471cecbc8ea7544de59db368  atvF2wf1tfB2IkuV.jpg</div></pre></td></tr></table></figure>
-<ul>
-<li><code>cd4d19b8471cecbc8ea7544de59db368</code> was the flag.</li>
-</ul>
-<p><img src="https://i.imgbox.com/K5qOYSYB.jpg" alt=""></p>
-<p><strong>Feedback</strong>: it’s a international CTF, so please use only english, russian content everywhere is pain for non-russian</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+      <category term="joy" scheme="http://rawsec.ml/tags/joy/"/>
     
   </entry>
   
@@ -549,11 +494,11 @@
   </entry>
   
   <entry>
-    <title>Juniors CTF - 500 - Skeleton in the closet - Joy</title>
-    <link href="http://rawsec.ml/en/JuniorCTF-2016-network-Skeleton-in-the-closet/"/>
-    <id>http://rawsec.ml/en/JuniorCTF-2016-network-Skeleton-in-the-closet/</id>
+    <title>Juniors CTF - 200 - Clone Attack - Forensics</title>
+    <link href="http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/"/>
+    <id>http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/</id>
     <published>2016-11-26T23:00:00.000Z</published>
-    <updated>2016-11-27T21:54:59.192Z</updated>
+    <updated>2016-11-27T21:54:59.188Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -578,88 +523,37 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: network, joy, admin</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: trivial, forensics</p>
 <blockquote>
-<p><img src="http://i.imgur.com/bXKRRBB.png" alt=""></p>
-<p><img src="http://i.imgur.com/HnyYDnR.jpg" alt=""></p>
-<p>#hint for task with jabber: try to use another clients because clients works differently with anonymous auth.</p>
+<p> Gravity Falls is under clones attack. Find the real Dipper and save the town</p>
+<p><a href="https://yadi.sk/d/ekEIo3nwy22JC" target="_blank" rel="external">https://yadi.sk/d/ekEIo3nwy22JC</a>, <a href="http://juniors.ucoz.net/dipper2.png" target="_blank" rel="external">http://juniors.ucoz.net/dipper2.png</a></p>
+<p><img src="https://i.imgbox.com/iiiv8xc8.png" alt=""></p>
+<p>Lupanov M.Iu.<br><br></p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo dipper lo-o-ssE-bo |tr ipodlEsb- ab0j1328.</div><div class="line">jabber 10.0.223.80</div></pre></td></tr></table></figure>
-<p>with pidgin &amp; wireshark</p>
-<ul>
-<li>domain: 10.0.223.80</li>
-<li>server: 10.0.223.80</li>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<li><code>dipper2.jpg</code> is useless.</li>
+<li>unzip <code>dipper.7z</code></li>
+<li>We have 201 images:</li>
 </ul>
-<p>change domaine to:<br>mystery-hack.gravity.falls</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">Ab9t2MDhgeCdtIWM.jpg  HjBQKJSOhcieolm4.jpg  n3dQQ0ZDx3S3UsBr.jpg  T1uPfBLnZwT4gnLy.jpg  zaDSq7pwGh4a38xy.jpg</div><div class="line">ABDOzIFq6epnCnhx.jpg  hk0hHu8tI5DkDyiV.jpg  N4M2CtJ7gr7Jzo9S.jpg  t1xoHMAR0IAkwfd7.jpg  Zb1RJWvpVjXFKfxq.jpg</div><div class="line">aBHn54lpn0JuymBI.jpg  HKjCtFdy5EL15cXH.jpg  N5muaN8pZFaQizT6.jpg  t2FNLj2HOKnT1naO.jpg  ZcAZFv16zVB2Xoih.jpg</div><div class="line">AbmIxXZ4ReLk7UYM.jpg  hlB31hrzrOU5RYQg.jpg  N5ZGl2k84vyFp5Br.jpg  t3sXG01KznKJiN9v.jpg  zCYJB6XDGlt8UB58.jpg</div><div class="line">ABNclrsAR0By1bUx.jpg  HLIqYcwvszKfJ2mh.jpg  n6bfa5irSSBzz1IU.jpg  t9IRCSMIJBrvArav.jpg  zD3o8PsmbXmRWNON.jpg</div><div class="line">ac9q61SRl4vlF0td.jpg  hmrrHYgpxaW6V6XU.jpg  n6BS4SVXzrkIRpsu.jpg  TBHJwtjbcXh2GYv9.jpg  zdd9UFYGdxytCbCz.jpg</div><div class="line">[...]</div></pre></td></tr></table></figure>
 <ul>
-<li>domain: mystery-hack.gravity.falls</li>
-<li>server: 10.0.223.80</li>
+<li>Let’s take a look at the first image:</li>
 </ul>
-<p>Pidgin can’t be used because it doesn’t support anonymous connection.</p>
-<p>Use <a href="http://profanity.im/" target="_blank" rel="external">Profanity</a> instead:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/connect anonymous@mystery-hack.gravity.falls server 10.0.223.80</div></pre></td></tr></table></figure>
-<p>Some people are connected:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dipper@mystery-hack.gravity.falls</div><div class="line">root</div><div class="line">ru2en@bot.talk.google.com</div><div class="line">stand</div></pre></td></tr></table></figure>
-<p>Let’s talk to <code>dipper@mystery-hack.gravity.falls</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/msg dipper@mystery-hack.gravity.falls hello</div></pre></td></tr></table></figure>
-<p>He told us:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool 07snLOxf2k0rRrT3.jpg</div><div class="line">ExifTool Version Number         : 10.20</div><div class="line">File Name                       : 07snLOxf2k0rRrT3.jpg</div><div class="line">Directory                       : .</div><div class="line">File Size                       : 26 kB</div><div class="line">File Modification Date/Time     : 2016:11:03 04:56:07+01:00</div><div class="line">File Access Date/Time           : 2016:11:25 16:47:44+01:00</div><div class="line">File Inode Change Date/Time     : 2016:11:25 16:48:53+01:00</div><div class="line">File Permissions                : rw-r--r--</div><div class="line">File Type                       : JPEG</div><div class="line">File Type Extension             : jpg</div><div class="line">MIME Type                       : image/jpeg</div><div class="line">JFIF Version                    : 1.01</div><div class="line">Resolution Unit                 : inches</div><div class="line">X Resolution                    : 72</div><div class="line">Y Resolution                    : 72</div><div class="line">Current IPTC Digest             : 1f6df1813fc08f735211d55b866d1cca</div><div class="line">Coded Character Set             : UTF8</div><div class="line">Envelope Record Version         : 4</div><div class="line">Object Name                     : Ксерокопия  номер  086</div><div class="line">Application Record Version      : 4</div><div class="line">Comment                         : Flag is MD5sum of this file. Its TRUE</div><div class="line">Image Width                     : 193</div><div class="line">Image Height                    : 400</div><div class="line">Encoding Process                : Progressive DCT, Huffman coding</div><div class="line">Bits Per Sample                 : 8</div><div class="line">Color Components                : 3</div><div class="line">Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)</div><div class="line">Image Size                      : 193x400</div><div class="line">Megapixels                      : 0.077</div></pre></td></tr></table></figure>
 <ul>
-<li>Russian: <code>Я очень смышленый парень. Но сейчас не понимаю ни слова.</code></li>
-<li>English: <code>I am very clever guy. But now I do not understand a word.</code></li>
+<li><code>Comment                         : Flag is MD5sum of this file. Its TRUE</code> but all images have the same comment.</li>
+<li><code>Object Name                     : Ксерокопия  номер  086</code> means <code>n° of copie 086</code>, let’s fidn teh original:</li>
 </ul>
-<p>We talked to <code>stand</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool * | grep &apos;Object Name&apos;</div><div class="line">[...]</div><div class="line">Object Name                     : Ксерокопия  номер  644</div><div class="line">Object Name                     : Оригинальный Диппер</div><div class="line">Object Name                     : Ксерокопия  номер  702</div><div class="line">[...]</div></pre></td></tr></table></figure>
 <ul>
-<li>Russian: <code>Это ты что сейчас сказал? Всегда четко формулируй, что тебе надо. Ты что, русского языка не понимаешь. Тогда тебе сюда: ru2en@bot.talk.google.com</code></li>
-<li>English: <code>That&#39;s what you have just said that? Always articulate what you need. What, you do not understand the Russian language. Then you here: ru2en@bot.talk.google.com</code></li>
+<li>We found it, <code>Оригинальный Диппер</code> means <code>The original Dipper</code>:</li>
 </ul>
-<p>Admins said us that <code>ru2en@bot.talk.google.com</code> doesn’t work and we need to use Google Translate and speak to <code>dipper@mystery-hack.gravity.falls</code> in russian only.</p>
-<p>We tried to invite him in a room but he didn’t want to come in:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/join</div><div class="line">/room accept</div><div class="line">/invite dipper@mystery-hack.gravity.falls</div></pre></td></tr></table></figure>
-<p>We tried to get some infos about him:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/info dipper@mystery-hack.gravity.falls</div><div class="line">11:51:30 - dipper@mystery-hack.gravity.falls:</div><div class="line">11:51:30 - Subscription: none</div></pre></td></tr></table></figure>
-<p>We checked upload:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/sendfile /etc/hosts</div><div class="line">11:55:25 - XEP-0363 HTTP File Upload is not supported by the server</div></pre></td></tr></table></figure>
-<p>We added him in contact, check if he had a pgp public key, wanted to subscribe to his presence and allow him to see ours, but it seems he doesn’t want to be our friend:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/roster add dipper@mystery-hack.gravity.falls</div><div class="line">/pgp contacts</div><div class="line">/sub request dipper@mystery-hack.gravity.falls</div><div class="line">/sub allow dipper@mystery-hack.gravity.falls</div><div class="line">/sub show dipper@mystery-hack.gravity.falls</div><div class="line">12:20:08 - Awaiting subscription responses from:</div><div class="line">12:20:08 -   dipper@mystery-hack.gravity.falls</div></pre></td></tr></table></figure>
-<p>Last activity requests are forbidden:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/lastactivity dipper@mystery-hack.gravity.falls</div><div class="line">12:24:27 - Last activity request failed for dipper@mystery-hack.gravity.falls: forbidden</div></pre></td></tr></table></figure>
-<p>Someone in the Telegram chat talked about <code>mabel</code>, so we tried:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/msg mabel@mystery-hack.gravity.falls hello</div></pre></td></tr></table></figure>
-<p>He said us:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ grep -r &apos;Оригинальный Диппер&apos; ./</div><div class="line">Binary file ./atvF2wf1tfB2IkuV.jpg matches</div><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ md5sum atvF2wf1tfB2IkuV.jpg</div><div class="line">cd4d19b8471cecbc8ea7544de59db368  atvF2wf1tfB2IkuV.jpg</div></pre></td></tr></table></figure>
 <ul>
-<li>russian: <code>Не понимаю, чего вы хотите? Я богиня разрушения!</code></li>
-<li>english: <code>I do not know what you want? I am the goddess of destruction!</code></li>
+<li><code>cd4d19b8471cecbc8ea7544de59db368</code> was the flag.</li>
 </ul>
-<p>Try to list rooms again, this times it works:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/rooms</div><div class="line">13:08:11 - Chat rooms at conference.mystery-hack.gravity.falls:</div><div class="line">13:08:11 -   hall@conference.mystery-hack.gravity.falls, (hall (12))</div><div class="line">13:08:11 -   dipper@conference.mystery-hack.gravity.falls, (dipper (1))</div><div class="line">13:08:11 -   flag_shop@conference.mystery-hack.gravity.falls, (flag_shop (4))</div></pre></td></tr></table></figure>
-<p>We joined hall (<code>/join hall</code>), there is some users:</p>
-<ul>
-<li>Moderators: stan</li>
-<li>Participants: dipper, Gideon, mabel, soos, wendy</li>
-<li>Visitors: ctf players I suppose</li>
-</ul>
-<p>We talked to soos:</p>
-<ul>
-<li>russian: <code>Чувак, я тебя не понимаю. Хотя мудрость - мое благословение и проклятие.</code></li>
-<li>english: <code>Dude, I do not understand you. Although wisdom - my blessing and a curse.</code></li>
-</ul>
-<p>When we talk, giving only keywords, nobody understand us so let’s try some complete sentences:</p>
-<p>To stan:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">stan:</div><div class="line">Хотите флаг? (You want to flag?)</div><div class="line">Могу предложить флаг Конфедерации за сотку баксов. (I can offer the Confederate flag for a hundred bucks.)</div><div class="line">Пока рядом нет полиции - все законно! (While not near the police - all legally!)</div><div class="line">ХА-ХА-ХА!!! (Ha-ha-ha !!!)</div><div class="line">Если есть какие-то вопросы - обратитесь к soos (If you have any questions - please contact soos)</div></pre></td></tr></table></figure>
-<p>To soos:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">soos:</div><div class="line">Можно вопрос, зачем тебе флаг? (It is possible to question, why do you a flag?)</div><div class="line">Лучше обратись к dipper, он специалист по загадкам. (Better to turn to the dipper, he riddles specialist.)</div><div class="line">Вообще-то я второстепенный персонаж. (Actually, I&apos;m a minor character.)</div><div class="line">О боже, второстепенные персонажы погибают в первые пять минут. (Oh God, the secondary characters are killed in the first five minutes.)</div><div class="line">Что же делать? (What to do?)</div></pre></td></tr></table></figure>
-<p>Ok so let’s talk to dipper:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">dipper:</div><div class="line">Флаг? Причем тут флаг? (Flag? And the flag here?)</div><div class="line">Это очередная загадка Гравити Фолз?. (This is another mystery Gravity Falls ?.)</div><div class="line">Я ее обязательно разгадаю. (I&apos;m sure it unravel.)</div><div class="line">Но сейчас мне некогда, у меня свидание с wendy. (But now I have no time, I have a date with wendy.)</div></pre></td></tr></table></figure>
-<p>Let’s try wendy:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">wendy:</div><div class="line">Флаг? Ну да. Почему бы и нет. (Flag? Well yes. Why not.)</div><div class="line">Хотя лучше утка. Или панда. (Although better duck. Or panda.)</div><div class="line">Но по животным у нас специалист mabel (But animals have specialist mabel)</div></pre></td></tr></table></figure>
-<p>mabel:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">mabel:</div><div class="line">Флаг? Нелегально? Я легализую всё, что только можно!&quot; (Flag? Illegally? I legalize everything that is possible!)</div><div class="line">Ой, забыла предстваиться. (Oh, I forgot to introduce myself.)</div><div class="line">Привет, я Мэйбл. Мне двенадцать. (Hi, I&apos;m Mabel. I was twelve.)</div><div class="line">У меня есть waddles. Хотите пожениться? (I have waddles. Want to get married?)</div></pre></td></tr></table></figure>
-<p>waddles:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">waddles:</div><div class="line">Флаг: 骨架 (Flag: 骨架)</div><div class="line">Досвидания. (Bye.)</div></pre></td></tr></table></figure>
-<p>And <code>骨架</code> in chinese means <code>skeleton</code>.</p>
-<p>We must submit the flag in chinese, not in english.</p>
-<p><strong>Note</strong>: Jabber server was very unstable and we get a lot of <em>Lost connection.</em> messages. So we used <code>/reconnect 1</code>.</p>
-<p><strong>Feedback</strong>: russian content everywhere, taht’s pain for non-russian people, use english only. No flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like. This was a joy only challenge, there is no security in this challenge, so that must not be in a CTF or that should give very few points.</p>
+<p><img src="https://i.imgbox.com/K5qOYSYB.jpg" alt=""></p>
+<p><strong>Feedback</strong>: it’s a international CTF, so please use only english, russian content everywhere is pain for non-russian</p>
 ]]></content>
     
     <summary type="html">
@@ -679,81 +573,16 @@
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="joy" scheme="http://rawsec.ml/tags/joy/"/>
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
     
   </entry>
   
   <entry>
-    <title>Juniors CTF - 200 - Here goes ! - Recon</title>
-    <link href="http://rawsec.ml/en/JuniorCTF-2016-recon-Here-goes/"/>
-    <id>http://rawsec.ml/en/JuniorCTF-2016-recon-Here-goes/</id>
+    <title>Juniors CTF - 300 - Southern Cross - Cryptography</title>
+    <link href="http://rawsec.ml/en/JuniorCTF-2016-crypto-southern-cross/"/>
+    <id>http://rawsec.ml/en/JuniorCTF-2016-crypto-southern-cross/</id>
     <published>2016-11-26T23:00:00.000Z</published>
-    <updated>2016-11-27T22:20:04.912Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chill3d</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Juniors CTF 2016</li>
-<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: trivial, crypto, recon</p>
-<blockquote>
-<p><img src="https://i.imgur.com/mXTu7tU.png" alt="https://i.imgur.com/mXTu7tU.png"></p>
-</blockquote>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>This challenge was the first crypto challenge of the Junior CTF 2016.<br>First, it’s pretty easy to know that the flag is encoded in shapes in the bottom left of this picture. But the question is, how to translate/decode it ?   </p>
-<p>Go on Google Image and proceed at a picture search…</p>
-<p>We find this link : <a href="http://gravityfalls.wikia.com/wiki/Nightmare_Head/Gallery" target="_blank" rel="external">http://gravityfalls.wikia.com/wiki/Nightmare_Head/Gallery</a>   </p>
-<p>So, this capture come from <code>Gravity Falls</code>… Let’s navigate on the wiki…</p>
-<p>A page is talking about a list of cryptogram, interesting :smirk: (<a href="http://gravityfalls.wikia.com/wiki/List_of_cryptograms" target="_blank" rel="external">http://gravityfalls.wikia.com/wiki/List_of_cryptograms</a>)    </p>
-<p>Oh ! In Bill’s symbol substitution cipher we find shapes that are on the picture ! (<a href="http://gravityfalls.wikia.com/wiki/List_of_cryptograms#Bill.27s_symbol_substitution_cipher" target="_blank" rel="external">http://gravityfalls.wikia.com/wiki/List_of_cryptograms#Bill.27s_symbol_substitution_cipher</a>).</p>
-<p>If we replace shapes by letters we find the following text : <code>FIXPROBLEMQUICKLYWITHGALVANIZEDJETS</code>.</p>
-<p>Flag : <code>FIXPROBLEMQUICKLYWITHGALVANIZEDJETS</code> :tada:</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="reconnaissance" scheme="http://rawsec.ml/tags/reconnaissance/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Juniors CTF - 100 - Black Suprematic Square - Web</title>
-    <link href="http://rawsec.ml/en/JuniorCTF-2016-web-Black-Suprematic-Square/"/>
-    <id>http://rawsec.ml/en/JuniorCTF-2016-web-Black-Suprematic-Square/</id>
-    <published>2016-11-26T23:00:00.000Z</published>
-    <updated>2016-11-27T21:54:59.192Z</updated>
+    <updated>2016-11-27T21:54:59.188Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -778,17 +607,73 @@
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: trivial, web</p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: crypto</p>
 <blockquote>
-<p><img src="http://i.imgur.com/8QgIphK.jpg" alt=""></p>
-<p> M.Iu.Lupanov</p>
+<ul>
+<li>Wow, what’s this, Soos?</li>
+<li>It’s the Confederacy’s cipher disk with a help of which southerners encrypted their messages.</li>
+<li>How does it work?</li>
+<li>Look, Dipper. We need to encode the phrase MABLE EATS SPRINKLES. We don’t need any spaces so just delete them. We get MABLEEATSSPRINKLES. Then we have too choose a key. Let it be GRAVITY. And let’s go !!!</li>
+</ul>
+<p><a href="https://youtu.be/Fpzrs-fcNKM" target="_blank" rel="external">https://youtu.be/Fpzrs-fcNKM</a></p>
+<p>You see, we’ve encrypted the phrase and here it is RBZTXYZJSKZBLQCEN</p>
+<ul>
+<li>Cool!</li>
+<li>Now I’ll encode a famous story and you’ll try to decode it. By the way, it’s much more interesting to read the whole story over, isn’t it?<br>….</li>
+<li>That’s complicated. Maybe I have to find a key at first. I’d better look for someone who is able to solve this…</li>
+<li>Don’t forget to reach to the end of the text! The ending is greatly important.</li>
+</ul>
 </blockquote>
-<p>source:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"task_header"</span>&gt;</span>Black Suprematic Square<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"task_body"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">center</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width: 478px;"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">"http://juniors.ucoz.net/Black_Suprematic_Square.jpg"</span> &gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">"http://juniors.ucoz.net/Black_And_White_Symbols.jpg"</span> <span class="attr">width</span>=<span class="string">0</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">[...]</div></pre></td></tr></table></figure>
-<p>This image was hidden: <img src="http://juniors.ucoz.net/Black_And_White_Symbols.jpg" alt=""></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––[~/CTF/JuniorCTF/2016]</div><div class="line">$ exiftool Black-Suprematic-Square/Black_And_White_Symbols.jpg</div><div class="line">ExifTool Version Number         : 10.20</div><div class="line">File Name                       : Black_And_White_Symbols.jpg</div><div class="line">Directory                       : Black-Suprematic-Square</div><div class="line">File Size                       : 76 kB</div><div class="line">File Modification Date/Time     : 2016:11:22 02:19:51+01:00</div><div class="line">File Access Date/Time           : 2016:11:25 16:15:54+01:00</div><div class="line">File Inode Change Date/Time     : 2016:11:25 16:15:54+01:00</div><div class="line">File Permissions                : rw-r--r--</div><div class="line">File Type                       : JPEG</div><div class="line">File Type Extension             : jpg</div><div class="line">MIME Type                       : image/jpeg</div><div class="line">JFIF Version                    : 1.01</div><div class="line">Resolution Unit                 : inches</div><div class="line">X Resolution                    : 72</div><div class="line">Y Resolution                    : 72</div><div class="line">Comment                         : aima0AiwahsidupaiToehoong1PhieruqueivahphieKah7uceetair9aiGae1eSsaedoo4becooShohhu8eifahXi7EJoh2gaephechei5chiP9</div><div class="line">Image Width                     : 477</div><div class="line">Image Height                    : 406</div><div class="line">Encoding Process                : Progressive DCT, Huffman coding</div><div class="line">Bits Per Sample                 : 8</div><div class="line">Color Components                : 3</div><div class="line">Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)</div><div class="line">Image Size                      : 477x406</div><div class="line">Megapixels                      : 0.194</div></pre></td></tr></table></figure>
-<p><code>aima0AiwahsidupaiToehoong1PhieruqueivahphieKah7uceetair9aiGae1eSsaedoo4becooShohhu8eifahXi7EJoh2gaephechei5chiP9</code> was the flag.</p>
-<p><strong>Feedback</strong>: no flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Mmmh, it sounds like polyalphabetic substitution cipher, it looks like Vigenere.</p>
+<p>We have additional proofs, title is <code>Southern Cross</code> making a reference to the <code>Confederate cipher disks used in the Civil War</code> [<a href="http://ciphermachines.com/vigenere" target="_blank" rel="external">1</a>].</p>
+<p>The ciphertext is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UKPVOYDJZPAREJUCQBPCJPBEPZSLOGPBZXGSSDANTFQDPLVTRUOYSOOKBYPWIWRUSCJZSZESDBCERRIPWPSRERTBDOEUVPMIGZOSZNOHRUTLUJUJGZJMMATRITZZDJPAPWOHVSHSQIGJUVLBREIFBZBBOFETZZDTNIWWMOHVGWCMHAEXODTJWVSWYOOHVGSPLDNXICDMWOSUWOJVLCTVLZFDFEGZVVNUBEFIMTVSPCMYCIFSVQIDZBBNIGLVEXZPIBZHRZOXLZNPPLJNKISPVBIEFOYLNHFXSOBCEVOUTVZEIUVCMZRFVBOWMIWJQPADNGJSNMNOWPFOVVNTFHSIOTYFMNIMRZFREPZSVPFTNDCVTGZQHPIFGDMYTYFSYODNVFFHQOHKISTZKOJTWMQGIKJSDBCAKISCIDSVEPZBCHRORDQIAXFGECMEJVQSINATDCXXVNZFGEPZEABQFTVTZPBOWOECMOEBCETSWDXXODNOYLJFJIOCSYOUTCYECONBGWMVDVSCQBCERUHLKFIEHTZZXEKISPVBIEFSCLZSTFBOMYTFUVPOMOLORLVYUEDCFXGEUUVPMIGZOSLVYTVORPZOHVOXZPIBZHRZOKEIDVPLPPFOHSMXORMGAWMTZWSWGCECEHHWBUETIAWITYFSYODNVEFTDZRROREPZFZSSXIIAEEGFOBEJUSOBCAKUVPGMUEUVPMIGZOSQQATPZOCLNANBMLVYTYFFPIRAZUTFZOHVSCCLZRJTVLZFDFEGZVVNUCCMBDDSBZWAXOIOWYOOOGVHDCXHCPKRZVDVPFPINTYFDLANEEHSCAOHIPIRPOHVNWWTNTIVQVWPTWPFEPZRZDVAWXKVUCQBCEVYDCMNSTBFEPZYWPIYLOHVNSDAZNXFFDMMEEFWYBCESFZTMATYBHEPZSLOGPBZXGSSDARAJUOVQIGFOBZBCIEHAZZZSKJAFTVTZOULVYDROUPZJUJUVLVVQLBDFZVWYJZPJJBNBGVVJCBJBRBCIJJRPIJUKPTSQNHVBRHQOHKISMCOTVORZNCIJTWIACOFUSCACAILRZLNOEXODIGRVBRJLJSZOUEPZEOQFPANCRSGLNZWZUVOGIADJHPBCEJBTPMSPCPRPLOOKISECIEFG30000OWTBOCEOYLXUISSYKTTYFDLANEEHSCAOHIVGEBCEZSVPIYSTBGFIGLPPIEWATYFKTVYONTHZTJOBGCCBCEKIIYLZRTMCFLOHVDCYLPCKPFUMMKVEOEBCESFZWZJPVXVTKCSRHUPLYONOZZWNERORFVMEJJGEQIGRUVTAOUXTVLZFDFEGZVVNUCCMBDDSBZWEDTYUVPQMBFPHJQIAJUCFBXAEWODJVGKVAMTZDFVHZNOHVFLAZZSJDOCIIDIBBLEFWRSRWGDNKISTZCIXIVPMGEUCCZBNTFUVPMIGZOSEPZEEHWYMZRJVZWMILPBBRZTBLUKTAZRROHSMZNXJBPIXCFSRTVBTFPFOMMSIBDTLGYRXOJNMODUVPQIEIUHCIDNSVHMMAOIFHSQNWRTONKJMGMWDPZDKISPFKRVTGXMNSVOUPZMETPJPZZDWSCXJJBKJRMIGLJQSCAPAUFFEWIELUFLTDTPKIXXZDFVHZNCIJDOCEDTYBKTVXHVTHPZMIWMSLVYTFPYLBMITLWYBCEXBAPUMJFIBMQBDFHGTBOIEHCYBCETPOWBZNUFFFVRIKUWYOGYDBRPIRRFOUWMVDSZUTDDNXBBTUDTRUWZVJFRUOCOZTROREPZMVTGPVBEIUFFUKEUIWXEDTYBPLTGEOBQETTBVUKPMIHZTGSWPLUFFMTVDVTHSMXRVFYNPZVRMWPZJFZORFAORPSCWTZDFGTEWOHVHFZCIDKIIDQICIFODQIGKISDPVRVPTSQNCFNFLLZSZOHSMGOFUPJWIEJJLEPZATIHHWHICFGQZJMKISEIIKKISPVBIEFSCEVSFSRPZZDKPGEWKTYFFZJWEITKLDZDRESQQVNKBRTMPAEEDWCIGVERZEITYFGEMZPJMCAMDNKPHSMOHZDYHWJDJUVLBGIEFREPZTIBQVNDVVNWYCOEJPTNZVSYJBRBCRFVUSIOHZDYPBJFTIOAIMRRMPCWPGYUHSMHTFPDPVROFEGHPZRVUVCMZHFSGPAREIFHTMYTFMCHPVNXJBRJMAEDVPAJNVXODEVIKJBRNJRAPVYJDGUPUHPJWFVZOVZVVSFTLZBPOWRPOOIEOJIBAZOHSQNAEJALTOHVSCMJZRJEWGMNTVECQAVDUMSLVYBIJRWMVNUTSENMEVUVPGHOLOHPLOHVPHSMMTNPKTBCTYFPLOVCIPGDWIEGPAXMGAEEFZLZFRTHLVYWZUVOQNCIFHTWITYSCFOCTYFTZZZSKBBOCKAGSWXMQACMCYMGYXPFRMCEIFHSMVNZNOWBCAKCCCMWOSUWOJVLCTZTXKEUPBLUJSJZPZCGDVSOYLWRFLSLNJRVMSRBCEPTVZBCIDUVCWPGYUVPPZAUBHZVXERORDIODFXBEWCOCEONWPNTJZZNALZHVEUVDVTSNCMEWPFEPZPIFGPVOBPUVPBJRKVCFAORRJZEPZYYBREZVVVMZPLOHVRIPAOIFOCQBDMVXODVJLFOUPZNOSJUXIIYDJZPAVNUICFZNLRZPPBREVOHSMHAEEHSMNPIZSDBKOJTSEPVTTPIWLAOCMCHACAILRZLNOETVZZNENJHSBMAZMWYOMOGFOYLYRFQDPLWRZEZPXVNKFRLVYCIPDAMYTYBBVNPLCZCQBCEXSODAVLFOUEPZSKSSLUDNKISRWMGVCCMBDDSBZWWKEEFREPZSRDYOZZWFVHOWPBCFVLVYFLMGZNOHVOSLBKATLORMNOWDICZZNTZOYLOHVPBPAVCBPTRWGDRORNPPCBMSOEDTYUVPOGEVPTLKCICEGLGTOLPZOLJUSMSOMXKVEDTZVTVISNIGLVEXZGAUCMMEWYOUTCYGJUJBWOEZCFVZOLJIKZCFOJTRISLLAOIGWYIICZOUEPVTBOCNSNTYFVZZISFGTZNVNPUVTVBIEBFTHJNRXVLBVRVXSRWDNXUCOWVBFVHLPJSJGCCGJUSPPHMVIEUUZBGOEHHZEVIKISCMOHVZZWJZOEPICBMAZMPPNJRVEOJTDGYUWYBCEDPFYQIOYJUFMNSKIOEKVYLTSZNTOLSBWTXAISMOWPBCFTZZVWYJZPIISNFFPLOHVTOYOPIEFPZJRECMOYVZXKISQQMSKBBTUVLNFQZUZATSCDAWYAJBRWZSNFALLZAYBIWLDDEUKPIXCFSRTVOOKISXIMKJPBEPDSDPBPGOHVSSD3000015000IKIVDSTBNSYPFEWAWYBHTMSPVDHPLNAZEGSIMKUPRDWIKZDYTVBSFGHWGVTKISAIXKRHSDEDTYUVPBJEFGVTAWOFUOYLOHVOVPTJOBFRAMISZWSWGVTKISHMOSZESDWAHZTHTZZDYPFDMJLUCCWQQAITATOCTPOWRPKLRZSOWPTYFGLQYSCPKWGDWZTVEPVTJPFCMGOWZCFZNHREBEOJTYVFEAJDFJGLQYBFCVPIMTZMMMCOIKDOYBWEYFZAMYBFMWGIMSXPHATZNKZCQJJTKPASMGLXFHFAWOKITLZZNFVUSBJGVUTCMNHDPIYBNDROUTBNHRSYTKVNKISWXOHZOYTVCONGIYVTIKJGEPVTROSLAOEIOSCTDKVZCFKVNTPAPWPTYFFPIIDXJJPCNWVTHPZIFVMZZENCRSRDIIDJQOOMNIEUVPLZSGFFLLJBLTWYMNSNIOEXVRKPTEPZERTHHINYFVTCWHAEZKLGIENZCCSNTRUSDIDDJIOCSYOUTCYADTKJBRLJWEPBLJJUCESCIIDTISHQIGRUKTODWRTPZZIOEBTLZHIEVZDBZRTPIYBTIIBBLEVYWSCXPJMVXVPVDWRTGPDZNKFSYQOWRTOYIXCZESYBHYTPATVBWVTHTEVSNBZVQIACPBRBCEIPOOEDTYNMNTJTYFGTVVBLORWMHABJBQWMNVXMZZFCZUMTPVDROWOMVOWHCTVOHVSSLVYMRLWYTJTJPTXWIEPJOWEVYJGSWBGIBFWNWPLUECTBDCRNSEWVPCBQPWIEVWSYQIWYFFPBCEIPOONJRBFRLVYIUJRYBFNFXKSQXHWPFVBJTRLSTAOUUJSOIWOLUWENJRYBZQIIHFVFLVYTYFBTBJOBUVPTZFKIOYLOHRUBTOCTZSIYQITFUVPKVMGPTLEDLUXSDBNHFXHSIOWRTHCIQECMWYIHOEHHSMGIKUZPBJWETOYLDWVOHHMNTNJHSQOIMFCQBZNNPBOMMEUJTTEJUCEBEPVVVUICVZDFVHOQAFVSSYBDFZEHZWFTYFCEPZRIPOOWCIIFQVWIYFVRSIQEVORPLPPRCCFBOHVTOXMNAZEPZJOIUCOWTXHVFFQCGLPQVTTJSFQVTKVLZUOTVOTYFFZIYSNFHLSZIKTKSIOSZOGTLZOWVGEPVTDBYPAPSKVFYWPTKISHITWVECDPVRBECOAJNXPHFXVNUMSLVZDRHOTVNTRUFPMDDRHCZLYERMFLBCEIUVLBNOISSWWAYFVFYPVDEUVFZOHZNGPTABFCVPAVIUBULQIACNCDBKAKISEQXACMMDIHEYFFPIBRVFRMWWHVXODAPRVBTTZNTIBHPSDNUPTLKMONCOTBWUKCCWQQAIISWTKUCMIDBCRFVUSIGLIJUSBMETLCYEZDSFHEMMBVNCGQIOEIOOVOWVTVLZFICMPLOOHZTPZWYLVBUTVVNUXSWTCIKUVPBMAZMTZZCIXISCBDMSFFMWWTZEPLTGRVQZLKZDKISDXJICJBEPZBRHOYLOIVEHSMHOLUVZNDTKJUSBGYNJHSIXOIEKSMIHVMCZSZDLQHSMHOJUDCWHIEFBEWWJVDHEPVTYFGLERAJUVPUPZQMSZNNHRSYOWYSFOG45SMGDLQCYPDMNJHSWPTRXOGMMSKPDJWPRWVBYQISRJRMWWWZUVLOMIEXSRWOTFCSSQOTZOHSMWRVFNPAZTJUWWTNAZEGSIMKPPILQITXPWYBJHZUBZJMEVASMWWIYBHPBJTVMZJWPBLUHSMMERJBEIIYTIOYKZFFSPFBJNVPTFAWOCJJLZCEJQZPVOYKJFPLVNUISNIITTBFCGYOLCZPEZBVFBAIMDJNSLVYYFVGSIMKUPRDWIFFSHSZZEPFOCJJBJBWOYPIVUZJEZVVSWDSZDFVFWQQEJUCRMOHVSHTUZAEEORIDNZWSLTRAPTUTDZYFVODYPAIFRPIGAEEWEPJUXIHJWPWRTOXIIIMFVPIMDJPAPYPEVSGEWMIVTOMWPTPPIDPJOKJBZVZOIUKZUZNZOOAMXUCJOCEVYSVHTVZVVSPPTDEMFRPUIONJTJWPRVKIDBCAMJBLTDTKMSQCIWZUVXMNHRSYACOYFVFRCIUGBBOEZLCHSEWIBFMWGIMAEEJLUJSVJTJWPMVBBEWNHFPHDPJOKZCFJGATLVPIMTVEGZVJFRUOCIITLMODPVRBECOAJNJGONMWOIFOOMZPCZGZZMONGIWTJOBZCFLJNKLBZECONCOOQAEVMVPADGYFRLJJUKUVLBNOISSWWAYFVFYJMERLWYPDSCFUMWWTYFSIXMEJTWZVJNUPRDWISWBQPKCAEHSOQIAEJBDBVNKUCZVZOWDCWLAEIPQTBTMZOUWMYWZUVTVZXFSOMTZCLQWOQOYKISDWPLFGHSMHAETVZEZDZUGPTAFFSOXWHEEUZTSZAEFJTTAATFWYBCENJBOWROWBFPXPTRCZPPJUJFHCCGYSPPEQYBRMZHINNVWSCBJHZUHSMWRVFNPIBAZOHSMYEREZJ45WATYFTLTNEWSWPVYCIBQVMYAEETTTGEUUVPOJRXFKTBCAIPOCBCAKUVPEVLCTVFZGEUCONSRIKIWYLDGEBBEMXHFFGLVYBFMWGIMUEDCYAXIFVGLKXODQZTKZSNJTETTBFSSLEVYKISWINTFGHSMCOCESCAPPFGHSMNUETSEMSPIFGDVJTGVHEWOHVTHCMNSFGQLZMYZOUOWPBCFPFBVSJIOCSYOUTCYOVLCPDPLVWRZHSMROFEGDMZMVEHZNVDVGFZUCIJWWPEOHVSSGWGVVSWYPDSIJUSBCAEEHFZIEUUCEPZCLSJPLVRDPTLUVHFHOYGXHRJFSQNSRERWMRAJTHCIIGVMMFXCOCTHPZZDRORSMJPVOSOPDSVZSDIIDJBKSQNFVFHYWOIETHTZMUGTPFBMEJUWYOLUZFHWGJNKISPLBEFGOBCVRKFFPLJABESDSDADUSWTDNXZCFBCAKECOAJNFGHSMAIINCQLJDJPBOMXKVSKLTGSKSSPBWRFLSCAJPVOSOPDSVZSDXZASPRJBCETPBQQYEEUWLTXLVSYHINSKBBOQIGSZVTAXHRJFSMNIKBHTVBTFTDPIFTYFFPEVSRDCYNPSVEVFUJFNISPTNBVMCHIIDKISDMYAKJJPJPZQPTLVZLVDHCQXFROOSMHPVBPZLTSRJROWYSFOPWQIKZOUTUPSKIOGMAACMSYINLVFDTPVDRNCDBMEDBFVIWLVEFPIHWYBHTADTGFOMWYYDSKTTGIRNGDQMOWUFLKTWZMZTIHSZTCFBNIUFVPPVSTPAPBJSVUHWMCIJESLTDNOZNEPZMRSYPBXALHVEPDMJICCBNIIJTJWPRVNSXJZRPFGTZZMVNPPZRHRUWDFTZHVCEMYAKUCOITPVBPZLTOEFSTOCTPGWGMNIIUVPVOHRUGSQNPIJQPMSCLTSXMNAZEDPIWOUZFLBCEIOSCDJUJMMQWMSGFOVQIGFGWEJPTZWSMMZNKBZVQIGKPKTTGIRNGSMNAEPZONMIVORZNTOLSGXZYOUTCYIIDPPIAZVCKJQLTGYYBJPIXOIOSCQIXPAWEPJUXIHJWPMZHVEBCAKJGTBCOLHVEGJUDJUSBIOKSSXMHBVSHSIOHVTCWLTOLUVPAOOTLOE98QAHVTSEBGEJBHEPZMRSYPBKRZDSTBRICMHLSZEMFFJKZNKISSINIEUVPEJRCEOYLCIJICXMOOFUCOMGIMFFEPZSYBFPAOHVFLAZZSJJCYWIDFEGZVNFRDSNPVNXFRTVVNZOGEIITKPCYMJFTPZONZRFDWEGHIEHZPLRIKIWYMSOIBPWMXUGJRTBTTYFGZCGOWUVPUVNJICHMYIKTSWNAOIBAZUZNKMWVMVNVWWWNVCVJBEPZWZORZEJFRSSACOASMSSWPSVISHQGLJFHETZAKPBPMDGYUMQQQEJBWOLJDJPBMWGIMBFNIINFUQLZMYUPIMTZ</div></pre></td></tr></table></figure>
+<p>A statistic analysis give us <code>BOLIVOR</code> as KEY, that’s nearly the good one.</p>
+<p>At the begining of the clear text we can guess <code>TWENTY MILES</code> so by running a known text attack we found the true KEY: <code>BOLIVAR</code>.</p>
+<p>So the clear text is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TWENTYMILESWESTOFTUCSONTHESUNSETEXPRESSSTOPPEDATATANKTOTAKEONWATERBESIDESTHEAQUEOUSADDITIONTHEENGINEOFTHATFAMOUSFLYERACQUIREDSOMEOTHERTHINGSTHATWERENOTGOODFORITWHILETHEFIREMANWASLOWERINGTHEFEEDINGHOSEBOBTIDBALLSHARKDODSONANDAQUARTERBREDCREEKINDIANCALLEDJOHNBIGDOGCLIMBEDONTHEENGINEANDSHOWEDTHEENGINEERTHREEROUNDORIFICESINPIECESOFORDNANCETHATTHEYCARRIEDTHESEORIFICESSOIMPRESSEDTHEENGINEERWITHTHEIRPOSSIBILITIESTHATHERAISEDBOTHHANDSINAGESTURESUCHASACCOMPANIESTHEEJACULATIONDOTELLATTHECRISPCOMMANDOFSHARKDODSONWHOWASLEADEROFTHEATTACKINGFORCETHEENGINEERDESCENDEDTOTHEGROUNDANDUNCOUPLEDTHEENGINEANDTENDERTHENJOHNBIGDOGPERCHEDUPONTHECOALSPORTIVELYHELDTWOGUNSUPONTHEENGINEDRIVERANDTHEFIREMANANDSUGGESTEDTHATTHEYRUNTHEENGINEFIFTYYARDSAWAYANDTHEREAWAITFURTHERORDERSSHARKDODSONANDBOBTIDBALLSCORNINGTOPUTSUCHLOWGRADEOREASTHEPASSENGERSTHROUGHTHEMILLSTRUCKOUTFORTHERICHPOCKETOFTHEEXPRESSCARTHEYFOUNDTHEMESSENGERSERENEINTHEBELIEFTHATTHESUNSETEXPRESSWASTAKINGONNOTHINGMORESTIMULATINGANDDANGEROUSTHANAQUAPURAWHILEBOBWASKNOCKINGTHISIDEAOUTOFHISHEADWITHTHEBUTTENDOFHISSIXSHOOTERSHARKDODSONWASALREADYDOSINGTHEEXPRESSCARSAFEWITHDYNAMITETHESAFEEXPLODEDTOTHETUNEOF30000ALLGOLDANDCURRENCYTHEPASSENGERSTHRUSTTHEIRHEADSCASUALLYOUTOFTHEWINDOWSTOLOOKFORTHETHUNDERCLOUDTHECONDUCTORJERKEDATTHEBELLROPEWHICHSAGGEDDOWNLOOSEANDUNRESISTINGATHISTUGSHARKDODSONANDBOBTIDBALLWITHTHEIRBOOTYINASTOUTCANVASBAGTUMBLEDOUTOFTHEEXPRESSCARANDRANAWKWARDLYINTHEIRHIGHHEELEDBOOTSTOTHEENGINETHEENGINEERSULLENLYANGRYBUTWISERANTHEENGINEACCORDINGTOORDERSRAPIDLYAWAYFROMTHEINERTTRAINBUTBEFORETHISWASACCOMPLISHEDTHEEXPRESSMESSENGERRECOVEREDFROMBOBTIDBALLSPERSUADERTONEUTRALITYJUMPEDOUTOFHISCARWITHAWINCHESTERRIFLEANDTOOKATRICKINTHEGAMEMRJOHNBIGDOGSITTINGONTHECOALTENDERUNWITTINGLYMADEAWRONGLEADBYGIVINGANIMITATIONOFATARGETANDTHEMESSENGERTRUMPEDHIMWITHABALLEXACTLYBETWEENHISSHOULDERBLADESTHECREEKCHEVALIEROFINDUSTRYROLLEDOFFTOTHEGROUNDTHUSINCREASINGTHESHAREOFHISCOMRADESINTHELOOTBYONESIXTHEACHTWOMILESFROMTHETANKTHEENGINEERWASORDEREDTOSTOPTHEROBBERSWAVEDADEFIANTADIEUANDPLUNGEDDOWNTHESTEEPSLOPEINTOTHETHICKWOODSTHATLINEDTHETRACKFIVEMINUTESOFCRASHINGTHROUGHATHICKETOFCHAPARRALBROUGHTTHEMTOOPENWOODSWHERETHREEHORSESWERETIEDTOLOWHANGINGBRANCHESONEWASWAITINGFORJOHNBIGDOGWHOWOULDNEVERRIDEBYNIGHTORDAYAGAINTHISANIMALTHEROBBERSDIVESTEDOFSADDLEANDBRIDLEANDSETFREETHEYMOUNTEDTHEOTHERTWOWITHTHEBAGACROSSONEPOMMELANDRODEFASTANDWITHDISCRETIONTHROUGHTHEFORESTANDUPAPRIMEVALLONELYGORGEHERETHEANIMALTHATBOREBOBTIDBALLSLIPPEDONAMOSSYBOULDERANDBROKEAFORELEGTHEYSHOTHIMTHROUGHTHEHEADATONCEANDSATDOWNTOHOLDACOUNCILOFFLIGHTMADESECUREFORTHEPRESENTBYTHETORTUOUSTRAILTHEYHADTRAVELLEDTHEQUESTIONOFTIMEWASNOLONGERSOBIGMANYMILESANDHOURSLAYBETWEENTHEMANDTHESPRYESTPOSSETHATCOULDFOLLOWSHARKDODSONSHORSEWITHTRAILINGROPEANDDROPPEDBRIDLEPANTEDANDCROPPEDTHANKFULLYOFTHEGRASSALONGTHESTREAMINTHEGORGEBOBTIDBALLOPENEDTHESACKDREWOUTDOUBLEHANDFULSOFTHENEATPACKAGESOFCURRENCYANDTHEONESACKOFGOLDANDCHUCKLEDWITHTHEGLEEOFACHILDSAYYOUOLDDOUBLEDECKEDPIRATEHECALLEDJOYFULLYTODODSONYOUSAIDWECOULDDOITYOUGOTAHEADFORFINANCINGTHATKNOCKSTHEHORNSOFFOFANYTHINGINARIZONAWHATAREWEGOINGTODOABOUTAHOSSFORYOUBOBWEAINTGOTLONGTOWAITHERETHEYLLBEONOURTRAILBEFOREDAYLIGHTINTHEMORNINOHIGUESSTHATCAYUSEOFYOURNLLCARRYDOUBLEFORAWHILEANSWEREDTHESANGUINEBOBWELLANNEXTHEFIRSTANIMALWECOMEACROSSBYJINGOESWEMADEAHAULDIDNTWEACCORDINTOTHEMARKSONTHISMONEYTHERES3000015000APIECEITSSHORTOFWHATIEXPECTEDSAIDSHARKDODSONKICKINGSOFTLYATTHEPACKAGESWITHTHETOEOFHISBOOTANDTHENHELOOKEDPENSIVELYATTHEWETSIDESOFHISTIREDHORSEOLDBOLIVARSMIGHTYNIGHPLAYEDOUTHESAIDSLOWLYIWISHTHATSORRELOFYOURSHADNTGOTHURTSODOISAIDBOBHEARTILYBUTITCANTBEHELPEDBOLIVARSGOTPLENTYOFBOTTOMHELLGETUSBOTHFARENOUGHTOGETFRESHMOUNTSDANGITSHARKICANTHELPTHINKINHOWFUNNYITISTHATANEASTERNERLIKEYOUCANCOMEOUTHEREANDGIVEUSWESTERNFELLOWSCARDSANDSPADESINTHEDESPERADOBUSINESSWHATPARTOFTHEEASTWASYOUFROMANYWAYNEWYORKSTATESAIDSHARKDODSONSITTINGDOWNONABOULDERANDCHEWINGATWIGIWASBORNONAFARMINULSTERCOUNTYIRANAWAYFROMHOMEWHENIWASSEVENTEENITWASANACCIDENTMYCOMINGWESTIWASWALKINALONGTHEROADWITHMYCLOTHESINABUNDLEMAKINFORNEWYORKCITYIHADANIDEAOFGOINTHEREANDMAKINLOTSOFMONEYIALWAYSFELTLIKEICOULDDOITICAMETOAPLACEONEEVENINWHERETHEROADFORKEDANDIDIDNTKNOWWHICHFORKTOTAKEISTUDIEDABOUTITFORHALFANHOURANDTHENITOOKTHELEFTHANDTHATNIGHTIRUNINTOTHECAMPOFAWILDWESTSHOWTHATWASTRAVELLINAMONGTHELITTLETOWNSANDIWENTWESTWITHITIVEOFTENWONDEREDIFIWOULDNTHAVETURNEDOUTDIFFERENTIFIDTOOKTHEOTHERROADOHIRECKONYOUDHAVEENDEDUPABOUTTHESAMESAIDBOBTIDBALLCHEERFULLYPHILOSOPHICALITAINTTHEROADSWETAKEITSWHATSINSIDEOFUSTHATMAKESUSTURNOUTTHEWAYWEDOSHARKDODSONGOTUPANDLEANEDAGAINSTATREEIDAGOODDEALRATHERTHATSORRELOFYOURNHADNTHURTHIMSELFBOBHESAIDAGAINALMOSTPATHETICALLYSAMEHEREAGREEDBOBHEWASSUREAFIRSTRATEKINDOFACROWBAITBUTBOLIVARHELLPULLUSTHROUGHALLRIGHTRECKONWEDBETTERBEMOVINONHADNTWESHARKILLBAGTHISBOODLEAGINANDWELLHITTHETRAILFORHIGHERTIMBERBOBTIDBALLREPLACEDTHESPOILINTHEBAGANDTIEDTHEMOUTHOFITTIGHTLYWITHACORDWHENHELOOKEDUPTHEMOSTPROMINENTOBJECTTHATHESAWWASTHEMUZZLEOFSHARKDODSONS45HELDUPONHIMWITHOUTAWAVERSTOPYOURFUNNINSAIDBOBWITHAGRINWEGOTTOBEHITTINTHEBREEZESETSTILLSAIDSHARKYOUAINTGOINTOHITNOBREEZEBOBIHATETOTELLYOUBUTTHEREAINTANYCHANCEFORBUTONEOFUSBOLIVARHESPLENTYTIREDANDHECANTCARRYDOUBLEWEBEENPARDSMEANDYOUSHARKDODSONFORTHREEYEARBOBSAIDQUIETLYWEVERISKEDOURLIVESTOGETHERTIMEANDAGAINIVEALWAYSGIVEYOUASQUAREDEALANDITHOUGHTYOUWASAMANIVEHEARDSOMEQUEERSTORIESABOUTYOUSHOOTINONEORTWOMENINAPECULIARWAYBUTINEVERBELIEVEDEMNOWIFYOUREJUSTHAVINALITTLEFUNWITHMESHARKPUTYOURGUNUPANDWELLGETONBOLIVARANDVAMOSEIFYOUMEANTOSHOOTSHOOTYOUBLACKHEARTEDSONOFATARANTULASHARKDODSONSFACEBOREADEEPLYSORROWFULLOOKYOUDONTKNOWHOWBADIFEELHESIGHEDABOUTTHATSORRELOFYOURNBREAKINHISLEGBOBTHEEXPRESSIONONDODSONSFACECHANGEDINANINSTANTTOONEOFCOLDFEROCITYMINGLEDWITHINEXORABLECUPIDITYTHESOULOFTHEMANSHOWEDITSELFFORAMOMENTLIKEANEVILFACEINTHEWINDOWOFAREPUTABLEHOUSETRULYBOBTIDBALLWASNEVERTOHITTHEBREEZEAGAINTHEDEADLY45OFTHEFALSEFRIENDCRACKEDANDFILLEDTHEGORGEWITHAROARTHATTHEWALLSHURLEDBACKWITHINDIGNANTECHOESANDBOLIVARUNCONSCIOUSACCOMPLICESWIFTLYBOREAWAYTHELASTOFTHEHOLDERSUPOFTHESUNSETEXPRESSNOTPUTTOTHESTRESSOFCARRYINGDOUBLEBUTASSHARKDODSONGALLOPEDAWAYTHEWOODSSEEMEDTOFADEFROMHISVIEWTHEREVOLVERINHISRIGHTHANDTURNEDTOTHECURVEDARMOFAMAHOGANYCHAIRHISSADDLEWASSTRANGELYUPHOLSTEREDANDHEOPENEDHISEYESANDSAWHISFEETNOTINSTIRRUPSBUTRESTINGQUIETLYONTHEEDGEOFAQUARTEREDOAKDESKIAMTELLINGYOUTHATDODSONOFTHEFIRMOFDODSONDECKERWALLSTREETBROKERSOPENEDHISEYESPEABODYTHECONFIDENTIALCLERKWASSTANDINGBYHISCHAIRHESITATINGTOSPEAKTHEREWASACONFUSEDHUMOFWHEELSBELOWANDTHESEDATIVEBUZZOFANELECTRICFANAHEMPEABODYSAIDDODSONBLINKINGIMUSTHAVEFALLENASLEEPIHADAMOSTREMARKABLEDREAMWHATISITPEABODYMRWILLIAMSSIROFTRACYWILLIAMSISOUTSIDEHEHASCOMETOSETTLEHISDEALINXYZTHEMARKETCAUGHTHIMSHORTSIRIFYOUREMEMBERYESIREMEMBERWHATISXYZQUOTEDATTODAYPEABODYONEEIGHTYFIVESIRTHENTHATSHISPRICEEXCUSEMESAIDPEABODYRATHERNERVOUSLYFORSPEAKINGOFITBUTIVEBEENTALKINGTOWILLIAMSHESANOLDFRIENDOFYOURSMRDODSONANDYOUPRACTICALLYHAVEACORNERINXYZITHOUGHTYOUMIGHTTHATISITHOUGHTYOUMIGHTNOTREMEMBERTHATHESOLDYOUTHESTOCKAT98IFHESETTLESATTHEMARKETPRICEITWILLTAKEEVERYCENTHEHASINTHEWORLDANDHISHOMETOOTODELIVERTHESHARESTHEEXPRESSIONONDODSONSFACECHANGEDINANINSTANTTOONEOFCOLDFEROCITYMINGLEDWITHINEXORABLECUPIDITYTHESOULOFTHEMANSHOWEDITSELFFORAMOMENTLIKEANEVILFACEINTHEWINDOWOFAREPUTABLEHOUSEHEWILLSETTLEATONEEIGHTYFIVESAIDDODSONBOLIVARCANNOTCARRYDOUBLE</div></pre></td></tr></table></figure>
+<p><code>BOLIVAR</code> is not the flag. Let’s quickly look over the text, but we don’t want to spend too much time adding, so we fount the <a href="http://www.dominiopublico.gov.br/download/texto/gu001595.pdf" target="_blank" rel="external">original text</a> (Whirligigs, O. Henry, Chapter XIV,<br>THE ROADS WE TAKE, page 82).</p>
+<p>Because HTML is better than PDF (<a href="http://www.hymnsandcarolsofchristmas.com/Text/8whrl11h.htm#14" target="_blank" rel="external">http://www.hymnsandcarolsofchristmas.com/Text/8whrl11h.htm#14</a>):</p>
+<blockquote>
+<p>TWENTY miles West of Tucson, the “Sunset Express” stopped at a tank to take on water. Besides the aqueous, addition the engine of that famous flyer acquired some other things that were not good for it.</p>
+<p>While the fireman was lowering the feeding hose, Bob Tidball, “Shark” Dodson and a quarter-bred Creek Indian called John Big Dog climbed on the engine and showed the engineer three round orifices in pieces of ordnance that the carried. These orifices so impressed the engineer with their possibilities that he raised both hands in a gesture such as accompanies the ejaculation “Do tell!”</p>
+<p>At the crisp command of Shark Dodson, who was leader of the attacking force the engineer descended to the ground and uncoupled the engine and tender. Then John Big Dog, perched upon the coal, sportively held two guns upon the engine driver and the fireman, and suggested that they run the engine fifty yards away and there await further orders.</p>
+<p>Shark Dodson and Bob Tidball, scorning to put such low-grade ore as the passengers through the mill, struck out for the rich pocket of the express car. They found the messenger serene in the belief that the “Sunset Express” was taking on nothing more stimulating and dangerous than aqua pura. While Bob was knocking this idea out of his head with the butt-end of his six-shooter Shark Dodson was already dosing the express-car safe with dynamite.</p>
+<p>The safe exploded to the tune of $30,000, all gold and currency. The passengers thrust their heads casually out of the windows to look for the thunder-cloud. The conductor jerked at the bell-rope, which sagged down loose and unresisting, at his tug. Shark Dodson and Bob Tidball, with their booty in a stout canvas bag, tumbled out of the express car and ran awkwardly in their high-heeled boots to the engine.</p>
+<p>The engineer, sullenly angry but wise, ran the engine, according to orders, rapidly away from the inert train. But before this was accomplished the express messenger, recovered from Bob Tidball’s persuader to neutrality, jumped out of his car with a Winchester rifle and took a trick in the game. Mr. John Big Dog, sitting on the coal tender, unwittingly made a wrong lead by giving an imitation of a target, and the messenger trumped him. With a ball exactly between his shoulder blades the Creek chevalier of industry rolled off to the ground, thus increasing the share of his comrades in the loot by one-sixth each.</p>
+<p>Two miles from the tank the engineer was ordered to stop.</p>
+<p>The robbers waved a defiant adieu and plunged down the steep slope into the thick woods that lined the track. Five minutes of crashing through a thicket of chapparal brought them to open woods, where three horses were tied to low-hanging branches. One was waiting for John Big Dog, who would never ride by night or day again. This animal the robbers divested of saddle and bridle and set free. They mounted the other two with the bag across one pommel, and rode fast and with discre- tion through the forest and up a primeval, lonely gorge. Here the animal that bore Bob Tidball slipped on a mossy boulder and broke a foreleg. They shot him through the head at once and sat down to hold a council of flight. Made secure for the present by the tortuous trail they- had travelled, the question of time was no longer so big. Many miles and hours lay between them and the spryest posse that could follow. Shark Dodson’s horse, with trailing rope and dropped bridle, panted and cropped thankfully of the grass along the stream in the gorge. Bob Tidball opened the sack, drew out double handfuls of the neat packages of currency and the one sack of gold and chuckled with the glee of a child.</p>
+<p>“Say, you old double-decked pirate,” he called joyfully to Dodson, “you said we could do it – you got a head for financing that knocks the horns off of anything in Arizona.”</p>
+<p>“What are we going to do about a hoss for you, Bob? We ain’t got long to wait here. They’ll be on our trail before daylight in the mornin’.”</p>
+<p>“Oh, I guess that cayuse of yourn’ll carry double for a while,” answered the sanguine Bob. “We’ll annex the first animal we come across. By jingoes, we made a haul, didn’t we? Accordin’ to the marks on this money there’s $30,000 – $15,000 apiece!”</p>
+<p>“It’s short of what I expected,” said Shark Dodson, kicking softly at the packages with the toe of his boot and then he looked pensively at the wet sides of his tired horse.</p>
+<p>“Old Bolivar’s mighty nigh played out,” he said, slowly. “I wish that sorrel of yours hadn’t got hurt.”</p>
+<p>“So do I,” said Bob, heartily, “but it can’t be helped. Bolivar’s got plenty of bottom – he’ll get us both far enough to get fresh mounts. Dang it, Shark, I can’t belp thinkin’ how funny it is that an Easterner like you can come out here and give us Western fellows cards and spades in the desperado business. What part of the East was you from, anyway?”</p>
+<p>“New York State,” said Shark Dodson, sitting down on a boulder and chewing a twig. “I was born on a farm in Ulster County. I ran away from home when I was seventeen. It was an accident my coming West. I was walkin’ along the road with my clothes in a bundle, makin’ for New York City. I had an idea of goin’ there and makin’ lots of money. I always felt like I could do it. I came to a place one evenin’ where the road forked and I didn’t know which fork to take. I studied about it for half an hour, and then I took the left- hand. That night I run into the camp of a Wild West show that was travellin’ among the little towns, and I went West with it. I’ve often wondered if I wouldn’t have turned out different if I’d took the other road.”</p>
+<p>“Oh, I reckon you’d have ended up about the same,” said Bob Tidball, cheerfully philosophical. “It ain’t the roads we take; it’s what’s inside of us that makes us turn out the way we do.”</p>
+<p>Shark Dodson got up and leaned against a tree.</p>
+<p>“I’d a good deal rather that sorrel of yourn hadn’t hurt himself, Bob,” he said again, almost pathetically.</p>
+<p>“Same here,” agreed Bob; “he was sure a first-rate kind of a crowbait. But Bolivar, he’ll pull us through all right. Reckon we’d better be movin’ on, hadn’t we, Shark? I’ll bag this boodle ag’in and we’ll hit the trail for higher timber.”</p>
+<p>Bob Tidball replaced the spoil in the bag and tied the mouth of it tightly with a cord. When he looked up the most prominent object that he saw was the muzzle of Shark Dodson’s .45 held upon him without a waver.</p>
+<p>“Stop your funnin’,” said Bob, with a grin. “We got to be hittin’ the breeze.”</p>
+<p>“Set still,” said Shark. “You ain’t goin’ to hit no breeze, Bob. I hate to tell you, but there ain’t any chance for but one of us. Bolivar, he’s plenty tired, and he can’t carry double.”</p>
+<p>“We been pards, me and you, Shark Dodson, for three year,” Bob said quietly. “We’ve risked our lives together time and again. I’ve always give you a square deal, and I thought you was a man. I’ve heard some queer stories about you shootin’ one or two men in a peculiar way, but I never believed ‘em. Now if you’re just havin’ a little fun with me, Shark, put your gun up, and we’ll get on Bolivar and vamose. If you mean to shoot – shoot, you blackhearted son of a tarantula!”</p>
+<p>Shark Dodson’s face bore a deeply sorrowful look. “You don’t know how bad I feel,” he sighed, “about that sorrel of yourn breakin’ his leg, Bob.”</p>
+<p>The expression on Dodson’s face changed in an instant to one of cold ferocity mingled with inexorable cupidity. The soul of the man showed itself for a moment like an evil face in the window of a reputable house.</p>
+<p>Truly Bob Tidball was never to “hit the breeze” again. The deadly .45 of the false friend cracked and filled the gorge with a roar that the walls hurled back with indignant echoes. And Bolivar, unconscious accomplice, swiftly bore away the last of the holders-up of the “Sunset Express,” not put to the stress of “carrying double.”</p>
+<p>But as “Shark” Dodson galloped away the woods seemed to fade from his view; the revolver in his right hand turned to the curved arm of a mahogany chair; his saddle was strangely upholstered, and he opened his eyes and saw his feet, not in stirrups, but resting quietly on the edge of a quartered-oak desk.</p>
+<p>I am telling you that Dodson, of the firm of Dodson &amp; Decker, Wall Street brokers, opened his eyes. Peabody, the confidential clerk, was standing by his chair, hesitating to speak. There was a confused hum of wheels below, and the sedative buzz of an electric fan.</p>
+<p>“Ahem! Peabody,” said Dodson, blinking. “I must have fallen asleep. I had a most remarkable dream. What is it, Peabody?”</p>
+<p>“Mr. Williams, sir, of Tracy &amp; Williams, is outside. He has come to settle his deal in X. Y. Z. The market caught him short, sir, if you remember.”</p>
+<p>“Yes, I remember. What is X. Y. Z. quoted at to-day, Peabody?”</p>
+<p>“One eighty-five, sir.”</p>
+<p>“Then that’s his price.”</p>
+<p>“Excuse me,” said Peabody, rather nervously “for speaking of it, but I’ve been talking to Williams. He’s an old friend of yours, Mr. Dodson, and you practically have a corner in X. Y. Z. I thought you might – that is, I thought you might not remember that he sold you the stock at 98. If he settles at the market price it will take every cent he has in the world and his home too to deliver the shares.”</p>
+<p>The expression on Dodson’s face changed in an instant to one of cold ferocity mingled with inexorable cupidity. The soul of the man showed itself for a moment like an evil face in the window of a reputable house.</p>
+<p>“He will settle at one eighty-five,” said Dodson. “Bolivar cannot carry double.”</p>
+</blockquote>
+<p>Description said the end was very important so we tried <code>BOLIVARCANNOTCARRYDOUBLE</code> as flag. And that was the one.</p>
+<p><strong>Feedback</strong>: no flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like, here we just known that was at the end</p>
 ]]></content>
     
     <summary type="html">
@@ -804,7 +689,7 @@
     
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+      <category term="crypto" scheme="http://rawsec.ml/tags/crypto/"/>
     
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
@@ -889,6 +774,265 @@
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Juniors CTF - 200 - Here goes ! - Recon</title>
+    <link href="http://rawsec.ml/en/JuniorCTF-2016-recon-Here-goes/"/>
+    <id>http://rawsec.ml/en/JuniorCTF-2016-recon-Here-goes/</id>
+    <published>2016-11-26T23:00:00.000Z</published>
+    <updated>2016-11-27T22:20:04.912Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chill3d</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : Juniors CTF 2016</li>
+<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: trivial, crypto, recon</p>
+<blockquote>
+<p><img src="https://i.imgur.com/mXTu7tU.png" alt="https://i.imgur.com/mXTu7tU.png"></p>
+</blockquote>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>This challenge was the first crypto challenge of the Junior CTF 2016.<br>First, it’s pretty easy to know that the flag is encoded in shapes in the bottom left of this picture. But the question is, how to translate/decode it ?   </p>
+<p>Go on Google Image and proceed at a picture search…</p>
+<p>We find this link : <a href="http://gravityfalls.wikia.com/wiki/Nightmare_Head/Gallery" target="_blank" rel="external">http://gravityfalls.wikia.com/wiki/Nightmare_Head/Gallery</a>   </p>
+<p>So, this capture come from <code>Gravity Falls</code>… Let’s navigate on the wiki…</p>
+<p>A page is talking about a list of cryptogram, interesting :smirk: (<a href="http://gravityfalls.wikia.com/wiki/List_of_cryptograms" target="_blank" rel="external">http://gravityfalls.wikia.com/wiki/List_of_cryptograms</a>)    </p>
+<p>Oh ! In Bill’s symbol substitution cipher we find shapes that are on the picture ! (<a href="http://gravityfalls.wikia.com/wiki/List_of_cryptograms#Bill.27s_symbol_substitution_cipher" target="_blank" rel="external">http://gravityfalls.wikia.com/wiki/List_of_cryptograms#Bill.27s_symbol_substitution_cipher</a>).</p>
+<p>If we replace shapes by letters we find the following text : <code>FIXPROBLEMQUICKLYWITHGALVANIZEDJETS</code>.</p>
+<p>Flag : <code>FIXPROBLEMQUICKLYWITHGALVANIZEDJETS</code> :tada:</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="reconnaissance" scheme="http://rawsec.ml/tags/reconnaissance/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Juniors CTF - 400 - Dirty Repo - Forensics</title>
+    <link href="http://rawsec.ml/en/JuniorCTF-2016-forensics-Dirty-Repo/"/>
+    <id>http://rawsec.ml/en/JuniorCTF-2016-forensics-Dirty-Repo/</id>
+    <published>2016-11-26T23:00:00.000Z</published>
+    <updated>2016-11-27T22:20:23.379Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chill3d</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : Juniors CTF 2016</li>
+<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: admin, forensics</p>
+<blockquote>
+<p>Gruncle Stan loves money very much and doesn’t shun to use unacceptable tricks to get it. Not so far he started a new project with an aim to embezzlement of public funds. He hired some developers and decided to “borrow” source code. But one liberal-minded young man didn’t like, that Stan’s project is a plagiarism. This zealous fighter for justice decided to spoil one developer’s project. Try to find out, what the malefactor added.</p>
+<p>Here are all developers’ projects -&gt; WORKDIRS</p>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>In this challenge, we get a tar.gz file. In it, there are 20 tar.gz files containing git repo from openvpn.<br>So first, I unzip all tar.gz file, and I seek so differences between repos :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ diff -r comp_1 comp_2</div><div class="line">Binary files comp_1/openvpn/.git/index and comp_2/openvpn/.git/index are differents</div><div class="line">$ diff -r comp_1 comp_3</div><div class="line">$ diff -r comp_1 comp_4</div><div class="line">$ diff -r comp_1 comp_5</div><div class="line">132a133</div><div class="line">&gt; //FLAG -&gt; gRunCle_StAn_tHe_woRsT_coDeR</div></pre></td></tr></table></figure>
+<p>Flag : gRunCle_StAn_tHe_woRsT_coDeR</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Juniors CTF - 100 - Black Suprematic Square - Web</title>
+    <link href="http://rawsec.ml/en/JuniorCTF-2016-web-Black-Suprematic-Square/"/>
+    <id>http://rawsec.ml/en/JuniorCTF-2016-web-Black-Suprematic-Square/</id>
+    <published>2016-11-26T23:00:00.000Z</published>
+    <updated>2016-11-27T21:54:59.192Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : Juniors CTF 2016</li>
+<li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: trivial, web</p>
+<blockquote>
+<p><img src="http://i.imgur.com/8QgIphK.jpg" alt=""></p>
+<p> M.Iu.Lupanov</p>
+</blockquote>
+<p>source:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"task_header"</span>&gt;</span>Black Suprematic Square<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"task_body"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">center</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width: 478px;"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">"http://juniors.ucoz.net/Black_Suprematic_Square.jpg"</span> &gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">"http://juniors.ucoz.net/Black_And_White_Symbols.jpg"</span> <span class="attr">width</span>=<span class="string">0</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>This image was hidden: <img src="http://juniors.ucoz.net/Black_And_White_Symbols.jpg" alt=""></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––[~/CTF/JuniorCTF/2016]</div><div class="line">$ exiftool Black-Suprematic-Square/Black_And_White_Symbols.jpg</div><div class="line">ExifTool Version Number         : 10.20</div><div class="line">File Name                       : Black_And_White_Symbols.jpg</div><div class="line">Directory                       : Black-Suprematic-Square</div><div class="line">File Size                       : 76 kB</div><div class="line">File Modification Date/Time     : 2016:11:22 02:19:51+01:00</div><div class="line">File Access Date/Time           : 2016:11:25 16:15:54+01:00</div><div class="line">File Inode Change Date/Time     : 2016:11:25 16:15:54+01:00</div><div class="line">File Permissions                : rw-r--r--</div><div class="line">File Type                       : JPEG</div><div class="line">File Type Extension             : jpg</div><div class="line">MIME Type                       : image/jpeg</div><div class="line">JFIF Version                    : 1.01</div><div class="line">Resolution Unit                 : inches</div><div class="line">X Resolution                    : 72</div><div class="line">Y Resolution                    : 72</div><div class="line">Comment                         : aima0AiwahsidupaiToehoong1PhieruqueivahphieKah7uceetair9aiGae1eSsaedoo4becooShohhu8eifahXi7EJoh2gaephechei5chiP9</div><div class="line">Image Width                     : 477</div><div class="line">Image Height                    : 406</div><div class="line">Encoding Process                : Progressive DCT, Huffman coding</div><div class="line">Bits Per Sample                 : 8</div><div class="line">Color Components                : 3</div><div class="line">Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)</div><div class="line">Image Size                      : 477x406</div><div class="line">Megapixels                      : 0.194</div></pre></td></tr></table></figure>
+<p><code>aima0AiwahsidupaiToehoong1PhieruqueivahphieKah7uceetair9aiGae1eSsaedoo4becooShohhu8eifahXi7EJoh2gaephechei5chiP9</code> was the flag.</p>
+<p><strong>Feedback</strong>: no flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RC3 CTF - 100 - My Lil Droid - Forensics</title>
+    <link href="http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/"/>
+    <id>http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/</id>
+    <published>2016-11-21T23:00:00.000Z</published>
+    <updated>2016-11-22T22:50:01.174Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chill3d</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : RC3 CTF 2016</li>
+<li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>Sometimes not all files are needed.<br>Hint:<br>– You probably don’t have to run it</p>
+</blockquote>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>For this challenge, we have an apk file nammed <code>youtube.apk</code>. First, let decode it with apktool to see usefull file like AndroidManifest.xml : <code>apktool d youtube.apk</code>.</p>
+<p>We know that we are seeking a RC3-2016 flag, so go search in files we extracted :</p>
+<ul>
+<li><code>cd youtube</code>  </li>
+<li><code>find . -type f -exec grep RC3-2016 {} \;</code> =&gt; No result  </li>
+<li><code>find . -type f -exec grep RC3 {} \;</code> give this output :</li>
+</ul>
+<pre><code>new-instance v1, Ljava/util/zip/CRC32;
+invoke-direct {v1}, Ljava/util/zip/CRC32;-&gt;&lt;init&gt;()V
+invoke-virtual {v1, v4, v8, v0}, Ljava/util/zip/CRC32;-&gt;update([BII)V
+invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
+</code></pre><p>Let’s see if we can find 2016 string somewhere :<br><code>find . -type f -exec grep 2016 {} \;</code> give a loot of string and the last one is a bit weird : <code>UkMz-2016-R09URU0yMQ==</code></p>
+<p>Decode this in base64 : flag = <code>RC3-2016-GOTEM21</code>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
+    
+    </summary>
+    
+      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
     
   </entry>
   
@@ -1021,11 +1165,11 @@
   </entry>
   
   <entry>
-    <title>RC3 CTF - 100 - My Lil Droid - Forensics</title>
-    <link href="http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/"/>
-    <id>http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/</id>
-    <published>2016-11-21T23:00:00.000Z</published>
-    <updated>2016-11-22T22:50:01.174Z</updated>
+    <title>RC3 CTF - 200 - Bridge of Cyber - Misc</title>
+    <link href="http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/"/>
+    <id>http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/</id>
+    <published>2016-11-20T23:00:00.000Z</published>
+    <updated>2016-11-22T22:50:01.171Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
 <thead>
@@ -1037,7 +1181,7 @@
 </thead>
 <tbody>
 <tr>
-<td>Chill3d</td>
+<td>noraj</td>
 <td>1.0</td>
 <td>Creation</td>
 </tr>
@@ -1051,21 +1195,39 @@
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>Sometimes not all files are needed.<br>Hint:<br>– You probably don’t have to run it</p>
+<p>Welcome to the “Bridge of Cyber”! It’s the same concept as the “Bridge of Death” in Holy Grail. Our DNS servers aren’t very good at their job because they ask more questions then they answer. Let’s see if you can get the flag from our DNS.</p>
+<p>Nameserver: ns-920.awsdns-51.net</p>
+<p>Domain: misc200.ctf.rc3.club</p>
 </blockquote>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>For this challenge, we have an apk file nammed <code>youtube.apk</code>. First, let decode it with apktool to see usefull file like AndroidManifest.xml : <code>apktool d youtube.apk</code>.</p>
-<p>We know that we are seeking a RC3-2016 flag, so go search in files we extracted :</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What we know:</p>
 <ul>
-<li><code>cd youtube</code>  </li>
-<li><code>find . -type f -exec grep RC3-2016 {} \;</code> =&gt; No result  </li>
-<li><code>find . -type f -exec grep RC3 {} \;</code> give this output :</li>
+<li>Domain: <code>misc200.ctf.rc3.club</code></li>
+<li>Name Server: <code>ns-920.awsdns-51.net</code></li>
+<li>We look for questions so probably TXT records</li>
 </ul>
-<pre><code>new-instance v1, Ljava/util/zip/CRC32;
-invoke-direct {v1}, Ljava/util/zip/CRC32;-&gt;&lt;init&gt;()V
-invoke-virtual {v1, v4, v8, v0}, Ljava/util/zip/CRC32;-&gt;update([BII)V
-invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
-</code></pre><p>Let’s see if we can find 2016 string somewhere :<br><code>find . -type f -exec grep 2016 {} \;</code> give a loot of string and the last one is a bit weird : <code>UkMz-2016-R09URU0yMQ==</code></p>
-<p>Decode this in base64 : flag = <code>RC3-2016-GOTEM21</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 21494</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; misc200.ctf.rc3.club.	IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is the air-speed velocity of an unladen swallow&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 225 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 12:01:47 2016</div><div class="line">;; MSG SIZE  rcvd: 243</div></pre></td></tr></table></figure>
+<p>So we get the first question: “What is the air-speed velocity of an unladen swallow” is a question from “Bridge of Death” in Holy Grail of Monty Python.</p>
+<p>The answer is:</p>
+<blockquote>
+<p>What do you mean? An African or European swallow?</p>
+</blockquote>
+<p>The first idea that matched “How to send the answer” was by prefixing the answer to the domain.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;The roundest knight at king arthurs table was sir cumference. He acquired his size from too much __&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>The roundest knight at king Arthur’s round table was Sir Cumference. He acquired his size from too much pi.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is it that no man ever yet did see, which never was, but always is to be?&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Tomorrow</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;My favorite things in life don&apos;t cost any money. It&apos;s really clear that the most precious resource we all have is ___&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>My favorite things in life don’t cost any money. It’s really clear that the most precious resource we all have is time.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill time.tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net ANY</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 52009</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; time.tomorrow.pi.european.misc200.ctf.rc3.club.	IN	TYPE255</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">time.tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	SPF	&quot;RC3-2016-cyb3rxr05&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 5244 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 19:48:48 2016</div><div class="line">;; MSG SIZE  rcvd: 235</div></pre></td></tr></table></figure>
+<p>So we get the flag: <code>RC3-2016-cyb3rxr05</code>.</p>
+<p>Or may be it was possible to do it with <code>african</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill african.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">african.misc200.ctf.rc3.club.	300	IN	TXT	&quot;Why was the developer broke? He spent all of his&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -1085,7 +1247,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
     
-      <category term="forensics" scheme="http://rawsec.ml/tags/forensics/"/>
+      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
     
   </entry>
   
@@ -1133,72 +1295,6 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
 <p>Take a look: <code>var chars = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=&#39;;</code> is the base64 alphabet.<br>Try to decode <code>ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu</code> in base64 and we get <code>j4v4scr1pt___0bfusc4t10n</code>.</p>
 <p>Just to check, execute <code>encode(&#39;j4v4scr1pt___0bfusc4t10n&#39;)</code> and you get <code>ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu</code>.</p>
 <p>So this obfuscated function is just doing base64. Our flag is <code>j4v4scr1pt___0bfusc4t10n</code>.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Informations&quot;&gt;&lt;a href=&quot;#Informations&quot; class=&quot;headerlink&quot; title=&quot;Informations&quot;&gt;&lt;/a&gt;Informations&lt;/h2&gt;&lt;h3 id=&quot;Version&quot;&gt;&lt;a href=&quot;#Versio
-    
-    </summary>
-    
-      <category term="security" scheme="http://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="http://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
-    
-      <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RC3 CTF - 100 - Who&#39;s a good boy - Web</title>
-    <link href="http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/"/>
-    <id>http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/</id>
-    <published>2016-11-20T23:00:00.000Z</published>
-    <updated>2016-11-22T22:50:01.171Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : RC3 CTF 2016</li>
-<li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>You’re trying to see the cute dog pictures on ctf.rc3.club. But every time you click on one of them, it brings you to a bad gateway.</p>
-<p><a href="https://ctf.rc3.club:3000/" target="_blank" rel="external">https://ctf.rc3.club:3000/</a></p>
-<p>– Your friendly neighborhood webadmin</p>
-</blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We can see that one of the image is not like all others:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"phil me up"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/doge-pattern-27481-2880x1800.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>the absolute mostest?<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"philarydufflebag"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/doge/this-aint-the-RC3-flag-we're-getting-there-though.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>CTF flags!!1!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"guys the flag is!"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/doge-pattern-27481-2880x1800.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>Find the Phil<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">[...]</div></pre></td></tr></table></figure>
-<p>But this image doesn’t exist, and is not cached in the WayBackMachine.</p>
-<p>Each image has a different class:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;img class="why hello there"</div><div class="line">&lt;img class="try not to get too distracted"</div><div class="line">&lt;img class="or infuriated"</div><div class="line">&lt;img class="don't give up, you can do it!"</div><div class="line">&lt;img class="hey, by the way"</div><div class="line">&lt;img class="have you ever"</div><div class="line">&lt;img class="heard of phil"</div><div class="line">&lt;img class="phil's a good name"</div><div class="line">&lt;img class="philly phil phil"</div><div class="line">&lt;img class="philthy phil"</div><div class="line">&lt;img class="now if only there was a way to philter out this nonsense"</div><div class="line">&lt;img class="phil likes phalgs?"</div><div class="line">&lt;img class="phil's gone phishing"</div><div class="line">&lt;img class ="philet-o-phish"</div><div class="line">&lt;img class= "philament"</div><div class="line">&lt;img class = "philanthropy"</div><div class="line">&lt;img class="phil me up"</div><div class="line">&lt;img class="philarydufflebag"</div><div class="line">&lt;img class="guys the flag is!"</div><div class="line">&lt;img class="phil pills r phor phil's phlegm"</div><div class="line">&lt;img class="not phil nor phlag"</div><div class="line">&lt;img class=i like scary philms"</div><div class="line">&lt;img class=phillllllyy"</div><div class="line">&lt;img class= philadelphia"</div><div class="line">&lt;img class="fill me up with dreams of phil"</div><div class="line">&lt;img class="still not phil"</div><div class="line">&lt;img class="also not phil"</div><div class="line">&lt;img class="not phil"</div></pre></td></tr></table></figure>
-<p>See what is the mess in the css:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-attr">[...]</span></div><div class="line"><span class="selector-class">.philarydufflebag</span>&#123;</div><div class="line"></div><div class="line"><span class="comment">/*hiya*/</span></div><div class="line"><span class="comment">/*compress your frontend*/</span></div><div class="line"><span class="comment">/*here's a flag :)*/</span></div><div class="line"><span class="attribute">flag</span>:RC3-<span class="number">2016</span>-CanineSS</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Flag was not well hidden: <code>RC3-2016-CanineSS</code>.</p>
 ]]></content>
     
     <summary type="html">
@@ -1312,9 +1408,9 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
   </entry>
   
   <entry>
-    <title>RC3 CTF - 200 - Bridge of Cyber - Misc</title>
-    <link href="http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/"/>
-    <id>http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/</id>
+    <title>RC3 CTF - 100 - Who&#39;s a good boy - Web</title>
+    <link href="http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/"/>
+    <id>http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/</id>
     <published>2016-11-20T23:00:00.000Z</published>
     <updated>2016-11-22T22:50:01.171Z</updated>
     
@@ -1342,39 +1438,18 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
 </ul>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>Welcome to the “Bridge of Cyber”! It’s the same concept as the “Bridge of Death” in Holy Grail. Our DNS servers aren’t very good at their job because they ask more questions then they answer. Let’s see if you can get the flag from our DNS.</p>
-<p>Nameserver: ns-920.awsdns-51.net</p>
-<p>Domain: misc200.ctf.rc3.club</p>
+<p>You’re trying to see the cute dog pictures on ctf.rc3.club. But every time you click on one of them, it brings you to a bad gateway.</p>
+<p><a href="https://ctf.rc3.club:3000/" target="_blank" rel="external">https://ctf.rc3.club:3000/</a></p>
+<p>– Your friendly neighborhood webadmin</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What we know:</p>
-<ul>
-<li>Domain: <code>misc200.ctf.rc3.club</code></li>
-<li>Name Server: <code>ns-920.awsdns-51.net</code></li>
-<li>We look for questions so probably TXT records</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 21494</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; misc200.ctf.rc3.club.	IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is the air-speed velocity of an unladen swallow&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 225 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 12:01:47 2016</div><div class="line">;; MSG SIZE  rcvd: 243</div></pre></td></tr></table></figure>
-<p>So we get the first question: “What is the air-speed velocity of an unladen swallow” is a question from “Bridge of Death” in Holy Grail of Monty Python.</p>
-<p>The answer is:</p>
-<blockquote>
-<p>What do you mean? An African or European swallow?</p>
-</blockquote>
-<p>The first idea that matched “How to send the answer” was by prefixing the answer to the domain.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;The roundest knight at king arthurs table was sir cumference. He acquired his size from too much __&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<blockquote>
-<p>The roundest knight at king Arthur’s round table was Sir Cumference. He acquired his size from too much pi.</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is it that no man ever yet did see, which never was, but always is to be?&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<blockquote>
-<p>Tomorrow</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;My favorite things in life don&apos;t cost any money. It&apos;s really clear that the most precious resource we all have is ___&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<blockquote>
-<p>My favorite things in life don’t cost any money. It’s really clear that the most precious resource we all have is time.</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill time.tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net ANY</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 52009</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; time.tomorrow.pi.european.misc200.ctf.rc3.club.	IN	TYPE255</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">time.tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	SPF	&quot;RC3-2016-cyb3rxr05&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 5244 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 19:48:48 2016</div><div class="line">;; MSG SIZE  rcvd: 235</div></pre></td></tr></table></figure>
-<p>So we get the flag: <code>RC3-2016-cyb3rxr05</code>.</p>
-<p>Or may be it was possible to do it with <code>african</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill african.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">african.misc200.ctf.rc3.club.	300	IN	TXT	&quot;Why was the developer broke? He spent all of his&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We can see that one of the image is not like all others:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"phil me up"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/doge-pattern-27481-2880x1800.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>the absolute mostest?<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"philarydufflebag"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/doge/this-aint-the-RC3-flag-we're-getting-there-though.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>CTF flags!!1!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"guys the flag is!"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/doge-pattern-27481-2880x1800.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>Find the Phil<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>But this image doesn’t exist, and is not cached in the WayBackMachine.</p>
+<p>Each image has a different class:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;img class="why hello there"</div><div class="line">&lt;img class="try not to get too distracted"</div><div class="line">&lt;img class="or infuriated"</div><div class="line">&lt;img class="don't give up, you can do it!"</div><div class="line">&lt;img class="hey, by the way"</div><div class="line">&lt;img class="have you ever"</div><div class="line">&lt;img class="heard of phil"</div><div class="line">&lt;img class="phil's a good name"</div><div class="line">&lt;img class="philly phil phil"</div><div class="line">&lt;img class="philthy phil"</div><div class="line">&lt;img class="now if only there was a way to philter out this nonsense"</div><div class="line">&lt;img class="phil likes phalgs?"</div><div class="line">&lt;img class="phil's gone phishing"</div><div class="line">&lt;img class ="philet-o-phish"</div><div class="line">&lt;img class= "philament"</div><div class="line">&lt;img class = "philanthropy"</div><div class="line">&lt;img class="phil me up"</div><div class="line">&lt;img class="philarydufflebag"</div><div class="line">&lt;img class="guys the flag is!"</div><div class="line">&lt;img class="phil pills r phor phil's phlegm"</div><div class="line">&lt;img class="not phil nor phlag"</div><div class="line">&lt;img class=i like scary philms"</div><div class="line">&lt;img class=phillllllyy"</div><div class="line">&lt;img class= philadelphia"</div><div class="line">&lt;img class="fill me up with dreams of phil"</div><div class="line">&lt;img class="still not phil"</div><div class="line">&lt;img class="also not phil"</div><div class="line">&lt;img class="not phil"</div></pre></td></tr></table></figure>
+<p>See what is the mess in the css:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-attr">[...]</span></div><div class="line"><span class="selector-class">.philarydufflebag</span>&#123;</div><div class="line"></div><div class="line"><span class="comment">/*hiya*/</span></div><div class="line"><span class="comment">/*compress your frontend*/</span></div><div class="line"><span class="comment">/*here's a flag :)*/</span></div><div class="line"><span class="attribute">flag</span>:RC3-<span class="number">2016</span>-CanineSS</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Flag was not well hidden: <code>RC3-2016-CanineSS</code>.</p>
 ]]></content>
     
     <summary type="html">
@@ -1390,57 +1465,11 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
     
       <category term="security" scheme="http://rawsec.ml/tags/security/"/>
     
+      <category term="web" scheme="http://rawsec.ml/tags/web/"/>
+    
       <category term="writeups" scheme="http://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="http://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="http://rawsec.ml/tags/misc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ArchLinux - Monitor copy progression with Advanced Copy patch</title>
-    <link href="http://rawsec.ml/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/"/>
-    <id>http://rawsec.ml/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/</id>
-    <published>2016-11-12T23:00:00.000Z</published>
-    <updated>2016-11-13T16:49:39.147Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="https://web.archive.org/web/20131115171331/http://beatex.org/web/advcopy/advcpmv-screen-20130313.png" alt="advcpmv"></p>
-<blockquote>
-<p>Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what’s going on.</p>
-</blockquote>
-<p>It was written by Florian Zwicke and released under the GPL.</p>
-<p>Original website (<a href="http://beatex.org/web/advancedcopy.html" target="_blank" rel="external">http://beatex.org/web/advancedcopy.html</a>) is dead but a backup git repository exist (<a href="https://github.com/atdt/advcpmv" target="_blank" rel="external">https://github.com/atdt/advcpmv</a>).</p>
-<h2 id="Compile-from-sources"><a href="#Compile-from-sources" class="headerlink" title="Compile from sources"></a>Compile from sources</h2><p>You will need <a href="https://www.archlinux.org/packages/core/x86_64/gcc/" target="_blank" rel="external">gcc</a>, <a href="https://www.archlinux.org/packages/core/x86_64/make/" target="_blank" rel="external">make</a> and <a href="https://www.archlinux.org/packages/core/x86_64/patch/" target="_blank" rel="external">patch</a>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ wget http://ftp.gnu.org/gnu/coreutils/coreutils-8.21.tar.xz</div><div class="line">$ tar xvJf coreutils-8.21.tar.xz</div><div class="line">$ cd coreutils-8.21/</div><div class="line">$ wget https://raw.githubusercontent.com/atdt/advcpmv/master/advcpmv-0.5-8.21.patch</div><div class="line">$ patch -p1 -i advcpmv-0.5-8.21.patch</div><div class="line">$ ./configure</div><div class="line">$ make</div></pre></td></tr></table></figure>
-<p>The new programs are now located in src/cp and src/mv. Place them somewhere else:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo cp src/cp /usr/local/bin/cp</div><div class="line">$ sudo cp src/mv /usr/local/bin/mv</div></pre></td></tr></table></figure>
-<p>You can make some aliases, for example:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias cpa=&apos;/usr/local/bin/cp -g&apos;</div><div class="line">alias mva=&apos;/usr/local/bin/mv -g&apos;</div></pre></td></tr></table></figure>
-<p>You may want this aliases to be permanent so place them in your <code>~/.zshrc</code> (or <code>~/.bashrc</code>) or create a profile script containing the two previous aliases:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/profile.d/alias-advcpmv.sh</div></pre></td></tr></table></figure>
-<p>And then create another profile script for <code>sudo</code> otherwise you won’t be able to call the previous aliases with <code>sudo</code>.<br>To be able to pass aliases to <code>sudo</code> create the following file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/profile.d/alias-sudo.sh</div></pre></td></tr></table></figure>
-<p>Containing:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias sudo=&apos;sudo &apos;</div><div class="line"># whitespace ---^</div></pre></td></tr></table></figure>
-<h2 id="Running"><a href="#Running" class="headerlink" title="Running"></a>Running</h2><p>Now when using <code>cpa</code>, <code>sudo cpa -rn</code>, etc… you will use <code>/usr/local/bin/cp -g</code>, <code>sudo /usr/local/bin/cp -grn</code>, etc…</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;https://web.archive.org/web/20131115171331/http://beatex.org/web/advcopy/advcpmv-screen-20130313.png&quot; alt=&quot;advcpmv&quot;&gt;&lt;/p&gt;
-&lt;block
-    
-    </summary>
-    
-      <category term="linux" scheme="http://rawsec.ml/categories/linux/"/>
-    
-      <category term="archlinux" scheme="http://rawsec.ml/categories/linux/archlinux/"/>
-    
-    
-      <category term="linux" scheme="http://rawsec.ml/tags/linux/"/>
-    
-      <category term="archlinux" scheme="http://rawsec.ml/tags/archlinux/"/>
     
   </entry>
   
