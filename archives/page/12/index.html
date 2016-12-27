@@ -654,17 +654,17 @@ Notes : vdi are
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/en/vm-automatic-start-hyperv-powershell/" class="thumbnail">
+        <a href="/en/disable-ssh-login-for-root-user/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Windows_logo.svg)" alt="How to configure VM Auto Start in Hyper-V with PowerShell" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="How to disable SSH login for the root user" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/vm-automatic-start-hyperv-powershell/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/disable-ssh-login-for-root-user/">0</span>
     
 </span>
 
@@ -674,25 +674,24 @@ Notes : vdi are
         
         <div class="article-meta">
             <p class="category">
-            <a class="article-category-link" href="/categories/windows/">windows</a>
+            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/centos/">centos</a>
             </p>
             <p class="date"><time datetime="2016-04-06T22:00:00.000Z" itemprop="datePublished">Thursday 7 April 2016 (2016-04-07)</time></p>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/en/vm-automatic-start-hyperv-powershell/">How to configure VM Auto Start in Hyper-V with PowerShell</a>
+        <a href="/en/disable-ssh-login-for-root-user/">How to disable SSH login for the root user</a>
         </h1>
     
 
         <p class="article-excerpt">
-            VM automatic action at Hyper-V start up1Set-VM [VM_NAME] -AutomaticStartAction [Option]
-With :
+            
+Create a new user. In the following example, we will name it bob.
+123root# adduser bobroot# id bobuid=1000(bob) gid=1000(bob) groupes=1000(bob)
 
-[VM_NAME] : The VM name
-[Option] :
-Nothing : When the host is powered on, the VM will do nothing
-StartIf
+Set the password for the new user.
+12345root# passwd b
         </p>
     </div>
 </article>
@@ -781,10 +780,10 @@ StartIf
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" class="thumbnail">
+                            <a href="/en/WhiteHat-GrandPrix-2016-forensics-300-Banh-it-la-gai/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 100 - Banh can - Web" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 300 - Banh it la gai - Forensics" class="thumbnail-image"></span>
     
     
 </a>
@@ -793,7 +792,7 @@ StartIf
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" class="title">WhiteHat GrandPrix - 100 - Banh can - Web</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-forensics-300-Banh-it-la-gai/" class="title">WhiteHat GrandPrix - 300 - Banh it la gai - Forensics</a></p>
                             <p class="item-date"><time datetime="2016-12-16T23:00:00.000Z" itemprop="datePublished">Saturday 17 December 2016 (2016-12-17)</time></p>
                         </div>
                     </li>
@@ -821,30 +820,10 @@ StartIf
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-GrandPrix-2016-forensics-300-Banh-it-la-gai/" class="thumbnail">
+                            <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 300 - Banh it la gai - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-forensics-300-Banh-it-la-gai/" class="title">WhiteHat GrandPrix - 300 - Banh it la gai - Forensics</a></p>
-                            <p class="item-date"><time datetime="2016-12-16T23:00:00.000Z" itemprop="datePublished">Saturday 17 December 2016 (2016-12-17)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 100 - Banh Giay - Forensics" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 100 - Banh can - Web" class="thumbnail-image"></span>
     
     
 </a>
@@ -853,7 +832,7 @@ StartIf
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" class="title">WhiteHat GrandPrix - 100 - Banh Giay - Forensics</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" class="title">WhiteHat GrandPrix - 100 - Banh can - Web</a></p>
                             <p class="item-date"><time datetime="2016-12-16T23:00:00.000Z" itemprop="datePublished">Saturday 17 December 2016 (2016-12-17)</time></p>
                         </div>
                     </li>
@@ -874,6 +853,26 @@ StartIf
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/" class="title">WhiteHat GrandPrix - 100 - Banh bot loc - Web</a></p>
+                            <p class="item-date"><time datetime="2016-12-16T23:00:00.000Z" itemprop="datePublished">Saturday 17 December 2016 (2016-12-17)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 100 - Banh Giay - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" class="title">WhiteHat GrandPrix - 100 - Banh Giay - Forensics</a></p>
                             <p class="item-date"><time datetime="2016-12-16T23:00:00.000Z" itemprop="datePublished">Saturday 17 December 2016 (2016-12-17)</time></p>
                         </div>
                     </li>
