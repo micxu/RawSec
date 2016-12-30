@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>OpenSUSE : Install rTorrent and ruTorrent | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="linux,system,opensuse" />
+    
+    <meta name="description" content="Install rTorrent, git ang nginx:
+
+1# zypper install rtorrent git nginx
+Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won’t be able to use it with rutorr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenSUSE : Install rTorrent and ruTorrent">
+<meta property="og:url" content="http://rawsec.ml/en/opensuse-install-rtorrent-rutorrent/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="Install rTorrent, git ang nginx:
+
+1# zypper install rtorrent git nginx
+Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won’t be able to use it with rutorr">
+<meta property="og:image" content="http://rawsec.ml/images/opensuse.svg">
+<meta property="og:updated_time" content="2016-12-30T10:20:25.485Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenSUSE : Install rTorrent and ruTorrent">
+<meta name="twitter:description" content="Install rTorrent, git ang nginx:
+
+1# zypper install rtorrent git nginx
+Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won’t be able to use it with rutorr">
+<meta name="twitter:image" content="http://rawsec.ml/images/opensuse.svg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/linux/opensuse/">opensuse</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-opensuse-install-rtorrent-rutorrent" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        OpenSUSE : Install rTorrent and ruTorrent
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/opensuse-install-rtorrent-rutorrent/" class="article-date">
+    <time datetime="2016-12-29T23:00:00.000Z" itemprop="datePublished">Friday 30 December 2016 (2016-12-30)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opensuse/">opensuse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/system/">system</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ul>
+<li>Install rTorrent, git ang nginx:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># zypper install rtorrent git nginx</div></pre></td></tr></table></figure>
+<p><strong>Warning</strong>: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won’t be able to use it with rutorrent.</p>
+<ul>
+<li>Add the php devel repository to be able to install php7:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># zypper addrepo http://download.opensuse.org/repositories/devel:languages:php/openSUSE_Leap_42.1/devel:languages:php.repo</div><div class="line"># zypper refresh</div><div class="line"># zypper install php7 php7-fpm</div></pre></td></tr></table></figure>
+<ul>
+<li>Go to the default web folder and clone the <a href="https://github.com/Novik/ruTorrent" target="_blank" rel="external">ruTorrent</a> git repository:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /srv/www/htdocs/</div><div class="line"># git clone https://github.com/Novik/ruTorrent.git rutorrent</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable and start nginx:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable nginx.service</div><div class="line"># systemctl start nginx.service</div></pre></td></tr></table></figure>
+<ul>
+<li>Open php configuration:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/cli/php.ini</div></pre></td></tr></table></figure>
+<ul>
+<li>Disable php exposure (<a href="http://php.net/manual/en/ini.core.php#ini.expose-php" target="_blank" rel="external">expose_php</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">expose_php = Off</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable file uploads (<a href="http://php.net/manual/en/ini.core.php#ini.file-uploads" target="_blank" rel="external">file_uploads</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">file_uploads = On</div></pre></td></tr></table></figure>
+<ul>
+<li>Set the maximum size of an uploaded file (<a href="http://php.net/manual/en/ini.core.php#ini.upload-max-filesize" target="_blank" rel="external">upload_max_filesize</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upload_max_filesize = 15M</div></pre></td></tr></table></figure>
+<ul>
+<li>Set max size of post data allowed (<a href="http://php.net/manual/en/ini.core.php#ini.post-max-size" target="_blank" rel="external">post_max_size</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">post_max_size = 15M</div></pre></td></tr></table></figure>
+<ul>
+<li>Set the timezone (<a href="http://php.net/manual/en/datetime.configuration.php#ini.date.timezone" target="_blank" rel="external">date.timezone</a>).</li>
+<li>For more security, limit the files that can be accessed by php (<a href="http://php.net/manual/en/ini.core.php#ini.open-basedir" target="_blank" rel="external">open_basedir</a>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open_basedir = /srv/www/htdocs/rutorrent</div></pre></td></tr></table></figure>
+<ul>
+<li>Change the value of cgi.fix_pathinfo to zero for security reasons:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cgi.fix_pathinfo=0</div></pre></td></tr></table></figure>
+<ul>
+<li>Save and quit <code>php.ini</code>.</li>
+<li>Create the <code>php-fpm.conf</code> and <code>www.conf</code> files:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># cp /etc/php7/fpm/php-fpm.conf.default /etc/php7/fpm/php-fpm.conf</div><div class="line"># cp /etc/php7/fpm/php-fpm.d/www.conf.default /etc/php7/fpm/php-fpm.d/www.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>Edit the php-fpm configuration:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/fpm/php-fpm.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>To enable php-fpm log, uncomment this line (the default prefix is <code>/var</code>):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error_log = log/php-fpm.log</div></pre></td></tr></table></figure>
+<ul>
+<li>Edit the php-fpm pool file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/fpm/php-fpm.d/www.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>Configure the owner of the nginx process to the Nginx user:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">user = nginx</div><div class="line">group = nginx</div></pre></td></tr></table></figure>
+<ul>
+<li>Configure php-fpm to run under a socket file, not a port:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">listen = /var/run/php-fpm.sock</div></pre></td></tr></table></figure>
+<ul>
+<li>Change the permissions for the unix socket to the nginx user, group and mode:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">listen.owner = nginx</div><div class="line">listen.group = nginx</div><div class="line">listen.mode = 0660</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable and start php-fpm:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable php-fpm</div><div class="line"># systemctl start php-fpm</div></pre></td></tr></table></figure>
+<ul>
+<li>Create an authentification folder for nginx:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/auth</div></pre></td></tr></table></figure>
+<ul>
+<li>Create the virtual servers directories:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/servers-available</div><div class="line"># mkdir /etc/nginx/servers-enabled</div></pre></td></tr></table></figure>
+<ul>
+<li>Edit the nginx configuration file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/nginx.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>And add this config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">user nginx;</div><div class="line">worker_processes auto;</div><div class="line">pid /var/run/nginx.pid;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">    worker_connections 1024;</div><div class="line">    multi_accept on;</div><div class="line">    use epoll;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">    charset UTF-8;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Basic Settings</div><div class="line">    ##</div><div class="line">    server_names_hash_bucket_size 64;</div><div class="line">    sendfile on;</div><div class="line">    tcp_nopush on;</div><div class="line">    tcp_nodelay on;</div><div class="line">    keepalive_timeout 65;</div><div class="line">    types_hash_max_size 2048;</div><div class="line">    server_tokens off;</div><div class="line"></div><div class="line">    # server_name_in_redirect off;</div><div class="line"></div><div class="line">    include /etc/nginx/mime.types;</div><div class="line">    default_type application/octet-stream;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Logging Settings</div><div class="line">    ##</div><div class="line">    access_log /var/log/nginx/access.log;</div><div class="line">    error_log /var/log/nginx/error.log;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Gzip Settings</div><div class="line">    ##</div><div class="line">    gzip on;</div><div class="line">    gzip_disable &quot;msie6&quot;;</div><div class="line">    gzip_vary on;</div><div class="line">    gzip_proxied any;</div><div class="line">    gzip_comp_level 6;</div><div class="line">    gzip_buffers 16 8k;</div><div class="line">    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Virtual Host Configs</div><div class="line">    ##</div><div class="line">    include /etc/nginx/servers-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Save and quit.</li>
+<li>Create the server domain config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/servers-available/seedbox.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>And add the config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen [::]:80;</div><div class="line">    # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.</div><div class="line">    return 301 https://$host$request_uri;</div><div class="line">&#125;</div><div class="line"></div><div class="line">##</div><div class="line"># BLOCK SERVEUR HTTPS</div><div class="line">##</div><div class="line">server &#123;</div><div class="line">    # http2 not supported by nginx 1.8.1</div><div class="line">    listen 443 ssl;</div><div class="line">    server_name seedbox.domain.example.org;</div><div class="line">    root /srv/www/htdocs/rutorrent;</div><div class="line">    index index.php index.html index.htm;</div><div class="line"></div><div class="line">##</div><div class="line"># SSL</div><div class="line">##</div><div class="line">    ssl_certificate /etc/nginx/ssl/seedbox.crt;</div><div class="line">    ssl_certificate_key /etc/nginx/ssl/seedbox.key;</div><div class="line"></div><div class="line">    ssl_protocols TLSv1.2;</div><div class="line">    ssl_ciphers EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;</div><div class="line">    ssl_ecdh_curve secp384r1;</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line">    # ssl optimizations</div><div class="line">    ssl_session_timeout 5m;</div><div class="line">    ssl_session_cache shared:SSL:20m;</div><div class="line">    ssl_session_tickets on;</div><div class="line"></div><div class="line">##</div><div class="line"># SECURITY</div><div class="line">##</div><div class="line"></div><div class="line">    add_header X-XSS-Protection &quot;1; mode=block&quot;;</div><div class="line">    auth_basic &quot;Restricted Area&quot;;</div><div class="line">    auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth&quot;;</div><div class="line"></div><div class="line">##</div><div class="line"># PHP</div><div class="line">##</div><div class="line">    location / &#123;</div><div class="line">    index index.php index.html index.htm;</div><div class="line">    try_files $uri $uri/ /index.php?$args;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">    try_files $uri =404;</div><div class="line">    fastcgi_split_path_info ^(.+\.php)(/.+)$;</div><div class="line">    fastcgi_pass unix:/var/run/php-fpm.sock;</div><div class="line">    fastcgi_index index.php;</div><div class="line">    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line">    include fastcgi_params;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ^~ /conf/ &#123;</div><div class="line">    deny all;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ^~ /share/ &#123;</div><div class="line">    deny all;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Don’t forget to change <code>server_name seedbox.domain.example.org;</code> with your own domain and create a CNAME entry in your DNS configuration.</li>
+<li>Enable the server:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ln -s /etc/nginx/servers-available/seedbox.conf /etc/nginx/servers-enabled/seedbox.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>To configure a self-signed certificate, add the certificate folder:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/ssl</div></pre></td></tr></table></figure>
+<ul>
+<li>Generate self-signed certificate:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># cd /etc/nginx/ssl</div><div class="line"># openssl ecparam -genkey -name secp384r1 -out seedbox.key</div><div class="line"># openssl req -new -key seedbox.key -sha256 -out seedbox.csr</div><div class="line"># openssl req -x509 -days 3650 -sha256 -key seedbox.key -in seedbox.csr -out seedbox.crt</div></pre></td></tr></table></figure>
+<ul>
+<li>Modify files rights:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 644 /etc/nginx/ssl/*.crt</div><div class="line"># chmod 640 /etc/nginx/ssl/*.key</div></pre></td></tr></table></figure>
+<ul>
+<li>Create an user:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># useradd --shell /bin/bash --create-home sdbox</div><div class="line"># passwd sdbox</div></pre></td></tr></table></figure>
+<ul>
+<li>Create needed folder for rtorrent:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir -p /home/sdbox/&#123;torrents,watch,.session&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Create rtorrent config file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /home/sdbox/.rtorrent.rc</div></pre></td></tr></table></figure>
+<ul>
+<li>Paste the config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">scgi_port = 127.0.0.1:5001</div><div class="line">encoding_list = UTF-8</div><div class="line">port_range = 45000-65000</div><div class="line">port_random = no</div><div class="line">check_hash = no</div><div class="line">directory = /home/sdbox/torrents</div><div class="line">session = /home/sdbox/.session</div><div class="line">encryption = allow_incoming, try_outgoing, enable_retry</div><div class="line">schedule = watch_directory,1,1,&quot;load_start=/home/sdbox/watch/*.torrent&quot;</div><div class="line">schedule = untied_directory,5,5,&quot;stop_untied=/home/sdbox/watch/*.torrent&quot;</div><div class="line">use_udp_trackers = yes</div><div class="line">dht = off</div><div class="line">peer_exchange = no</div><div class="line">min_peers = 40</div><div class="line">max_peers = 100</div><div class="line">min_peers_seed = 10</div><div class="line">max_peers_seed = 50</div><div class="line">max_uploads = 15</div><div class="line">execute = &#123;sh,-c,/usr/bin/php /srv/www/htdocs/rutorrent/php/initplugins.php sdbox &amp;&#125;</div><div class="line">schedule = espace_disque_insuffisant,1,30,close_low_diskspace=500M</div></pre></td></tr></table></figure>
+<ul>
+<li>Give user permissions:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown --recursive sdbox:users /home/sdbox</div><div class="line"># chown root:root /home/sdbox</div><div class="line"># chmod 755 /home/sdbox</div></pre></td></tr></table></figure>
+<ul>
+<li>Edit the virtual server config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/servers-available/seedbox.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>Add the config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /SDBOX</div><div class="line">&#123;</div><div class="line">    include scgi_params;</div><div class="line">    scgi_pass 127.0.0.1:5001;</div><div class="line">    auth_basic &quot;Restricted Area&quot;;</div><div class="line">    auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth sdbox&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>In order to do not install apache-tools, manually generate the auth file for sdbox user (it will write over the file and don’t forget to change the password in the command):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo -n &quot;sdbox:&quot; | sudo tee /etc/nginx/auth/seedbox_auth &amp;&amp; openssl passwd -apr1 password | sudo tee -a /etc/nginx/auth/seedbox_auth</div></pre></td></tr></table></figure>
+<ul>
+<li>Protect the authentification file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 600 /etc/nginx/auth/seedbox_auth</div><div class="line"># chown nginx:nginx /etc/nginx/auth/*</div></pre></td></tr></table></figure>
+<ul>
+<li>Create ruTorrent config file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /srv/www/htdocs/rutorrent/conf/users/sdbox</div><div class="line"># vim /srv/www/htdocs/rutorrent/conf/users/sdbox/config.php</div></pre></td></tr></table></figure>
+<ul>
+<li>And add the content:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$pathToExternals[&apos;curl&apos;] = &apos;/usr/bin/curl&apos;;</div><div class="line">$topDirectory = &apos;/home/sdbox&apos;;</div><div class="line">$scgi_port = 5001;</div><div class="line">$scgi_host = &apos;127.0.0.1&apos;;</div><div class="line">$XMLRPCMountPoint = &apos;/SDBOX&apos;;</div><div class="line">$tempDirectory = &apos;/srv/www/htdocs/rutorrent/tmp/&apos;;</div></pre></td></tr></table></figure>
+<ul>
+<li>Correct permissions:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown -R nginx:nginx /srv/www/htdocs/rutorrent</div><div class="line"># chmod 0777 /srv/www/htdocs/rutorrent/share/&#123;settings,torrents,users&#125;</div><div class="line"># systemctl restart nginx.service</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable user lingering:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># loginctl enable-linger sdbox</div></pre></td></tr></table></figure>
+<ul>
+<li>To create a rTorrent service, create the file <code>/etc/systemd/system/rtorrent.service</code> containing:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=rTorrent Daemon</div><div class="line">After=network.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=forking</div><div class="line">KillMode=none</div><div class="line">User=sdbox</div><div class="line">ExecStart=/usr/bin/tmux new-session -c /mnt/storage/rtorrent -s rtorrent -n rtorrent -d rtorrent</div><div class="line">ExecStop=/usr/bin/bash -c &quot;/usr/bin/tmux send-keys -t rtorrent C-q &amp;&amp; while pidof rtorrent &gt; /dev/null; do sleep 0.5; done&quot;</div><div class="line">WorkingDirectory=/home/sdbox/</div><div class="line">Restart=on-failure</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure>
+<ul>
+<li>Enable rtorrent at boot time and manually start it:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable rtorrent</div><div class="line"># systemctl start rtorrent</div></pre></td></tr></table></figure>
+<ul>
+<li>To allow web traffic trought the firewall, create this file:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/sysconfig/SuSEfirewall2.d/services/httpd</div></pre></td></tr></table></figure>
+<ul>
+<li>And add this config:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">## Name: Web server</div><div class="line">## Description: opens ports for web servers in order to allow http and https traffic</div><div class="line"></div><div class="line"># space separated list of allowed TCP ports</div><div class="line">TCP=&quot;80 443&quot;</div></pre></td></tr></table></figure>
+<ul>
+<li>Now add the httpd config in the global settings:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/sysconfig/SuSEfirewall2</div></pre></td></tr></table></figure>
+<ul>
+<li><p>And add <code>httpd</code> to <code>FW_CONFIGURATIONS_EXT</code>, for example <code>FW_CONFIGURATIONS_EXT=&quot;sshd httpd&quot;</code>.</p>
+</li>
+<li><p>Now restart the firewall:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># systemctl restart SuSEfirewall2.service</div><div class="line">or</div><div class="line"># rcSuSEfirewall2 restart</div></pre></td></tr></table></figure>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://rawsec.ml/en/opensuse-install-rtorrent-rutorrent/" data-id="cixbnfepf004xdqj35y8wx8os" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/en/C3CTF-33-150-try-web/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">33C3 CTF - 150 - try - Web</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/opensuse-install-rtorrent-rutorrent/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/opensuse.svg)" alt="OpenSUSE : Install rTorrent and ruTorrent" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/linux/opensuse/">opensuse</a></p>
+                            <p class="item-title"><a href="/en/opensuse-install-rtorrent-rutorrent/" class="title">OpenSUSE : Install rTorrent and ruTorrent</a></p>
+                            <p class="item-date"><time datetime="2016-12-29T23:00:00.000Z" itemprop="datePublished">Friday 30 December 2016 (2016-12-30)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/C3CTF-33-150-try-web/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="33C3 CTF - 150 - try - Web" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/C3CTF-33-150-try-web/" class="title">33C3 CTF - 150 - try - Web</a></p>
+                            <p class="item-date"><time datetime="2016-12-27T23:00:00.000Z" itemprop="datePublished">Wednesday 28 December 2016 (2016-12-28)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 100 - Banh Giay - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" class="title">WhiteHat GrandPrix - 100 - Banh Giay - Forensics</a></p>
+                            <p class="item-date"><time datetime="2016-12-16T23:00:00.000Z" itemprop="datePublished">Saturday 17 December 2016 (2016-12-17)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 100 - Banh can - Web" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" class="title">WhiteHat GrandPrix - 100 - Banh can - Web</a></p>
+                            <p class="item-date"><time datetime="2016-12-16T23:00:00.000Z" itemprop="datePublished">Saturday 17 December 2016 (2016-12-17)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-GrandPrix-2016-misc-100-Banh-da-Ke/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat GrandPrix - 100 - Banh da Ke - Misc" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-GrandPrix-2016-misc-100-Banh-da-Ke/" class="title">WhiteHat GrandPrix - 100 - Banh da Ke - Misc</a></p>
+                            <p class="item-date"><time datetime="2016-12-16T23:00:00.000Z" itemprop="datePublished">Saturday 17 December 2016 (2016-12-17)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">98</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">86</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 12.14px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.71px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.71px;">centos</a> <a href="/tags/crypto/" style="font-size: 15px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.29px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensic/" style="font-size: 10px;">forensic</a> <a href="/tags/forensics/" style="font-size: 17.14px;">forensics</a> <a href="/tags/git/" style="font-size: 11.43px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.71px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.71px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/misc/" style="font-size: 15.71px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.71px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 12.86px;">news</a> <a href="/tags/opensuse/" style="font-size: 13.57px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.71px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 11.43px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.71px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 11.43px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.71px;">reverse</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.71px;">ssh</a> <a href="/tags/stegano/" style="font-size: 11.43px;">stegano</a> <a href="/tags/system/" style="font-size: 16.43px;">system</a> <a href="/tags/tor/" style="font-size: 10.71px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.71px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.71px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 14.29px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.71px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 17.86px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 12.86px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.29px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'http://rawsec.ml/en/opensuse-install-rtorrent-rutorrent/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
