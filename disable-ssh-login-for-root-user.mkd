@@ -3,6 +3,7 @@ layout: post
 lang: en
 title: 'How to disable SSH login for the root user'
 date: 2016/04/07
+updated: 2016/12/27
 categories:
   - security
   - centos
@@ -14,12 +15,15 @@ tags:
 thumbnail: /images/security-265130_640.jpg
 ---
 1. Create a new user. In the following example, we will name it **bob**.
+
 ```
-root# adduser bob
+root# useradd -m bob
 root# id bob
 uid=1000(bob) gid=1000(bob) groupes=1000(bob)
 ```
+
 2. Set the password for the new user.
+
 ```
 root# passwd bob
 Changing password for user bob.
@@ -27,25 +31,25 @@ New UNIX password:
 Retype new UNIX password:
 passwd: all authentication tokens updated successfully.
 ```
+
 3. In order to add sudo permissions for the new user, add `bob  ALL=(ALL)   ALL` in `/etc/sudoers` or add bob in wheel group with `usermod -a -G wheel bob`.
 4. Try to connect SSH with bob user.
+
 ```
-ssh bob@my.ip
-```
-5. Verify you can switch user to root with bob.
-```
-bob$ su -
-Password:
-root# whoami
-root
-```
-6. Disable root SSH login:
-```
-root# vim /etc/ssh/sshd_config
+ssh bob@localhost
 ```
 
-and change `#PermitRootLogin yes` into `PermitRootLogin no`.
+5. Verify you can switch user to root with bob.
+
+```
+bob$ sudo -i
+```
+
+6. Disable root SSH login:
+  + Edit `# vim /etc/ssh/sshd_config`
+  + and change `#PermitRootLogin yes` into `PermitRootLogin no`.
 7. Now, we can restart SSH server.
+
 ```
 root# systemctl restart sshd.service
 ```

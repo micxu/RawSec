@@ -1,0 +1,499 @@
+---
+layout: post
+title: "OpenSUSE : Install rTorrent and ruTorrent"
+date: 2016/12/30
+lang: en
+categories:
+- linux
+- opensuse
+tags:
+- linux
+- opensuse
+- system
+thumbnail: /images/opensuse.svg
+---
++ Install rTorrent, git ang nginx:
+
+```
+# zypper install rtorrent git nginx
+```
+
+**Warning**: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won't be able to use it with rutorrent.
+
++ Add the php devel repository to be able to install php7:
+
+```
+# zypper addrepo http://download.opensuse.org/repositories/devel:languages:php/openSUSE_Leap_42.1/devel:languages:php.repo
+# zypper refresh
+# zypper install php7 php7-fpm
+```
+
++ Go to the default web folder and clone the [ruTorrent](https://github.com/Novik/ruTorrent) git repository:
+
+```
+$ cd /srv/www/htdocs/
+# git clone https://github.com/Novik/ruTorrent.git rutorrent
+```
+
++ Enable and start nginx:
+
+```
+# systemctl enable nginx.service
+# systemctl start nginx.service
+```
+
++ Open php configuration:
+
+```
+# vim /etc/php7/cli/php.ini
+```
+
++ Disable php exposure ([expose_php](http://php.net/manual/en/ini.core.php#ini.expose-php)):
+
+```
+expose_php = Off
+```
+
++ Enable file uploads ([file_uploads](http://php.net/manual/en/ini.core.php#ini.file-uploads)):
+
+```
+file_uploads = On
+```
+
++ Set the maximum size of an uploaded file ([upload_max_filesize](http://php.net/manual/en/ini.core.php#ini.upload-max-filesize)):
+
+```
+upload_max_filesize = 15M
+```
+
++ Set max size of post data allowed ([post_max_size](http://php.net/manual/en/ini.core.php#ini.post-max-size)):
+
+```
+post_max_size = 15M
+```
+
++ Set the timezone ([date.timezone](http://php.net/manual/en/datetime.configuration.php#ini.date.timezone)).
++ For more security, limit the files that can be accessed by php ([open_basedir](http://php.net/manual/en/ini.core.php#ini.open-basedir)):
+
+```
+open_basedir = /srv/www/htdocs/rutorrent
+```
+
++ Change the value of cgi.fix_pathinfo to zero for security reasons:
+
+```
+cgi.fix_pathinfo=0
+```
+
++ Save and quit `php.ini`.
++ Create the `php-fpm.conf` and `www.conf` files:
+
+```
+# cp /etc/php7/fpm/php-fpm.conf.default /etc/php7/fpm/php-fpm.conf
+# cp /etc/php7/fpm/php-fpm.d/www.conf.default /etc/php7/fpm/php-fpm.d/www.conf
+```
+
++ Edit the php-fpm configuration:
+
+```
+# vim /etc/php7/fpm/php-fpm.conf
+```
+
++ To enable php-fpm log, uncomment this line (the default prefix is `/var`):
+
+```
+error_log = log/php-fpm.log
+```
+
++ Edit the php-fpm pool file:
+
+```
+# vim /etc/php7/fpm/php-fpm.d/www.conf
+```
+
++ Configure the owner of the nginx process to the Nginx user:
+
+```
+user = nginx
+group = nginx
+```
+
++ Configure php-fpm to run under a socket file, not a port:
+
+```
+listen = /var/run/php-fpm.sock
+```
+
++ Change the permissions for the unix socket to the nginx user, group and mode:
+
+```
+listen.owner = nginx
+listen.group = nginx
+listen.mode = 0660
+```
+
++ Enable and start php-fpm:
+
+```
+# systemctl enable php-fpm
+# systemctl start php-fpm
+```
+
++ Create an authentification folder for nginx:
+
+```
+# mkdir /etc/nginx/auth
+```
+
++ Create the virtual servers directories:
+
+```
+# mkdir /etc/nginx/servers-available
+# mkdir /etc/nginx/servers-enabled
+```
+
++ Edit the nginx configuration file:
+
+```
+# vim /etc/nginx/nginx.conf
+```
+
++ And add this config:
+
+```
+user nginx;
+worker_processes auto;
+pid /var/run/nginx.pid;
+
+events {
+    worker_connections 1024;
+    multi_accept on;
+    use epoll;
+}
+
+http {
+
+    charset UTF-8;
+
+    ##
+    # Basic Settings
+    ##
+    server_names_hash_bucket_size 64;
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    server_tokens off;
+
+    # server_name_in_redirect off;
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    ##
+    # Logging Settings
+    ##
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    ##
+    # Gzip Settings
+    ##
+    gzip on;
+    gzip_disable "msie6";
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+    ##
+    # Virtual Host Configs
+    ##
+    include /etc/nginx/servers-enabled/*;
+}
+```
+
++ Save and quit.
++ Create the server domain config:
+
+```
+# vim /etc/nginx/servers-available/seedbox.conf
+```
+
++ And add the config:
+
+```
+server {
+    listen 80;
+    listen [::]:80;
+    # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
+    return 301 https://$host$request_uri;
+}
+
+##
+# BLOCK SERVEUR HTTPS
+##
+server {
+    # http2 not supported by nginx 1.8.1
+    listen 443 ssl;
+    server_name seedbox.domain.example.org;
+    root /srv/www/htdocs/rutorrent;
+    index index.php index.html index.htm;
+
+##
+# SSL
+##
+    ssl_certificate /etc/nginx/ssl/seedbox.crt;
+    ssl_certificate_key /etc/nginx/ssl/seedbox.key;
+
+    ssl_protocols TLSv1.2;
+    ssl_ciphers EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;
+    ssl_ecdh_curve secp384r1;
+    ssl_prefer_server_ciphers on;
+
+    # ssl optimizations
+    ssl_session_timeout 5m;
+    ssl_session_cache shared:SSL:20m;
+    ssl_session_tickets on;
+
+##
+# SECURITY
+##
+
+    add_header X-XSS-Protection "1; mode=block";
+    auth_basic "Restricted Area";
+    auth_basic_user_file "/etc/nginx/auth/seedbox_auth";
+
+##
+# PHP
+##
+    location / {
+    index index.php index.html index.htm;
+    try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+    try_files $uri =404;
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/var/run/php-fpm.sock;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+    }
+
+    location ^~ /conf/ {
+    deny all;
+    }
+
+    location ^~ /share/ {
+    deny all;
+    }
+}
+```
+
++ Don’t forget to change `server_name seedbox.domain.example.org;` with your own domain and create a CNAME entry in your DNS configuration.
++ Enable the server:
+
+```
+# ln -s /etc/nginx/servers-available/seedbox.conf /etc/nginx/servers-enabled/seedbox.conf
+```
+
++ To configure a self-signed certificate, add the certificate folder:
+
+```
+# mkdir /etc/nginx/ssl
+```
+
++ Generate self-signed certificate:
+
+```
+# cd /etc/nginx/ssl
+# openssl ecparam -genkey -name secp384r1 -out seedbox.key
+# openssl req -new -key seedbox.key -sha256 -out seedbox.csr
+# openssl req -x509 -days 3650 -sha256 -key seedbox.key -in seedbox.csr -out seedbox.crt
+```
+
++ Modify files rights:
+
+```
+# chmod 644 /etc/nginx/ssl/*.crt
+# chmod 640 /etc/nginx/ssl/*.key
+```
+
++ Create an user:
+
+```
+# useradd --shell /bin/bash --create-home sdbox
+# passwd sdbox
+```
+
++ Create needed folder for rtorrent:
+
+```
+# mkdir -p /home/sdbox/{torrents,watch,.session}
+```
+
++ Create rtorrent config file:
+
+```
+# vim /home/sdbox/.rtorrent.rc
+```
+
++ Paste the config:
+
+```
+scgi_port = 127.0.0.1:5001
+encoding_list = UTF-8
+port_range = 45000-65000
+port_random = no
+check_hash = no
+directory = /home/sdbox/torrents
+session = /home/sdbox/.session
+encryption = allow_incoming, try_outgoing, enable_retry
+schedule = watch_directory,1,1,"load_start=/home/sdbox/watch/*.torrent"
+schedule = untied_directory,5,5,"stop_untied=/home/sdbox/watch/*.torrent"
+use_udp_trackers = yes
+dht = off
+peer_exchange = no
+min_peers = 40
+max_peers = 100
+min_peers_seed = 10
+max_peers_seed = 50
+max_uploads = 15
+execute = {sh,-c,/usr/bin/php /srv/www/htdocs/rutorrent/php/initplugins.php sdbox &}
+schedule = espace_disque_insuffisant,1,30,close_low_diskspace=500M
+```
+
++ Give user permissions:
+
+```
+# chown --recursive sdbox:users /home/sdbox
+# chown root:root /home/sdbox
+# chmod 755 /home/sdbox
+```
+
++ Edit the virtual server config:
+
+```
+# vim /etc/nginx/servers-available/seedbox.conf
+```
+
++ Add the config:
+
+```
+location /SDBOX
+{
+    include scgi_params;
+    scgi_pass 127.0.0.1:5001;
+    auth_basic "Restricted Area";
+    auth_basic_user_file "/etc/nginx/auth/seedbox_auth sdbox";
+}
+```
+
++ In order to do not install apache-tools, manually generate the auth file for sdbox user (it will write over the file and don’t forget to change the password in the command):
+
+```
+$ echo -n "sdbox:" | sudo tee /etc/nginx/auth/seedbox_auth && openssl passwd -apr1 password | sudo tee -a /etc/nginx/auth/seedbox_auth
+```
+
++ Protect the authentification file:
+
+```
+# chmod 600 /etc/nginx/auth/seedbox_auth
+# chown nginx:nginx /etc/nginx/auth/*
+```
+
++ Create ruTorrent config file:
+
+```
+# mkdir /srv/www/htdocs/rutorrent/conf/users/sdbox
+# vim /srv/www/htdocs/rutorrent/conf/users/sdbox/config.php
+```
+
++ And add the content:
+
+```
+<?php
+
+$pathToExternals['curl'] = '/usr/bin/curl';
+$topDirectory = '/home/sdbox';
+$scgi_port = 5001;
+$scgi_host = '127.0.0.1';
+$XMLRPCMountPoint = '/SDBOX';
+$tempDirectory = '/srv/www/htdocs/rutorrent/tmp/';
+```
+
++ Correct permissions:
+
+```
+# chown -R nginx:nginx /srv/www/htdocs/rutorrent
+# chmod 0777 /srv/www/htdocs/rutorrent/share/{settings,torrents,users}
+# systemctl restart nginx.service
+```
+
++ Enable user lingering:
+
+```
+# loginctl enable-linger sdbox
+```
+
++ To create a rTorrent service, create the file `/etc/systemd/system/rtorrent.service` containing:
+
+```
+[Unit]
+Description=rTorrent Daemon
+After=network.target
+
+[Service]
+Type=forking
+KillMode=none
+User=sdbox
+ExecStart=/usr/bin/tmux new-session -c /mnt/storage/rtorrent -s rtorrent -n rtorrent -d rtorrent
+ExecStop=/usr/bin/bash -c "/usr/bin/tmux send-keys -t rtorrent C-q && while pidof rtorrent > /dev/null; do sleep 0.5; done"
+WorkingDirectory=/home/sdbox/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
++ Enable rtorrent at boot time and manually start it:
+
+```
+# systemctl enable rtorrent
+# systemctl start rtorrent
+```
+
++ To allow web traffic trought the firewall, create this file:
+
+```
+# vim /etc/sysconfig/SuSEfirewall2.d/services/httpd
+```
+
++ And add this config:
+
+```
+## Name: Web server
+## Description: opens ports for web servers in order to allow http and https traffic
+
+# space separated list of allowed TCP ports
+TCP="80 443"
+```
+
++ Now add the httpd config in the global settings:
+
+```
+# vim /etc/sysconfig/SuSEfirewall2
+```
+
++ And add `httpd` to `FW_CONFIGURATIONS_EXT`, for example `FW_CONFIGURATIONS_EXT="sshd httpd"`.
+
++ Now restart the firewall:
+
+```
+# systemctl restart SuSEfirewall2.service
+or
+# rcSuSEfirewall2 restart
+```

@@ -9,7 +9,7 @@ tags:
 - linux
 - system
 - opensuse
-thumbnail: /images/tux-293844_640.png
+thumbnail: /images/opensuse.svg
 ---
 To see your battery infos you can use acpi if you have it or directly see system files.
 

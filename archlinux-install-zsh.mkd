@@ -9,7 +9,7 @@ categories:
 tags:
 - linux
 - archlinux
-thumbnail: /images/tux-293844_640.png
+thumbnail: /images/archlinux.svg
 ---
 ## Install Zsh
 

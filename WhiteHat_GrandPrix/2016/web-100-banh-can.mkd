@@ -1,0 +1,72 @@
+---
+layout: post
+title: "WhiteHat GrandPrix - 100 - Banh can - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/12/17
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : WhiteHat GrandPrix 2016
+- **Website** : [grandprix.whitehatvn.com](https://grandprix.whitehatvn.com/Contests/ChallengesContest/32)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/398)
+
+### Description
+
+> http://web04.grandprix.whitehatvn.com
+>
+> http://bakweb04.grandprix.whitehatvn.com:8118
+>
+> Powered by People Security Academic - PSA
+
+## Solution
+
+**TL;DR**: Incomplete write-up.
+
+Here is the home page:
+
+![](http://i.imgur.com/OZw8nP1.png)
+
+Check the source code:
+
+```html
+What's your name? I just want to say hello :)
+<form>
+	<input name="hello" value="" />
+	<button type="submit">Send</button>
+</form>
+
+<!-- function hint() -->
+```
+
+So let's try the hint function: `http://web04.grandprix.whitehatvn.com/?hint=`.
+
+![](http://i.imgur.com/kJVzdOH.png)
+
+```php
+$blacklist = array("system", "passthru", "exec", "read", "open", "eval", "backtick", "`", "_");
+
+die("No no no hackers!!");
+```
+
+
+
+## Submit

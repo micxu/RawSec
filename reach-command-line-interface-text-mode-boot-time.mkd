@@ -10,7 +10,7 @@ tags:
 - linux
 - system
 - opensuse
-thumbnail: /images/tux-293844_640.png
+thumbnail: /images/opensuse.svg
 ---
 This work with Grub2:
 * When you are on the bootloader, hover over your distribution name and press **e** (*e* for *edit*)

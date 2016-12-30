@@ -1,0 +1,105 @@
+---
+layout: post
+title: "WhiteHat GrandPrix - 100 - Banh bot loc - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/12/17
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : WhiteHat GrandPrix 2016
+- **Website** : [grandprix.whitehatvn.com](https://grandprix.whitehatvn.com/Contests/ChallengesContest/32)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/398)
+
+### Description
+
+> http://web05.grandprix.whitehatvn.com
+>
+> http://bakweb05.grandprix.whitehatvn.com:8125
+
+## Solution
+
+Here is the home page:
+
+![](http://i.imgur.com/r2BGme3.png)
+
+The login link go to `http://web05.grandprix.whitehatvn.com/index.php?username=guest&password=guest` and says `noob`.
+
+![](http://i.imgur.com/w7FZJ9a.png)
+
+Let's see source code of teh web page:
+
+```html
+<html>
+    <title>hello</title>
+    <body>
+    <a href='index.php?username=guest&password=guest'>login</a><br>
+    </body>Login to get our secret</html>
+<!-- index.php.bak -->
+```
+
+Ok, let's see `index.php.bak`:
+
+```php
+<?php
+    function checklogin($username, $password, $key, $secret)
+    {
+        if($username.$key == md5($password))
+		echo $secret;
+	else echo "noob";
+    }
+$key = "1337";
+$secret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+echo "<html>
+    <title>hello</title>
+    <body>
+    <a href='index.php?username=guest&password=guest'>login</a><br>
+    </body>";
+if (isset($_GET['username'])&&isset($_GET['password']))
+    {
+        checklogin($_GET['username'],$_GET['password'],$key,$secret);
+        die(0);
+    }
+echo "Login to get our secret";
+echo "</html>";
+?>
+```
+
+Ok so the login checks that the concatenation of the username and the key is equal to the md5 hash of the password.
+
+So we need to find a hash like `????????????????????????????1337` (28 random hex chars and 1337).
+
+I first thought to download a md5 hash dictionary but I didn't wanted to wait during teh download.
+
+So I went to [md5db.net](https://md5db.net/explore/0000) and looked for a hash beginning with `0000`, did a `CTRL + F` to find `1337` and finaly found [one](https://md5db.net/view/0000dd456d15560290351cb4e6311337): **#** *13381* **Hash** *0000dd456d15560290351cb4e6311337* **Word** *hdtfz*.
+
+So we get:
++ username: `0000dd456d15560290351cb4e631`
++ key: `1337`
++ password: `hdtfz`
+
+I submited the url: http://web05.grandprix.whitehatvn.com/index.php?username=0000dd456d15560290351cb4e631&password=hdtfz and got the flag `WhiteHat{92ab818618fee438a1ea3944b5940237975f2b1d}`.
+
+![](http://i.imgur.com/YxrFXdq.png)
+
+## Submit
+
+![](http://i.imgur.com/aFTxLvH.jpg)

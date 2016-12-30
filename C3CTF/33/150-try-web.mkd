@@ -1,0 +1,151 @@
+---
+layout: post
+title: "33C3 CTF - 150 - try - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2016/12/28
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : 33C3 CTF
+- **Website** : [33c3ctf.ccc.ac](https://33c3ctf.ccc.ac/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/404)
+
+### Description
+
+> "I never try anything, I just do it!" [Do](http://78.46.224.73/)
+>
+> Flag is in /challenge/flag
+
+## Solution
+
+Home page looks like this (need to log in with just a pseudo):
+
+![](http://i.imgur.com/i5jBUHP.png)
+
+On the profil page we can upload a profil picture (only gif):
+
+![](http://i.imgur.com/tPtblHp.png)
+
+You can't use easy trick to upload any files except gif:
+- no double or triple extensions
+- no MIME type changing
+- not just the GIF file header `47 49 46 38 37 61` (GIF87a) +  GIF file trailer `00 3B` (;) -- see [file signatures](http://www.garykessler.net/library/file_sigs.html)
+
+![](http://i.imgur.com/gB74rLj.png)
+
+You have to upload the ~~nearly~~ full [skeleton](http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever) of the GIF picture.
+
+But you can use a web proxy (like burpsuite) and append whatever you want at the end of the GIF.
+
+As the website seems to execute Haskell algorithms, I tried to append some haskell code.
+
+hello world (just to confirm haskell execution):
+
+```haskell
+main = putStrLn "hello world"
+```
+
+But just now we want to know where is uploaded our profil picture. It's embedded in the heading and have a location like this `http://78.46.224.73/static/33c3_50fc0c1d-e04a-4942-9fc8-8921e4e83e6e/pic.gif`.
+
+**Note**: path is unpredictable and file is renamed.
+
+What to do now? Try to execute it.
+
+On the home page when you want to run some of the examples, you can see with a web proxy that the file to execute is up to you:
+
+![](http://i.imgur.com/OMaIqIH.png)
+
+A legitimate run file is `run_file=fib.hs`.
+
+If you try the download link you can see that this haskell script is hosted at `http://78.46.224.73/static/fib.hs`. Just remember that our picture is located at `http://78.46.224.73/static/33c3_50fc0c1d-e04a-4942-9fc8-8921e4e83e6e/pic.gif`. So what happen if we change it to `run_file=33c3_50fc0c1d-e04a-4942-9fc8-8921e4e83e6e/pic.gif` and if we append some haskell code at the end of the picture?
+
+Unfortunatly this lead to an error: `lexical error at character '\SOH'` (with the tiniest GIF)
+
+![](http://i.imgur.com/iuLfarc.png)
+
+or `lexical error (UTF-8 decoding error)` (with a real GIF)
+
+![](http://i.imgur.com/7JrAwbI.png)
+
+So we conclude that the interpreter try to execute the bytecode of the GIF image. Unfortunatly we are not able to upload only haskell.
+
+To limit error possibilities we tried to upload one of the tiniest GIF and replaced 0x01 (SOF) with 0x00 (null) but the website doesn't allow that.
+
+I think we have to upload a GIF file and neutralize GIF data. Then I read an excellent [article](https://quadhead.de/storing-javascript-code-in-gif-images/) talking about how to store javascript code in a GIF, so I tried to do the same with a haskell comment.
+
+In haskell comments ([ref](https://wiki.haskell.org/Reference_card)) are like this:
++ `-- a single line comment`
++ `{- A multiline comment which can continue for many lines -}`
+
+ASCII   | Hex
+---     | ---
+`{`     | 0x7b
+`}`     | 0x7d
+`-`     | 0x2d
+
+A legitimate minimalistic GIF would be:
+
+```
+$ xxd handtinyblack.gif
+00000000: 4749 4638 3961 0100 0100 00ff 002c 0000  GIF89a.......,..
+00000010: 0000 0100 0100 0002 003b                 .........;
+```
+
+Our malicious GIF with haskell comment and appended code would be:
+
+```
+$ xxd vuln.gif
+00000000: 4749 4638 3961 7b2d 0100 0100 00ff 002c  GIF89a{-.......,
+00000010: 0000 0000 0100 0100 0002 003b 2d7d 0a6d  ...........;-}.m
+00000020: 6169 6e20 3d20 7075 7453 7472 4c6e 2022  ain = putStrLn "
+00000030: 6865 6c6c 6f20 776f 726c 6422 0a         hello world".
+```
+
+But again we have an error: `Parse error: naked expression at top level. Perhaps you intended to use TemplateHaskell`
+
+![](http://i.imgur.com/1uVcIAd.png)
+
+So we want to change *GIF89a* from an expression to a variable or a function, but the problem is that in haskell functions can't begin with an uppercase letter, only data [constructor](https://wiki.haskell.org/Constructor) can. So we can't begin with something like `GIF89a :: Integer` and if we begin with somethin else than `GIF89a` the image is not recognized as valid.
+
+All the difficulty is about crafting a valid haskell code beginning with `GIF89a`.
+
+I went to the official Haskell IRC and asked for this question, the trick is to start the file with a pattern matching and declare it later ([ref](https://wiki.haskell.org/Parsing_expressions_and_statements#Make_token_parser)).
+
+```
+$ xxd vuln2.gif
+00000000: 4749 4638 3961 203d 2047 4946 3839 617b  GIF89a = GIF89a{
+00000010: 2d01 0001 0000 ff00 2c00 0000 0001 0001  -.......,.......
+00000020: 0000 0200 3b2d 7d0a 6461 7461 2047 4946  ....;-}.data GIF
+00000030: 3839 6120 3d20 4749 4638 3961 0a6d 6169  89a = GIF89a.mai
+00000040: 6e20 3d20 7075 7453 7472 4c6e 2022 6865  n = putStrLn "he
+00000050: 6c6c 6f20 776f 726c 6422 0a              llo world".
+```
+
+That works now! So now we will just switch the hello world program to somethinf reading the flag folder (we need native function because we can't use *import* as it needs to be at the beginning of the file in the heading section):
+
+```haskell
+main = do  
+    contents <- readFile "/challenge/flag"
+    print $ contents
+```
+
+![](http://i.imgur.com/BwVowgX.png)

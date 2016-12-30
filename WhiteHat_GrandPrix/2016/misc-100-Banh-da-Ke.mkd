@@ -1,0 +1,196 @@
+---
+layout: post
+title: "WhiteHat GrandPrix - 100 - Banh da Ke - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2016/12/17
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : WhiteHat GrandPrix 2016
+- **Website** : [grandprix.whitehatvn.com](https://grandprix.whitehatvn.com/Contests/ChallengesContest/32)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/398)
+
+### Description
+
+> When you gather all part of flag. Let's submit: WhiteHat{SHA1(flag)}
+>
+> nc misc04.grandprix.whitehatvn.com 23403
+>
+> nc bakmisc04.grandprix.whitehatvn.com 23403
+>
+> http://material.grandprix.whitehatvn.com/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip
+>
+> http://bakmaterial.grandprix.whitehatvn.com/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip
+>
+>
+> Alternative server on amazon in case of low traffic:
+>
+>
+> http://54.183.97.137/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip
+
+create_folder_player.py
+
+```python
+import os
+import random
+
+flag = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+count = 0
+length = len(flag)
+print length
+
+arr = random.sample(range(0,10000),length)
+arr = sorted(arr)
+
+for k in range(0,10000):
+    try:
+        os.mkdir(str(k))
+    except:
+        pass
+    if k in arr:
+        f=open("./"+str(k)+"/"+os.urandom(8).encode("hex")+"."+os.urandom(8).encode("hex"),"w").write(str(flag[count]))
+        count +=1
+```
+
+mics.py
+
+```python
+#!/usr/bin/env python
+import os
+import re
+import sys
+blaclist = "cat|nano|less|tail|vim|head|apt|install|wget|more|emacs|vi|subl|pico|bash|sh|rm|sed|nl|flag.hihi|`|%|\$|chmod|python"
+
+myregrex = "\W*(?i)("+blaclist+")\W*"
+cmd = ""
+while(cmd != "exit"):
+    sys.stdout.write("Input your command: \n")
+    sys.stdout.flush()
+    cmd = raw_input()
+    check = re.findall(myregrex,cmd)
+    if check!=[]:
+        sys.stdout.write("rejected\n")
+        sys.stdout.flush()
+        continue
+    try:
+        #call()
+        a ="XXXXXXXXXXXXX"
+        a+=cmd
+        os.system(a)
+    except:
+        sys.stdout.write("bad command\n")
+        sys.stdout.flush()
+```
+
+## Solution
+
++ `create_folder_player.py`: there will be 10000 folders with one part of the flag in several of them choosen randomly.
++ `misc.py`: lol, the spell. `blaclist` vs `blacklist`.
++ `misc.py`: ok seriously, blacklist usage sucks so I wont do a script to send a `ls` for the all 10000 folders. I will simply find a command not blacklisted: `grep`.
++ `grep` is magic, you can use all kind of regex and use it recursively:
+
+```
+Input your command:
+grep -r -E '*.*' .
+./5256/7e8e1adc2c27d5ae.b20d7fe2eeee83a6:e
+./5363/049185c04d8d4a6a.14b749db725281b6:p
+./9149/e60247d6e9b86d66.538088287218f418:h
+./6625/99c4b89e33717d68.4e7cfddc3ab792ab:m
+./2961/af1fa87c94746adc.4ceba2ad4425295a:H
+./5360/3b1d1d39b7cdfc5e.b3d700c19f7da568:3
+./7520/be92bc1c03188333.8a0acf56d05e21f2:D
+./9460/0990eb1ff5a0f0f4.2b8448627eda707d:4
+./7261/85c5e9b11412182b.c8aa64a3e89d6116:4
+./4464/bfb49af4d0d18330.0e0a92989ea0cd16:{
+./8447/1383404de7cf99d1.801ee7e580554bf7:r
+./9817/abb9dad1b91251c0.8aca51ae85b0a5a3:}
+./2464/91001f84e6b7043c.362d39207f7113d5:e
+./6089/0da7f2cf81b578bc.64aceb97e90d59b8:4
+./7265/0d1d93183a71652c.f62fd332e6a893c7:n
+./8042/45b7f42e37a7036d.4649801c191cd850:t
+./8566/eb0eac89c6af6941.a01ee5abd0018d64:y
+./1490/ce66a0652ef071e2.8e59cb623f5044db:i
+./3391/d5bb02174118cd0a.8452e896dc972780:a
+./9729/ff958bf095684403.ba220df0c0a00cbc:d
+./5627/39835fcae4e0fb1e.d63a2b4f7cd6cc4d:_
+./5754/01b98e405d1a6f5e.dfea13f68bf1d28c:c
+./2124/0388bdb00dff778b.cf361e5e8cba7330:t
+./8919/8b998e1b2d84792e.05c56576bc8a640c:_
+./251/01fbe27318a591b2.32905c5f1c5d5be2:W
+./6805/421c3e7b161f09e6.cb2d792b88d852d3:_
+./7615/40672c2915963dc7.23d290b7ab5a23fe:_
+./4983/29a3e67904c136c1.82698942425d3172:k
+./4091/5d4d11679777c463.54a739cf22f2147f:t
+./1477/76ed9a66da76f47c.fffc5ebba341f304:h
+./6428/4ab16af8f7bea2ca.f326ac02efddd099:l
+./9664/3a309f1c601603e8.949523481193df68:r
+```
+
++ Save the output in a text file.
++ Let's order that with a ruby script:
+
+```ruby
+#!/usr/bin/ruby
+
+arr = []
+
+File.open('misc04.txt').each do |line|
+    # math the folderName, fileName and content of each file (one char)
+    regex = line.match(/\/([0-9]{1,4})\/([a-f0-9]{16}\.[a-f0-9]{16}):(.)/)
+    folderName = regex.captures[0]
+    fileName = regex.captures[1]
+    char = regex.captures[2]
+    # convert folderName to int in order to be able to sort it the right way. Sort as int (2464 > 251), sort a string (2464 < 251).
+    arr.push([folderName.to_i,fileName,char])
+end
+
+# sort by first col, so sort by fileName
+arr.sort!
+# display only chars (third column of each row)
+arr.each{|r| print r[2]}
+```
+
++ Execute it:
+
+```
+[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]
+$ ruby sorted.rb
+WhiteHat{ke3p_c4lm_4nD_try_h4rd}
+```
+
++ Format the flag (WhiteHat{SHA1(flag)}):
+
+```
+[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]
+$ printf %s 'WhiteHat{ke3p_c4lm_4nD_try_h4rd}' | sha1sum
+1a05093adb0795d8e2f5b89985c43b85bcb11d19  -
+```
+
++ Submt the flag `WhiteHat{1a05093adb0795d8e2f5b89985c43b85bcb11d19}`.
+
+## Submit
+
+![](http://i.imgur.com/9wgmKeY.jpg)
+
+Another piece of the puzzle:
+
+![](http://i.imgur.com/wfuiArQ.png)

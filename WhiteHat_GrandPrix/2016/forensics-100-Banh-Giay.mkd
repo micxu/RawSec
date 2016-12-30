@@ -1,0 +1,307 @@
+---
+layout: post
+title: "WhiteHat GrandPrix - 100 - Banh Giay - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensics
+date: 2016/12/17
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : WhiteHat GrandPrix 2016
+- **Website** : [grandprix.whitehatvn.com](https://grandprix.whitehatvn.com/Contests/ChallengesContest/32)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/398)
+
+### Description
+
+> Submit: WhiteHat{SHA1(flag)}
+>
+> http://material.grandprix.whitehatvn.com/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip
+>
+> http://bakmaterial.grandprix.whitehatvn.com/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip
+>
+> Alternative server on amazon in case of low traffic:
+>
+> http://54.183.97.137/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip
+
+
+## Solution
+
++ Download the zip.
++ Extract it.
++ Open the pcapng with [Wireshark](https://www.wireshark.org/).
++ Filter `http` requests.
++ See frame n°134 `GET /corporation/secret HTTP/1.1`.
++ Extract the file (File > Export Objects > HTTP).
++ Check the type of file:
+
+```
+[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]
+$ file secret
+secret: Zip archive data, at least v2.0 to extract
+```
+
++ Unzip it:
+
+```
+[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]
+$ unzip secret
+Archive:  secret
+[secret] EasyExtrack password:
+```
+
++ Ok, there is a pasword, let's check the html page: frame n°149 `GET /corporation/arsenal.html HTTP/1.1`.
++ Extract it from the pcapng.
++ See the hint: `For H.i.n.t: Referring to arsenal, i remember a number. It also length of secret p.a.s.s.w.o.r.d`.
++ One key event is:
+
+> 30 October: Arsenal recorded victory in the League Cup to a record-breaking 7–5 scoreline at the Madjeski Stadium, having been 4–0 down initially. The game had the most goals ever scored in a single League Cup match (12).
+
++ With luck and guessing I found this number was **4**.
++ So now let's try to crack the zip password with [`fcrackzip`](http://manpages.ubuntu.com/manpages/precise/man1/fcrackzip.1.html):
+
+```
+[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]
+$ fcrackzip -b -c a -l 4 -u secret
+
+PASSWORD FOUND!!!!: pw == fuzu
+```
+
++ Extract the zip with the password.
++ Check what file type `EasyExtrack` is:
+
+```
+[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]
+$ file EasyExtrack
+EasyExtrack: Zip archive data, at least v1.0 to extract
+```
+
++ Try to unzip it with the same password:
+
+```
+[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]
+$ unzip EasyExtrack -d out
+Archive:  EasyExtrack
+   creating: out/EasyExtrack/
+[EasyExtrack] EasyExtrack/flag1.txt password:
+  inflating: out/EasyExtrack/flag1.txt  
+  inflating: out/EasyExtrack/flag10.txt  
+  inflating: out/EasyExtrack/flag11.txt  
+  inflating: out/EasyExtrack/flag12.txt  
+  inflating: out/EasyExtrack/flag13.txt  
+  inflating: out/EasyExtrack/flag14.txt  
+  inflating: out/EasyExtrack/flag15.txt  
+  inflating: out/EasyExtrack/flag16.txt  
+  inflating: out/EasyExtrack/flag17.txt  
+  inflating: out/EasyExtrack/flag18.txt  
+  inflating: out/EasyExtrack/flag19.txt  
+  inflating: out/EasyExtrack/flag2.txt  
+  inflating: out/EasyExtrack/flag20.txt  
+  inflating: out/EasyExtrack/flag21.txt  
+  inflating: out/EasyExtrack/flag22.txt  
+  inflating: out/EasyExtrack/flag23.txt  
+  inflating: out/EasyExtrack/flag24.txt  
+  inflating: out/EasyExtrack/flag25.txt  
+  inflating: out/EasyExtrack/flag26.txt  
+  inflating: out/EasyExtrack/flag27.txt  
+  inflating: out/EasyExtrack/flag28.txt  
+  inflating: out/EasyExtrack/flag29.txt  
+  inflating: out/EasyExtrack/flag3.txt  
+  inflating: out/EasyExtrack/flag30.txt  
+  inflating: out/EasyExtrack/flag4.txt  
+  inflating: out/EasyExtrack/flag5.txt  
+  inflating: out/EasyExtrack/flag6.txt  
+  inflating: out/EasyExtrack/flag7.txt  
+  inflating: out/EasyExtrack/flag8.txt  
+  inflating: out/EasyExtrack/flag9.txt  
+```
+
++ Here are all the flags:
+
+```
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{12f54a96f6444324693t0da001cafda8b}
+raw: Flag{60b725f10c9c85c70d9h7880dfe8191b3}
+raw: Flag{f5302386464f953ed58u1edac03556e55}
+raw: Flag{d9bed3b7e151f11b8fdyadf75f1db96d9}
+raw: Flag{3b5d5c3712955042212n316173ccf37be}
+raw: Flag{72cfd272ace172fa3502h6445fbef9b03}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{9a8ad92c50cae39aa2c5604pfd0ab6d8c}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{d2a33790e5bf28b33cdxbf61722a06989}
+raw: Flag{12f54a96f64443s246930da001cafda8b}
+raw: Flag{92520a5a9cf8932i20b9cd447f585f144}
+raw: Flag{01fbdc44ef819db6p273bc30965a23814}
+raw: Flag{9ffbf43126e33be52hcd2bf7e01d627f9}
+raw: Flag{12f54a96f644432469o30da001cafda8b}
+raw: Flag{9d7bf075372908f55e2nd945c39e0a613}
+raw: Flag{92520a5a9cf893220b9cud447f585f144}
+raw: Flag{009520053b00386d1173fu3988c55d192}
+raw: Flag{e73af36376314c7c0022cbk1d204f76b3}
+raw: Flag{e85dde330c34efb0e526ee3j082e4353b}
+raw: Flag{7d9d25f71cb8a5aba8620254l0a20d405}
+```
+
++ Flags are not hashes because they are 33 char long. But we can see there is one non-hex char in each flag.
++ Remove each non-hex flag to get 32 char long MD5 hashed:
+
+```
+d2a33790e5bf28b33cdbf61722a06989
+12f54a96f64443246930da001cafda8b
+60b725f10c9c85c70d97880dfe8191b3
+f5302386464f953ed581edac03556e55
+d9bed3b7e151f11b8fdadf75f1db96d9
+3b5d5c3712955042212316173ccf37be
+72cfd272ace172fa35026445fbef9b03
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+9a8ad92c50cae39aa2c5604fd0ab6d8c
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+d2a33790e5bf28b33cdbf61722a06989
+12f54a96f64443246930da001cafda8b
+92520a5a9cf893220b9cd447f585f144
+01fbdc44ef819db6273bc30965a23814
+9ffbf43126e33be52cd2bf7e01d627f9
+12f54a96f64443246930da001cafda8b
+9d7bf075372908f55e2d945c39e0a613
+92520a5a9cf893220b9cd447f585f144
+009520053b00386d1173f3988c55d192
+e73af36376314c7c0022cb1d204f76b3
+e85dde330c34efb0e526ee3082e4353b
+7d9d25f71cb8a5aba86202540a20d405
+```
+
++ The extracted wrong letters are (in order): `xthuynhxxxpxxxxxxxxsiphonuukjl`.
++ Use [hashkiller.co.uk](https://hashkiller.co.uk/md5-decrypter.aspx) to decrypt MD5 hashes:
+
+```
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+12f54a96f64443246930da001cafda8b MD5 : l
+60b725f10c9c85c70d97880dfe8191b3 MD5 : a
+f5302386464f953ed581edac03556e55 MD5 : g
+d9bed3b7e151f11b8fdadf75f1db96d9 MD5 : {
+3b5d5c3712955042212316173ccf37be MD5 : b
+72cfd272ace172fa35026445fbef9b03 MD5 : r
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+9a8ad92c50cae39aa2c5604fd0ab6d8c MD5 : f
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+d2a33790e5bf28b33cdbf61722a06989 MD5 : F
+12f54a96f64443246930da001cafda8b MD5 : l
+92520a5a9cf893220b9cd447f585f144 MD5 : _
+01fbdc44ef819db6273bc30965a23814 MD5 : h
+9ffbf43126e33be52cd2bf7e01d627f9 MD5 : e
+12f54a96f64443246930da001cafda8b MD5 : l
+9d7bf075372908f55e2d945c39e0a613 MD5 : p
+92520a5a9cf893220b9cd447f585f144 MD5 : _
+009520053b00386d1173f3988c55d192 MD5 : y
+e73af36376314c7c0022cb1d204f76b3 MD5 : o
+e85dde330c34efb0e526ee3082e4353b MD5 : u
+7d9d25f71cb8a5aba86202540a20d405 MD5 : }
+```
+
++ Unformated flag is: `Flag{brFFFfFFFFFFFFl_help_you}`.
++ SHA1 the unformated flag:
+
+```
+[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]
+$ printf %s 'Flag{brFFFfFFFFFFFFl_help_you}' | sha1sum
+e7643ccd180c84176ae0b4361c3b169fceacf961  -
+```
+
++ Format the flag: `WhiteHat{e7643ccd180c84176ae0b4361c3b169fceacf961}`.
++ Not the good flag ...
+
+Note that `800618943025315f869e4e1f09471012` is the right md5 hash for `F` and `d2a33790e5bf28b33cdbf61722a06989` is the wrong md5 hash for `F` that you can obtain with non POSIX tools like echo (that's why I use printf). So only hashkiller knows both wrong and right hash, all other md5 decrypt online tools knows only the right one so they are not able to decrypt `d2a33790e5bf28b33cdbf61722a06989`. But anyway...
+
++ You know what? After some wasted hours I figured that I needed to replace `F` with some guessed letters:  `Flag{bruteforce_will_help_you}`. Yes guessing again.
++ SHA1 the unformated flag:
+
+```
+[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]
+$ printf %s 'Flag{bruteforce_will_help_you}' | sha1sum
+1e71b26aa01733cd13e5199386c70fe31df43deb  -
+```
+
++ Format the flag: `WhiteHat{1e71b26aa01733cd13e5199386c70fe31df43deb}`.
++ Not the good flag ...
++ Description said `Submit: WhiteHat{SHA1(flag)}`, it depends if `flag` means `Flag{xxx}` or `xxx`.
++ SHA1 the unformated flag:
+
+```
+[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]
+$ printf %s 'bruteforce_will_help_you' | sha1sum                                                                    
+31bd8aa56447ea1c703d0943e175a06a5c4ee614  -
+```
+
++ Format the flag: `WhiteHat{31bd8aa56447ea1c703d0943e175a06a5c4ee614}`.
++ This time this is the good one.
+
+Here was my ruby script:
+
+```ruby
+#!/usr/bin/ruby
+
+(1..30).each do |num|
+	raw_flag = File.read('flag'+num.to_s+'.txt')
+	# Not sanitized flags
+	puts 'raw: '.concat(raw_flag)
+	only_flag = raw_flag.match(/\{([a-z0-9]{33})\}/).captures[0]
+	# Sanitized flags
+	puts only_flag.gsub(/[^0-9a-fA-F]/, '')
+end
+```
+
+**Note**: CTF orga team should test challenges and remove the crappy ones before let teams have pain with them.
+
+## Submit
+
+![](http://i.imgur.com/qdWgxcB.jpg)
+
+And we also get one of the 23 parts of the puzzle:
+
+![](http://i.imgur.com/N6ZHerV.png)
+
+This is for the *Discovering Vietnam* bonus challenge. It is a puzzle of 23 parts, you need them to get a QR-code that give a flag. Flag will give 10% bonus points of the current score.
+
+I think we need to do almost all challenges to get all the pieces.

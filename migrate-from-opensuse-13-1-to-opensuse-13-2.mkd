@@ -8,7 +8,7 @@ categories:
 tags:
   - linux
   - opensuse
-thumbnail: /images/tux-293844_640.png
+thumbnail: /images/opensuse.svg
 date: 2014-11-20 00:00:00
 ---
 + Check that update repository is existing and activated, so display repository list with URLs display: `zypper repos --uri`.

@@ -10,7 +10,7 @@ tags:
 - opensuse
 - system
 date: 2014/08/03
-thumbnail: /images/tux-293844_640.png
+thumbnail: /images/opensuse.svg
 ---
 To display the repository list in command line you can use :
 

@@ -1,0 +1,712 @@
+---
+layout: post
+title: "WhiteHat GrandPrix - 300 - Banh it la gai - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forensics
+date: 2016/12/17
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : WhiteHat GrandPrix 2016
+- **Website** : [grandprix.whitehatvn.com](https://grandprix.whitehatvn.com/Contests/ChallengesContest/32)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/398)
+
+### Description
+
+> Submit: WhiteHat{SHA1(flag)}
+>
+> http://material.grandprix.whitehatvn.com/gp2016/For02_3603cb82230e3f6eb669a65f455e92b74659c2cc.zip
+>
+> http://bakmaterial.grandprix.whitehatvn.com/gp2016/For02_3603cb82230e3f6eb669a65f455e92b74659c2cc.zip
+>
+> Alternative server on amazon in case of low traffic:
+>
+> http://54.183.97.137/gp2016/For02_3603cb82230e3f6eb669a65f455e92b74659c2cc.zip
+
+## Solution
+
+**TL;DR**: incomplete write-up.
+
++ Download the zip.
++ Extract it.
++ We have a raw image.
++ Let's see what we can do with Volatility:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ volatility -f bkav5.raw imageinfo
+Volatility Foundation Volatility Framework 2.5
+INFO    : volatility.debug    : Determining profile based on KDBG search...
+          Suggested Profile(s) : WinXPSP2x86, WinXPSP3x86 (Instantiated with WinXPSP2x86)
+                     AS Layer1 : IA32PagedMemoryPae (Kernel AS)
+                     AS Layer2 : FileAddressSpace (/home/noraj/CTF/WhiteHat_GrandPrix/2016/For2/bkav5.raw)
+                      PAE type : PAE
+                           DTB : 0x334000L
+                          KDBG : 0x8054d2e0L
+          Number of Processors : 2
+     Image Type (Service Pack) : 3
+                KPCR for CPU 0 : 0xffdff000L
+                KPCR for CPU 1 : 0xfd24c000L
+             KUSER_SHARED_DATA : 0xffdf0000L
+           Image date and time : 2016-11-06 16:47:44 UTC+0000
+     Image local date and time : 2016-11-06 23:47:44 +0700
+
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ volatility -f bkav5.raw --profile=WinXPSP2x86 pstree
+Volatility Foundation Volatility Framework 2.5
+Name                                                  Pid   PPid   Thds   Hnds Time
+-------------------------------------------------- ------ ------ ------ ------ ----
+0x8107e020:System                                      4      0     60    228 1970-01-01 00:00:00 UTC+0000
+. 0xff596808:smss.exe                                 544      4      3     17 2016-11-06 16:44:22 UTC+0000
+.. 0xff4b4da0:winlogon.exe                            644    544     25    524 2016-11-06 16:44:23 UTC+0000
+... 0xff609998:services.exe                           744    644     13    246 2016-11-06 16:44:25 UTC+0000
+.... 0xff4a3d70:vmacthlp.exe                          928    744      1     25 2016-11-06 16:44:26 UTC+0000
+.... 0xff67a7e8:spoolsv.exe                          1600    744      6     54 2016-11-06 16:47:21 UTC+0000
+.... 0xff5cfda0:svchost.exe                           992    744     10    178 2016-11-06 16:44:27 UTC+0000
+.... 0xff583888:svchost.exe                          1348    744      6    119 2016-11-06 16:44:27 UTC+0000
+.... 0xff59a7b8:svchost.exe                           944    744      7    122 2016-11-06 16:44:26 UTC+0000
+.... 0x80fdec10:svchost.exe                           180    744      5     88 2016-11-06 16:44:45 UTC+0000
+.... 0xff481020:svchost.exe                          1876    744     15    194 2016-11-06 16:47:07 UTC+0000
+.... 0xff58c7b8:svchost.exe                          1244    744      5     59 2016-11-06 16:44:27 UTC+0000
+... 0xff5be460:lsass.exe                              760    644     25    332 2016-11-06 16:44:25 UTC+0000
+.. 0xff5974d8:csrss.exe                               616    544     10    265 2016-11-06 16:44:22 UTC+0000
+0x80ecf928:explorer.exe                             1740   1704     17    424 2016-11-06 16:44:32 UTC+0000
+. 0xff5bf138:DumpIt.exe                               308   1740      1     27 2016-11-06 16:47:42 UTC+0000
+. 0x80eb7690:rundll32.exe                            1884   1740      4     72 2016-11-06 16:44:37 UTC+0000
+. 0xff5b2888:keylog.exe                              2020   1740      2     35 2016-11-06 16:47:17 UTC+0000
+
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ volatility -f bkav5.raw --profile=WinXPSP2x86 procdump -p 2020 --dump-dir=.
+Volatility Foundation Volatility Framework 2.5
+Process(V) ImageBase  Name                 Result
+---------- ---------- -------------------- ------
+0xff5b2888 0x00400000 keylog.exe           OK: executable.2020.exe
+```
+
++ See a supicious `keylog.exe` so we dumped it.
++ Upload it to [Virustotal](https://www.virustotal.com/en/file/7b8b04c340e36d7f78d67cbcd22dd4299e579ebf40abfe79fd6c5d9e7240bc29/analysis/1482010139/) and to [Hybrid Analysis](https://www.hybrid-analysis.com/sample/7b8b04c340e36d7f78d67cbcd22dd4299e579ebf40abfe79fd6c5d9e7240bc29?environmentId=100).
++ Detection ratio: 4 / 56, a keylogger.
++ Just look for quick win:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ strings keylog.exe_executable.2020.exe
+[...]
+
+%c  -  %d
+c:/windows/keylog.log
+[WIN]
+
+[...]
+```
+
++ The malware is saving its collected informations in `c:/windows/keylog.log`.
++ Let's find the file and dump it:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ volatility -f bkav5.raw --profile=WinXPSP2x86 filescan | grep -i 'keylog.log'
+Volatility Foundation Volatility Framework 2.5
+
+Offset(P)            #Ptr   #Hnd Access Name
+------------------ ------ ------ ------ ----
+0x00000000010410a0      1      0 RW-rw- \Device\HarddiskVolume1\WINDOWS\keylog.log
+
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ volatility -f bkav5.raw --profile=WinXPSP2x86 dumpfiles -Q 0x00000000010410a0 --dump-dir=.
+Volatility Foundation Volatility Framework 2.5
+DataSectionObject 0x010410a0   None   \Device\HarddiskVolume1\WINDOWS\keylog.log
+```
+
++ But this is a non standard encoding:
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ file keylog.log_file.None.0x80eb7008.dat
+keylog.log_file.None.0x80eb7008.dat: Non-ISO extended-ASCII text, with NEL line terminators
+
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ xxd keylog.log_file.None.0x80eb7008.dat
+00000000: 8589 9790 83bd b3ba 859b b0aa bbac 83b6  ................
+00000010: bbb2 b2b1 859b b0aa bbac 83a9 bbb2 b2b1  ................
+00000020: 859c 9f9d 958d 8e9f 9d9b 83bd b1b3 bbfe  ................
+00000030: a7b1 abfe b9ab a7ff 859c 9f9d 958d 8e9f  ................
+00000040: 9d9b 83fe e185 9bb0 aabb ac83 a9bb b2fe  ................
+00000050: b1ac fea9 bbb2 b2fe e185 9bb0 aabb ac83  ................
+00000060: a9b6 bfaa bbac a8bb acfe 869a 859b b0aa  ................
+00000070: bbac 8385 8997 9083 bdb6 acb1 b3bb 859b  ................
+00000080: b0aa bbac 83a9 bbb2 feb1 ac85 9c9f 9d95  ................
+00000090: 8d8e 9f9d 9b83 859c 9f9d 958d 8e9f 9d9b  ................
+000000a0: 8385 9c9f 9d95 8d8e 9f9d 9b83 b2bd b1b3  ................
+000000b0: bbfe b1ac fea9 bbb2 bdb1 b3bb 859b b0aa  ................
+000000c0: bbac 83ab b6b3 fef0 f0f0 fe85 9c9f 9d95  ................
+000000d0: 8d8e 9f9d 9b83 859c 9f9d 958d 8e9f 9d9b  ................
+000000e0: 8385 9c9f 9d95 8d8e 9f9d 9b83 859c 9f9d  ................
+000000f0: 958d 8e9f 9d9b 8385 9c9f 9d95 8d8e 9f9d  ................
+00000100: 9b83 859c 9f9d 958d 8e9f 9d9b 8385 9c9f  ................
+00000110: 9d95 8d8e 9f9d 9b83 859c 9f9d 958d 8e9f  ................
+00000120: 9d9b 8385 9c9f 9d95 8d8e 9f9d 9b83 859c  ................
+00000130: 9f9d 958d 8e9f 9d9b 8385 9c9f 9d95 8d8e  ................
+00000140: 9f9d 9b83 859c 9f9d 958d 8e9f 9d9b 8385  ................
+00000150: 9c9f 9d95 8d8e 9f9d 9b83 b7fe b9b1 aafe  ................
+00000160: b7aa fef0 feaa b6bf aafe a9bb b2bd b1b3  ................
+00000170: bbfe e49a 859d aaac b283 aab8 bf85 9bb0  ................
+00000180: aabb ac83 859d aaac b283 aab8 bdbb b1b1  ................
+00000190: b5f0 bdb1 b385 9bb0 aabb ac83 aab6 b7ad  ................
+000001a0: b7ad b3a7 b8b2 bfb9 d7a5 a385 92bb b8aa  ................
+000001b0: 9fac acb1 a983 b5ba b7bb b5b5 bab7 eced  ................
+000001c0: e7ed e9ba b8b6 ede7 b4ad b2ad bab5 e7ed  ................
+000001d0: 859b b0aa bbac 83aa b6bf b0b5 a7b1 abff  ................
+000001e0: 859b b0aa bbac 83e4 9abf bcbd babb b8b9  ................
+000001f0: b6b7 b5b2 b3b0 b1ae afac adaa e1e1 e1a7  ................
+```
+
++ This is nor UTF-8, nor WINDOWS-1252/C1252.
++ Try to determine what kind of encoding this is (source: [superuser.com](http://superuser.com/questions/669700/non-iso-extended-ascii-text/669729#answer-732589)):
+
+```
+$ iconv --list | sed 's/\/\/$//' | sort > encodings.list
+$ for a in `cat encodings.list`; do
+printf "$a  "
+iconv -f $a -t UTF-8 keylog.log_file.None.0x80eb7008.dat > /dev/null 2>&1 \
+&& echo "ok: $a" || echo "fail: $a"
+done | tee result.txt
+```
+
++ Let's take a look at results:
+
+```
+1026  ok: 1026
+1047  ok: 1047
+437  ok: 437
+500  ok: 500
+500V1  ok: 500V1
+850  ok: 850
+851  ok: 851
+852  ok: 852
+855  ok: 855
+860  ok: 860
+861  ok: 861
+862  ok: 862
+863  ok: 863
+865  ok: 865
+866  ok: 866
+866NAV  ok: 866NAV
+8859_1  ok: 8859_1
+8859_2  ok: 8859_2
+8859_4  ok: 8859_4
+8859_5  ok: 8859_5
+8859_9  ok: 8859_9
+BALTIC  ok: BALTIC
+CP037  ok: CP037
+CP10007  ok: CP10007
+CP1025  ok: CP1025
+CP1026  ok: CP1026
+CP1047  ok: CP1047
+CP1070  ok: CP1070
+CP1079  ok: CP1079
+CP1081  ok: CP1081
+CP1084  ok: CP1084
+CP1097  ok: CP1097
+CP1112  ok: CP1112
+CP1122  ok: CP1122
+CP1123  ok: CP1123
+CP1124  ok: CP1124
+CP1125  ok: CP1125
+CP1129  ok: CP1129
+CP1130  ok: CP1130
+CP1137  ok: CP1137
+CP1140  ok: CP1140
+CP1141  ok: CP1141
+CP1142  ok: CP1142
+CP1143  ok: CP1143
+CP1144  ok: CP1144
+CP1145  ok: CP1145
+CP1146  ok: CP1146
+CP1147  ok: CP1147
+CP1148  ok: CP1148
+CP1149  ok: CP1149
+CP1153  ok: CP1153
+CP1154  ok: CP1154
+CP1155  ok: CP1155
+CP1156  ok: CP1156
+CP1157  ok: CP1157
+CP1158  ok: CP1158
+CP1160  ok: CP1160
+CP1163  ok: CP1163
+CP1164  ok: CP1164
+CP1166  ok: CP1166
+CP1167  ok: CP1167
+CP1251  ok: CP1251
+CP1256  ok: CP1256
+CP1282  ok: CP1282
+CP1390  ok: CP1390
+CP1399  ok: CP1399
+CP273  ok: CP273
+CP278  ok: CP278
+CP280  ok: CP280
+CP282  ok: CP282
+CP284  ok: CP284
+CP285  ok: CP285
+CP297  ok: CP297
+CP437  ok: CP437
+CP500  ok: CP500
+CP5347  ok: CP5347
+CP737  ok: CP737
+CP770  ok: CP770
+CP771  ok: CP771
+CP772  ok: CP772
+CP773  ok: CP773
+CP774  ok: CP774
+CP775  ok: CP775
+CP819  ok: CP819
+CP850  ok: CP850
+CP851  ok: CP851
+CP852  ok: CP852
+CP855  ok: CP855
+CP860  ok: CP860
+CP861  ok: CP861
+CP862  ok: CP862
+CP863  ok: CP863
+CP865  ok: CP865
+CP866  ok: CP866
+CP866NAV  ok: CP866NAV
+CP870  ok: CP870
+CP871  ok: CP871
+CP880  ok: CP880
+CP901  ok: CP901
+CP902  ok: CP902
+CP9030  ok: CP9030
+CP912  ok: CP912
+CP915  ok: CP915
+CP920  ok: CP920
+CP921  ok: CP921
+CP922  ok: CP922
+CP9448  ok: CP9448
+CP-HU  ok: CP-HU
+CPIBM861  ok: CPIBM861
+CSIBM037  ok: CSIBM037
+CSIBM1025  ok: CSIBM1025
+CSIBM1026  ok: CSIBM1026
+CSIBM1097  ok: CSIBM1097
+CSIBM1112  ok: CSIBM1112
+CSIBM1122  ok: CSIBM1122
+CSIBM1123  ok: CSIBM1123
+CSIBM1124  ok: CSIBM1124
+CSIBM1129  ok: CSIBM1129
+CSIBM1130  ok: CSIBM1130
+CSIBM1137  ok: CSIBM1137
+CSIBM1140  ok: CSIBM1140
+CSIBM1141  ok: CSIBM1141
+CSIBM1142  ok: CSIBM1142
+CSIBM1143  ok: CSIBM1143
+CSIBM1144  ok: CSIBM1144
+CSIBM1145  ok: CSIBM1145
+CSIBM1146  ok: CSIBM1146
+CSIBM1147  ok: CSIBM1147
+CSIBM1148  ok: CSIBM1148
+CSIBM1149  ok: CSIBM1149
+CSIBM1153  ok: CSIBM1153
+CSIBM1154  ok: CSIBM1154
+CSIBM1155  ok: CSIBM1155
+CSIBM1156  ok: CSIBM1156
+CSIBM1157  ok: CSIBM1157
+CSIBM1158  ok: CSIBM1158
+CSIBM1160  ok: CSIBM1160
+CSIBM1163  ok: CSIBM1163
+CSIBM1164  ok: CSIBM1164
+CSIBM1166  ok: CSIBM1166
+CSIBM1167  ok: CSIBM1167
+CSIBM1390  ok: CSIBM1390
+CSIBM1399  ok: CSIBM1399
+CSIBM273  ok: CSIBM273
+CSIBM277  ok: CSIBM277
+CSIBM278  ok: CSIBM278
+CSIBM280  ok: CSIBM280
+CSIBM284  ok: CSIBM284
+CSIBM285  ok: CSIBM285
+CSIBM297  ok: CSIBM297
+CSIBM500  ok: CSIBM500
+CSIBM5347  ok: CSIBM5347
+CSIBM851  ok: CSIBM851
+CSIBM855  ok: CSIBM855
+CSIBM860  ok: CSIBM860
+CSIBM863  ok: CSIBM863
+CSIBM865  ok: CSIBM865
+CSIBM866  ok: CSIBM866
+CSIBM870  ok: CSIBM870
+CSIBM871  ok: CSIBM871
+CSIBM880  ok: CSIBM880
+CSIBM901  ok: CSIBM901
+CSIBM902  ok: CSIBM902
+CSIBM9030  ok: CSIBM9030
+CSIBM921  ok: CSIBM921
+CSIBM922  ok: CSIBM922
+CSIBM9448  ok: CSIBM9448
+CSISO111ECMACYRILLIC  ok: CSISO111ECMACYRILLIC
+CSISO139CSN369103  ok: CSISO139CSN369103
+CSISO143IECP271  ok: CSISO143IECP271
+CSISOLATIN1  ok: CSISOLATIN1
+CSISOLATIN2  ok: CSISOLATIN2
+CSISOLATIN4  ok: CSISOLATIN4
+CSISOLATIN5  ok: CSISOLATIN5
+CSISOLATIN6  ok: CSISOLATIN6
+CSISOLATINCYRILLIC  ok: CSISOLATINCYRILLIC
+CSKOI8R  ok: CSKOI8R
+CSMACINTOSH  ok: CSMACINTOSH
+CSN_369103  ok: CSN_369103
+CSPC775BALTIC  ok: CSPC775BALTIC
+CSPC850MULTILINGUAL  ok: CSPC850MULTILINGUAL
+CSPC862LATINHEBREW  ok: CSPC862LATINHEBREW
+CSPC8CODEPAGE437  ok: CSPC8CODEPAGE437
+CSPCP852  ok: CSPCP852
+CSUNICODE  ok: CSUNICODE
+CWI  ok: CWI
+CWI-2  ok: CWI-2
+CYRILLIC  ok: CYRILLIC
+EBCDIC-CP-BE  ok: EBCDIC-CP-BE
+EBCDIC-CP-CA  ok: EBCDIC-CP-CA
+EBCDIC-CP-CH  ok: EBCDIC-CP-CH
+EBCDIC-CP-DK  ok: EBCDIC-CP-DK
+EBCDIC-CP-ES  ok: EBCDIC-CP-ES
+EBCDIC-CP-FI  ok: EBCDIC-CP-FI
+EBCDIC-CP-FR  ok: EBCDIC-CP-FR
+EBCDIC-CP-GB  ok: EBCDIC-CP-GB
+EBCDIC-CP-IS  ok: EBCDIC-CP-IS
+EBCDIC-CP-IT  ok: EBCDIC-CP-IT
+EBCDIC-CP-NL  ok: EBCDIC-CP-NL
+EBCDIC-CP-NO  ok: EBCDIC-CP-NO
+EBCDIC-CP-ROECE  ok: EBCDIC-CP-ROECE
+EBCDIC-CP-SE  ok: EBCDIC-CP-SE
+EBCDIC-CP-US  ok: EBCDIC-CP-US
+EBCDIC-CP-WT  ok: EBCDIC-CP-WT
+EBCDIC-CP-YU  ok: EBCDIC-CP-YU
+EBCDIC-CYRILLIC  ok: EBCDIC-CYRILLIC
+EBCDIC-INT1  ok: EBCDIC-INT1
+ECMA-128  ok: ECMA-128
+ECMACYRILLIC  ok: ECMACYRILLIC
+ECMA-CYRILLIC  ok: ECMA-CYRILLIC
+GEORGIAN-ACADEMY  ok: GEORGIAN-ACADEMY
+GEORGIAN-PS  ok: GEORGIAN-PS
+IBM037  ok: IBM037
+IBM1025  ok: IBM1025
+IBM-1025  ok: IBM-1025
+IBM1026  ok: IBM1026
+IBM1047  ok: IBM1047
+IBM-1047  ok: IBM-1047
+IBM1097  ok: IBM1097
+IBM-1097  ok: IBM-1097
+IBM1112  ok: IBM1112
+IBM-1112  ok: IBM-1112
+IBM1122  ok: IBM1122
+IBM-1122  ok: IBM-1122
+IBM1123  ok: IBM1123
+IBM-1123  ok: IBM-1123
+IBM1124  ok: IBM1124
+IBM-1124  ok: IBM-1124
+IBM1129  ok: IBM1129
+IBM-1129  ok: IBM-1129
+IBM1130  ok: IBM1130
+IBM-1130  ok: IBM-1130
+IBM1137  ok: IBM1137
+IBM-1137  ok: IBM-1137
+IBM1140  ok: IBM1140
+IBM-1140  ok: IBM-1140
+IBM1141  ok: IBM1141
+IBM-1141  ok: IBM-1141
+IBM1142  ok: IBM1142
+IBM-1142  ok: IBM-1142
+IBM1143  ok: IBM1143
+IBM-1143  ok: IBM-1143
+IBM1144  ok: IBM1144
+IBM-1144  ok: IBM-1144
+IBM1145  ok: IBM1145
+IBM-1145  ok: IBM-1145
+IBM1146  ok: IBM1146
+IBM-1146  ok: IBM-1146
+IBM1147  ok: IBM1147
+IBM-1147  ok: IBM-1147
+IBM1148  ok: IBM1148
+IBM-1148  ok: IBM-1148
+IBM1149  ok: IBM1149
+IBM-1149  ok: IBM-1149
+IBM1153  ok: IBM1153
+IBM-1153  ok: IBM-1153
+IBM1154  ok: IBM1154
+IBM-1154  ok: IBM-1154
+IBM1155  ok: IBM1155
+IBM-1155  ok: IBM-1155
+IBM1156  ok: IBM1156
+IBM-1156  ok: IBM-1156
+IBM1157  ok: IBM1157
+IBM-1157  ok: IBM-1157
+IBM1158  ok: IBM1158
+IBM-1158  ok: IBM-1158
+IBM1160  ok: IBM1160
+IBM-1160  ok: IBM-1160
+IBM1163  ok: IBM1163
+IBM-1163  ok: IBM-1163
+IBM1164  ok: IBM1164
+IBM-1164  ok: IBM-1164
+IBM1166  ok: IBM1166
+IBM-1166  ok: IBM-1166
+IBM1167  ok: IBM1167
+IBM-1167  ok: IBM-1167
+IBM1390  ok: IBM1390
+IBM-1390  ok: IBM-1390
+IBM1399  ok: IBM1399
+IBM-1399  ok: IBM-1399
+IBM256  ok: IBM256
+IBM273  ok: IBM273
+IBM277  ok: IBM277
+IBM278  ok: IBM278
+IBM280  ok: IBM280
+IBM284  ok: IBM284
+IBM285  ok: IBM285
+IBM297  ok: IBM297
+IBM437  ok: IBM437
+IBM500  ok: IBM500
+IBM5347  ok: IBM5347
+IBM-5347  ok: IBM-5347
+IBM775  ok: IBM775
+IBM819  ok: IBM819
+IBM848  ok: IBM848
+IBM850  ok: IBM850
+IBM851  ok: IBM851
+IBM852  ok: IBM852
+IBM855  ok: IBM855
+IBM860  ok: IBM860
+IBM861  ok: IBM861
+IBM862  ok: IBM862
+IBM863  ok: IBM863
+IBM865  ok: IBM865
+IBM866  ok: IBM866
+IBM866NAV  ok: IBM866NAV
+IBM870  ok: IBM870
+IBM871  ok: IBM871
+IBM880  ok: IBM880
+IBM901  ok: IBM901
+IBM-901  ok: IBM-901
+IBM902  ok: IBM902
+IBM-902  ok: IBM-902
+IBM9030  ok: IBM9030
+IBM-9030  ok: IBM-9030
+IBM912  ok: IBM912
+IBM915  ok: IBM915
+IBM920  ok: IBM920
+IBM921  ok: IBM921
+IBM-921  ok: IBM-921
+IBM922  ok: IBM922
+IBM-922  ok: IBM-922
+IBM9448  ok: IBM9448
+IBM-9448  ok: IBM-9448
+IEC_P271  ok: IEC_P271
+IEC_P27-1  ok: IEC_P27-1
+ISO-10646/UCS2/  ok: ISO-10646/UCS2/
+ISO_11548-1  ok: ISO_11548-1
+ISO11548-1  ok: ISO11548-1
+ISO6937  ok: ISO6937
+ISO_6937  ok: ISO_6937
+ISO_6937:1992  ok: ISO_6937:1992
+ISO88591  ok: ISO88591
+ISO_8859-1  ok: ISO_8859-1
+ISO-8859-1  ok: ISO-8859-1
+ISO8859-1  ok: ISO8859-1
+ISO885910  ok: ISO885910
+ISO_8859-10  ok: ISO_8859-10
+ISO-8859-10  ok: ISO-8859-10
+ISO8859-10  ok: ISO8859-10
+ISO_8859-10:1992  ok: ISO_8859-10:1992
+ISO_8859-1:1987  ok: ISO_8859-1:1987
+ISO885913  ok: ISO885913
+ISO-8859-13  ok: ISO-8859-13
+ISO8859-13  ok: ISO8859-13
+ISO885914  ok: ISO885914
+ISO_8859-14  ok: ISO_8859-14
+ISO-8859-14  ok: ISO-8859-14
+ISO8859-14  ok: ISO8859-14
+ISO_8859-14:1998  ok: ISO_8859-14:1998
+ISO885915  ok: ISO885915
+ISO_8859-15  ok: ISO_8859-15
+ISO-8859-15  ok: ISO-8859-15
+ISO8859-15  ok: ISO8859-15
+ISO_8859-15:1998  ok: ISO_8859-15:1998
+ISO885916  ok: ISO885916
+ISO_8859-16  ok: ISO_8859-16
+ISO-8859-16  ok: ISO-8859-16
+ISO8859-16  ok: ISO8859-16
+ISO_8859-16:2001  ok: ISO_8859-16:2001
+ISO88592  ok: ISO88592
+ISO_8859-2  ok: ISO_8859-2
+ISO-8859-2  ok: ISO-8859-2
+ISO8859-2  ok: ISO8859-2
+ISO_8859-2:1987  ok: ISO_8859-2:1987
+ISO88594  ok: ISO88594
+ISO_8859-4  ok: ISO_8859-4
+ISO-8859-4  ok: ISO-8859-4
+ISO8859-4  ok: ISO8859-4
+ISO_8859-4:1988  ok: ISO_8859-4:1988
+ISO88595  ok: ISO88595
+ISO_8859-5  ok: ISO_8859-5
+ISO-8859-5  ok: ISO-8859-5
+ISO8859-5  ok: ISO8859-5
+ISO_8859-5:1988  ok: ISO_8859-5:1988
+ISO88599  ok: ISO88599
+ISO_8859-9  ok: ISO_8859-9
+ISO-8859-9  ok: ISO-8859-9
+ISO8859-9  ok: ISO8859-9
+ISO_8859-9:1989  ok: ISO_8859-9:1989
+ISO88599E  ok: ISO88599E
+ISO_8859-9E  ok: ISO_8859-9E
+ISO-8859-9E  ok: ISO-8859-9E
+ISO8859-9E  ok: ISO8859-9E
+ISO-CELTIC  ok: ISO-CELTIC
+ISO-IR-100  ok: ISO-IR-100
+ISO-IR-101  ok: ISO-IR-101
+ISO-IR-110  ok: ISO-IR-110
+ISO-IR-111  ok: ISO-IR-111
+ISO-IR-139  ok: ISO-IR-139
+ISO-IR-143  ok: ISO-IR-143
+ISO-IR-144  ok: ISO-IR-144
+ISO-IR-148  ok: ISO-IR-148
+ISO-IR-156  ok: ISO-IR-156
+ISO-IR-157  ok: ISO-IR-157
+ISO-IR-179  ok: ISO-IR-179
+ISO-IR-199  ok: ISO-IR-199
+ISO-IR-203  ok: ISO-IR-203
+ISO-IR-226  ok: ISO-IR-226
+ISO/TR_11548-1/  ok: ISO/TR_11548-1/
+KOI8R  ok: KOI8R
+KOI8-R  ok: KOI8-R
+KOI8-RU  ok: KOI8-RU
+KOI8U  ok: KOI8U
+KOI8-U  ok: KOI8-U
+L1  ok: L1
+L10  ok: L10
+L2  ok: L2
+L4  ok: L4
+L5  ok: L5
+L6  ok: L6
+L7  ok: L7
+L8  ok: L8
+LATIN1  ok: LATIN1
+LATIN10  ok: LATIN10
+LATIN2  ok: LATIN2
+LATIN4  ok: LATIN4
+LATIN5  ok: LATIN5
+LATIN6  ok: LATIN6
+LATIN7  ok: LATIN7
+LATIN8  ok: LATIN8
+LATIN9  ok: LATIN9
+LATIN-9  ok: LATIN-9
+MAC  ok: MAC
+MAC-CENTRALEUROPE  ok: MAC-CENTRALEUROPE
+MACCYRILLIC  ok: MACCYRILLIC
+MAC-CYRILLIC  ok: MAC-CYRILLIC
+MACINTOSH  ok: MACINTOSH
+MACIS  ok: MACIS
+MAC-IS  ok: MAC-IS
+MAC-SAMI  ok: MAC-SAMI
+MACUK  ok: MACUK
+MAC-UK  ok: MAC-UK
+MACUKRAINIAN  ok: MACUKRAINIAN
+MIK  ok: MIK
+MS-ARAB  ok: MS-ARAB
+MS-CYRL  ok: MS-CYRL
+MSMACCYRILLIC  ok: MSMACCYRILLIC
+MS-MAC-CYRILLIC  ok: MS-MAC-CYRILLIC
+OSF00010001  ok: OSF00010001
+OSF00010002  ok: OSF00010002
+OSF00010004  ok: OSF00010004
+OSF00010005  ok: OSF00010005
+OSF00010009  ok: OSF00010009
+OSF0001000A  ok: OSF0001000A
+OSF00010100  ok: OSF00010100
+OSF00010101  ok: OSF00010101
+OSF00010102  ok: OSF00010102
+OSF10020025  ok: OSF10020025
+OSF10020111  ok: OSF10020111
+OSF10020115  ok: OSF10020115
+OSF10020116  ok: OSF10020116
+OSF10020118  ok: OSF10020118
+OSF1002011C  ok: OSF1002011C
+OSF1002011D  ok: OSF1002011D
+OSF10020129  ok: OSF10020129
+OSF100201B5  ok: OSF100201B5
+OSF100201F4  ok: OSF100201F4
+OSF10020352  ok: OSF10020352
+OSF10020354  ok: OSF10020354
+OSF10020357  ok: OSF10020357
+OSF1002035D  ok: OSF1002035D
+OSF1002035E  ok: OSF1002035E
+OSF1002035F  ok: OSF1002035F
+OSF10020366  ok: OSF10020366
+OSF10020367  ok: OSF10020367
+OSF10020370  ok: OSF10020370
+OSF10020402  ok: OSF10020402
+OSF10020417  ok: OSF10020417
+PT154  ok: PT154
+RK1048  ok: RK1048
+RUSCII  ok: RUSCII
+STRK1048-2002  ok: STRK1048-2002
+TCVN  ok: TCVN
+TCVN-5712  ok: TCVN-5712
+TCVN5712-1  ok: TCVN5712-1
+TCVN5712-1:1993  ok: TCVN5712-1:1993
+TS-5881  ok: TS-5881
+UCS2  ok: UCS2
+UCS-2  ok: UCS-2
+UCS-2BE  ok: UCS-2BE
+UCS-2LE  ok: UCS-2LE
+UNICODE  ok: UNICODE
+UNICODEBIG  ok: UNICODEBIG
+UNICODELITTLE  ok: UNICODELITTLE
+UTF16  ok: UTF16
+UTF-16  ok: UTF-16
+UTF16BE  ok: UTF16BE
+UTF-16BE  ok: UTF-16BE
+UTF16LE  ok: UTF16LE
+UTF-16LE  ok: UTF-16LE
+VISCII  ok: VISCII
+WINDOWS-1251  ok: WINDOWS-1251
+WINDOWS-1256  ok: WINDOWS-1256
+```
+
++ Tried UTF-16, UNICODELITTLE, UNICODE, LATIN1, ISO-8859-1 WINDOWS-1251, CP1251 with `iconv`.
++ Tried `enca` recognition:
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ enca -f keylog.log_file.None.0x80eb7008.dat
+enca: Cannot determine (or understand) your language preferences.
+Please use `-L language', or `-L none' if your language is not supported
+(only a few multibyte encodings can be recognized then).
+Run `enca --list languages' to get a list of supported languages.
+```
+
++ Tried `chardet` (not even a relevent output):
+
+```
+[noraj@rawsec]––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/For2]
+$ chardetect keylog.log_file.None.0x80eb7008.dat
+keylog.log_file.None.0x80eb7008.dat: windows-1253 with confidence 0.3253156807138245
+```
+
+## Submit

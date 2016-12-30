@@ -9,7 +9,7 @@ categories:
 tags:
 - linux
 - archlinux
-thumbnail: /images/tux-293844_640.png
+thumbnail: /images/archlinux.svg
 ---
 
 ![advcpmv](https://web.archive.org/web/20131115171331/http://beatex.org/web/advcopy/advcpmv-screen-20130313.png)

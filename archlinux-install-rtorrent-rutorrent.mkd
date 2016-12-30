@@ -2,7 +2,7 @@
 layout: post
 title: "ArchLinux - Install rTorrent and ruTorrent"
 date: 2016/09/14
-updated: 2016/11/13
+updated: 2016/12/27
 lang: en
 categories:
 - linux
@@ -10,7 +10,7 @@ categories:
 tags:
 - linux
 - archlinux
-thumbnail: /images/tux-293844_640.png
+thumbnail: /images/archlinux.svg
 ---
 
 ## Install rTorrent
@@ -91,7 +91,7 @@ expose_php = Off
 file_uploads = On
 ```
 
-+ Set max size of post data allowed ([post_max_size][post_max_size])
++ Set max size of post data allowed ([post_max_size][post_max_size]):
 
 ```
 post_max_size = 15M
@@ -189,7 +189,7 @@ http {
 	gzip_proxied any;
 	gzip_comp_level 6;
 	gzip_buffers 16 8k;
-	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript
+	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 
 	##
 	# Virtual Host Configs
@@ -209,7 +209,7 @@ http {
 + Create the server domain config:
 
 ```
-# vim /etc/nginx/servers-available/seedbox
+# vim /etc/nginx/servers-available/seedbox.conf
 ```
 
 + And add the conf:
@@ -222,19 +222,19 @@ server {
  return 301 https://$host$request_uri;
 }
 
-#------------------------------------------------------------------------
+##
 # BLOCK SERVEUR HTTPS
-#
+##
 server {
 
  listen 443 ssl http2;
  server_name seedbox.domain.example.org;
- root /srv/http/rutorrent;
+ root /usr/share/nginx/html/rutorrent;
  index index.php index.html index.htm;
 
-#------------------------------------------------------------------------
+##
 # SSL
-#
+##
  ssl_certificate /etc/nginx/ssl/seedbox.crt;
  ssl_certificate_key /etc/nginx/ssl/seedbox.key;
 
@@ -249,16 +249,16 @@ server {
  ssl_session_tickets on;
 
 
-#------------------------------------------------------------------------
+##
 # SECURITY
-
+##
  add_header X-XSS-Protection "1; mode=block";
  auth_basic "Restricted Area";
  auth_basic_user_file "/etc/nginx/auth/seedbox_auth";
 
-#------------------------------------------------------------------------
+##
 # PHP
-#
+##
  location / {
  index index.php index.html index.htm;
  try_files $uri $uri/ /index.php?$args;
@@ -363,7 +363,7 @@ max_peers = 100
 min_peers_seed = 10
 max_peers_seed = 50
 max_uploads = 15
-execute = {sh,-c,/usr/bin/php /srv/http/rutorrent/php/initplugins.php sdbox &}
+execute = {sh,-c,/usr/bin/php /usr/share/nginx/html/rutorrent/php/initplugins.php sdbox &}
 schedule = espace_disque_insuffisant,1,30,close_low_diskspace=500M
 ```
 
@@ -378,7 +378,7 @@ schedule = espace_disque_insuffisant,1,30,close_low_diskspace=500M
 + Edit the virtual server conf:
 
 ```
-# vim /etc/nginx/servers-available/seedbox
+# vim /etc/nginx/servers-available/seedbox.conf
 ```
 
 + Add the conf:
@@ -436,7 +436,7 @@ $tempDirectory = '/usr/share/nginx/html/rutorrent/tmp/';
 
 ## Create a rTorrent service
 
-+ Create the file `~/.config/systemd/user/rt.service` containing:
++ Create the file `/etc/systemd/system/rtorent.service` (because `/etc/systemd/user/` doesn't work) containing:
 
 ```
 [Unit]
@@ -464,3 +464,64 @@ $ systemctl start rtorrent
 ```
 
 **Source**: [sdbox](https://www.sdbox.net/noobunschool/seedbox/installer-une-seedbox/), [wiki archlinux](https://wiki.archlinux.org/index.php/RTorrent#Installation)
+
+## Troubleshooting
+
+### mediainfo
+
+```
+mediainfo: Plugin will not work. rTorrent user can't access external program (mediainfo).
+```
+
+You may need to install mediainfo: `pacman -S mediainfo`.
+
+### unrar
+
+```
+Unpack plugin: rTorrent user can't access 'unrar' program.
+```
+
+You may need to install unrar: `pacman -S unrar`.
+
+### screenshots
+
+```
+screenshots: Plugin will not work. rTorrent user can't access external program (ffmpeg).
+```
+
+I don't use it and don't want to install ffmpeg and all its dependencies (224 MB) so I disabled it.
+
+To do so:
++ Edit the plugin config file (global) `vim /usr/share/nginx/html/rutorrent/conf/plugins.ini`.
++ And add this lines at the end:
+
+```
+[screenshots]
+enabled = no
+```
+
+Or if you want to use screenshots plugin just install ffmpeg: `pacman -S ffmpeg`.
+
+### rss
+
+```
+rss: Some functionality will be unavailable. Webserver user can't access external program (curl).
+```
+I didn't find how to **cleanly** resolve that. Some tells to add `/urb/bin` in the `open_basedir` or `php.ini` but this is a security issue and that doesn't work in our case. So I just disabled rss plugin:
++ Edit the plugin config file (global) `vim /usr/share/nginx/html/rutorrent/conf/plugins.ini`.
++ And add this lines at the end:
+
+```
+[rss]
+enabled = no
+
+[rssurlrewrite]
+enabled = no
+```
+### rutracker_check
+
+```
+rutracker_check: Plugin will not work. Webserver user must have execute access to the rtorrent session directory (/home/sdbox/.session/).
+```
+
+Add `/home/sdbox/.session/` into `open_basedir` of `/etc/php/php.ini`.

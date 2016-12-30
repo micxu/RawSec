@@ -1,0 +1,89 @@
+---
+layout: post
+title: "OpenSUSE : change ssh port / use a cutom ssh port"
+date: 2016/12/14
+lang: en
+categories:
+- linux
+- opensuse
+tags:
+- linux
+- opensuse
+- system
+thumbnail: /images/opensuse.svg
+---
+For this exemple, our custom ssh port will be **52222**.
+
+Edit `/etc/ssh/sshd_config`:
+
+```
+# vim /etc/ssh/sshd_config
+```
+
+Uncomment `Port 22` and change it to `Port 52222`.
+
+**Note**: You can add several times the *Port* directive to allow several ports. This can be usefull first to not be locked out of teh server. For example:
+
+```
+Port 22
+Port 52222
+```
+
+Restart the ssh deamon:
+
+```
+# systemctl restart sshd.service
+```
+
+Do not close your current ssh session and test if you can localy connect via ssh with the new port:
+
+```
+$ ssh user@localhost -p 52222
+```
+
+If it works you can `exit` the test ssh connection.
+
+Now we will need to allow this new port in the firewall.
+
+To do so, edit `/etc/sysconfig/SuSEfirewall2.d/services/sshd`:
+
+```
+# vim /etc/sysconfig/SuSEfirewall2.d/services/sshd
+```
+
+Change `TCP="ssh"` to `TCP="52222"` (this will only allow port 52222 for ssh) or to `TCP="ssh 52222"` if you want both ports.
+
+**Note**: this is possible because there is `FW_CONFIGURATIONS_EXT="sshd"` in your `/etc/sysconfig/SuSEfirewall2` config file. Known terms (mapping between well known ports and services, ex: ssh=22) are in `/etc/services`, it's not advised to modify this file.
+
+Now restart the firewall:
+
+```
+# systemctl restart SuSEfirewall2.service
+or
+# rcSuSEfirewall2 restart
+```
+
+**Question**: Why did we tested local ssh connection before modifying the firewall rules? Because the change we made only affects external connections (i.e. from the internet) so local connection are not restricted by firewall port filtering.
+
+Now we can safely exit the remote ssh connection.
+
+Now to connect to the server we have to specify the ssh port:
+
+```
+$ ssh user@example.org -p 52222
+```
+
+or add a custom entry in `.ssh/config` (single user) or `/etc/ssh_config` (all users):
+
+```
+Host host_alias
+    Hostname example.org
+    Port 52222
+    User user
+```
+
+and simply connect with:
+
+```
+$ ssh host_alias
+```

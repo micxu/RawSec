@@ -9,7 +9,7 @@ categories:
 tags:
 - linux
 - archlinux
-thumbnail: /images/tux-293844_640.png
+thumbnail: /images/archlinux.svg
 ---
 ## Requirement
 
@@ -50,7 +50,7 @@ Match User sftpuser
 # chown root:root /home/sftpuser
 ```
 
-+ You won't we to connect in sftp if you user have `/bin/false` shell as it's not defined in the `/etc/shells`. To disable normal ssh login, add `/bin/false` in `/etc/shells` and change sftpuser shell:
++ You won't be able to connect in sftp if your user have `/bin/false` shell as it's not defined in the `/etc/shells`. To disable normal ssh login, add `/bin/false` in `/etc/shells` and change sftpuser shell:
 
 ```
 # usermod -s /bin/false sftpuser
