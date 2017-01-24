@@ -1,0 +1,172 @@
+---
+layout: post
+title: "Insomni'hack teaser - 50 - cryptoquizz - Misc"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+date: 2017/01/21
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : Insomni'hack teaser 2017
+- **Website** : [teaser.insomnihack.ch](http://teaser.insomnihack.ch/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/382)
+
+### Description
+
+> cryptoquizz - Misc/Crypto - 50 pts - realized by cryptopathe
+>
+> Hello, young hacker. Are you ready to fight rogue machines ? Now, you'll have to prove us that you are a genuine cryptographer.
+>
+> Running on quizz.teaser.insomnihack.ch:1031
+
+## Solution
+
+**Goal**: In this challenge, a server a get us a name (of a famous cryptographer) and we have to find his/her birth year. Then we must send the year to the server and do it again for others cryptographers until we get the flag.
+
+To find the year of someone famous it is possible to use the [Wikimedia API][api]. I tried the API [sandbox][sandbox] and figured that it was difficult to use it manually.
+
+[api]:https://www.mediawiki.org/wiki/API
+[sandbox]:https://en.wikipedia.org/wiki/Special:ApiSandbox
+
+The wikimedia API works for all the Wikimedia Fundation entities, for example: Wikipedia, Wikidata,...
+
+As we only want the birt year of the cryptographer we should prefer to use [Wikidata][wikidata] instead of [wikipedia][wikipedia], there is less data to parse.
+
+[wikidata]:https://www.wikidata.org/
+[wikipedia]:https://en.wikipedia.org/
+
+As I like ruby for scripting, I chose to use a ruby gem: a Wikidata API Client named [**wikidata-client**][wikidata-client]. Here is the [documentation][documentation].
+
+[wikidata-client]:https://rubygems.org/gems/wikidata-client/
+[documentation]:http://www.rubydoc.info/gems/wikidata-client/
+
+Fist I only looked for the first person of the result. But I had soem wrong asnwer.
+Because the server is giving wrong or partial name.
+For example the server give *Ross Anderson* but there are:
+- *Ross Anderson* an alpine skier
+- *Ross Anderson* a swimmer
+- *Ross J. Anderson* a computer scientist, cryptographer
+
+Another example is the server also giving diminutive or nickname like *Ron Rivest* for *Ronald Rivest*. This is not a problem for Ronald but with *Jim Massey* this is. There is a cryptographer named *James Lee Massey* and his nickname *Jimmy Massey* and the diminutive of *Jimmy* is *Jim*. Problem is that the real *Jim Massey* is a comics writer and the server is giving a diminutive of a nickname of *James Lee Massey*...
+
+So I had to create a *homonym avoidance* by checking the occupation of the person but this function takes too much time as it needs more requests and regex. So I finally disabled this function because it was making my requests timed out.
+So I had to run my script several and have the luck not to search for ambiguous name and to finally get the flag.
+
+Here is my ruby script:
+
+```ruby
+#!/usr/bin/ruby
+
+require 'socket'
+require 'wikidata'
+
+hostname = 'quizz.teaser.insomnihack.ch'
+port = 1031
+
+s = TCPSocket.open(hostname, port)
+raw = ''
+flag = false
+find = false
+
+while line = s.gets   # Read lines from the socket
+    puts line.chop    # And print with platform line terminator
+    raw += line
+    if raw.match(/~~ What/) && flag == false
+        name = raw.match(/^~~ What is the birth year of ([a-zA-Z\s\-\.]*) ?/).captures[0]
+        name = name[0...-1]
+        search = Wikidata::Item.search "#{name}"
+        if search.empty? == false
+            while find == false
+                man = search.results.first
+                #occupation = man.properties('P106').to_s
+                #if occupation.match(/crypto/) || occupation.match(/computer/)
+                if true # homonym avoidance take to much time
+                    birth_year = man.date_of_birth.date.year
+                    puts "#{name}: #{birth_year}"
+                    s.puts birth_year
+                    raw = ''
+                    find = true
+                else
+                    puts "shift"
+                    search.results.shift    # remove first item of the array
+                end
+            end
+            find = false    # for the next search
+        end
+    end
+end
+s.close               # Close the socket when done
+```
+
+Here is the output of the script:
+
+```
+[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/Insomnihack/Teaser/2017]
+$ ruby cryptoquizz.rb
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~ Hello, young hacker. Are you ready to fight rogue machines ?    ~~
+~~ Now, you'll have to prove us that you are a genuine             ~~
+~~ cryptographer.                                                  ~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~ What is the birth year of Nigel P. Smart ?
+Nigel P. Smart: 1967
+
+
+~~ What is the birth year of Don Coppersmith ?
+Don Coppersmith: 1950
+
+
+~~ What is the birth year of Niels Ferguson ?
+Niels Ferguson: 1965
+
+
+~~ What is the birth year of Mihir Bellare ?
+Mihir Bellare: 1962
+
+
+~~ What is the birth year of Amos Fiat ?
+Amos Fiat: 1956
+
+
+~~ What is the birth year of Wang Xiaoyun ?
+Wang Xiaoyun: 1966
+
+
+~~ What is the birth year of Eli Biham ?
+Eli Biham: 1960
+
+
+~~ What is the birth year of Martin Hellman ?
+Martin Hellman: 1945
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~ OK, young hacker. You are now considered to be a                ~~
+~~ INS{GENUINE_CRYPTOGRAPHER_BUT_NOT_YET_A_PROVEN_SKILLED_ONE}     ~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+Flag was: `INS{GENUINE_CRYPTOGRAPHER_BUT_NOT_YET_A_PROVEN_SKILLED_ONE}`.
+
+**Opinion**: I don't kniw if *cryptopathe* (challenge's author) did it on purpose to make it harder or did it unintentionally because he/she didn't checked his/her challenge and used a crappy data set, but giving wrong, partial, diminutive, nickname is very problematic for searches. I think this is not a well written challenge.
