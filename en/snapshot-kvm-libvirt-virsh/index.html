@@ -3,18 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Archive: 2016/7 | RawSec</title>
+    <title>Snapshot for KVM via libvirt with virsh | RawSec</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="a cybersecurity and IT blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="RawSec">
-<meta property="og:url" content="http://rawsec.ml/archives/2016/07/page/3/index.html">
+        <meta name="keywords" content="linux,system,virtualization" />
+    
+    <meta name="description" content="ContextI am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
+I’m giving examples for qcow2 disk images and commands are ma">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Snapshot for KVM via libvirt with virsh">
+<meta property="og:url" content="http://rawsec.ml/en/snapshot-kvm-libvirt-virsh/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="a cybersecurity and IT blog">
+<meta property="og:description" content="ContextI am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
+I’m giving examples for qcow2 disk images and commands are ma">
+<meta property="og:image" content="http://rawsec.ml/images/tux-293844_640.png">
+<meta property="og:updated_time" content="2017-02-07T22:03:01.578Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RawSec">
-<meta name="twitter:description" content="a cybersecurity and IT blog">
+<meta name="twitter:title" content="Snapshot for KVM via libvirt with virsh">
+<meta name="twitter:description" content="ContextI am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
+I’m giving examples for qcow2 disk images and commands are ma">
+<meta name="twitter:image" content="http://rawsec.ml/images/tux-293844_640.png">
     
 
     
@@ -144,373 +152,139 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-archive"></i>Archive: 2016/7
+    <a class="page-title-link" href="/categories/linux/">linux</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            
+                            <article id="post-snapshot-kvm-libvirt-virsh" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Snapshot for KVM via libvirt with virsh
+        </h1>
+    
 
-    
-    
+            </header>
         
         
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
+            <div class="article-subtitle">
+                <a href="/en/snapshot-kvm-libvirt-virsh/" class="article-date">
+    <time datetime="2017-02-07T23:00:00.000Z" itemprop="datePublished">Wednesday 8 February 2017 (2017-02-08)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/system/">system</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtualization/">virtualization</a></li></ul>
+
             </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
         
-        <a href="/en/ABCTF-2016-ABCTF-60-MoonWalk-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="ABCTF - 60 - MoonWalk - Forensics" class="thumbnail-image"></span>
-    
-    
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-60-MoonWalk-Forensics/">0</span>
-    
-</span>
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Libvirt_support.svg/640px-Libvirt_support.svg.png" alt=""></p>
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p>I am using <em>KVM</em>, and use/manage my VMs with <em>virt-manager</em>. But I asked myself this question: how can create or revert some snapshot?</p>
+<p>I’m giving examples for qcow2 disk images and commands are made with virsh.</p>
+<h2 id="Internal-Disk-Snapshots"><a href="#Internal-Disk-Snapshots" class="headerlink" title="Internal Disk Snapshots"></a>Internal Disk Snapshots</h2><p>You can list available VM with virsh in order to know their name:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ virsh list</div><div class="line"> Id Name                 State</div><div class="line">----------------------------------</div><div class="line">  1 vmname               running</div></pre></td></tr></table></figure>
+<p>Then you can check if there already is existing shapshots for this VM:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-list vmname</div><div class="line"> Name                 Creation Time             State</div><div class="line">------------------------------------------------------------</div></pre></td></tr></table></figure>
+<p>Next there is two possibilities to make a snapshot:</p>
+<ul>
+<li>create a XML snapshot description file to specify the name and description of the snapshot</li>
+<li>or let libvirt choose a name and no description</li>
+</ul>
+<p>The XML snapshot description file must look like the following:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">domainsnapshot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>vmname-snapshot1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>description of the snapshot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">domainsnapshot</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Make a snapshot with an XML file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-create vmname /path/to/description.xml</div></pre></td></tr></table></figure>
+<p>Or make a snapshot without description file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-create vmname</div></pre></td></tr></table></figure>
+<p><strong>Note</strong>: this is much more faster to make a snapshot while the VM is stoped. But it’s also possible to make a snapshot while the VM is running even if it’s more slow.</p>
+<p>If you want to see some informations about the VM and snapshots you can run:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ qemu-img info /path/to/disk/image/vmname.qcow2</div><div class="line">image: vmname.qcow2</div><div class="line">file format: qcow2</div><div class="line">virtual size: 20G (21474836480 bytes)</div><div class="line">disk size: 5.2G</div><div class="line">cluster_size: 65536</div><div class="line">Snapshot list:</div><div class="line">ID        TAG                 VM SIZE                DATE       VM CLOCK</div><div class="line">1         vmname-snapshot1   329M 2017-02-08 20:40:59   01:23:38.281</div><div class="line">2         vmname-snapshot2   375M 2017-02-08 20:46:39   01:26:01.645</div><div class="line">3         vmname-snapshot3   482M 2017-02-08 22:42:48   03:22:00.515</div><div class="line">Format specific information:</div><div class="line">    compat: 1.1</div><div class="line">    lazy refcounts: true</div><div class="line">    refcount bits: 16</div><div class="line">    corrupt: false</div></pre></td></tr></table></figure>
+<p>To revert the VM to a snapshot, for example run:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-revert vmname vmname-snapshot1</div></pre></td></tr></table></figure>
+<p><a href="https://kashyapc.com/2011/10/04/snapshotting-with-libvirt-for-qcow2-images/" target="_blank" rel="external">Source</a></p>
 
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-22T22:00:00.000Z" itemprop="datePublished">Saturday 23 July 2016 (2016-07-23)</time></p>
         </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/ABCTF-2016-ABCTF-60-MoonWalk-Forensics/">ABCTF - 60 - MoonWalk - Forensics</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-By
-Translated by
-Version
-Comment
+        <footer class="article-footer">
+            
 
 
 
+    <a data-url="http://rawsec.ml/en/snapshot-kvm-libvirt-virsh/" data-id="ciyw2q2l40069rsfsulrnj93f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
 
-Chill3d
-noraj
-1.0
-Creation
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
 
+            if ($('#' + id).length) {
+                box = $('#' + id);
 
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
 
-CTF
-Name : ABCTF 2016
-Website : http://abctf.xyz/
-Type : Online
-Format : Jeopardy - Student
-CTF Time : link
+              box = $(html);
 
-De
-        </p>
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
 </article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/local-file-inclusion-remote-code-execution-vulnerability/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="Local File Inclusion (LFI) and Remote Code Execution (RCE) vulnerabilities for PHP" class="thumbnail-image"></span>
-    
+    <section id="comments">
     
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/local-file-inclusion-remote-code-execution-vulnerability/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a>
-            </p>
-            <p class="date"><time datetime="2016-07-08T22:00:00.000Z" itemprop="datePublished">Saturday 9 July 2016 (2016-07-09)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/local-file-inclusion-remote-code-execution-vulnerability/">Local File Inclusion (LFI) and Remote Code Execution (RCE) vulnerabilities for PHP</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            Local File Inclusion (LFI) is a type of vulnerability concerning web server. It allow an attacker to include a local file on the web server. It occurs due to the use of not properly sanitized user inp
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
-        </div>
-    
 
     
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/nikto-protecting-LFI/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="Nikto : protect your Apache server against a LFI vulnerability" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/nikto-protecting-LFI/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a>
-            </p>
-            <p class="date"><time datetime="2016-07-06T22:00:00.000Z" itemprop="datePublished">Thursday 7 July 2016 (2016-07-07)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/nikto-protecting-LFI/">Nikto : protect your Apache server against a LFI vulnerability</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            GoalHow to protect your apache server against a LFI vulnerability that can be found with Nikto
-.
-1/autohtml.php?op=modload&amp;mainfile=x&amp;name=/etc/passwd : php-proxima 6.0 and below allows arbitr
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/virtualbox-change-virtual-disk-uuid/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/tux-293844_640.png)" alt="Virtualbox : change the UUID of a virtual disk" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/virtualbox-change-virtual-disk-uuid/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/linux/">linux</a>
-            </p>
-            <p class="date"><time datetime="2016-07-05T22:00:00.000Z" itemprop="datePublished">Wednesday 6 July 2016 (2016-07-06)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/virtualbox-change-virtual-disk-uuid/">Virtualbox : change the UUID of a virtual disk</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            To change the UUID of a virtual disk:1VBoxManage internalcommands sethduuid &lt;filepath&gt; [&lt;uuid&gt;]
-Examples
-With a vdi disk : VBoxManage internalcommands sethduuid disk.vdi
-With a vmdk disk a
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/virtualbox-export-vmware-esxi/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/tux-293844_640.png)" alt="Virtualbox : Export from VirtualBox and import to VMware ESXI" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/virtualbox-export-vmware-esxi/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/linux/">linux</a>
-            </p>
-            <p class="date"><time datetime="2016-07-05T22:00:00.000Z" itemprop="datePublished">Wednesday 6 July 2016 (2016-07-06)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/virtualbox-export-vmware-esxi/">Virtualbox : Export from VirtualBox and import to VMware ESXI</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            Version of software used:
-
-VirtualBox 5.0.22
-vSphere Client 5.1
-VMware ESXI 5.1
-
-Export to OVA/OVFFrom VirtualBox export the virtual machine : “File” &gt; “Export Appliance”.
-Then choose OVF 1.0 forma
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/BackdoorCTF-2016-writeups-forensic-busybee/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Writeups - Forensic - BusyBee" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-forensic-busybee/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a>
-            </p>
-            <p class="date"><time datetime="2016-07-01T22:00:00.000Z" itemprop="datePublished">Saturday 2 July 2016 (2016-07-02)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/BackdoorCTF-2016-writeups-forensic-busybee/">Writeups - Forensic - BusyBee</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            InformationsVersion
-
-
-Date
-By
-Version
-Comment
-
-
-
-
-05/06/2016
-noraj
-1.0
-Creation
-
-
-
-CTF
-Name : BackdoorCTF 2016
-Website : https://backdoor.sdslabs.co
-Type : Online
-Format : Jeopardy
-CTF Time : link
-
-Na
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
-
-
-    <nav id="page-nav">
-        <span class="pages">Page 3 of 3</span>
-        <a class="extend prev" rel="prev" href="/archives/2016/07/page/2/">&laquo;</a><a class="page-number" href="/archives/2016/07/">1</a><a class="page-number" href="/archives/2016/07/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
-
+    </section>
 
                         </div>
                     </section>
@@ -570,6 +344,19 @@ Na
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/en/AlexCTF-2017-write-ups/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">AlexCTF 2017 - Write-ups</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -765,11 +552,13 @@ Na
     var disqus_shortname = 'rawsec';
     
     
+    var disqus_url = 'http://rawsec.ml/en/snapshot-kvm-libvirt-virsh/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
