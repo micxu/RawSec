@@ -636,17 +636,17 @@ Then define zsh as your default shell: chsh -s /bin/zsh.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/en/opensuse-displaymanager-windowsmanager/" class="thumbnail">
+        <a href="/en/know-graphic-controller-linux/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/opensuse.svg)" alt="DISPLAYMANAGER and WINDOWSMANAGER" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/tux-293844_640.png)" alt="How to know the graphic controller under Linux" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/opensuse-displaymanager-windowsmanager/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/know-graphic-controller-linux/">0</span>
     
 </span>
 
@@ -656,21 +656,22 @@ Then define zsh as your default shell: chsh -s /bin/zsh.
         
         <div class="article-meta">
             <p class="category">
-            <a class="article-category-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/linux/opensuse/">opensuse</a>
+            <a class="article-category-link" href="/categories/linux/">linux</a>
             </p>
             <p class="date"><time datetime="2014-08-02T22:00:00.000Z" itemprop="datePublished">Sunday 3 August 2014 (2014-08-03)</time></p>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/en/opensuse-displaymanager-windowsmanager/">DISPLAYMANAGER and WINDOWSMANAGER</a>
+        <a href="/en/know-graphic-controller-linux/">How to know the graphic controller under Linux</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Change of Display ManagerPass root1sudo -i
-Then open /etc/sysconfig/displaymanager with a text editor.1vim /etc/sysconfig/displaymanager
-Display Manager can be changed at line DISPLAYMANAGER=&quot;XXX
+            To know your 3D graphic(s) controller(s) working (GPU or/and chipset) with your VGA output you can run the following command :
+1/sbin/lspci | egrep 'VGA|3D'
+Example :
+123/sbin/lspci | egrep 'VGA|3D'00
         </p>
     </div>
 </article>
