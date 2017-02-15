@@ -1,0 +1,95 @@
+---
+layout: post
+title: "Snapshot for KVM via libvirt with virsh"
+date: 2017/02/08
+lang: en
+categories:
+- linux
+tags:
+- linux
+- virtualization
+- system
+thumbnail: /images/tux-293844_640.png
+---
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Libvirt_support.svg/640px-Libvirt_support.svg.png)
+
+## Context
+
+I am using *KVM*, and use/manage my VMs with *virt-manager*. But I asked myself this question: how can create or revert some snapshot?
+
+I'm giving examples for qcow2 disk images and commands are made with virsh.
+
+## Internal Disk Snapshots
+
+You can list available VM with virsh in order to know their name:
+
+```
+$ virsh list
+ Id Name                 State
+----------------------------------
+  1 vmname               running
+```
+
+Then you can check if there already is existing shapshots for this VM:
+
+```
+$ virsh snapshot-list vmname
+ Name                 Creation Time             State
+------------------------------------------------------------
+```
+
+Next there is two possibilities to make a snapshot:
++ create a XML snapshot description file to specify the name and description of the snapshot
++ or let libvirt choose a name and no description
+
+The XML snapshot description file must look like the following:
+
+```xml
+<domainsnapshot>
+    <name>vmname-snapshot1</name>
+    <description>description of the snapshot</description>
+</domainsnapshot>
+```
+
+Make a snapshot with an XML file:
+
+```
+$ virsh snapshot-create vmname /path/to/description.xml
+```
+
+Or make a snapshot without description file:
+
+```
+$ virsh snapshot-create vmname
+```
+
+**Note**: this is much more faster to make a snapshot while the VM is stoped. But it's also possible to make a snapshot while the VM is running even if it's more slow.
+
+If you want to see some informations about the VM and snapshots you can run:
+
+```
+$ qemu-img info /path/to/disk/image/vmname.qcow2
+image: vmname.qcow2
+file format: qcow2
+virtual size: 20G (21474836480 bytes)
+disk size: 5.2G
+cluster_size: 65536
+Snapshot list:
+ID        TAG                 VM SIZE                DATE       VM CLOCK
+1         vmname-snapshot1   329M 2017-02-08 20:40:59   01:23:38.281
+2         vmname-snapshot2   375M 2017-02-08 20:46:39   01:26:01.645
+3         vmname-snapshot3   482M 2017-02-08 22:42:48   03:22:00.515
+Format specific information:
+    compat: 1.1
+    lazy refcounts: true
+    refcount bits: 16
+    corrupt: false
+```
+
+To revert the VM to a snapshot, for example run:
+
+```
+$ virsh snapshot-revert vmname vmname-snapshot1
+```
+
+[Source](https://kashyapc.com/2011/10/04/snapshotting-with-libvirt-for-qcow2-images/)
