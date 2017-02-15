@@ -167,17 +167,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/en/archlinux-install-rtorrent-rutorrent/" class="thumbnail">
+        <a href="/en/archlinux-install-zsh/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/archlinux.svg)" alt="ArchLinux - Install rTorrent and ruTorrent" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/archlinux.svg)" alt="ArchLinux - Install Zsh shell and oh-my-zsh" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/archlinux-install-zsh/">0</span>
     
 </span>
 
@@ -194,18 +194,22 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/en/archlinux-install-rtorrent-rutorrent/">ArchLinux - Install rTorrent and ruTorrent</a>
+        <a href="/en/archlinux-install-zsh/">ArchLinux - Install Zsh shell and oh-my-zsh</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Install rTorrentAs rTorrent package is always up-to-date on Arch repository, it’s not needed to compile it.
+            Install Zsh
+Before installing zsh, see what shell is currently being used:
 
-Install rtorrent:
+1$ echo $SHELL
 
-1# pacman -S rtorrent
-Install ruTorrent
-Create the web server root direc
+Install zsh:
+
+1# pacman -S zsh
+
+For additional completion definitions, install the zsh-completions package:
+
         </p>
     </div>
 </article>
@@ -319,6 +323,55 @@ Create a new repository on one of the git service
         <article class="article article-summary">
     <div class="article-summary-inner">
         
+        <a href="/en/deploying-subfolder-github-pages/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/git.png)" alt="Deploying a subfolder to GitHub Pages" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/deploying-subfolder-github-pages/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/misc/">misc</a>
+            </p>
+            <p class="date"><time datetime="2016-07-26T22:00:00.000Z" itemprop="datePublished">Wednesday 27 July 2016 (2016-07-27)</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/en/deploying-subfolder-github-pages/">Deploying a subfolder to GitHub Pages</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            You are building a website with a static site generator like Hexo or Jekyll? You want to have website source code on GitHub and the website running on gh-pages without maintaining two Git repository? 
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
         <a href="/en/creating-python-package-distutils-pypi/" class="thumbnail">
     
     
@@ -363,29 +416,25 @@ Package example
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
     
-        <div class="article-row">
-    
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/en/deploying-subfolder-github-pages/" class="thumbnail">
+        <a href="/en/virtualbox-change-virtual-disk-uuid/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/git.png)" alt="Deploying a subfolder to GitHub Pages" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/tux-293844_640.png)" alt="Virtualbox : change the UUID of a virtual disk" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/deploying-subfolder-github-pages/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/virtualbox-change-virtual-disk-uuid/">0</span>
     
 </span>
 
@@ -395,27 +444,34 @@ Package example
         
         <div class="article-meta">
             <p class="category">
-            <a class="article-category-link" href="/categories/misc/">misc</a>
+            <a class="article-category-link" href="/categories/linux/">linux</a>
             </p>
-            <p class="date"><time datetime="2016-07-26T22:00:00.000Z" itemprop="datePublished">Wednesday 27 July 2016 (2016-07-27)</time></p>
+            <p class="date"><time datetime="2016-07-05T22:00:00.000Z" itemprop="datePublished">Wednesday 6 July 2016 (2016-07-06)</time></p>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/en/deploying-subfolder-github-pages/">Deploying a subfolder to GitHub Pages</a>
+        <a href="/en/virtualbox-change-virtual-disk-uuid/">Virtualbox : change the UUID of a virtual disk</a>
         </h1>
     
 
         <p class="article-excerpt">
-            You are building a website with a static site generator like Hexo or Jekyll? You want to have website source code on GitHub and the website running on gh-pages without maintaining two Git repository? 
+            To change the UUID of a virtual disk:1VBoxManage internalcommands sethduuid &lt;filepath&gt; [&lt;uuid&gt;]
+Examples
+With a vdi disk : VBoxManage internalcommands sethduuid disk.vdi
+With a vmdk disk a
         </p>
     </div>
 </article>
+    
+        </div>
     
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -464,58 +520,6 @@ Then choose OVF 1.0 forma
     </div>
 </article>
     
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/en/virtualbox-change-virtual-disk-uuid/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/tux-293844_640.png)" alt="Virtualbox : change the UUID of a virtual disk" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/virtualbox-change-virtual-disk-uuid/">0</span>
-    
-</span>
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/linux/">linux</a>
-            </p>
-            <p class="date"><time datetime="2016-07-05T22:00:00.000Z" itemprop="datePublished">Wednesday 6 July 2016 (2016-07-06)</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/en/virtualbox-change-virtual-disk-uuid/">Virtualbox : change the UUID of a virtual disk</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            To change the UUID of a virtual disk:1VBoxManage internalcommands sethduuid &lt;filepath&gt; [&lt;uuid&gt;]
-Examples
-With a vdi disk : VBoxManage internalcommands sethduuid disk.vdi
-With a vmdk disk a
-        </p>
-    </div>
-</article>
-    
 
     
     
@@ -556,32 +560,17 @@ With a vmdk disk a
     
 
         <p class="article-excerpt">
-            Maintained
+            This list is available as: 
+
+a web page: http://rawsec.ml/en/security-related-os/
+a git file: https://github.com/noraj1337/RawSec/blob/posts-sources/security-related-os.mkd
+
+Maintained
 
 
 OS
 Based on
-Description
-Link
-
-
-
-
-Alpine Linux
-Independent
-minimalist
-Alpine Linux
-
-
-BackBox
-Ubuntu
-penetration testing and security lab
-BackBox
-
-
-BlackArch Linux
-ArchLinux
-penetration tes
+D
         </p>
     </div>
 </article>
