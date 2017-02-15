@@ -14,6 +14,10 @@ date: 2016/06/09
 updated: 2017/02/15
 thumbnail: /images/security-265130_640.jpg
 ---
+This list is available as: 
++ a web page: http://rawsec.ml/en/security-related-os/
++ a git file: https://github.com/noraj1337/RawSec/blob/posts-sources/security-related-os.mkd
+
 ## Maintained
 
 | OS                    | Based on        | Description                                             | Link
