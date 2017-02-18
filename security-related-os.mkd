@@ -11,44 +11,45 @@ tags:
   - pentest
   - privacy
 date: 2016/06/09
-updated: 2017/02/15
+updated: 2017/02/18
 thumbnail: /images/security-265130_640.jpg
 ---
-This list is available as: 
+This list is available as:
 + a web page: http://rawsec.ml/en/security-related-os/
 + a git file: https://github.com/noraj1337/RawSec/blob/posts-sources/security-related-os.mkd
 
 ## Maintained
 
-| OS                    | Based on        | Description                                             | Link
-| ---                   | ---             | ---                                                     | ---
-| Alpine Linux          | Independent     | minimalist                                              | [Alpine Linux](http://www.alpinelinux.org/)
-| BackBox               | Ubuntu          | penetration testing and security lab                    | [BackBox](https://backbox.org/)
-| BlackArch Linux       | ArchLinux       | penetration testing and security lab                    | [BlackArch Linux](https://blackarch.org/)
-| Bugtraq-II Blackwidow | Ubuntu / Debian | penetration testing and security lab                    | [Bugtraq-II Blackwidow](http://www.bugtraq-team.com/project-blackwidow.html)
-| CAINE                 | Ubuntu          | digital forensics                                       | [CAINE](http://www.caine-live.net/)
-| Cyborg Essentials     | Debian          | penetration testing and security lab                    | [Cyborg Essentials](http://cyborg.ztrela.com/cyborg-essentials/)
-| Cyborg Hawk Linux     | Ubuntu          | penetration testing and security lab                    | [Cyborg Hawk Linux](http://cyborg.ztrela.com/cyborg-hawk/)
-| DEFT                  | Ubuntu          | digital forensics                                       | [DEFT](http://www.deftlinux.net/)
-| Fedora Security Lab   | Fedora          | penetration testing and security lab                    | [Fedora Security Lab](https://labs.fedoraproject.org/security/)
-| Kali Linux            | Debian          | penetration testing and security lab                    | [Kali Linux](https://www.kali.org/)
-| Knoppix               | Debian          | penetration testing and security lab                    | [Knoppix](http://knoppix.net/)
-| Linux Kodachi         | Debian          | privacy and anonymity                                   | [Linux Kodachi](https://www.digi77.com/linux-kodachi/)
-| Matriux               | Debian          | penetration testing and security lab                    | [Matriux](https://sourceforge.net/projects/matriux/)
-| NodeZero              | Ubuntu          | penetration testing and security lab                    | [NodeZero](https://sourceforge.net/projects/nodezero/)
-| NST                   | Fedora          | network security monitoring and analysis                | [NST](https://sourceforge.net/projects/nst/)
-| Parrot Security OS    | Debian          | penetration testing and security lab                    | [Parrot Security OS](https://www.parrotsec.org/)
-| Pentoo                | Gentoo          | penetration testing and security lab                    | [Pentoo](http://www.pentoo.ch/)
-| Qubes OS              | Fedora          | security by compartmentalization (VM)                   | [Qubes OS](https://www.qubes-os.org/)
-| REMnux                | Debian          | malware analysts and reverse-engineering                | [REMnux](https://remnux.org/)
-| Security Onion        | Ubuntu          | network security monitoring and analysis                | [Security Onion](https://securityonion.net/)
-| Subgraph OS           | Debian          | security by compartmentalization (container)            | [Subgraph OS](https://subgraph.com/sgos/index.en.html)
-| Tails                 | Debian          | privacy and anonymity                                   | [Tails](https://tails.boum.org/)
-| TENS                  | Thinstation     | privacy and stealth                                     | [TENS](https://www.spi.dod.mil/lipose.htm)
-| URIX OS               | openSUSE        | penetration testing, security lab and security-focused  | [URIX OS](http://urix.us/)
-| WEAKERTHAN Linux      | Debian          | penetration testing and security lab                    | [WEAKERTHAN Linux](http://www.weaknetlabs.com)
-| Whonix                | Debian          | privacy and anonymity                                   | [Whonix](https://www.whonix.org/)
-| Wifislax              | Slackware       | penetration testing and security lab                    | [Wifislax](http://www.wifislax.com/)
+| OS                    | Based on          | Description                                             | Link
+| ---                   | ---                 | ---                                                     | ---
+| Alpine Linux          | Independent         | minimalist                                              | [Alpine Linux](http://www.alpinelinux.org/)
+| BackBox               | Ubuntu              | penetration testing and security lab                    | [BackBox](https://backbox.org/)
+| BlackArch Linux       | ArchLinux           | penetration testing and security lab                    | [BlackArch Linux](https://blackarch.org/)
+| Bugtraq-II Blackwidow | Ubuntu / Debian     | penetration testing and security lab                    | [Bugtraq-II Blackwidow](http://www.bugtraq-team.com/project-blackwidow.html)
+| CAINE                 | Ubuntu              | digital forensics                                       | [CAINE](http://www.caine-live.net/)
+| Cyborg Essentials     | Debian              | penetration testing and security lab                    | [Cyborg Essentials](http://cyborg.ztrela.com/cyborg-essentials/)
+| Cyborg Hawk Linux     | Ubuntu              | penetration testing and security lab                    | [Cyborg Hawk Linux](http://cyborg.ztrela.com/cyborg-hawk/)
+| DEFT                  | Ubuntu              | digital forensics                                       | [DEFT](http://www.deftlinux.net/)
+| DracOS                | Linux From Scratch  | penetration testing and security lab                    | [DracOS](https://dracos-linux.org/)
+| Fedora Security Lab   | Fedora              | penetration testing and security lab                    | [Fedora Security Lab](https://labs.fedoraproject.org/security/)
+| Kali Linux            | Debian              | penetration testing and security lab                    | [Kali Linux](https://www.kali.org/)
+| Knoppix               | Debian              | penetration testing and security lab                    | [Knoppix](http://knoppix.net/)
+| Linux Kodachi         | Debian              | privacy and anonymity                                   | [Linux Kodachi](https://www.digi77.com/linux-kodachi/)
+| Matriux               | Debian              | penetration testing and security lab                    | [Matriux](https://sourceforge.net/projects/matriux/)
+| NodeZero              | Ubuntu              | penetration testing and security lab                    | [NodeZero](https://sourceforge.net/projects/nodezero/)
+| NST                   | Fedora              | network security monitoring and analysis                | [NST](https://sourceforge.net/projects/nst/)
+| Parrot Security OS    | Debian              | penetration testing and security lab                    | [Parrot Security OS](https://www.parrotsec.org/)
+| Pentoo                | Gentoo              | penetration testing and security lab                    | [Pentoo](http://www.pentoo.ch/)
+| Qubes OS              | Fedora              | security by compartmentalization (VM)                   | [Qubes OS](https://www.qubes-os.org/)
+| REMnux                | Debian              | malware analysts and reverse-engineering                | [REMnux](https://remnux.org/)
+| Security Onion        | Ubuntu              | network security monitoring and analysis                | [Security Onion](https://securityonion.net/)
+| Subgraph OS           | Debian              | security by compartmentalization (container)            | [Subgraph OS](https://subgraph.com/sgos/index.en.html)
+| Tails                 | Debian              | privacy and anonymity                                   | [Tails](https://tails.boum.org/)
+| TENS                  | Thinstation         | privacy and stealth                                     | [TENS](https://www.spi.dod.mil/lipose.htm)
+| URIX OS               | openSUSE            | penetration testing, security lab and security-focused  | [URIX OS](http://urix.us/)
+| WEAKERTHAN Linux      | Debian              | penetration testing and security lab                    | [WEAKERTHAN Linux](http://www.weaknetlabs.com)
+| Whonix                | Debian              | privacy and anonymity                                   | [Whonix](https://www.whonix.org/)
+| Wifislax              | Slackware           | penetration testing and security lab                    | [Wifislax](http://www.wifislax.com/)
 
 ## No more maintained
 
