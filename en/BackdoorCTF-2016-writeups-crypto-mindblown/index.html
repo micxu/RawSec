@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,crypto,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 Date
@@ -27,18 +29,19 @@ Creation
 
 
 CTF
+
 Name : BackdoorCTF 2016
 Website : https://backdoor.sdslabs.co
 Type : Online
 Format : Jeopardy
-CTF Time : link
-
-Na">
+CTF Time : link">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeups - Crypto - MindBlown">
 <meta property="og:url" content="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-mindblown/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 Date
@@ -57,18 +60,19 @@ Creation
 
 
 CTF
+
 Name : BackdoorCTF 2016
 Website : https://backdoor.sdslabs.co
 Type : Online
 Format : Jeopardy
-CTF Time : link
-
-Na">
+CTF Time : link">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
-<meta property="og:updated_time" content="2017-02-07T18:23:37.115Z">
+<meta property="og:updated_time" content="2017-02-27T19:19:12.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Writeups - Crypto - MindBlown">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 Date
@@ -87,13 +91,12 @@ Creation
 
 
 CTF
+
 Name : BackdoorCTF 2016
 Website : https://backdoor.sdslabs.co
 Type : Online
 Format : Jeopardy
-CTF Time : link
-
-Na">
+CTF Time : link">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -253,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>Date</th>
@@ -271,39 +276,57 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : BackdoorCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://backdoor.sdslabs.co/competitions/backdoorctf16/leaderboard" target="_blank" rel="external">https://backdoor.sdslabs.co</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/314" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h3><p><em>MindBlown</em></p>
-<h3 id="Category"><a href="#Category" class="headerlink" title="Category"></a>Category</h3><p><em>Cryptography</em></p>
-<h3 id="Wording"><a href="#Wording" class="headerlink" title="Wording"></a>Wording</h3><blockquote>
-<p>Recently Chintu made a login service to secure his flag.<br>But we managed to get the authentification logic to be found <em>here</em>.<br>Can you help us to get his flag?<br>Find the login form <em>here</em>.</p>
+<h3>Name</h3>
+<p><em>MindBlown</em></p>
+<h3>Category</h3>
+<p><em>Cryptography</em></p>
+<h3>Wording</h3>
+<blockquote>
+<p>Recently Chintu made a login service to secure his flag.
+But we managed to get the authentification logic to be found <em>here</em>.
+Can you help us to get his flag?
+Find the login form <em>here</em>.</p>
 </blockquote>
 <p><img src="http://i.imgur.com/moXsMFi.png" alt="Wording page"></p>
-<h3 id="Data-s"><a href="#Data-s" class="headerlink" title="Data(s)"></a>Data(s)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="keyword">var</span> port = process.env.PORT || <span class="number">9898</span>;</div><div class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</div><div class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)</div><div class="line"><span class="keyword">var</span> salt = <span class="string">'somestring'</span>;</div><div class="line"><span class="keyword">var</span> iteration = <span class="comment">/// some number here;</span></div><div class="line"><span class="keyword">var</span> keylength = <span class="comment">// some number here;</span></div><div class="line"></div><div class="line">app.post(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> username = req.body.username;</div><div class="line">    <span class="keyword">var</span> password = req.body.password;</div><div class="line">    <span class="keyword">if</span> (username !== <span class="string">'chintu'</span>) &#123;</div><div class="line">        res.send(<span class="string">'Username is wrong'</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (crypto.pbkdf2Sync(password, salt, iteration, keylength).toString() === hashOfPassword) &#123;</div><div class="line">        <span class="keyword">if</span> (password === <span class="string">'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg'</span>) &#123;</div><div class="line">            <span class="comment">// some logic here and return something</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// return flag here</span></div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        res.send(<span class="string">'Password is wrong'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="Equipment-s"><a href="#Equipment-s" class="headerlink" title="Equipment(s)"></a>Equipment(s)</h3><ul>
+<h3>Data(s)</h3>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="keyword">var</span> port = process.env.PORT || <span class="number">9898</span>;</div><div class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</div><div class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)</div><div class="line"><span class="keyword">var</span> salt = <span class="string">'somestring'</span>;</div><div class="line"><span class="keyword">var</span> iteration = <span class="comment">/// some number here;</span></div><div class="line"><span class="keyword">var</span> keylength = <span class="comment">// some number here;</span></div><div class="line"></div><div class="line">app.post(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> username = req.body.username;</div><div class="line">    <span class="keyword">var</span> password = req.body.password;</div><div class="line">    <span class="keyword">if</span> (username !== <span class="string">'chintu'</span>) &#123;</div><div class="line">        res.send(<span class="string">'Username is wrong'</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (crypto.pbkdf2Sync(password, salt, iteration, keylength).toString() === hashOfPassword) &#123;</div><div class="line">        <span class="keyword">if</span> (password === <span class="string">'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg'</span>) &#123;</div><div class="line">            <span class="comment">// some logic here and return something</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// return flag here</span></div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        res.send(<span class="string">'Password is wrong'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3>Equipment(s)</h3>
+<ul>
 <li>A computer with an OS (preferably UNIX)</li>
 <li>Internet access</li>
 </ul>
-<h3 id="Hint-s"><a href="#Hint-s" class="headerlink" title="Hint(s)"></a>Hint(s)</h3><p>None</p>
-<h3 id="Help"><a href="#Help" class="headerlink" title="Help"></a>Help</h3><p>None</p>
-<h3 id="Difficulty"><a href="#Difficulty" class="headerlink" title="Difficulty"></a>Difficulty</h3><p>Medium</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h3><ol>
+<h3>Hint(s)</h3>
+<p>None</p>
+<h3>Help</h3>
+<p>None</p>
+<h3>Difficulty</h3>
+<p>Medium</p>
+<h2>Solution</h2>
+<h3>Methodology</h3>
+<ol>
 <li>Take a look at the <em>logic</em> source code.</li>
-<li><code>if (username !== &#39;chintu&#39;)</code> clearly indicates that the username is <code>chintu</code></li>
-<li><code>if (password === &#39;complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg&#39;)</code> let us believe that the password is <code>complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg</code> but it’s not. If you try this password you will get this message : <em>Hacker got you! I know my password was leaked, won’t give you my flag.</em><br><img src="http://i.imgur.com/4CnRxOv.png" alt="Hacker got you!"></li>
+<li><code>if (username !== 'chintu')</code> clearly indicates that the username is <code>chintu</code></li>
+<li><code>if (password === 'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg')</code> let us believe that the password is <code>complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg</code> but it's not. If you try this password you will get this message : <em>Hacker got you! I know my password was leaked, won't give you my flag.</em>
+<img src="http://i.imgur.com/4CnRxOv.png" alt="Hacker got you!"></li>
 <li>In fact, that is the else statement that returns the flag.</li>
 <li>So we have to validate the root if statement <code>if (crypto.pbkdf2Sync(password, salt, iteration, keylength).toString() === hashOfPassword)</code> with another password than <code>complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg</code>.</li>
-<li>We can see that <a href="https://nodejs.org/api/crypto.html#crypto_crypto_pbkdf2sync_password_salt_iterations_keylen_digest" title="Node.js pbkdf2Sync method" target="_blank" rel="external"><code>crypto.pbkdf2Sync</code></a> is kind of a hash method. So let’s look for more information about it. (it’s a Node.js / JavaScript method)</li>
-<li>We’ll try to create a <a href="https://en.wikipedia.org/wiki/PBKDF2" title="PBKDF2 Wikipedia page" target="_blank" rel="external">PBKDF2</a> + <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" title="HMAC Wikipedia page" target="_blank" rel="external">HMAC</a> hash <a href="https://en.wikipedia.org/wiki/Collision_attack" title="Collision attack" target="_blank" rel="external">collision</a>. For more details see the <em>PBKDF2 + HMAC collision explanation</em> part below.</li>
-<li>Enter the collision password <code>e6~n22k81&lt;[p&quot;k5hhV6*</code>.<br><img src="http://i.imgur.com/h1A7umA.png" alt="login"></li>
-<li>Here you are.<br><img src="http://i.imgur.com/eZFIWTI.png" alt="flag"></li>
+<li>We can see that <a href="https://nodejs.org/api/crypto.html#crypto_crypto_pbkdf2sync_password_salt_iterations_keylen_digest" title="Node.js pbkdf2Sync method" target="_blank" rel="external"><code>crypto.pbkdf2Sync</code></a> is kind of a hash method. So let's look for more information about it. (it's a Node.js / JavaScript method)</li>
+<li>We'll try to create a <a href="https://en.wikipedia.org/wiki/PBKDF2" title="PBKDF2 Wikipedia page" target="_blank" rel="external">PBKDF2</a> + <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" title="HMAC Wikipedia page" target="_blank" rel="external">HMAC</a> hash <a href="https://en.wikipedia.org/wiki/Collision_attack" title="Collision attack" target="_blank" rel="external">collision</a>. For more details see the <em>PBKDF2 + HMAC collision explanation</em> part below.</li>
+<li>Enter the collision password <code>e6~n22k81&lt;[p&quot;k5hhV6*</code>.
+<img src="http://i.imgur.com/h1A7umA.png" alt="login"></li>
+<li>Here you are.
+<img src="http://i.imgur.com/eZFIWTI.png" alt="flag"></li>
 </ol>
-<h4 id="PBKDF2-HMAC-collision-explanation"><a href="#PBKDF2-HMAC-collision-explanation" class="headerlink" title="PBKDF2 + HMAC collision explanation"></a>PBKDF2 + HMAC collision explanation</h4><p><strong>Inspired by</strong> <a href="https://mathiasbynens.be/notes/pbkdf2-hmac" title="PBKDF2+HMAC hash collisions explained" target="_blank" rel="external">mathiasbynens.be</a></p>
+<h4>PBKDF2 + HMAC collision explanation</h4>
+<p><strong>Inspired by</strong> <a href="https://mathiasbynens.be/notes/pbkdf2-hmac" title="PBKDF2+HMAC hash collisions explained" target="_blank" rel="external">mathiasbynensbe</a></p>
 <p>PBKDF2 is a widely used method to derive a key.</p>
 <p>Minimal arguments are:</p>
 <ul>
@@ -315,18 +338,25 @@ ga('send', 'pageview');
 <p>As said in <a href="https://tools.ietf.org/html/rfc2898#appendix-A.2" title="RFC 2898" target="_blank" rel="external">RFC2898</a>, default is to use HMAC with <a href="https://en.wikipedia.org/wiki/SHA-1" title="SHA-1 Wikipedia page" target="_blank" rel="external">SHA-1</a> hash function.</p>
 <blockquote>
 <p>HMAC has an interesting property: if a supplied key is longer than the block size of the hash function that’s being used, it uses the hash of the key rather than the key itself.</p>
+</blockquote>
+<blockquote>
 <p>SHA-1 has a block size of 512 bits, which equals 64 bytes.</p>
+</blockquote>
+<blockquote>
 <p>So in this case, if the supplied key takes up more than 64 bytes, then SHA1(key) is used as the key.</p>
 </blockquote>
-<p>In this challenge password is 65 bytes long:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> -n <span class="string">'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg'</span> | wc -c</div><div class="line">65</div></pre></td></tr></table></figure></p>
+<p>In this challenge password is 65 bytes long:
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> -n <span class="string">'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg'</span> | wc -c</div><div class="line">65</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>Note that the collision password always has a length of 20 characters, because SHA1 hashes always consist of exactly 40 hexadecimal digits representing 20 bytes. One byte, i.e. two hexadecimal digits are used for each character in the colliding password.</p>
 </blockquote>
-<p>Here, how to generate the collision password:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> -n <span class="string">'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg'</span> | sha1sum | xxd -r -p</div><div class="line">e6~n22k81&lt;[p<span class="string">"k5hhV6*</span></div></pre></td></tr></table></figure></p>
+<p>Here, how to generate the collision password:
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> -n <span class="string">'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg'</span> | sha1sum | xxd -r -p</div><div class="line">e6~n22k81&lt;[p<span class="string">"k5hhV6*</span></div></pre></td></tr></table></figure></p>
 <p>Note that:</p>
 <ul>
 <li><code>-n</code> option of <code>echo</code> <em>do not output the trailing newline</em> else generated password would be wrong.</li>
-<li><code>xxd</code> - make a hexdump or do the reverse.<ul>
+<li><code>xxd</code> - make a hexdump or do the reverse.
+<ul>
 <li><code>-r</code> or <code>-revert</code>: convert hexdump into binary.</li>
 <li><code>-p</code> or <code>-ps</code> or <code>-postscript</code> or <code>-plain</code>: output in postscript continuous hexdump style. Also known as plain hexdump style.</li>
 <li><code>-r -p</code>: Use the combination -r -p to read plain hexadecimal dumps without line number information and without a particular column  layout.</li>
@@ -338,9 +368,12 @@ ga('send', 'pageview');
 <blockquote>
 <p>While it’s easy to find a collision for any given string larger than 64 bytes (just run the above Bash command), it gets trickier if you want the colliding password to consist of readable ASCII characters only. SHA1 hashes can contain any hexadecimal digits, and converting such a hash back into a string is likely to result in at least one character outside of the printable ASCII range (<code>[\x20-\x7E]</code>).</p>
 </blockquote>
-<p>To see how to choose a prefix for the colliding password go to [link][<a href="https://mathiasbynens.be/notes/pbkdf2-hmac" title="PBKDF2+HMAC hash collisions explained" target="_blank" rel="external">mathiasbynens.be</a>.</p>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><blockquote>
-<p>Since Backdoor is an always-online CTF platform, and not a one time contest, we kindly request you to not publish flags for the challenges in your writeups.<br>Writeups are an excellent way to share knowledge and help others learn. In Backdoor, challenges are shifted from a contest to the Practice section, where people can continue to attempt them after the contest is over. It would be very unfair to participants if the flags for the problems were easily available in writeups online.<br>Hence, we kindly request to not publish flags of the problems that you solve. Here is an example of an excellent writeup which refrains from giving the complete solution.</p>
+<p>To see how to choose a prefix for the colliding password go to [link][<a href="https://mathiasbynens.be/notes/pbkdf2-hmac" title="PBKDF2+HMAC hash collisions explained" target="_blank" rel="external">mathiasbynensbe</a>.</p>
+<h3>Flag</h3>
+<blockquote>
+<p>Since Backdoor is an always-online CTF platform, and not a one time contest, we kindly request you to not publish flags for the challenges in your writeups.
+Writeups are an excellent way to share knowledge and help others learn. In Backdoor, challenges are shifted from a contest to the Practice section, where people can continue to attempt them after the contest is over. It would be very unfair to participants if the flags for the problems were easily available in writeups online.
+Hence, we kindly request to not publish flags of the problems that you solve. Here is an example of an excellent writeup which refrains from giving the complete solution.</p>
 </blockquote>
 
         </div>
@@ -349,7 +382,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-mindblown/" data-id="cizbi39sn00e33jfsei73u2hh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-mindblown/" data-id="cizepeo9l00gb2rfsi9vby070" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -485,20 +518,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/BackdoorCTF-2016-writeups-crypto-oups-its-all-mixed/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/pastejacking-vs-clipboard-hijacking/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Writeups - Crypto - Oups it&#39;s all mixed
+            Pastejacking vs clipboard hijacking
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/how-to-manually-configure-firefox-waterfox-language/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/BackdoorCTF-2016-writeups-crypto-oups-its-all-mixed/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">How to manually configure Firefox / Waterfox language</p>
+        <p class="article-nav-title">Writeups - Crypto - Oups it&#39;s all mixed</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -513,6 +546,86 @@ ga('send', 'pageview');
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/Ruby-cheat-sheet-with-examples/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/programming.jpg)" alt="Ruby cheat sheet with examples" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/programming/">programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/programming/ruby/">ruby</a></p>
+                            <p class="item-title"><a href="/en/Ruby-cheat-sheet-with-examples/" class="title">Ruby cheat sheet with examples</a></p>
+                            <p class="item-date"><time datetime="2017-02-19T23:00:00.000Z" itemprop="datePublished">Monday 20 February 2017 (2017-02-20)</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -534,86 +647,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/en/snapshot-kvm-libvirt-virsh/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/tux-293844_640.png)" alt="Snapshot for KVM via libvirt with virsh" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a></p>
-                            <p class="item-title"><a href="/en/snapshot-kvm-libvirt-virsh/" class="title">Snapshot for KVM via libvirt with virsh</a></p>
-                            <p class="item-date"><time datetime="2017-02-07T23:00:00.000Z" itemprop="datePublished">Wednesday 8 February 2017 (2017-02-08)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/en/AlexCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="AlexCTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/AlexCTF-2017-write-ups/" class="title">AlexCTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-04T23:00:00.000Z" itemprop="datePublished">Sunday 5 February 2017 (2017-02-05)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/en/BITSCTF-2017-writeups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="BITSCTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/BITSCTF-2017-writeups/" class="title">BITSCTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-04T23:00:00.000Z" itemprop="datePublished">Sunday 5 February 2017 (2017-02-05)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/en/Insomnihack-2017-Teaser-smarttomcat/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Insomni&#39;hack teaser - 50 - smarttomcat - Web" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/Insomnihack-2017-Teaser-smarttomcat/" class="title">Insomni&#39;hack teaser - 50 - smarttomcat - Web</a></p>
-                            <p class="item-date"><time datetime="2017-01-20T23:00:00.000Z" itemprop="datePublished">Saturday 21 January 2017 (2017-01-21)</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -623,7 +656,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">103</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">91</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/ruby/">ruby</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">106</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">94</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -633,7 +666,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 12.14px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.71px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.71px;">centos</a> <a href="/tags/crypto/" style="font-size: 15px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.29px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensic/" style="font-size: 10px;">forensic</a> <a href="/tags/forensics/" style="font-size: 17.14px;">forensics</a> <a href="/tags/git/" style="font-size: 11.43px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.71px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.71px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/misc/" style="font-size: 15.71px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.71px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 12.86px;">news</a> <a href="/tags/opensuse/" style="font-size: 13.57px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.71px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 11.43px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.71px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 11.43px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.71px;">reverse</a> <a href="/tags/reversing/" style="font-size: 10px;">reversing</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.71px;">ssh</a> <a href="/tags/stegano/" style="font-size: 11.43px;">stegano</a> <a href="/tags/system/" style="font-size: 16.43px;">system</a> <a href="/tags/tor/" style="font-size: 10.71px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.71px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.71px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 14.29px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.71px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 17.86px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 12.86px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.29px;">writeups</a>
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 12.67px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.67px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.67px;">centos</a> <a href="/tags/crypto/" style="font-size: 15.33px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.33px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forencics/" style="font-size: 10px;">forencics</a> <a href="/tags/forensic/" style="font-size: 10px;">forensic</a> <a href="/tags/forensics/" style="font-size: 17.33px;">forensics</a> <a href="/tags/git/" style="font-size: 11.33px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.67px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.67px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.67px;">linux</a> <a href="/tags/misc/" style="font-size: 16px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.67px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 13.33px;">news</a> <a href="/tags/opensuse/" style="font-size: 14px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.67px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 12px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.67px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 11.33px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.67px;">reverse</a> <a href="/tags/reversing/" style="font-size: 10px;">reversing</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.67px;">ssh</a> <a href="/tags/stegano/" style="font-size: 11.33px;">stegano</a> <a href="/tags/system/" style="font-size: 16.67px;">system</a> <a href="/tags/tor/" style="font-size: 10.67px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.67px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.67px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 14.67px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.67px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 18px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.33px;">writeups</a>
         </div>
     </div>
 
@@ -643,7 +676,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

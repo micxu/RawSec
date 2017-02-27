@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>NeverLAN CTF 2017 - Write-ups | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="security,web,writeups,ctf,forensics" />
+    
+    <meta name="description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : NeverLAN CTF 2017
+Website : neverlanctf.com
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+50 - Encoding Apprentice -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NeverLAN CTF 2017 - Write-ups">
+<meta property="og:url" content="http://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : NeverLAN CTF 2017
+Website : neverlanctf.com
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+50 - Encoding Apprentice -">
+<meta property="og:image" content="http://rawsec.ml/images/ctf.png">
+<meta property="og:updated_time" content="2017-02-27T19:04:01.933Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NeverLAN CTF 2017 - Write-ups">
+<meta name="twitter:description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : NeverLAN CTF 2017
+Website : neverlanctf.com
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+50 - Encoding Apprentice -">
+<meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/security/writeups/">writeups</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-NeverLAN-CTF-2017-write-ups" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        NeverLAN CTF 2017 - Write-ups
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/NeverLAN-CTF-2017-write-ups/" class="article-date">
+    <time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forensics/">forensics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeups/">writeups</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3>CTF</h3>
+<ul>
+<li><strong>Name</strong> : NeverLAN CTF 2017</li>
+<li><strong>Website</strong> : <a href="https://neverlanctf.com/" target="_blank" rel="external">neverlanctf.com</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/431/" target="_blank" rel="external">link</a></li>
+</ul>
+<h1>50 - Encoding Apprentice - Trivia</h1>
+<blockquote>
+<p>What common encoding practice’s title contains the square of 8 and occasionally ends with an “=”, or “==”?</p>
+</blockquote>
+<p>Answer: <em>base64</em></p>
+<h1>50 - Shifty Ciphers… - Trivia</h1>
+<blockquote>
+<p>What cipher is the shiftiest of them all? He even has his own salad…</p>
+</blockquote>
+<p>Answer: <em>caesar</em></p>
+<h1>50 - Know your extensions - Trivia</h1>
+<blockquote>
+<p>Unix and Linux use this (instead of a file extension) to determine what format a file is.</p>
+</blockquote>
+<p>Answer: <em>magic numbers</em></p>
+<h1>50 - Mmmm... SSL - Trivia</h1>
+<blockquote>
+<p>What is the standard, secure, size of an ssl certificate?</p>
+</blockquote>
+<p>Answer: <em>2048</em></p>
+<h1>50 - Don't eat me - Trivia</h1>
+<blockquote>
+<p>I allow HTTP to act as a stateful protocol instead of the stateless protocol it actually is. Just a small piece of data sent from a website...</p>
+</blockquote>
+<p>Answer: <em>cookie</em></p>
+<h1>50 - NeverLAN - Recon</h1>
+<blockquote>
+<p>We've been known to leak things on twitter...</p>
+</blockquote>
+<p>Go to NeverLanCTF twitter: https://twitter.com/NeverLanCTF</p>
+<p>There is <a href="https://twitter.com/NeverLanCTF/status/834992893978804224" target="_blank" rel="external">an interesting twitter status</a>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Rnfl erpba vf rnfl. synt&#123;vas0ezngvba_vf_c0jre_xa0j_l0he_nqirefnel&#125; #CommonCaeserCipher</div></pre></td></tr></table></figure></p>
+<p>I tried a rot13 and I got that:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Easy recon is easy. flag&#123;inf0rmation_is_p0wer_kn0w_y0ur_adversary&#125;</div></pre></td></tr></table></figure></p>
+<p>Flag is <code>inf0rmation_is_p0wer_kn0w_y0ur_adversary</code>.</p>
+<h1>100 - Purvesta - Recon</h1>
+<blockquote>
+<p>Purvesta also really likes his twitter...</p>
+</blockquote>
+<ul>
+<li>NeverLAN CTFTime page: https://ctftime.org/team/32118</li>
+<li>purvesta CTFtime page: https://ctftime.org/user/23157</li>
+</ul>
+<p>purvesta name is: <em>Tanner Purves</em>, his LinkedIn page is not working. So I searched for <em>twitter Tanner Purves</em> and found his twitter page (@purvesta0704): https://twitter.com/purvesta0704</p>
+<p>His twitter descripton says:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\\\BSU &apos;20, Co-founder of the NeverLAN CTF/// &#123;ZmxhZ3tXMHdfeTB1X0FyM19HZXR0aW5nX2cwMGRfYXRfVGhpNX0=&#125;</div></pre></td></tr></table></figure></p>
+<p>It looks like a base64 string:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ printf %s &apos;ZmxhZ3tXMHdfeTB1X0FyM19HZXR0aW5nX2cwMGRfYXRfVGhpNX0=&apos; | base64 -d</div><div class="line">flag&#123;W0w_y0u_Ar3_Getting_g00d_at_Thi5&#125;</div></pre></td></tr></table></figure></p>
+<h1>50 - SoYouLikeMusic - Forensics</h1>
+<blockquote>
+<p><a href="https://ctf.neverlanctf.com/files/d8dacada92f876cff3f4f5775185240c/SoYouLikeMusic.class" target="_blank" rel="external">SoYouLikeMusic.class</a></p>
+</blockquote>
+<p>We can use <code>strings</code> on the java class:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">$ strings SoYouLikeMusic.class</div><div class="line">scan</div><div class="line">Ljava/util/Scanner;</div><div class="line">&lt;init&gt;</div><div class="line">Code</div><div class="line">LineNumberTable</div><div class="line">main</div><div class="line">([Ljava/lang/String;)V</div><div class="line">decompilingTheCodeNow</div><div class="line">qOne</div><div class="line">StackMapTable</div><div class="line">qTwo</div><div class="line">qThree</div><div class="line">playGame</div><div class="line">SourceFile</div><div class="line">SoYouLikeMusic.java</div><div class="line">java/util/Scanner</div><div class="line">OAhh welcome... so I hear you like music? What might I call you fellow listener?</div><div class="line">java/lang/StringBuilder</div><div class="line">Well</div><div class="line">4, let&apos;s play a game and see how much you like music.</div><div class="line">UWho was the special artist to dj music for our live streams before the event started?</div><div class="line">    s7a73farm</div><div class="line">Try Again...</div><div class="line">@Now you are on a roll! What is zestyfe&apos;s favorite type of music?</div><div class="line">dubstep</div><div class="line">=Final Question! What is the name of purvesta&apos;s only rap song?</div><div class="line">The_Gettysburg_Address_Rap</div><div class="line">|I will ask you three questions. If you can answer them all right, then I will point you towards your precious flag you seek!</div><div class="line">Want to play? (y/n)</div><div class="line">;Great let&apos;s play! (ctrl-c if you really don&apos;t want to play)</div><div class="line">Congratulations!! You did it!!</div><div class="line">8ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=</div><div class="line">SoYouLikeMusic</div><div class="line">java/lang/Object</div><div class="line">java/lang/String</div><div class="line">java/lang/System</div><div class="line">Ljava/io/InputStream;</div><div class="line">(Ljava/io/InputStream;)V</div><div class="line">Ljava/io/PrintStream;</div><div class="line">java/io/PrintStream</div><div class="line">println</div><div class="line">(Ljava/lang/String;)V</div><div class="line">nextLine</div><div class="line">()Ljava/lang/String;</div><div class="line">trim</div><div class="line">append</div><div class="line">-(Ljava/lang/String;)Ljava/lang/StringBuilder;</div><div class="line">toString</div><div class="line">equals</div><div class="line">(Ljava/lang/Object;)Z</div><div class="line">equalsIgnoreCase</div><div class="line">(Ljava/lang/String;)Z</div><div class="line">exit</div><div class="line">(I)V</div></pre></td></tr></table></figure></p>
+<p>Focus on:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Congratulations!! You did it!!</div><div class="line">8ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=</div></pre></td></tr></table></figure></p>
+<p>That looks like base64:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">printf %s &apos;8ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=&apos; |base64 -d</div><div class="line">񙱅��Mѥ��&#125;]��ѥ��&#125;=�&#125;���ٕ�ф��&#125;5��х���base64: invalid input</div></pre></td></tr></table></figure></p>
+<p>That's wrong let's execute the java class, we know teh answers:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ java -cp . SoYouLikeMusic</div><div class="line">Ahh welcome... so I hear you like music? What might I call you fellow listener?</div><div class="line">alex</div><div class="line"></div><div class="line">Well alex, let&apos;s play a game and see how much you like music.</div><div class="line">I will ask you three questions. If you can answer them all right, then I will point you towards your precious flag you seek!</div><div class="line">Want to play? (y/n)</div><div class="line">y</div><div class="line"></div><div class="line">Great let&apos;s play! (ctrl-c if you really don&apos;t want to play)</div><div class="line"></div><div class="line">Who was the special artist to dj music for our live streams before the event started?</div><div class="line">s7a73farm</div><div class="line"></div><div class="line">Now you are on a roll! What is zestyfe&apos;s favorite type of music?</div><div class="line">dubstep</div><div class="line"></div><div class="line">Final Question! What is the name of purvesta&apos;s only rap song?</div><div class="line">The_Gettysburg_Address_Rap</div><div class="line"></div><div class="line">Congratulations!! You did it!!</div><div class="line">ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=</div></pre></td></tr></table></figure></p>
+<p>There was only a <code>8</code> before our base64 string:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ printf %s &apos;ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=&apos; | base64 -di</div><div class="line">flag&#123;Still_Waiting_On_purvesta&apos;s_Mixtape&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>Note</strong>: This is not forensics.</p>
+<h1>300 - just-a-selfie - Forensics</h1>
+<blockquote>
+<p>You've been put in charge of a very secret project. There's talk that some of your data has leaked out. Your security analyst has flagged this email as &quot;out of place&quot;. Has your company been breached?</p>
+<p>Hmm.. Binwalk.</p>
+<p>Now that's a useful tool!</p>
+</blockquote>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file email.txt</div><div class="line">email.txt: SMTP mail, ASCII text</div></pre></td></tr></table></figure></p>
+<p>This is a mail with a attached image.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">--Apple-Mail=_9C94B8C8-A2CF-4892-8E1B-A89A4C3EAE03</div><div class="line">Content-Transfer-Encoding: base64</div><div class="line">Content-Disposition: inline;</div><div class="line">    filename=selfie.jpg</div><div class="line">Content-Type: image/jpeg;</div><div class="line">    x-unix-mode=0644;</div><div class="line">    name=&quot;selfie.jpg&quot;</div><div class="line">Content-Id: &lt;456C033A-8B84-4975-B1DC-3E5820C8993A@death.star&gt;</div></pre></td></tr></table></figure></p>
+<p>The image is base64 encoded, and split between line 92 and line 12617.</p>
+<p>Of course, <code>binwalk</code> is useless here:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">1369          0x559           HTML document header</div><div class="line">4003          0xFA3           HTML document footer</div><div class="line">9689          0x25D9          Unix path: /WqckbqxDJsHoQRUjuIXZONp/Kk81v7p/KjzN4BFG73qguf/0Pu9</div><div class="line">11085         0x2B4D          Unix path: /4RD4Z6ZCUZZplNxIrjBy/I/QgV9N/DfxvL4aeO+t0</div><div class="line">13229         0x33AD          Unix path: /ENn/Y/huxtvl8wx5Yrjljz/XFcVZQtPdqFRpH3DhFzntj8eK7L4h3</div><div class="line">13284         0x33E4          Unix path: /nakVUgImCE9BjOK2f2dPAx8c/F/w/p+zfD9pW4kA4+SP5mz7dK8OeIjhsJKtN7Js/Sc0pxnmnsl</div><div class="line">14560         0x38E0          Unix path: /wCEI0L/AJ8I/wDvqtxbcOoY/KTz6Uv2</div><div class="line">15287         0x3BB7          Unix path: /qK6f4i/C/VfHGu/wBs+MdbXXmhwEuZIRFIUAGAQuOn1P0rxLRVlc+hdp6rRI8RvvDfhTxRpk8h</div><div class="line">22696         0x58A8          Unix path: /8E/Ke8hMUKjeWAOBkde/9c/jVZIhnPfvmr2or8qZwpPJHFVQm7ngjsDWt</div><div class="line">23242         0x5ACA          Unix path: /jivyX2F9h6LjJ/P/J/GvqMszD+0Kcm1ZrcqbhUh7WGielgaMcY</div><div class="line">25527         0x63B7          Unix path: /VX4Z/sceA/B/hq2iksI7rUFjAedu/Gf5ivMlZaHq+1jSXNI/P8A+FHxw1DwhrDWGlBbnT3bZLay</div><div class="line">26919         0x6927          Unix path: /g9Ya7q2iG9/4SKO4Xz1zss1b/AFYcehBbrXxjjLmaPufiimmec/DD4VaN4j1K8uIbWym1</div><div class="line">29935         0x74EF          Unix path: /AI/pTd3IVudkZwoPsWP/AI7X2XdzLDG7M20AE5r8q/2lvHLfED4yeIL/</div><div class="line">33346         0x8242          Unix path: /8d2V8h6gAHRADuC54969P/aJ8X/8ACc/H</div><div class="line">35802         0x8BDA          Unix path: /KvZNS/bO8a61EBdzJLFghkZuAOR1/Ovn74k/FC58Q</div><div class="line">36928         0x9040          Unix path: /klCp/1gIwfY1z2sSrIxWX5to/vYrQ4iLU/FsiXLyLB5MucoAPlj/xrKufEV1e4S4K/NyGB</div><div class="line">42880         0xA780          Unix path: /a/E/hDRQwxbWk1y/PQu4Uf+i/1r4a1Ihrjysj93x07100aM</div><div class="line">43257         0xA8F9          Unix path: /Z8yuKjGpSany/ebZ8P6bqWDG/2Vm/ij5H5Gsq/8K3FmC0bxzpuyD0Ki</div><div class="line">49189         0xC025          Unix path: /rtr4UWLzdoB3Z/Kvfv2z/GR8UfGaewhfdaaLAtoo3Y/eHDuf1A/C</div><div class="line">50244         0xC444          Unix path: /ljkcgHrV/RNXOm6pFLjMT/LKnHzr3WgpMr5AA2/xVteG5f3k0bN6HH+fwqprmnHTbwmI7rOb95B</div><div class="line">53176         0xCFB8          Unix path: /8E7tBW30/xJrEsflyTMlvE5/iGSWA/Ja+HzKq6OAqS6yP0PMKqipQh9iKXzPt7Tvml5rY</div><div class="line">55034         0xD6FA          Unix path: /wBivxnBfOmn6hp91bfwySPsY/UGqX/DGPxA/wCfjTP+/wAK+8fIP90n8KPI</div><div class="line">60216         0xEB38          Unix path: /TRd66LiUARWaeeWI6sDhV/U/lT/F1+19qUuO</div><div class="line">65339         0xFF3B          Unix path: /AMBrzL/hb3ib/oI3X5mvAdFXPSWHbSZ//9P4g8A+Ab3VNM1HxQztJpem3kFoSSMvNKrlVwOw</div><div class="line">67005         0x105BD         StuffIt Deluxe Segment (data): fpW74o1EL5VrGoBI3PhRkc</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
+<p>So let's extract the base64 string, join it, decode it and save the ouput in a file (with a ruby script of course).</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">"base64"</span></div><div class="line"></div><div class="line">line_no = <span class="number">1</span></div><div class="line">selfie_b64 = <span class="string">""</span></div><div class="line"></div><div class="line">File.open(<span class="string">"email.txt"</span>, <span class="string">'r'</span>) <span class="keyword">do</span> <span class="params">|file|</span></div><div class="line">    file.each <span class="keyword">do</span> <span class="params">|line|</span></div><div class="line">        <span class="keyword">if</span> line_no &gt;= <span class="number">92</span> &amp;&amp; line_no &lt;= <span class="number">12617</span></div><div class="line">            selfie_b64 += line.chomp</div><div class="line">        <span class="keyword">end</span></div><div class="line">        line_no += <span class="number">1</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">selfie_plain = Base64.decode64(selfie_b64)</div><div class="line"></div><div class="line">File.open(<span class="string">"selfie.jpg"</span>, <span class="string">'w'</span>) <span class="keyword">do</span> <span class="params">|file|</span></div><div class="line">    file.write(selfie_plain)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>I obtained this picture:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file selfie.jpg</div><div class="line">selfie.jpg: JPEG image data, JFIF standard 1.01, aspect ratio, density 72x72, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=2, orientation=upper-left], baseline, precision 8, 820x618, frames 3</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/tcjBM2a.jpg" alt=""></p>
+<p>This image seems to hide something else (trailing data):</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ binwalk selfie.jpg</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.01</div><div class="line">30            0x1E            TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">128969        0x1F7C9         Zip archive data, at least v2.0 to extract, name: Death_Star_Owner&apos;s_Technical_Manual_blueprints.jpg</div><div class="line">712883        0xAE0B3         Zip archive data, at least v1.0 to extract, name: __MACOSX/</div><div class="line">712938        0xAE0EA         Zip archive data, at least v2.0 to extract, name: __MACOSX/._Death_Star_Owner&apos;s_Technical_Manual_blueprints.jpg</div><div class="line">713908        0xAE4B4         End of Zip archive</div></pre></td></tr></table></figure></p>
+<p>Then I extracted it with <code>foremost</code> and unzip the archive:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ unzip 00000251.zip</div><div class="line">Archive:  00000251.zip</div><div class="line">  inflating: Death_Star_Owner&apos;s_Technical_Manual_blueprints.jpg  </div><div class="line">   creating: __MACOSX/</div><div class="line">  inflating: __MACOSX/._Death_Star_Owner&apos;s_Technical_Manual_blueprints.jpg</div></pre></td></tr></table></figure></p>
+<p>Finally, I get this Death Star Elevation Plan:</p>
+<p><img src="http://i.imgur.com/YZ84sSG.jpg" alt=""></p>
+<p>Flag is <code>rebellions_are_built_on_hope</code>.</p>
+<p><strong>Note</strong>: This is steganography, not forensics.</p>
+<h1>100 - TheHistoryOfCryptography - Cryptography</h1>
+<p><code>The_History_of_Cryptography.zip</code> contains two files: <code>0.txt</code> and <code>1.zip</code> :</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat 0.txt</div><div class="line">This Shifty Cipher is one of the simplest, and most well know ciphers.</div></pre></td></tr></table></figure></p>
+<p>Answer: <em>caesar</em></p>
+<p>The zip is password protected and the password is the answer of <code>0.txt</code>.</p>
+<p><code>1.zip</code> contains 2 files: <code>1.txt</code> and <code>2.zip</code>, and so on.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat 1.txt</div><div class="line">This Cipher is is named after the person who made it famous, not but the man who first created it.</div><div class="line"></div><div class="line">Password:&quot;The name of cipher in the riddle&quot; with out the quotes.</div></pre></td></tr></table></figure></p>
+<p>Answer: <em>vigenere</em></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat 2.txt</div><div class="line">This transposition cipher was used by the warriors in the famous movie &quot;the 300&quot;</div><div class="line"></div><div class="line">PassWord:&quot;The name of cipher in the riddle&quot; with out the quotes.</div></pre></td></tr></table></figure></p>
+<p>Answer: <em>scytale</em></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat 3.txt</div><div class="line">The first recorded use of this cipher was used to hide a book of magic.</div><div class="line"></div><div class="line">Password:&quot;The name of cipher in the riddle&quot; with out the quotes.</div></pre></td></tr></table></figure></p>
+<p>Answer: <em>steganography</em> (<a href="https://en.wikipedia.org/wiki/Steganography" target="_blank" rel="external">details</a>)</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat 4.txt</div><div class="line">This world famous cipher was invented by Arthur Scherbius</div><div class="line"></div><div class="line">Password:&quot;The name of cipher in the riddle&quot; with out the quotes.</div></pre></td></tr></table></figure></p>
+<p>Answer: <em>enigma machine</em> (<a href="https://en.wikipedia.org/wiki/Arthur_Scherbius" target="_blank" rel="external">details</a>)</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cat 5.txt</div><div class="line">Which one is you&apos;re favorite? I love them all because...</div><div class="line">flag&#123;THEHISTORYOFCRYPTOGRAPHYISAW3S0M3&#125;</div></pre></td></tr></table></figure></p>
+<p>Flag is <code>THEHISTORYOFCRYPTOGRAPHYISAW3S0M3</code>.</p>
+<p><strong>Note</strong>: this challenge was a quizz, not a cryptography challenge. It should have been in Trivia, Misc, Quizz or Other.</p>
+<h1>100 - A Slight Cut - Web</h1>
+<blockquote>
+<p>http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/</p>
+</blockquote>
+<p>Source:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;A slight cut&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;script&gt;</div><div class="line">[...]</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;div&gt;</div><div class="line">            &lt;h1&gt;type in some text to have the server repeat it back&lt;/h1&gt;</div><div class="line">            &lt;form onsubmit=&quot;getEcho(); return false;&quot;&gt;</div><div class="line">                &lt;input id=&quot;text&quot; name=&quot;text&quot; type=&quot;text&quot; placeholder=&quot;type some text here&quot;/&gt;</div><div class="line">                &lt;input id=&quot;length&quot; type=&quot;hidden&quot; name=&quot;length&quot; value=&quot;0&quot;/&gt;</div><div class="line">                &lt;input type=&quot;submit&quot;/&gt;</div><div class="line">            &lt;/form&gt;</div><div class="line">            &lt;p id=&quot;echo&quot;&gt;output will appear here&lt;/p&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>There is two parameters in te request url: <code>length</code> and <code>text</code>. <code>text</code> comes from the input field, and <code>length</code> is calculated with javascript.</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getEcho</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> text = $(<span class="string">'#text'</span>).val();</div><div class="line">    <span class="keyword">var</span> length = $(<span class="string">'#length'</span>).val();</div><div class="line">    $.ajax(<span class="string">'echo.php?length='</span>+length+<span class="string">'&amp;text='</span>+text).done(<span class="function"><span class="keyword">function</span>(<span class="params">echoed</span>)</span>&#123;</div><div class="line">        $(<span class="string">'#echo'</span>).text(echoed);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $(<span class="string">'#text'</span>).on(<span class="string">'input'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        $(<span class="string">'#length'</span>).val($(<span class="string">'#text'</span>).val().length);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>If I submit <code>A</code>, the calculated length is <code>1</code>.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">GET /echo.php?length=1&amp;text=A HTTP/1.1</div><div class="line">Host: neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123</div><div class="line">User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:51.0) Gecko/20100101 Firefox/51.0</div><div class="line">Accept: */*</div><div class="line">Accept-Language: en-US,en;q=0.5</div><div class="line">Accept-Encoding: gzip, deflate</div><div class="line">Referer: http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/</div><div class="line">X-Requested-With: XMLHttpRequest</div><div class="line">Connection: close</div></pre></td></tr></table></figure></p>
+<p>But what will happen if I change the value from 1 to 1000 with Burp:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /echo.php?length=1000&amp;text=A HTTP/1.1</div></pre></td></tr></table></figure></p>
+<p>The server displays more than intended:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Auo$@uyc kds2^4a ady 5 tyusft tuyuy_#65afajty ajb tjuflt ty%&amp;(juuyttyjtji KEY: flag&#123;bleeding_in_javascript&#125; SDF4 asd6f ayj1dsgff@ af ttmtum56tu$%ga wrg3@#%aa9-mtyumty dfgsaumg68g$%ershe as 9tuyt t9uty38dsdfg-5f htyd45s#$</div></pre></td></tr></table></figure></p>
+<p>Flag is: <code>bleeding_in_javascript</code>.</p>
+<h1>300 - WebCipher - Web</h1>
+<blockquote>
+<p>#anti-human</p>
+<p>http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/</p>
+<p>word list:</p>
+<p>https://s3-us-west-2.amazonaws.com/neverlanctf/files/words.txt</p>
+</blockquote>
+<p>Source:</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>anti-human cipher<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"cipher_box"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"cipher"</span>&gt;</span>shhsjwfl<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"form_box"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"form"</span> <span class="attr">method</span>=<span class="string">"GET"</span> <span class="attr">action</span>=<span class="string">"?"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"deciphered"</span> <span class="attr">id</span>=<span class="string">"deciphered"</span>/&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>First thing is to understand what to do. Here is what the server do:</p>
+<ul>
+<li>A word is picked up randomly from <code>words.txt</code></li>
+<li>This word is randomly rotated (Caesar cipher with a shift between 1 and 25)</li>
+<li>Then the shifted word is displayed for a few seconds</li>
+<li>A new word is picked up and so on...</li>
+</ul>
+<p>So we need a script that:</p>
+<ul>
+<li>Get the shifted word</li>
+<li>Cross the dictionary and test words one by one (only same length as teh shifted word)</li>
+<li>For each tested word try all possible shifting</li>
+<li>Break when that match</li>
+<li>Send the answer (decipered/unshifted word)</li>
+<li>Get the flag</li>
+</ul>
+<p>So that's what I did with a ruby script and <code>curb</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ ruby webcipher.rb</div><div class="line">• Connexion works</div><div class="line">• Cracking ciphered word</div><div class="line">• Deciphered: cassidony</div><div class="line">• Sending answer</div><div class="line">• Flag: c34s3r_c1ph3r_70_7h3_m4x</div></pre></td></tr></table></figure></p>
+<p>My ruby script:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line"><span class="comment"># from https://gist.github.com/matugm/db363c7131e6af27716c</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">caesar_cipher</span><span class="params">(string, shift = <span class="number">1</span>)</span></span></div><div class="line">    alphabet   = Array(<span class="string">'a'</span>..<span class="string">'z'</span>)</div><div class="line">    encrypter  = Hash[alphabet.zip(alphabet.rotate(shift))]</div><div class="line">    string.chars.map &#123; <span class="params">|c|</span> encrypter.fetch(c, <span class="string">" "</span>) &#125;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">hostname = <span class="string">'http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/index.php'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'PHPSESSID=30ff4361f8af2985595bff7c9614b1f1'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line"></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/anti\-human cipher/</span>)</div><div class="line">  puts <span class="string">'• Connexion works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># get the cipher word</span></div><div class="line">ciphered_word = c.body_str.match(<span class="regexp">/&lt;h1 id="cipher"&gt;([a-zA-Z]*)&lt;\/h1&gt;/</span>).captures[<span class="number">0</span>]</div><div class="line">ciphered_word.downcase! <span class="comment"># put lowercase</span></div><div class="line">ciphered_word_length = ciphered_word.length</div><div class="line"></div><div class="line">puts <span class="string">'• Cracking ciphered word'</span></div><div class="line">do_break = <span class="literal">false</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">File.open(<span class="string">"words.txt"</span>, <span class="string">'r'</span>) <span class="keyword">do</span> <span class="params">|file|</span></div><div class="line">    file.each <span class="keyword">do</span> <span class="params">|word|</span></div><div class="line">        word.chomp! <span class="comment"># remove spaces</span></div><div class="line">        <span class="keyword">if</span> word.length.eql?(ciphered_word_length) <span class="comment"># only try word with same length</span></div><div class="line">            answer = word <span class="comment"># save the word because it can be mixed case</span></div><div class="line">            word.downcase! <span class="comment"># put lowercase</span></div><div class="line">            <span class="comment"># puts "word: #&#123;word&#125;"</span></div><div class="line">            (<span class="number">1</span>..<span class="number">25</span>).each <span class="keyword">do</span> <span class="params">|i|</span></div><div class="line">                <span class="comment"># puts caesar_cipher(word, i).join</span></div><div class="line">                <span class="keyword">if</span> caesar_cipher(word, i).join == ciphered_word</div><div class="line">                    puts <span class="string">"• Deciphered: <span class="subst">#&#123;word&#125;</span>"</span></div><div class="line">                    do_break = <span class="literal">true</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">                <span class="keyword">end</span></div><div class="line">            <span class="keyword">end</span></div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">break</span> <span class="keyword">if</span> do_break</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">puts <span class="string">"• Sending answer"</span></div><div class="line">c.url = hostname.concat(<span class="string">"?deciphered=<span class="subst">#&#123;answer&#125;</span>"</span>)</div><div class="line">c.perform</div><div class="line"></div><div class="line">puts <span class="string">"• Flag: "</span>.concat(c.body_str.match(<span class="regexp">/&lt;p&gt;flag&#123;(.*)&#125;&lt;\/p&gt;/</span>).captures[<span class="number">0</span>])</div></pre></td></tr></table></figure></p>
+<p><strong>Note</strong>: This is not web, this is scripting.</p>
+<h1>50 - Master Mind 1 - Other</h1>
+<blockquote>
+<p>Can you break my three digit lock?</p>
+<p><a href="https://ctf.neverlanctf.com/files/fd671a9b0e49da2d34c8fcc055663d9c/MasterMind1.txt" target="_blank" rel="external">MasterMind1.txt</a></p>
+</blockquote>
+<p>Source:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">+-----------------------+</div><div class="line">|       |       |       |</div><div class="line">|   7   |   3   |   6   | One number is correct but wrongly placed</div><div class="line">|       |       |       |</div><div class="line">|_______|_______|_______|</div><div class="line">|       |       |       |</div><div class="line">|   0   |   6   |   5   | One number is correct and correctly placed</div><div class="line">|       |       |       |</div><div class="line">|_______|_______|_______|</div><div class="line">|       |       |       |</div><div class="line">|   3   |   7   |   2   | Two numbers are correct but wrongly placed</div><div class="line">|       |       |       |</div><div class="line">|_______|_______|_______|</div><div class="line">|       |       |       |</div><div class="line">|   6   |   4   |   7   | No numbers are correct</div><div class="line">|       |       |       |</div><div class="line">|_______|_______|_______|</div><div class="line">|       |       |       |</div><div class="line">|   5   |   2   |   4   | One number is correct and correctly placed</div><div class="line">|       |       |       |</div><div class="line">|       |       |       |</div><div class="line">+-----------------------+</div></pre></td></tr></table></figure></p>
+<p>Rules: <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" target="_blank" rel="external">Mastermind</a></p>
+<p>Code-breaking:</p>
+<ul>
+<li>Line 4: 647, No numbers are correct =&gt; [0,1,2,3,5,8,9] are possible</li>
+<li>Line 1: 736, One number is correct but wrongly placed =&gt; 7 and 6 are wrong, so 3 is in the code and is right or left</li>
+<li>Line 2: 065, One number is correct and correctly placed =&gt; 6 is wrong, so 0 or 5 is in the code and corrctly placed</li>
+<li>Line 3: 372, Two numbers are correct but wrongly placed =&gt; 7 is wrong, 3 and 2 are good so [3,2,[0|5]] are possible</li>
+<li>Line 5: 524, One number is correct and correctly placed =&gt; Only one number is correct, 2 is good so 5 is wrong and [3,2,0] are possible</li>
+<li>(We have the three numbers so now let's order them)</li>
+<li>Line 5: 524, One number is correct and correctly placed =&gt; 2 is middle</li>
+<li>Line 2: 065, One number is correct and correctly placed =&gt; 0 is left</li>
+<li>So 3 is right</li>
+</ul>
+<p>Flag is <code>023</code>.</p>
+<h1>100 - Master Mind 2 - Other</h1>
+<blockquote>
+<p>I've upgraded my lock! Can you solve it?</p>
+<p><a href="https://ctf.neverlanctf.com/files/7ce349ea5750338cb65d4e92cbd1a56e/MasterMind2.txt" target="_blank" rel="external">MasterMind2.txt</a></p>
+</blockquote>
+<p>Source:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">+-------------------------------+</div><div class="line">|       |       |       |       |</div><div class="line">|   9   |   5   |   3   |   2   | One number is correct but wrongly placed</div><div class="line">|       |       |       |       |</div><div class="line">|_______|_______|_______|_______|</div><div class="line">|       |       |       |       |</div><div class="line">|   1   |   6   |   7   |   3   | Two numbers are correct and correctly placed</div><div class="line">|       |       |       |       |</div><div class="line">|_______|_______|_______|_______|</div><div class="line">|       |       |       |       |</div><div class="line">|   0   |   6   |   5   |   9   | Two numbers are correct but wrongly placed</div><div class="line">|       |       |       |       |</div><div class="line">|_______|_______|_______|_______|</div><div class="line">|       |       |       |       |</div><div class="line">|   2   |   4   |   3   |   8   | No numbers are correct</div><div class="line">|       |       |       |       |</div><div class="line">|_______|_______|_______|_______|</div><div class="line">|       |       |       |       |</div><div class="line">|   5   |   2   |   4   |   0   | One number is correct and correctly placed</div><div class="line">|       |       |       |       |</div><div class="line">|       |       |       |       |</div><div class="line">+-------------------------------+</div></pre></td></tr></table></figure></p>
+<p>Rules: <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" target="_blank" rel="external">Mastermind</a></p>
+<p>Code-breaking:</p>
+<ul>
+<li>Line 4: 2438, No numbers are correct =&gt; Only [0,1,5,6,7,9] are possible</li>
+<li>Line 5: 5240, One number is correct and correctly placed =&gt; 2 and 4 are wrong, so 0 or 5 is in the code, [[0|5],1,6,7,9]</li>
+<li>Line 1: 9532, One number is correct but wrongly placed =&gt; 2 and 3 are wrong, so 9 or 5 is good, [0|5] &amp; [5|9] = 5 so [1,5,6,7] OR [0|5] &amp; [5|9] = [0,9] so so [0,1,6,7,9]</li>
+<li>Line 2: 1673, Two numbers are correct and correctly placed =&gt; Only two number are good so [1,5,6,7] impossible so [0,1,6,7,9] is only possible</li>
+<li>(Now we need to filter the 5 numbers to keep only 4)</li>
+<li>Line 1: Confirmed [9], Possible [0,1,6,7]</li>
+<li>Line 3: Confirmed [9,[0|6]], Possible [1,7]</li>
+<li>Line 5: Confirmed [9,0], Possible [1,7] so [0,1,7,9] are the four numbers</li>
+<li>(We have the four numbers so now let's order them)</li>
+<li>Line 2: Place [1,x,7,x]</li>
+<li>Line 5: Place [1,x,7,0] so  [1,9,7,0]</li>
+</ul>
+<p>Flag is <code>1970</code>.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/" data-id="cizohnaid0000v9fs8kqz7ku1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            WhiteHat Challenge 01 - 20 - For001 - Forensics
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/en/Ruby-cheat-sheet-with-examples/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Ruby cheat sheet with examples</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/Ruby-cheat-sheet-with-examples/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/programming.jpg)" alt="Ruby cheat sheet with examples" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/programming/">programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/programming/ruby/">ruby</a></p>
+                            <p class="item-title"><a href="/en/Ruby-cheat-sheet-with-examples/" class="title">Ruby cheat sheet with examples</a></p>
+                            <p class="item-date"><time datetime="2017-02-19T23:00:00.000Z" itemprop="datePublished">Monday 20 February 2017 (2017-02-20)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/BSides-San-Francisco-CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="BSides San Francisco CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/BSides-San-Francisco-CTF-2017-write-ups/" class="title">BSides San Francisco CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-12T23:00:00.000Z" itemprop="datePublished">Monday 13 February 2017 (2017-02-13)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/ruby/">ruby</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">106</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">94</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 12.67px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.67px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.67px;">centos</a> <a href="/tags/crypto/" style="font-size: 15.33px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.33px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forencics/" style="font-size: 10px;">forencics</a> <a href="/tags/forensic/" style="font-size: 10px;">forensic</a> <a href="/tags/forensics/" style="font-size: 17.33px;">forensics</a> <a href="/tags/git/" style="font-size: 11.33px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.67px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.67px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.67px;">linux</a> <a href="/tags/misc/" style="font-size: 16px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.67px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 13.33px;">news</a> <a href="/tags/opensuse/" style="font-size: 14px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.67px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 12px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.67px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 11.33px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.67px;">reverse</a> <a href="/tags/reversing/" style="font-size: 10px;">reversing</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.67px;">ssh</a> <a href="/tags/stegano/" style="font-size: 11.33px;">stegano</a> <a href="/tags/system/" style="font-size: 16.67px;">system</a> <a href="/tags/tor/" style="font-size: 10.67px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.67px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.67px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 14.67px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.67px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 18px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.33px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'http://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
