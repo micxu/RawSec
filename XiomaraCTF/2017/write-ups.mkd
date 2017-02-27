@@ -29,7 +29,7 @@ thumbnail: /images/ctf.png
 - **Format** : Jeopardy
 - **CTF Time** : [link](https://ctftime.org/event/430/)
 
-# 50 - Easy Login? - Web Exploitation
+## 50 - Easy Login? - Web Exploitation
 
 > An aspiring engineer started learning web development on Youtube a day ago and he was asked to build a nice, secure, simple login page as part of his project. Well, he just started off so don't blame him. Go, hack!
 >
@@ -133,7 +133,7 @@ $ cat flag.txt
 xiomara{50_y0u_ar3_@_h@ck3r}
 ```
 
-# 50 - Lulz - Web Exploitation
+## 50 - Lulz - Web Exploitation
 
 > Heavy sarcasm awaits. Are you a person who finds opportunities even in trolls? Well, let's find out.
 >
@@ -183,7 +183,7 @@ Copy it and paste it in your browser terminal, you will get:
 
 The is a ~~mistake~~ troll, so correct `Xiomara{i_4gr33_Y0U_4r3_a_Flash!}` into `xiomara{i_4gr33_Y0U_4r3_a_Flash!}` (lowercase the first char).
 
-# 50 - No Flags? - Web Exploitation
+## 50 - No Flags? - Web Exploitation
 
 > What would you do if we tell you there are no flags for this question? Go on, solve it. That reminds me, Nothing is impossible.
 >

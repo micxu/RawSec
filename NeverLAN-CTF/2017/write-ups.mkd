@@ -30,37 +30,37 @@ thumbnail: /images/ctf.png
 - **Format** : Jeopardy
 - **CTF Time** : [link](https://ctftime.org/event/431/)
 
-# 50 - Encoding Apprentice - Trivia
+## 50 - Encoding Apprentice - Trivia
 
 > What common encoding practice’s title contains the square of 8 and occasionally ends with an “=”, or “==”?
 
 Answer: *base64*
 
-# 50 - Shifty Ciphers… - Trivia
+## 50 - Shifty Ciphers… - Trivia
 
 > What cipher is the shiftiest of them all? He even has his own salad…
 
 Answer: *caesar*
 
-# 50 - Know your extensions - Trivia
+## 50 - Know your extensions - Trivia
 
 > Unix and Linux use this (instead of a file extension) to determine what format a file is.
 
 Answer: *magic numbers*
 
-# 50 - Mmmm... SSL - Trivia
+## 50 - Mmmm... SSL - Trivia
 
 > What is the standard, secure, size of an ssl certificate?
 
 Answer: *2048*
 
-# 50 - Don't eat me - Trivia
+## 50 - Don't eat me - Trivia
 
 > I allow HTTP to act as a stateful protocol instead of the stateless protocol it actually is. Just a small piece of data sent from a website...
 
 Answer: *cookie*
 
-# 50 - NeverLAN - Recon
+## 50 - NeverLAN - Recon
 
 > We've been known to leak things on twitter...
 
@@ -80,7 +80,7 @@ Easy recon is easy. flag{inf0rmation_is_p0wer_kn0w_y0ur_adversary}
 
 Flag is `inf0rmation_is_p0wer_kn0w_y0ur_adversary`.
 
-# 100 - Purvesta - Recon
+## 100 - Purvesta - Recon
 
 > Purvesta also really likes his twitter...
 
@@ -102,7 +102,7 @@ $ printf %s 'ZmxhZ3tXMHdfeTB1X0FyM19HZXR0aW5nX2cwMGRfYXRfVGhpNX0=' | base64 -d
 flag{W0w_y0u_Ar3_Getting_g00d_at_Thi5}
 ```
 
-# 50 - SoYouLikeMusic - Forensics
+## 50 - SoYouLikeMusic - Forensics
 
 > [SoYouLikeMusic.class](https://ctf.neverlanctf.com/files/d8dacada92f876cff3f4f5775185240c/SoYouLikeMusic.class)
 
@@ -216,7 +216,7 @@ flag{Still_Waiting_On_purvesta's_Mixtape}
 
 **Note**: This is not forensics.
 
-# 300 - just-a-selfie - Forensics
+## 300 - just-a-selfie - Forensics
 
 > You've been put in charge of a very secret project. There's talk that some of your data has leaked out. Your security analyst has flagged this email as "out of place". Has your company been breached?
 >
@@ -341,7 +341,7 @@ Flag is `rebellions_are_built_on_hope`.
 
 **Note**: This is steganography, not forensics.
 
-# 100 - TheHistoryOfCryptography - Cryptography
+## 100 - TheHistoryOfCryptography - Cryptography
 
 `The_History_of_Cryptography.zip` contains two files: `0.txt` and `1.zip` :
 
@@ -402,7 +402,7 @@ Flag is `THEHISTORYOFCRYPTOGRAPHYISAW3S0M3`.
 
 **Note**: this challenge was a quizz, not a cryptography challenge. It should have been in Trivia, Misc, Quizz or Other.
 
-# 100 - A Slight Cut - Web
+## 100 - A Slight Cut - Web
 
 > http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/
 
@@ -477,7 +477,7 @@ Auo$@uyc kds2^4a ady 5 tyusft tuyuy_#65afajty ajb tjuflt ty%&(juuyttyjtji KEY: f
 
 Flag is: `bleeding_in_javascript`.
 
-# 300 - WebCipher - Web
+## 300 - WebCipher - Web
 
 > #anti-human
 >
@@ -599,7 +599,7 @@ puts "• Flag: ".concat(c.body_str.match(/<p>flag{(.*)}<\/p>/).captures[0])
 
 **Note**: This is not web, this is scripting.
 
-# 50 - Master Mind 1 - Other
+## 50 - Master Mind 1 - Other
 
 > Can you break my three digit lock?
 >
@@ -647,7 +647,7 @@ Code-breaking:
 
 Flag is `023`.
 
-# 100 - Master Mind 2 - Other
+## 100 - Master Mind 2 - Other
 
 > I've upgraded my lock! Can you solve it?
 >
