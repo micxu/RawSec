@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,virtualization,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionThis mysterio">
+Description
+This myst">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ABCTF - 35 - Virtual Box 3 - Virtual Series">
 <meta property="og:url" content="http://rawsec.ml/en/ABCTF-2016-ABCTF-35-Virtual-Box-3-Virtual-Series/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionThis mysterio">
+Description
+This myst">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ABCTF - 35 - Virtual Box 3 - Virtual Series">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionThis mysterio">
+Description
+This myst">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,17 +277,21 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : ABCTF 2016</li>
 <li><strong>Website</strong> : <a href="http://abctf.xyz/" target="_blank" rel="external">http://abctf.xyz/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy - Student</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/333" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>This mysterious file was left here, but I have no idea how to open it. Do you? I left it in a folder named 2016 just for you.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Go to <code>C:\My Documents\2016</code> and there is <code>flagfour.xlsx</code> but we don’t have Excel</li>
-<li>Extract the file with a floppy disk<ul>
+<h3>Description</h3>
+<p>This mysterious file was left here, but I have no idea how to open it. Do you? I left it in a folder named 2016 just for you.</p>
+<h2>Solution</h2>
+<ol>
+<li>Go to <code>C:\My Documents\2016</code> and there is <code>flagfour.xlsx</code> but we don't have Excel</li>
+<li>Extract the file with a floppy disk
+<ul>
 <li>On your host create a floppy disk: <code>fallocate -l 1474560 floppy.vfd</code></li>
 <li>Mount it on the Win98 VM</li>
 <li>Format it</li>
@@ -281,7 +299,8 @@ ga('send', 'pageview');
 <li>Eject the floppy</li>
 </ul>
 </li>
-<li>Retrieve the file on your host<ul>
+<li>Retrieve the file on your host
+<ul>
 <li>Mount the image with a loopback device: <code>sudo mount -o loop floppy.vfd /tmp/floppy</code></li>
 <li>Open with libreoffice <code>libreoffice /tmp/floppy/flagfour.xlsx</code></li>
 <li>Content is <em>ABCTF{FR0M_THE_FUTURE}</em></li>
@@ -296,7 +315,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-35-Virtual-Box-3-Virtual-Series/" data-id="cizepeo7b00cv2rfs8s8044ju" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-35-Virtual-Box-3-Virtual-Series/" data-id="cizoihhbw00d2mefsn9s7m5om" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -443,9 +462,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/local-file-inclusion-remote-code-execution-vulnerability/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/ABCTF-2016-ABCTF-75-Virtual-Box-5-Virtual-Series/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Local File Inclusion (LFI) and Remote Code Execution (RCE) vulnerabilities for PHP</p>
+        <p class="article-nav-title">ABCTF - 75 - Virtual Box 5 - Virtual Series</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -484,26 +503,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -517,6 +516,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

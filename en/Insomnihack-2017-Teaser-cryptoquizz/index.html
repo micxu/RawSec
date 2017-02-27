@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,misc" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,19 +27,21 @@ Creation
 
 
 CTF
-Name : Insomni’hack teaser 2017
+
+Name : Insomni&apos;hack teaser 2017
 Website : teaser.insomnihack.ch
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-cryp">
+Description">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Insomni'hack teaser - 50 - cryptoquizz - Misc">
 <meta property="og:url" content="http://rawsec.ml/en/Insomnihack-2017-Teaser-cryptoquizz/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,19 +58,21 @@ Creation
 
 
 CTF
-Name : Insomni’hack teaser 2017
+
+Name : Insomni&apos;hack teaser 2017
 Website : teaser.insomnihack.ch
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-cryp">
+Description">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Insomni'hack teaser - 50 - cryptoquizz - Misc">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,14 +89,14 @@ Creation
 
 
 CTF
-Name : Insomni’hack teaser 2017
+
+Name : Insomni&apos;hack teaser 2017
 Website : teaser.insomnihack.ch
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-cryp">
+Description">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,37 +274,43 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Insomni’hack teaser 2017</li>
+<h3>CTF</h3>
+<ul>
+<li><strong>Name</strong> : Insomni'hack teaser 2017</li>
 <li><strong>Website</strong> : <a href="http://teaser.insomnihack.ch/" target="_blank" rel="external">teaser.insomnihack.ch</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/382" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<h3>Description</h3>
+<blockquote>
 <p>cryptoquizz - Misc/Crypto - 50 pts - realized by cryptopathe</p>
-<p>Hello, young hacker. Are you ready to fight rogue machines ? Now, you’ll have to prove us that you are a genuine cryptographer.</p>
+<p>Hello, young hacker. Are you ready to fight rogue machines ? Now, you'll have to prove us that you are a genuine cryptographer.</p>
 <p>Running on quizz.teaser.insomnihack.ch:1031</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><strong>Goal</strong>: In this challenge, a server a get us a name (of a famous cryptographer) and we have to find his/her birth year. Then we must send the year to the server and do it again for others cryptographers until we get the flag.</p>
+<h2>Solution</h2>
+<p><strong>Goal</strong>: In this challenge, a server a get us a name (of a famous cryptographer) and we have to find his/her birth year. Then we must send the year to the server and do it again for others cryptographers until we get the flag.</p>
 <p>To find the year of someone famous it is possible to use the <a href="https://www.mediawiki.org/wiki/API" target="_blank" rel="external">Wikimedia API</a>. I tried the API <a href="https://en.wikipedia.org/wiki/Special:ApiSandbox" target="_blank" rel="external">sandbox</a> and figured that it was difficult to use it manually.</p>
-<p>The wikimedia API works for all the Wikimedia Fundation entities, for example: Wikipedia, Wikidata,…</p>
+<p>The wikimedia API works for all the Wikimedia Fundation entities, for example: Wikipedia, Wikidata,...</p>
 <p>As we only want the birt year of the cryptographer we should prefer to use <a href="https://www.wikidata.org/" target="_blank" rel="external">Wikidata</a> instead of <a href="https://en.wikipedia.org/" target="_blank" rel="external">wikipedia</a>, there is less data to parse.</p>
 <p>As I like ruby for scripting, I chose to use a ruby gem: a Wikidata API Client named <a href="https://rubygems.org/gems/wikidata-client/" target="_blank" rel="external"><strong>wikidata-client</strong></a>. Here is the <a href="http://www.rubydoc.info/gems/wikidata-client/" target="_blank" rel="external">documentation</a>.</p>
-<p>Fist I only looked for the first person of the result. But I had soem wrong asnwer.<br>Because the server is giving wrong or partial name.<br>For example the server give <em>Ross Anderson</em> but there are:</p>
+<p>Fist I only looked for the first person of the result. But I had soem wrong asnwer.
+Because the server is giving wrong or partial name.
+For example the server give <em>Ross Anderson</em> but there are:</p>
 <ul>
 <li><em>Ross Anderson</em> an alpine skier</li>
 <li><em>Ross Anderson</em> a swimmer</li>
 <li><em>Ross J. Anderson</em> a computer scientist, cryptographer</li>
 </ul>
-<p>Another example is the server also giving diminutive or nickname like <em>Ron Rivest</em> for <em>Ronald Rivest</em>. This is not a problem for Ronald but with <em>Jim Massey</em> this is. There is a cryptographer named <em>James Lee Massey</em> and his nickname <em>Jimmy Massey</em> and the diminutive of <em>Jimmy</em> is <em>Jim</em>. Problem is that the real <em>Jim Massey</em> is a comics writer and the server is giving a diminutive of a nickname of <em>James Lee Massey</em>…</p>
-<p>So I had to create a <em>homonym avoidance</em> by checking the occupation of the person but this function takes too much time as it needs more requests and regex. So I finally disabled this function because it was making my requests timed out.<br>So I had to run my script several and have the luck not to search for ambiguous name and to finally get the flag.</p>
+<p>Another example is the server also giving diminutive or nickname like <em>Ron Rivest</em> for <em>Ronald Rivest</em>. This is not a problem for Ronald but with <em>Jim Massey</em> this is. There is a cryptographer named <em>James Lee Massey</em> and his nickname <em>Jimmy Massey</em> and the diminutive of <em>Jimmy</em> is <em>Jim</em>. Problem is that the real <em>Jim Massey</em> is a comics writer and the server is giving a diminutive of a nickname of <em>James Lee Massey</em>...</p>
+<p>So I had to create a <em>homonym avoidance</em> by checking the occupation of the person but this function takes too much time as it needs more requests and regex. So I finally disabled this function because it was making my requests timed out.
+So I had to run my script several and have the luck not to search for ambiguous name and to finally get the flag.</p>
 <p>Here is my ruby script:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'wikidata'</span></div><div class="line"></div><div class="line">hostname = <span class="string">'quizz.teaser.insomnihack.ch'</span></div><div class="line">port = <span class="number">1031</span></div><div class="line"></div><div class="line">s = TCPSocket.open(hostname, port)</div><div class="line">raw = <span class="string">''</span></div><div class="line">flag = <span class="literal">false</span></div><div class="line">find = <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> line = s.gets   <span class="comment"># Read lines from the socket</span></div><div class="line">    puts line.chop    <span class="comment"># And print with platform line terminator</span></div><div class="line">    raw += line</div><div class="line">    <span class="keyword">if</span> raw.match(<span class="regexp">/~~ What/</span>) &amp;&amp; flag == <span class="literal">false</span></div><div class="line">        name = raw.match(<span class="regexp">/^~~ What is the birth year of ([a-zA-Z\s\-\.]*) ?/</span>).captures[<span class="number">0</span>]</div><div class="line">        name = name[<span class="number">0</span>...-<span class="number">1</span>]</div><div class="line">        search = Wikidata::Item.search <span class="string">"<span class="subst">#&#123;name&#125;</span>"</span></div><div class="line">        <span class="keyword">if</span> search.empty? == <span class="literal">false</span></div><div class="line">            <span class="keyword">while</span> find == <span class="literal">false</span></div><div class="line">                man = search.results.first</div><div class="line">                <span class="comment">#occupation = man.properties('P106').to_s</span></div><div class="line">                <span class="comment">#if occupation.match(/crypto/) || occupation.match(/computer/)</span></div><div class="line">                <span class="keyword">if</span> <span class="literal">true</span> <span class="comment"># homonym avoidance take to much time</span></div><div class="line">                    birth_year = man.date_of_birth.date.year</div><div class="line">                    puts <span class="string">"<span class="subst">#&#123;name&#125;</span>: <span class="subst">#&#123;birth_year&#125;</span>"</span></div><div class="line">                    s.puts birth_year</div><div class="line">                    raw = <span class="string">''</span></div><div class="line">                    find = <span class="literal">true</span></div><div class="line">                <span class="keyword">else</span></div><div class="line">                    puts <span class="string">"shift"</span></div><div class="line">                    search.results.shift    <span class="comment"># remove first item of the array</span></div><div class="line">                <span class="keyword">end</span></div><div class="line">            <span class="keyword">end</span></div><div class="line">            find = <span class="literal">false</span>    <span class="comment"># for the next search</span></div><div class="line">        <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">s.close               <span class="comment"># Close the socket when done</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'wikidata'</span></div><div class="line"></div><div class="line">hostname = <span class="string">'quizz.teaser.insomnihack.ch'</span></div><div class="line">port = <span class="number">1031</span></div><div class="line"></div><div class="line">s = TCPSocket.open(hostname, port)</div><div class="line">raw = <span class="string">''</span></div><div class="line">flag = <span class="literal">false</span></div><div class="line">find = <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> line = s.gets   <span class="comment"># Read lines from the socket</span></div><div class="line">    puts line.chop    <span class="comment"># And print with platform line terminator</span></div><div class="line">    raw += line</div><div class="line">    <span class="keyword">if</span> raw.match(<span class="regexp">/~~ What/</span>) &amp;&amp; flag == <span class="literal">false</span></div><div class="line">        name = raw.match(<span class="regexp">/^~~ What is the birth year of ([a-zA-Z\s\-\.]*) ?/</span>).captures[<span class="number">0</span>]</div><div class="line">        name = name[<span class="number">0</span>...-<span class="number">1</span>]</div><div class="line">        search = Wikidata::Item.search <span class="string">"<span class="subst">#&#123;name&#125;</span>"</span></div><div class="line">        <span class="keyword">if</span> search.empty? == <span class="literal">false</span></div><div class="line">            <span class="keyword">while</span> find == <span class="literal">false</span></div><div class="line">                man = search.results.first</div><div class="line">                <span class="comment">#occupation = man.properties('P106').to_s</span></div><div class="line">                <span class="comment">#if occupation.match(/crypto/) || occupation.match(/computer/)</span></div><div class="line">                <span class="keyword">if</span> <span class="literal">true</span> <span class="comment"># homonym avoidance take to much time</span></div><div class="line">                    birth_year = man.date_of_birth.date.year</div><div class="line">                    puts <span class="string">"<span class="subst">#&#123;name&#125;</span>: <span class="subst">#&#123;birth_year&#125;</span>"</span></div><div class="line">                    s.puts birth_year</div><div class="line">                    raw = <span class="string">''</span></div><div class="line">                    find = <span class="literal">true</span></div><div class="line">                <span class="keyword">else</span></div><div class="line">                    puts <span class="string">"shift"</span></div><div class="line">                    search.results.shift    <span class="comment"># remove first item of the array</span></div><div class="line">                <span class="keyword">end</span></div><div class="line">            <span class="keyword">end</span></div><div class="line">            find = <span class="literal">false</span>    <span class="comment"># for the next search</span></div><div class="line">        <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">s.close               <span class="comment"># Close the socket when done</span></div></pre></td></tr></table></figure></p>
 <p>Here is the output of the script:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/Insomnihack/Teaser/2017]</div><div class="line">$ ruby cryptoquizz.rb</div><div class="line"></div><div class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div><div class="line">~~ Hello, young hacker. Are you ready to fight rogue machines ?    ~~</div><div class="line">~~ Now, you&apos;ll have to prove us that you are a genuine             ~~</div><div class="line">~~ cryptographer.                                                  ~~</div><div class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Nigel P. Smart ?</div><div class="line">Nigel P. Smart: 1967</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Don Coppersmith ?</div><div class="line">Don Coppersmith: 1950</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Niels Ferguson ?</div><div class="line">Niels Ferguson: 1965</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Mihir Bellare ?</div><div class="line">Mihir Bellare: 1962</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Amos Fiat ?</div><div class="line">Amos Fiat: 1956</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Wang Xiaoyun ?</div><div class="line">Wang Xiaoyun: 1966</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Eli Biham ?</div><div class="line">Eli Biham: 1960</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Martin Hellman ?</div><div class="line">Martin Hellman: 1945</div><div class="line"></div><div class="line"></div><div class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div><div class="line">~~ OK, young hacker. You are now considered to be a                ~~</div><div class="line">~~ INS&#123;GENUINE_CRYPTOGRAPHER_BUT_NOT_YET_A_PROVEN_SKILLED_ONE&#125;     ~~</div><div class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/Insomnihack/Teaser/2017]</div><div class="line">$ ruby cryptoquizz.rb</div><div class="line"></div><div class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div><div class="line">~~ Hello, young hacker. Are you ready to fight rogue machines ?    ~~</div><div class="line">~~ Now, you&apos;ll have to prove us that you are a genuine             ~~</div><div class="line">~~ cryptographer.                                                  ~~</div><div class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Nigel P. Smart ?</div><div class="line">Nigel P. Smart: 1967</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Don Coppersmith ?</div><div class="line">Don Coppersmith: 1950</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Niels Ferguson ?</div><div class="line">Niels Ferguson: 1965</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Mihir Bellare ?</div><div class="line">Mihir Bellare: 1962</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Amos Fiat ?</div><div class="line">Amos Fiat: 1956</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Wang Xiaoyun ?</div><div class="line">Wang Xiaoyun: 1966</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Eli Biham ?</div><div class="line">Eli Biham: 1960</div><div class="line"></div><div class="line"></div><div class="line">~~ What is the birth year of Martin Hellman ?</div><div class="line">Martin Hellman: 1945</div><div class="line"></div><div class="line"></div><div class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div><div class="line">~~ OK, young hacker. You are now considered to be a                ~~</div><div class="line">~~ INS&#123;GENUINE_CRYPTOGRAPHER_BUT_NOT_YET_A_PROVEN_SKILLED_ONE&#125;     ~~</div><div class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div></pre></td></tr></table></figure></p>
 <p>Flag was: <code>INS{GENUINE_CRYPTOGRAPHER_BUT_NOT_YET_A_PROVEN_SKILLED_ONE}</code>.</p>
-<p><strong>Opinion</strong>: I don’t kniw if <em>cryptopathe</em> (challenge’s author) did it on purpose to make it harder or did it unintentionally because he/she didn’t checked his/her challenge and used a crappy data set, but giving wrong, partial, diminutive, nickname is very problematic for searches. I think this is not a well written challenge.</p>
+<p><strong>Opinion</strong>: I don't kniw if <em>cryptopathe</em> (challenge's author) did it on purpose to make it harder or did it unintentionally because he/she didn't checked his/her challenge and used a crappy data set, but giving wrong, partial, diminutive, nickname is very problematic for searches. I think this is not a well written challenge.</p>
 
         </div>
         <footer class="article-footer">
@@ -304,7 +318,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/Insomnihack-2017-Teaser-cryptoquizz/" data-id="cizepeohp00ue2rfsr0bt5ekt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/Insomnihack-2017-Teaser-cryptoquizz/" data-id="cizoihhi300vamefs5w8jedjs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -440,20 +454,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/AlexCTF-2017-write-ups/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/Insomnihack-2017-Teaser-smarttomcat/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            AlexCTF 2017 - Write-ups
+            Insomni&#39;hack teaser - 50 - smarttomcat - Web
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/Insomnihack-2017-Teaser-smarttomcat/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/opensuse-install-rtorrent-rutorrent/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Insomni&#39;hack teaser - 50 - smarttomcat - Web</p>
+        <p class="article-nav-title">OpenSUSE : Install rTorrent and ruTorrent</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -492,26 +506,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -525,6 +519,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

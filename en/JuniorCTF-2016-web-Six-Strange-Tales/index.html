@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: web">
+Description
+categories:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Juniors CTF - 300 - Six Strange Tales - Web">
 <meta property="og:url" content="http://rawsec.ml/en/JuniorCTF-2016-web-Six-Strange-Tales/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: web">
+Description
+categories:">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Juniors CTF - 300 - Six Strange Tales - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: web">
+Description
+categories:">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,40 +277,43 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : Juniors CTF 2016</li>
 <li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: web</p>
+<h3>Description</h3>
+<p>categories: web</p>
 <blockquote>
 <p><img src="http://i.imgur.com/nuiH6tv.jpg" alt=""></p>
 <ul>
-<li>Gruncle Stan, what’s the secret of the six fingered hand?</li>
+<li>Gruncle Stan, what's the secret of the six fingered hand?</li>
 <li>Can you see these codes? When the six fingered hand touches them, one of the Gravity Falls secrets opens!</li>
 <li>Gruncle, but how should we read the secret? From left to right or right to left? Or maybe upside down?</li>
-<li>It depends on whether you are a Christian, a Muslim or a Taoist…</li>
+<li>It depends on whether you are a Christian, a Muslim or a Taoist...</li>
 </ul>
 <p><img src="http://i.imgur.com/GIYH3fA.png" alt=""></p>
 <p>Lupanov M.Iu.</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Let’s see source code of the web page:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"img"</span> <span class="attr">width</span>=<span class="string">"717"</span> <span class="attr">height</span>=<span class="string">"380"</span>&gt;</span></div><div class="line">flag=&#123;fH7eAHJT3tXWD1e7afAvVfhcb&#125;      </div><div class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"> &lt;!--</span></div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> b = <span class="built_in">document</span>.getElementById(<span class="string">'img'</span>);</div><div class="line"><span class="keyword">var</span> a = b.getContext(<span class="string">'2d'</span>);</div><div class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> Image();</div><div class="line">d.src = <span class="string">"http://i.imgur.com/GIYH3fA.png"</span>;</div><div class="line">d.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">a.drawImage(<span class="keyword">this</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">k = <span class="number">174</span>;</div><div class="line">l = <span class="number">345</span>;</div><div class="line">m = <span class="number">12</span>;</div><div class="line">n = <span class="number">89</span>;</div><div class="line">o = <span class="number">671</span>;</div><div class="line">p = <span class="number">18</span>;</div><div class="line">q = <span class="number">222</span>;</div><div class="line">r = q<span class="number">-1</span>;</div><div class="line">c=<span class="string">"rgba(0,0,0,0)"</span>;</div><div class="line"><span class="keyword">if</span> (navigator.userAgent == <span class="string">"Gravity Falls"</span>)</div><div class="line">c=c.replace(<span class="regexp">/(0)(\))/</span>,<span class="string">"$1.5$2"</span>);</div><div class="line">a.fillStyle = c;         </div><div class="line">a.fillRect(q%m<span class="number">-6</span>, k<span class="number">-3</span>, n+r-q<span class="number">-2</span>, <span class="number">5</span>-(p-q));</div><div class="line">a.fillRect(<span class="number">2</span>*(q+<span class="number">1</span>), p+<span class="number">1</span>, n+r-q+<span class="number">2</span>, l+<span class="number">16</span>);</div><div class="line">a.fillRect(l+r<span class="number">-30</span>, o%p<span class="number">-5</span>, <span class="number">2</span>*l<span class="number">-600</span>, q+<span class="number">5</span>-p);</div><div class="line">a.fillRect(q%n+<span class="number">42</span>, o%p<span class="number">-5</span>, o<span class="number">-600</span>+p+<span class="number">1</span>, <span class="number">2</span>*(p+<span class="number">1</span>));</div><div class="line">a.fillRect(<span class="number">176</span>, o%p<span class="number">-5</span>, <span class="number">2</span>*l<span class="number">-600</span>, q/<span class="number">2</span>*<span class="number">3</span>+<span class="number">47</span>);</div><div class="line">a.fillRect(<span class="number">2</span>*k+p<span class="number">-100</span>, q%m<span class="number">-6</span>, o<span class="number">-600</span>+p+<span class="number">1</span>, n+r-m/<span class="number">2</span>);</div><div class="line">a.fillRect(o%p<span class="number">-5</span>, q%m<span class="number">-6</span>, <span class="number">2</span>*l<span class="number">-604</span>, k-p<span class="number">-4</span>);</div><div class="line">a.fillRect(<span class="number">2</span>*k+p<span class="number">-100</span>, q/<span class="number">2</span>*<span class="number">3</span><span class="number">-10</span>, <span class="number">3</span>*m+p*<span class="number">3</span>, (p+<span class="number">1</span>)*<span class="number">3</span>);</div><div class="line">a.fillRect(<span class="number">2</span>*k+p-m+<span class="number">2</span>, q%m<span class="number">-6</span>,<span class="number">2</span>*l<span class="number">-600</span>, q+n+m<span class="number">-190</span>);</div><div class="line">a.fillRect(<span class="number">2</span>*k+p<span class="number">-10</span>, k-p-m/<span class="number">3</span>, o<span class="number">-600</span>+p+<span class="number">1</span>, r+m*<span class="number">2</span>/<span class="number">3</span>+p);</div><div class="line">a.fillRect(n<span class="number">-3</span>, q-k+<span class="number">9</span>, <span class="number">2</span>*(l<span class="number">-300</span>), q+n+m);</div><div class="line">a.fillRect(l+q<span class="number">-31</span>, q+m/<span class="number">2</span>,<span class="number">2</span>*l<span class="number">-600</span>, k-p-m/<span class="number">3</span>);</div><div class="line">a.fillRect(o<span class="number">-2</span>*p-p/<span class="number">2</span>, q%m<span class="number">-6</span>, <span class="number">2</span>*l<span class="number">-600</span>, q/<span class="number">2</span>*<span class="number">3</span>+<span class="number">47</span>);</div><div class="line">&#125;,<span class="literal">false</span>);&#125;,<span class="literal">false</span>);</div><div class="line"><span class="comment">// --&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2>Solution</h2>
+<p>Let's see source code of the web page:</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"img"</span> <span class="attr">width</span>=<span class="string">"717"</span> <span class="attr">height</span>=<span class="string">"380"</span>&gt;</span></div><div class="line">flag=&#123;fH7eAHJT3tXWD1e7afAvVfhcb&#125;      </div><div class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"> &lt;!--</span></div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> b = <span class="built_in">document</span>.getElementById(<span class="string">'img'</span>);</div><div class="line"><span class="keyword">var</span> a = b.getContext(<span class="string">'2d'</span>);</div><div class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> Image();</div><div class="line">d.src = <span class="string">"http://i.imgur.com/GIYH3fA.png"</span>;</div><div class="line">d.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">a.drawImage(<span class="keyword">this</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">k = <span class="number">174</span>;</div><div class="line">l = <span class="number">345</span>;</div><div class="line">m = <span class="number">12</span>;</div><div class="line">n = <span class="number">89</span>;</div><div class="line">o = <span class="number">671</span>;</div><div class="line">p = <span class="number">18</span>;</div><div class="line">q = <span class="number">222</span>;</div><div class="line">r = q<span class="number">-1</span>;</div><div class="line">c=<span class="string">"rgba(0,0,0,0)"</span>;</div><div class="line"><span class="keyword">if</span> (navigator.userAgent == <span class="string">"Gravity Falls"</span>)</div><div class="line">c=c.replace(<span class="regexp">/(0)(\))/</span>,<span class="string">"$1.5$2"</span>);</div><div class="line">a.fillStyle = c;         </div><div class="line">a.fillRect(q%m<span class="number">-6</span>, k<span class="number">-3</span>, n+r-q<span class="number">-2</span>, <span class="number">5</span>-(p-q));</div><div class="line">a.fillRect(<span class="number">2</span>*(q+<span class="number">1</span>), p+<span class="number">1</span>, n+r-q+<span class="number">2</span>, l+<span class="number">16</span>);</div><div class="line">a.fillRect(l+r<span class="number">-30</span>, o%p<span class="number">-5</span>, <span class="number">2</span>*l<span class="number">-600</span>, q+<span class="number">5</span>-p);</div><div class="line">a.fillRect(q%n+<span class="number">42</span>, o%p<span class="number">-5</span>, o<span class="number">-600</span>+p+<span class="number">1</span>, <span class="number">2</span>*(p+<span class="number">1</span>));</div><div class="line">a.fillRect(<span class="number">176</span>, o%p<span class="number">-5</span>, <span class="number">2</span>*l<span class="number">-600</span>, q/<span class="number">2</span>*<span class="number">3</span>+<span class="number">47</span>);</div><div class="line">a.fillRect(<span class="number">2</span>*k+p<span class="number">-100</span>, q%m<span class="number">-6</span>, o<span class="number">-600</span>+p+<span class="number">1</span>, n+r-m/<span class="number">2</span>);</div><div class="line">a.fillRect(o%p<span class="number">-5</span>, q%m<span class="number">-6</span>, <span class="number">2</span>*l<span class="number">-604</span>, k-p<span class="number">-4</span>);</div><div class="line">a.fillRect(<span class="number">2</span>*k+p<span class="number">-100</span>, q/<span class="number">2</span>*<span class="number">3</span><span class="number">-10</span>, <span class="number">3</span>*m+p*<span class="number">3</span>, (p+<span class="number">1</span>)*<span class="number">3</span>);</div><div class="line">a.fillRect(<span class="number">2</span>*k+p-m+<span class="number">2</span>, q%m<span class="number">-6</span>,<span class="number">2</span>*l<span class="number">-600</span>, q+n+m<span class="number">-190</span>);</div><div class="line">a.fillRect(<span class="number">2</span>*k+p<span class="number">-10</span>, k-p-m/<span class="number">3</span>, o<span class="number">-600</span>+p+<span class="number">1</span>, r+m*<span class="number">2</span>/<span class="number">3</span>+p);</div><div class="line">a.fillRect(n<span class="number">-3</span>, q-k+<span class="number">9</span>, <span class="number">2</span>*(l<span class="number">-300</span>), q+n+m);</div><div class="line">a.fillRect(l+q<span class="number">-31</span>, q+m/<span class="number">2</span>,<span class="number">2</span>*l<span class="number">-600</span>, k-p-m/<span class="number">3</span>);</div><div class="line">a.fillRect(o<span class="number">-2</span>*p-p/<span class="number">2</span>, q%m<span class="number">-6</span>, <span class="number">2</span>*l<span class="number">-600</span>, q/<span class="number">2</span>*<span class="number">3</span>+<span class="number">47</span>);</div><div class="line">&#125;,<span class="literal">false</span>);&#125;,<span class="literal">false</span>);</div><div class="line"><span class="comment">// --&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p><code>flag={fH7eAHJT3tXWD1e7afAvVfhcb}</code> is not the good flag, it needs transformations.</p>
 <p>We can see that we need a different user agent: <code>Gravity Falls</code>.</p>
 <p>We changed our user agent to <code>Gravity Falls</code> and reloaded the page, the image has changed:</p>
 <p><img src="http://i.imgur.com/PT2D2mi.png" alt=""></p>
-<p>Let’s mix them: <code>AhWae2Oh</code>, <code>Is4feeh3</code>, <code>ud2juD9a</code>, <code>aej8eeTh</code>, <code>Maiy2au0</code>, <code>dawu0Aeb</code>.</p>
+<p>Let's mix them: <code>AhWae2Oh</code>, <code>Is4feeh3</code>, <code>ud2juD9a</code>, <code>aej8eeTh</code>, <code>Maiy2au0</code>, <code>dawu0Aeb</code>.</p>
 <ul>
 <li>left to right: <code>AhWae2OhIs4feeh3ud2juD9aaej8eeThMaiy2au0dawu0Aeb</code></li>
 <li>right to left: <code>dawu0AebMaiy2au0aej8eeThud2juD9aIs4feeh3AhWae2Oh</code></li>
 <li>upside down: <code>Maiy2au0Is4feeh3aej8eeThAhWae2Ohdawu0Aebud2juD9a</code></li>
 </ul>
-<p><a href="http://gravityfalls.wikia.com/wiki/Scary-oke" target="_blank" rel="external">http://gravityfalls.wikia.com/wiki/Scary-oke</a> is no help.</p>
+<p>http://gravityfalls.wikia.com/wiki/Scary-oke is no help.</p>
 <p><code>AhWae2OhIs4feeh3ud2juD9aaej8eeThMaiy2au0dawu0Aeb</code> was the flag.</p>
-<p><strong>Feedback</strong>: This is more a joy than a web and this isn’t really about security. I’m tired to see challenge like that. No flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like.</p>
+<p><strong>Feedback</strong>: This is more a joy than a web and this isn't really about security. I'm tired to see challenge like that. No flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like.</p>
 
         </div>
         <footer class="article-footer">
@@ -304,7 +321,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-web-Six-Strange-Tales/" data-id="cizepeofh00ko2rfs00ga30e7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-web-Six-Strange-Tales/" data-id="cizoihhfs00iomefsfoat1tgm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -440,20 +457,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/JuniorCTF-2016-web-Black-Suprematic-Square/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/JuniorCTF-2016-recon-Here-goes/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Juniors CTF - 100 - Black Suprematic Square - Web
+            Juniors CTF - 200 - Here goes ! - Recon
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/JuniorCTF-2016-recon-Here-goes/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/JuniorCTF-2016-forensics-Dirty-Repo/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Juniors CTF - 200 - Here goes ! - Recon</p>
+        <p class="article-nav-title">Juniors CTF - 400 - Dirty Repo - Forensics</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -492,26 +509,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -525,6 +522,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

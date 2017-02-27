@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensics" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,21 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECW - 150 - Alternative Persistent Threat - Forensics">
 <meta property="og:url" content="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +58,21 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECW - 150 - Alternative Persistent Threat - Forensics">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +89,14 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,23 +274,27 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
 <li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We used <a href="http://www.arxsys.fr/discover/" target="_blank" rel="external">Digital Forensics Framework (DFF)</a></p>
+<h3>Description</h3>
+<p>N.A.</p>
+<h2>Solution</h2>
+<p>We used <a href="http://www.arxsys.fr/discover/" target="_blank" rel="external">Digital Forensics Framework (DFF)</a></p>
 <p>We can view that <strong>usb.dd</strong> is NTFS partition in the hex view so we mounted it as it.</p>
 <p>We browsed the files and this one retaind our attention: <code>usb.dd/NTFS/Users/windows/Documents/tmp_rqsu78.docx:flag</code>.</p>
 <p>Its content is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Get the data from the default value of the key HKLM\SYSTEM\CurrentControlSet\Control\DeviceContainers\&#123;000001111-2345178-232416-99801&#125;&apos;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Get the data from the default value of the key HKLM\SYSTEM\CurrentControlSet\Control\DeviceContainers\&#123;000001111-2345178-232416-99801&#125;&apos;</div></pre></td></tr></table></figure></p>
 <p>So we need to find Windows registry and browse it.</p>
 <blockquote>
-<p>The location of these registry hives are as follows:<br><code>HKEY_LOCAL_MACHINE \SYSTEM</code> : <code>\system32\config\system</code></p>
+<p>The location of these registry hives are as follows:
+<code>HKEY_LOCAL_MACHINE \SYSTEM</code> : <code>\system32\config\system</code></p>
 </blockquote>
-<p>Source: <a href="http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7" target="_blank" rel="external">http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7</a></p>
+<p>Source: http://www.thewindowsclub.com/where-are-the-windows-registry-files-located-in-windows-7</p>
 <p>We browsed it and the value of the key was: <code>a2486aac827711258d0642176cc4f8c2</code>.</p>
 <p>So the flag is <code>ECW{a2486aac827711258d0642176cc4f8c2}</code>.</p>
 <p><strong>Bonus</strong>:</p>
@@ -287,7 +302,7 @@ ga('send', 'pageview');
 <li><code>/Logical files/temp/usb.dd/NTFS/!j3CtfuSD5zz1RfB=MlsL]u-k8O5v+,P</code> was certainly the target location of the attack.</li>
 <li>There was also a <code>no flag here.txt</code> troll file in <code>Windows\system32\config\</code> containing a pretty list of fake flags:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ECW&#123;ee4f493d149e634540b79ed030b3790e&#125;</div><div class="line">ECW&#123;ef20996f87a1c172223d1796f155cabb&#125;</div><div class="line">ECW&#123;78a4b8dd2614fea24d694aaad4e5ee7c&#125;</div><div class="line">ECW&#123;2942e64a0b3836b84aa18311be73804d&#125;</div><div class="line">ECW&#123;860d8070c9fed931856856b2957316d9&#125;</div><div class="line">ECW&#123;5c07ee2b8313b406a32325c7a2924011&#125;</div><div class="line">ECW&#123;20b1ab287f9f4485800b15ba9cb933b0&#125;</div><div class="line">ECW&#123;31470d8d9676ee5d17fe79317124d67a&#125;</div><div class="line">ECW&#123;c0ad5adadd6dc5871f4cc66370757d9a&#125;</div><div class="line">ECW&#123;d28aeba8bb169a6f628d77b7059e9110&#125;</div><div class="line">ECW&#123;c9f619827e73ce3d61048b0ddb49ec84&#125;</div><div class="line">ECW&#123;07c563dd9f91b19a18d8876e89188593&#125;</div><div class="line">ECW&#123;46f8ba8cd62e3334e05501407d653587&#125;</div><div class="line">ECW&#123;d55e0d52fa7c5ccb0af9efa488f5206d&#125;</div><div class="line">ECW&#123;269c20f280f7326c674811f59ece9cab&#125;</div><div class="line">ECW&#123;656122abbb817863ae145539bb0eeb03&#125;</div><div class="line">ECW&#123;d1b46e0fa5e5c0375ade62ff820ce631&#125;</div><div class="line">ECW&#123;62fd1f329ac8d59e6c4052e45b6121bf&#125;</div><div class="line">ECW&#123;c4393a542ae85e178cf7da6cee80139d&#125;</div><div class="line">ECW&#123;0ae1fcf8c1b5e378ba62736d59ab346c&#125;</div><div class="line">ECW&#123;31e42f6a1adeb6350cda9270c164855f&#125;</div><div class="line">ECW&#123;6a1dd34361fe943af6a4c4a71584ac2f&#125;</div><div class="line">ECW&#123;bc65d36be9d0c6877cc0b200002e4e2d&#125;</div><div class="line">ECW&#123;a0a7c3fff21f2aea3cfa1d0316dd816c&#125;</div><div class="line">ECW&#123;4cf2d64e44205fe628ddd534e1151b58&#125;</div><div class="line">ECW&#123;9cc72dc973e24f9623bd3fe708f60ef5&#125;</div><div class="line">ECW&#123;579a3c1e12a1e74a98169175fb913012&#125;</div><div class="line">ECW&#123;2b7ea5cee3c49ff53d41e00785eb974c&#125;</div><div class="line">ECW&#123;a4a7e457b55b5ac2877f7973dbba37e9&#125;</div><div class="line">ECW&#123;01b1688f97f94776baae85d77b06048b&#125;</div><div class="line">ECW&#123;9b64ca5761c6de555d7d1b3c948ecfeb&#125;</div><div class="line">ECW&#123;3ff6ba9cf6d8e5332978e057559b5562&#125;</div><div class="line">ECW&#123;7dfe15854212a30f346da5255c1d794b&#125;</div><div class="line">ECW&#123;f51b02427757e79621b5235d7efdf117&#125;</div><div class="line">ECW&#123;e0e8b9912a4793170fd23f7aa4c6d68c&#125;</div><div class="line">ECW&#123;036208b4a1ab4a235d75c181e685e5a3&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;7fad9816d7334cc470e5dc82d06e222f&#125;</div><div class="line">ECW&#123;d69fc8c97d906264c98463b4bca59fd4&#125;</div><div class="line">ECW&#123;5088741fd5456ef3471fe11022575e03&#125;</div><div class="line">ECW&#123;4d3f80683b3b9021f517e5b9920d0126&#125;</div><div class="line">ECW&#123;73a00957034783b7b5c8294c54cd3e12&#125;</div><div class="line">ECW&#123;1f77c389e0a69652980c341170d0834b&#125;</div><div class="line">ECW&#123;b42d4ed9a6bf5cda33366c01be5d11cb&#125;</div><div class="line">ECW&#123;c9440da5b11074fca7966ecde2fe3c97&#125;</div><div class="line">ECW&#123;6258191d167c56dcdb51ae9fa2faee23&#125;</div><div class="line">ECW&#123;095fd6a167e3c0f7331a1a6b97969c83&#125;</div><div class="line">ECW&#123;40942c14fbaaff0523b88ab781900cfd&#125;</div><div class="line">ECW&#123;39e14ad7477262c347f2e6d927a6518c&#125;</div><div class="line">ECW&#123;cdfb31c9bd2ea0c6d87206224466ac75&#125;</div><div class="line">ECW&#123;663f929002e1547fd2bf67e72f1b85e0&#125;</div><div class="line">ECW&#123;2eedce1bca0150e3dcda7e77f4d8ecfd&#125;</div><div class="line">ECW&#123;35b88728559e409dd550eb818228c99e&#125;</div><div class="line">ECW&#123;469966e739df10b55c3c8ee3ad572617&#125;</div><div class="line">ECW&#123;5146da32deef5fee7df9461eeca13e7b&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ECW&#123;ee4f493d149e634540b79ed030b3790e&#125;</div><div class="line">ECW&#123;ef20996f87a1c172223d1796f155cabb&#125;</div><div class="line">ECW&#123;78a4b8dd2614fea24d694aaad4e5ee7c&#125;</div><div class="line">ECW&#123;2942e64a0b3836b84aa18311be73804d&#125;</div><div class="line">ECW&#123;860d8070c9fed931856856b2957316d9&#125;</div><div class="line">ECW&#123;5c07ee2b8313b406a32325c7a2924011&#125;</div><div class="line">ECW&#123;20b1ab287f9f4485800b15ba9cb933b0&#125;</div><div class="line">ECW&#123;31470d8d9676ee5d17fe79317124d67a&#125;</div><div class="line">ECW&#123;c0ad5adadd6dc5871f4cc66370757d9a&#125;</div><div class="line">ECW&#123;d28aeba8bb169a6f628d77b7059e9110&#125;</div><div class="line">ECW&#123;c9f619827e73ce3d61048b0ddb49ec84&#125;</div><div class="line">ECW&#123;07c563dd9f91b19a18d8876e89188593&#125;</div><div class="line">ECW&#123;46f8ba8cd62e3334e05501407d653587&#125;</div><div class="line">ECW&#123;d55e0d52fa7c5ccb0af9efa488f5206d&#125;</div><div class="line">ECW&#123;269c20f280f7326c674811f59ece9cab&#125;</div><div class="line">ECW&#123;656122abbb817863ae145539bb0eeb03&#125;</div><div class="line">ECW&#123;d1b46e0fa5e5c0375ade62ff820ce631&#125;</div><div class="line">ECW&#123;62fd1f329ac8d59e6c4052e45b6121bf&#125;</div><div class="line">ECW&#123;c4393a542ae85e178cf7da6cee80139d&#125;</div><div class="line">ECW&#123;0ae1fcf8c1b5e378ba62736d59ab346c&#125;</div><div class="line">ECW&#123;31e42f6a1adeb6350cda9270c164855f&#125;</div><div class="line">ECW&#123;6a1dd34361fe943af6a4c4a71584ac2f&#125;</div><div class="line">ECW&#123;bc65d36be9d0c6877cc0b200002e4e2d&#125;</div><div class="line">ECW&#123;a0a7c3fff21f2aea3cfa1d0316dd816c&#125;</div><div class="line">ECW&#123;4cf2d64e44205fe628ddd534e1151b58&#125;</div><div class="line">ECW&#123;9cc72dc973e24f9623bd3fe708f60ef5&#125;</div><div class="line">ECW&#123;579a3c1e12a1e74a98169175fb913012&#125;</div><div class="line">ECW&#123;2b7ea5cee3c49ff53d41e00785eb974c&#125;</div><div class="line">ECW&#123;a4a7e457b55b5ac2877f7973dbba37e9&#125;</div><div class="line">ECW&#123;01b1688f97f94776baae85d77b06048b&#125;</div><div class="line">ECW&#123;9b64ca5761c6de555d7d1b3c948ecfeb&#125;</div><div class="line">ECW&#123;3ff6ba9cf6d8e5332978e057559b5562&#125;</div><div class="line">ECW&#123;7dfe15854212a30f346da5255c1d794b&#125;</div><div class="line">ECW&#123;f51b02427757e79621b5235d7efdf117&#125;</div><div class="line">ECW&#123;e0e8b9912a4793170fd23f7aa4c6d68c&#125;</div><div class="line">ECW&#123;036208b4a1ab4a235d75c181e685e5a3&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;a51a588dc98a55fbbb26cf2f64589bda&#125;</div><div class="line">ECW&#123;7fad9816d7334cc470e5dc82d06e222f&#125;</div><div class="line">ECW&#123;d69fc8c97d906264c98463b4bca59fd4&#125;</div><div class="line">ECW&#123;5088741fd5456ef3471fe11022575e03&#125;</div><div class="line">ECW&#123;4d3f80683b3b9021f517e5b9920d0126&#125;</div><div class="line">ECW&#123;73a00957034783b7b5c8294c54cd3e12&#125;</div><div class="line">ECW&#123;1f77c389e0a69652980c341170d0834b&#125;</div><div class="line">ECW&#123;b42d4ed9a6bf5cda33366c01be5d11cb&#125;</div><div class="line">ECW&#123;c9440da5b11074fca7966ecde2fe3c97&#125;</div><div class="line">ECW&#123;6258191d167c56dcdb51ae9fa2faee23&#125;</div><div class="line">ECW&#123;095fd6a167e3c0f7331a1a6b97969c83&#125;</div><div class="line">ECW&#123;40942c14fbaaff0523b88ab781900cfd&#125;</div><div class="line">ECW&#123;39e14ad7477262c347f2e6d927a6518c&#125;</div><div class="line">ECW&#123;cdfb31c9bd2ea0c6d87206224466ac75&#125;</div><div class="line">ECW&#123;663f929002e1547fd2bf67e72f1b85e0&#125;</div><div class="line">ECW&#123;2eedce1bca0150e3dcda7e77f4d8ecfd&#125;</div><div class="line">ECW&#123;35b88728559e409dd550eb818228c99e&#125;</div><div class="line">ECW&#123;469966e739df10b55c3c8ee3ad572617&#125;</div><div class="line">ECW&#123;5146da32deef5fee7df9461eeca13e7b&#125;</div></pre></td></tr></table></figure></p>
 
         </div>
         <footer class="article-footer">
@@ -295,7 +310,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/" data-id="cizepeoaj00h32rfsa4bllu6b" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/ECW-2016-Alternative-Persistent-Threat/" data-id="cizoihhdh00famefsb47sp8qn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -431,20 +446,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/ECW-2016-dilemme/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/ECW-2016-pas-seulement-BSON/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            ECW - 150 - Dilemme - Misc
+            ECW - 100 - Pas seulement BSON - Web
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/ECW-2016-pas-seulement-BSON/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/Hack-The-Vote-2016-50-topkek/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ECW - 100 - Pas seulement BSON - Web</p>
+        <p class="article-nav-title">Hack The Vote 2016 - 50 - TOPKEK - Misc</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -483,26 +498,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -516,6 +511,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

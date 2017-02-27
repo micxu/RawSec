@@ -187,22 +187,22 @@ ga('send', 'pageview');
             <p>There is the old method <code>cat /etc/*-release</code> to match distribution release file.</p>
 <p>For example on openSUSE this will match with <code>/etc/SuSE-release</code>.</p>
 <p>This method is deprecated and will be removed in the future.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">cat /etc/*-release</div><div class="line">NAME=<span class="string">"openSUSE Leap"</span></div><div class="line">VERSION=<span class="string">"42.1"</span></div><div class="line">VERSION_ID=<span class="string">"42.1"</span></div><div class="line">PRETTY_NAME=<span class="string">"openSUSE Leap 42.1 (x86_64)"</span></div><div class="line">ID=opensuse</div><div class="line">ANSI_COLOR=<span class="string">"0;32"</span></div><div class="line">CPE_NAME=<span class="string">"cpe:/o:opensuse:opensuse:42.1"</span></div><div class="line">BUG_REPORT_URL=<span class="string">"https://bugs.opensuse.org"</span></div><div class="line">HOME_URL=<span class="string">"https://opensuse.org/"</span></div><div class="line">ID_LIKE=<span class="string">"suse"</span></div><div class="line">openSUSE 42.1 (x86_64)</div><div class="line">VERSION = 42.1</div><div class="line">CODENAME = Malachite</div><div class="line"><span class="comment"># /etc/SuSE-release is deprecated and will be removed in the future, use /etc/os-release instead</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">cat /etc/*-release</div><div class="line">NAME=<span class="string">"openSUSE Leap"</span></div><div class="line">VERSION=<span class="string">"42.1"</span></div><div class="line">VERSION_ID=<span class="string">"42.1"</span></div><div class="line">PRETTY_NAME=<span class="string">"openSUSE Leap 42.1 (x86_64)"</span></div><div class="line">ID=opensuse</div><div class="line">ANSI_COLOR=<span class="string">"0;32"</span></div><div class="line">CPE_NAME=<span class="string">"cpe:/o:opensuse:opensuse:42.1"</span></div><div class="line">BUG_REPORT_URL=<span class="string">"https://bugs.opensuse.org"</span></div><div class="line">HOME_URL=<span class="string">"https://opensuse.org/"</span></div><div class="line">ID_LIKE=<span class="string">"suse"</span></div><div class="line">openSUSE 42.1 (x86_64)</div><div class="line">VERSION = 42.1</div><div class="line">CODENAME = Malachite</div><div class="line"><span class="comment"># /etc/SuSE-release is deprecated and will be removed in the future, use /etc/os-release instead</span></div></pre></td></tr></table></figure></p>
 <p>There is a more modern and more universal method <code>cat /etc/os-release</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cat /etc/os-release</div><div class="line">NAME=<span class="string">"openSUSE Leap"</span></div><div class="line">VERSION=<span class="string">"42.1"</span></div><div class="line">VERSION_ID=<span class="string">"42.1"</span></div><div class="line">PRETTY_NAME=<span class="string">"openSUSE Leap 42.1 (x86_64)"</span></div><div class="line">ID=opensuse</div><div class="line">ANSI_COLOR=<span class="string">"0;32"</span></div><div class="line">CPE_NAME=<span class="string">"cpe:/o:opensuse:opensuse:42.1"</span></div><div class="line">BUG_REPORT_URL=<span class="string">"https://bugs.opensuse.org"</span></div><div class="line">HOME_URL=<span class="string">"https://opensuse.org/"</span></div><div class="line">ID_LIKE=<span class="string">"suse"</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cat /etc/os-release</div><div class="line">NAME=<span class="string">"openSUSE Leap"</span></div><div class="line">VERSION=<span class="string">"42.1"</span></div><div class="line">VERSION_ID=<span class="string">"42.1"</span></div><div class="line">PRETTY_NAME=<span class="string">"openSUSE Leap 42.1 (x86_64)"</span></div><div class="line">ID=opensuse</div><div class="line">ANSI_COLOR=<span class="string">"0;32"</span></div><div class="line">CPE_NAME=<span class="string">"cpe:/o:opensuse:opensuse:42.1"</span></div><div class="line">BUG_REPORT_URL=<span class="string">"https://bugs.opensuse.org"</span></div><div class="line">HOME_URL=<span class="string">"https://opensuse.org/"</span></div><div class="line">ID_LIKE=<span class="string">"suse"</span></div></pre></td></tr></table></figure></p>
 <p>There is also a command with a more concise output <code>lsb_release -a</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">lsb_release <span class="_">-a</span></div><div class="line">LSB Version:  core-5.0-amd64:core-5.0-noarch</div><div class="line">Distributor ID: SUSE LINUX</div><div class="line">Description:  openSUSE Leap 42.1 (x86_64)</div><div class="line">Release:  42.1</div><div class="line">Codename: n/a</div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">lsb_release <span class="_">-a</span></div><div class="line">LSB Version:  core-5.0-amd64:core-5.0-noarch</div><div class="line">Distributor ID: SUSE LINUX</div><div class="line">Description:  openSUSE Leap 42.1 (x86_64)</div><div class="line">Release:  42.1</div><div class="line">Codename: n/a</div></pre></td></tr></table></figure></p>
 <p>To know the kernel version there is the <em>uname</em> command:</p>
 <ul>
 <li><code>uname -a</code> to have all informations</li>
 <li><code>uname -rs</code> to have kernel name and version only</li>
 <li><code>uname -m</code> to have architecture type</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uname <span class="_">-a</span></div><div class="line">Linux linux-7o7a.site 4.1.20-11-default <span class="comment">#1 SMP PREEMPT Fri Mar 18 14:42:07 UTC 2016 (0a392b2) x86_64 x86_64 x86_64 GNU/Linux</span></div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uname -rs</div><div class="line">Linux 4.1.20-11-default</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uname -m</div><div class="line">x86_64</div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uname <span class="_">-a</span></div><div class="line">Linux linux-7o7a.site 4.1.20-11-default <span class="comment">#1 SMP PREEMPT Fri Mar 18 14:42:07 UTC 2016 (0a392b2) x86_64 x86_64 x86_64 GNU/Linux</span></div></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uname -rs</div><div class="line">Linux 4.1.20-11-default</div></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uname -m</div><div class="line">x86_64</div></pre></td></tr></table></figure></p>
 <p>An alternative method is to see the <code>/proc/version</code> file that is showing kernel version and gcc version used to build it.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /proc/version</div><div class="line">Linux version 4.1.20-11-default (geeko@buildhost) (gcc version 4.8.5 (SUSE Linux) ) <span class="comment">#1 SMP PREEMPT Fri Mar 18 14:42:07 UTC 2016 (0a392b2)</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /proc/version</div><div class="line">Linux version 4.1.20-11-default (geeko@buildhost) (gcc version 4.8.5 (SUSE Linux) ) <span class="comment">#1 SMP PREEMPT Fri Mar 18 14:42:07 UTC 2016 (0a392b2)</span></div></pre></td></tr></table></figure></p>
 
         </div>
         <footer class="article-footer">
@@ -210,7 +210,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/find-out-linux-distribution-name-and-version/" data-id="cizepenm0001v2rfsomg2o5kb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/find-out-linux-distribution-name-and-version/" data-id="cizoihh2w0038mefsk8y4wyvi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -346,11 +346,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/virtualbox-shared-folder-with-guest/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/how-to-manually-configure-firefox-waterfox-language/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Virtualbox : shared folder with guest
+            How to manually configure Firefox / Waterfox language
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -398,26 +398,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -431,6 +411,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

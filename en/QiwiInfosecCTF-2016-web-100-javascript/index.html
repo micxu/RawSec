@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,6 +27,7 @@ Creation
 
 
 CTF
+
 Name : Qiwi-Infosec CTF-2016
 Website : https://qiwictf.ru/
 Type : Online
@@ -32,12 +35,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-we don’t">
+
+we do">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qiwi-Infosec CTF - 100 - javascript - Web">
 <meta property="og:url" content="http://rawsec.ml/en/QiwiInfosecCTF-2016-web-100-javascript/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,6 +60,7 @@ Creation
 
 
 CTF
+
 Name : Qiwi-Infosec CTF-2016
 Website : https://qiwictf.ru/
 Type : Online
@@ -61,12 +68,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-we don’t">
+
+we do">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Qiwi-Infosec CTF - 100 - javascript - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,6 +93,7 @@ Creation
 
 
 CTF
+
 Name : Qiwi-Infosec CTF-2016
 Website : https://qiwictf.ru/
 Type : Online
@@ -90,7 +101,8 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-we don’t">
+
+we do">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +262,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,26 +280,30 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : Qiwi-Infosec CTF-2016</li>
 <li><strong>Website</strong> : <a href="https://qiwictf.ru/" target="_blank" rel="external">https://qiwictf.ru/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/385" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>we don’t want to make any interface. just solve it</p>
+<h3>Description</h3>
+<blockquote>
+<p>we don't want to make any interface. just solve it</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We have a packed javascript code:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">eval</span>(<span class="function"><span class="keyword">function</span>(<span class="params">p,a,c,k,e,d</span>)</span>&#123;e=<span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;<span class="keyword">return</span>(c&amp;lt;a?<span class="string">''</span>:e(<span class="built_in">parseInt</span>(c/a)))+((c=c%a)&amp;gt;<span class="number">35</span>?<span class="built_in">String</span>.fromCharCode(c+<span class="number">29</span>):c.toString(<span class="number">36</span>))&#125;;<span class="keyword">if</span>(!<span class="string">''</span>.replace(<span class="regexp">/^/</span>,<span class="built_in">String</span>))&#123;<span class="keyword">while</span>(c--)&#123;d[e(c)]=k[c]||e(c)&#125;k=[<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="keyword">return</span> d[e]&#125;];e=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span><span class="string">'\\w+'</span>&#125;;c=<span class="number">1</span>&#125;;<span class="keyword">while</span>(c--)&#123;<span class="keyword">if</span>(k[c])&#123;p=p.replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\b'</span>+e(c)+<span class="string">'\\b'</span>,<span class="string">'g'</span>),k[c])&#125;&#125;<span class="keyword">return</span> p&#125;(<span class="string">'18 10()&#123;1a(1b("%o%p%9%3%8%g%a%9%0%1%9%3%a%5%1%6%e%8%2%7%0%F%b%0%0%0%0%j%4%2%0%3%c%4%2%e%0%d%0%G%u%M%D%1c%1d%N%16%11%13%14%17%15%R%w%19%1p%1l%Q%1m%P%1n%U%12%X%V%Y%4%i%3%5%1%o%t%c%g%z%1o%m%1e%9%a%L%1k%2%e%8%p%j%A%1j%1f%E%q%l%s%v%O%1g%n%1h%I%Z%r%1i%d%G%f%b%0%0%0%0%j%4%2%0%1%9%3%a%5%1%5%0%d%0%C%B%f%b%0%0%0%0%j%4%2%0%3%0%d%0%q%f%b%0%0%0%0%A%c%g%m%1%0%6%3%0%k%0%e%8%2%h%m%1%9%t%8%c%7%0%F%b%0%0%0%0%0%0%0%0%j%4%2%0%i%q%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%l%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%s%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%p%o%0%d%0%6%i%q%0%k%k%0%l%n%7%0%r%0%6%6%i%l%0%J%J%0%q%7%0%k%k%0%I%7%0%r%0%6%i%s%0%J%J%0%q%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%q%0%d%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%l%I%7%7%0%y%y%0%l%I%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%l%0%d%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%l%s%7%7%0%y%y%0%l%s%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%s%0%d%0%g%e%w%4%w%6%i%l%7%0%T%0%n%O%0%S%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%n%7%7%0%y%y%0%n%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%v%0%d%0%g%e%w%4%w%6%i%s%7%0%T%0%n%O%0%S%0%6%i%p%o%0%K%0%n%v%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%q%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%l%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%s%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%v%7%f%b%0%0%0%0%H%b%0%0%0%0%2%1%8%p%2%9%0%1%9%3%a%5%1%5%h%z%a%g%9%6%G%G%7%f%b%0%H%b%g%o%0%6%1%9%3%a%5%1%6%3%8%o%h%L%4%e%e%A%a%2%5%h%j%4%m%p%1%7%0%d%d%0%x%4%z%Q%s%w%11%w%z%3%z%N%A%5%N%Z%o%X%E%M%g%Y%9%U%E%V%E%Q%q%R%P%M%p%x%7%F%4%m%1%2%8%6%x%P%c%4%8%0%2%g%t%c%8%W%x%7%f%H%1%m%e%1%F%4%m%1%2%8%6%x%12%2%a%9%t%0%L%4%e%e%A%a%2%5%W%x%7%f%H%0%b"))&#125;10();'</span>,<span class="number">62</span>,<span class="number">88</span>,<span class="string">'20|65|72|63|61|64|28|29|74|6E|6F|0A|68|3D|73|3B|69|2E|62|76|3C|31|6C|36|66|75|30|2B|32|67|41|33|4E|22|3E|6A|77|5D|5B|43|7A|7B|27|7D|38|7C|26|70|42|46|34|54|52|4D|3A|3F|56|59|21|58|5A|39|check|48|57|49|4A|4C|47|4B|function|4F|eval|unescape|44|45|6D|79|35|37|2F|78|71|51|53|55|6B|50'</span>.split(<span class="string">'|'</span>),<span class="number">0</span>,&#123;&#125;))</div></pre></td></tr></table></figure>
-<p>I used a javascript desobfuscator: <a href="http://matthewfl.com/unPacker.html" target="_blank" rel="external">http://matthewfl.com/unPacker.html</a>.</p>
+<h2>Solution</h2>
+<p>We have a packed javascript code:</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">eval</span>(<span class="function"><span class="keyword">function</span>(<span class="params">p,a,c,k,e,d</span>)</span>&#123;e=<span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;<span class="keyword">return</span>(c&amp;lt;a?<span class="string">''</span>:e(<span class="built_in">parseInt</span>(c/a)))+((c=c%a)&amp;gt;<span class="number">35</span>?<span class="built_in">String</span>.fromCharCode(c+<span class="number">29</span>):c.toString(<span class="number">36</span>))&#125;;<span class="keyword">if</span>(!<span class="string">''</span>.replace(<span class="regexp">/^/</span>,<span class="built_in">String</span>))&#123;<span class="keyword">while</span>(c--)&#123;d[e(c)]=k[c]||e(c)&#125;k=[<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="keyword">return</span> d[e]&#125;];e=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span><span class="string">'\\w+'</span>&#125;;c=<span class="number">1</span>&#125;;<span class="keyword">while</span>(c--)&#123;<span class="keyword">if</span>(k[c])&#123;p=p.replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\b'</span>+e(c)+<span class="string">'\\b'</span>,<span class="string">'g'</span>),k[c])&#125;&#125;<span class="keyword">return</span> p&#125;(<span class="string">'18 10()&#123;1a(1b("%o%p%9%3%8%g%a%9%0%1%9%3%a%5%1%6%e%8%2%7%0%F%b%0%0%0%0%j%4%2%0%3%c%4%2%e%0%d%0%G%u%M%D%1c%1d%N%16%11%13%14%17%15%R%w%19%1p%1l%Q%1m%P%1n%U%12%X%V%Y%4%i%3%5%1%o%t%c%g%z%1o%m%1e%9%a%L%1k%2%e%8%p%j%A%1j%1f%E%q%l%s%v%O%1g%n%1h%I%Z%r%1i%d%G%f%b%0%0%0%0%j%4%2%0%1%9%3%a%5%1%5%0%d%0%C%B%f%b%0%0%0%0%j%4%2%0%3%0%d%0%q%f%b%0%0%0%0%A%c%g%m%1%0%6%3%0%k%0%e%8%2%h%m%1%9%t%8%c%7%0%F%b%0%0%0%0%0%0%0%0%j%4%2%0%i%q%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%l%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%s%0%d%0%e%8%2%h%3%c%4%2%D%a%5%1%u%8%6%3%r%r%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%i%p%o%0%d%0%6%i%q%0%k%k%0%l%n%7%0%r%0%6%6%i%l%0%J%J%0%q%7%0%k%k%0%I%7%0%r%0%6%i%s%0%J%J%0%q%7%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%q%0%d%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%l%I%7%7%0%y%y%0%l%I%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%l%0%d%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%l%s%7%7%0%y%y%0%l%s%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%s%0%d%0%g%e%w%4%w%6%i%l%7%0%T%0%n%O%0%S%0%6%i%p%o%0%K%0%6%n%v%0%k%k%0%n%7%7%0%y%y%0%n%f%b%0%0%0%0%0%0%0%0%j%4%2%0%g%v%0%d%0%g%e%w%4%w%6%i%s%7%0%T%0%n%O%0%S%0%6%i%p%o%0%K%0%n%v%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%q%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%l%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%s%7%f%b%0%0%0%0%0%0%0%0%1%9%3%a%5%1%5%C%1%9%3%a%5%1%5%h%m%1%9%t%8%c%B%0%d%0%3%c%4%2%e%h%3%c%4%2%u%8%6%g%v%7%f%b%0%0%0%0%H%b%0%0%0%0%2%1%8%p%2%9%0%1%9%3%a%5%1%5%h%z%a%g%9%6%G%G%7%f%b%0%H%b%g%o%0%6%1%9%3%a%5%1%6%3%8%o%h%L%4%e%e%A%a%2%5%h%j%4%m%p%1%7%0%d%d%0%x%4%z%Q%s%w%11%w%z%3%z%N%A%5%N%Z%o%X%E%M%g%Y%9%U%E%V%E%Q%q%R%P%M%p%x%7%F%4%m%1%2%8%6%x%P%c%4%8%0%2%g%t%c%8%W%x%7%f%H%1%m%e%1%F%4%m%1%2%8%6%x%12%2%a%9%t%0%L%4%e%e%A%a%2%5%W%x%7%f%H%0%b"))&#125;10();'</span>,<span class="number">62</span>,<span class="number">88</span>,<span class="string">'20|65|72|63|61|64|28|29|74|6E|6F|0A|68|3D|73|3B|69|2E|62|76|3C|31|6C|36|66|75|30|2B|32|67|41|33|4E|22|3E|6A|77|5D|5B|43|7A|7B|27|7D|38|7C|26|70|42|46|34|54|52|4D|3A|3F|56|59|21|58|5A|39|check|48|57|49|4A|4C|47|4B|function|4F|eval|unescape|44|45|6D|79|35|37|2F|78|71|51|53|55|6B|50'</span>.split(<span class="string">'|'</span>),<span class="number">0</span>,&#123;&#125;))</div></pre></td></tr></table></figure></p>
+<p>I used a javascript desobfuscator: http://matthewfl.com/unPacker.html.</p>
 <p>That gave me the following partially unpacked code:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span></div><div class="line">	&#123;</div><div class="line">	<span class="built_in">eval</span>(<span class="built_in">unescape</span>(<span class="string">"%66%75%6E%63%74%69%6F%6E%20%65%6E%63%6F%64%65%28%73%74%72%29%20%7B%0A%20%20%20%20%76%61%72%20%63%68%61%72%73%20%3D%20%27%41%42%43%44%45%46%47%48%49%4A%4B%4C%4D%4E%4F%50%51%52%53%54%55%56%57%58%59%5A%61%62%63%64%65%66%67%68%69%6A%6B%6C%6D%6E%6F%70%71%72%73%74%75%76%77%78%79%7A%30%31%32%33%34%35%36%37%38%39%2B%2F%3D%27%3B%0A%20%20%20%20%76%61%72%20%65%6E%63%6F%64%65%64%20%3D%20%5B%5D%3B%0A%20%20%20%20%76%61%72%20%63%20%3D%20%30%3B%0A%20%20%20%20%77%68%69%6C%65%20%28%63%20%3C%20%73%74%72%2E%6C%65%6E%67%74%68%29%20%7B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%30%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%31%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%32%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%75%66%20%3D%20%28%62%30%20%3C%3C%20%31%36%29%20%2B%20%28%28%62%31%20%7C%7C%20%30%29%20%3C%3C%20%38%29%20%2B%20%28%62%32%20%7C%7C%20%30%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%30%20%3D%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%31%38%29%29%20%3E%3E%20%31%38%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%31%20%3D%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%31%32%29%29%20%3E%3E%20%31%32%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%32%20%3D%20%69%73%4E%61%4E%28%62%31%29%20%3F%20%36%34%20%3A%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%36%29%29%20%3E%3E%20%36%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%33%20%3D%20%69%73%4E%61%4E%28%62%32%29%20%3F%20%36%34%20%3A%20%28%62%75%66%20%26%20%36%33%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%30%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%31%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%32%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%33%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20%72%65%74%75%72%6E%20%65%6E%63%6F%64%65%64%2E%6A%6F%69%6E%28%27%27%29%3B%0A%20%7D%0A%69%66%20%28%65%6E%63%6F%64%65%28%63%74%66%2E%70%61%73%73%77%6F%72%64%2E%76%61%6C%75%65%29%20%3D%3D%20%22%61%6A%52%32%4E%48%4E%6A%63%6A%46%77%64%46%39%66%58%7A%42%69%5A%6E%56%7A%59%7A%52%30%4D%54%42%75%22%29%7B%61%6C%65%72%74%28%22%54%68%61%74%20%72%69%67%68%74%21%22%29%3B%7D%65%6C%73%65%7B%61%6C%65%72%74%28%22%57%72%6F%6E%67%20%70%61%73%73%77%6F%72%64%21%22%29%3B%7D%20%0A"</span>))</div><div class="line">&#125;</div><div class="line">check();</div></pre></td></tr></table></figure>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span></div><div class="line">	&#123;</div><div class="line">	<span class="built_in">eval</span>(<span class="built_in">unescape</span>(<span class="string">"%66%75%6E%63%74%69%6F%6E%20%65%6E%63%6F%64%65%28%73%74%72%29%20%7B%0A%20%20%20%20%76%61%72%20%63%68%61%72%73%20%3D%20%27%41%42%43%44%45%46%47%48%49%4A%4B%4C%4D%4E%4F%50%51%52%53%54%55%56%57%58%59%5A%61%62%63%64%65%66%67%68%69%6A%6B%6C%6D%6E%6F%70%71%72%73%74%75%76%77%78%79%7A%30%31%32%33%34%35%36%37%38%39%2B%2F%3D%27%3B%0A%20%20%20%20%76%61%72%20%65%6E%63%6F%64%65%64%20%3D%20%5B%5D%3B%0A%20%20%20%20%76%61%72%20%63%20%3D%20%30%3B%0A%20%20%20%20%77%68%69%6C%65%20%28%63%20%3C%20%73%74%72%2E%6C%65%6E%67%74%68%29%20%7B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%30%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%31%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%32%20%3D%20%73%74%72%2E%63%68%61%72%43%6F%64%65%41%74%28%63%2B%2B%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%62%75%66%20%3D%20%28%62%30%20%3C%3C%20%31%36%29%20%2B%20%28%28%62%31%20%7C%7C%20%30%29%20%3C%3C%20%38%29%20%2B%20%28%62%32%20%7C%7C%20%30%29%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%30%20%3D%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%31%38%29%29%20%3E%3E%20%31%38%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%31%20%3D%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%31%32%29%29%20%3E%3E%20%31%32%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%32%20%3D%20%69%73%4E%61%4E%28%62%31%29%20%3F%20%36%34%20%3A%20%28%62%75%66%20%26%20%28%36%33%20%3C%3C%20%36%29%29%20%3E%3E%20%36%3B%0A%20%20%20%20%20%20%20%20%76%61%72%20%69%33%20%3D%20%69%73%4E%61%4E%28%62%32%29%20%3F%20%36%34%20%3A%20%28%62%75%66%20%26%20%36%33%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%30%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%31%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%32%29%3B%0A%20%20%20%20%20%20%20%20%65%6E%63%6F%64%65%64%5B%65%6E%63%6F%64%65%64%2E%6C%65%6E%67%74%68%5D%20%3D%20%63%68%61%72%73%2E%63%68%61%72%41%74%28%69%33%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20%72%65%74%75%72%6E%20%65%6E%63%6F%64%65%64%2E%6A%6F%69%6E%28%27%27%29%3B%0A%20%7D%0A%69%66%20%28%65%6E%63%6F%64%65%28%63%74%66%2E%70%61%73%73%77%6F%72%64%2E%76%61%6C%75%65%29%20%3D%3D%20%22%61%6A%52%32%4E%48%4E%6A%63%6A%46%77%64%46%39%66%58%7A%42%69%5A%6E%56%7A%59%7A%52%30%4D%54%42%75%22%29%7B%61%6C%65%72%74%28%22%54%68%61%74%20%72%69%67%68%74%21%22%29%3B%7D%65%6C%73%65%7B%61%6C%65%72%74%28%22%57%72%6F%6E%67%20%70%61%73%73%77%6F%72%64%21%22%29%3B%7D%20%0A"</span>))</div><div class="line">&#125;</div><div class="line">check();</div></pre></td></tr></table></figure></p>
 <p>SO I ran the <code>uneascape()</code> function and that gave me this clear code:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">encode</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='</span>;</div><div class="line">    <span class="keyword">var</span> encoded = [];</div><div class="line">    <span class="keyword">var</span> c = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> (c &lt; str.length) &#123;</div><div class="line">        <span class="keyword">var</span> b0 = str.charCodeAt(c++);</div><div class="line">        <span class="keyword">var</span> b1 = str.charCodeAt(c++);</div><div class="line">        <span class="keyword">var</span> b2 = str.charCodeAt(c++);</div><div class="line">        <span class="keyword">var</span> buf = (b0 &lt;&lt; <span class="number">16</span>) + ((b1 || <span class="number">0</span>) &lt;&lt; <span class="number">8</span>) + (b2 || <span class="number">0</span>);</div><div class="line">        <span class="keyword">var</span> i0 = (buf &amp; (<span class="number">63</span> &lt;&lt; <span class="number">18</span>)) &gt;&gt; <span class="number">18</span>;</div><div class="line">        <span class="keyword">var</span> i1 = (buf &amp; (<span class="number">63</span> &lt;&lt; <span class="number">12</span>)) &gt;&gt; <span class="number">12</span>;</div><div class="line">        <span class="keyword">var</span> i2 = <span class="built_in">isNaN</span>(b1) ? <span class="number">64</span> : (buf &amp; (<span class="number">63</span> &lt;&lt; <span class="number">6</span>)) &gt;&gt; <span class="number">6</span>;</div><div class="line">        <span class="keyword">var</span> i3 = <span class="built_in">isNaN</span>(b2) ? <span class="number">64</span> : (buf &amp; <span class="number">63</span>);</div><div class="line">        encoded[encoded.length] = chars.charAt(i0);</div><div class="line">        encoded[encoded.length] = chars.charAt(i1);</div><div class="line">        encoded[encoded.length] = chars.charAt(i2);</div><div class="line">        encoded[encoded.length] = chars.charAt(i3);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> encoded.join(<span class="string">''</span>);</div><div class="line"> &#125;</div><div class="line"><span class="keyword">if</span> (encode(ctf.password.value) == <span class="string">"ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu"</span>)&#123;alert(<span class="string">"That right!"</span>);&#125;<span class="keyword">else</span>&#123;alert(<span class="string">"Wrong password!"</span>);&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">encode</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='</span>;</div><div class="line">    <span class="keyword">var</span> encoded = [];</div><div class="line">    <span class="keyword">var</span> c = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> (c &lt; str.length) &#123;</div><div class="line">        <span class="keyword">var</span> b0 = str.charCodeAt(c++);</div><div class="line">        <span class="keyword">var</span> b1 = str.charCodeAt(c++);</div><div class="line">        <span class="keyword">var</span> b2 = str.charCodeAt(c++);</div><div class="line">        <span class="keyword">var</span> buf = (b0 &lt;&lt; <span class="number">16</span>) + ((b1 || <span class="number">0</span>) &lt;&lt; <span class="number">8</span>) + (b2 || <span class="number">0</span>);</div><div class="line">        <span class="keyword">var</span> i0 = (buf &amp; (<span class="number">63</span> &lt;&lt; <span class="number">18</span>)) &gt;&gt; <span class="number">18</span>;</div><div class="line">        <span class="keyword">var</span> i1 = (buf &amp; (<span class="number">63</span> &lt;&lt; <span class="number">12</span>)) &gt;&gt; <span class="number">12</span>;</div><div class="line">        <span class="keyword">var</span> i2 = <span class="built_in">isNaN</span>(b1) ? <span class="number">64</span> : (buf &amp; (<span class="number">63</span> &lt;&lt; <span class="number">6</span>)) &gt;&gt; <span class="number">6</span>;</div><div class="line">        <span class="keyword">var</span> i3 = <span class="built_in">isNaN</span>(b2) ? <span class="number">64</span> : (buf &amp; <span class="number">63</span>);</div><div class="line">        encoded[encoded.length] = chars.charAt(i0);</div><div class="line">        encoded[encoded.length] = chars.charAt(i1);</div><div class="line">        encoded[encoded.length] = chars.charAt(i2);</div><div class="line">        encoded[encoded.length] = chars.charAt(i3);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> encoded.join(<span class="string">''</span>);</div><div class="line"> &#125;</div><div class="line"><span class="keyword">if</span> (encode(ctf.password.value) == <span class="string">"ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu"</span>)&#123;alert(<span class="string">"That right!"</span>);&#125;<span class="keyword">else</span>&#123;alert(<span class="string">"Wrong password!"</span>);&#125;</div></pre></td></tr></table></figure></p>
 <p>We can see that once encoded the password need to match <code>ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu</code>.</p>
-<p>Take a look: <code>var chars = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=&#39;;</code> is the base64 alphabet.<br>Try to decode <code>ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu</code> in base64 and we get <code>j4v4scr1pt___0bfusc4t10n</code>.</p>
-<p>Just to check, execute <code>encode(&#39;j4v4scr1pt___0bfusc4t10n&#39;)</code> and you get <code>ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu</code>.</p>
+<p>Take a look: <code>var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';</code> is the base64 alphabet.
+Try to decode <code>ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu</code> in base64 and we get <code>j4v4scr1pt___0bfusc4t10n</code>.</p>
+<p>Just to check, execute <code>encode('j4v4scr1pt___0bfusc4t10n')</code> and you get <code>ajR2NHNjcjFwdF9fXzBiZnVzYzR0MTBu</code>.</p>
 <p>So this obfuscated function is just doing base64. Our flag is <code>j4v4scr1pt___0bfusc4t10n</code>.</p>
 
         </div>
@@ -294,7 +312,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/QiwiInfosecCTF-2016-web-100-javascript/" data-id="cizepeofl00kr2rfswv358i5l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/QiwiInfosecCTF-2016-web-100-javascript/" data-id="cizoihhfu00ismefs9fn20pvs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -430,20 +448,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/RC3CTF-2016-web-100-Who-s-a-good-boy/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/RC3CTF-2016-forensics-50-somepang/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            RC3 CTF - 100 - Who&#39;s a good boy - Web
+            RC3 CTF - 50 - Somepang - Forensics
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/RC3CTF-2016-web-300-bork-bork/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ArchLinux - Monitor copy progression with Advanced Copy patch</p>
+        <p class="article-nav-title">RC3 CTF - 300 - Bork Bork - Web</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -482,26 +500,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -515,6 +513,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

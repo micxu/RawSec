@@ -67,7 +67,7 @@ CTF Time : link
 
 50 - Easy Login? - Web Exploita">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
-<meta property="og:updated_time" content="2017-02-27T19:07:48.064Z">
+<meta property="og:updated_time" content="2017-02-27T19:36:18.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xiomara CTF 2017 - Write-ups">
 <meta name="twitter:description" content="Informations
@@ -282,7 +282,7 @@ ga('send', 'pageview');
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/430/" target="_blank" rel="external">link</a></li>
 </ul>
-<h1>50 - Easy Login? - Web Exploitation</h1>
+<h2>50 - Easy Login? - Web Exploitation</h2>
 <blockquote>
 <p>An aspiring engineer started learning web development on Youtube a day ago and he was asked to build a nice, secure, simple login page as part of his project. Well, he just started off so don't blame him. Go, hack!</p>
 <p>http://139.59.61.220:23478/</p>
@@ -295,7 +295,7 @@ ga('send', 'pageview');
 <p>The image is named <code>hiddenflag.jpeg</code> so let's download it.</p>
 <p>There is some hidden data here:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">$ binwalk hiddenflag.jpeg</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.01</div><div class="line">48981         0xBF55          Zip archive data, at least v1.0 to extract, compressed size: 29, uncompressed size: 29, name: flag.txt</div><div class="line">49154         0xC002          End of Zip archive</div><div class="line"></div><div class="line">$ foremost -v hiddenflag.jpeg</div><div class="line">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus</div><div class="line">Audit File</div><div class="line"></div><div class="line">Foremost started at Sun Feb 26 19:14:21 2017</div><div class="line">Invocation: foremost -v hiddenflag.jpeg</div><div class="line">Output directory: /home/noraj/CTF/XiomaraCTF/2017/output</div><div class="line">Configuration file: /etc/foremost.conf</div><div class="line">Processing: hiddenflag.jpeg</div><div class="line">|------------------------------------------------------------------</div><div class="line">File: hiddenflag.jpeg</div><div class="line">Start: Sun Feb 26 19:14:21 2017</div><div class="line">Length: 48 KB (49176 bytes)</div><div class="line"></div><div class="line">Num	 Name (bs=512)	       Size	 File Offset	 Comment</div><div class="line"></div><div class="line">0:	00000000.jpg 	      47 KB 	          0 	 </div><div class="line">foundat=flag.txtUT</div><div class="line">1:	00000095.zip 	      196 B 	      48981 	 </div><div class="line">*|</div><div class="line">Finish: Sun Feb 26 19:14:21 2017</div><div class="line"></div><div class="line">2 FILES EXTRACTED</div><div class="line"></div><div class="line">jpg:= 1</div><div class="line">zip:= 1</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">Foremost finished at Sun Feb 26 19:14:21 2017</div><div class="line"></div><div class="line">$ cd output/zip</div><div class="line"></div><div class="line">$ unzip 00000095.zip</div><div class="line">Archive:  00000095.zip</div><div class="line"> extracting: flag.txt</div><div class="line"></div><div class="line">$ cat flag.txt</div><div class="line">xiomara&#123;50_y0u_ar3_@_h@ck3r&#125;</div></pre></td></tr></table></figure></p>
-<h1>50 - Lulz - Web Exploitation</h1>
+<h2>50 - Lulz - Web Exploitation</h2>
 <blockquote>
 <p>Heavy sarcasm awaits. Are you a person who finds opportunities even in trolls? Well, let's find out.</p>
 <p>http://139.59.61.220:23456</p>
@@ -310,7 +310,7 @@ ga('send', 'pageview');
 <p>Copy it and paste it in your browser terminal, you will get:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;alert(Xiomara&#123;i_4gr33_Y0U_4r3_a_Flash!&#125;))&quot;</div></pre></td></tr></table></figure></p>
 <p>The is a <s>mistake</s> troll, so correct <code>Xiomara{i_4gr33_Y0U_4r3_a_Flash!}</code> into <code>xiomara{i_4gr33_Y0U_4r3_a_Flash!}</code> (lowercase the first char).</p>
-<h1>50 - No Flags? - Web Exploitation</h1>
+<h2>50 - No Flags? - Web Exploitation</h2>
 <blockquote>
 <p>What would you do if we tell you there are no flags for this question? Go on, solve it. That reminds me, Nothing is impossible.</p>
 <p>http://139.59.61.220:23467/</p>
@@ -334,7 +334,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/XiomaraCTF-2017-write-ups/" data-id="cizohnaix0003v9fsuam7x1ux" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/XiomaraCTF-2017-write-ups/" data-id="cizoihhh400kcmefs7yuyn3jx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -471,9 +471,9 @@ ga('send', 'pageview');
 <nav id="article-nav">
     
     
-        <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/NeverLAN-CTF-2017-write-ups/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">WhiteHat Challenge 01 - 20 - For001 - Forensics</p>
+        <p class="article-nav-title">NeverLAN CTF 2017 - Write-ups</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -512,26 +512,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -545,6 +525,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -8,7 +8,7 @@
     
         <meta name="keywords" content="linux,archlinux" />
     
-    <meta name="description" content="Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what’s going on.
+    <meta name="description" content="Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what&apos;s going on.
 
 It was written by Florian Zwicke and released under the GPL.
 Original web">
@@ -16,7 +16,7 @@ Original web">
 <meta property="og:title" content="ArchLinux - Monitor copy progression with Advanced Copy patch">
 <meta property="og:url" content="http://rawsec.ml/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what’s going on.
+<meta property="og:description" content="Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what&apos;s going on.
 
 It was written by Florian Zwicke and released under the GPL.
 Original web">
@@ -24,7 +24,7 @@ Original web">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArchLinux - Monitor copy progression with Advanced Copy patch">
-<meta name="twitter:description" content="Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what’s going on.
+<meta name="twitter:description" content="Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what&apos;s going on.
 
 It was written by Florian Zwicke and released under the GPL.
 Original web">
@@ -189,23 +189,26 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <p><img src="https://web.archive.org/web/20131115171331/http://beatex.org/web/advcopy/advcpmv-screen-20130313.png" alt="advcpmv"></p>
 <blockquote>
-<p>Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what’s going on.</p>
+<p>Advanced Copy is a mod for the GNU cp and GNU mv tools which adds a progress bar and provides some info on what's going on.</p>
 </blockquote>
 <p>It was written by Florian Zwicke and released under the GPL.</p>
-<p>Original website (<a href="http://beatex.org/web/advancedcopy.html" target="_blank" rel="external">http://beatex.org/web/advancedcopy.html</a>) is dead but a backup git repository exist (<a href="https://github.com/atdt/advcpmv" target="_blank" rel="external">https://github.com/atdt/advcpmv</a>).</p>
-<h2 id="Compile-from-sources"><a href="#Compile-from-sources" class="headerlink" title="Compile from sources"></a>Compile from sources</h2><p>You will need <a href="https://www.archlinux.org/packages/core/x86_64/gcc/" target="_blank" rel="external">gcc</a>, <a href="https://www.archlinux.org/packages/core/x86_64/make/" target="_blank" rel="external">make</a> and <a href="https://www.archlinux.org/packages/core/x86_64/patch/" target="_blank" rel="external">patch</a>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ wget http://ftp.gnu.org/gnu/coreutils/coreutils-8.21.tar.xz</div><div class="line">$ tar xvJf coreutils-8.21.tar.xz</div><div class="line">$ cd coreutils-8.21/</div><div class="line">$ wget https://raw.githubusercontent.com/atdt/advcpmv/master/advcpmv-0.5-8.21.patch</div><div class="line">$ patch -p1 -i advcpmv-0.5-8.21.patch</div><div class="line">$ ./configure</div><div class="line">$ make</div></pre></td></tr></table></figure>
+<p>Original website (http://beatex.org/web/advancedcopy.html) is dead but a backup git repository exist (https://github.com/atdt/advcpmv).</p>
+<h2>Compile from sources</h2>
+<p>You will need <a href="https://www.archlinux.org/packages/core/x86_64/gcc/" target="_blank" rel="external">gcc</a>, <a href="https://www.archlinux.org/packages/core/x86_64/make/" target="_blank" rel="external">make</a> and <a href="https://www.archlinux.org/packages/core/x86_64/patch/" target="_blank" rel="external">patch</a>.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ wget http://ftp.gnu.org/gnu/coreutils/coreutils-8.21.tar.xz</div><div class="line">$ tar xvJf coreutils-8.21.tar.xz</div><div class="line">$ cd coreutils-8.21/</div><div class="line">$ wget https://raw.githubusercontent.com/atdt/advcpmv/master/advcpmv-0.5-8.21.patch</div><div class="line">$ patch -p1 -i advcpmv-0.5-8.21.patch</div><div class="line">$ ./configure</div><div class="line">$ make</div></pre></td></tr></table></figure></p>
 <p>The new programs are now located in src/cp and src/mv. Place them somewhere else:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo cp src/cp /usr/local/bin/cp</div><div class="line">$ sudo cp src/mv /usr/local/bin/mv</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo cp src/cp /usr/local/bin/cp</div><div class="line">$ sudo cp src/mv /usr/local/bin/mv</div></pre></td></tr></table></figure></p>
 <p>You can make some aliases, for example:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias cpa=&apos;/usr/local/bin/cp -g&apos;</div><div class="line">alias mva=&apos;/usr/local/bin/mv -g&apos;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias cpa=&apos;/usr/local/bin/cp -g&apos;</div><div class="line">alias mva=&apos;/usr/local/bin/mv -g&apos;</div></pre></td></tr></table></figure></p>
 <p>You may want this aliases to be permanent so place them in your <code>~/.zshrc</code> (or <code>~/.bashrc</code>) or create a profile script containing the two previous aliases:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/profile.d/alias-advcpmv.sh</div></pre></td></tr></table></figure>
-<p>And then create another profile script for <code>sudo</code> otherwise you won’t be able to call the previous aliases with <code>sudo</code>.<br>To be able to pass aliases to <code>sudo</code> create the following file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/profile.d/alias-sudo.sh</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/profile.d/alias-advcpmv.sh</div></pre></td></tr></table></figure></p>
+<p>And then create another profile script for <code>sudo</code> otherwise you won't be able to call the previous aliases with <code>sudo</code>.
+To be able to pass aliases to <code>sudo</code> create the following file:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/profile.d/alias-sudo.sh</div></pre></td></tr></table></figure></p>
 <p>Containing:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias sudo=&apos;sudo &apos;</div><div class="line"># whitespace ---^</div></pre></td></tr></table></figure>
-<h2 id="Running"><a href="#Running" class="headerlink" title="Running"></a>Running</h2><p>Now when using <code>cpa</code>, <code>sudo cpa -rn</code>, etc… you will use <code>/usr/local/bin/cp -g</code>, <code>sudo /usr/local/bin/cp -grn</code>, etc…</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias sudo=&apos;sudo &apos;</div><div class="line"># whitespace ---^</div></pre></td></tr></table></figure></p>
+<h2>Running</h2>
+<p>Now when using <code>cpa</code>, <code>sudo cpa -rn</code>, etc... you will use <code>/usr/local/bin/cp -g</code>, <code>sudo /usr/local/bin/cp -grn</code>, etc...</p>
 
         </div>
         <footer class="article-footer">
@@ -213,7 +216,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/" data-id="cizepenkd000g2rfsz1t01kgp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/" data-id="cizoihh0x001omefs7mni8h1a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -349,11 +352,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/QiwiInfosecCTF-2016-web-100-javascript/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/RC3CTF-2016-misc-200-bridge-of-cyber/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Qiwi-Infosec CTF - 100 - javascript - Web
+            RC3 CTF - 200 - Bridge of Cyber - Misc
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -401,26 +404,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -434,6 +417,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -182,9 +182,11 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <p>Jose Carlos Norte, security researcher, wrote <a href="http://jcarlosnorte.com/security/2016/03/06/advanced-tor-browser-fingerprinting.html" title="Advanced Tor browser fingerprinting" target="_blank" rel="external">a post</a> detailing how Tor Browser users can be uniquely fingerprinted using the mouse wheel, mouse speed, a CPU benchmark, and “getClientRects”.</p>
-<p>POCs (proof-of-concept) can be tested <a href="http://jcarlosnorte.com/assets/ubercookie/" title="Ubercookie" target="_blank" rel="external">here</a> and <a href="http://jcarlosnorte.com/assets/fingerprint/" title="Fingerprint" target="_blank" rel="external">here</a>.<br>Fingerprinting method rely on javascript.</p>
+<p>POCs (proof-of-concept) can be tested <a href="http://jcarlosnorte.com/assets/ubercookie/" title="Ubercookie" target="_blank" rel="external">here</a> and <a href="http://jcarlosnorte.com/assets/fingerprint/" title="Fingerprint" target="_blank" rel="external">here</a>.
+Fingerprinting method rely on javascript.</p>
 <p>Each method alone is not very accurate but crossing data from mouse wheel speed, mouse cursor speed (effectively enhanced by personal OS mouse sensitivity preferences and preferred set of gestures), trackpad movements, Javascript CPU informations, and getClientRects() function makes the fingerprint very unique.</p>
-<p>Here an example of datas that can be collected with JavaScript:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Client rects:</div><div class="line">&#123;&quot;x&quot;:131.5,&quot;y&quot;:462,&quot;width&quot;:724,&quot;height&quot;:19,&quot;top&quot;:462,&quot;right&quot;:855.5,&quot;bottom&quot;</div><div class="line">:481,&quot;left&quot;:131.5&#125;</div><div class="line">scrolling milis:</div><div class="line">[2,2,0,3,0,1,0,2,3,0,0,3,1,2,2,1,2,1,4,4,35,2,1,3,0,1,0,3,0,1,0,3,0,1,0,3,1</div><div class="line">,0,3,1,3,0,1,3,2,4,4,8,44,4,1,4,4,405,2,3,2,1,3,1,3,57,2,0,2,2,0,2,2,4,60,2</div><div class="line">,0,2,2,0,2,2,6,54,2,2,2,0,2,1,4,8]</div><div class="line">scrolling deltas:</div><div class="line">[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,</div><div class="line">3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</div><div class="line">,0,0,0,0,0,0,0,0,0,0,0,0,0,0]</div><div class="line">Biggest mouse step: 65</div><div class="line">In a few seconds, the result of the CPU benchmark will appear, please</div><div class="line">wait...</div><div class="line">CPU Mean: 3245</div></pre></td></tr></table></figure></p>
+<p>Here an example of datas that can be collected with JavaScript:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Client rects:</div><div class="line">&#123;&quot;x&quot;:131.5,&quot;y&quot;:462,&quot;width&quot;:724,&quot;height&quot;:19,&quot;top&quot;:462,&quot;right&quot;:855.5,&quot;bottom&quot;</div><div class="line">:481,&quot;left&quot;:131.5&#125;</div><div class="line">scrolling milis:</div><div class="line">[2,2,0,3,0,1,0,2,3,0,0,3,1,2,2,1,2,1,4,4,35,2,1,3,0,1,0,3,0,1,0,3,0,1,0,3,1</div><div class="line">,0,3,1,3,0,1,3,2,4,4,8,44,4,1,4,4,405,2,3,2,1,3,1,3,57,2,0,2,2,0,2,2,4,60,2</div><div class="line">,0,2,2,0,2,2,6,54,2,2,2,0,2,1,4,8]</div><div class="line">scrolling deltas:</div><div class="line">[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,</div><div class="line">3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</div><div class="line">,0,0,0,0,0,0,0,0,0,0,0,0,0,0]</div><div class="line">Biggest mouse step: 65</div><div class="line">In a few seconds, the result of the CPU benchmark will appear, please</div><div class="line">wait...</div><div class="line">CPU Mean: 3245</div></pre></td></tr></table></figure></p>
 <p>The effectiveness of these methods is dependent upon the ability of the attackers to measure time accurately on Tor at the 1-millisecond level which is pretty difficult on Tor.</p>
 <p>We already known that JavaScript was dangerous for security and anonimity and that tools like NoScript exist to avoid those problems.</p>
 
@@ -194,7 +196,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/tracking-down-tor-users-with-mouse-movements/" data-id="cizepenrv00812rfsryracn0l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/tracking-down-tor-users-with-mouse-movements/" data-id="cizoihh4j006dmefs173i4odb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -382,26 +384,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -415,6 +397,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

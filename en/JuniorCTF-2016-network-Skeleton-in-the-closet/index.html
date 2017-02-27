@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,joy" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: netw">
+Description
+categories:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Juniors CTF - 500 - Skeleton in the closet - Joy">
 <meta property="og:url" content="http://rawsec.ml/en/JuniorCTF-2016-network-Skeleton-in-the-closet/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: netw">
+Description
+categories:">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Juniors CTF - 500 - Skeleton in the closet - Joy">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: netw">
+Description
+categories:">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,37 +277,43 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : Juniors CTF 2016</li>
 <li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: network, joy, admin</p>
+<h3>Description</h3>
+<p>categories: network, joy, admin</p>
 <blockquote>
 <p><img src="http://i.imgur.com/bXKRRBB.png" alt=""></p>
 <p><img src="http://i.imgur.com/HnyYDnR.jpg" alt=""></p>
+</blockquote>
+<blockquote>
 <p>#hint for task with jabber: try to use another clients because clients works differently with anonymous auth.</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo dipper lo-o-ssE-bo |tr ipodlEsb- ab0j1328.</div><div class="line">jabber 10.0.223.80</div></pre></td></tr></table></figure>
+<h2>Solution</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo dipper lo-o-ssE-bo |tr ipodlEsb- ab0j1328.</div><div class="line">jabber 10.0.223.80</div></pre></td></tr></table></figure></p>
 <p>with pidgin &amp; wireshark</p>
 <ul>
 <li>domain: 10.0.223.80</li>
 <li>server: 10.0.223.80</li>
 </ul>
-<p>change domaine to:<br>mystery-hack.gravity.falls</p>
+<p>change domaine to:
+mystery-hack.gravity.falls</p>
 <ul>
 <li>domain: mystery-hack.gravity.falls</li>
 <li>server: 10.0.223.80</li>
 </ul>
-<p>Pidgin can’t be used because it doesn’t support anonymous connection.</p>
+<p>Pidgin can't be used because it doesn't support anonymous connection.</p>
 <p>Use <a href="http://profanity.im/" target="_blank" rel="external">Profanity</a> instead:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/connect anonymous@mystery-hack.gravity.falls server 10.0.223.80</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/connect anonymous@mystery-hack.gravity.falls server 10.0.223.80</div></pre></td></tr></table></figure></p>
 <p>Some people are connected:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dipper@mystery-hack.gravity.falls</div><div class="line">root</div><div class="line">ru2en@bot.talk.google.com</div><div class="line">stand</div></pre></td></tr></table></figure>
-<p>Let’s talk to <code>dipper@mystery-hack.gravity.falls</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/msg dipper@mystery-hack.gravity.falls hello</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dipper@mystery-hack.gravity.falls</div><div class="line">root</div><div class="line">ru2en@bot.talk.google.com</div><div class="line">stand</div></pre></td></tr></table></figure></p>
+<p>Let's talk to <code>dipper@mystery-hack.gravity.falls</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/msg dipper@mystery-hack.gravity.falls hello</div></pre></td></tr></table></figure></p>
 <p>He told us:</p>
 <ul>
 <li>Russian: <code>Я очень смышленый парень. Но сейчас не понимаю ни слова.</code></li>
@@ -302,28 +322,28 @@ ga('send', 'pageview');
 <p>We talked to <code>stand</code>:</p>
 <ul>
 <li>Russian: <code>Это ты что сейчас сказал? Всегда четко формулируй, что тебе надо. Ты что, русского языка не понимаешь. Тогда тебе сюда: ru2en@bot.talk.google.com</code></li>
-<li>English: <code>That&#39;s what you have just said that? Always articulate what you need. What, you do not understand the Russian language. Then you here: ru2en@bot.talk.google.com</code></li>
+<li>English: <code>That's what you have just said that? Always articulate what you need. What, you do not understand the Russian language. Then you here: ru2en@bot.talk.google.com</code></li>
 </ul>
-<p>Admins said us that <code>ru2en@bot.talk.google.com</code> doesn’t work and we need to use Google Translate and speak to <code>dipper@mystery-hack.gravity.falls</code> in russian only.</p>
-<p>We tried to invite him in a room but he didn’t want to come in:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/join</div><div class="line">/room accept</div><div class="line">/invite dipper@mystery-hack.gravity.falls</div></pre></td></tr></table></figure>
+<p>Admins said us that <code>ru2en@bot.talk.google.com</code> doesn't work and we need to use Google Translate and speak to <code>dipper@mystery-hack.gravity.falls</code> in russian only.</p>
+<p>We tried to invite him in a room but he didn't want to come in:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/join</div><div class="line">/room accept</div><div class="line">/invite dipper@mystery-hack.gravity.falls</div></pre></td></tr></table></figure></p>
 <p>We tried to get some infos about him:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/info dipper@mystery-hack.gravity.falls</div><div class="line">11:51:30 - dipper@mystery-hack.gravity.falls:</div><div class="line">11:51:30 - Subscription: none</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/info dipper@mystery-hack.gravity.falls</div><div class="line">11:51:30 - dipper@mystery-hack.gravity.falls:</div><div class="line">11:51:30 - Subscription: none</div></pre></td></tr></table></figure></p>
 <p>We checked upload:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/sendfile /etc/hosts</div><div class="line">11:55:25 - XEP-0363 HTTP File Upload is not supported by the server</div></pre></td></tr></table></figure>
-<p>We added him in contact, check if he had a pgp public key, wanted to subscribe to his presence and allow him to see ours, but it seems he doesn’t want to be our friend:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/roster add dipper@mystery-hack.gravity.falls</div><div class="line">/pgp contacts</div><div class="line">/sub request dipper@mystery-hack.gravity.falls</div><div class="line">/sub allow dipper@mystery-hack.gravity.falls</div><div class="line">/sub show dipper@mystery-hack.gravity.falls</div><div class="line">12:20:08 - Awaiting subscription responses from:</div><div class="line">12:20:08 -   dipper@mystery-hack.gravity.falls</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/sendfile /etc/hosts</div><div class="line">11:55:25 - XEP-0363 HTTP File Upload is not supported by the server</div></pre></td></tr></table></figure></p>
+<p>We added him in contact, check if he had a pgp public key, wanted to subscribe to his presence and allow him to see ours, but it seems he doesn't want to be our friend:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/roster add dipper@mystery-hack.gravity.falls</div><div class="line">/pgp contacts</div><div class="line">/sub request dipper@mystery-hack.gravity.falls</div><div class="line">/sub allow dipper@mystery-hack.gravity.falls</div><div class="line">/sub show dipper@mystery-hack.gravity.falls</div><div class="line">12:20:08 - Awaiting subscription responses from:</div><div class="line">12:20:08 -   dipper@mystery-hack.gravity.falls</div></pre></td></tr></table></figure></p>
 <p>Last activity requests are forbidden:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/lastactivity dipper@mystery-hack.gravity.falls</div><div class="line">12:24:27 - Last activity request failed for dipper@mystery-hack.gravity.falls: forbidden</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/lastactivity dipper@mystery-hack.gravity.falls</div><div class="line">12:24:27 - Last activity request failed for dipper@mystery-hack.gravity.falls: forbidden</div></pre></td></tr></table></figure></p>
 <p>Someone in the Telegram chat talked about <code>mabel</code>, so we tried:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/msg mabel@mystery-hack.gravity.falls hello</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/msg mabel@mystery-hack.gravity.falls hello</div></pre></td></tr></table></figure></p>
 <p>He said us:</p>
 <ul>
 <li>russian: <code>Не понимаю, чего вы хотите? Я богиня разрушения!</code></li>
 <li>english: <code>I do not know what you want? I am the goddess of destruction!</code></li>
 </ul>
 <p>Try to list rooms again, this times it works:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/rooms</div><div class="line">13:08:11 - Chat rooms at conference.mystery-hack.gravity.falls:</div><div class="line">13:08:11 -   hall@conference.mystery-hack.gravity.falls, (hall (12))</div><div class="line">13:08:11 -   dipper@conference.mystery-hack.gravity.falls, (dipper (1))</div><div class="line">13:08:11 -   flag_shop@conference.mystery-hack.gravity.falls, (flag_shop (4))</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/rooms</div><div class="line">13:08:11 - Chat rooms at conference.mystery-hack.gravity.falls:</div><div class="line">13:08:11 -   hall@conference.mystery-hack.gravity.falls, (hall (12))</div><div class="line">13:08:11 -   dipper@conference.mystery-hack.gravity.falls, (dipper (1))</div><div class="line">13:08:11 -   flag_shop@conference.mystery-hack.gravity.falls, (flag_shop (4))</div></pre></td></tr></table></figure></p>
 <p>We joined hall (<code>/join hall</code>), there is some users:</p>
 <ul>
 <li>Moderators: stan</li>
@@ -335,23 +355,23 @@ ga('send', 'pageview');
 <li>russian: <code>Чувак, я тебя не понимаю. Хотя мудрость - мое благословение и проклятие.</code></li>
 <li>english: <code>Dude, I do not understand you. Although wisdom - my blessing and a curse.</code></li>
 </ul>
-<p>When we talk, giving only keywords, nobody understand us so let’s try some complete sentences:</p>
+<p>When we talk, giving only keywords, nobody understand us so let's try some complete sentences:</p>
 <p>To stan:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">stan:</div><div class="line">Хотите флаг? (You want to flag?)</div><div class="line">Могу предложить флаг Конфедерации за сотку баксов. (I can offer the Confederate flag for a hundred bucks.)</div><div class="line">Пока рядом нет полиции - все законно! (While not near the police - all legally!)</div><div class="line">ХА-ХА-ХА!!! (Ha-ha-ha !!!)</div><div class="line">Если есть какие-то вопросы - обратитесь к soos (If you have any questions - please contact soos)</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">stan:</div><div class="line">Хотите флаг? (You want to flag?)</div><div class="line">Могу предложить флаг Конфедерации за сотку баксов. (I can offer the Confederate flag for a hundred bucks.)</div><div class="line">Пока рядом нет полиции - все законно! (While not near the police - all legally!)</div><div class="line">ХА-ХА-ХА!!! (Ha-ha-ha !!!)</div><div class="line">Если есть какие-то вопросы - обратитесь к soos (If you have any questions - please contact soos)</div></pre></td></tr></table></figure></p>
 <p>To soos:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">soos:</div><div class="line">Можно вопрос, зачем тебе флаг? (It is possible to question, why do you a flag?)</div><div class="line">Лучше обратись к dipper, он специалист по загадкам. (Better to turn to the dipper, he riddles specialist.)</div><div class="line">Вообще-то я второстепенный персонаж. (Actually, I&apos;m a minor character.)</div><div class="line">О боже, второстепенные персонажы погибают в первые пять минут. (Oh God, the secondary characters are killed in the first five minutes.)</div><div class="line">Что же делать? (What to do?)</div></pre></td></tr></table></figure>
-<p>Ok so let’s talk to dipper:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">dipper:</div><div class="line">Флаг? Причем тут флаг? (Flag? And the flag here?)</div><div class="line">Это очередная загадка Гравити Фолз?. (This is another mystery Gravity Falls ?.)</div><div class="line">Я ее обязательно разгадаю. (I&apos;m sure it unravel.)</div><div class="line">Но сейчас мне некогда, у меня свидание с wendy. (But now I have no time, I have a date with wendy.)</div></pre></td></tr></table></figure>
-<p>Let’s try wendy:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">wendy:</div><div class="line">Флаг? Ну да. Почему бы и нет. (Flag? Well yes. Why not.)</div><div class="line">Хотя лучше утка. Или панда. (Although better duck. Or panda.)</div><div class="line">Но по животным у нас специалист mabel (But animals have specialist mabel)</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">soos:</div><div class="line">Можно вопрос, зачем тебе флаг? (It is possible to question, why do you a flag?)</div><div class="line">Лучше обратись к dipper, он специалист по загадкам. (Better to turn to the dipper, he riddles specialist.)</div><div class="line">Вообще-то я второстепенный персонаж. (Actually, I&apos;m a minor character.)</div><div class="line">О боже, второстепенные персонажы погибают в первые пять минут. (Oh God, the secondary characters are killed in the first five minutes.)</div><div class="line">Что же делать? (What to do?)</div></pre></td></tr></table></figure></p>
+<p>Ok so let's talk to dipper:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">dipper:</div><div class="line">Флаг? Причем тут флаг? (Flag? And the flag here?)</div><div class="line">Это очередная загадка Гравити Фолз?. (This is another mystery Gravity Falls ?.)</div><div class="line">Я ее обязательно разгадаю. (I&apos;m sure it unravel.)</div><div class="line">Но сейчас мне некогда, у меня свидание с wendy. (But now I have no time, I have a date with wendy.)</div></pre></td></tr></table></figure></p>
+<p>Let's try wendy:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">wendy:</div><div class="line">Флаг? Ну да. Почему бы и нет. (Flag? Well yes. Why not.)</div><div class="line">Хотя лучше утка. Или панда. (Although better duck. Or panda.)</div><div class="line">Но по животным у нас специалист mabel (But animals have specialist mabel)</div></pre></td></tr></table></figure></p>
 <p>mabel:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">mabel:</div><div class="line">Флаг? Нелегально? Я легализую всё, что только можно!&quot; (Flag? Illegally? I legalize everything that is possible!)</div><div class="line">Ой, забыла предстваиться. (Oh, I forgot to introduce myself.)</div><div class="line">Привет, я Мэйбл. Мне двенадцать. (Hi, I&apos;m Mabel. I was twelve.)</div><div class="line">У меня есть waddles. Хотите пожениться? (I have waddles. Want to get married?)</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">mabel:</div><div class="line">Флаг? Нелегально? Я легализую всё, что только можно!&quot; (Flag? Illegally? I legalize everything that is possible!)</div><div class="line">Ой, забыла предстваиться. (Oh, I forgot to introduce myself.)</div><div class="line">Привет, я Мэйбл. Мне двенадцать. (Hi, I&apos;m Mabel. I was twelve.)</div><div class="line">У меня есть waddles. Хотите пожениться? (I have waddles. Want to get married?)</div></pre></td></tr></table></figure></p>
 <p>waddles:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">waddles:</div><div class="line">Флаг: 骨架 (Flag: 骨架)</div><div class="line">Досвидания. (Bye.)</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Me:</div><div class="line">Я хочу, чтобы флаг, пожалуйста. (I want the flag, please.)</div><div class="line"></div><div class="line">waddles:</div><div class="line">Флаг: 骨架 (Flag: 骨架)</div><div class="line">Досвидания. (Bye.)</div></pre></td></tr></table></figure></p>
 <p>And <code>骨架</code> in chinese means <code>skeleton</code>.</p>
 <p>We must submit the flag in chinese, not in english.</p>
 <p><strong>Note</strong>: Jabber server was very unstable and we get a lot of <em>Lost connection.</em> messages. So we used <code>/reconnect 1</code>.</p>
-<p><strong>Feedback</strong>: russian content everywhere, taht’s pain for non-russian people, use english only. No flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like. This was a joy only challenge, there is no security in this challenge, so that must not be in a CTF or that should give very few points.</p>
+<p><strong>Feedback</strong>: russian content everywhere, taht's pain for non-russian people, use english only. No flag format, flag are meaningless so it may be hard to know when you get the flag or not, they need to use a flag format or give in the description what the flag have to look like. This was a joy only challenge, there is no security in this challenge, so that must not be in a CTF or that should give very few points.</p>
 
         </div>
         <footer class="article-footer">
@@ -359,7 +379,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-network-Skeleton-in-the-closet/" data-id="cizepeof900kd2rfsqfqej52d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-network-Skeleton-in-the-closet/" data-id="cizoihhg300iymefs8c2m6w7r" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -495,20 +515,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/JuniorCTF-2016-recon-Here-goes/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/JuniorCTF-2016-web-Black-Suprematic-Square/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Juniors CTF - 200 - Here goes ! - Recon
+            Juniors CTF - 100 - Black Suprematic Square - Web
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/JuniorCTF-2016-network-Find-The-Gobblewonker/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/JuniorCTF-2016-recon-Here-goes/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Juniors CTF - 100 - Find The Gobblewonker - Network</p>
+        <p class="article-nav-title">Juniors CTF - 200 - Here goes ! - Recon</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -547,26 +567,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -580,6 +580,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

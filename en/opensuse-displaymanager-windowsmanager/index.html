@@ -8,23 +8,32 @@
     
         <meta name="keywords" content="linux,opensuse" />
     
-    <meta name="description" content="Change of Display ManagerPass root1sudo -i
-Then open /etc/sysconfig/displaymanager with a text editor.1vim /etc/sysconfig/displaymanager
-Display Manager can be changed at line DISPLAYMANAGER=&amp;quot;XXX">
+    <meta name="description" content="Change of Display Manager
+Pass root
+1sudo -i
+Then open /etc/sysconfig/displaymanager with a text editor.
+1vim /etc/sysconfig/displaymanager
+Display Manager can be changed at line DISPLAYMANAGER=&amp;quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DISPLAYMANAGER and WINDOWSMANAGER">
 <meta property="og:url" content="http://rawsec.ml/en/opensuse-displaymanager-windowsmanager/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="Change of Display ManagerPass root1sudo -i
-Then open /etc/sysconfig/displaymanager with a text editor.1vim /etc/sysconfig/displaymanager
-Display Manager can be changed at line DISPLAYMANAGER=&amp;quot;XXX">
+<meta property="og:description" content="Change of Display Manager
+Pass root
+1sudo -i
+Then open /etc/sysconfig/displaymanager with a text editor.
+1vim /etc/sysconfig/displaymanager
+Display Manager can be changed at line DISPLAYMANAGER=&amp;quot;">
 <meta property="og:image" content="http://rawsec.ml/images/opensuse.svg">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DISPLAYMANAGER and WINDOWSMANAGER">
-<meta name="twitter:description" content="Change of Display ManagerPass root1sudo -i
-Then open /etc/sysconfig/displaymanager with a text editor.1vim /etc/sysconfig/displaymanager
-Display Manager can be changed at line DISPLAYMANAGER=&amp;quot;XXX">
+<meta name="twitter:description" content="Change of Display Manager
+Pass root
+1sudo -i
+Then open /etc/sysconfig/displaymanager with a text editor.
+1vim /etc/sysconfig/displaymanager
+Display Manager can be changed at line DISPLAYMANAGER=&amp;quot;">
 <meta name="twitter:image" content="http://rawsec.ml/images/opensuse.svg">
     
 
@@ -184,8 +193,11 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Change-of-Display-Manager"><a href="#Change-of-Display-Manager" class="headerlink" title="Change of Display Manager"></a>Change of Display Manager</h2><p>Pass root<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo -i</div></pre></td></tr></table></figure></p>
-<p>Then open <code>/etc/sysconfig/displaymanager</code> with a text editor.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/displaymanager</div></pre></td></tr></table></figure></p>
+            <h2>Change of Display Manager</h2>
+<p>Pass root
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo -i</div></pre></td></tr></table></figure></p>
+<p>Then open <code>/etc/sysconfig/displaymanager</code> with a text editor.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/displaymanager</div></pre></td></tr></table></figure></p>
 <p>Display Manager can be changed at line <code>DISPLAYMANAGER=&quot;XXX&quot;</code></p>
 <p>Display Manager also called Login Manager can be modified as explained previously.</p>
 <p>Main managers are:</p>
@@ -198,9 +210,12 @@ ga('send', 'pageview');
 </ul>
 <p>For more manager, see <a href="https://en.wikipedia.org/wiki/X_display_manager_%28program_type%29#Some_implementations" title="Wikipedia Some implementations" target="_blank" rel="external">here</a>.</p>
 <p>If you have trouble with a manager you can temporarily replace it with <code>xdm</code> : <code>DISPLAYMANAGER=&quot;xdm&quot;</code>.</p>
-<h2 id="Change-of-Window-Manager"><a href="#Change-of-Window-Manager" class="headerlink" title="Change of Window Manager"></a>Change of Window Manager</h2><p>To change of window manager laso called desktop manager, open <code>/etc/sysconfig/windowmanager</code>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/windowmanager</div></pre></td></tr></table></figure></p>
-<p>At line <code>DEFAULT_WM=&quot;XXX&quot;</code>,replace <code>XXX</code> with one of these manager : gnome, kde, xfce, lxde, enlightenment, icewm, cinnamon.<br>For example <code>DEFAULT_WM=&quot;xfce&quot;</code>.</p>
-<p>The a reboot it’s needed.</p>
+<h2>Change of Window Manager</h2>
+<p>To change of window manager laso called desktop manager, open <code>/etc/sysconfig/windowmanager</code>.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/windowmanager</div></pre></td></tr></table></figure></p>
+<p>At line <code>DEFAULT_WM=&quot;XXX&quot;</code>,replace <code>XXX</code> with one of these manager : gnome, kde, xfce, lxde, enlightenment, icewm, cinnamon.
+For example <code>DEFAULT_WM=&quot;xfce&quot;</code>.</p>
+<p>The a reboot it's needed.</p>
 
         </div>
         <footer class="article-footer">
@@ -208,7 +223,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/opensuse-displaymanager-windowsmanager/" data-id="cizepenr1006x2rfscfcm64i4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/opensuse-displaymanager-windowsmanager/" data-id="cizoihh3v0052mefsfnagkrsj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -344,20 +359,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/reach-command-line-interface-text-mode-boot-time/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/display-repository-list-comand-line-openSUSE/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Reach the command line interface (text mode) at boot time
+            Display repository list in comand-line on openSUSE
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/know-status-health-battery-command-line/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/reach-command-line-interface-text-mode-boot-time/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Know status and health battery in command-line</p>
+        <p class="article-nav-title">Reach the command line interface (text mode) at boot time</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -396,26 +411,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -429,6 +424,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

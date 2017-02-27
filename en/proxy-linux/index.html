@@ -8,20 +8,23 @@
     
         <meta name="keywords" content="linux,system,proxy" />
     
-    <meta name="description" content="Environment variablesLot of programs (such as wget, curl, pacman, …) use environment variables to determine the proxy of a given protocol.
-Environment variables can be added per user in their .bashrc">
+    <meta name="description" content="Environment variables
+Lot of programs (such as wget, curl, pacman, ...) use environment variables to determine the proxy of a given protocol.
+Environment variables can be added per user in their .bash">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Setup a proxy under Linux">
 <meta property="og:url" content="http://rawsec.ml/en/proxy-linux/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="Environment variablesLot of programs (such as wget, curl, pacman, …) use environment variables to determine the proxy of a given protocol.
-Environment variables can be added per user in their .bashrc">
+<meta property="og:description" content="Environment variables
+Lot of programs (such as wget, curl, pacman, ...) use environment variables to determine the proxy of a given protocol.
+Environment variables can be added per user in their .bash">
 <meta property="og:image" content="http://rawsec.ml/images/tux-293844_640.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Setup a proxy under Linux">
-<meta name="twitter:description" content="Environment variablesLot of programs (such as wget, curl, pacman, …) use environment variables to determine the proxy of a given protocol.
-Environment variables can be added per user in their .bashrc">
+<meta name="twitter:description" content="Environment variables
+Lot of programs (such as wget, curl, pacman, ...) use environment variables to determine the proxy of a given protocol.
+Environment variables can be added per user in their .bash">
 <meta name="twitter:image" content="http://rawsec.ml/images/tux-293844_640.png">
     
 
@@ -181,16 +184,19 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Environment-variables"><a href="#Environment-variables" class="headerlink" title="Environment variables"></a>Environment variables</h2><p>Lot of programs (such as wget, curl, pacman, …) use environment variables to determine the proxy of a given protocol.</p>
+            <h2>Environment variables</h2>
+<p>Lot of programs (such as wget, curl, pacman, ...) use environment variables to determine the proxy of a given protocol.</p>
 <p>Environment variables can be added per user in their <code>.bashrc</code> or <code>.zshrc</code> shell profile file with something like <code>export KEY=value</code>. The advantage is that variables can be used in order to avoid repeating the same proxy several times.</p>
 <p>Or <code>/etc/environment</code> file stores the system-wide variables initialized upon user login. Or you can use <code>/etc/syconfig/proxy</code> under openSUSE.</p>
 <p>To add proxy settings one time for everyone, you can execute the following script with sudo privilege (because you need to write into a system file: <code>/etc/environment</code>).</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">file=/etc/environment</div><div class="line"></div><div class="line">http_proxy=http://proxy.example.org:8080/</div><div class="line">HTTP_PROXY=<span class="variable">$http_proxy</span></div><div class="line">https_proxy=<span class="variable">$http_proxy</span></div><div class="line">HTTPS_PROXY=<span class="variable">$https_proxy</span></div><div class="line">ftp_proxy=<span class="variable">$http_proxy</span></div><div class="line">FTP_PROXY=<span class="variable">$ftp_proxy</span></div><div class="line">rsync_proxy=<span class="variable">$http_proxy</span></div><div class="line">RSYNC_PROXY=<span class="variable">$rsync_proxy</span></div><div class="line">no_proxy=<span class="string">"localhost,127.0.0.1,localaddress,.localdomain.com"</span></div><div class="line">NO_PROXY=<span class="variable">$no_proxy</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"http_proxy=<span class="variable">$http_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTP_PROXY=<span class="variable">$HTTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"https_proxy=<span class="variable">$https_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTPS_PROXY=<span class="variable">$HTTPS_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"ftp_proxy=<span class="variable">$ftp_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"FTP_PROXY=<span class="variable">$FTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"rsync_proxy=<span class="variable">$rsync_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"RSYNC_PROXY=<span class="variable">$RSYNC_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"no_proxy=<span class="variable">$no_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"NO_PROXY=<span class="variable">$NO_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div></pre></td></tr></table></figure>
-<h2 id="Proxy-settings-on-GNOME3"><a href="#Proxy-settings-on-GNOME3" class="headerlink" title="Proxy settings on GNOME3"></a>Proxy settings on GNOME3</h2><p>Some other graphical programs (such as Chromium or Rhythmbox) ignore those environment variables and use gnome (GTK3) settings. These settings can be modified through the gnome-control-center front end and also through gsettings (see the example below).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gsettings set org.gnome.system.proxy mode &apos;manual&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http port 8080</div><div class="line">gsettings set org.gnome.system.proxy.ftp host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.ftp port 8080</div><div class="line">gsettings set org.gnome.system.proxy.https host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.https port 8080</div><div class="line">gsettings set org.gnome.system.proxy ignore-hosts &quot;[&apos;localhost&apos;, &apos;127.0.0.0/8&apos;, &apos;10.0.0.0/8&apos;, &apos;192.168.0.0/16&apos;, &apos;172.16.0.0/12&apos; , &apos;*.localdomain.com&apos; ]&quot;</div></pre></td></tr></table></figure>
-<h2 id="Package-managers"><a href="#Package-managers" class="headerlink" title="Package managers"></a>Package managers</h2><p>Since you are using awesome tools like <a href="https://en.opensuse.org/Portal:Zypper" target="_blank" rel="external">zypper</a> (openSUSE) or <a href="https://wiki.archlinux.org/index.php/pacman" target="_blank" rel="external">pacman</a> (ArchLinux) you will probably don’t care about the following paragraph.</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">file=/etc/environment</div><div class="line"></div><div class="line">http_proxy=http://proxy.example.org:8080/</div><div class="line">HTTP_PROXY=<span class="variable">$http_proxy</span></div><div class="line">https_proxy=<span class="variable">$http_proxy</span></div><div class="line">HTTPS_PROXY=<span class="variable">$https_proxy</span></div><div class="line">ftp_proxy=<span class="variable">$http_proxy</span></div><div class="line">FTP_PROXY=<span class="variable">$ftp_proxy</span></div><div class="line">rsync_proxy=<span class="variable">$http_proxy</span></div><div class="line">RSYNC_PROXY=<span class="variable">$rsync_proxy</span></div><div class="line">no_proxy=<span class="string">"localhost,127.0.0.1,localaddress,.localdomain.com"</span></div><div class="line">NO_PROXY=<span class="variable">$no_proxy</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"http_proxy=<span class="variable">$http_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTP_PROXY=<span class="variable">$HTTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"https_proxy=<span class="variable">$https_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"HTTPS_PROXY=<span class="variable">$HTTPS_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"ftp_proxy=<span class="variable">$ftp_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"FTP_PROXY=<span class="variable">$FTP_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"rsync_proxy=<span class="variable">$rsync_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"RSYNC_PROXY=<span class="variable">$RSYNC_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"no_proxy=<span class="variable">$no_proxy</span>"</span> &gt;&gt; <span class="variable">$file</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"NO_PROXY=<span class="variable">$NO_PROXY</span>"</span> &gt;&gt; <span class="variable">$file</span></div></pre></td></tr></table></figure></p>
+<h2>Proxy settings on GNOME3</h2>
+<p>Some other graphical programs (such as Chromium or Rhythmbox) ignore those environment variables and use gnome (GTK3) settings. These settings can be modified through the gnome-control-center front end and also through gsettings (see the example below).</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gsettings set org.gnome.system.proxy mode &apos;manual&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.http port 8080</div><div class="line">gsettings set org.gnome.system.proxy.ftp host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.ftp port 8080</div><div class="line">gsettings set org.gnome.system.proxy.https host &apos;proxy.example.org&apos;</div><div class="line">gsettings set org.gnome.system.proxy.https port 8080</div><div class="line">gsettings set org.gnome.system.proxy ignore-hosts &quot;[&apos;localhost&apos;, &apos;127.0.0.0/8&apos;, &apos;10.0.0.0/8&apos;, &apos;192.168.0.0/16&apos;, &apos;172.16.0.0/12&apos; , &apos;*.localdomain.com&apos; ]&quot;</div></pre></td></tr></table></figure></p>
+<h2>Package managers</h2>
+<p>Since you are using awesome tools like <a href="https://en.opensuse.org/Portal:Zypper" target="_blank" rel="external">zypper</a> (openSUSE) or <a href="https://wiki.archlinux.org/index.php/pacman" target="_blank" rel="external">pacman</a> (ArchLinux) you will probably don't care about the following paragraph.</p>
 <p>But users of apt-get or aptitue will need an additional step to use their package manager working with a proxy. They will need to edit <code>/etc/apt/apt.conf.d/proxy</code> and include the following lines:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Acquire::http::proxy &quot;http://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::ftp::proxy &quot;ftp://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::https::proxy &quot;https://proxy.example.org:8080/&quot;;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Acquire::http::proxy &quot;http://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::ftp::proxy &quot;ftp://proxy.example.org:8080/&quot;;</div><div class="line">Acquire::https::proxy &quot;https://proxy.example.org:8080/&quot;;</div></pre></td></tr></table></figure></p>
 
         </div>
         <footer class="article-footer">
@@ -198,7 +204,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/proxy-linux/" data-id="cizepenrf007a2rfst2td37a9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/proxy-linux/" data-id="cizoihh43005imefs2qhlue7n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -334,20 +340,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/2-less-known-tricks-spoofing-extensions/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/archlinux-temporarily-resize-tmp-partition/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            2 less known tricks of spoofing extensions on Windows
+            ArchLinux - Temporarily resize /tmp partition
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/archlinux-setup-sftp-user-deluge/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/2-less-known-tricks-spoofing-extensions/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ArchLinux - Setup an SFTP user for Deluge</p>
+        <p class="article-nav-title">2 less known tricks of spoofing extensions on Windows</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -386,26 +392,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -419,6 +405,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

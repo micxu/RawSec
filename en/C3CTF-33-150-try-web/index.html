@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,6 +27,7 @@ Creation
 
 
 CTF
+
 Name : 33C3 CTF
 Website : 33c3ctf.ccc.ac
 Type : Online
@@ -32,12 +35,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-“I never try anything, I ju">
+
+&amp;quot;I never try anyth">
 <meta property="og:type" content="article">
 <meta property="og:title" content="33C3 CTF - 150 - try - Web">
 <meta property="og:url" content="http://rawsec.ml/en/C3CTF-33-150-try-web/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,6 +60,7 @@ Creation
 
 
 CTF
+
 Name : 33C3 CTF
 Website : 33c3ctf.ccc.ac
 Type : Online
@@ -61,12 +68,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-“I never try anything, I ju">
+
+&amp;quot;I never try anyth">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="33C3 CTF - 150 - try - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,6 +93,7 @@ Creation
 
 
 CTF
+
 Name : 33C3 CTF
 Website : 33c3ctf.ccc.ac
 Type : Online
@@ -90,7 +101,8 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-“I never try anything, I ju">
+
+&amp;quot;I never try anyth">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +262,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,46 +280,49 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : 33C3 CTF</li>
 <li><strong>Website</strong> : <a href="https://33c3ctf.ccc.ac/" target="_blank" rel="external">33c3ctf.ccc.ac</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/404" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>“I never try anything, I just do it!” <a href="http://78.46.224.73/" target="_blank" rel="external">Do</a></p>
+<h3>Description</h3>
+<blockquote>
+<p>&quot;I never try anything, I just do it!&quot; <a href="http://78.46.224.73/" target="_blank" rel="external">Do</a></p>
 <p>Flag is in /challenge/flag</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Home page looks like this (need to log in with just a pseudo):</p>
+<h2>Solution</h2>
+<p>Home page looks like this (need to log in with just a pseudo):</p>
 <p><img src="http://i.imgur.com/i5jBUHP.png" alt=""></p>
 <p>On the profil page we can upload a profil picture (only gif):</p>
 <p><img src="http://i.imgur.com/tPtblHp.png" alt=""></p>
-<p>You can’t use easy trick to upload any files except gif:</p>
+<p>You can't use easy trick to upload any files except gif:</p>
 <ul>
 <li>no double or triple extensions</li>
 <li>no MIME type changing</li>
-<li>not just the GIF file header <code>47 49 46 38 37 61</code> (GIF87a) +  GIF file trailer <code>00 3B</code> (;) – see <a href="http://www.garykessler.net/library/file_sigs.html" target="_blank" rel="external">file signatures</a></li>
+<li>not just the GIF file header <code>47 49 46 38 37 61</code> (GIF87a) +  GIF file trailer <code>00 3B</code> (;) -- see <a href="http://www.garykessler.net/library/file_sigs.html" target="_blank" rel="external">file signatures</a></li>
 </ul>
 <p><img src="http://i.imgur.com/gB74rLj.png" alt=""></p>
-<p>You have to upload the <del>nearly</del> full <a href="http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever" target="_blank" rel="external">skeleton</a> of the GIF picture.</p>
+<p>You have to upload the <s>nearly</s> full <a href="http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever" target="_blank" rel="external">skeleton</a> of the GIF picture.</p>
 <p>But you can use a web proxy (like burpsuite) and append whatever you want at the end of the GIF.</p>
 <p>As the website seems to execute Haskell algorithms, I tried to append some haskell code.</p>
 <p>hello world (just to confirm haskell execution):</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">main</span> = putStrLn <span class="string">"hello world"</span></div></pre></td></tr></table></figure>
-<p>But just now we want to know where is uploaded our profil picture. It’s embedded in the heading and have a location like this <code>http://78.46.224.73/static/33c3_50fc0c1d-e04a-4942-9fc8-8921e4e83e6e/pic.gif</code>.</p>
+<p><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">main</span> = putStrLn <span class="string">"hello world"</span></div></pre></td></tr></table></figure></p>
+<p>But just now we want to know where is uploaded our profil picture. It's embedded in the heading and have a location like this <code>http://78.46.224.73/static/33c3_50fc0c1d-e04a-4942-9fc8-8921e4e83e6e/pic.gif</code>.</p>
 <p><strong>Note</strong>: path is unpredictable and file is renamed.</p>
 <p>What to do now? Try to execute it.</p>
 <p>On the home page when you want to run some of the examples, you can see with a web proxy that the file to execute is up to you:</p>
 <p><img src="http://i.imgur.com/OMaIqIH.png" alt=""></p>
 <p>A legitimate run file is <code>run_file=fib.hs</code>.</p>
 <p>If you try the download link you can see that this haskell script is hosted at <code>http://78.46.224.73/static/fib.hs</code>. Just remember that our picture is located at <code>http://78.46.224.73/static/33c3_50fc0c1d-e04a-4942-9fc8-8921e4e83e6e/pic.gif</code>. So what happen if we change it to <code>run_file=33c3_50fc0c1d-e04a-4942-9fc8-8921e4e83e6e/pic.gif</code> and if we append some haskell code at the end of the picture?</p>
-<p>Unfortunatly this lead to an error: <code>lexical error at character &#39;\SOH&#39;</code> (with the tiniest GIF)</p>
+<p>Unfortunatly this lead to an error: <code>lexical error at character '\SOH'</code> (with the tiniest GIF)</p>
 <p><img src="http://i.imgur.com/iuLfarc.png" alt=""></p>
 <p>or <code>lexical error (UTF-8 decoding error)</code> (with a real GIF)</p>
 <p><img src="http://i.imgur.com/7JrAwbI.png" alt=""></p>
 <p>So we conclude that the interpreter try to execute the bytecode of the GIF image. Unfortunatly we are not able to upload only haskell.</p>
-<p>To limit error possibilities we tried to upload one of the tiniest GIF and replaced 0x01 (SOF) with 0x00 (null) but the website doesn’t allow that.</p>
+<p>To limit error possibilities we tried to upload one of the tiniest GIF and replaced 0x01 (SOF) with 0x00 (null) but the website doesn't allow that.</p>
 <p>I think we have to upload a GIF file and neutralize GIF data. Then I read an excellent <a href="https://quadhead.de/storing-javascript-code-in-gif-images/" target="_blank" rel="external">article</a> talking about how to store javascript code in a GIF, so I tried to do the same with a haskell comment.</p>
 <p>In haskell comments (<a href="https://wiki.haskell.org/Reference_card" target="_blank" rel="external">ref</a>) are like this:</p>
 <ul>
@@ -335,17 +352,17 @@ ga('send', 'pageview');
 </tbody>
 </table>
 <p>A legitimate minimalistic GIF would be:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ xxd handtinyblack.gif</div><div class="line">00000000: 4749 4638 3961 0100 0100 00ff 002c 0000  GIF89a.......,..</div><div class="line">00000010: 0000 0100 0100 0002 003b                 .........;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ xxd handtinyblack.gif</div><div class="line">00000000: 4749 4638 3961 0100 0100 00ff 002c 0000  GIF89a.......,..</div><div class="line">00000010: 0000 0100 0100 0002 003b                 .........;</div></pre></td></tr></table></figure></p>
 <p>Our malicious GIF with haskell comment and appended code would be:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ xxd vuln.gif</div><div class="line">00000000: 4749 4638 3961 7b2d 0100 0100 00ff 002c  GIF89a&#123;-.......,</div><div class="line">00000010: 0000 0000 0100 0100 0002 003b 2d7d 0a6d  ...........;-&#125;.m</div><div class="line">00000020: 6169 6e20 3d20 7075 7453 7472 4c6e 2022  ain = putStrLn &quot;</div><div class="line">00000030: 6865 6c6c 6f20 776f 726c 6422 0a         hello world&quot;.</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ xxd vuln.gif</div><div class="line">00000000: 4749 4638 3961 7b2d 0100 0100 00ff 002c  GIF89a&#123;-.......,</div><div class="line">00000010: 0000 0000 0100 0100 0002 003b 2d7d 0a6d  ...........;-&#125;.m</div><div class="line">00000020: 6169 6e20 3d20 7075 7453 7472 4c6e 2022  ain = putStrLn &quot;</div><div class="line">00000030: 6865 6c6c 6f20 776f 726c 6422 0a         hello world&quot;.</div></pre></td></tr></table></figure></p>
 <p>But again we have an error: <code>Parse error: naked expression at top level. Perhaps you intended to use TemplateHaskell</code></p>
 <p><img src="http://i.imgur.com/1uVcIAd.png" alt=""></p>
-<p>So we want to change <em>GIF89a</em> from an expression to a variable or a function, but the problem is that in haskell functions can’t begin with an uppercase letter, only data <a href="https://wiki.haskell.org/Constructor" target="_blank" rel="external">constructor</a> can. So we can’t begin with something like <code>GIF89a :: Integer</code> and if we begin with somethin else than <code>GIF89a</code> the image is not recognized as valid.</p>
+<p>So we want to change <em>GIF89a</em> from an expression to a variable or a function, but the problem is that in haskell functions can't begin with an uppercase letter, only data <a href="https://wiki.haskell.org/Constructor" target="_blank" rel="external">constructor</a> can. So we can't begin with something like <code>GIF89a :: Integer</code> and if we begin with somethin else than <code>GIF89a</code> the image is not recognized as valid.</p>
 <p>All the difficulty is about crafting a valid haskell code beginning with <code>GIF89a</code>.</p>
 <p>I went to the official Haskell IRC and asked for this question, the trick is to start the file with a pattern matching and declare it later (<a href="https://wiki.haskell.org/Parsing_expressions_and_statements#Make_token_parser" target="_blank" rel="external">ref</a>).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ xxd vuln2.gif</div><div class="line">00000000: 4749 4638 3961 203d 2047 4946 3839 617b  GIF89a = GIF89a&#123;</div><div class="line">00000010: 2d01 0001 0000 ff00 2c00 0000 0001 0001  -.......,.......</div><div class="line">00000020: 0000 0200 3b2d 7d0a 6461 7461 2047 4946  ....;-&#125;.data GIF</div><div class="line">00000030: 3839 6120 3d20 4749 4638 3961 0a6d 6169  89a = GIF89a.mai</div><div class="line">00000040: 6e20 3d20 7075 7453 7472 4c6e 2022 6865  n = putStrLn &quot;he</div><div class="line">00000050: 6c6c 6f20 776f 726c 6422 0a              llo world&quot;.</div></pre></td></tr></table></figure>
-<p>That works now! So now we will just switch the hello world program to somethinf reading the flag folder (we need native function because we can’t use <em>import</em> as it needs to be at the beginning of the file in the heading section):</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="title">main</span> = <span class="keyword">do</span>  </div><div class="line">    contents &lt;- readFile <span class="string">"/challenge/flag"</span></div><div class="line">    print $ contents</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ xxd vuln2.gif</div><div class="line">00000000: 4749 4638 3961 203d 2047 4946 3839 617b  GIF89a = GIF89a&#123;</div><div class="line">00000010: 2d01 0001 0000 ff00 2c00 0000 0001 0001  -.......,.......</div><div class="line">00000020: 0000 0200 3b2d 7d0a 6461 7461 2047 4946  ....;-&#125;.data GIF</div><div class="line">00000030: 3839 6120 3d20 4749 4638 3961 0a6d 6169  89a = GIF89a.mai</div><div class="line">00000040: 6e20 3d20 7075 7453 7472 4c6e 2022 6865  n = putStrLn &quot;he</div><div class="line">00000050: 6c6c 6f20 776f 726c 6422 0a              llo world&quot;.</div></pre></td></tr></table></figure></p>
+<p>That works now! So now we will just switch the hello world program to somethinf reading the flag folder (we need native function because we can't use <em>import</em> as it needs to be at the beginning of the file in the heading section):</p>
+<p><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="title">main</span> = <span class="keyword">do</span>  </div><div class="line">    contents &lt;- readFile <span class="string">"/challenge/flag"</span></div><div class="line">    print $ contents</div></pre></td></tr></table></figure></p>
 <p><img src="http://i.imgur.com/BwVowgX.png" alt=""></p>
 
         </div>
@@ -354,7 +371,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/C3CTF-33-150-try-web/" data-id="cizepeo9y00gm2rfsehtuei7k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/C3CTF-33-150-try-web/" data-id="cizoihhd100emmefsjmfsjbth" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -501,9 +518,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/WhiteHat-GrandPrix-2016-forensics-300-Banh-it-la-gai/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">WhiteHat GrandPrix - 100 - Banh can - Web</p>
+        <p class="article-nav-title">WhiteHat GrandPrix - 300 - Banh it la gai - Forensics</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -542,26 +559,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -575,6 +572,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

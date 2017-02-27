@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionJohn is pretty happy wi">
+Description
+John is pretty happ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF - 60 - Exposed! - Web">
 <meta property="og:url" content="http://rawsec.ml/en/IceCTF-2016-IceCTF-60-Exposed-Web/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionJohn is pretty happy wi">
+Description
+John is pretty happ">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF - 60 - Exposed! - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionJohn is pretty happy wi">
+Description
+John is pretty happ">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,40 +277,64 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : IceCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>John is pretty happy with himself, he just made his first <a href="http://exposed.vuln.icec.tf/" target="_blank" rel="external">website</a>! He used all the hip and cool systems, like NginX, PHP and Git! Everyone is so happy for him, but can you get him to give you the flag?</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Description tell us we’re looking for a web hosted git repository.</li>
-<li>Let’s try <code>http://exposed.vuln.icec.tf/.git/</code>.</li>
-<li>Oh I forgot to say! We are lazy and this tool is amazing: <a href="https://github.com/internetwache/GitTools" target="_blank" rel="external">GitTools</a>.</li>
-<li>Dump the git repo : <code>./gitdumper.sh http://exposed.vuln.icec.tf/.git/ repo</code>.</li>
-<li><p>Let’s see what we get in there:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ls -A1 repo/.git/</div><div class="line">COMMIT_EDITMSG</div><div class="line">HEAD</div><div class="line">config</div><div class="line">description</div><div class="line">index</div><div class="line">info</div><div class="line">logs</div><div class="line">objects</div><div class="line">packed-refs</div><div class="line">refs</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>John is pretty happy with himself, he just made his first <a href="http://exposed.vuln.icec.tf/" target="_blank" rel="external">website</a>! He used all the hip and cool systems, like NginX, PHP and Git! Everyone is so happy for him, but can you get him to give you the flag?</p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>Description tell us we're looking for a web hosted git repository.</p>
 </li>
-<li><p>Let’s see <code>COMMIT_EDITMSG</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cat .git/COMMIT_EDITMSG</div><div class="line">add robots.txt</div><div class="line"></div><div class="line"># Please enter the commit message for your changes. Lines starting</div><div class="line"># with &apos;#&apos; will be ignored, and an empty message aborts the commit.</div><div class="line">#</div><div class="line"># Author:    James Sigurðarson &lt;jamiees2@gmail.com&gt;</div><div class="line"># Date:      Wed Aug 10 21:47:49 2016 +0000</div><div class="line">#</div><div class="line"># On branch master</div><div class="line"># Changes to be committed:</div><div class="line">#	new file:   robots.txt</div><div class="line">#</div><div class="line"># Untracked files:</div><div class="line">#	rewrite-history.sh</div><div class="line">#</div></pre></td></tr></table></figure>
+<li>
+<p>Let's try <code>http://exposed.vuln.icec.tf/.git/</code>.</p>
 </li>
-<li><p>Interesting there is a <code>robots.txt</code>, we should have look to it sooner: <a href="http://exposed.vuln.icec.tf/robots.txt" target="_blank" rel="external">http://exposed.vuln.icec.tf/robots.txt</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">User-Agent: *</div><div class="line">Disallow: /.git</div><div class="line">Disallow: /flag.php</div></pre></td></tr></table></figure>
+<li>
+<p>Oh I forgot to say! We are lazy and this tool is amazing: <a href="https://github.com/internetwache/GitTools" target="_blank" rel="external">GitTools</a>.</p>
 </li>
-<li><p>Oh yeah a <code>flag.php</code> file! Let’s go to <a href="http://exposed.vuln.icec.tf/flag.php" target="_blank" rel="external">http://exposed.vuln.icec.tf/flag.php</a>: there is nothing anymore here.</p>
+<li>
+<p>Dump the git repo : <code>./gitdumper.sh http://exposed.vuln.icec.tf/.git/ repo</code>.</p>
 </li>
-<li>But maybe we can found an older version of <code>flag.php</code> with git!</li>
-<li>Want to dig into git HEAD and all? Nah! There still is <a href="https://github.com/internetwache/GitTools" target="_blank" rel="external">GitTools</a>.</li>
-<li>Let’s extract all now: <code>./extractor.sh repo/ repodump/</code>.</li>
-<li><p>There is a lot of stuff in here:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">ls -RA repodump</div><div class="line">repodump:</div><div class="line">0-60756b184c2d6b8f0247c152d8549562bc14d2d9   14-b536a10b5453686bd1dfcc50da3cb156c321fb5f  2-adf0ebdff8a972f3f6158304323feba4aa1fd482   25-631503ff237e145c7bade484c44c05a223b51155  4-cda8cc0acc8a09153351e43c40f4abeb7a823a03</div><div class="line">1-6034c348380c9709715e6af60d04f684867d7234   15-e9f1db96f8b67eced8183d2d523e4ea76c008b83  20-32b31838b757a00f2e296ac198ca7d9cb930e644  26-90c2cd27cabb8ec7f55941ecee004558a070ccde  5-68162dcb661493c295f3913b1c1da2b198adfdd8</div><div class="line">10-fd2ac4d5260ee06f9a0e5f4808bf3862e2065fb8  16-ec95d11bb37f00fb8e17f6bdbb800124b79e3c32  21-5ea13398f975b53ff30b7ea162b2ec6897a48c68  27-541e08f75514d1caec2a62fe3a1af308da6f35d8  6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef</div><div class="line">11-4183a0cd7143899e4a5d34f01ce58317fd68921e  17-590a15d32d9a494be5830f61c5c180ddef86e43e  22-ebe74d8641b4d8b90c33d1deb69070476b0ef402  28-4de7e6fbbba6f94bc146b33bbfe6c0155f3c2fd4  7-f521418118a088ef00fef0c3e199d30d6c7e96a5</div><div class="line">12-175e312b3d3aeab77ada20ed93d1c9a3f2caf429  18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36  23-97dcb30a5862aa43984b8beee84c9477a7315856  29-bf55633224c5c76f49d42621ace07aa705ebae6e  8-584ae8349fe51e2cb25e11347003c11e92f88c74</div><div class="line">13-1746e11be489319bd8900318874b68304eb05288  19-1f601ea8a09052234b53e2cc1bb12e4ceacbf8a6  24-971c67fd8ed67c3986844f627917c19c151d00bf  3-d70b2e576c0f35e83d70027434050e06f729662b   9-672c8f636b6db9c79412db177dcca75cde27c82b</div><div class="line"></div><div class="line">repodump/0-60756b184c2d6b8f0247c152d8549562bc14d2d9:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/1-6034c348380c9709715e6af60d04f684867d7234:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/10-fd2ac4d5260ee06f9a0e5f4808bf3862e2065fb8:</div><div class="line">commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/11-4183a0cd7143899e4a5d34f01ce58317fd68921e:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/12-175e312b3d3aeab77ada20ed93d1c9a3f2caf429:</div><div class="line">commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/13-1746e11be489319bd8900318874b68304eb05288:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/14-b536a10b5453686bd1dfcc50da3cb156c321fb5f:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/15-e9f1db96f8b67eced8183d2d523e4ea76c008b83:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/16-ec95d11bb37f00fb8e17f6bdbb800124b79e3c32:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/17-590a15d32d9a494be5830f61c5c180ddef86e43e:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/19-1f601ea8a09052234b53e2cc1bb12e4ceacbf8a6:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/2-adf0ebdff8a972f3f6158304323feba4aa1fd482:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/20-32b31838b757a00f2e296ac198ca7d9cb930e644:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/21-5ea13398f975b53ff30b7ea162b2ec6897a48c68:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/22-ebe74d8641b4d8b90c33d1deb69070476b0ef402:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/23-97dcb30a5862aa43984b8beee84c9477a7315856:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/24-971c67fd8ed67c3986844f627917c19c151d00bf:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/25-631503ff237e145c7bade484c44c05a223b51155:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/26-90c2cd27cabb8ec7f55941ecee004558a070ccde:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/27-541e08f75514d1caec2a62fe3a1af308da6f35d8:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/28-4de7e6fbbba6f94bc146b33bbfe6c0155f3c2fd4:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/29-bf55633224c5c76f49d42621ace07aa705ebae6e:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/3-d70b2e576c0f35e83d70027434050e06f729662b:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/4-cda8cc0acc8a09153351e43c40f4abeb7a823a03:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/5-68162dcb661493c295f3913b1c1da2b198adfdd8:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/7-f521418118a088ef00fef0c3e199d30d6c7e96a5:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/8-584ae8349fe51e2cb25e11347003c11e92f88c74:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/9-672c8f636b6db9c79412db177dcca75cde27c82b:</div><div class="line">.gitignore  commit-meta.txt  index.php</div></pre></td></tr></table></figure>
+<li>
+<p>Let's see what we get in there:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ls -A1 repo/.git/</div><div class="line">COMMIT_EDITMSG</div><div class="line">HEAD</div><div class="line">config</div><div class="line">description</div><div class="line">index</div><div class="line">info</div><div class="line">logs</div><div class="line">objects</div><div class="line">packed-refs</div><div class="line">refs</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Still to lazy to dig with git? Ok let’s use <code>grep</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">grep -r -i icectf&#123; repodump/</div><div class="line">repodump/20-32b31838b757a00f2e296ac198ca7d9cb930e644/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/7-f521418118a088ef00fef0c3e199d30d6c7e96a5/index.php:            font-size: 2em; /* IceCTF&#123;secure_y0ur */</div><div class="line">repodump/8-584ae8349fe51e2cb25e11347003c11e92f88c74/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/0-60756b184c2d6b8f0247c152d8549562bc14d2d9/flag.php:                    echo &apos;IceCTF&#123;not_this_flag&#125;&apos;;</div><div class="line">repodump/6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef/index.php:                echo &apos;Hello World! IceCTF&#123;secure_y0ur_g1t_repos_pe0ple&#125;&apos;;</div><div class="line">repodump/18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36/index.php:                echo &apos;Hello World! IceCTF&#123;secure_y0ur_g1t_repos_pe0ple&#125;&apos;;</div><div class="line">repodump/27-541e08f75514d1caec2a62fe3a1af308da6f35d8/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/23-97dcb30a5862aa43984b8beee84c9477a7315856/flag.php:                    echo &apos;IceCTF&#123;not_this_flag&#125;&apos;;</div></pre></td></tr></table></figure>
+<li>
+<p>Let's see <code>COMMIT_EDITMSG</code>:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cat .git/COMMIT_EDITMSG</div><div class="line">add robots.txt</div><div class="line"></div><div class="line"># Please enter the commit message for your changes. Lines starting</div><div class="line"># with &apos;#&apos; will be ignored, and an empty message aborts the commit.</div><div class="line">#</div><div class="line"># Author:    James Sigurðarson &lt;jamiees2@gmail.com&gt;</div><div class="line"># Date:      Wed Aug 10 21:47:49 2016 +0000</div><div class="line">#</div><div class="line"># On branch master</div><div class="line"># Changes to be committed:</div><div class="line">#	new file:   robots.txt</div><div class="line">#</div><div class="line"># Untracked files:</div><div class="line">#	rewrite-history.sh</div><div class="line">#</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Tada!</p>
+<li>
+<p>Interesting there is a <code>robots.txt</code>, we should have look to it sooner: <a href="http://exposed.vuln.icec.tf/robots.txt" target="_blank" rel="external">http://exposed.vuln.icec.tf/robots.txt</a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">User-Agent: *</div><div class="line">Disallow: /.git</div><div class="line">Disallow: /flag.php</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Oh yeah a <code>flag.php</code> file! Let's go to <a href="http://exposed.vuln.icec.tf/flag.php" target="_blank" rel="external">http://exposed.vuln.icec.tf/flag.php</a>: there is nothing anymore here.</p>
+</li>
+<li>
+<p>But maybe we can found an older version of <code>flag.php</code> with git!</p>
+</li>
+<li>
+<p>Want to dig into git HEAD and all? Nah! There still is <a href="https://github.com/internetwache/GitTools" target="_blank" rel="external">GitTools</a>.</p>
+</li>
+<li>
+<p>Let's extract all now: <code>./extractor.sh repo/ repodump/</code>.</p>
+</li>
+<li>
+<p>There is a lot of stuff in here:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">ls -RA repodump</div><div class="line">repodump:</div><div class="line">0-60756b184c2d6b8f0247c152d8549562bc14d2d9   14-b536a10b5453686bd1dfcc50da3cb156c321fb5f  2-adf0ebdff8a972f3f6158304323feba4aa1fd482   25-631503ff237e145c7bade484c44c05a223b51155  4-cda8cc0acc8a09153351e43c40f4abeb7a823a03</div><div class="line">1-6034c348380c9709715e6af60d04f684867d7234   15-e9f1db96f8b67eced8183d2d523e4ea76c008b83  20-32b31838b757a00f2e296ac198ca7d9cb930e644  26-90c2cd27cabb8ec7f55941ecee004558a070ccde  5-68162dcb661493c295f3913b1c1da2b198adfdd8</div><div class="line">10-fd2ac4d5260ee06f9a0e5f4808bf3862e2065fb8  16-ec95d11bb37f00fb8e17f6bdbb800124b79e3c32  21-5ea13398f975b53ff30b7ea162b2ec6897a48c68  27-541e08f75514d1caec2a62fe3a1af308da6f35d8  6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef</div><div class="line">11-4183a0cd7143899e4a5d34f01ce58317fd68921e  17-590a15d32d9a494be5830f61c5c180ddef86e43e  22-ebe74d8641b4d8b90c33d1deb69070476b0ef402  28-4de7e6fbbba6f94bc146b33bbfe6c0155f3c2fd4  7-f521418118a088ef00fef0c3e199d30d6c7e96a5</div><div class="line">12-175e312b3d3aeab77ada20ed93d1c9a3f2caf429  18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36  23-97dcb30a5862aa43984b8beee84c9477a7315856  29-bf55633224c5c76f49d42621ace07aa705ebae6e  8-584ae8349fe51e2cb25e11347003c11e92f88c74</div><div class="line">13-1746e11be489319bd8900318874b68304eb05288  19-1f601ea8a09052234b53e2cc1bb12e4ceacbf8a6  24-971c67fd8ed67c3986844f627917c19c151d00bf  3-d70b2e576c0f35e83d70027434050e06f729662b   9-672c8f636b6db9c79412db177dcca75cde27c82b</div><div class="line"></div><div class="line">repodump/0-60756b184c2d6b8f0247c152d8549562bc14d2d9:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/1-6034c348380c9709715e6af60d04f684867d7234:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/10-fd2ac4d5260ee06f9a0e5f4808bf3862e2065fb8:</div><div class="line">commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/11-4183a0cd7143899e4a5d34f01ce58317fd68921e:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/12-175e312b3d3aeab77ada20ed93d1c9a3f2caf429:</div><div class="line">commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/13-1746e11be489319bd8900318874b68304eb05288:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/14-b536a10b5453686bd1dfcc50da3cb156c321fb5f:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/15-e9f1db96f8b67eced8183d2d523e4ea76c008b83:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/16-ec95d11bb37f00fb8e17f6bdbb800124b79e3c32:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/17-590a15d32d9a494be5830f61c5c180ddef86e43e:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php  robots.txt</div><div class="line"></div><div class="line">repodump/18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/19-1f601ea8a09052234b53e2cc1bb12e4ceacbf8a6:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/2-adf0ebdff8a972f3f6158304323feba4aa1fd482:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/20-32b31838b757a00f2e296ac198ca7d9cb930e644:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/21-5ea13398f975b53ff30b7ea162b2ec6897a48c68:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/22-ebe74d8641b4d8b90c33d1deb69070476b0ef402:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/23-97dcb30a5862aa43984b8beee84c9477a7315856:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/24-971c67fd8ed67c3986844f627917c19c151d00bf:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/25-631503ff237e145c7bade484c44c05a223b51155:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/26-90c2cd27cabb8ec7f55941ecee004558a070ccde:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/27-541e08f75514d1caec2a62fe3a1af308da6f35d8:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/28-4de7e6fbbba6f94bc146b33bbfe6c0155f3c2fd4:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/29-bf55633224c5c76f49d42621ace07aa705ebae6e:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/3-d70b2e576c0f35e83d70027434050e06f729662b:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/4-cda8cc0acc8a09153351e43c40f4abeb7a823a03:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/5-68162dcb661493c295f3913b1c1da2b198adfdd8:</div><div class="line">.gitignore  commit-meta.txt  flag.php  index.php</div><div class="line"></div><div class="line">repodump/6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/7-f521418118a088ef00fef0c3e199d30d6c7e96a5:</div><div class="line">.gitignore  commit-meta.txt  index.php</div><div class="line"></div><div class="line">repodump/8-584ae8349fe51e2cb25e11347003c11e92f88c74:</div><div class="line">.gitignore  commit-meta.txt  flag.php  flag.txt  index.php</div><div class="line"></div><div class="line">repodump/9-672c8f636b6db9c79412db177dcca75cde27c82b:</div><div class="line">.gitignore  commit-meta.txt  index.php</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Still to lazy to dig with git? Ok let's use <code>grep</code>:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">grep -r -i icectf&#123; repodump/</div><div class="line">repodump/20-32b31838b757a00f2e296ac198ca7d9cb930e644/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/7-f521418118a088ef00fef0c3e199d30d6c7e96a5/index.php:            font-size: 2em; /* IceCTF&#123;secure_y0ur */</div><div class="line">repodump/8-584ae8349fe51e2cb25e11347003c11e92f88c74/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/0-60756b184c2d6b8f0247c152d8549562bc14d2d9/flag.php:                    echo &apos;IceCTF&#123;not_this_flag&#125;&apos;;</div><div class="line">repodump/6-f5674cbaacd842cfacb9f825c29f7f3e5150c7ef/index.php:                echo &apos;Hello World! IceCTF&#123;secure_y0ur_g1t_repos_pe0ple&#125;&apos;;</div><div class="line">repodump/18-6b3e1ffdc1d679c4815f08ef1d70d1b955451b36/index.php:                echo &apos;Hello World! IceCTF&#123;secure_y0ur_g1t_repos_pe0ple&#125;&apos;;</div><div class="line">repodump/27-541e08f75514d1caec2a62fe3a1af308da6f35d8/flag.txt:IceCTF&#123;this_isnt_the_flag_either&#125;</div><div class="line">repodump/23-97dcb30a5862aa43984b8beee84c9477a7315856/flag.php:                    echo &apos;IceCTF&#123;not_this_flag&#125;&apos;;</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Tada!</p>
 </li>
 </ol>
 
@@ -306,7 +344,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-60-Exposed-Web/" data-id="cizepeodr00jg2rfsoaiwgn1y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-60-Exposed-Web/" data-id="cizoihhf800humefsfw0a3srp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -453,9 +491,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/IceCTF-2016-IceCTF-10-Spotlight-Web/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-60-Blue-Monday-Misc/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">IceCTF - 10 - Spotlight - Web</p>
+        <p class="article-nav-title">IceCTF - 60 - Blue Monday - Misc</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -494,26 +532,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -527,6 +545,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

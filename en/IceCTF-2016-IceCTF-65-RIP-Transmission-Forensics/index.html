@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensics" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThis seems to be reciev">
+Description
+[This][this] seems">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF - 65 - R.I.P Transmission - Forensics">
 <meta property="og:url" content="http://rawsec.ml/en/IceCTF-2016-IceCTF-65-RIP-Transmission-Forensics/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThis seems to be reciev">
+Description
+[This][this] seems">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.488Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF - 65 - R.I.P Transmission - Forensics">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThis seems to be reciev">
+Description
+[This][this] seems">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,34 +277,47 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : IceCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><a href="https://play.icec.tf/problem-static/rip_2067f9686b4d07eea2cac19b9c6588b2abac16500135901ce8781e4ccc262446" target="_blank" rel="external">This</a> seems to be recieving some sort of transmission. Our experts have been working around the clock trying and figure out what the hell it means with no hope of getting to the bottom of it. You’re our only hope.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Check file type:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file rip</div><div class="line">rip: ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, BuildID[sha1]=9fd51896db8e1b47260951e8f6ca7d6023ce9ae6, not stripped</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>[This][this] seems to be recieving some sort of transmission. Our experts have been working around the clock trying and figure out what the hell it means with no hope of getting to the bottom of it. You're our only hope.
+[this]:https://play.icec.tf/problem-static/rip_2067f9686b4d07eea2cac19b9c6588b2abac16500135901ce8781e4ccc262446</p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>Check file type:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file rip</div><div class="line">rip: ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, BuildID[sha1]=9fd51896db8e1b47260951e8f6ca7d6023ce9ae6, not stripped</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Execute it: <a href="http://asciinema.org/a/276ngyyh05z80luxnqbyy95mq" target="_blank" rel="external">http://asciinema.org/a/276ngyyh05z80luxnqbyy95mq</a></p>
+<li>
+<p>Execute it: <a href="http://asciinema.org/a/276ngyyh05z80luxnqbyy95mq" target="_blank" rel="external">http://asciinema.org/a/276ngyyh05z80luxnqbyy95mq</a></p>
 </li>
-<li><p>That’s defintly not what we’re looking for but only a lapse in concentration.</p>
+<li>
+<p>That's defintly not what we're looking for but only a lapse in concentration.</p>
 </li>
-<li><p>Check what is hidden in this binary:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">binwalk rip</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             ELF, 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux)</div><div class="line">993400        0xF2878         Unix path: /usr/lib/locale/locale-archive</div><div class="line">1014524       0xF7AFC         Unix path: /proc/sys/vm/overcommit_memory</div><div class="line">1024257       0xFA101         Unix path: /proc/sys/kernel/rtsig-max</div><div class="line">1025342       0xFA53E         Unix path: /sysdeps/unix/sysv/linux/getcwd.c</div><div class="line">1027000       0xFABB8         Unix path: /proc/sys/kernel/osrelease</div><div class="line">1093862       0x10B0E6        Unix path: /nptl/sysdeps/unix/sysv/linux/i386/../fork.c</div><div class="line">1097017       0x10BD39        ELF, 32-bit LSB no file type, (SYSV)</div><div class="line">1100142       0x10C96E        Unix path: /sysdeps/unix/sysv/linux/dl-origin.c</div><div class="line">1323949       0x1433AD        Zip archive data, encrypted at least v2.0 to extract, compressed size: 112199, uncompressed size: 112190, name: rip.jpg</div><div class="line">1436306       0x15EA92        End of Zip archive</div></pre></td></tr></table></figure>
+<li>
+<p>Check what is hidden in this binary:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">binwalk rip</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             ELF, 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux)</div><div class="line">993400        0xF2878         Unix path: /usr/lib/locale/locale-archive</div><div class="line">1014524       0xF7AFC         Unix path: /proc/sys/vm/overcommit_memory</div><div class="line">1024257       0xFA101         Unix path: /proc/sys/kernel/rtsig-max</div><div class="line">1025342       0xFA53E         Unix path: /sysdeps/unix/sysv/linux/getcwd.c</div><div class="line">1027000       0xFABB8         Unix path: /proc/sys/kernel/osrelease</div><div class="line">1093862       0x10B0E6        Unix path: /nptl/sysdeps/unix/sysv/linux/i386/../fork.c</div><div class="line">1097017       0x10BD39        ELF, 32-bit LSB no file type, (SYSV)</div><div class="line">1100142       0x10C96E        Unix path: /sysdeps/unix/sysv/linux/dl-origin.c</div><div class="line">1323949       0x1433AD        Zip archive data, encrypted at least v2.0 to extract, compressed size: 112199, uncompressed size: 112190, name: rip.jpg</div><div class="line">1436306       0x15EA92        End of Zip archive</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>We can see there is a zip with encrypted data (protected by password). Firstly we can extract this zip from the binary:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">foremost -t zip -i rip -T -v</div><div class="line">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus</div><div class="line">Audit File</div><div class="line"></div><div class="line">Foremost started at Sat Aug 20 23:01:53 2016</div><div class="line">Invocation: foremost -t zip -i rip -T -v</div><div class="line">Output directory: /root/CTF/IceCTF/2016/65-RIP_Transmission-Forensics/output_Sat_Aug_20_23_01_53_2016</div><div class="line">Configuration file: /etc/foremost.conf</div><div class="line">Processing: rip</div><div class="line">|------------------------------------------------------------------</div><div class="line">File: rip</div><div class="line">Start: Sat Aug 20 23:01:53 2016</div><div class="line">Length: 1 MB (1698648 bytes)</div><div class="line"></div><div class="line">Num	 Name (bs=512)	       Size	 File Offset	 Comment</div><div class="line"></div><div class="line">foundat=rip.jpgUT</div><div class="line">0:	00002585.zip 	     109 KB 	    1323949 	 </div><div class="line">*|</div><div class="line">Finish: Sat Aug 20 23:01:53 2016</div><div class="line"></div><div class="line">1 FILES EXTRACTED</div><div class="line"></div><div class="line">zip:= 1</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">Foremost finished at Sat Aug 20 23:01:53 2016</div></pre></td></tr></table></figure>
+<li>
+<p>We can see there is a zip with encrypted data (protected by password). Firstly we can extract this zip from the binary:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">foremost -t zip -i rip -T -v</div><div class="line">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus</div><div class="line">Audit File</div><div class="line"></div><div class="line">Foremost started at Sat Aug 20 23:01:53 2016</div><div class="line">Invocation: foremost -t zip -i rip -T -v</div><div class="line">Output directory: /root/CTF/IceCTF/2016/65-RIP_Transmission-Forensics/output_Sat_Aug_20_23_01_53_2016</div><div class="line">Configuration file: /etc/foremost.conf</div><div class="line">Processing: rip</div><div class="line">|------------------------------------------------------------------</div><div class="line">File: rip</div><div class="line">Start: Sat Aug 20 23:01:53 2016</div><div class="line">Length: 1 MB (1698648 bytes)</div><div class="line"></div><div class="line">Num	 Name (bs=512)	       Size	 File Offset	 Comment</div><div class="line"></div><div class="line">foundat=rip.jpgUT</div><div class="line">0:	00002585.zip 	     109 KB 	    1323949 	 </div><div class="line">*|</div><div class="line">Finish: Sat Aug 20 23:01:53 2016</div><div class="line"></div><div class="line">1 FILES EXTRACTED</div><div class="line"></div><div class="line">zip:= 1</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">Foremost finished at Sat Aug 20 23:01:53 2016</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Secondly we can bruteforce the password with <a href="https://github.com/lanjelot/patator" target="_blank" rel="external">patator</a>, I first tried with <a href="http://downloads.skullsecurity.org/passwords/500-worst-passwords.txt.bz2" target="_blank" rel="external">500-worst-passwords</a> dict and then I was successful with <a href="http://downloads.skullsecurity.org/passwords/john.txt.bz2" target="_blank" rel="external">john</a> dict:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">patator unzip_pass zipfile=output_Sat_Aug_20_23_01_53_2016/zip/00002585.zip password=FILE0 0=john.txt -x ignore:code!=0</div><div class="line">23:22:46 patator    INFO - Starting Patator v0.7-beta (https://github.com/lanjelot/patator) at 2016-08-20 23:22 CEST</div><div class="line">23:22:46 patator    INFO -                                                                              </div><div class="line">23:22:46 patator    INFO - code  size    time | candidate                          |   num | mesg</div><div class="line">23:22:46 patator    INFO - -----------------------------------------------------------------------------</div><div class="line">23:22:49 patator    INFO - 0     142    0.020 | bunny                              |   966 | No errors detected in compressed data of /root/CTF/IceCTF/2016/65-RIP_Transmission-Forensics/output_Sat_Aug_20_23_01_53_2016/zip/00002585.zip.</div><div class="line">23:22:56 patator    INFO - Hits/Done/Skip/Fail/Size: 1/3107/0/0/3107, Avg: 321 r/s, Time: 0h 0m 9s</div></pre></td></tr></table></figure>
+<li>
+<p>Secondly we can bruteforce the password with <a href="https://github.com/lanjelot/patator" target="_blank" rel="external">patator</a>, I first tried with <a href="http://downloads.skullsecurity.org/passwords/500-worst-passwords.txt.bz2" target="_blank" rel="external">500-worst-passwords</a> dict and then I was successful with <a href="http://downloads.skullsecurity.org/passwords/john.txt.bz2" target="_blank" rel="external">john</a> dict:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">patator unzip_pass zipfile=output_Sat_Aug_20_23_01_53_2016/zip/00002585.zip password=FILE0 0=john.txt -x ignore:code!=0</div><div class="line">23:22:46 patator    INFO - Starting Patator v0.7-beta (https://github.com/lanjelot/patator) at 2016-08-20 23:22 CEST</div><div class="line">23:22:46 patator    INFO -                                                                              </div><div class="line">23:22:46 patator    INFO - code  size    time | candidate                          |   num | mesg</div><div class="line">23:22:46 patator    INFO - -----------------------------------------------------------------------------</div><div class="line">23:22:49 patator    INFO - 0     142    0.020 | bunny                              |   966 | No errors detected in compressed data of /root/CTF/IceCTF/2016/65-RIP_Transmission-Forensics/output_Sat_Aug_20_23_01_53_2016/zip/00002585.zip.</div><div class="line">23:22:56 patator    INFO - Hits/Done/Skip/Fail/Size: 1/3107/0/0/3107, Avg: 321 r/s, Time: 0h 0m 9s</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Now we have just to <code>unzip output_Sat_Aug_20_23_01_53_2016/zip/00002585.zip</code> with <code>bunny</code> as password.</p>
+<li>
+<p>Now we have just to <code>unzip output_Sat_Aug_20_23_01_53_2016/zip/00002585.zip</code> with <code>bunny</code> as password.</p>
 </li>
-<li>And <code>display output_Sat_Aug_20_23_01_53_2016/zip/rip.jpg</code> to get the flag:  <code>IceCTF{1_Lik3_7o_r1P_4nD_diP_411_7He_ziP5}</code></li>
+<li>
+<p>And <code>display output_Sat_Aug_20_23_01_53_2016/zip/rip.jpg</code> to get the flag:  <code>IceCTF{1_Lik3_7o_r1P_4nD_diP_411_7He_ziP5}</code></p>
+</li>
 </ol>
 
         </div>
@@ -299,7 +326,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-65-RIP-Transmission-Forensics/" data-id="cizepeoe200jp2rfsix2wphzt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-65-RIP-Transmission-Forensics/" data-id="cizoihhfe00i3mefslw70otxf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -435,20 +462,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/IceCTF-2016-IceCTF-65-Over-the-Hill-Cryptography/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-70-Kitty-Web/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            IceCTF - 65 - Over the Hill - Cryptography
+            IceCTF - 70 - Kitty - Web
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/IceCTF-2016-IceCTF-15-All-your-Base-are-belong-to-us-Misc/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-65-Over-the-Hill-Cryptography/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">IceCTF - 15 - All your Base are belong to us - Misc</p>
+        <p class="article-nav-title">IceCTF - 65 - Over the Hill - Cryptography</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -487,26 +514,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -520,6 +527,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

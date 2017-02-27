@@ -6,28 +6,31 @@
     <title>How to change OpenSSH port on CentOS 7 | RawSec</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="security,linux,centos,ssh" />
+        <meta name="keywords" content="linux,security,centos,ssh" />
     
-    <meta name="description" content="Before beginningThese are the steps to do on the SSH server.
+    <meta name="description" content="Before beginning
+These are the steps to do on the SSH server.
 Be sure to do all the steps before exiting SSH connection if you are connected via SSH.
 This config was tested for default CentOS 7 iso.
-Ch">
+C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to change OpenSSH port on CentOS 7">
 <meta property="og:url" content="http://rawsec.ml/en/change-openssh-port-centos-7/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="Before beginningThese are the steps to do on the SSH server.
+<meta property="og:description" content="Before beginning
+These are the steps to do on the SSH server.
 Be sure to do all the steps before exiting SSH connection if you are connected via SSH.
 This config was tested for default CentOS 7 iso.
-Ch">
+C">
 <meta property="og:image" content="http://rawsec.ml/images/security-265130_640.jpg">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to change OpenSSH port on CentOS 7">
-<meta name="twitter:description" content="Before beginningThese are the steps to do on the SSH server.
+<meta name="twitter:description" content="Before beginning
+These are the steps to do on the SSH server.
 Be sure to do all the steps before exiting SSH connection if you are connected via SSH.
 This config was tested for default CentOS 7 iso.
-Ch">
+C">
 <meta name="twitter:image" content="http://rawsec.ml/images/security-265130_640.jpg">
     
 
@@ -187,26 +190,28 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Before-beginning"><a href="#Before-beginning" class="headerlink" title="Before beginning"></a>Before beginning</h2><p>These are the steps to do on the SSH server.</p>
+            <h2>Before beginning</h2>
+<p>These are the steps to do on the SSH server.</p>
 <p>Be sure to do all the steps before exiting SSH connection if you are connected via SSH.</p>
 <p>This config was tested for default CentOS 7 iso.</p>
-<h2 id="Change-the-SSH-port"><a href="#Change-the-SSH-port" class="headerlink" title="Change the SSH port"></a>Change the SSH port</h2><p>You can start by backup your current SSH configuration :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bck</div></pre></td></tr></table></figure>
+<h2>Change the SSH port</h2>
+<p>You can start by backup your current SSH configuration :</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bck</div></pre></td></tr></table></figure></p>
 <p>You can now open the default SSH configuration file :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/ssh/sshd_config</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/ssh/sshd_config</div></pre></td></tr></table></figure></p>
 <p>Un-comment the <code>Port</code> line and change the value.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Port 44223</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Port 44223</div></pre></td></tr></table></figure></p>
 <p>Save the file.</p>
 <p>By default, SELinux only allow port 22 for SSH. So you need to enable the new port through SELinux :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo semanage port -a -t ssh_port_t -p tcp 44223</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo semanage port -a -t ssh_port_t -p tcp 44223</div></pre></td></tr></table></figure></p>
 <p>You can now restart the SSH server :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo systemctl restart sshd.service</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo systemctl restart sshd.service</div></pre></td></tr></table></figure></p>
 <p>Verify that SSH is now running on the new port :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ss -tnlp | grep ssh</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ss -tnlp | grep ssh</div></pre></td></tr></table></figure></p>
 <p>You may want to try the SSH connexion with another user before exiting your current SSH session.</p>
 <p>You can now use the new port number :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh user@example.com -p 44223</div></pre></td></tr></table></figure>
-<p>That’s it !</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh user@example.com -p 44223</div></pre></td></tr></table></figure></p>
+<p>That's it !</p>
 
         </div>
         <footer class="article-footer">
@@ -214,7 +219,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/change-openssh-port-centos-7/" data-id="cizepenkt000r2rfst65lg4i9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/change-openssh-port-centos-7/" data-id="cizoihh1b0023mefsd5aizxjy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -402,26 +407,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -435,6 +420,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

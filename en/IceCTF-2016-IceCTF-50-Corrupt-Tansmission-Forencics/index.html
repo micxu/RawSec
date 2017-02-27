@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensics" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWe intercepted this ima">
+Description
+We intercepted this">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF - 50 - Corrupt Transmission - Forensics">
 <meta property="og:url" content="http://rawsec.ml/en/IceCTF-2016-IceCTF-50-Corrupt-Tansmission-Forencics/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWe intercepted this ima">
+Description
+We intercepted this">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF - 50 - Corrupt Transmission - Forensics">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWe intercepted this ima">
+Description
+We intercepted this">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,38 +277,50 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : IceCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We intercepted this image, but it must have gotten corrupted during the transmission. Can you try and fix it? <a href="https://play.icec.tf/problem-static/corrupt_92cee405924ad39fb513e3ef910699b79bb6d45cc5046c051eb9aab3546e22c3.png" target="_blank" rel="external">corrupt.png</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Check the file type:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file corrupt.png</div><div class="line">corrupt.png: data</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>We intercepted this image, but it must have gotten corrupted during the transmission. Can you try and fix it? <a href="https://play.icec.tf/problem-static/corrupt_92cee405924ad39fb513e3ef910699b79bb6d45cc5046c051eb9aab3546e22c3.png" target="_blank" rel="external">corrupt.png</a></p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>Check the file type:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file corrupt.png</div><div class="line">corrupt.png: data</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>This PNG is clearly corrupted, check what’s wrong:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pngcheck corrupt.png</div><div class="line">corrupt.png:  CORRUPTED by text conversion</div><div class="line">ERROR: corrupt.png</div><div class="line"></div><div class="line">pngcheck -v corrupt.png</div><div class="line">File: corrupt.png (469363 bytes)</div><div class="line">  File is CORRUPTED.  It seems to have suffered EOL conversion.</div><div class="line">  It was probably transmitted in text mode.</div><div class="line">ERRORS DETECTED in corrupt.png</div></pre></td></tr></table></figure>
+<li>
+<p>This PNG is clearly corrupted, check what's wrong:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pngcheck corrupt.png</div><div class="line">corrupt.png:  CORRUPTED by text conversion</div><div class="line">ERROR: corrupt.png</div><div class="line"></div><div class="line">pngcheck -v corrupt.png</div><div class="line">File: corrupt.png (469363 bytes)</div><div class="line">  File is CORRUPTED.  It seems to have suffered EOL conversion.</div><div class="line">  It was probably transmitted in text mode.</div><div class="line">ERRORS DETECTED in corrupt.png</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>This kind of error may occurs when an image (binary) was downloaded as ASCII text.</p>
+<li>
+<p>This kind of error may occurs when an image (binary) was downloaded as ASCII text.</p>
 </li>
-<li><p>First, we’ll check the PNG header with <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png</div><div class="line">00000000: 9050 4e47 0e1a 0a1b                      .PNG....</div></pre></td></tr></table></figure>
+<li>
+<p>First, we'll check the PNG header with <a href="http://linuxcommand.org/man_pages/xxd1.html" target="_blank" rel="external">xxd</a>:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png</div><div class="line">00000000: 9050 4e47 0e1a 0a1b                      .PNG....</div></pre></td></tr></table></figure></p>
 </li>
-<li><p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature" target="_blank" rel="external">PNG spec</a> tell us that not the right header, good header should be:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(decimal)              137  80  78  71  13  10  26  10</div><div class="line">(hexadecimal)           89  50  4e  47  0d  0a  1a  0a</div><div class="line">(ASCII C notation)    \211   P   N   G  \r  \n \032 \n</div></pre></td></tr></table></figure>
+<li>
+<p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature" target="_blank" rel="external">PNG spec</a> tell us that not the right header, good header should be:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(decimal)              137  80  78  71  13  10  26  10</div><div class="line">(hexadecimal)           89  50  4e  47  0d  0a  1a  0a</div><div class="line">(ASCII C notation)    \211   P   N   G  \r  \n \032 \n</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Let’s fix it with <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">HT</a> hex editor.</p>
+<li>
+<p>Let's fix it with <a href="http://hte.sourceforge.net/readme.html" target="_blank" rel="external">HT</a> hex editor.</p>
 </li>
-<li><p>Now it sounds right:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png.fix</div><div class="line">00000000: 8950 4e47 0d0a 1a0a                      .PNG....</div><div class="line"></div><div class="line">pngcheck corrupt.png.fix</div><div class="line">corrupt.png.fix  additional data after IEND chunk</div><div class="line">ERROR: corrupt.png.fix</div></pre></td></tr></table></figure>
+<li>
+<p>Now it sounds right:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">xxd -l8 corrupt.png.fix</div><div class="line">00000000: 8950 4e47 0d0a 1a0a                      .PNG....</div><div class="line"></div><div class="line">pngcheck corrupt.png.fix</div><div class="line">corrupt.png.fix  additional data after IEND chunk</div><div class="line">ERROR: corrupt.png.fix</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>There is still an error but now PNG is recognized and we can display the image:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">file corrupt.png.fix</div><div class="line">corrupt.png.fix: PNG image data, 500 x 408, 8-bit/color RGBA, non-interlaced</div><div class="line"></div><div class="line">pngcheck -v corrupt.png.fix</div><div class="line">File: corrupt.png.fix (469363 bytes)</div><div class="line">  chunk IHDR at offset 0x0000c, length 13</div><div class="line">    500 x 408 image, 32-bit RGB+alpha, non-interlaced</div><div class="line">  chunk bKGD at offset 0x00025, length 6</div><div class="line">    red = 0x00ff, green = 0x00ff, blue = 0x00ff</div><div class="line">  chunk pHYs at offset 0x00037, length 9: 2835x2835 pixels/meter (72 dpi)</div><div class="line">  chunk tIME at offset 0x0004c, length 7: 20 Jun 2016 03:20:08 UTC</div><div class="line">  chunk IDAT at offset 0x0005f, length 8192</div><div class="line">    zlib: deflated, 32K window, maximum compression</div><div class="line">  chunk IDAT at offset 0x0206b, length 8192</div><div class="line">  chunk IDAT at offset 0x04077, length 8192</div><div class="line">  chunk IDAT at offset 0x06083, length 8192</div><div class="line">  chunk IDAT at offset 0x0808f, length 8192</div><div class="line">  chunk IDAT at offset 0x0a09b, length 8192</div><div class="line">  chunk IDAT at offset 0x0c0a7, length 8192</div><div class="line">  chunk IDAT at offset 0x0e0b3, length 8192</div><div class="line">  chunk IDAT at offset 0x100bf, length 8192</div><div class="line">  chunk IDAT at offset 0x120cb, length 8192</div><div class="line">  chunk IDAT at offset 0x140d7, length 8192</div><div class="line">  chunk IDAT at offset 0x160e3, length 8192</div><div class="line">  chunk IDAT at offset 0x180ef, length 8192</div><div class="line">  chunk IDAT at offset 0x1a0fb, length 8192</div><div class="line">  chunk IDAT at offset 0x1c107, length 8192</div><div class="line">  chunk IDAT at offset 0x1e113, length 8192</div><div class="line">  chunk IDAT at offset 0x2011f, length 8192</div><div class="line">  chunk IDAT at offset 0x2212b, length 8192</div><div class="line">  chunk IDAT at offset 0x24137, length 8192</div><div class="line">  chunk IDAT at offset 0x26143, length 8192</div><div class="line">  chunk IDAT at offset 0x2814f, length 8192</div><div class="line">  chunk IDAT at offset 0x2a15b, length 8192</div><div class="line">  chunk IDAT at offset 0x2c167, length 8192</div><div class="line">  chunk IDAT at offset 0x2e173, length 8192</div><div class="line">  chunk IDAT at offset 0x3017f, length 8192</div><div class="line">  chunk IDAT at offset 0x3218b, length 8192</div><div class="line">  chunk IDAT at offset 0x34197, length 8192</div><div class="line">  chunk IDAT at offset 0x361a3, length 8192</div><div class="line">  chunk IDAT at offset 0x381af, length 8192</div><div class="line">  chunk IDAT at offset 0x3a1bb, length 8192</div><div class="line">  chunk IDAT at offset 0x3c1c7, length 8192</div><div class="line">  chunk IDAT at offset 0x3e1d3, length 8192</div><div class="line">  chunk IDAT at offset 0x401df, length 8192</div><div class="line">  chunk IDAT at offset 0x421eb, length 8192</div><div class="line">  chunk IDAT at offset 0x441f7, length 8192</div><div class="line">  chunk IDAT at offset 0x46203, length 8192</div><div class="line">  chunk IDAT at offset 0x4820f, length 8192</div><div class="line">  chunk IDAT at offset 0x4a21b, length 8192</div><div class="line">  chunk IDAT at offset 0x4c227, length 8192</div><div class="line">  chunk IDAT at offset 0x4e233, length 8192</div><div class="line">  chunk IDAT at offset 0x5023f, length 8192</div><div class="line">  chunk IDAT at offset 0x5224b, length 8192</div><div class="line">  chunk IDAT at offset 0x54257, length 8192</div><div class="line">  chunk IDAT at offset 0x56263, length 8192</div><div class="line">  chunk IDAT at offset 0x5826f, length 8192</div><div class="line">  chunk IDAT at offset 0x5a27b, length 8192</div><div class="line">  chunk IDAT at offset 0x5c287, length 8192</div><div class="line">  chunk IDAT at offset 0x5e293, length 8192</div><div class="line">  chunk IDAT at offset 0x6029f, length 8192</div><div class="line">  chunk IDAT at offset 0x622ab, length 8192</div><div class="line">  chunk IDAT at offset 0x642b7, length 8192</div><div class="line">  chunk IDAT at offset 0x662c3, length 8192</div><div class="line">  chunk IDAT at offset 0x682cf, length 8192</div><div class="line">  chunk IDAT at offset 0x6a2db, length 8192</div><div class="line">  chunk IDAT at offset 0x6c2e7, length 8192</div><div class="line">  chunk IDAT at offset 0x6e2f3, length 8192</div><div class="line">  chunk IDAT at offset 0x702ff, length 8192</div><div class="line">  chunk IDAT at offset 0x7230b, length 1619</div><div class="line">  chunk IEND at offset 0x7296a, length 0</div><div class="line">  additional data after IEND chunk</div><div class="line">ERRORS DETECTED in corrupt.png.fix</div><div class="line"></div><div class="line">display corrupt.png.fix</div></pre></td></tr></table></figure>
+<li>
+<p>There is still an error but now PNG is recognized and we can display the image:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">file corrupt.png.fix</div><div class="line">corrupt.png.fix: PNG image data, 500 x 408, 8-bit/color RGBA, non-interlaced</div><div class="line"></div><div class="line">pngcheck -v corrupt.png.fix</div><div class="line">File: corrupt.png.fix (469363 bytes)</div><div class="line">  chunk IHDR at offset 0x0000c, length 13</div><div class="line">    500 x 408 image, 32-bit RGB+alpha, non-interlaced</div><div class="line">  chunk bKGD at offset 0x00025, length 6</div><div class="line">    red = 0x00ff, green = 0x00ff, blue = 0x00ff</div><div class="line">  chunk pHYs at offset 0x00037, length 9: 2835x2835 pixels/meter (72 dpi)</div><div class="line">  chunk tIME at offset 0x0004c, length 7: 20 Jun 2016 03:20:08 UTC</div><div class="line">  chunk IDAT at offset 0x0005f, length 8192</div><div class="line">    zlib: deflated, 32K window, maximum compression</div><div class="line">  chunk IDAT at offset 0x0206b, length 8192</div><div class="line">  chunk IDAT at offset 0x04077, length 8192</div><div class="line">  chunk IDAT at offset 0x06083, length 8192</div><div class="line">  chunk IDAT at offset 0x0808f, length 8192</div><div class="line">  chunk IDAT at offset 0x0a09b, length 8192</div><div class="line">  chunk IDAT at offset 0x0c0a7, length 8192</div><div class="line">  chunk IDAT at offset 0x0e0b3, length 8192</div><div class="line">  chunk IDAT at offset 0x100bf, length 8192</div><div class="line">  chunk IDAT at offset 0x120cb, length 8192</div><div class="line">  chunk IDAT at offset 0x140d7, length 8192</div><div class="line">  chunk IDAT at offset 0x160e3, length 8192</div><div class="line">  chunk IDAT at offset 0x180ef, length 8192</div><div class="line">  chunk IDAT at offset 0x1a0fb, length 8192</div><div class="line">  chunk IDAT at offset 0x1c107, length 8192</div><div class="line">  chunk IDAT at offset 0x1e113, length 8192</div><div class="line">  chunk IDAT at offset 0x2011f, length 8192</div><div class="line">  chunk IDAT at offset 0x2212b, length 8192</div><div class="line">  chunk IDAT at offset 0x24137, length 8192</div><div class="line">  chunk IDAT at offset 0x26143, length 8192</div><div class="line">  chunk IDAT at offset 0x2814f, length 8192</div><div class="line">  chunk IDAT at offset 0x2a15b, length 8192</div><div class="line">  chunk IDAT at offset 0x2c167, length 8192</div><div class="line">  chunk IDAT at offset 0x2e173, length 8192</div><div class="line">  chunk IDAT at offset 0x3017f, length 8192</div><div class="line">  chunk IDAT at offset 0x3218b, length 8192</div><div class="line">  chunk IDAT at offset 0x34197, length 8192</div><div class="line">  chunk IDAT at offset 0x361a3, length 8192</div><div class="line">  chunk IDAT at offset 0x381af, length 8192</div><div class="line">  chunk IDAT at offset 0x3a1bb, length 8192</div><div class="line">  chunk IDAT at offset 0x3c1c7, length 8192</div><div class="line">  chunk IDAT at offset 0x3e1d3, length 8192</div><div class="line">  chunk IDAT at offset 0x401df, length 8192</div><div class="line">  chunk IDAT at offset 0x421eb, length 8192</div><div class="line">  chunk IDAT at offset 0x441f7, length 8192</div><div class="line">  chunk IDAT at offset 0x46203, length 8192</div><div class="line">  chunk IDAT at offset 0x4820f, length 8192</div><div class="line">  chunk IDAT at offset 0x4a21b, length 8192</div><div class="line">  chunk IDAT at offset 0x4c227, length 8192</div><div class="line">  chunk IDAT at offset 0x4e233, length 8192</div><div class="line">  chunk IDAT at offset 0x5023f, length 8192</div><div class="line">  chunk IDAT at offset 0x5224b, length 8192</div><div class="line">  chunk IDAT at offset 0x54257, length 8192</div><div class="line">  chunk IDAT at offset 0x56263, length 8192</div><div class="line">  chunk IDAT at offset 0x5826f, length 8192</div><div class="line">  chunk IDAT at offset 0x5a27b, length 8192</div><div class="line">  chunk IDAT at offset 0x5c287, length 8192</div><div class="line">  chunk IDAT at offset 0x5e293, length 8192</div><div class="line">  chunk IDAT at offset 0x6029f, length 8192</div><div class="line">  chunk IDAT at offset 0x622ab, length 8192</div><div class="line">  chunk IDAT at offset 0x642b7, length 8192</div><div class="line">  chunk IDAT at offset 0x662c3, length 8192</div><div class="line">  chunk IDAT at offset 0x682cf, length 8192</div><div class="line">  chunk IDAT at offset 0x6a2db, length 8192</div><div class="line">  chunk IDAT at offset 0x6c2e7, length 8192</div><div class="line">  chunk IDAT at offset 0x6e2f3, length 8192</div><div class="line">  chunk IDAT at offset 0x702ff, length 8192</div><div class="line">  chunk IDAT at offset 0x7230b, length 1619</div><div class="line">  chunk IEND at offset 0x7296a, length 0</div><div class="line">  additional data after IEND chunk</div><div class="line">ERRORS DETECTED in corrupt.png.fix</div><div class="line"></div><div class="line">display corrupt.png.fix</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Flag is <code>IceCTF{t1s_but_4_5cr4tch}</code>.</p>
+<li>
+<p>Flag is <code>IceCTF{t1s_but_4_5cr4tch}</code>.</p>
 </li>
 </ol>
 
@@ -304,7 +330,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-50-Corrupt-Tansmission-Forencics/" data-id="cizepeod500ix2rfseetfdzeq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-50-Corrupt-Tansmission-Forencics/" data-id="cizoihheu00h8mefsm51zq045" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -492,26 +518,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -525,6 +531,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

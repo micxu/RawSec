@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensics" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,6 +27,7 @@ Creation
 
 
 CTF
+
 Name : RC3 CTF 2016
 Website : http://ctf.rc3.club/
 Type : Online
@@ -32,12 +35,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Sometimes not a">
+
+Sometimes n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RC3 CTF - 100 - My Lil Droid - Forensics">
 <meta property="og:url" content="http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,6 +60,7 @@ Creation
 
 
 CTF
+
 Name : RC3 CTF 2016
 Website : http://ctf.rc3.club/
 Type : Online
@@ -61,12 +68,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Sometimes not a">
+
+Sometimes n">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RC3 CTF - 100 - My Lil Droid - Forensics">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,6 +93,7 @@ Creation
 
 
 CTF
+
 Name : RC3 CTF 2016
 Website : http://ctf.rc3.club/
 Type : Online
@@ -90,7 +101,8 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Sometimes not a">
+
+Sometimes n">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +262,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,28 +280,35 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : RC3 CTF 2016</li>
 <li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>Sometimes not all files are needed.<br>Hint:<br>– You probably don’t have to run it</p>
+<h3>Description</h3>
+<blockquote>
+<p>Sometimes not all files are needed.
+Hint:<br>
+– You probably don’t have to run it</p>
 </blockquote>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>For this challenge, we have an apk file nammed <code>youtube.apk</code>. First, let decode it with apktool to see usefull file like AndroidManifest.xml : <code>apktool d youtube.apk</code>.</p>
+<h3>Solution</h3>
+<p>For this challenge, we have an apk file nammed <code>youtube.apk</code>. First, let decode it with apktool to see usefull file like AndroidManifest.xml : <code>apktool d youtube.apk</code>.</p>
 <p>We know that we are seeking a RC3-2016 flag, so go search in files we extracted :</p>
 <ul>
-<li><code>cd youtube</code>  </li>
-<li><code>find . -type f -exec grep RC3-2016 {} \;</code> =&gt; No result  </li>
+<li><code>cd youtube</code></li>
+<li><code>find . -type f -exec grep RC3-2016 {} \;</code> =&gt; No result</li>
 <li><code>find . -type f -exec grep RC3 {} \;</code> give this output :</li>
 </ul>
-<pre><code>new-instance v1, Ljava/util/zip/CRC32;
-invoke-direct {v1}, Ljava/util/zip/CRC32;-&gt;&lt;init&gt;()V
-invoke-virtual {v1, v4, v8, v0}, Ljava/util/zip/CRC32;-&gt;update([BII)V
-invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
-</code></pre><p>Let’s see if we can find 2016 string somewhere :<br><code>find . -type f -exec grep 2016 {} \;</code> give a loot of string and the last one is a bit weird : <code>UkMz-2016-R09URU0yMQ==</code></p>
+<pre><code>    new-instance v1, Ljava/util/zip/CRC32;
+    invoke-direct {v1}, Ljava/util/zip/CRC32;-&gt;&lt;init&gt;()V
+    invoke-virtual {v1, v4, v8, v0}, Ljava/util/zip/CRC32;-&gt;update([BII)V
+    invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
+</code></pre>
+<p>Let's see if we can find 2016 string somewhere :<br>
+<code>find . -type f -exec grep 2016 {} \;</code> give a loot of string and the last one is a bit weird : <code>UkMz-2016-R09URU0yMQ==</code></p>
 <p>Decode this in base64 : flag = <code>RC3-2016-GOTEM21</code>.</p>
 
         </div>
@@ -296,7 +317,7 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
 
 
 
-    <a data-url="http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/" data-id="cizepeofn00ku2rfsnp6j9iil" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/RC3CTF-2016-forensics-100-My-Lil-Droid/" data-id="cizoihhg600j1mefsfxhn1s0g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -432,20 +453,20 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
         
 <nav id="article-nav">
     
-        <a href="/en/RC3CTF-2016-forensics-300-breaking-news/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/JuniorCTF-2016-crypto-southern-cross/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            RC3 CTF - 300 - Breaking News - Forensics
+            Juniors CTF - 300 - Southern Cross - Cryptography
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/RC3CTF-2016-misc-200-bridge-of-cyber/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/RC3CTF-2016-forensics-300-breaking-news/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">RC3 CTF - 200 - Bridge of Cyber - Misc</p>
+        <p class="article-nav-title">RC3 CTF - 300 - Breaking News - Forensics</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -484,26 +505,6 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -517,6 +518,26 @@ invoke-virtual {v1}, Ljava/util/zip/CRC32;-&gt;getValue()J
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

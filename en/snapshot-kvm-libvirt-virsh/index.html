@@ -8,20 +8,23 @@
     
         <meta name="keywords" content="linux,system,virtualization" />
     
-    <meta name="description" content="ContextI am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
-I’m giving examples for qcow2 disk images and commands are ma">
+    <meta name="description" content="Context
+I am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
+I&apos;m giving examples for qcow2 disk images and commands are m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Snapshot for KVM via libvirt with virsh">
 <meta property="og:url" content="http://rawsec.ml/en/snapshot-kvm-libvirt-virsh/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="ContextI am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
-I’m giving examples for qcow2 disk images and commands are ma">
+<meta property="og:description" content="Context
+I am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
+I&apos;m giving examples for qcow2 disk images and commands are m">
 <meta property="og:image" content="http://rawsec.ml/images/tux-293844_640.png">
 <meta property="og:updated_time" content="2017-02-07T22:03:01.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Snapshot for KVM via libvirt with virsh">
-<meta name="twitter:description" content="ContextI am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
-I’m giving examples for qcow2 disk images and commands are ma">
+<meta name="twitter:description" content="Context
+I am using KVM, and use/manage my VMs with virt-manager. But I asked myself this question: how can create or revert some snapshot?
+I&apos;m giving examples for qcow2 disk images and commands are m">
 <meta name="twitter:image" content="http://rawsec.ml/images/tux-293844_640.png">
     
 
@@ -182,28 +185,30 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Libvirt_support.svg/640px-Libvirt_support.svg.png" alt=""></p>
-<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p>I am using <em>KVM</em>, and use/manage my VMs with <em>virt-manager</em>. But I asked myself this question: how can create or revert some snapshot?</p>
-<p>I’m giving examples for qcow2 disk images and commands are made with virsh.</p>
-<h2 id="Internal-Disk-Snapshots"><a href="#Internal-Disk-Snapshots" class="headerlink" title="Internal Disk Snapshots"></a>Internal Disk Snapshots</h2><p>You can list available VM with virsh in order to know their name:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ virsh list</div><div class="line"> Id Name                 State</div><div class="line">----------------------------------</div><div class="line">  1 vmname               running</div></pre></td></tr></table></figure>
+<h2>Context</h2>
+<p>I am using <em>KVM</em>, and use/manage my VMs with <em>virt-manager</em>. But I asked myself this question: how can create or revert some snapshot?</p>
+<p>I'm giving examples for qcow2 disk images and commands are made with virsh.</p>
+<h2>Internal Disk Snapshots</h2>
+<p>You can list available VM with virsh in order to know their name:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ virsh list</div><div class="line"> Id Name                 State</div><div class="line">----------------------------------</div><div class="line">  1 vmname               running</div></pre></td></tr></table></figure></p>
 <p>Then you can check if there already is existing shapshots for this VM:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-list vmname</div><div class="line"> Name                 Creation Time             State</div><div class="line">------------------------------------------------------------</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-list vmname</div><div class="line"> Name                 Creation Time             State</div><div class="line">------------------------------------------------------------</div></pre></td></tr></table></figure></p>
 <p>Next there is two possibilities to make a snapshot:</p>
 <ul>
 <li>create a XML snapshot description file to specify the name and description of the snapshot</li>
 <li>or let libvirt choose a name and no description</li>
 </ul>
 <p>The XML snapshot description file must look like the following:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">domainsnapshot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>vmname-snapshot1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>description of the snapshot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">domainsnapshot</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">domainsnapshot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>vmname-snapshot1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>description of the snapshot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">domainsnapshot</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>Make a snapshot with an XML file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-create vmname /path/to/description.xml</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-create vmname /path/to/description.xml</div></pre></td></tr></table></figure></p>
 <p>Or make a snapshot without description file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-create vmname</div></pre></td></tr></table></figure>
-<p><strong>Note</strong>: this is much more faster to make a snapshot while the VM is stoped. But it’s also possible to make a snapshot while the VM is running even if it’s more slow.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-create vmname</div></pre></td></tr></table></figure></p>
+<p><strong>Note</strong>: this is much more faster to make a snapshot while the VM is stoped. But it's also possible to make a snapshot while the VM is running even if it's more slow.</p>
 <p>If you want to see some informations about the VM and snapshots you can run:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ qemu-img info /path/to/disk/image/vmname.qcow2</div><div class="line">image: vmname.qcow2</div><div class="line">file format: qcow2</div><div class="line">virtual size: 20G (21474836480 bytes)</div><div class="line">disk size: 5.2G</div><div class="line">cluster_size: 65536</div><div class="line">Snapshot list:</div><div class="line">ID        TAG                 VM SIZE                DATE       VM CLOCK</div><div class="line">1         vmname-snapshot1   329M 2017-02-08 20:40:59   01:23:38.281</div><div class="line">2         vmname-snapshot2   375M 2017-02-08 20:46:39   01:26:01.645</div><div class="line">3         vmname-snapshot3   482M 2017-02-08 22:42:48   03:22:00.515</div><div class="line">Format specific information:</div><div class="line">    compat: 1.1</div><div class="line">    lazy refcounts: true</div><div class="line">    refcount bits: 16</div><div class="line">    corrupt: false</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ qemu-img info /path/to/disk/image/vmname.qcow2</div><div class="line">image: vmname.qcow2</div><div class="line">file format: qcow2</div><div class="line">virtual size: 20G (21474836480 bytes)</div><div class="line">disk size: 5.2G</div><div class="line">cluster_size: 65536</div><div class="line">Snapshot list:</div><div class="line">ID        TAG                 VM SIZE                DATE       VM CLOCK</div><div class="line">1         vmname-snapshot1   329M 2017-02-08 20:40:59   01:23:38.281</div><div class="line">2         vmname-snapshot2   375M 2017-02-08 20:46:39   01:26:01.645</div><div class="line">3         vmname-snapshot3   482M 2017-02-08 22:42:48   03:22:00.515</div><div class="line">Format specific information:</div><div class="line">    compat: 1.1</div><div class="line">    lazy refcounts: true</div><div class="line">    refcount bits: 16</div><div class="line">    corrupt: false</div></pre></td></tr></table></figure></p>
 <p>To revert the VM to a snapshot, for example run:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-revert vmname vmname-snapshot1</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ virsh snapshot-revert vmname vmname-snapshot1</div></pre></td></tr></table></figure></p>
 <p><a href="https://kashyapc.com/2011/10/04/snapshotting-with-libvirt-for-qcow2-images/" target="_blank" rel="external">Source</a></p>
 
         </div>
@@ -212,7 +217,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/snapshot-kvm-libvirt-virsh/" data-id="cizepenru007y2rfs8worvwk0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/snapshot-kvm-libvirt-virsh/" data-id="cizoihh4i0069mefssfldhjac" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -359,9 +364,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/BITSCTF-2017-writeups/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/AlexCTF-2017-write-ups/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">BITSCTF 2017 - Write-ups</p>
+        <p class="article-nav-title">AlexCTF 2017 - Write-ups</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -400,26 +405,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -433,6 +418,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

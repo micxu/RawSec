@@ -180,15 +180,19 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <p>You are building a website with a static site generator like <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> or <a href="https://jekyllrb.com/" target="_blank" rel="external">Jekyll</a>? You want to have website source code on GitHub and the website running on <strong>gh-pages</strong> without maintaining two Git repository? You need subtree!</p>
 <p>You are making slideshows with Reveal.js? You want to have slideshow source code on GitHub and the slideshow running on <strong>gh-pages</strong> without maintaining two Git repository? You need subtree!</p>
-<p>Sometimes it’s useful to have a subfolder on <strong>gh-pages</strong> and all the source code on the <strong>master</strong> branch and all of that in the same root directory. In fact for all project that you want to see his source code hosted on GitHub and the building result living on gh-pages.</p>
-<p>For this example, I suppose you have a <code>build</code> folder under the project’s root directory.</p>
+<p>Sometimes it's useful to have a subfolder on <strong>gh-pages</strong> and all the source code on the <strong>master</strong> branch and all of that in the same root directory. In fact for all project that you want to see his source code hosted on GitHub and the building result living on gh-pages.</p>
+<p>For this example, I suppose you have a <code>build</code> folder under the project's root directory.</p>
 <ol>
-<li>Remove the <code>build</code> folder from the project’s <code>.gitignore</code> file.</li>
-<li><p>Make git aware of the <code>build</code> folder:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add build</div><div class="line">git commit -m &quot;Preparing build/ for subtree&quot;</div></pre></td></tr></table></figure>
+<li>
+<p>Remove the <code>build</code> folder from the project's <code>.gitignore</code> file.</p>
 </li>
-<li><p>Each time you re-build the project to a final release, use <code>subtree push</code> to send the build on the <strong>gh-pages</strong> branch on GitHub:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git subtree push --prefix build origin gh-pages</div></pre></td></tr></table></figure>
+<li>
+<p>Make git aware of the <code>build</code> folder:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add build</div><div class="line">git commit -m &quot;Preparing build/ for subtree&quot;</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Each time you re-build the project to a final release, use <code>subtree push</code> to send the build on the <strong>gh-pages</strong> branch on GitHub:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git subtree push --prefix build origin gh-pages</div></pre></td></tr></table></figure></p>
 </li>
 </ol>
 
@@ -198,7 +202,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/deploying-subfolder-github-pages/" data-id="cizepenla00172rfs51ukkkfe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/deploying-subfolder-github-pages/" data-id="cizoihh1w002kmefsfej3ysdv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -345,9 +349,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/ABCTF-2016-ABCTF-50-Chocolate-Web-Exploitation/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/ABCTF-2016-ABCTF-30-GZ-Forensics/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ABCTF - 50 - Chocolate - Web Exploitation</p>
+        <p class="article-nav-title">ABCTF - 30 - GZ - Forensics</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -386,26 +390,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -419,6 +403,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

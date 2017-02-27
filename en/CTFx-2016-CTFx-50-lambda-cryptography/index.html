@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,crypto,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : CTF(x) 2016
 Website : http://ctfx.io/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionI used this program to e">
+Description
+I used this program">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTF(x) - 50 - λ - Cryptography">
 <meta property="og:url" content="http://rawsec.ml/en/CTFx-2016-CTFx-50-lambda-cryptography/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : CTF(x) 2016
 Website : http://ctfx.io/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionI used this program to e">
+Description
+I used this program">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF(x) - 50 - λ - Cryptography">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : CTF(x) 2016
 Website : http://ctfx.io/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionI used this program to e">
+Description
+I used this program">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,38 +277,42 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : CTF(x) 2016</li>
 <li><strong>Website</strong> : <a href="http://ctfx.io/" target="_blank" rel="external">http://ctfx.io/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/348/" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I used this program to encrypt a flag. The output was:<br>n1s4_t1An(f1ctdb@mpl_h3)m3lp3y__Eas</p>
+<h3>Description</h3>
+<p>I used this program to encrypt a flag. The output was:
+n1s4_t1An(f1ctdb@mpl_h3)m3lp3y__Eas</p>
 <p>file: <a href="http://compete.ctfx.io/download?file_key=e1f0efcd2db9d3a57ece97805fca95a877b9df1a480f52ef71e086f779a9be6e&amp;team_key=1363275c2f4e78940bb6a342fb83902f1128ff824d8eb6505da463820eabfbe3" target="_blank" rel="external">λ.py</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>TL;DR : that solution is just a trick not a smart de-obfuscation.</p>
+<h2>Solution</h2>
+<p>TL;DR : that solution is just a trick not a smart de-obfuscation.</p>
 <ul>
 <li>Here is the code of the <code>λ.py</code>:</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> (<span class="keyword">lambda</span> j,m:(<span class="keyword">lambda</span> f,t:t <span class="keyword">if</span> len(t) &lt;= <span class="number">1</span> <span class="keyword">else</span> j([f(f,x)<span class="keyword">for</span> x <span class="keyword">in</span> m(j,m(reversed,(<span class="keyword">lambda</span> s:zip(*[iter(s)]*(len(s)/<span class="number">2</span>)))(t+<span class="string">"\x01"</span>*(len(t)%<span class="number">2</span>))))]))(<span class="keyword">lambda</span> f,t:t <span class="keyword">if</span> len(t) &lt;= <span class="number">1</span> <span class="keyword">else</span> j([f(f,x)<span class="keyword">for</span> x <span class="keyword">in</span> m(j,m(reversed,(<span class="keyword">lambda</span> s: zip(*[iter(s)]*(len(s)/<span class="number">2</span>)))(t+<span class="string">"\x01"</span>*(len(t)%<span class="number">2</span>))))]),raw_input(<span class="string">"Plaintext:"</span>)))(<span class="string">''</span>.join,map).replace(<span class="string">"\x01"</span>,<span class="string">""</span>)</div></pre></td></tr></table></figure>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> (<span class="keyword">lambda</span> j,m:(<span class="keyword">lambda</span> f,t:t <span class="keyword">if</span> len(t) &lt;= <span class="number">1</span> <span class="keyword">else</span> j([f(f,x)<span class="keyword">for</span> x <span class="keyword">in</span> m(j,m(reversed,(<span class="keyword">lambda</span> s:zip(*[iter(s)]*(len(s)/<span class="number">2</span>)))(t+<span class="string">"\x01"</span>*(len(t)%<span class="number">2</span>))))]))(<span class="keyword">lambda</span> f,t:t <span class="keyword">if</span> len(t) &lt;= <span class="number">1</span> <span class="keyword">else</span> j([f(f,x)<span class="keyword">for</span> x <span class="keyword">in</span> m(j,m(reversed,(<span class="keyword">lambda</span> s: zip(*[iter(s)]*(len(s)/<span class="number">2</span>)))(t+<span class="string">"\x01"</span>*(len(t)%<span class="number">2</span>))))]),raw_input(<span class="string">"Plaintext:"</span>)))(<span class="string">''</span>.join,map).replace(<span class="string">"\x01"</span>,<span class="string">""</span>)</div></pre></td></tr></table></figure></p>
 <ul>
-<li>It’s clear that the code is obfuscated, but even beautified it’s still a mess.</li>
-<li>So as I don’t want my brain to blow trying to de-obfuscate this, I got around.</li>
-<li>I realized that, with enought iteration, we gan get back the original string. So I modified the code to “brute-force” the good combination:</li>
+<li>It's clear that the code is obfuscated, but even beautified it's still a mess.</li>
+<li>So as I don't want my brain to blow trying to de-obfuscate this, I got around.</li>
+<li>I realized that, with enought iteration, we gan get back the original string. So I modified the code to &quot;brute-force&quot; the good combination:</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Modiied code</span></div><div class="line">mixed_flag = <span class="string">"n1s4_t1An(f1ctdb@mpl_h3)m3lp3y__Eas"</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</div><div class="line">    old_mixed_flag = mixed_flag</div><div class="line">    mixed_flag = (<span class="keyword">lambda</span> j, m: (<span class="keyword">lambda</span> f, t: t</div><div class="line">        <span class="keyword">if</span> len(t) &lt;= <span class="number">1</span></div><div class="line">        <span class="keyword">else</span> j([f(f, x) <span class="keyword">for</span> x <span class="keyword">in</span> m(j, m(reversed, (<span class="keyword">lambda</span> s: zip( * [iter(s)] * (len(s) / <span class="number">2</span>)))(t + <span class="string">"\x01"</span> * (len(t) % <span class="number">2</span>))))]))(<span class="keyword">lambda</span> f, t: t</div><div class="line">        <span class="keyword">if</span> len(t) &lt;= <span class="number">1</span></div><div class="line">    <span class="keyword">else</span> j([f(f, x) <span class="keyword">for</span> x <span class="keyword">in</span> m(j, m(reversed, (<span class="keyword">lambda</span> s: zip( * [iter(s)] * (len(s) / <span class="number">2</span>)))(t + <span class="string">"\x01"</span> * (len(t) % <span class="number">2</span>))))]), old_mixed_flag))(<span class="string">''</span>.join, map).replace(<span class="string">"\x01"</span>, <span class="string">""</span>)</div><div class="line">    print(str(i) + <span class="string">" "</span> + mixed_flag)</div></pre></td></tr></table></figure>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Modiied code</span></div><div class="line">mixed_flag = <span class="string">"n1s4_t1An(f1ctdb@mpl_h3)m3lp3y__Eas"</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</div><div class="line">    old_mixed_flag = mixed_flag</div><div class="line">    mixed_flag = (<span class="keyword">lambda</span> j, m: (<span class="keyword">lambda</span> f, t: t</div><div class="line">        <span class="keyword">if</span> len(t) &lt;= <span class="number">1</span></div><div class="line">        <span class="keyword">else</span> j([f(f, x) <span class="keyword">for</span> x <span class="keyword">in</span> m(j, m(reversed, (<span class="keyword">lambda</span> s: zip( * [iter(s)] * (len(s) / <span class="number">2</span>)))(t + <span class="string">"\x01"</span> * (len(t) % <span class="number">2</span>))))]))(<span class="keyword">lambda</span> f, t: t</div><div class="line">        <span class="keyword">if</span> len(t) &lt;= <span class="number">1</span></div><div class="line">    <span class="keyword">else</span> j([f(f, x) <span class="keyword">for</span> x <span class="keyword">in</span> m(j, m(reversed, (<span class="keyword">lambda</span> s: zip( * [iter(s)] * (len(s) / <span class="number">2</span>)))(t + <span class="string">"\x01"</span> * (len(t) % <span class="number">2</span>))))]), old_mixed_flag))(<span class="string">''</span>.join, map).replace(<span class="string">"\x01"</span>, <span class="string">""</span>)</div><div class="line">    print(str(i) + <span class="string">" "</span> + mixed_flag)</div></pre></td></tr></table></figure></p>
 <ul>
-<li>Here the non-filtered output, that’s quite long:</li>
+<li>Here the non-filtered output, that's quite long:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]</div><div class="line">└──╼ #python lambda_λ.py</div><div class="line">0 c1t(fm@db4s_n1nAt1_y_p3sEah_3pll3)m</div><div class="line">1 n_14s1tnA(tfc1bdm@lpl_3m3)p_3_yhasE</div><div class="line">2 cf1(t@mbd41sn_An1ty_h_3Eas_l3lpp)m3</div><div class="line">[...]</div><div class="line">97 n_14s1tnA(tfc1bdm@lph_3m3)_l3_ypasE</div><div class="line">98 cf1(t@mbd41sn_An1ty_pl3Eas_h3lp_)m3</div><div class="line">99 ns_41t1An(1tcfdb@mpl_h33)mlp3y__sEa</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]</div><div class="line">└──╼ #python lambda_λ.py</div><div class="line">0 c1t(fm@db4s_n1nAt1_y_p3sEah_3pll3)m</div><div class="line">1 n_14s1tnA(tfc1bdm@lpl_3m3)p_3_yhasE</div><div class="line">2 cf1(t@mbd41sn_An1ty_h_3Eas_l3lpp)m3</div><div class="line">[...]</div><div class="line">97 n_14s1tnA(tfc1bdm@lph_3m3)_l3_ypasE</div><div class="line">98 cf1(t@mbd41sn_An1ty_pl3Eas_h3lp_)m3</div><div class="line">99 ns_41t1An(1tcfdb@mpl_h33)mlp3y__sEa</div></pre></td></tr></table></figure></p>
 <ul>
-<li>Now let’s see what begins with <code>ctf(</code></li>
+<li>Now let's see what begins with <code>ctf(</code></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]</div><div class="line">└──╼ #python lambda_λ.py | grep &apos;ctf(&apos;</div><div class="line">4 ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)</div><div class="line">10 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)</div><div class="line">16 ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)</div><div class="line">22 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)</div><div class="line">28 ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)</div><div class="line">34 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)</div><div class="line">40 ctf(1m@db4_1nsnAt1_y_p3asEh_3pllm3)</div><div class="line">46 ctf(1@mbd4_1nsAn1ty_l_3asEp_3lphm3)</div><div class="line">52 ctf(1m@db4_1nsnAt1_yh_3asE_l3plpm3)</div><div class="line">58 ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)</div><div class="line">64 ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)</div><div class="line">70 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)</div><div class="line">76 ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)</div><div class="line">82 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)</div><div class="line">88 ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)</div><div class="line">94 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]</div><div class="line">└──╼ #python lambda_λ.py | grep &apos;ctf(&apos;</div><div class="line">4 ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)</div><div class="line">10 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)</div><div class="line">16 ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)</div><div class="line">22 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)</div><div class="line">28 ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)</div><div class="line">34 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)</div><div class="line">40 ctf(1m@db4_1nsnAt1_y_p3asEh_3pllm3)</div><div class="line">46 ctf(1@mbd4_1nsAn1ty_l_3asEp_3lphm3)</div><div class="line">52 ctf(1m@db4_1nsnAt1_yh_3asE_l3plpm3)</div><div class="line">58 ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)</div><div class="line">64 ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)</div><div class="line">70 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)</div><div class="line">76 ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)</div><div class="line">82 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)</div><div class="line">88 ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)</div><div class="line">94 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)</div></pre></td></tr></table></figure></p>
 <ul>
 <li>That begins to make sense, more filtering:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]</div><div class="line">└──╼ #python lambda_λ.py | grep &apos;ctf(1@mbd4_1nsAn1ty_&apos;</div><div class="line">10 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)</div><div class="line">22 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)</div><div class="line">34 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)</div><div class="line">46 ctf(1@mbd4_1nsAn1ty_l_3asEp_3lphm3)</div><div class="line">58 ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)</div><div class="line">70 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)</div><div class="line">82 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)</div><div class="line">94 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">┌─[root@parrot]─[~/CTF/CTFx/2016/50-lambda_λ-cryptography]</div><div class="line">└──╼ #python lambda_λ.py | grep &apos;ctf(1@mbd4_1nsAn1ty_&apos;</div><div class="line">10 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)</div><div class="line">22 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)</div><div class="line">34 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)</div><div class="line">46 ctf(1@mbd4_1nsAn1ty_l_3asEp_3lphm3)</div><div class="line">58 ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)</div><div class="line">70 ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)</div><div class="line">82 ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)</div><div class="line">94 ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Not so hard: <code>58 ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)</code>.</li>
 </ul>
@@ -305,7 +323,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/CTFx-2016-CTFx-50-lambda-cryptography/" data-id="cizepeobf00ho2rfsoyboezb8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/CTFx-2016-CTFx-50-lambda-cryptography/" data-id="cizoihhde00f7mefsdg3a8a3w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -441,20 +459,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/remove-pages-from-pdf-command-line/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/CTFx-2016-CTFx-50-crash-forensics/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            How to remove pages from a PDF in command line on Linux
+            CTF(x) - 50 - crash - Forensics
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/CTFx-2016-CTFx-50-crash-forensics/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-55-Thor-s-a-hacker-now-Misc/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">CTF(x) - 50 - crash - Forensics</p>
+        <p class="article-nav-title">IceCTF - 55 - Thor&#39;s a hacker now - Misc</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -493,26 +511,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -526,6 +524,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

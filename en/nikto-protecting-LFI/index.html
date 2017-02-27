@@ -6,25 +6,28 @@
     <title>Nikto : protect your Apache server against a LFI vulnerability | RawSec</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="security,vulnerability,apache,lfi" />
+        <meta name="keywords" content="security,vulnerability,lfi,apache" />
     
-    <meta name="description" content="GoalHow to protect your apache server against a LFI vulnerability that can be found with Nikto
+    <meta name="description" content="Goal
+How to protect your apache server against a LFI vulnerability that can be found with Nikto
 .
-1/autohtml.php?op=modload&amp;amp;mainfile=x&amp;amp;name=/etc/passwd : php-proxima 6.0 and below allows arbitr">
+1/autohtml.php?op=modload&amp;amp;mainfile=x&amp;amp;name=/etc/passwd : php-proxima 6.0 and below allows arbit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nikto : protect your Apache server against a LFI vulnerability">
 <meta property="og:url" content="http://rawsec.ml/en/nikto-protecting-LFI/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="GoalHow to protect your apache server against a LFI vulnerability that can be found with Nikto
+<meta property="og:description" content="Goal
+How to protect your apache server against a LFI vulnerability that can be found with Nikto
 .
-1/autohtml.php?op=modload&amp;amp;mainfile=x&amp;amp;name=/etc/passwd : php-proxima 6.0 and below allows arbitr">
+1/autohtml.php?op=modload&amp;amp;mainfile=x&amp;amp;name=/etc/passwd : php-proxima 6.0 and below allows arbit">
 <meta property="og:image" content="http://rawsec.ml/images/security-265130_640.jpg">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nikto : protect your Apache server against a LFI vulnerability">
-<meta name="twitter:description" content="GoalHow to protect your apache server against a LFI vulnerability that can be found with Nikto
+<meta name="twitter:description" content="Goal
+How to protect your apache server against a LFI vulnerability that can be found with Nikto
 .
-1/autohtml.php?op=modload&amp;amp;mainfile=x&amp;amp;name=/etc/passwd : php-proxima 6.0 and below allows arbitr">
+1/autohtml.php?op=modload&amp;amp;mainfile=x&amp;amp;name=/etc/passwd : php-proxima 6.0 and below allows arbit">
 <meta name="twitter:image" content="http://rawsec.ml/images/security-265130_640.jpg">
     
 
@@ -184,13 +187,18 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Goal"><a href="#Goal" class="headerlink" title="Goal"></a>Goal</h2><p>How to protect your apache server against a LFI vulnerability that can be found with <a href="https://cirt.net/Nikto2" target="_blank" rel="external">Nikto
+            <h2>Goal</h2>
+<p>How to protect your apache server against a LFI vulnerability that can be found with <a href="https://cirt.net/Nikto2" target="_blank" rel="external">Nikto
 </a>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/autohtml.php?op=modload&amp;mainfile=x&amp;name=/etc/passwd : php-proxima 6.0 and below allows arbitrary files to be retrieved.</div></pre></td></tr></table></figure>
-<h2 id="Nikto-test"><a href="#Nikto-test" class="headerlink" title="Nikto test"></a>Nikto test</h2><p><a href="https://raw.githubusercontent.com/sullo/nikto/master/program/databases/db_tests" target="_blank" rel="external">https://raw.githubusercontent.com/sullo/nikto/master/program/databases/db_tests</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;000548&quot;,&quot;9028&quot;,&quot;5&quot;,&quot;/autohtml.php?op=modload&amp;mainfile=x&amp;name=/etc/passwd&quot;,&quot;GET&quot;,&quot;root:&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;php-proxima 6.0 and below allows arbitrary files to be retrieved.&quot;,&quot;&quot;,&quot;&quot;</div></pre></td></tr></table></figure></p>
-<h2 id="Protection"><a href="#Protection" class="headerlink" title="Protection"></a>Protection</h2><p>To do so, you have to disable trailing pathname by disabling the <a href="https://httpd.apache.org/docs/2.4/fr/mod/core.html#acceptpathinfo" target="_blank" rel="external"><code>AcceptPathInfo</code></a> directive:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/autohtml.php?op=modload&amp;mainfile=x&amp;name=/etc/passwd : php-proxima 6.0 and below allows arbitrary files to be retrieved.</div></pre></td></tr></table></figure></p>
+<h2>Nikto test</h2>
+<p><a href="https://raw.githubusercontent.com/sullo/nikto/master/program/databases/db_tests" target="_blank" rel="external">https://raw.githubusercontent.com/sullo/nikto/master/program/databases/db_tests</a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;000548&quot;,&quot;9028&quot;,&quot;5&quot;,&quot;/autohtml.php?op=modload&amp;mainfile=x&amp;name=/etc/passwd&quot;,&quot;GET&quot;,&quot;root:&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;php-proxima 6.0 and below allows arbitrary files to be retrieved.&quot;,&quot;&quot;,&quot;&quot;</div></pre></td></tr></table></figure></p>
+<h2>Protection</h2>
+<p>To do so, you have to disable trailing pathname by disabling the <a href="https://httpd.apache.org/docs/2.4/fr/mod/core.html#acceptpathinfo" target="_blank" rel="external"><code>AcceptPathInfo</code></a> directive:</p>
 <ul>
-<li>For example edit your vhost configuration: <ul>
+<li>For example edit your vhost configuration:
+<ul>
 <li><code>vim /etc/apache2/vhosts.d/vhostname.conf</code> (openSUSE)</li>
 <li><code>vim /etc/apache2/sites-available/example.com.conf</code> (Debian/Ubuntu)</li>
 <li><code>vim /etc/httpd/sites-available/example.com.conf</code> (CentOS/RHEL/Fedora)</li>
@@ -198,7 +206,8 @@ ga('send', 'pageview');
 </li>
 <li>And in the <code>&lt;Directory&gt;</code> section add the directive <code>AcceptPathInfo Off</code> or turn it to <em>Off</em> if already existing</li>
 <li>Save your config file</li>
-<li>Restart apache: <ul>
+<li>Restart apache:
+<ul>
 <li><code>systemctl restart apache2.service</code> (openSUSE)</li>
 <li><code>service apache2 restart</code> (Debian/Ubuntu)</li>
 <li><code>systemctl restart httpd.service</code> (CentOS/RHEL/Fedora)</li>
@@ -213,7 +222,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/nikto-protecting-LFI/" data-id="cizepenqx006t2rfs2lcp4x8s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/nikto-protecting-LFI/" data-id="cizoihh3s004vmefsg4jmeg04" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -360,9 +369,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/virtualbox-change-virtual-disk-uuid/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/virtualbox-export-vmware-esxi/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Virtualbox : change the UUID of a virtual disk</p>
+        <p class="article-nav-title">Virtualbox : Export from VirtualBox and import to VMware ESXI</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -401,26 +410,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -434,6 +423,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensics" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,19 +27,21 @@ Creation
 
 
 CTF
+
 Name : WhiteHat GrandPrix 2016
 Website : grandprix.whitehatvn.com
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-Su">
+Description">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WhiteHat GrandPrix - 100 - Banh Giay - Forensics">
 <meta property="og:url" content="http://rawsec.ml/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,19 +58,21 @@ Creation
 
 
 CTF
+
 Name : WhiteHat GrandPrix 2016
 Website : grandprix.whitehatvn.com
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-Su">
+Description">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WhiteHat GrandPrix - 100 - Banh Giay - Forensics">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,14 +89,14 @@ Creation
 
 
 CTF
+
 Name : WhiteHat GrandPrix 2016
 Website : grandprix.whitehatvn.com
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-Su">
+Description">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,21 +274,24 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : WhiteHat GrandPrix 2016</li>
 <li><strong>Website</strong> : <a href="https://grandprix.whitehatvn.com/Contests/ChallengesContest/32" target="_blank" rel="external">grandprix.whitehatvn.com</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/398" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<h3>Description</h3>
+<blockquote>
 <p>Submit: WhiteHat{SHA1(flag)}</p>
-<p><a href="http://material.grandprix.whitehatvn.com/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip" target="_blank" rel="external">http://material.grandprix.whitehatvn.com/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip</a></p>
-<p><a href="http://bakmaterial.grandprix.whitehatvn.com/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip" target="_blank" rel="external">http://bakmaterial.grandprix.whitehatvn.com/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip</a></p>
+<p>http://material.grandprix.whitehatvn.com/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip</p>
+<p>http://bakmaterial.grandprix.whitehatvn.com/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip</p>
 <p>Alternative server on amazon in case of low traffic:</p>
-<p><a href="http://54.183.97.137/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip" target="_blank" rel="external">http://54.183.97.137/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip</a></p>
+<p>http://54.183.97.137/gp2016/For01_7afbfe8847d67c8dd51d7227091bb9aaaafe11f3.zip</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<h2>Solution</h2>
+<ul>
 <li>Download the zip.</li>
 <li>Extract it.</li>
 <li>Open the pcapng with <a href="https://www.wireshark.org/" target="_blank" rel="external">Wireshark</a>.</li>
@@ -289,13 +300,13 @@ ga('send', 'pageview');
 <li>Extract the file (File &gt; Export Objects &gt; HTTP).</li>
 <li>Check the type of file:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ file secret</div><div class="line">secret: Zip archive data, at least v2.0 to extract</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ file secret</div><div class="line">secret: Zip archive data, at least v2.0 to extract</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Unzip it:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ unzip secret</div><div class="line">Archive:  secret</div><div class="line">[secret] EasyExtrack password:</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ unzip secret</div><div class="line">Archive:  secret</div><div class="line">[secret] EasyExtrack password:</div></pre></td></tr></table></figure></p>
 <ul>
-<li>Ok, there is a pasword, let’s check the html page: frame n°149 <code>GET /corporation/arsenal.html HTTP/1.1</code>.</li>
+<li>Ok, there is a pasword, let's check the html page: frame n°149 <code>GET /corporation/arsenal.html HTTP/1.1</code>.</li>
 <li>Extract it from the pcapng.</li>
 <li>See the hint: <code>For H.i.n.t: Referring to arsenal, i remember a number. It also length of secret p.a.s.s.w.o.r.d</code>.</li>
 <li>One key event is:</li>
@@ -305,62 +316,63 @@ ga('send', 'pageview');
 </blockquote>
 <ul>
 <li>With luck and guessing I found this number was <strong>4</strong>.</li>
-<li>So now let’s try to crack the zip password with <a href="http://manpages.ubuntu.com/manpages/precise/man1/fcrackzip.1.html" target="_blank" rel="external"><code>fcrackzip</code></a>:</li>
+<li>So now let's try to crack the zip password with <a href="http://manpages.ubuntu.com/manpages/precise/man1/fcrackzip.1.html" target="_blank" rel="external"><code>fcrackzip</code></a>:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ fcrackzip -b -c a -l 4 -u secret</div><div class="line"></div><div class="line">PASSWORD FOUND!!!!: pw == fuzu</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ fcrackzip -b -c a -l 4 -u secret</div><div class="line"></div><div class="line">PASSWORD FOUND!!!!: pw == fuzu</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Extract the zip with the password.</li>
 <li>Check what file type <code>EasyExtrack</code> is:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ file EasyExtrack</div><div class="line">EasyExtrack: Zip archive data, at least v1.0 to extract</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ file EasyExtrack</div><div class="line">EasyExtrack: Zip archive data, at least v1.0 to extract</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Try to unzip it with the same password:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ unzip EasyExtrack -d out</div><div class="line">Archive:  EasyExtrack</div><div class="line">   creating: out/EasyExtrack/</div><div class="line">[EasyExtrack] EasyExtrack/flag1.txt password:</div><div class="line">  inflating: out/EasyExtrack/flag1.txt  </div><div class="line">  inflating: out/EasyExtrack/flag10.txt  </div><div class="line">  inflating: out/EasyExtrack/flag11.txt  </div><div class="line">  inflating: out/EasyExtrack/flag12.txt  </div><div class="line">  inflating: out/EasyExtrack/flag13.txt  </div><div class="line">  inflating: out/EasyExtrack/flag14.txt  </div><div class="line">  inflating: out/EasyExtrack/flag15.txt  </div><div class="line">  inflating: out/EasyExtrack/flag16.txt  </div><div class="line">  inflating: out/EasyExtrack/flag17.txt  </div><div class="line">  inflating: out/EasyExtrack/flag18.txt  </div><div class="line">  inflating: out/EasyExtrack/flag19.txt  </div><div class="line">  inflating: out/EasyExtrack/flag2.txt  </div><div class="line">  inflating: out/EasyExtrack/flag20.txt  </div><div class="line">  inflating: out/EasyExtrack/flag21.txt  </div><div class="line">  inflating: out/EasyExtrack/flag22.txt  </div><div class="line">  inflating: out/EasyExtrack/flag23.txt  </div><div class="line">  inflating: out/EasyExtrack/flag24.txt  </div><div class="line">  inflating: out/EasyExtrack/flag25.txt  </div><div class="line">  inflating: out/EasyExtrack/flag26.txt  </div><div class="line">  inflating: out/EasyExtrack/flag27.txt  </div><div class="line">  inflating: out/EasyExtrack/flag28.txt  </div><div class="line">  inflating: out/EasyExtrack/flag29.txt  </div><div class="line">  inflating: out/EasyExtrack/flag3.txt  </div><div class="line">  inflating: out/EasyExtrack/flag30.txt  </div><div class="line">  inflating: out/EasyExtrack/flag4.txt  </div><div class="line">  inflating: out/EasyExtrack/flag5.txt  </div><div class="line">  inflating: out/EasyExtrack/flag6.txt  </div><div class="line">  inflating: out/EasyExtrack/flag7.txt  </div><div class="line">  inflating: out/EasyExtrack/flag8.txt  </div><div class="line">  inflating: out/EasyExtrack/flag9.txt</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016]</div><div class="line">$ unzip EasyExtrack -d out</div><div class="line">Archive:  EasyExtrack</div><div class="line">   creating: out/EasyExtrack/</div><div class="line">[EasyExtrack] EasyExtrack/flag1.txt password:</div><div class="line">  inflating: out/EasyExtrack/flag1.txt  </div><div class="line">  inflating: out/EasyExtrack/flag10.txt  </div><div class="line">  inflating: out/EasyExtrack/flag11.txt  </div><div class="line">  inflating: out/EasyExtrack/flag12.txt  </div><div class="line">  inflating: out/EasyExtrack/flag13.txt  </div><div class="line">  inflating: out/EasyExtrack/flag14.txt  </div><div class="line">  inflating: out/EasyExtrack/flag15.txt  </div><div class="line">  inflating: out/EasyExtrack/flag16.txt  </div><div class="line">  inflating: out/EasyExtrack/flag17.txt  </div><div class="line">  inflating: out/EasyExtrack/flag18.txt  </div><div class="line">  inflating: out/EasyExtrack/flag19.txt  </div><div class="line">  inflating: out/EasyExtrack/flag2.txt  </div><div class="line">  inflating: out/EasyExtrack/flag20.txt  </div><div class="line">  inflating: out/EasyExtrack/flag21.txt  </div><div class="line">  inflating: out/EasyExtrack/flag22.txt  </div><div class="line">  inflating: out/EasyExtrack/flag23.txt  </div><div class="line">  inflating: out/EasyExtrack/flag24.txt  </div><div class="line">  inflating: out/EasyExtrack/flag25.txt  </div><div class="line">  inflating: out/EasyExtrack/flag26.txt  </div><div class="line">  inflating: out/EasyExtrack/flag27.txt  </div><div class="line">  inflating: out/EasyExtrack/flag28.txt  </div><div class="line">  inflating: out/EasyExtrack/flag29.txt  </div><div class="line">  inflating: out/EasyExtrack/flag3.txt  </div><div class="line">  inflating: out/EasyExtrack/flag30.txt  </div><div class="line">  inflating: out/EasyExtrack/flag4.txt  </div><div class="line">  inflating: out/EasyExtrack/flag5.txt  </div><div class="line">  inflating: out/EasyExtrack/flag6.txt  </div><div class="line">  inflating: out/EasyExtrack/flag7.txt  </div><div class="line">  inflating: out/EasyExtrack/flag8.txt  </div><div class="line">  inflating: out/EasyExtrack/flag9.txt</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Here are all the flags:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;12f54a96f6444324693t0da001cafda8b&#125;</div><div class="line">raw: Flag&#123;60b725f10c9c85c70d9h7880dfe8191b3&#125;</div><div class="line">raw: Flag&#123;f5302386464f953ed58u1edac03556e55&#125;</div><div class="line">raw: Flag&#123;d9bed3b7e151f11b8fdyadf75f1db96d9&#125;</div><div class="line">raw: Flag&#123;3b5d5c3712955042212n316173ccf37be&#125;</div><div class="line">raw: Flag&#123;72cfd272ace172fa3502h6445fbef9b03&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;9a8ad92c50cae39aa2c5604pfd0ab6d8c&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;12f54a96f64443s246930da001cafda8b&#125;</div><div class="line">raw: Flag&#123;92520a5a9cf8932i20b9cd447f585f144&#125;</div><div class="line">raw: Flag&#123;01fbdc44ef819db6p273bc30965a23814&#125;</div><div class="line">raw: Flag&#123;9ffbf43126e33be52hcd2bf7e01d627f9&#125;</div><div class="line">raw: Flag&#123;12f54a96f644432469o30da001cafda8b&#125;</div><div class="line">raw: Flag&#123;9d7bf075372908f55e2nd945c39e0a613&#125;</div><div class="line">raw: Flag&#123;92520a5a9cf893220b9cud447f585f144&#125;</div><div class="line">raw: Flag&#123;009520053b00386d1173fu3988c55d192&#125;</div><div class="line">raw: Flag&#123;e73af36376314c7c0022cbk1d204f76b3&#125;</div><div class="line">raw: Flag&#123;e85dde330c34efb0e526ee3j082e4353b&#125;</div><div class="line">raw: Flag&#123;7d9d25f71cb8a5aba8620254l0a20d405&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;12f54a96f6444324693t0da001cafda8b&#125;</div><div class="line">raw: Flag&#123;60b725f10c9c85c70d9h7880dfe8191b3&#125;</div><div class="line">raw: Flag&#123;f5302386464f953ed58u1edac03556e55&#125;</div><div class="line">raw: Flag&#123;d9bed3b7e151f11b8fdyadf75f1db96d9&#125;</div><div class="line">raw: Flag&#123;3b5d5c3712955042212n316173ccf37be&#125;</div><div class="line">raw: Flag&#123;72cfd272ace172fa3502h6445fbef9b03&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;9a8ad92c50cae39aa2c5604pfd0ab6d8c&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;d2a33790e5bf28b33cdxbf61722a06989&#125;</div><div class="line">raw: Flag&#123;12f54a96f64443s246930da001cafda8b&#125;</div><div class="line">raw: Flag&#123;92520a5a9cf8932i20b9cd447f585f144&#125;</div><div class="line">raw: Flag&#123;01fbdc44ef819db6p273bc30965a23814&#125;</div><div class="line">raw: Flag&#123;9ffbf43126e33be52hcd2bf7e01d627f9&#125;</div><div class="line">raw: Flag&#123;12f54a96f644432469o30da001cafda8b&#125;</div><div class="line">raw: Flag&#123;9d7bf075372908f55e2nd945c39e0a613&#125;</div><div class="line">raw: Flag&#123;92520a5a9cf893220b9cud447f585f144&#125;</div><div class="line">raw: Flag&#123;009520053b00386d1173fu3988c55d192&#125;</div><div class="line">raw: Flag&#123;e73af36376314c7c0022cbk1d204f76b3&#125;</div><div class="line">raw: Flag&#123;e85dde330c34efb0e526ee3j082e4353b&#125;</div><div class="line">raw: Flag&#123;7d9d25f71cb8a5aba8620254l0a20d405&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Flags are not hashes because they are 33 char long. But we can see there is one non-hex char in each flag.</li>
 <li>Remove each non-hex flag to get 32 char long MD5 hashed:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">12f54a96f64443246930da001cafda8b</div><div class="line">60b725f10c9c85c70d97880dfe8191b3</div><div class="line">f5302386464f953ed581edac03556e55</div><div class="line">d9bed3b7e151f11b8fdadf75f1db96d9</div><div class="line">3b5d5c3712955042212316173ccf37be</div><div class="line">72cfd272ace172fa35026445fbef9b03</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">9a8ad92c50cae39aa2c5604fd0ab6d8c</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">12f54a96f64443246930da001cafda8b</div><div class="line">92520a5a9cf893220b9cd447f585f144</div><div class="line">01fbdc44ef819db6273bc30965a23814</div><div class="line">9ffbf43126e33be52cd2bf7e01d627f9</div><div class="line">12f54a96f64443246930da001cafda8b</div><div class="line">9d7bf075372908f55e2d945c39e0a613</div><div class="line">92520a5a9cf893220b9cd447f585f144</div><div class="line">009520053b00386d1173f3988c55d192</div><div class="line">e73af36376314c7c0022cb1d204f76b3</div><div class="line">e85dde330c34efb0e526ee3082e4353b</div><div class="line">7d9d25f71cb8a5aba86202540a20d405</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">12f54a96f64443246930da001cafda8b</div><div class="line">60b725f10c9c85c70d97880dfe8191b3</div><div class="line">f5302386464f953ed581edac03556e55</div><div class="line">d9bed3b7e151f11b8fdadf75f1db96d9</div><div class="line">3b5d5c3712955042212316173ccf37be</div><div class="line">72cfd272ace172fa35026445fbef9b03</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">9a8ad92c50cae39aa2c5604fd0ab6d8c</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">d2a33790e5bf28b33cdbf61722a06989</div><div class="line">12f54a96f64443246930da001cafda8b</div><div class="line">92520a5a9cf893220b9cd447f585f144</div><div class="line">01fbdc44ef819db6273bc30965a23814</div><div class="line">9ffbf43126e33be52cd2bf7e01d627f9</div><div class="line">12f54a96f64443246930da001cafda8b</div><div class="line">9d7bf075372908f55e2d945c39e0a613</div><div class="line">92520a5a9cf893220b9cd447f585f144</div><div class="line">009520053b00386d1173f3988c55d192</div><div class="line">e73af36376314c7c0022cb1d204f76b3</div><div class="line">e85dde330c34efb0e526ee3082e4353b</div><div class="line">7d9d25f71cb8a5aba86202540a20d405</div></pre></td></tr></table></figure></p>
 <ul>
 <li>The extracted wrong letters are (in order): <code>xthuynhxxxpxxxxxxxxsiphonuukjl</code>.</li>
 <li>Use <a href="https://hashkiller.co.uk/md5-decrypter.aspx" target="_blank" rel="external">hashkiller.co.uk</a> to decrypt MD5 hashes:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">12f54a96f64443246930da001cafda8b MD5 : l</div><div class="line">60b725f10c9c85c70d97880dfe8191b3 MD5 : a</div><div class="line">f5302386464f953ed581edac03556e55 MD5 : g</div><div class="line">d9bed3b7e151f11b8fdadf75f1db96d9 MD5 : &#123;</div><div class="line">3b5d5c3712955042212316173ccf37be MD5 : b</div><div class="line">72cfd272ace172fa35026445fbef9b03 MD5 : r</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">9a8ad92c50cae39aa2c5604fd0ab6d8c MD5 : f</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">12f54a96f64443246930da001cafda8b MD5 : l</div><div class="line">92520a5a9cf893220b9cd447f585f144 MD5 : _</div><div class="line">01fbdc44ef819db6273bc30965a23814 MD5 : h</div><div class="line">9ffbf43126e33be52cd2bf7e01d627f9 MD5 : e</div><div class="line">12f54a96f64443246930da001cafda8b MD5 : l</div><div class="line">9d7bf075372908f55e2d945c39e0a613 MD5 : p</div><div class="line">92520a5a9cf893220b9cd447f585f144 MD5 : _</div><div class="line">009520053b00386d1173f3988c55d192 MD5 : y</div><div class="line">e73af36376314c7c0022cb1d204f76b3 MD5 : o</div><div class="line">e85dde330c34efb0e526ee3082e4353b MD5 : u</div><div class="line">7d9d25f71cb8a5aba86202540a20d405 MD5 : &#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">12f54a96f64443246930da001cafda8b MD5 : l</div><div class="line">60b725f10c9c85c70d97880dfe8191b3 MD5 : a</div><div class="line">f5302386464f953ed581edac03556e55 MD5 : g</div><div class="line">d9bed3b7e151f11b8fdadf75f1db96d9 MD5 : &#123;</div><div class="line">3b5d5c3712955042212316173ccf37be MD5 : b</div><div class="line">72cfd272ace172fa35026445fbef9b03 MD5 : r</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">9a8ad92c50cae39aa2c5604fd0ab6d8c MD5 : f</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">d2a33790e5bf28b33cdbf61722a06989 MD5 : F</div><div class="line">12f54a96f64443246930da001cafda8b MD5 : l</div><div class="line">92520a5a9cf893220b9cd447f585f144 MD5 : _</div><div class="line">01fbdc44ef819db6273bc30965a23814 MD5 : h</div><div class="line">9ffbf43126e33be52cd2bf7e01d627f9 MD5 : e</div><div class="line">12f54a96f64443246930da001cafda8b MD5 : l</div><div class="line">9d7bf075372908f55e2d945c39e0a613 MD5 : p</div><div class="line">92520a5a9cf893220b9cd447f585f144 MD5 : _</div><div class="line">009520053b00386d1173f3988c55d192 MD5 : y</div><div class="line">e73af36376314c7c0022cb1d204f76b3 MD5 : o</div><div class="line">e85dde330c34efb0e526ee3082e4353b MD5 : u</div><div class="line">7d9d25f71cb8a5aba86202540a20d405 MD5 : &#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Unformated flag is: <code>Flag{brFFFfFFFFFFFFl_help_you}</code>.</li>
 <li>SHA1 the unformated flag:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]</div><div class="line">$ printf %s &apos;Flag&#123;brFFFfFFFFFFFFl_help_you&#125;&apos; | sha1sum</div><div class="line">e7643ccd180c84176ae0b4361c3b169fceacf961  -</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]</div><div class="line">$ printf %s &apos;Flag&#123;brFFFfFFFFFFFFl_help_you&#125;&apos; | sha1sum</div><div class="line">e7643ccd180c84176ae0b4361c3b169fceacf961  -</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Format the flag: <code>WhiteHat{e7643ccd180c84176ae0b4361c3b169fceacf961}</code>.</li>
-<li>Not the good flag …</li>
+<li>Not the good flag ...</li>
 </ul>
-<p>Note that <code>800618943025315f869e4e1f09471012</code> is the right md5 hash for <code>F</code> and <code>d2a33790e5bf28b33cdbf61722a06989</code> is the wrong md5 hash for <code>F</code> that you can obtain with non POSIX tools like echo (that’s why I use printf). So only hashkiller knows both wrong and right hash, all other md5 decrypt online tools knows only the right one so they are not able to decrypt <code>d2a33790e5bf28b33cdbf61722a06989</code>. But anyway…</p>
+<p>Note that <code>800618943025315f869e4e1f09471012</code> is the right md5 hash for <code>F</code> and <code>d2a33790e5bf28b33cdbf61722a06989</code> is the wrong md5 hash for <code>F</code> that you can obtain with non POSIX tools like echo (that's why I use printf). So only hashkiller knows both wrong and right hash, all other md5 decrypt online tools knows only the right one so they are not able to decrypt <code>d2a33790e5bf28b33cdbf61722a06989</code>. But anyway...</p>
 <ul>
 <li>You know what? After some wasted hours I figured that I needed to replace <code>F</code> with some guessed letters:  <code>Flag{bruteforce_will_help_you}</code>. Yes guessing again.</li>
 <li>SHA1 the unformated flag:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]</div><div class="line">$ printf %s &apos;Flag&#123;bruteforce_will_help_you&#125;&apos; | sha1sum</div><div class="line">1e71b26aa01733cd13e5199386c70fe31df43deb  -</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]</div><div class="line">$ printf %s &apos;Flag&#123;bruteforce_will_help_you&#125;&apos; | sha1sum</div><div class="line">1e71b26aa01733cd13e5199386c70fe31df43deb  -</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Format the flag: <code>WhiteHat{1e71b26aa01733cd13e5199386c70fe31df43deb}</code>.</li>
-<li>Not the good flag …</li>
+<li>Not the good flag ...</li>
 <li>Description said <code>Submit: WhiteHat{SHA1(flag)}</code>, it depends if <code>flag</code> means <code>Flag{xxx}</code> or <code>xxx</code>.</li>
 <li>SHA1 the unformated flag:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]</div><div class="line">$ printf %s &apos;bruteforce_will_help_you&apos; | sha1sum                                                                    </div><div class="line">31bd8aa56447ea1c703d0943e175a06a5c4ee614  -</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]–––––––––––––––––––[~/CTF/WhiteHat_GrandPrix/2016/out/EasyExtrack]</div><div class="line">$ printf %s &apos;bruteforce_will_help_you&apos; | sha1sum                                                                    </div><div class="line">31bd8aa56447ea1c703d0943e175a06a5c4ee614  -</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Format the flag: <code>WhiteHat{31bd8aa56447ea1c703d0943e175a06a5c4ee614}</code>.</li>
 <li>This time this is the good one.</li>
 </ul>
 <p>Here was my ruby script:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"></div><div class="line">(<span class="number">1</span>..<span class="number">30</span>).each <span class="keyword">do</span> <span class="params">|num|</span></div><div class="line">	raw_flag = File.read(<span class="string">'flag'</span>+num.to_s+<span class="string">'.txt'</span>)</div><div class="line">	<span class="comment"># Not sanitized flags</span></div><div class="line">	puts <span class="string">'raw: '</span>.concat(raw_flag)</div><div class="line">	only_flag = raw_flag.match(<span class="regexp">/\&#123;([a-z0-9]&#123;33&#125;)\&#125;/</span>).captures[<span class="number">0</span>]</div><div class="line">	<span class="comment"># Sanitized flags</span></div><div class="line">	puts only_flag.gsub(<span class="regexp">/[^0-9a-fA-F]/</span>, <span class="string">''</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"></div><div class="line">(<span class="number">1</span>..<span class="number">30</span>).each <span class="keyword">do</span> <span class="params">|num|</span></div><div class="line">	raw_flag = File.read(<span class="string">'flag'</span>+num.to_s+<span class="string">'.txt'</span>)</div><div class="line">	<span class="comment"># Not sanitized flags</span></div><div class="line">	puts <span class="string">'raw: '</span>.concat(raw_flag)</div><div class="line">	only_flag = raw_flag.match(<span class="regexp">/\&#123;([a-z0-9]&#123;33&#125;)\&#125;/</span>).captures[<span class="number">0</span>]</div><div class="line">	<span class="comment"># Sanitized flags</span></div><div class="line">	puts only_flag.gsub(<span class="regexp">/[^0-9a-fA-F]/</span>, <span class="string">''</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
 <p><strong>Note</strong>: CTF orga team should test challenges and remove the crappy ones before let teams have pain with them.</p>
-<h2 id="Submit"><a href="#Submit" class="headerlink" title="Submit"></a>Submit</h2><p><img src="http://i.imgur.com/qdWgxcB.jpg" alt=""></p>
+<h2>Submit</h2>
+<p><img src="http://i.imgur.com/qdWgxcB.jpg" alt=""></p>
 <p>And we also get one of the 23 parts of the puzzle:</p>
 <p><img src="http://i.imgur.com/N6ZHerV.png" alt=""></p>
 <p>This is for the <em>Discovering Vietnam</em> bonus challenge. It is a puzzle of 23 parts, you need them to get a QR-code that give a flag. Flag will give 10% bonus points of the current score.</p>
@@ -372,7 +384,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" data-id="cizepeogg00lo2rfsx700e1zg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" data-id="cizoihhgt00jwmefsa8xi3mpx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -508,20 +520,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            WhiteHat GrandPrix - 100 - Banh bot loc - Web
+            WhiteHat GrandPrix - 100 - Banh can - Web
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/opensuse-change-ssh-port/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">OpenSUSE : change ssh port / use a cutom ssh port</p>
+        <p class="article-nav-title">WhiteHat GrandPrix - 100 - Banh bot loc - Web</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -560,26 +572,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -593,6 +585,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

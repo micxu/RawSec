@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensics" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: triv">
+Description
+categories:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Juniors CTF - 200 - Clone Attack - Forensics">
 <meta property="og:url" content="http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: triv">
+Description
+categories:">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Juniors CTF - 200 - Clone Attack - Forensics">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Descriptioncategories: triv">
+Description
+categories:">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,44 +277,47 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : Juniors CTF 2016</li>
 <li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>categories: trivial, forensics</p>
+<h3>Description</h3>
+<p>categories: trivial, forensics</p>
 <blockquote>
-<p> Gravity Falls is under clones attack. Find the real Dipper and save the town</p>
-<p><a href="https://yadi.sk/d/ekEIo3nwy22JC" target="_blank" rel="external">https://yadi.sk/d/ekEIo3nwy22JC</a>, <a href="http://juniors.ucoz.net/dipper2.png" target="_blank" rel="external">http://juniors.ucoz.net/dipper2.png</a></p>
+<p>Gravity Falls is under clones attack. Find the real Dipper and save the town</p>
+<p>https://yadi.sk/d/ekEIo3nwy22JC, http://juniors.ucoz.net/dipper2.png</p>
 <p><img src="https://i.imgbox.com/iiiv8xc8.png" alt=""></p>
-<p>Lupanov M.Iu.<br><br></p>
+<p>Lupanov M.Iu.&lt;br&gt;&lt;br&gt;</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<h2>Solution</h2>
+<ul>
 <li><code>dipper2.jpg</code> is useless.</li>
 <li>unzip <code>dipper.7z</code></li>
 <li>We have 201 images:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">Ab9t2MDhgeCdtIWM.jpg  HjBQKJSOhcieolm4.jpg  n3dQQ0ZDx3S3UsBr.jpg  T1uPfBLnZwT4gnLy.jpg  zaDSq7pwGh4a38xy.jpg</div><div class="line">ABDOzIFq6epnCnhx.jpg  hk0hHu8tI5DkDyiV.jpg  N4M2CtJ7gr7Jzo9S.jpg  t1xoHMAR0IAkwfd7.jpg  Zb1RJWvpVjXFKfxq.jpg</div><div class="line">aBHn54lpn0JuymBI.jpg  HKjCtFdy5EL15cXH.jpg  N5muaN8pZFaQizT6.jpg  t2FNLj2HOKnT1naO.jpg  ZcAZFv16zVB2Xoih.jpg</div><div class="line">AbmIxXZ4ReLk7UYM.jpg  hlB31hrzrOU5RYQg.jpg  N5ZGl2k84vyFp5Br.jpg  t3sXG01KznKJiN9v.jpg  zCYJB6XDGlt8UB58.jpg</div><div class="line">ABNclrsAR0By1bUx.jpg  HLIqYcwvszKfJ2mh.jpg  n6bfa5irSSBzz1IU.jpg  t9IRCSMIJBrvArav.jpg  zD3o8PsmbXmRWNON.jpg</div><div class="line">ac9q61SRl4vlF0td.jpg  hmrrHYgpxaW6V6XU.jpg  n6BS4SVXzrkIRpsu.jpg  TBHJwtjbcXh2GYv9.jpg  zdd9UFYGdxytCbCz.jpg</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">Ab9t2MDhgeCdtIWM.jpg  HjBQKJSOhcieolm4.jpg  n3dQQ0ZDx3S3UsBr.jpg  T1uPfBLnZwT4gnLy.jpg  zaDSq7pwGh4a38xy.jpg</div><div class="line">ABDOzIFq6epnCnhx.jpg  hk0hHu8tI5DkDyiV.jpg  N4M2CtJ7gr7Jzo9S.jpg  t1xoHMAR0IAkwfd7.jpg  Zb1RJWvpVjXFKfxq.jpg</div><div class="line">aBHn54lpn0JuymBI.jpg  HKjCtFdy5EL15cXH.jpg  N5muaN8pZFaQizT6.jpg  t2FNLj2HOKnT1naO.jpg  ZcAZFv16zVB2Xoih.jpg</div><div class="line">AbmIxXZ4ReLk7UYM.jpg  hlB31hrzrOU5RYQg.jpg  N5ZGl2k84vyFp5Br.jpg  t3sXG01KznKJiN9v.jpg  zCYJB6XDGlt8UB58.jpg</div><div class="line">ABNclrsAR0By1bUx.jpg  HLIqYcwvszKfJ2mh.jpg  n6bfa5irSSBzz1IU.jpg  t9IRCSMIJBrvArav.jpg  zD3o8PsmbXmRWNON.jpg</div><div class="line">ac9q61SRl4vlF0td.jpg  hmrrHYgpxaW6V6XU.jpg  n6BS4SVXzrkIRpsu.jpg  TBHJwtjbcXh2GYv9.jpg  zdd9UFYGdxytCbCz.jpg</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 <ul>
-<li>Let’s take a look at the first image:</li>
+<li>Let's take a look at the first image:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool 07snLOxf2k0rRrT3.jpg</div><div class="line">ExifTool Version Number         : 10.20</div><div class="line">File Name                       : 07snLOxf2k0rRrT3.jpg</div><div class="line">Directory                       : .</div><div class="line">File Size                       : 26 kB</div><div class="line">File Modification Date/Time     : 2016:11:03 04:56:07+01:00</div><div class="line">File Access Date/Time           : 2016:11:25 16:47:44+01:00</div><div class="line">File Inode Change Date/Time     : 2016:11:25 16:48:53+01:00</div><div class="line">File Permissions                : rw-r--r--</div><div class="line">File Type                       : JPEG</div><div class="line">File Type Extension             : jpg</div><div class="line">MIME Type                       : image/jpeg</div><div class="line">JFIF Version                    : 1.01</div><div class="line">Resolution Unit                 : inches</div><div class="line">X Resolution                    : 72</div><div class="line">Y Resolution                    : 72</div><div class="line">Current IPTC Digest             : 1f6df1813fc08f735211d55b866d1cca</div><div class="line">Coded Character Set             : UTF8</div><div class="line">Envelope Record Version         : 4</div><div class="line">Object Name                     : Ксерокопия  номер  086</div><div class="line">Application Record Version      : 4</div><div class="line">Comment                         : Flag is MD5sum of this file. Its TRUE</div><div class="line">Image Width                     : 193</div><div class="line">Image Height                    : 400</div><div class="line">Encoding Process                : Progressive DCT, Huffman coding</div><div class="line">Bits Per Sample                 : 8</div><div class="line">Color Components                : 3</div><div class="line">Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)</div><div class="line">Image Size                      : 193x400</div><div class="line">Megapixels                      : 0.077</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool 07snLOxf2k0rRrT3.jpg</div><div class="line">ExifTool Version Number         : 10.20</div><div class="line">File Name                       : 07snLOxf2k0rRrT3.jpg</div><div class="line">Directory                       : .</div><div class="line">File Size                       : 26 kB</div><div class="line">File Modification Date/Time     : 2016:11:03 04:56:07+01:00</div><div class="line">File Access Date/Time           : 2016:11:25 16:47:44+01:00</div><div class="line">File Inode Change Date/Time     : 2016:11:25 16:48:53+01:00</div><div class="line">File Permissions                : rw-r--r--</div><div class="line">File Type                       : JPEG</div><div class="line">File Type Extension             : jpg</div><div class="line">MIME Type                       : image/jpeg</div><div class="line">JFIF Version                    : 1.01</div><div class="line">Resolution Unit                 : inches</div><div class="line">X Resolution                    : 72</div><div class="line">Y Resolution                    : 72</div><div class="line">Current IPTC Digest             : 1f6df1813fc08f735211d55b866d1cca</div><div class="line">Coded Character Set             : UTF8</div><div class="line">Envelope Record Version         : 4</div><div class="line">Object Name                     : Ксерокопия  номер  086</div><div class="line">Application Record Version      : 4</div><div class="line">Comment                         : Flag is MD5sum of this file. Its TRUE</div><div class="line">Image Width                     : 193</div><div class="line">Image Height                    : 400</div><div class="line">Encoding Process                : Progressive DCT, Huffman coding</div><div class="line">Bits Per Sample                 : 8</div><div class="line">Color Components                : 3</div><div class="line">Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)</div><div class="line">Image Size                      : 193x400</div><div class="line">Megapixels                      : 0.077</div></pre></td></tr></table></figure></p>
 <ul>
-<li><code>Comment                         : Flag is MD5sum of this file. Its TRUE</code> but all images have the same comment.</li>
-<li><code>Object Name                     : Ксерокопия  номер  086</code> means <code>n° of copie 086</code>, let’s fidn teh original:</li>
+<li><code>Comment : Flag is MD5sum of this file. Its TRUE</code> but all images have the same comment.</li>
+<li><code>Object Name : Ксерокопия номер 086</code> means <code>n° of copie 086</code>, let's fidn teh original:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool * | grep &apos;Object Name&apos;</div><div class="line">[...]</div><div class="line">Object Name                     : Ксерокопия  номер  644</div><div class="line">Object Name                     : Оригинальный Диппер</div><div class="line">Object Name                     : Ксерокопия  номер  702</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ exiftool * | grep &apos;Object Name&apos;</div><div class="line">[...]</div><div class="line">Object Name                     : Ксерокопия  номер  644</div><div class="line">Object Name                     : Оригинальный Диппер</div><div class="line">Object Name                     : Ксерокопия  номер  702</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 <ul>
 <li>We found it, <code>Оригинальный Диппер</code> means <code>The original Dipper</code>:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ grep -r &apos;Оригинальный Диппер&apos; ./</div><div class="line">Binary file ./atvF2wf1tfB2IkuV.jpg matches</div><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ md5sum atvF2wf1tfB2IkuV.jpg</div><div class="line">cd4d19b8471cecbc8ea7544de59db368  atvF2wf1tfB2IkuV.jpg</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ grep -r &apos;Оригинальный Диппер&apos; ./</div><div class="line">Binary file ./atvF2wf1tfB2IkuV.jpg matches</div><div class="line">[noraj@rawsec]––––––––––––––––––––––––[~/CTF/JuniorCTF/2016/Clone-Attack/dipper]</div><div class="line">$ md5sum atvF2wf1tfB2IkuV.jpg</div><div class="line">cd4d19b8471cecbc8ea7544de59db368  atvF2wf1tfB2IkuV.jpg</div></pre></td></tr></table></figure></p>
 <ul>
 <li><code>cd4d19b8471cecbc8ea7544de59db368</code> was the flag.</li>
 </ul>
 <p><img src="https://i.imgbox.com/K5qOYSYB.jpg" alt=""></p>
-<p><strong>Feedback</strong>: it’s a international CTF, so please use only english, russian content everywhere is pain for non-russian</p>
+<p><strong>Feedback</strong>: it's a international CTF, so please use only english, russian content everywhere is pain for non-russian</p>
 
         </div>
         <footer class="article-footer">
@@ -308,7 +325,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/" data-id="cizepeoeo00k72rfsu2j245cc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-forensics-clone-attack/" data-id="cizoihhfo00iimefsy87lbg98" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -496,26 +513,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -529,6 +526,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -8,23 +8,26 @@
     
         <meta name="keywords" content="linux,archlinux" />
     
-    <meta name="description" content="RequirementDeluge is already installed, configured and working.
+    <meta name="description" content="Requirement
+Deluge is already installed, configured and working.
 The deluge user looks like: deluge:x:125:125:Deluge user:/srv/deluge:/bin/false.
-A SSH server is already installed, configured and worki">
+A SSH server is already installed, configured and work">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ArchLinux - Setup an SFTP user for Deluge">
 <meta property="og:url" content="http://rawsec.ml/en/archlinux-setup-sftp-user-deluge/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="RequirementDeluge is already installed, configured and working.
+<meta property="og:description" content="Requirement
+Deluge is already installed, configured and working.
 The deluge user looks like: deluge:x:125:125:Deluge user:/srv/deluge:/bin/false.
-A SSH server is already installed, configured and worki">
+A SSH server is already installed, configured and work">
 <meta property="og:image" content="http://rawsec.ml/images/archlinux.svg">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArchLinux - Setup an SFTP user for Deluge">
-<meta name="twitter:description" content="RequirementDeluge is already installed, configured and working.
+<meta name="twitter:description" content="Requirement
+Deluge is already installed, configured and working.
 The deluge user looks like: deluge:x:125:125:Deluge user:/srv/deluge:/bin/false.
-A SSH server is already installed, configured and worki">
+A SSH server is already installed, configured and work">
 <meta name="twitter:image" content="http://rawsec.ml/images/archlinux.svg">
     
 
@@ -184,52 +187,54 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Requirement"><a href="#Requirement" class="headerlink" title="Requirement"></a>Requirement</h2><p>Deluge is already installed, configured and working.</p>
+            <h2>Requirement</h2>
+<p>Deluge is already installed, configured and working.</p>
 <p>The deluge user looks like: <code>deluge:x:125:125:Deluge user:/srv/deluge:/bin/false</code>.</p>
 <p>A SSH server is already installed, configured and working.</p>
-<h2 id="SFTP-setup"><a href="#SFTP-setup" class="headerlink" title="SFTP setup"></a>SFTP setup</h2><ul>
+<h2>SFTP setup</h2>
+<ul>
 <li>Create the sftp user and add it to the deluge group (this will allow him to access to <code>/srv/deluge/</code>):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># useradd sftpuser -d /home/sftpuser -G deluge</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># useradd sftpuser -d /home/sftpuser -G deluge</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Modify the sshd config (<code>/etc/ssh/sshd_config</code>) and add this lines:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Match User sftpuser</div><div class="line">  ChrootDirectory %h</div><div class="line">  ForceCommand internal-sftp</div><div class="line">  AllowTcpForwarding no</div><div class="line">  PermitTunnel no</div><div class="line">  X11Forwarding no</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Match User sftpuser</div><div class="line">  ChrootDirectory %h</div><div class="line">  ForceCommand internal-sftp</div><div class="line">  AllowTcpForwarding no</div><div class="line">  PermitTunnel no</div><div class="line">  X11Forwarding no</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Restart the sshd server:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># systemctl restart sshd.service</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># systemctl restart sshd.service</div></pre></td></tr></table></figure></p>
 <ul>
-<li>Change chroot directory rights, this is required or sftp won’t let you connect. The home directory must be owned as root and not writable by another user or group. This includes the path leading to the directory.</li>
+<li>Change chroot directory rights, this is required or sftp won't let you connect. The home directory must be owned as root and not writable by another user or group. This includes the path leading to the directory.</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># chown root:root /home/sftpuser</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># chown root:root /home/sftpuser</div></pre></td></tr></table></figure></p>
 <ul>
-<li>You won’t be able to connect in sftp if your user have <code>/bin/false</code> shell as it’s not defined in the <code>/etc/shells</code>. To disable normal ssh login, add <code>/bin/false</code> in <code>/etc/shells</code> and change sftpuser shell:</li>
+<li>You won't be able to connect in sftp if your user have <code>/bin/false</code> shell as it's not defined in the <code>/etc/shells</code>. To disable normal ssh login, add <code>/bin/false</code> in <code>/etc/shells</code> and change sftpuser shell:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># usermod -s /bin/false sftpuser</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># usermod -s /bin/false sftpuser</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Test ssh access: (access should be refuse if <code>/bin/false</code> is used)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ssh sftpuser@localhost -p $SSH_PORT$</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ssh sftpuser@localhost -p $SSH_PORT$</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Test sftp access: (sftp user should be placed in the chroot environment)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># sftp -P $SSH_PORT$ sftpuser@localhost</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># sftp -P $SSH_PORT$ sftpuser@localhost</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Create the torrent folder to let sftp user access to deluge download folder:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /home/sftpuser/torrent</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /home/sftpuser/torrent</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Give the torrent folder the appropriate rights:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># chown sftpuser:sftpuser /home/sftpuser/torrent</div></pre></td></tr></table></figure>
-<p>As sftpuser will be chrooted in his home directory (<code>/home/sftpuser/</code>) he won’t be able to access <code>/srv/deluge/Downloads</code> even if he has rights (he is in deluge group) and a symbolic link like <code>ln -s /srv/deluge/Downloads /home/sftpuser/deluge</code> won’t work because it is outside the chroot environment. For sftpuser accessing via sftp to the chroot environment, <code>/home/sftpuser/</code> will be the root directory <code>/</code> so the symbolic link to <code>/srv/deluge/Downloads</code> will in fact be wrong as <code>/home/sftpuser/srv/deluge/Downloads</code> doesn’t exist.</p>
-<p>We can’t directly chroot sftpuser in <code>/srv/deluge/Downloads</code> because that will require to change the <code>/srv/deluge/Downloads/</code> folder ownership to <code>root:root</code> and so deluge user won’t be able to access it anymore.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># chown sftpuser:sftpuser /home/sftpuser/torrent</div></pre></td></tr></table></figure></p>
+<p>As sftpuser will be chrooted in his home directory (<code>/home/sftpuser/</code>) he won't be able to access <code>/srv/deluge/Downloads</code> even if he has rights (he is in deluge group) and a symbolic link like <code>ln -s /srv/deluge/Downloads /home/sftpuser/deluge</code> won't work because it is outside the chroot environment. For sftpuser accessing via sftp to the chroot environment, <code>/home/sftpuser/</code> will be the root directory <code>/</code> so the symbolic link to <code>/srv/deluge/Downloads</code> will in fact be wrong as <code>/home/sftpuser/srv/deluge/Downloads</code> doesn't exist.</p>
+<p>We can't directly chroot sftpuser in <code>/srv/deluge/Downloads</code> because that will require to change the <code>/srv/deluge/Downloads/</code> folder ownership to <code>root:root</code> and so deluge user won't be able to access it anymore.</p>
 <p>We must chroot sftp user because letting him access to the whole system would be a security issue.</p>
 <p>So we will give sftp user two home directory: one SFTP home that is locked down by root (<code>/home/sftpuser/</code>) and one home he can write to (<code>/home/sftpuser/torrent/</code>) so sshd will be satisfied and the system will remain secure. To do that, we will make the deluge folder (the writable home directory) appear as a subdirectory inside the SFTP home directory:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mount --bind /srv/deluge/Downloads /home/sftpuser/torrent</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mount --bind /srv/deluge/Downloads /home/sftpuser/torrent</div></pre></td></tr></table></figure></p>
 <p>We can also add this into <code>/etc/fstab</code> to make this configuration permanent even after a reboot:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># echo &apos;/srv/deluge/Downloads /home/sftpuser/torrent none bind&apos; &gt;&gt; /etc/fstab</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># echo &apos;/srv/deluge/Downloads /home/sftpuser/torrent none bind&apos; &gt;&gt; /etc/fstab</div></pre></td></tr></table></figure></p>
 <p>SFTP user is now ready to access the deluge download folder via SFTP.</p>
 <p>Thanks to the great <a href="https://wiki.archlinux.org/index.php/SFTP_chroot" target="_blank" rel="external">ArchLinux wiki</a>.</p>
 
@@ -239,7 +244,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/archlinux-setup-sftp-user-deluge/" data-id="cizepenkg000j2rfs4cjq9oac" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/archlinux-setup-sftp-user-deluge/" data-id="cizoihh13001umefsf7nrf5vq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -375,11 +380,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/proxy-linux/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/2-less-known-tricks-spoofing-extensions/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Setup a proxy under Linux
+            2 less known tricks of spoofing extensions on Windows
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -427,26 +432,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -460,6 +445,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

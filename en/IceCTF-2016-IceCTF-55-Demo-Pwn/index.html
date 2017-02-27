@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,pwn" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionI found this awesome pr">
+Description
+I found this awesom">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF - 55 - Demo - Pwn">
 <meta property="og:url" content="http://rawsec.ml/en/IceCTF-2016-IceCTF-55-Demo-Pwn/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionI found this awesome pr">
+Description
+I found this awesom">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF - 55 - Demo - Pwn">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionI found this awesome pr">
+Description
+I found this awesom">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,36 +277,60 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : IceCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>I found this awesome premium shell, but my demo version just ran out… can you help me crack it? <code>/home/demo/</code> on the shell.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>Connect to the shell provided by IceCTF.</li>
-<li>Go to <code>/home/demo/</code>.</li>
-<li><p>Our goal is to display <code>flag.txt</code> but it is impossible ofr the moment:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ cat flag.txt</div><div class="line">cat: flag.txt: Permission denied</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ sh</div><div class="line">$ cat /home/demo/flag.txt</div><div class="line">cat: /home/demo/flag.txt: Permission denied</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>I found this awesome premium shell, but my demo version just ran out... can you help me crack it? <code>/home/demo/</code> on the shell.</p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>Connect to the shell provided by IceCTF.</p>
 </li>
-<li><p>Display <code>demo.c</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#define _GNU_SOURCE</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;libgen.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">void give_shell() &#123;</div><div class="line">    gid_t gid = getegid();</div><div class="line">    setresgid(gid, gid, gid);</div><div class="line">    system(&quot;/bin/sh&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">    if(strncmp(basename(getenv(&quot;_&quot;)), &quot;icesh&quot;, 6) == 0)&#123;</div><div class="line">        give_shell();</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        printf(&quot;I&apos;m sorry, your free trial has ended.\n&quot;);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>
+<p>Go to <code>/home/demo/</code>.</p>
 </li>
-<li><p>To call <code>give_shell()</code> we have to bypass the if statement.</p>
+<li>
+<p>Our goal is to display <code>flag.txt</code> but it is impossible ofr the moment:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ cat flag.txt</div><div class="line">cat: flag.txt: Permission denied</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ sh</div><div class="line">$ cat /home/demo/flag.txt</div><div class="line">cat: /home/demo/flag.txt: Permission denied</div></pre></td></tr></table></figure></p>
 </li>
-<li>We need the <code>_</code> environment variable to be <code>_=icesh</code>.</li>
-<li><p>But our zsh shell don’t allow us to change: <code>_</code> is read-only and we can’t make it writable.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ export \_=icesh</div><div class="line">zsh: read-only variable: _</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ typeset +rx \_=icesh</div><div class="line">typeset: _: can&apos;t change type of a special parameter</div></pre></td></tr></table></figure>
+<li>
+<p>Display <code>demo.c</code>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#define _GNU_SOURCE</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;libgen.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">void give_shell() &#123;</div><div class="line">    gid_t gid = getegid();</div><div class="line">    setresgid(gid, gid, gid);</div><div class="line">    system(&quot;/bin/sh&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">    if(strncmp(basename(getenv(&quot;_&quot;)), &quot;icesh&quot;, 6) == 0)&#123;</div><div class="line">        give_shell();</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        printf(&quot;I&apos;m sorry, your free trial has ended.\n&quot;);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 </li>
-<li><p><code>_</code> contain the name of the last command but launching <code>icesh</code> and then <code>./demo</code> doesn’t work in this environment because the last command is <code>./demo</code> so <code>_=./demo</code>.</p>
+<li>
+<p>To call <code>give_shell()</code> we have to bypass the if statement.</p>
 </li>
-<li>As <code>give_shell()</code> will give us a <code>/bin/sh</code>, let’s try with it.</li>
-<li>Start a <code>/bin/sh</code>.</li>
-<li>With <code>/bin/sh</code>, <code>_</code> contain the last command before last one, so running <code>icesh</code> and then <code>./demo</code> will work: <code>_=icesh</code>.</li>
-<li>So that launch <code>give_shell()</code> and give a <code>/bin/sh</code> enhanced with special gid instead of having <em>I’m sorry, your free trial has ended.</em> printed.</li>
-<li>With this empowered shell we can display the <code>flag.txt</code> file:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat /home/demo/flag.txt</div><div class="line">IceCTF&#123;wH0_WoU1d_3vr_7Ru5t_4rgV&#125;</div></pre></td></tr></table></figure>
+<li>
+<p>We need the <code>_</code> environment variable to be <code>_=icesh</code>.</p>
+</li>
+<li>
+<p>But our zsh shell don't allow us to change: <code>_</code> is read-only and we can't make it writable.
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ export \_=icesh</div><div class="line">zsh: read-only variable: _</div><div class="line">[ctf-578@icectf-shell-2016 /home/demo]$ typeset +rx \_=icesh</div><div class="line">typeset: _: can&apos;t change type of a special parameter</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p><code>_</code> contain the name of the last command but launching <code>icesh</code> and then <code>./demo</code> doesn't work in this environment because the last command is <code>./demo</code> so <code>_=./demo</code>.</p>
+</li>
+<li>
+<p>As <code>give_shell()</code> will give us a <code>/bin/sh</code>, let's try with it.</p>
+</li>
+<li>
+<p>Start a <code>/bin/sh</code>.</p>
+</li>
+<li>
+<p>With <code>/bin/sh</code>, <code>_</code> contain the last command before last one, so running <code>icesh</code> and then <code>./demo</code> will work: <code>_=icesh</code>.</p>
+</li>
+<li>
+<p>So that launch <code>give_shell()</code> and give a <code>/bin/sh</code> enhanced with special gid instead of having <em>I'm sorry, your free trial has ended.</em> printed.</p>
+</li>
+<li>
+<p>With this empowered shell we can display the <code>flag.txt</code> file:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat /home/demo/flag.txt</div><div class="line">IceCTF&#123;wH0_WoU1d_3vr_7Ru5t_4rgV&#125;</div></pre></td></tr></table></figure></p>
 </li>
 </ol>
 
@@ -302,7 +340,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-55-Demo-Pwn/" data-id="cizepeodk00j92rfs6fq8nheu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-55-Demo-Pwn/" data-id="cizoihhf200hkmefsebwwmhu6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -449,9 +487,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/IceCTF-2016-IceCTF-50-Scavenger-Hunt-Misc/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-50-Vape-Nation-Stego/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">IceCTF - 50 - Scavenger Hunt - Misc</p>
+        <p class="article-nav-title">IceCTF - 50 - Vape Nation - Stego</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -490,26 +528,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -523,6 +541,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

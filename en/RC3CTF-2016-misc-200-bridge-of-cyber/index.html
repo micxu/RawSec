@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,misc" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,6 +27,7 @@ Creation
 
 
 CTF
+
 Name : RC3 CTF 2016
 Website : http://ctf.rc3.club/
 Type : Online
@@ -32,12 +35,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Welcome to the “B">
+
+Welcome to th">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RC3 CTF - 200 - Bridge of Cyber - Misc">
 <meta property="og:url" content="http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,6 +60,7 @@ Creation
 
 
 CTF
+
 Name : RC3 CTF 2016
 Website : http://ctf.rc3.club/
 Type : Online
@@ -61,12 +68,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Welcome to the “B">
+
+Welcome to th">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RC3 CTF - 200 - Bridge of Cyber - Misc">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,6 +93,7 @@ Creation
 
 
 CTF
+
 Name : RC3 CTF 2016
 Website : http://ctf.rc3.club/
 Type : Online
@@ -90,7 +101,8 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Welcome to the “B">
+
+Welcome to th">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +262,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,47 +280,50 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : RC3 CTF 2016</li>
 <li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>Welcome to the “Bridge of Cyber”! It’s the same concept as the “Bridge of Death” in Holy Grail. Our DNS servers aren’t very good at their job because they ask more questions then they answer. Let’s see if you can get the flag from our DNS.</p>
+<h3>Description</h3>
+<blockquote>
+<p>Welcome to the &quot;Bridge of Cyber&quot;! It's the same concept as the &quot;Bridge of Death&quot; in Holy Grail. Our DNS servers aren't very good at their job because they ask more questions then they answer. Let's see if you can get the flag from our DNS.</p>
 <p>Nameserver: ns-920.awsdns-51.net</p>
 <p>Domain: misc200.ctf.rc3.club</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What we know:</p>
+<h2>Solution</h2>
+<p>What we know:</p>
 <ul>
 <li>Domain: <code>misc200.ctf.rc3.club</code></li>
 <li>Name Server: <code>ns-920.awsdns-51.net</code></li>
 <li>We look for questions so probably TXT records</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 21494</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; misc200.ctf.rc3.club.	IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is the air-speed velocity of an unladen swallow&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 225 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 12:01:47 2016</div><div class="line">;; MSG SIZE  rcvd: 243</div></pre></td></tr></table></figure>
-<p>So we get the first question: “What is the air-speed velocity of an unladen swallow” is a question from “Bridge of Death” in Holy Grail of Monty Python.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 21494</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; misc200.ctf.rc3.club.	IN	TXT</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is the air-speed velocity of an unladen swallow&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 225 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 12:01:47 2016</div><div class="line">;; MSG SIZE  rcvd: 243</div></pre></td></tr></table></figure></p>
+<p>So we get the first question: &quot;What is the air-speed velocity of an unladen swallow&quot; is a question from &quot;Bridge of Death&quot; in Holy Grail of Monty Python.</p>
 <p>The answer is:</p>
 <blockquote>
 <p>What do you mean? An African or European swallow?</p>
 </blockquote>
-<p>The first idea that matched “How to send the answer” was by prefixing the answer to the domain.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;The roundest knight at king arthurs table was sir cumference. He acquired his size from too much __&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>The first idea that matched &quot;How to send the answer&quot; was by prefixing the answer to the domain.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;The roundest knight at king arthurs table was sir cumference. He acquired his size from too much __&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>The roundest knight at king Arthur’s round table was Sir Cumference. He acquired his size from too much pi.</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is it that no man ever yet did see, which never was, but always is to be?&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;What is it that no man ever yet did see, which never was, but always is to be?&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>Tomorrow</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;My favorite things in life don&apos;t cost any money. It&apos;s really clear that the most precious resource we all have is ___&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	TXT	&quot;My favorite things in life don&apos;t cost any money. It&apos;s really clear that the most precious resource we all have is ___&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 <blockquote>
-<p>My favorite things in life don’t cost any money. It’s really clear that the most precious resource we all have is time.</p>
+<p>My favorite things in life don't cost any money. It's really clear that the most precious resource we all have is time.</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill time.tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net ANY</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 52009</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; time.tomorrow.pi.european.misc200.ctf.rc3.club.	IN	TYPE255</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">time.tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	SPF	&quot;RC3-2016-cyb3rxr05&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 5244 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 19:48:48 2016</div><div class="line">;; MSG SIZE  rcvd: 235</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill time.tomorrow.pi.european.misc200.ctf.rc3.club @ns-920.awsdns-51.net ANY</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, rcode: NOERROR, id: 52009</div><div class="line">;; flags: qr aa rd ; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 0</div><div class="line">;; QUESTION SECTION:</div><div class="line">;; time.tomorrow.pi.european.misc200.ctf.rc3.club.	IN	TYPE255</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">time.tomorrow.pi.european.misc200.ctf.rc3.club.	300	IN	SPF	&quot;RC3-2016-cyb3rxr05&quot;</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1526.awsdns-62.org.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-1842.awsdns-38.co.uk.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-489.awsdns-61.com.</div><div class="line">misc200.ctf.rc3.club.	172800	IN	NS	ns-920.awsdns-51.net.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line"></div><div class="line">;; Query time: 5244 msec</div><div class="line">;; SERVER: 205.251.195.152</div><div class="line">;; WHEN: Sun Nov 20 19:48:48 2016</div><div class="line">;; MSG SIZE  rcvd: 235</div></pre></td></tr></table></figure></p>
 <p>So we get the flag: <code>RC3-2016-cyb3rxr05</code>.</p>
 <p>Or may be it was possible to do it with <code>african</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill african.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">african.misc200.ctf.rc3.club.	300	IN	TXT	&quot;Why was the developer broke? He spent all of his&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––––––––––––[~/CTF/RC3/2016]</div><div class="line">$ drill african.misc200.ctf.rc3.club @ns-920.awsdns-51.net TXT</div><div class="line">[...]</div><div class="line">african.misc200.ctf.rc3.club.	300	IN	TXT	&quot;Why was the developer broke? He spent all of his&quot;</div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 
         </div>
         <footer class="article-footer">
@@ -314,7 +331,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/" data-id="cizepeofw00l32rfsw2edytfk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/RC3CTF-2016-misc-200-bridge-of-cyber/" data-id="cizoihhga00j8mefsv9jricic" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -450,20 +467,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/RC3CTF-2016-forensics-100-My-Lil-Droid/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/RC3CTF-2016-web-100-Who-s-a-good-boy/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            RC3 CTF - 100 - My Lil Droid - Forensics
+            RC3 CTF - 100 - Who&#39;s a good boy - Web
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/RC3CTF-2016-web-300-bork-bork/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/archlinux-monitor-copy-progression-with-advanced-copy-patch/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">RC3 CTF - 300 - Bork Bork - Web</p>
+        <p class="article-nav-title">ArchLinux - Monitor copy progression with Advanced Copy patch</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -502,26 +519,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -535,6 +532,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

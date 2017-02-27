@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,reverse" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionHey if you ca">
+Description
+Hey if yo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ABCTF - 50 - Java Madness - Reverse Engineering">
 <meta property="og:url" content="http://rawsec.ml/en/ABCTF-2016-ABCTF-50-Java-Madness-Reverse-Engineering/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionHey if you ca">
+Description
+Hey if yo">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ABCTF - 50 - Java Madness - Reverse Engineering">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionHey if you ca">
+Description
+Hey if yo">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,35 +277,47 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : ABCTF 2016</li>
 <li><strong>Website</strong> : <a href="http://abctf.xyz/" target="_blank" rel="external">http://abctf.xyz/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy - Student</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/333" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Hey if you can get <a href="https://mega.nz/#!DpVk3QII!0q_VFSxC2v0bjwodRIPT2UhJTTK3qvYsDMD7JL3qfPo" target="_blank" rel="external">this</a> to pass some tests you could probably have the flag.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Here is the java source code:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">what_the_hack</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		String check = <span class="string">""</span>;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(args.length != <span class="number">5</span>)&#123;</div><div class="line">			System.out.println(<span class="string">"Almost! (;"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = args.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">				System.out.println(i);</div><div class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j = args[i].length() - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)&#123;</div><div class="line">					check += args[i].charAt(j);</div><div class="line">					System.out.println(args[i].charAt(j));</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span>(check.equals(<span class="string">"abctf is the coolest ctf"</span>))&#123;</div><div class="line">				System.out.println(<span class="string">"Flag: "</span> + <span class="string">"ABCTF&#123;"</span> + args[<span class="number">0</span>] + args[<span class="number">1</span>] + args[<span class="number">2</span>] +args[<span class="number">3</span>] + args[<span class="number">4</span>] + <span class="string">"&#125;"</span>);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span>&#123;</div><div class="line">				System.out.println(check);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>Hey if you can get [this][this] to pass some tests you could probably have the flag.
+[this]:https://mega.nz/#!DpVk3QII!0q_VFSxC2v0bjwodRIPT2UhJTTK3qvYsDMD7JL3qfPo</p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>Here is the java source code:
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">what_the_hack</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		String check = <span class="string">""</span>;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(args.length != <span class="number">5</span>)&#123;</div><div class="line">			System.out.println(<span class="string">"Almost! (;"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = args.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">				System.out.println(i);</div><div class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j = args[i].length() - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)&#123;</div><div class="line">					check += args[i].charAt(j);</div><div class="line">					System.out.println(args[i].charAt(j));</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span>(check.equals(<span class="string">"abctf is the coolest ctf"</span>))&#123;</div><div class="line">				System.out.println(<span class="string">"Flag: "</span> + <span class="string">"ABCTF&#123;"</span> + args[<span class="number">0</span>] + args[<span class="number">1</span>] + args[<span class="number">2</span>] +args[<span class="number">3</span>] + args[<span class="number">4</span>] + <span class="string">"&#125;"</span>);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span>&#123;</div><div class="line">				System.out.println(check);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Compile the code: <code>javac what_the_hack.java</code></p>
+<li>
+<p>Compile the code: <code>javac what_the_hack.java</code></p>
 </li>
-<li><p>Run it:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">java what_the_hack</div><div class="line">Almost! (;</div></pre></td></tr></table></figure>
+<li>
+<p>Run it:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">java what_the_hack</div><div class="line">Almost! (;</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Analyse the code, there must be 5 strings args:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">java what_the_hack a b c d e</div><div class="line">4</div><div class="line">e</div><div class="line">3</div><div class="line">d</div><div class="line">2</div><div class="line">c</div><div class="line">1</div><div class="line">b</div><div class="line">0</div><div class="line">a</div><div class="line">edcba</div></pre></td></tr></table></figure>
+<li>
+<p>Analyse the code, there must be 5 strings args:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">java what_the_hack a b c d e</div><div class="line">4</div><div class="line">e</div><div class="line">3</div><div class="line">d</div><div class="line">2</div><div class="line">c</div><div class="line">1</div><div class="line">b</div><div class="line">0</div><div class="line">a</div><div class="line">edcba</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>By analysing the code we understand that the software display the position of the arg and is content in the reverse order and that the valid check must be <code>abctf is the coolest ctf</code></p>
+<li>
+<p>By analysing the code we understand that the software display the position of the arg and is content in the reverse order and that the valid check must be <code>abctf is the coolest ctf</code></p>
 </li>
-<li><p>So write <code>abctf is the coolest ctf</code> to reverse it:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">java what_the_hack abctf is the coolest ctf</div><div class="line">4</div><div class="line">f</div><div class="line">t</div><div class="line">c</div><div class="line">3</div><div class="line">t</div><div class="line">s</div><div class="line">e</div><div class="line">l</div><div class="line">o</div><div class="line">o</div><div class="line">c</div><div class="line">2</div><div class="line">e</div><div class="line">h</div><div class="line">t</div><div class="line">1</div><div class="line">s</div><div class="line">i</div><div class="line">0</div><div class="line">f</div><div class="line">t</div><div class="line">c</div><div class="line">b</div><div class="line">a</div><div class="line">ftctseloocehtsiftcba</div></pre></td></tr></table></figure>
+<li>
+<p>So write <code>abctf is the coolest ctf</code> to reverse it:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">java what_the_hack abctf is the coolest ctf</div><div class="line">4</div><div class="line">f</div><div class="line">t</div><div class="line">c</div><div class="line">3</div><div class="line">t</div><div class="line">s</div><div class="line">e</div><div class="line">l</div><div class="line">o</div><div class="line">o</div><div class="line">c</div><div class="line">2</div><div class="line">e</div><div class="line">h</div><div class="line">t</div><div class="line">1</div><div class="line">s</div><div class="line">i</div><div class="line">0</div><div class="line">f</div><div class="line">t</div><div class="line">c</div><div class="line">b</div><div class="line">a</div><div class="line">ftctseloocehtsiftcba</div></pre></td></tr></table></figure></p>
 </li>
-<li><p><code>ftctseloocehtsiftcba</code> is the reverse but we need to space it:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">java what_the_hack &apos;ftc&apos; &apos; tselooc&apos; &apos; eht&apos; &apos; si&apos; &apos; ftcba&apos;</div><div class="line">4</div><div class="line">a</div><div class="line">b</div><div class="line">c</div><div class="line">t</div><div class="line">f</div><div class="line"></div><div class="line">3</div><div class="line">i</div><div class="line">s</div><div class="line"></div><div class="line">2</div><div class="line">t</div><div class="line">h</div><div class="line">e</div><div class="line"></div><div class="line">1</div><div class="line">c</div><div class="line">o</div><div class="line">o</div><div class="line">l</div><div class="line">e</div><div class="line">s</div><div class="line">t</div><div class="line"></div><div class="line">0</div><div class="line">c</div><div class="line">t</div><div class="line">f</div><div class="line">Flag: ABCTF&#123;ftc tselooc eht si ftcba&#125;</div></pre></td></tr></table></figure>
+<li>
+<p><code>ftctseloocehtsiftcba</code> is the reverse but we need to space it:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">java what_the_hack &apos;ftc&apos; &apos; tselooc&apos; &apos; eht&apos; &apos; si&apos; &apos; ftcba&apos;</div><div class="line">4</div><div class="line">a</div><div class="line">b</div><div class="line">c</div><div class="line">t</div><div class="line">f</div><div class="line"></div><div class="line">3</div><div class="line">i</div><div class="line">s</div><div class="line"></div><div class="line">2</div><div class="line">t</div><div class="line">h</div><div class="line">e</div><div class="line"></div><div class="line">1</div><div class="line">c</div><div class="line">o</div><div class="line">o</div><div class="line">l</div><div class="line">e</div><div class="line">s</div><div class="line">t</div><div class="line"></div><div class="line">0</div><div class="line">c</div><div class="line">t</div><div class="line">f</div><div class="line">Flag: ABCTF&#123;ftc tselooc eht si ftcba&#125;</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>We got it!</p>
+<li>
+<p>We got it!</p>
 </li>
 </ol>
 
@@ -301,7 +327,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-50-Java-Madness-Reverse-Engineering/" data-id="cizepeo7o00d92rfs8ed2ekjq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-50-Java-Madness-Reverse-Engineering/" data-id="cizoihhc400dgmefschjwqvhb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -448,9 +474,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/ABCTF-2016-ABCTF-50-Drive-Home-Reconaissance/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/ABCTF-2016-ABCTF-50-Archive-Me-Reconaissance/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ABCTF - 50 - Drive Home - Reconaissance</p>
+        <p class="article-nav-title">ABCTF - 50 - Archive Me - Reconaissance</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -489,26 +515,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -522,6 +528,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

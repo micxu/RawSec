@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensics" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -27,18 +29,19 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
-CTF Time : link
-
-De">
+CTF Time : link">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ABCTF - 60 - MoonWalk - Forensics">
 <meta property="og:url" content="http://rawsec.ml/en/ABCTF-2016-ABCTF-60-MoonWalk-Forensics/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -57,18 +60,19 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
-CTF Time : link
-
-De">
+CTF Time : link">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ABCTF - 60 - MoonWalk - Forensics">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -87,13 +91,12 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
-CTF Time : link
-
-De">
+CTF Time : link">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -253,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -271,30 +276,42 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : ABCTF 2016</li>
 <li><strong>Website</strong> : <a href="http://abctf.xyz/" target="_blank" rel="external">http://abctf.xyz/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy - Student</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/333" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>There is something a little off about <a href="https://mega.nz/#!q0UyATRS!k2MYymbvEHYy9nVA0awvKMwgKvrEIrPkZ2stcMuGf-E" target="_blank" rel="external">this</a> picture. If you could help us we could give you some points! Just find us a flag!</p>
-<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p><a href="https://asciinema.org/a/ey10oy210mavohq785cvw9m88" target="_blank" rel="external"><img src="https://asciinema.org/a/ey10oy210mavohq785cvw9m88.png" alt="asciicast"></a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>First, we’ll check file type:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file PurpleThing.png</div><div class="line">PurpleThing.png: PNG image data, 3200 x 2953, 8-bit/color RGBA, non-interlaced</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>There is something a little off about [this][this] picture. If you could help us we could give you some points! Just find us a flag!
+[this]:https://mega.nz/#!q0UyATRS!k2MYymbvEHYy9nVA0awvKMwgKvrEIrPkZ2stcMuGf-E</p>
+<h2>TL;DR</h2>
+<p><a href="https://asciinema.org/a/ey10oy210mavohq785cvw9m88" target="_blank" rel="external"><img src="https://asciinema.org/a/ey10oy210mavohq785cvw9m88.png" alt="asciicast"></a></p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>First, we'll check file type:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file PurpleThing.png</div><div class="line">PurpleThing.png: PNG image data, 3200 x 2953, 8-bit/color RGBA, non-interlaced</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Because it’s a Forensics challenge, we can look for other files hidden in this image:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">binwalk PurpleThing.png</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             PNG image, 3200 x 2953, 8-bit/color RGBA, non-interlaced</div><div class="line">85            0x55            Zlib compressed data, best compression</div><div class="line">2757          0xAC5           Zlib compressed data, best compression</div><div class="line">765455        0xBAE0F         JPEG image data, JFIF standard 1.01</div><div class="line">765485        0xBAE2D         TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">1809691       0x1B9D1B        StuffIt Deluxe Segment (data): f</div></pre></td></tr></table></figure>
+<li>
+<p>Because it's a Forensics challenge, we can look for other files hidden in this image:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">binwalk PurpleThing.png</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             PNG image, 3200 x 2953, 8-bit/color RGBA, non-interlaced</div><div class="line">85            0x55            Zlib compressed data, best compression</div><div class="line">2757          0xAC5           Zlib compressed data, best compression</div><div class="line">765455        0xBAE0F         JPEG image data, JFIF standard 1.01</div><div class="line">765485        0xBAE2D         TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">1809691       0x1B9D1B        StuffIt Deluxe Segment (data): f</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Hilights on the JPEG file found: intersting!</p>
+<li>
+<p>Hilights on the JPEG file found: intersting!</p>
 </li>
-<li><p>So we’ll launch a filecarving tool to inspect the file and look for magic headers to recover hidden files:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">foremost -v PurpleThing.png</div><div class="line">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus</div><div class="line">Audit File</div><div class="line"></div><div class="line">Foremost started at Thu Jul 21 22:20:19 2016</div><div class="line">Invocation: foremost -v PurpleThing.png</div><div class="line">Output directory: /root/CTF/ABCTF/60-MoonWalk-Forensics/output</div><div class="line">Configuration file: /etc/foremost.conf</div><div class="line">Processing: PurpleThing.png</div><div class="line">|------------------------------------------------------------------</div><div class="line">File: PurpleThing.png</div><div class="line">Start: Thu Jul 21 22:20:19 2016</div><div class="line">Length: 2 MB (2354256 bytes)</div><div class="line"></div><div class="line">Num	 Name (bs=512)	       Size	 File Offset	 Comment</div><div class="line"></div><div class="line">0:	00001495.jpg 	       1 MB 	     765455 	 </div><div class="line">*|</div><div class="line">Finish: Thu Jul 21 22:20:20 2016</div><div class="line"></div><div class="line">1 FILES EXTRACTED</div><div class="line"></div><div class="line">jpg:= 1</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">Foremost finished at Thu Jul 21 22:20:20 2016</div></pre></td></tr></table></figure>
+<li>
+<p>So we'll launch a filecarving tool to inspect the file and look for magic headers to recover hidden files:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">foremost -v PurpleThing.png</div><div class="line">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus</div><div class="line">Audit File</div><div class="line"></div><div class="line">Foremost started at Thu Jul 21 22:20:19 2016</div><div class="line">Invocation: foremost -v PurpleThing.png</div><div class="line">Output directory: /root/CTF/ABCTF/60-MoonWalk-Forensics/output</div><div class="line">Configuration file: /etc/foremost.conf</div><div class="line">Processing: PurpleThing.png</div><div class="line">|------------------------------------------------------------------</div><div class="line">File: PurpleThing.png</div><div class="line">Start: Thu Jul 21 22:20:19 2016</div><div class="line">Length: 2 MB (2354256 bytes)</div><div class="line"></div><div class="line">Num	 Name (bs=512)	       Size	 File Offset	 Comment</div><div class="line"></div><div class="line">0:	00001495.jpg 	       1 MB 	     765455 	 </div><div class="line">*|</div><div class="line">Finish: Thu Jul 21 22:20:20 2016</div><div class="line"></div><div class="line">1 FILES EXTRACTED</div><div class="line"></div><div class="line">jpg:= 1</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">Foremost finished at Thu Jul 21 22:20:20 2016</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Now let’s see the image: <code>display output/jpg/00001495.jpg</code></p>
+<li>
+<p>Now let's see the image: <code>display output/jpg/00001495.jpg</code></p>
 </li>
-<li>We find the flag: <code>ABCTF{PNG_S0_C00l}</code></li>
+<li>
+<p>We find the flag: <code>ABCTF{PNG_S0_C00l}</code></p>
+</li>
 </ol>
 
         </div>
@@ -303,7 +320,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-60-MoonWalk-Forensics/" data-id="cizepeo7q00dc2rfsghmlzybt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-60-MoonWalk-Forensics/" data-id="cizoihhc600djmefs5l2x4xlz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -491,26 +508,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -524,6 +521,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

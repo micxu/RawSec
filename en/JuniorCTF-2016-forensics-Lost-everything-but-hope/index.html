@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensics" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,6 +27,7 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
@@ -32,14 +35,17 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-  
+
+
 
 screams">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Juniors CTF - 500 - Lost everything but hope - Forensics">
 <meta property="og:url" content="http://rawsec.ml/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -56,6 +62,7 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
@@ -63,14 +70,17 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-  
+
+
 
 screams">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.018Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Juniors CTF - 500 - Lost everything but hope - Forensics">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -87,6 +97,7 @@ Creation
 
 
 CTF
+
 Name : Juniors CTF 2016
 Website : juniors.ctf.org.ru
 Type : Online
@@ -94,7 +105,8 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-  
+
+
 
 screams">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
@@ -256,7 +268,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -272,33 +286,38 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : Juniors CTF 2016</li>
 <li><strong>Website</strong> : <a href="https://juniors.ctf.org.ru/" target="_blank" rel="external">juniors.ctf.org.ru</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/391" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p><img src="https://i.imgur.com/s9I4kim.jpg" alt="https://i.imgur.com/s9I4kim.jpg">  </p>
+<h3>Description</h3>
+<blockquote>
+<p><img src="https://i.imgur.com/s9I4kim.jpg" alt="https://i.imgur.com/s9I4kim.jpg"></p>
 <ul>
-<li><em>screams</em>  </li>
-<li>Mabel: What’s up, Gruncle???  </li>
-<li>Stan: I left a phone here and went to the store to sell something useless. When I got back I saw this  </li>
-<li><em>shows a broken mobile</em>  </li>
-<li>Mabel: OMG!  </li>
-<li>Soos: Gonna get some insulating tape.  </li>
-<li>Stan: Restore the justice!  </li>
+<li><em>screams</em></li>
+<li>Mabel: What's up, Gruncle???</li>
+<li>Stan: I left a phone here and went to the store to sell something useless. When I got back I saw this</li>
+<li><em>shows a broken mobile</em></li>
+<li>Mabel: OMG!</li>
+<li>Soos: Gonna get some insulating tape.</li>
+<li>Stan: Restore the justice!</li>
 </ul>
-<p>A few hours later  </p>
+<p>A few hours later</p>
 <ul>
-<li>Dipper: Hm, who could do this?.. Soos, I managed to restore some files, maybe you can help to find something. Will you?  </li>
-<li>Soos: Of course, Dipper.   </li>
+<li>Dipper: Hm, who could do this?.. Soos, I managed to restore some files, maybe you can help to find something. Will you?</li>
+<li>Soos: Of course, Dipper.</li>
 </ul>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We have a <code>something.rar</code> file, and in it, there is a <code>sdcard</code> folder.<br>If we open it, we find data from an Android phone. After searching on the each folders, admin gave a <strong>hint</strong> on Telegram : <code>Someone who likes vkontakte</code>.</p>
-<p>So I opened the <code>.vkontakte</code> folder and search any clue. There was an ogg file named <code>397087112_439151831</code> with size of 1Ko so we couldn’t listen anything. I had the idea that a audio conversation must be between 2 account of vkontakt so the numbers are reprenting an id of these account…<br>Let’s see if we can get a profile page of these accounts on vk.com :smirk: !</p>
-<p>Go on <a href="https://vk.com/id397087112" target="_blank" rel="external">https://vk.com/id397087112</a>, we find a profile page of a pig nammed <code>Waddles Mabelpig</code>. This pig posted on the social network the flag !  </p>
+<h2>Solution</h2>
+<p>We have a <code>something.rar</code> file, and in it, there is a <code>sdcard</code> folder.<br>
+If we open it, we find data from an Android phone. After searching on the each folders, admin gave a <strong>hint</strong> on Telegram : <code>Someone who likes vkontakte</code>.</p>
+<p>So I opened the <code>.vkontakte</code> folder and search any clue. There was an ogg file named <code>397087112_439151831</code> with size of 1Ko so we couldn't listen anything. I had the idea that a audio conversation must be between 2 account of vkontakt so the numbers are reprenting an id of these account...<br>
+Let's see if we can get a profile page of these accounts on vk.com :smirk: !</p>
+<p>Go on https://vk.com/id397087112, we find a profile page of a pig nammed <code>Waddles Mabelpig</code>. This pig posted on the social network the flag !</p>
 <p>Flag: <code>waddles_the_d3stroyer</code> :tada:</p>
 
         </div>
@@ -307,7 +326,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/" data-id="cizepeoek00k42rfs0tjviffu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/JuniorCTF-2016-forensics-Lost-everything-but-hope/" data-id="cizoihhfm00ifmefsrbrhqa6p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -454,9 +473,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/JuniorCTF-2016-forensics-Dirty-Repo/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/JuniorCTF-2016-crypto-southern-cross/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Juniors CTF - 400 - Dirty Repo - Forensics</p>
+        <p class="article-nav-title">Juniors CTF - 300 - Southern Cross - Cryptography</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -495,26 +514,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -528,6 +527,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

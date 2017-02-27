@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,crypto,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWe got a substitute fla">
+Description
+We got a substitute">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF - 30 - Substituted - Cryptography">
 <meta property="og:url" content="http://rawsec.ml/en/IceCTF-2016-IceCTF-30-Substituted-Cryptography/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWe got a substitute fla">
+Description
+We got a substitute">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF - 30 - Substituted - Cryptography">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWe got a substitute fla">
+Description
+We got a substitute">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,22 +277,31 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : IceCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>We got a substitute flag, I hear they are pretty lax on the rules… <a href="https://play.icec.tf/problem-static/crypted_a888cc3cc9e064482ab8b61d0b19ca0b1b1ce88238c63f03c306d33947cf113b.txt" target="_blank" rel="external">crypted.txt</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li>It’s a <a href="https://en.wikipedia.org/wiki/Substitution_cipher" target="_blank" rel="external">substitution cipher</a>.</li>
-<li>I used <a href="http://www.simonsingh.net/The_Black_Chamber/substitutioncrackingtool.html" target="_blank" rel="external">The Black Chamber</a> for frequence analysis.</li>
-<li><p>And then I continued to analyze manually with the help of my tool:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">alphabet_letters = string.ascii_letters</div><div class="line"></div><div class="line"><span class="comment"># ciphered_text:plain_text (c:v)</span></div><div class="line">substitution_dict = &#123;<span class="string">'a'</span>:<span class="string">'p'</span> ,<span class="string">'b'</span>:<span class="string">'b'</span> ,<span class="string">'c'</span>:<span class="string">'m'</span>, <span class="string">'d'</span>:<span class="string">'s'</span>, <span class="string">'e'</span>:<span class="string">'o'</span>, <span class="string">'f'</span>:<span class="string">'*'</span>,</div><div class="line">                    <span class="string">'g'</span>:<span class="string">'w'</span>, <span class="string">'h'</span>:<span class="string">'*'</span>, <span class="string">'i'</span>:<span class="string">'k'</span>, <span class="string">'j'</span>:<span class="string">'a'</span>, <span class="string">'k'</span>:<span class="string">'t'</span>, <span class="string">'l'</span>:<span class="string">'h'</span>,</div><div class="line">                    <span class="string">'m'</span>:<span class="string">'n'</span>, <span class="string">'n'</span>:<span class="string">'*'</span>, <span class="string">'o'</span>:<span class="string">'r'</span>, <span class="string">'p'</span>:<span class="string">'*'</span>, <span class="string">'q'</span>:<span class="string">'g'</span>, <span class="string">'r'</span>:<span class="string">'y'</span>,</div><div class="line">                    <span class="string">'s'</span>:<span class="string">'u'</span>, <span class="string">'t'</span>:<span class="string">'f'</span>, <span class="string">'u'</span>:<span class="string">'d'</span>, <span class="string">'v'</span>:<span class="string">'c'</span>, <span class="string">'w'</span>:<span class="string">'i'</span>, <span class="string">'x'</span>:<span class="string">'v'</span>,</div><div class="line">                    <span class="string">'y'</span>:<span class="string">'e'</span>, <span class="string">'z'</span>:<span class="string">'l'</span>&#125;</div><div class="line"></div><div class="line">alphabet_substituted = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> c <span class="keyword">in</span> alphabet_letters:</div><div class="line">    <span class="keyword">if</span> c <span class="keyword">in</span> string.ascii_lowercase:</div><div class="line">        alphabet_substituted += substitution_dict[c]</div><div class="line">    <span class="keyword">elif</span> c <span class="keyword">in</span> string.ascii_uppercase:</div><div class="line">        <span class="keyword">if</span> substitution_dict[c.lower()] <span class="keyword">is</span> <span class="keyword">not</span> <span class="string">'*'</span>:</div><div class="line">            alphabet_substituted += substitution_dict[c.lower()].upper()</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            alphabet_substituted += substitution_dict[c.lower()]</div><div class="line"></div><div class="line"><span class="keyword">with</span> open(<span class="string">"crypted.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> fh:</div><div class="line">    encoded_data = fh.read()</div><div class="line"></div><div class="line"><span class="keyword">if</span> (sys.version_info &gt; (<span class="number">3</span>, <span class="number">0</span>)):</div><div class="line">    <span class="comment"># made with python 3.5.2</span></div><div class="line">    table = str.maketrans(alphabet_letters, alphabet_substituted)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="comment"># made with python 2.7.12</span></div><div class="line">    table = string.maketrans(alphabet_letters, alphabet_substituted)</div><div class="line"></div><div class="line">decoded_data = encoded_data.translate(table)</div><div class="line"></div><div class="line">print(<span class="string">"=== Encoded data ==="</span>)</div><div class="line">print(encoded_data)</div><div class="line">print(<span class="string">"=== Decoded data ==="</span>)</div><div class="line">print(decoded_data)</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>We got a substitute flag, I hear they are pretty lax on the rules... <a href="https://play.icec.tf/problem-static/crypted_a888cc3cc9e064482ab8b61d0b19ca0b1b1ce88238c63f03c306d33947cf113b.txt" target="_blank" rel="external">crypted.txt</a></p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>It's a <a href="https://en.wikipedia.org/wiki/Substitution_cipher" target="_blank" rel="external">substitution cipher</a>.</p>
 </li>
-<li><p>And I executed it:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">python substitution.py</div><div class="line">=== Encoded data ===</div><div class="line">Lw!</div><div class="line"></div><div class="line">Gyzvecy ke WvyVKT!</div><div class="line"></div><div class="line">W&apos;zz by reso dsbdkwksky tzjq teo kly ujr. Teo keujr, gy joy dksurwmq bjdwv vorakeqojalr jmu wkd jaazwvjkwemd. Vorakeqojalr ljd j zemq lwdkeor, jzklesql gwkl kly juxymk et vecaskyod wk ljd qekkym oyjzzr vecazwvjkyu. Decy dwcazy ezu vwalyod joy kly Vjydjo vwalyo, kly Xwqymyoy vwalyo, kly dsbdkwkskwem vwalyo, glwvl wd klwd emy, jmu de em. Jzcedk jzz et klydy vwalyod joy yjdwzr boeiym keujr gwkl kly lyza et vecaskyod. Decy myg ymvorakwem cykleud joy JYD, kly vsooymk dkjmujou teo ymvorakwem, jzemq gwkl ODJ. Vorakeqojalr wd j xjdk twyzu jmu wd xyor wmkyoydkwmq klesql. De iwvi bjvi, oyju sa em decy veez vwalyod jmu ljxy tsm!</div><div class="line"></div><div class="line">El jmu teo reso oyveoud cr mjcy wd WvyVKT&#123;jzgjrd_zwdkym_ke_reso_dsbdkwksky_tzjqd&#125;.</div><div class="line"></div><div class="line"></div><div class="line">=== Decoded data ===</div><div class="line">Hi!</div><div class="line"></div><div class="line">Welcome to IceCTF!</div><div class="line"></div><div class="line">I&apos;ll be your substitute flag for the day. For today, we are studying basic cryptography and its applications. Cryptography has a long history, although with the advent of computers it has gotten really complicated. Some simple old ciphers are the Caesar cipher, the Vigenere cipher, the substitution cipher, which is this one, and so on. Almost all of these ciphers are easily broken today with the help of computers. Some new encryption methods are AES, the current standard for encryption, along with RSA. Cryptography is a vast field and is very interesting though. So kick back, read up on some cool ciphers and have fun!</div><div class="line"></div><div class="line">Oh and for your records my name is IceCTF&#123;always_listen_to_your_substitute_flags&#125;.</div></pre></td></tr></table></figure>
+<li>
+<p>I used <a href="http://www.simonsingh.net/The_Black_Chamber/substitutioncrackingtool.html" target="_blank" rel="external">The Black Chamber</a> for frequence analysis.</p>
+</li>
+<li>
+<p>And then I continued to analyze manually with the help of my tool:
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">alphabet_letters = string.ascii_letters</div><div class="line"></div><div class="line"><span class="comment"># ciphered_text:plain_text (c:v)</span></div><div class="line">substitution_dict = &#123;<span class="string">'a'</span>:<span class="string">'p'</span> ,<span class="string">'b'</span>:<span class="string">'b'</span> ,<span class="string">'c'</span>:<span class="string">'m'</span>, <span class="string">'d'</span>:<span class="string">'s'</span>, <span class="string">'e'</span>:<span class="string">'o'</span>, <span class="string">'f'</span>:<span class="string">'*'</span>,</div><div class="line">                    <span class="string">'g'</span>:<span class="string">'w'</span>, <span class="string">'h'</span>:<span class="string">'*'</span>, <span class="string">'i'</span>:<span class="string">'k'</span>, <span class="string">'j'</span>:<span class="string">'a'</span>, <span class="string">'k'</span>:<span class="string">'t'</span>, <span class="string">'l'</span>:<span class="string">'h'</span>,</div><div class="line">                    <span class="string">'m'</span>:<span class="string">'n'</span>, <span class="string">'n'</span>:<span class="string">'*'</span>, <span class="string">'o'</span>:<span class="string">'r'</span>, <span class="string">'p'</span>:<span class="string">'*'</span>, <span class="string">'q'</span>:<span class="string">'g'</span>, <span class="string">'r'</span>:<span class="string">'y'</span>,</div><div class="line">                    <span class="string">'s'</span>:<span class="string">'u'</span>, <span class="string">'t'</span>:<span class="string">'f'</span>, <span class="string">'u'</span>:<span class="string">'d'</span>, <span class="string">'v'</span>:<span class="string">'c'</span>, <span class="string">'w'</span>:<span class="string">'i'</span>, <span class="string">'x'</span>:<span class="string">'v'</span>,</div><div class="line">                    <span class="string">'y'</span>:<span class="string">'e'</span>, <span class="string">'z'</span>:<span class="string">'l'</span>&#125;</div><div class="line"></div><div class="line">alphabet_substituted = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> c <span class="keyword">in</span> alphabet_letters:</div><div class="line">    <span class="keyword">if</span> c <span class="keyword">in</span> string.ascii_lowercase:</div><div class="line">        alphabet_substituted += substitution_dict[c]</div><div class="line">    <span class="keyword">elif</span> c <span class="keyword">in</span> string.ascii_uppercase:</div><div class="line">        <span class="keyword">if</span> substitution_dict[c.lower()] <span class="keyword">is</span> <span class="keyword">not</span> <span class="string">'*'</span>:</div><div class="line">            alphabet_substituted += substitution_dict[c.lower()].upper()</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            alphabet_substituted += substitution_dict[c.lower()]</div><div class="line"></div><div class="line"><span class="keyword">with</span> open(<span class="string">"crypted.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> fh:</div><div class="line">    encoded_data = fh.read()</div><div class="line"></div><div class="line"><span class="keyword">if</span> (sys.version_info &gt; (<span class="number">3</span>, <span class="number">0</span>)):</div><div class="line">    <span class="comment"># made with python 3.5.2</span></div><div class="line">    table = str.maketrans(alphabet_letters, alphabet_substituted)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="comment"># made with python 2.7.12</span></div><div class="line">    table = string.maketrans(alphabet_letters, alphabet_substituted)</div><div class="line"></div><div class="line">decoded_data = encoded_data.translate(table)</div><div class="line"></div><div class="line">print(<span class="string">"=== Encoded data ==="</span>)</div><div class="line">print(encoded_data)</div><div class="line">print(<span class="string">"=== Decoded data ==="</span>)</div><div class="line">print(decoded_data)</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>And I executed it:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">python substitution.py</div><div class="line">=== Encoded data ===</div><div class="line">Lw!</div><div class="line"></div><div class="line">Gyzvecy ke WvyVKT!</div><div class="line"></div><div class="line">W&apos;zz by reso dsbdkwksky tzjq teo kly ujr. Teo keujr, gy joy dksurwmq bjdwv vorakeqojalr jmu wkd jaazwvjkwemd. Vorakeqojalr ljd j zemq lwdkeor, jzklesql gwkl kly juxymk et vecaskyod wk ljd qekkym oyjzzr vecazwvjkyu. Decy dwcazy ezu vwalyod joy kly Vjydjo vwalyo, kly Xwqymyoy vwalyo, kly dsbdkwkskwem vwalyo, glwvl wd klwd emy, jmu de em. Jzcedk jzz et klydy vwalyod joy yjdwzr boeiym keujr gwkl kly lyza et vecaskyod. Decy myg ymvorakwem cykleud joy JYD, kly vsooymk dkjmujou teo ymvorakwem, jzemq gwkl ODJ. Vorakeqojalr wd j xjdk twyzu jmu wd xyor wmkyoydkwmq klesql. De iwvi bjvi, oyju sa em decy veez vwalyod jmu ljxy tsm!</div><div class="line"></div><div class="line">El jmu teo reso oyveoud cr mjcy wd WvyVKT&#123;jzgjrd_zwdkym_ke_reso_dsbdkwksky_tzjqd&#125;.</div><div class="line"></div><div class="line"></div><div class="line">=== Decoded data ===</div><div class="line">Hi!</div><div class="line"></div><div class="line">Welcome to IceCTF!</div><div class="line"></div><div class="line">I&apos;ll be your substitute flag for the day. For today, we are studying basic cryptography and its applications. Cryptography has a long history, although with the advent of computers it has gotten really complicated. Some simple old ciphers are the Caesar cipher, the Vigenere cipher, the substitution cipher, which is this one, and so on. Almost all of these ciphers are easily broken today with the help of computers. Some new encryption methods are AES, the current standard for encryption, along with RSA. Cryptography is a vast field and is very interesting though. So kick back, read up on some cool ciphers and have fun!</div><div class="line"></div><div class="line">Oh and for your records my name is IceCTF&#123;always_listen_to_your_substitute_flags&#125;.</div></pre></td></tr></table></figure></p>
 </li>
 </ol>
 
@@ -288,7 +311,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-30-Substituted-Cryptography/" data-id="cizepeoca00i92rfs0ys4y5r4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-30-Substituted-Cryptography/" data-id="cizoihhed00gjmefs4nu16b1z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -424,20 +447,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/IceCTF-2016-IceCTF-35-IRC-1-Misc/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-15-All-your-Base-are-belong-to-us-Misc/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            IceCTF - 35 - IRC I - Misc
+            IceCTF - 15 - All your Base are belong to us - Misc
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/IceCTF-2016-IceCTF-30-Move-Along-Web/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-70-Kitty-Web/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">IceCTF - 30 - Move Along - Web</p>
+        <p class="article-nav-title">IceCTF - 70 - Kitty - Web</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -476,26 +499,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -509,6 +512,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

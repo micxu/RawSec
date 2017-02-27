@@ -185,20 +185,24 @@ ga('send', 'pageview');
 <p>We can use WMIC (Microsoft Windows Management Instrumentation Command-line) to disable it.</p>
 <p>Before disabling it we will see wich network interfaces are using it:</p>
 <ul>
-<li><p>With <code>cmd.exe</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bat wmic nicconfig get caption,index,TcpipNetbiosOptions</div></pre></td></tr></table></figure>
+<li>
+<p>With <code>cmd.exe</code>:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bat wmic nicconfig get caption,index,TcpipNetbiosOptions</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>With <code>PowerShell</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic nicconfig get &quot;caption,index,TcpipNetbiosOptions&quot;</div></pre></td></tr></table></figure>
+<li>
+<p>With <code>PowerShell</code>:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic nicconfig get &quot;caption,index,TcpipNetbiosOptions&quot;</div></pre></td></tr></table></figure></p>
 </li>
 </ul>
 <p>Then you will need administrator power to run the following commands:</p>
 <ul>
-<li><p>If you want to disable NetBIOS for one network interface only, identify it index number and run:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic nicconfig where index=5 call SetTcpipNetbios 2</div></pre></td></tr></table></figure>
+<li>
+<p>If you want to disable NetBIOS for one network interface only, identify it index number and run:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic nicconfig where index=5 call SetTcpipNetbios 2</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>If you want to disable NetBIOS for all network interfaces run:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2</div><div class="line">wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2</div></pre></td></tr></table></figure>
+<li>
+<p>If you want to disable NetBIOS for all network interfaces run:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2</div><div class="line">wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2</div></pre></td></tr></table></figure></p>
 </li>
 </ul>
 <p><code>SetTcpipNetbios</code> can take this values:</p>
@@ -214,7 +218,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/disable-netbios-cli-wmic/" data-id="cizepenlf001c2rfsstj6dxya" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/disable-netbios-cli-wmic/" data-id="cizoihh1z002nmefstmxut994" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -402,26 +406,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -435,6 +419,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -9,22 +9,25 @@
         <meta name="keywords" content="linux,system,opensuse" />
     
     <meta name="description" content="To see your battery infos you can use acpi if you have it or directly see system files.
-Upower commandIn both case you can use upower command to get some usefull infos:
-1upower -i /org/freedesktop/UPo">
+Upower command
+In both case you can use upower command to get some usefull infos:
+1upower -i /org/freedesktop/UP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Know status and health battery in command-line">
 <meta property="og:url" content="http://rawsec.ml/en/know-status-health-battery-command-line/index.html">
 <meta property="og:site_name" content="RawSec">
 <meta property="og:description" content="To see your battery infos you can use acpi if you have it or directly see system files.
-Upower commandIn both case you can use upower command to get some usefull infos:
-1upower -i /org/freedesktop/UPo">
+Upower command
+In both case you can use upower command to get some usefull infos:
+1upower -i /org/freedesktop/UP">
 <meta property="og:image" content="http://rawsec.ml/images/opensuse.svg">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Know status and health battery in command-line">
 <meta name="twitter:description" content="To see your battery infos you can use acpi if you have it or directly see system files.
-Upower commandIn both case you can use upower command to get some usefull infos:
-1upower -i /org/freedesktop/UPo">
+Upower command
+In both case you can use upower command to get some usefull infos:
+1upower -i /org/freedesktop/UP">
 <meta name="twitter:image" content="http://rawsec.ml/images/opensuse.svg">
     
 
@@ -185,27 +188,34 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <p>To see your battery infos you can use acpi if you have it or directly see system files.</p>
-<h2 id="Upower-command"><a href="#Upower-command" class="headerlink" title="Upower command"></a>Upower command</h2><p>In both case you can use <code>upower</code> command to get some usefull infos:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upower -i /org/freedesktop/UPower/devices/battery_BAT0</div></pre></td></tr></table></figure>
+<h2>Upower command</h2>
+<p>In both case you can use <code>upower</code> command to get some usefull infos:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upower -i /org/freedesktop/UPower/devices/battery_BAT0</div></pre></td></tr></table></figure></p>
 <p>Example output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">native-path:          BAT0</div><div class="line">vendor:               ASUSTeK</div><div class="line">model:                N56--52</div><div class="line">power supply:         yes</div><div class="line">updated:              ven. 01 avril 2016 08:58:27 CEST (99 seconds ago)</div><div class="line">has history:          yes</div><div class="line">has statistics:       yes</div><div class="line">battery</div><div class="line">  present:             yes</div><div class="line">  rechargeable:        yes</div><div class="line">  state:               fully-charged</div><div class="line">  warning-level:       none</div><div class="line">  energy:              41,162 Wh</div><div class="line">  energy-empty:        0 Wh</div><div class="line">  energy-full:         43,054 Wh</div><div class="line">  energy-full-design:  57,2 Wh</div><div class="line">  energy-rate:         0 W</div><div class="line">  voltage:             12,377 V</div><div class="line">  percentage:          95%</div><div class="line">  capacity:            75,2692%</div><div class="line">  technology:          lithium-ion</div><div class="line">  icon-name:          &apos;battery-full-charged-symbolic&apos;</div></pre></td></tr></table></figure>
-<h2 id="With-acpi"><a href="#With-acpi" class="headerlink" title="With acpi"></a>With acpi</h2><p>Many distributions don’t use it so if you want to install it you can do:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo zypper <span class="keyword">in</span> acpi</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">native-path:          BAT0</div><div class="line">vendor:               ASUSTeK</div><div class="line">model:                N56--52</div><div class="line">power supply:         yes</div><div class="line">updated:              ven. 01 avril 2016 08:58:27 CEST (99 seconds ago)</div><div class="line">has history:          yes</div><div class="line">has statistics:       yes</div><div class="line">battery</div><div class="line">  present:             yes</div><div class="line">  rechargeable:        yes</div><div class="line">  state:               fully-charged</div><div class="line">  warning-level:       none</div><div class="line">  energy:              41,162 Wh</div><div class="line">  energy-empty:        0 Wh</div><div class="line">  energy-full:         43,054 Wh</div><div class="line">  energy-full-design:  57,2 Wh</div><div class="line">  energy-rate:         0 W</div><div class="line">  voltage:             12,377 V</div><div class="line">  percentage:          95%</div><div class="line">  capacity:            75,2692%</div><div class="line">  technology:          lithium-ion</div><div class="line">  icon-name:          &apos;battery-full-charged-symbolic&apos;</div></pre></td></tr></table></figure></p>
+<h2>With acpi</h2>
+<p>Many distributions don't use it so if you want to install it you can do:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo zypper <span class="keyword">in</span> acpi</div></pre></td></tr></table></figure></p>
 <p>OR</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum install acpi &amp;&amp; sudo yum install acpitool</div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum install acpi &amp;&amp; sudo yum install acpitool</div></pre></td></tr></table></figure></p>
 <p>OR</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install acpi &amp;&amp; sudo apt-get install acpitool</div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install acpi &amp;&amp; sudo apt-get install acpitool</div></pre></td></tr></table></figure></p>
 <p>To check is you have it installed:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">acpi -V</div></pre></td></tr></table></figure>
-<p>You can see <strong>battery health</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/acpi/battery/BAT0/info</div></pre></td></tr></table></figure></p>
-<p>and the <strong>battery status</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/acpi/battery/BAT0/state</div></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">acpi -V</div></pre></td></tr></table></figure></p>
+<p>You can see <strong>battery health</strong>:
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/acpi/battery/BAT0/info</div></pre></td></tr></table></figure></p>
+<p>and the <strong>battery status</strong>:
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/acpi/battery/BAT0/state</div></pre></td></tr></table></figure></p>
 <p>OR</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">acpi</div></pre></td></tr></table></figure>
-<p>You can also display ac adpter information:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">acpi <span class="_">-a</span></div></pre></td></tr></table></figure></p>
-<p>You can show thermal information:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">acpi -t</div></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">acpi</div></pre></td></tr></table></figure></p>
+<p>You can also display ac adpter information:
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">acpi <span class="_">-a</span></div></pre></td></tr></table></figure></p>
+<p>You can show thermal information:
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">acpi -t</div></pre></td></tr></table></figure></p>
 <p>OR</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/acpi/thermal_zone/THM/temperature</div></pre></td></tr></table></figure>
-<h2 id="Without-acpi"><a href="#Without-acpi" class="headerlink" title="Without acpi"></a>Without acpi</h2><p>Without acpi you will need to browse <code>/sys/class/power_supply/BAT0</code> directory and display files that are inside.</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/acpi/thermal_zone/THM/temperature</div></pre></td></tr></table></figure></p>
+<h2>Without acpi</h2>
+<p>Without acpi you will need to browse <code>/sys/class/power_supply/BAT0</code> directory and display files that are inside.</p>
 
         </div>
         <footer class="article-footer">
@@ -213,7 +223,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/know-status-health-battery-command-line/" data-id="cizepenn1002u2rfs7giovcvk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/know-status-health-battery-command-line/" data-id="cizoihh3i0047mefsstpqq1zc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -349,11 +359,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/opensuse-displaymanager-windowsmanager/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/know-graphic-controller-linux/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            DISPLAYMANAGER and WINDOWSMANAGER
+            How to know the graphic controller under Linux
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -401,26 +411,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -434,6 +424,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,programming,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionFriday is the">
+Description
+Friday is">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ABCTF - 30 - TGIF - Programming">
 <meta property="og:url" content="http://rawsec.ml/en/ABCTF-2016-ABCTF-30-TGIF-Programming/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionFriday is the">
+Description
+Friday is">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ABCTF - 30 - TGIF - Programming">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : ABCTF 2016
 Website : http://abctf.xyz/
 Type : Online
 Format : Jeopardy - Student
 CTF Time : link
 
-DescriptionFriday is the">
+Description
+Friday is">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,26 +277,34 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : ABCTF 2016</li>
 <li><strong>Website</strong> : <a href="http://abctf.xyz/" target="_blank" rel="external">http://abctf.xyz/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy - Student</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/333" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Friday is the best day of the week, and so I really want to know how many Fridays there are in <a href="https://gist.github.com/LiamRahav/0cbf82b8bc3a41deafc0403f1b1dd573" title="Gist" target="_blank" rel="external">this</a> file. But, with a twist. I want to know how many Fridays there are one year later than each date.</p>
+<h3>Description</h3>
+<p>Friday is the best day of the week, and so I really want to know how many Fridays there are in [this][this] file. But, with a twist. I want to know how many Fridays there are one year later than each date.
+[this]:https://gist.github.com/LiamRahav/0cbf82b8bc3a41deafc0403f1b1dd573 &quot;Gist&quot;</p>
 <p><strong>Hint</strong>: For example, if you got November 21, 2001, I want to know if November 21, 2002 is a Friday. Also, the answer is in the format ABCTF{}</p>
-<p><strong>Note</strong>: TGIF stands for <em>Thank God It’s Friday</em></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Write a script that parse the <em>date.txt</em> file and count the number of Friday</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python2</span></div><div class="line"><span class="keyword">import</span> locale</div><div class="line"></div><div class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</div><div class="line"><span class="keyword">import</span> calendar</div><div class="line"></div><div class="line">locale.setlocale(locale.LC_ALL, <span class="string">'en_US.UTF-8'</span>)</div><div class="line">calendar.setfirstweekday(calendar.MONDAY)</div><div class="line"></div><div class="line"><span class="comment"># strptime : https://docs.python.org/2/library/datetime.html#datetime.datetime.strptime</span></div><div class="line"><span class="comment"># format : https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior</span></div><div class="line"></div><div class="line">date_format = <span class="string">'%B %d, %Y'</span></div><div class="line">i = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="keyword">with</span> open(<span class="string">'date.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> date_file:</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> date_file:</div><div class="line">        date_string = line.rstrip()</div><div class="line">        date_object = datetime.strptime(date_string, date_format)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (calendar.isleap(date_object.year) <span class="keyword">and</span> date_object.day == <span class="number">29</span>):</div><div class="line">            date_object = date_object.replace(year = date_object.year + <span class="number">1</span>)</div><div class="line">            <span class="keyword">if</span> date_object.isoweekday() == <span class="number">5</span>: <span class="comment"># Friday</span></div><div class="line">                i += <span class="number">1</span></div><div class="line"></div><div class="line">print(<span class="string">'ABCTF&#123;'</span> + str(i) + <span class="string">'&#125;'</span>)</div></pre></td></tr></table></figure>
+<p><strong>Note</strong>: TGIF stands for <em>Thank God It's Friday</em></p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>Write a script that parse the <em>date.txt</em> file and count the number of Friday
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python2</span></div><div class="line"><span class="keyword">import</span> locale</div><div class="line"></div><div class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</div><div class="line"><span class="keyword">import</span> calendar</div><div class="line"></div><div class="line">locale.setlocale(locale.LC_ALL, <span class="string">'en_US.UTF-8'</span>)</div><div class="line">calendar.setfirstweekday(calendar.MONDAY)</div><div class="line"></div><div class="line"><span class="comment"># strptime : https://docs.python.org/2/library/datetime.html#datetime.datetime.strptime</span></div><div class="line"><span class="comment"># format : https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior</span></div><div class="line"></div><div class="line">date_format = <span class="string">'%B %d, %Y'</span></div><div class="line">i = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="keyword">with</span> open(<span class="string">'date.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> date_file:</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> date_file:</div><div class="line">        date_string = line.rstrip()</div><div class="line">        date_object = datetime.strptime(date_string, date_format)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (calendar.isleap(date_object.year) <span class="keyword">and</span> date_object.day == <span class="number">29</span>):</div><div class="line">            date_object = date_object.replace(year = date_object.year + <span class="number">1</span>)</div><div class="line">            <span class="keyword">if</span> date_object.isoweekday() == <span class="number">5</span>: <span class="comment"># Friday</span></div><div class="line">                i += <span class="number">1</span></div><div class="line"></div><div class="line">print(<span class="string">'ABCTF&#123;'</span> + str(i) + <span class="string">'&#125;'</span>)</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>This instruction <code>if not (calendar.isleap(date_object.year) and date_object.day == 29) :</code> was to avoid bug with <code>February 29, 2004</code> because 2004 was a leap year and that <code>February 29, 2005</code> is not existing so.</p>
+<li>
+<p>This instruction <code>if not (calendar.isleap(date_object.year) and date_object.day == 29) :</code> was to avoid bug with <code>February 29, 2004</code> because 2004 was a leap year and that <code>February 29, 2005</code> is not existing so.</p>
 </li>
-<li><p>So when running my script I got:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python3 date.py</div><div class="line">ABCTF&#123;193&#125;</div></pre></td></tr></table></figure>
+<li>
+<p>So when running my script I got:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python3 date.py</div><div class="line">ABCTF&#123;193&#125;</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>That’s not the good flag but maybe that is because of the 29 of February so I tried <code>ABCTF{194}</code> and it’s good!</p>
+<li>
+<p>That's not the good flag but maybe that is because of the 29 of February so I tried <code>ABCTF{194}</code> and it's good!</p>
 </li>
 </ol>
 
@@ -292,7 +314,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-30-TGIF-Programming/" data-id="cizepeo7300co2rfs4ott4uvt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/ABCTF-2016-ABCTF-30-TGIF-Programming/" data-id="cizoihhbr00cvmefsuuv42dc6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -428,20 +450,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/ABCTF-2016-ABCTF-30-GZ-Forensics/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/ABCTF-2016-ABCTF-50-Chocolate-Web-Exploitation/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            ABCTF - 30 - GZ - Forensics
+            ABCTF - 50 - Chocolate - Web Exploitation
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/ABCTF-2016-ABCTF-75-Virtual-Box-5-Virtual-Series/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/ABCTF-2016-ABCTF-35-The-Flash-Web-Exploitation/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ABCTF - 75 - Virtual Box 5 - Virtual Series</p>
+        <p class="article-nav-title">ABCTF - 35 - The Flash - Web Exploitation</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -480,26 +502,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -513,6 +515,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

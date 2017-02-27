@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,19 +27,21 @@ Creation
 
 
 CTF
+
 Name : WhiteHat GrandPrix 2016
 Website : grandprix.whitehatvn.com
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-ht">
+Description">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WhiteHat GrandPrix - 100 - Banh bot loc - Web">
 <meta property="og:url" content="http://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,19 +58,21 @@ Creation
 
 
 CTF
+
 Name : WhiteHat GrandPrix 2016
 Website : grandprix.whitehatvn.com
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-ht">
+Description">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WhiteHat GrandPrix - 100 - Banh bot loc - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,14 +89,14 @@ Creation
 
 
 CTF
+
 Name : WhiteHat GrandPrix 2016
 Website : grandprix.whitehatvn.com
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-Description
-ht">
+Description">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,28 +274,31 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : WhiteHat GrandPrix 2016</li>
 <li><strong>Website</strong> : <a href="https://grandprix.whitehatvn.com/Contests/ChallengesContest/32" target="_blank" rel="external">grandprix.whitehatvn.com</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/398" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p><a href="http://web05.grandprix.whitehatvn.com" target="_blank" rel="external">http://web05.grandprix.whitehatvn.com</a></p>
-<p><a href="http://bakweb05.grandprix.whitehatvn.com:8125" target="_blank" rel="external">http://bakweb05.grandprix.whitehatvn.com:8125</a></p>
+<h3>Description</h3>
+<blockquote>
+<p>http://web05.grandprix.whitehatvn.com</p>
+<p>http://bakweb05.grandprix.whitehatvn.com:8125</p>
 </blockquote>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Here is the home page:</p>
+<h2>Solution</h2>
+<p>Here is the home page:</p>
 <p><img src="http://i.imgur.com/r2BGme3.png" alt=""></p>
 <p>The login link go to <code>http://web05.grandprix.whitehatvn.com/index.php?username=guest&amp;password=guest</code> and says <code>noob</code>.</p>
 <p><img src="http://i.imgur.com/w7FZJ9a.png" alt=""></p>
-<p>Let’s see source code of teh web page:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'index.php?username=guest&amp;password=guest'</span>&gt;</span>login<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span>Login to get our secret<span class="tag">&lt;/<span class="name">html</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- index.php.bak --&gt;</span></div></pre></td></tr></table></figure>
-<p>Ok, let’s see <code>index.php.bak</code>:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checklogin</span><span class="params">($username, $password, $key, $secret)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>($username.$key == md5($password))</div><div class="line">		<span class="keyword">echo</span> $secret;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">echo</span> <span class="string">"noob"</span>;</div><div class="line">    &#125;</div><div class="line">$key = <span class="string">"1337"</span>;</div><div class="line">$secret = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;html&gt;</span></div><div class="line">    &lt;title&gt;hello&lt;/title&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    &lt;a href='index.php?username=guest&amp;password=guest'&gt;login&lt;/a&gt;&lt;br&gt;</div><div class="line">    &lt;/body&gt;";</div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'username'</span>])&amp;&amp;<span class="keyword">isset</span>($_GET[<span class="string">'password'</span>]))</div><div class="line">    &#123;</div><div class="line">        checklogin($_GET[<span class="string">'username'</span>],$_GET[<span class="string">'password'</span>],$key,$secret);</div><div class="line">        <span class="keyword">die</span>(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"><span class="keyword">echo</span> <span class="string">"Login to get our secret"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;/html&gt;"</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>Let's see source code of teh web page:</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'index.php?username=guest&amp;password=guest'</span>&gt;</span>login<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span>Login to get our secret<span class="tag">&lt;/<span class="name">html</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- index.php.bak --&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Ok, let's see <code>index.php.bak</code>:</p>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checklogin</span><span class="params">($username, $password, $key, $secret)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>($username.$key == md5($password))</div><div class="line">		<span class="keyword">echo</span> $secret;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">echo</span> <span class="string">"noob"</span>;</div><div class="line">    &#125;</div><div class="line">$key = <span class="string">"1337"</span>;</div><div class="line">$secret = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;html&gt;</span></div><div class="line">    &lt;title&gt;hello&lt;/title&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    &lt;a href='index.php?username=guest&amp;password=guest'&gt;login&lt;/a&gt;&lt;br&gt;</div><div class="line">    &lt;/body&gt;";</div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'username'</span>])&amp;&amp;<span class="keyword">isset</span>($_GET[<span class="string">'password'</span>]))</div><div class="line">    &#123;</div><div class="line">        checklogin($_GET[<span class="string">'username'</span>],$_GET[<span class="string">'password'</span>],$key,$secret);</div><div class="line">        <span class="keyword">die</span>(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"><span class="keyword">echo</span> <span class="string">"Login to get our secret"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;/html&gt;"</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
 <p>Ok so the login checks that the concatenation of the username and the key is equal to the md5 hash of the password.</p>
 <p>So we need to find a hash like <code>????????????????????????????1337</code> (28 random hex chars and 1337).</p>
-<p>I first thought to download a md5 hash dictionary but I didn’t wanted to wait during teh download.</p>
+<p>I first thought to download a md5 hash dictionary but I didn't wanted to wait during teh download.</p>
 <p>So I went to <a href="https://md5db.net/explore/0000" target="_blank" rel="external">md5db.net</a> and looked for a hash beginning with <code>0000</code>, did a <code>CTRL + F</code> to find <code>1337</code> and finaly found <a href="https://md5db.net/view/0000dd456d15560290351cb4e6311337" target="_blank" rel="external">one</a>: <strong>#</strong> <em>13381</em> <strong>Hash</strong> <em>0000dd456d15560290351cb4e6311337</em> <strong>Word</strong> <em>hdtfz</em>.</p>
 <p>So we get:</p>
 <ul>
@@ -295,9 +306,10 @@ ga('send', 'pageview');
 <li>key: <code>1337</code></li>
 <li>password: <code>hdtfz</code></li>
 </ul>
-<p>I submited the url: <a href="http://web05.grandprix.whitehatvn.com/index.php?username=0000dd456d15560290351cb4e631&amp;password=hdtfz" target="_blank" rel="external">http://web05.grandprix.whitehatvn.com/index.php?username=0000dd456d15560290351cb4e631&amp;password=hdtfz</a> and got the flag <code>WhiteHat{92ab818618fee438a1ea3944b5940237975f2b1d}</code>.</p>
+<p>I submited the url: http://web05.grandprix.whitehatvn.com/index.php?username=0000dd456d15560290351cb4e631&amp;password=hdtfz and got the flag <code>WhiteHat{92ab818618fee438a1ea3944b5940237975f2b1d}</code>.</p>
 <p><img src="http://i.imgur.com/YxrFXdq.png" alt=""></p>
-<h2 id="Submit"><a href="#Submit" class="headerlink" title="Submit"></a>Submit</h2><p><img src="http://i.imgur.com/aFTxLvH.jpg" alt=""></p>
+<h2>Submit</h2>
+<p><img src="http://i.imgur.com/aFTxLvH.jpg" alt=""></p>
 
         </div>
         <footer class="article-footer">
@@ -305,7 +317,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/" data-id="cizepeogs00m02rfs27i0mmz4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/" data-id="cizoihhgz00k6mefs6s9jydpo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -441,20 +453,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/WhiteHat-GrandPrix-2016-forensics-300-Banh-it-la-gai/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            WhiteHat GrandPrix - 300 - Banh it la gai - Forensics
+            WhiteHat GrandPrix - 100 - Banh Giay - Forensics
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/WhiteHat-GrandPrix-2016-forensics-100-Banh-Giay/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/WhiteHat-GrandPrix-2016-misc-100-Banh-da-Ke/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">WhiteHat GrandPrix - 100 - Banh Giay - Forensics</p>
+        <p class="article-nav-title">WhiteHat GrandPrix - 100 - Banh da Ke - Misc</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -493,26 +505,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -526,6 +518,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

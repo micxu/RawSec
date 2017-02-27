@@ -11,7 +11,7 @@
     <meta name="description" content="Install rTorrent, git ang nginx:
 
 1# zypper install rtorrent git nginx
-Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won’t be able to use it with rutorr">
+Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won&apos;t be able to use it with rutorr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenSUSE : Install rTorrent and ruTorrent">
 <meta property="og:url" content="http://rawsec.ml/en/opensuse-install-rtorrent-rutorrent/index.html">
@@ -19,7 +19,7 @@ Warning: rtorrent package in official openSUSE repository is not compiled with x
 <meta property="og:description" content="Install rTorrent, git ang nginx:
 
 1# zypper install rtorrent git nginx
-Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won’t be able to use it with rutorr">
+Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won&apos;t be able to use it with rutorr">
 <meta property="og:image" content="http://rawsec.ml/images/opensuse.svg">
 <meta property="og:updated_time" content="2017-02-07T18:23:36.855Z">
 <meta name="twitter:card" content="summary">
@@ -27,7 +27,7 @@ Warning: rtorrent package in official openSUSE repository is not compiled with x
 <meta name="twitter:description" content="Install rTorrent, git ang nginx:
 
 1# zypper install rtorrent git nginx
-Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won’t be able to use it with rutorr">
+Warning: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won&apos;t be able to use it with rutorr">
 <meta name="twitter:image" content="http://rawsec.ml/images/opensuse.svg">
     
 
@@ -190,203 +190,205 @@ ga('send', 'pageview');
             <ul>
 <li>Install rTorrent, git ang nginx:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># zypper install rtorrent git nginx</div></pre></td></tr></table></figure>
-<p><strong>Warning</strong>: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won’t be able to use it with rutorrent.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># zypper install rtorrent git nginx</div></pre></td></tr></table></figure></p>
+<p><strong>Warning</strong>: rtorrent package in official openSUSE repository is not compiled with xmlrpc so you won't be able to use it with rutorrent.</p>
 <ul>
 <li>Add the php devel repository to be able to install php7:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># zypper addrepo http://download.opensuse.org/repositories/devel:languages:php/openSUSE_Leap_42.1/devel:languages:php.repo</div><div class="line"># zypper refresh</div><div class="line"># zypper install php7 php7-fpm</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># zypper addrepo http://download.opensuse.org/repositories/devel:languages:php/openSUSE_Leap_42.1/devel:languages:php.repo</div><div class="line"># zypper refresh</div><div class="line"># zypper install php7 php7-fpm</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Go to the default web folder and clone the <a href="https://github.com/Novik/ruTorrent" target="_blank" rel="external">ruTorrent</a> git repository:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /srv/www/htdocs/</div><div class="line"># git clone https://github.com/Novik/ruTorrent.git rutorrent</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /srv/www/htdocs/</div><div class="line"># git clone https://github.com/Novik/ruTorrent.git rutorrent</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Enable and start nginx:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable nginx.service</div><div class="line"># systemctl start nginx.service</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable nginx.service</div><div class="line"># systemctl start nginx.service</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Open php configuration:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/cli/php.ini</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/cli/php.ini</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Disable php exposure (<a href="http://php.net/manual/en/ini.core.php#ini.expose-php" target="_blank" rel="external">expose_php</a>):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">expose_php = Off</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">expose_php = Off</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Enable file uploads (<a href="http://php.net/manual/en/ini.core.php#ini.file-uploads" target="_blank" rel="external">file_uploads</a>):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">file_uploads = On</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">file_uploads = On</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Set the maximum size of an uploaded file (<a href="http://php.net/manual/en/ini.core.php#ini.upload-max-filesize" target="_blank" rel="external">upload_max_filesize</a>):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upload_max_filesize = 15M</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upload_max_filesize = 15M</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Set max size of post data allowed (<a href="http://php.net/manual/en/ini.core.php#ini.post-max-size" target="_blank" rel="external">post_max_size</a>):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">post_max_size = 15M</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">post_max_size = 15M</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Set the timezone (<a href="http://php.net/manual/en/datetime.configuration.php#ini.date.timezone" target="_blank" rel="external">date.timezone</a>).</li>
 <li>For more security, limit the files that can be accessed by php (<a href="http://php.net/manual/en/ini.core.php#ini.open-basedir" target="_blank" rel="external">open_basedir</a>):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open_basedir = /srv/www/htdocs/rutorrent</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open_basedir = /srv/www/htdocs/rutorrent</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Change the value of cgi.fix_pathinfo to zero for security reasons:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cgi.fix_pathinfo=0</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cgi.fix_pathinfo=0</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Save and quit <code>php.ini</code>.</li>
 <li>Create the <code>php-fpm.conf</code> and <code>www.conf</code> files:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># cp /etc/php7/fpm/php-fpm.conf.default /etc/php7/fpm/php-fpm.conf</div><div class="line"># cp /etc/php7/fpm/php-fpm.d/www.conf.default /etc/php7/fpm/php-fpm.d/www.conf</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># cp /etc/php7/fpm/php-fpm.conf.default /etc/php7/fpm/php-fpm.conf</div><div class="line"># cp /etc/php7/fpm/php-fpm.d/www.conf.default /etc/php7/fpm/php-fpm.d/www.conf</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Edit the php-fpm configuration:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/fpm/php-fpm.conf</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/fpm/php-fpm.conf</div></pre></td></tr></table></figure></p>
 <ul>
 <li>To enable php-fpm log, uncomment this line (the default prefix is <code>/var</code>):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error_log = log/php-fpm.log</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error_log = log/php-fpm.log</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Edit the php-fpm pool file:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/fpm/php-fpm.d/www.conf</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/php7/fpm/php-fpm.d/www.conf</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Configure the owner of the nginx process to the Nginx user:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">user = nginx</div><div class="line">group = nginx</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">user = nginx</div><div class="line">group = nginx</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Configure php-fpm to run under a socket file, not a port:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">listen = /var/run/php-fpm.sock</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">listen = /var/run/php-fpm.sock</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Change the permissions for the unix socket to the nginx user, group and mode:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">listen.owner = nginx</div><div class="line">listen.group = nginx</div><div class="line">listen.mode = 0660</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">listen.owner = nginx</div><div class="line">listen.group = nginx</div><div class="line">listen.mode = 0660</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Enable and start php-fpm:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable php-fpm</div><div class="line"># systemctl start php-fpm</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable php-fpm</div><div class="line"># systemctl start php-fpm</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Create an authentification folder for nginx:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/auth</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/auth</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Create the virtual servers directories:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/servers-available</div><div class="line"># mkdir /etc/nginx/servers-enabled</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/servers-available</div><div class="line"># mkdir /etc/nginx/servers-enabled</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Edit the nginx configuration file:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/nginx.conf</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/nginx.conf</div></pre></td></tr></table></figure></p>
 <ul>
 <li>And add this config:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">user nginx;</div><div class="line">worker_processes auto;</div><div class="line">pid /var/run/nginx.pid;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">    worker_connections 1024;</div><div class="line">    multi_accept on;</div><div class="line">    use epoll;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">    charset UTF-8;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Basic Settings</div><div class="line">    ##</div><div class="line">    server_names_hash_bucket_size 64;</div><div class="line">    sendfile on;</div><div class="line">    tcp_nopush on;</div><div class="line">    tcp_nodelay on;</div><div class="line">    keepalive_timeout 65;</div><div class="line">    types_hash_max_size 2048;</div><div class="line">    server_tokens off;</div><div class="line"></div><div class="line">    # server_name_in_redirect off;</div><div class="line"></div><div class="line">    include /etc/nginx/mime.types;</div><div class="line">    default_type application/octet-stream;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Logging Settings</div><div class="line">    ##</div><div class="line">    access_log /var/log/nginx/access.log;</div><div class="line">    error_log /var/log/nginx/error.log;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Gzip Settings</div><div class="line">    ##</div><div class="line">    gzip on;</div><div class="line">    gzip_disable &quot;msie6&quot;;</div><div class="line">    gzip_vary on;</div><div class="line">    gzip_proxied any;</div><div class="line">    gzip_comp_level 6;</div><div class="line">    gzip_buffers 16 8k;</div><div class="line">    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Virtual Host Configs</div><div class="line">    ##</div><div class="line">    include /etc/nginx/servers-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">user nginx;</div><div class="line">worker_processes auto;</div><div class="line">pid /var/run/nginx.pid;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">    worker_connections 1024;</div><div class="line">    multi_accept on;</div><div class="line">    use epoll;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">    charset UTF-8;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Basic Settings</div><div class="line">    ##</div><div class="line">    server_names_hash_bucket_size 64;</div><div class="line">    sendfile on;</div><div class="line">    tcp_nopush on;</div><div class="line">    tcp_nodelay on;</div><div class="line">    keepalive_timeout 65;</div><div class="line">    types_hash_max_size 2048;</div><div class="line">    server_tokens off;</div><div class="line"></div><div class="line">    # server_name_in_redirect off;</div><div class="line"></div><div class="line">    include /etc/nginx/mime.types;</div><div class="line">    default_type application/octet-stream;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Logging Settings</div><div class="line">    ##</div><div class="line">    access_log /var/log/nginx/access.log;</div><div class="line">    error_log /var/log/nginx/error.log;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Gzip Settings</div><div class="line">    ##</div><div class="line">    gzip on;</div><div class="line">    gzip_disable &quot;msie6&quot;;</div><div class="line">    gzip_vary on;</div><div class="line">    gzip_proxied any;</div><div class="line">    gzip_comp_level 6;</div><div class="line">    gzip_buffers 16 8k;</div><div class="line">    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</div><div class="line"></div><div class="line">    ##</div><div class="line">    # Virtual Host Configs</div><div class="line">    ##</div><div class="line">    include /etc/nginx/servers-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Save and quit.</li>
 <li>Create the server domain config:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/servers-available/seedbox.conf</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/servers-available/seedbox.conf</div></pre></td></tr></table></figure></p>
 <ul>
 <li>And add the config:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen [::]:80;</div><div class="line">    # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.</div><div class="line">    return 301 https://$host$request_uri;</div><div class="line">&#125;</div><div class="line"></div><div class="line">##</div><div class="line"># BLOCK SERVEUR HTTPS</div><div class="line">##</div><div class="line">server &#123;</div><div class="line">    # http2 not supported by nginx 1.8.1</div><div class="line">    listen 443 ssl;</div><div class="line">    server_name seedbox.domain.example.org;</div><div class="line">    root /srv/www/htdocs/rutorrent;</div><div class="line">    index index.php index.html index.htm;</div><div class="line"></div><div class="line">##</div><div class="line"># SSL</div><div class="line">##</div><div class="line">    ssl_certificate /etc/nginx/ssl/seedbox.crt;</div><div class="line">    ssl_certificate_key /etc/nginx/ssl/seedbox.key;</div><div class="line"></div><div class="line">    ssl_protocols TLSv1.2;</div><div class="line">    ssl_ciphers EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;</div><div class="line">    ssl_ecdh_curve secp384r1;</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line">    # ssl optimizations</div><div class="line">    ssl_session_timeout 5m;</div><div class="line">    ssl_session_cache shared:SSL:20m;</div><div class="line">    ssl_session_tickets on;</div><div class="line"></div><div class="line">##</div><div class="line"># SECURITY</div><div class="line">##</div><div class="line"></div><div class="line">    add_header X-XSS-Protection &quot;1; mode=block&quot;;</div><div class="line">    auth_basic &quot;Restricted Area&quot;;</div><div class="line">    auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth&quot;;</div><div class="line"></div><div class="line">##</div><div class="line"># PHP</div><div class="line">##</div><div class="line">    location / &#123;</div><div class="line">    index index.php index.html index.htm;</div><div class="line">    try_files $uri $uri/ /index.php?$args;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">    try_files $uri =404;</div><div class="line">    fastcgi_split_path_info ^(.+\.php)(/.+)$;</div><div class="line">    fastcgi_pass unix:/var/run/php-fpm.sock;</div><div class="line">    fastcgi_index index.php;</div><div class="line">    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line">    include fastcgi_params;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ^~ /conf/ &#123;</div><div class="line">    deny all;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ^~ /share/ &#123;</div><div class="line">    deny all;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen [::]:80;</div><div class="line">    # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.</div><div class="line">    return 301 https://$host$request_uri;</div><div class="line">&#125;</div><div class="line"></div><div class="line">##</div><div class="line"># BLOCK SERVEUR HTTPS</div><div class="line">##</div><div class="line">server &#123;</div><div class="line">    # http2 not supported by nginx 1.8.1</div><div class="line">    listen 443 ssl;</div><div class="line">    server_name seedbox.domain.example.org;</div><div class="line">    root /srv/www/htdocs/rutorrent;</div><div class="line">    index index.php index.html index.htm;</div><div class="line"></div><div class="line">##</div><div class="line"># SSL</div><div class="line">##</div><div class="line">    ssl_certificate /etc/nginx/ssl/seedbox.crt;</div><div class="line">    ssl_certificate_key /etc/nginx/ssl/seedbox.key;</div><div class="line"></div><div class="line">    ssl_protocols TLSv1.2;</div><div class="line">    ssl_ciphers EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;</div><div class="line">    ssl_ecdh_curve secp384r1;</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line">    # ssl optimizations</div><div class="line">    ssl_session_timeout 5m;</div><div class="line">    ssl_session_cache shared:SSL:20m;</div><div class="line">    ssl_session_tickets on;</div><div class="line"></div><div class="line">##</div><div class="line"># SECURITY</div><div class="line">##</div><div class="line"></div><div class="line">    add_header X-XSS-Protection &quot;1; mode=block&quot;;</div><div class="line">    auth_basic &quot;Restricted Area&quot;;</div><div class="line">    auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth&quot;;</div><div class="line"></div><div class="line">##</div><div class="line"># PHP</div><div class="line">##</div><div class="line">    location / &#123;</div><div class="line">    index index.php index.html index.htm;</div><div class="line">    try_files $uri $uri/ /index.php?$args;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">    try_files $uri =404;</div><div class="line">    fastcgi_split_path_info ^(.+\.php)(/.+)$;</div><div class="line">    fastcgi_pass unix:/var/run/php-fpm.sock;</div><div class="line">    fastcgi_index index.php;</div><div class="line">    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line">    include fastcgi_params;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ^~ /conf/ &#123;</div><div class="line">    deny all;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ^~ /share/ &#123;</div><div class="line">    deny all;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Don’t forget to change <code>server_name seedbox.domain.example.org;</code> with your own domain and create a CNAME entry in your DNS configuration.</li>
 <li>Enable the server:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ln -s /etc/nginx/servers-available/seedbox.conf /etc/nginx/servers-enabled/seedbox.conf</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ln -s /etc/nginx/servers-available/seedbox.conf /etc/nginx/servers-enabled/seedbox.conf</div></pre></td></tr></table></figure></p>
 <ul>
 <li>To configure a self-signed certificate, add the certificate folder:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/ssl</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir /etc/nginx/ssl</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Generate self-signed certificate:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># cd /etc/nginx/ssl</div><div class="line"># openssl ecparam -genkey -name secp384r1 -out seedbox.key</div><div class="line"># openssl req -new -key seedbox.key -sha256 -out seedbox.csr</div><div class="line"># openssl req -x509 -days 3650 -sha256 -key seedbox.key -in seedbox.csr -out seedbox.crt</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># cd /etc/nginx/ssl</div><div class="line"># openssl ecparam -genkey -name secp384r1 -out seedbox.key</div><div class="line"># openssl req -new -key seedbox.key -sha256 -out seedbox.csr</div><div class="line"># openssl req -x509 -days 3650 -sha256 -key seedbox.key -in seedbox.csr -out seedbox.crt</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Modify files rights:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 644 /etc/nginx/ssl/*.crt</div><div class="line"># chmod 640 /etc/nginx/ssl/*.key</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 644 /etc/nginx/ssl/*.crt</div><div class="line"># chmod 640 /etc/nginx/ssl/*.key</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Create an user:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># useradd --shell /bin/bash --create-home sdbox</div><div class="line"># passwd sdbox</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># useradd --shell /bin/bash --create-home sdbox</div><div class="line"># passwd sdbox</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Create needed folder for rtorrent:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir -p /home/sdbox/&#123;torrents,watch,.session&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mkdir -p /home/sdbox/&#123;torrents,watch,.session&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Create rtorrent config file:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /home/sdbox/.rtorrent.rc</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /home/sdbox/.rtorrent.rc</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Paste the config:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">scgi_port = 127.0.0.1:5001</div><div class="line">encoding_list = UTF-8</div><div class="line">port_range = 45000-65000</div><div class="line">port_random = no</div><div class="line">check_hash = no</div><div class="line">directory = /home/sdbox/torrents</div><div class="line">session = /home/sdbox/.session</div><div class="line">encryption = allow_incoming, try_outgoing, enable_retry</div><div class="line">schedule = watch_directory,1,1,&quot;load_start=/home/sdbox/watch/*.torrent&quot;</div><div class="line">schedule = untied_directory,5,5,&quot;stop_untied=/home/sdbox/watch/*.torrent&quot;</div><div class="line">use_udp_trackers = yes</div><div class="line">dht = off</div><div class="line">peer_exchange = no</div><div class="line">min_peers = 40</div><div class="line">max_peers = 100</div><div class="line">min_peers_seed = 10</div><div class="line">max_peers_seed = 50</div><div class="line">max_uploads = 15</div><div class="line">execute = &#123;sh,-c,/usr/bin/php /srv/www/htdocs/rutorrent/php/initplugins.php sdbox &amp;&#125;</div><div class="line">schedule = espace_disque_insuffisant,1,30,close_low_diskspace=500M</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">scgi_port = 127.0.0.1:5001</div><div class="line">encoding_list = UTF-8</div><div class="line">port_range = 45000-65000</div><div class="line">port_random = no</div><div class="line">check_hash = no</div><div class="line">directory = /home/sdbox/torrents</div><div class="line">session = /home/sdbox/.session</div><div class="line">encryption = allow_incoming, try_outgoing, enable_retry</div><div class="line">schedule = watch_directory,1,1,&quot;load_start=/home/sdbox/watch/*.torrent&quot;</div><div class="line">schedule = untied_directory,5,5,&quot;stop_untied=/home/sdbox/watch/*.torrent&quot;</div><div class="line">use_udp_trackers = yes</div><div class="line">dht = off</div><div class="line">peer_exchange = no</div><div class="line">min_peers = 40</div><div class="line">max_peers = 100</div><div class="line">min_peers_seed = 10</div><div class="line">max_peers_seed = 50</div><div class="line">max_uploads = 15</div><div class="line">execute = &#123;sh,-c,/usr/bin/php /srv/www/htdocs/rutorrent/php/initplugins.php sdbox &amp;&#125;</div><div class="line">schedule = espace_disque_insuffisant,1,30,close_low_diskspace=500M</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Give user permissions:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown --recursive sdbox:users /home/sdbox</div><div class="line"># chown root:root /home/sdbox</div><div class="line"># chmod 755 /home/sdbox</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown --recursive sdbox:users /home/sdbox</div><div class="line"># chown root:root /home/sdbox</div><div class="line"># chmod 755 /home/sdbox</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Edit the virtual server config:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/servers-available/seedbox.conf</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/nginx/servers-available/seedbox.conf</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Add the config:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /SDBOX</div><div class="line">&#123;</div><div class="line">    include scgi_params;</div><div class="line">    scgi_pass 127.0.0.1:5001;</div><div class="line">    auth_basic &quot;Restricted Area&quot;;</div><div class="line">    auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth sdbox&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /SDBOX</div><div class="line">&#123;</div><div class="line">    include scgi_params;</div><div class="line">    scgi_pass 127.0.0.1:5001;</div><div class="line">    auth_basic &quot;Restricted Area&quot;;</div><div class="line">    auth_basic_user_file &quot;/etc/nginx/auth/seedbox_auth sdbox&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>In order to do not install apache-tools, manually generate the auth file for sdbox user (it will write over the file and don’t forget to change the password in the command):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo -n &quot;sdbox:&quot; | sudo tee /etc/nginx/auth/seedbox_auth &amp;&amp; openssl passwd -apr1 password | sudo tee -a /etc/nginx/auth/seedbox_auth</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo -n &quot;sdbox:&quot; | sudo tee /etc/nginx/auth/seedbox_auth &amp;&amp; openssl passwd -apr1 password | sudo tee -a /etc/nginx/auth/seedbox_auth</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Protect the authentification file:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 600 /etc/nginx/auth/seedbox_auth</div><div class="line"># chown nginx:nginx /etc/nginx/auth/*</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 600 /etc/nginx/auth/seedbox_auth</div><div class="line"># chown nginx:nginx /etc/nginx/auth/*</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Create ruTorrent config file:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /srv/www/htdocs/rutorrent/conf/users/sdbox</div><div class="line"># vim /srv/www/htdocs/rutorrent/conf/users/sdbox/config.php</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mkdir /srv/www/htdocs/rutorrent/conf/users/sdbox</div><div class="line"># vim /srv/www/htdocs/rutorrent/conf/users/sdbox/config.php</div></pre></td></tr></table></figure></p>
 <ul>
 <li>And add the content:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$pathToExternals[&apos;curl&apos;] = &apos;/usr/bin/curl&apos;;</div><div class="line">$topDirectory = &apos;/home/sdbox&apos;;</div><div class="line">$scgi_port = 5001;</div><div class="line">$scgi_host = &apos;127.0.0.1&apos;;</div><div class="line">$XMLRPCMountPoint = &apos;/SDBOX&apos;;</div><div class="line">$tempDirectory = &apos;/srv/www/htdocs/rutorrent/tmp/&apos;;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$pathToExternals[&apos;curl&apos;] = &apos;/usr/bin/curl&apos;;</div><div class="line">$topDirectory = &apos;/home/sdbox&apos;;</div><div class="line">$scgi_port = 5001;</div><div class="line">$scgi_host = &apos;127.0.0.1&apos;;</div><div class="line">$XMLRPCMountPoint = &apos;/SDBOX&apos;;</div><div class="line">$tempDirectory = &apos;/srv/www/htdocs/rutorrent/tmp/&apos;;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Correct permissions:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown -R nginx:nginx /srv/www/htdocs/rutorrent</div><div class="line"># chmod 0777 /srv/www/htdocs/rutorrent/share/&#123;settings,torrents,users&#125;</div><div class="line"># systemctl restart nginx.service</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown -R nginx:nginx /srv/www/htdocs/rutorrent</div><div class="line"># chmod 0777 /srv/www/htdocs/rutorrent/share/&#123;settings,torrents,users&#125;</div><div class="line"># systemctl restart nginx.service</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Enable user lingering:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># loginctl enable-linger sdbox</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># loginctl enable-linger sdbox</div></pre></td></tr></table></figure></p>
 <ul>
 <li>To create a rTorrent service, create the file <code>/etc/systemd/system/rtorrent.service</code> containing:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=rTorrent Daemon</div><div class="line">After=network.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=forking</div><div class="line">KillMode=none</div><div class="line">User=sdbox</div><div class="line">ExecStart=/usr/bin/tmux new-session -c /mnt/storage/rtorrent -s rtorrent -n rtorrent -d rtorrent</div><div class="line">ExecStop=/usr/bin/bash -c &quot;/usr/bin/tmux send-keys -t rtorrent C-q &amp;&amp; while pidof rtorrent &gt; /dev/null; do sleep 0.5; done&quot;</div><div class="line">WorkingDirectory=/home/sdbox/</div><div class="line">Restart=on-failure</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=rTorrent Daemon</div><div class="line">After=network.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=forking</div><div class="line">KillMode=none</div><div class="line">User=sdbox</div><div class="line">ExecStart=/usr/bin/tmux new-session -c /mnt/storage/rtorrent -s rtorrent -n rtorrent -d rtorrent</div><div class="line">ExecStop=/usr/bin/bash -c &quot;/usr/bin/tmux send-keys -t rtorrent C-q &amp;&amp; while pidof rtorrent &gt; /dev/null; do sleep 0.5; done&quot;</div><div class="line">WorkingDirectory=/home/sdbox/</div><div class="line">Restart=on-failure</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Enable rtorrent at boot time and manually start it:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable rtorrent</div><div class="line"># systemctl start rtorrent</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable rtorrent</div><div class="line"># systemctl start rtorrent</div></pre></td></tr></table></figure></p>
 <ul>
 <li>To allow web traffic trought the firewall, create this file:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/sysconfig/SuSEfirewall2.d/services/httpd</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/sysconfig/SuSEfirewall2.d/services/httpd</div></pre></td></tr></table></figure></p>
 <ul>
 <li>And add this config:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">## Name: Web server</div><div class="line">## Description: opens ports for web servers in order to allow http and https traffic</div><div class="line"></div><div class="line"># space separated list of allowed TCP ports</div><div class="line">TCP=&quot;80 443&quot;</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">## Name: Web server</div><div class="line">## Description: opens ports for web servers in order to allow http and https traffic</div><div class="line"></div><div class="line"># space separated list of allowed TCP ports</div><div class="line">TCP=&quot;80 443&quot;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Now add the httpd config in the global settings:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/sysconfig/SuSEfirewall2</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/sysconfig/SuSEfirewall2</div></pre></td></tr></table></figure></p>
 <ul>
-<li><p>And add <code>httpd</code> to <code>FW_CONFIGURATIONS_EXT</code>, for example <code>FW_CONFIGURATIONS_EXT=&quot;sshd httpd&quot;</code>.</p>
+<li>
+<p>And add <code>httpd</code> to <code>FW_CONFIGURATIONS_EXT</code>, for example <code>FW_CONFIGURATIONS_EXT=&quot;sshd httpd&quot;</code>.</p>
 </li>
-<li><p>Now restart the firewall:</p>
+<li>
+<p>Now restart the firewall:</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># systemctl restart SuSEfirewall2.service</div><div class="line">or</div><div class="line"># rcSuSEfirewall2 restart</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># systemctl restart SuSEfirewall2.service</div><div class="line">or</div><div class="line"># rcSuSEfirewall2 restart</div></pre></td></tr></table></figure></p>
 
         </div>
         <footer class="article-footer">
@@ -394,7 +396,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/opensuse-install-rtorrent-rutorrent/" data-id="cizepenr400712rfs3v89psu0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/opensuse-install-rtorrent-rutorrent/" data-id="cizoihh3x0056mefs1tscv4jm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -530,11 +532,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/Insomnihack-2017-Teaser-smarttomcat/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/Insomnihack-2017-Teaser-cryptoquizz/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Insomni&#39;hack teaser - 50 - smarttomcat - Web
+            Insomni&#39;hack teaser - 50 - cryptoquizz - Misc
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -582,26 +584,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -615,6 +597,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

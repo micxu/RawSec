@@ -6,7 +6,7 @@
     <title>How to disable SSH login for the root user | RawSec</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="security,linux,centos,ssh" />
+        <meta name="keywords" content="linux,security,centos,ssh" />
     
     <meta name="description" content="Create a new user. In the following example, we will name it bob.
 
@@ -199,29 +199,31 @@ ga('send', 'pageview');
             <ol>
 <li>Create a new user. In the following example, we will name it <strong>bob</strong>.</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root# useradd -m bob</div><div class="line">root# id bob</div><div class="line">uid=1000(bob) gid=1000(bob) groupes=1000(bob)</div></pre></td></tr></table></figure>
-<ol>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root# useradd -m bob</div><div class="line">root# id bob</div><div class="line">uid=1000(bob) gid=1000(bob) groupes=1000(bob)</div></pre></td></tr></table></figure></p>
+<ol start="2">
 <li>Set the password for the new user.</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">root# passwd bob</div><div class="line">Changing password for user bob.</div><div class="line">New UNIX password:</div><div class="line">Retype new UNIX password:</div><div class="line">passwd: all authentication tokens updated successfully.</div></pre></td></tr></table></figure>
-<ol>
-<li>In order to add sudo permissions for the new user, add <code>bob  ALL=(ALL)   ALL</code> in <code>/etc/sudoers</code> or add bob in wheel group with <code>usermod -a -G wheel bob</code>.</li>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">root# passwd bob</div><div class="line">Changing password for user bob.</div><div class="line">New UNIX password:</div><div class="line">Retype new UNIX password:</div><div class="line">passwd: all authentication tokens updated successfully.</div></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>In order to add sudo permissions for the new user, add <code>bob ALL=(ALL) ALL</code> in <code>/etc/sudoers</code> or add bob in wheel group with <code>usermod -a -G wheel bob</code>.</li>
 <li>Try to connect SSH with bob user.</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh bob@localhost</div></pre></td></tr></table></figure>
-<ol>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh bob@localhost</div></pre></td></tr></table></figure></p>
+<ol start="5">
 <li>Verify you can switch user to root with bob.</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bob$ sudo -i</div></pre></td></tr></table></figure>
-<ol>
-<li>Disable root SSH login:<ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bob$ sudo -i</div></pre></td></tr></table></figure></p>
+<ol start="6">
+<li>Disable root SSH login:</li>
+</ol>
+<ul>
 <li>Edit <code># vim /etc/ssh/sshd_config</code></li>
 <li>and change <code>#PermitRootLogin yes</code> into <code>PermitRootLogin no</code>.</li>
 </ul>
-</li>
+<ol start="7">
 <li>Now, we can restart SSH server.</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root# systemctl restart sshd.service</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root# systemctl restart sshd.service</div></pre></td></tr></table></figure></p>
 
         </div>
         <footer class="article-footer">
@@ -229,7 +231,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/disable-ssh-login-for-root-user/" data-id="cizepenlp001k2rfs7i0lvpqq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/disable-ssh-login-for-root-user/" data-id="cizoihh27002vmefst9gm5x3k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -417,26 +419,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -450,6 +432,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

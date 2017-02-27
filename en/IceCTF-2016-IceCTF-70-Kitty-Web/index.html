@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThey managed to secure">
+Description
+They managed to sec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF - 70 - Kitty - Web">
 <meta property="og:url" content="http://rawsec.ml/en/IceCTF-2016-IceCTF-70-Kitty-Web/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThey managed to secure">
+Description
+They managed to sec">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF - 70 - Kitty - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThey managed to secure">
+Description
+They managed to sec">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,23 +277,34 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : IceCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>They managed to secure their website this time and moved the hashing to the server :(. We managed to leak this hash of the admin’s password though! <code>c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a</code>. Can you get the flag? <a href="kitty.vuln.icec.tf">kitty.vuln.icec.tf</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Try to identify the hash:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"># hashid &quot;c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a&quot;</div><div class="line">Analyzing &apos;c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a&apos;</div><div class="line">[+] Snefru-256</div><div class="line">[+] SHA-256</div><div class="line">[+] RIPEMD-256</div><div class="line">[+] Haval-256</div><div class="line">[+] GOST R 34.11-94</div><div class="line">[+] GOST CryptoPro S-Box</div><div class="line">[+] SHA3-256</div><div class="line">[+] Skein-256</div><div class="line">[+] Skein-512(256)</div><div class="line"></div><div class="line"># hash-identifier</div><div class="line">   #########################################################################</div><div class="line">   #	 __  __ 		    __		 ______    _____	   #</div><div class="line">   #	/\ \/\ \		   /\ \ 	/\__  _\  /\  _ `\	   #</div><div class="line">   #	\ \ \_\ \     __      ____ \ \ \___	\/_/\ \/  \ \ \/\ \	   #</div><div class="line">   #	 \ \  _  \  /&apos;__`\   / ,__\ \ \  _ `\	   \ \ \   \ \ \ \ \	   #</div><div class="line">   #	  \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \	    \_\ \__ \ \ \_\ \	   #</div><div class="line">   #	   \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/	   #</div><div class="line">   #	    \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.1 #</div><div class="line">   #								 By Zion3R #</div><div class="line">   #							www.Blackploit.com #</div><div class="line">   #						       Root@Blackploit.com #</div><div class="line">   #########################################################################</div><div class="line"></div><div class="line">   -------------------------------------------------------------------------</div><div class="line"> HASH: c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a</div><div class="line"></div><div class="line">Possible Hashs:</div><div class="line">[+]  SHA-256</div><div class="line">[+]  Haval-256</div><div class="line"></div><div class="line">Least Possible Hashs:</div><div class="line">[+]  GOST R 34.11-94</div><div class="line">[+]  RipeMD-256</div><div class="line">[+]  SNEFRU-256</div><div class="line">[+]  SHA-256(HMAC)</div><div class="line">[+]  Haval-256(HMAC)</div><div class="line">[+]  RipeMD-256(HMAC)</div><div class="line">[+]  SNEFRU-256(HMAC)</div><div class="line">[+]  SHA-256(md5($pass))</div><div class="line">[+]  SHA-256(sha1($pass))</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>They managed to secure their website this time and moved the hashing to the server :(. We managed to leak this hash of the admin's password though! <code>c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a</code>. Can you get the flag? <a href="kitty.vuln.icec.tf">kitty.vuln.icec.tf</a></p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>Try to identify the hash:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"># hashid &quot;c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a&quot;</div><div class="line">Analyzing &apos;c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a&apos;</div><div class="line">[+] Snefru-256</div><div class="line">[+] SHA-256</div><div class="line">[+] RIPEMD-256</div><div class="line">[+] Haval-256</div><div class="line">[+] GOST R 34.11-94</div><div class="line">[+] GOST CryptoPro S-Box</div><div class="line">[+] SHA3-256</div><div class="line">[+] Skein-256</div><div class="line">[+] Skein-512(256)</div><div class="line"></div><div class="line"># hash-identifier</div><div class="line">   #########################################################################</div><div class="line">   #	 __  __ 		    __		 ______    _____	   #</div><div class="line">   #	/\ \/\ \		   /\ \ 	/\__  _\  /\  _ `\	   #</div><div class="line">   #	\ \ \_\ \     __      ____ \ \ \___	\/_/\ \/  \ \ \/\ \	   #</div><div class="line">   #	 \ \  _  \  /&apos;__`\   / ,__\ \ \  _ `\	   \ \ \   \ \ \ \ \	   #</div><div class="line">   #	  \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \	    \_\ \__ \ \ \_\ \	   #</div><div class="line">   #	   \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/	   #</div><div class="line">   #	    \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.1 #</div><div class="line">   #								 By Zion3R #</div><div class="line">   #							www.Blackploit.com #</div><div class="line">   #						       Root@Blackploit.com #</div><div class="line">   #########################################################################</div><div class="line"></div><div class="line">   -------------------------------------------------------------------------</div><div class="line"> HASH: c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a</div><div class="line"></div><div class="line">Possible Hashs:</div><div class="line">[+]  SHA-256</div><div class="line">[+]  Haval-256</div><div class="line"></div><div class="line">Least Possible Hashs:</div><div class="line">[+]  GOST R 34.11-94</div><div class="line">[+]  RipeMD-256</div><div class="line">[+]  SNEFRU-256</div><div class="line">[+]  SHA-256(HMAC)</div><div class="line">[+]  Haval-256(HMAC)</div><div class="line">[+]  RipeMD-256(HMAC)</div><div class="line">[+]  SNEFRU-256(HMAC)</div><div class="line">[+]  SHA-256(md5($pass))</div><div class="line">[+]  SHA-256(sha1($pass))</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>That’s most probably a SHA-256 hash.</p>
+<li>
+<p>That's most probably a SHA-256 hash.</p>
 </li>
-<li>Try an <a href="https://md5hashing.net/hash/sha256/c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a" target="_blank" rel="external">online service</a> to get the decoded password: <code>Vo83*</code>.</li>
-<li>Log in with Username: <code>admin</code> and Password: <code>Vo83*</code>.</li>
-<li>Flag: <code>IceCTF{i_guess_hashing_isnt_everything_in_this_world}</code>.</li>
+<li>
+<p>Try an <a href="https://md5hashing.net/hash/sha256/c7e83c01ed3ef54812673569b2d79c4e1f6554ffeb27706e98c067de9ab12d1a" target="_blank" rel="external">online service</a> to get the decoded password: <code>Vo83*</code>.</p>
+</li>
+<li>
+<p>Log in with Username: <code>admin</code> and Password: <code>Vo83*</code>.</p>
+</li>
+<li>
+<p>Flag: <code>IceCTF{i_guess_hashing_isnt_everything_in_this_world}</code>.</p>
+</li>
 </ol>
 
         </div>
@@ -288,7 +313,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-70-Kitty-Web/" data-id="cizepeoea00jv2rfsuy1ay4s2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-70-Kitty-Web/" data-id="cizoihhfg00i6mefsszxj44q7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -424,20 +449,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/IceCTF-2016-IceCTF-40-Alien-Message-Cryptography/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-30-Substituted-Cryptography/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            IceCTF - 40 - Alien Message - Cryptography
+            IceCTF - 30 - Substituted - Cryptography
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/IceCTF-2016-IceCTF-65-Over-the-Hill-Cryptography/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-65-RIP-Transmission-Forensics/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">IceCTF - 65 - Over the Hill - Cryptography</p>
+        <p class="article-nav-title">IceCTF - 65 - R.I.P Transmission - Forensics</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -476,26 +501,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -509,6 +514,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

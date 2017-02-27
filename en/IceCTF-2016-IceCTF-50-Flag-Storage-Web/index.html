@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,web,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWhat a cheat, I was pro">
+Description
+What a cheat, I was">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF - 50 - Flag Storage - Web">
 <meta property="og:url" content="http://rawsec.ml/en/IceCTF-2016-IceCTF-50-Flag-Storage-Web/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWhat a cheat, I was pro">
+Description
+What a cheat, I was">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF - 50 - Flag Storage - Web">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionWhat a cheat, I was pro">
+Description
+What a cheat, I was">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,26 +277,43 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : IceCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>What a cheat, I was promised a flag and I can’t even log in. Can you get in for me? <a href="http://flagstorage.vuln.icec.tf/" target="_blank" rel="external">flagstorage.vuln.icec.tf</a>. They seem to hash their passwords, but I think the problem is somehow related to <a href="https://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="external">this</a>.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Look at the source code:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> updatePassword = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">        <span class="comment">// hash client side for better security, never leak the pw over the wire</span></div><div class="line">        <span class="keyword">var</span> sha = <span class="keyword">new</span> jsSHA(<span class="string">"SHA-256"</span>, <span class="string">"TEXT"</span>);</div><div class="line">        sha.update($(<span class="keyword">this</span>).val());</div><div class="line">        $(<span class="string">"#password"</span>).val(sha.getHash(<span class="string">"HEX"</span>));</div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"#password_plain"</span>).on(<span class="string">"change"</span>, updatePassword);</div><div class="line">    $(<span class="string">"#form"</span>).on(<span class="string">"submit"</span>, updatePassword);</div><div class="line">&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>What a cheat, I was promised a flag and I can't even log in. Can you get in for me? <a href="http://flagstorage.vuln.icec.tf/" target="_blank" rel="external">flagstorage.vuln.icec.tf</a>. They seem to hash their passwords, but I think the problem is somehow related to <a href="https://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="external">this</a>.</p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p>Look at the source code:
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> updatePassword = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">        <span class="comment">// hash client side for better security, never leak the pw over the wire</span></div><div class="line">        <span class="keyword">var</span> sha = <span class="keyword">new</span> jsSHA(<span class="string">"SHA-256"</span>, <span class="string">"TEXT"</span>);</div><div class="line">        sha.update($(<span class="keyword">this</span>).val());</div><div class="line">        $(<span class="string">"#password"</span>).val(sha.getHash(<span class="string">"HEX"</span>));</div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"#password_plain"</span>).on(<span class="string">"change"</span>, updatePassword);</div><div class="line">    $(<span class="string">"#form"</span>).on(<span class="string">"submit"</span>, updatePassword);</div><div class="line">&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Script will send our password hashed on the network instead of plain text.</p>
+<li>
+<p>Script will send our password hashed on the network instead of plain text.</p>
 </li>
-<li>Login with random credentials.</li>
-<li>Open your browser network analyser and see the POST params: <code>username</code> and <code>password_plain</code> that you filled + <code>password</code> containing <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>.</li>
-<li><code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code> is the SHA256 hash of the null string according to <a href="http://www.di-mgt.com.au/sha_testvectors.html" target="_blank" rel="external">this</a> or if you try with <a href="https://crackstation.net/" target="_blank" rel="external">https://crackstation.net/</a>.</li>
-<li>Description of the challenge tell us it’s an SQLi so may be we need to inject username and let password_plain null so our hashed password will correspond to the hash we found.</li>
-<li>Try a classic username: <code>&#39; OR 1=1 #</code> and null password instead of random password.</li>
-<li>We get the flag: <code>IceCTF{why_would_you_even_do_anything_client_side}</code>.</li>
+<li>
+<p>Login with random credentials.</p>
+</li>
+<li>
+<p>Open your browser network analyser and see the POST params: <code>username</code> and <code>password_plain</code> that you filled + <code>password</code> containing <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>.</p>
+</li>
+<li>
+<p><code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code> is the SHA256 hash of the null string according to <a href="http://www.di-mgt.com.au/sha_testvectors.html" target="_blank" rel="external">this</a> or if you try with <a href="https://crackstation.net/" target="_blank" rel="external">https://crackstation.net/</a>.</p>
+</li>
+<li>
+<p>Description of the challenge tell us it's an SQLi so may be we need to inject username and let password_plain null so our hashed password will correspond to the hash we found.</p>
+</li>
+<li>
+<p>Try a classic username: <code>' OR 1=1 #</code> and null password instead of random password.</p>
+</li>
+<li>
+<p>We get the flag: <code>IceCTF{why_would_you_even_do_anything_client_side}</code>.</p>
+</li>
 </ol>
 
         </div>
@@ -291,7 +322,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-50-Flag-Storage-Web/" data-id="cizepeod900j02rfs0vufzplf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-50-Flag-Storage-Web/" data-id="cizoihhew00hbmefshwuett09" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -427,11 +458,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/IceCTF-2016-IceCTF-50-Vape-Nation-Stego/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/IceCTF-2016-IceCTF-50-Scavenger-Hunt-Misc/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            IceCTF - 50 - Vape Nation - Stego
+            IceCTF - 50 - Scavenger Hunt - Misc
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -479,26 +510,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -512,6 +523,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,crypto,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 Date
@@ -26,14 +28,20 @@ Creation
 
 
 
-NameOups it’s all mixed
-CategoryCryptography
-WordingDecipher the following flag:eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2">
+Name
+Oups it&apos;s all mixed
+Category
+Cryptography
+Wording
+Decipher the following flag:
+eGqaelr557dK4BbK47dS17dK68cu2PV">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeups - Crypto - Oups it's all mixed">
 <meta property="og:url" content="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-oups-its-all-mixed/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 Date
@@ -51,14 +59,20 @@ Creation
 
 
 
-NameOups it’s all mixed
-CategoryCryptography
-WordingDecipher the following flag:eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2">
+Name
+Oups it&apos;s all mixed
+Category
+Cryptography
+Wording
+Decipher the following flag:
+eGqaelr557dK4BbK47dS17dK68cu2PV">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Writeups - Crypto - Oups it's all mixed">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 Date
@@ -76,9 +90,13 @@ Creation
 
 
 
-NameOups it’s all mixed
-CategoryCryptography
-WordingDecipher the following flag:eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2">
+Name
+Oups it&apos;s all mixed
+Category
+Cryptography
+Wording
+Decipher the following flag:
+eGqaelr557dK4BbK47dS17dK68cu2PV">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -238,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>Date</th>
@@ -256,15 +276,26 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h3><p><em>Oups it’s all mixed</em></p>
-<h3 id="Category"><a href="#Category" class="headerlink" title="Category"></a>Category</h3><p><em>Cryptography</em></p>
-<h3 id="Wording"><a href="#Wording" class="headerlink" title="Wording"></a>Wording</h3><p>Decipher the following flag:<br><code>eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC</code></p>
-<h3 id="Data-s"><a href="#Data-s" class="headerlink" title="Data(s)"></a>Data(s)</h3><p><code>+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/</code></p>
-<h3 id="Equipment-s"><a href="#Equipment-s" class="headerlink" title="Equipment(s)"></a>Equipment(s)</h3><p>A computer with an OS (preferably UNIX)</p>
-<h3 id="Hint-s"><a href="#Hint-s" class="headerlink" title="Hint(s)"></a>Hint(s)</h3><p>The name title is a hint.</p>
-<h3 id="Help"><a href="#Help" class="headerlink" title="Help"></a>Help</h3><p>Base64</p>
-<h3 id="Difficulty"><a href="#Difficulty" class="headerlink" title="Difficulty"></a>Difficulty</h3><p>Easy / Medium</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h3><ol>
+<h3>Name</h3>
+<p><em>Oups it's all mixed</em></p>
+<h3>Category</h3>
+<p><em>Cryptography</em></p>
+<h3>Wording</h3>
+<p>Decipher the following flag:
+<code>eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC</code></p>
+<h3>Data(s)</h3>
+<p><code>+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/</code></p>
+<h3>Equipment(s)</h3>
+<p>A computer with an OS (preferably UNIX)</p>
+<h3>Hint(s)</h3>
+<p>The name title is a hint.</p>
+<h3>Help</h3>
+<p>Base64</p>
+<h3>Difficulty</h3>
+<p>Easy / Medium</p>
+<h2>Solution</h2>
+<h3>Methodology</h3>
+<ol>
 <li>Identify that is a base64 string</li>
 <li>Decode the base64 string and observe only garbage</li>
 <li>Look at the provided data and analyse it</li>
@@ -273,10 +304,14 @@ ga('send', 'pageview');
 <li>Write a script that will translate one alphabet to the other and pick up the output standard base64 string and then decode it</li>
 </ol>
 <p>Some scrip examples below.</p>
-<h4 id="Python-2"><a href="#Python-2" class="headerlink" title="Python 2"></a>Python 2</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python2                                                                               </span></div><div class="line"><span class="comment"># made with python 2.7.9</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">base64_mixed_alphabet =     <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span></div><div class="line">base64_standard_alphabet =  <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></div><div class="line"></div><div class="line">s = <span class="string">'eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC'</span></div><div class="line"></div><div class="line">s_unmixed = s.translate(string.maketrans(base64_mixed_alphabet, base64_standard_alphabet))</div><div class="line"></div><div class="line">s_unb64 = base64.urlsafe_b64decode(s_unmixed)</div></pre></td></tr></table></figure>
-<h4 id="Python-3"><a href="#Python-3" class="headerlink" title="Python 3"></a>Python 3</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python3                                                      </span></div><div class="line"><span class="comment"># made with python 3.4.1</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"></div><div class="line">base64_mixed_alphabet =     <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span></div><div class="line">base64_standard_alphabet =  <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></div><div class="line"></div><div class="line">s = <span class="string">'eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC'</span></div><div class="line"></div><div class="line">s_unmixed = s.translate(str.maketrans(base64_mixed_alphabet, base64_standard_alphabet))</div><div class="line"></div><div class="line">s_unb64 = base64.urlsafe_b64decode(s_unmixed.encode(<span class="string">'utf-8'</span>))</div><div class="line">s_unb64 = s_unb64.decode(<span class="string">'utf-8'</span>) <span class="comment"># byte to string</span></div></pre></td></tr></table></figure>
-<h4 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># made with bash 4.2.47</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC"</span> | tr <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span> <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span> | base64 -di &amp;&amp; <span class="built_in">echo</span> <span class="string">"\n"</span></div></pre></td></tr></table></figure>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><p><code>FLAG{Yesthatisjustabase64string}</code></p>
+<h4>Python 2</h4>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python2                                                                               </span></div><div class="line"><span class="comment"># made with python 2.7.9</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">base64_mixed_alphabet =     <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span></div><div class="line">base64_standard_alphabet =  <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></div><div class="line"></div><div class="line">s = <span class="string">'eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC'</span></div><div class="line"></div><div class="line">s_unmixed = s.translate(string.maketrans(base64_mixed_alphabet, base64_standard_alphabet))</div><div class="line"></div><div class="line">s_unb64 = base64.urlsafe_b64decode(s_unmixed)</div></pre></td></tr></table></figure></p>
+<h4>Python 3</h4>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python3                                                      </span></div><div class="line"><span class="comment"># made with python 3.4.1</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"></div><div class="line">base64_mixed_alphabet =     <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span></div><div class="line">base64_standard_alphabet =  <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></div><div class="line"></div><div class="line">s = <span class="string">'eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC'</span></div><div class="line"></div><div class="line">s_unmixed = s.translate(str.maketrans(base64_mixed_alphabet, base64_standard_alphabet))</div><div class="line"></div><div class="line">s_unb64 = base64.urlsafe_b64decode(s_unmixed.encode(<span class="string">'utf-8'</span>))</div><div class="line">s_unb64 = s_unb64.decode(<span class="string">'utf-8'</span>) <span class="comment"># byte to string</span></div></pre></td></tr></table></figure></p>
+<h4>Bash</h4>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># made with bash 4.2.47</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC"</span> | tr <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span> <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span> | base64 -di &amp;&amp; <span class="built_in">echo</span> <span class="string">"\n"</span></div></pre></td></tr></table></figure></p>
+<h3>Flag</h3>
+<p><code>FLAG{Yesthatisjustabase64string}</code></p>
 
         </div>
         <footer class="article-footer">
@@ -284,7 +319,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-oups-its-all-mixed/" data-id="cizepeo9n00gc2rfsmsz1nxux" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-oups-its-all-mixed/" data-id="cizoihhcv00efmefszfh0olde" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -420,20 +455,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/BackdoorCTF-2016-writeups-crypto-mindblown/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/pastejacking-vs-clipboard-hijacking/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Writeups - Crypto - MindBlown
+            Pastejacking vs clipboard hijacking
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/how-to-manually-configure-firefox-waterfox-language/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/BackdoorCTF-2016-writeups-crypto-mindblown/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">How to manually configure Firefox / Waterfox language</p>
+        <p class="article-nav-title">Writeups - Crypto - MindBlown</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -472,26 +507,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -505,6 +520,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

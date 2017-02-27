@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,forensic" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 Date
@@ -27,18 +29,19 @@ Creation
 
 
 CTF
+
 Name : BackdoorCTF 2016
 Website : https://backdoor.sdslabs.co
 Type : Online
 Format : Jeopardy
-CTF Time : link
-
-Na">
+CTF Time : link">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeups - Forensic - BusyBee">
 <meta property="og:url" content="http://rawsec.ml/en/BackdoorCTF-2016-writeups-forensic-busybee/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 Date
@@ -57,18 +60,19 @@ Creation
 
 
 CTF
+
 Name : BackdoorCTF 2016
 Website : https://backdoor.sdslabs.co
 Type : Online
 Format : Jeopardy
-CTF Time : link
-
-Na">
+CTF Time : link">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Writeups - Forensic - BusyBee">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 Date
@@ -87,13 +91,12 @@ Creation
 
 
 CTF
+
 Name : BackdoorCTF 2016
 Website : https://backdoor.sdslabs.co
 Type : Online
 Format : Jeopardy
-CTF Time : link
-
-Na">
+CTF Time : link">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -253,7 +256,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>Date</th>
@@ -271,47 +276,70 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : BackdoorCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://backdoor.sdslabs.co/competitions/backdoorctf16/leaderboard" target="_blank" rel="external">https://backdoor.sdslabs.co</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/314" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h3><p><em>BusyBee</em></p>
-<h3 id="Category"><a href="#Category" class="headerlink" title="Category"></a>Category</h3><p><em>Forensic</em></p>
-<h3 id="Wording"><a href="#Wording" class="headerlink" title="Wording"></a>Wording</h3><blockquote>
-<p> A deadly virus is killing bees in Busybee’s village Busybox, India. Unfortuantely, you have to go to the village to fight the infection. Get the flag virus out of the infected files.<br>Village address: <a href="http://hack.bckdr.in/BUSYBEE/infected.tar" target="_blank" rel="external">http://hack.bckdr.in/BUSYBEE/infected.tar</a><br>Created by: Ashish Chaudhary</p>
+<h3>Name</h3>
+<p><em>BusyBee</em></p>
+<h3>Category</h3>
+<p><em>Forensic</em></p>
+<h3>Wording</h3>
+<blockquote>
+<p>A deadly virus is killing bees in Busybee's village Busybox, India. Unfortuantely, you have to go to the village to fight the infection. Get the flag virus out of the infected files.
+Village address: http://hack.bckdr.in/BUSYBEE/infected.tar
+Created by: Ashish Chaudhary</p>
 </blockquote>
-<h3 id="Data-s"><a href="#Data-s" class="headerlink" title="Data(s)"></a>Data(s)</h3><p><a href="http://hack.bckdr.in/BUSYBEE/infected.tar" target="_blank" rel="external">link</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h3><ol>
-<li>Untar the datas: <code>tar xaf infected.tar</code></li>
-<li><p>List the content of the directory:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ls -AgG</div><div class="line">total 2332</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:13 2b0fbc0e1ac044737fd881cff8164bb5a2c7bfbf90c40c87de3c3435f2c6a94e</div><div class="line">drwxr-xr-x 4    4096 Jul  2 19:01 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:13 d51a083a3b01fe8c58086903595b91fc975de59a9e9ececec755df384a181026</div><div class="line">-rw-r--r-- 1    1344 Jun  3 18:13 eaa21323de5e2cce7078df3af4dd292181114dfc94be761b948657efbe3af26b.json</div><div class="line">-rw-r--r-- 1 2362880 Jun  6 08:17 infected.tar</div><div class="line">-rw-r--r-- 1     373 Jan  1  1970 manifest.json</div><div class="line">-rw-r--r-- 1     106 Jan  1  1970 repositories</div></pre></td></tr></table></figure>
+<h3>Data(s)</h3>
+<p><a href="http://hack.bckdr.in/BUSYBEE/infected.tar" target="_blank" rel="external">link</a></p>
+<h2>Solution</h2>
+<h3>Methodology</h3>
+<ol>
+<li>
+<p>Untar the datas: <code>tar xaf infected.tar</code></p>
 </li>
-<li><p>Display <code>repositories</code> file, it looks interesting:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat repositories</div><div class="line">&#123;&quot;busybox-1.24.1-infected&quot;:&#123;&quot;latest&quot;:&quot;983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7&quot;&#125;&#125;</div></pre></td></tr></table></figure>
+<li>
+<p>List the content of the directory:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ls -AgG</div><div class="line">total 2332</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:13 2b0fbc0e1ac044737fd881cff8164bb5a2c7bfbf90c40c87de3c3435f2c6a94e</div><div class="line">drwxr-xr-x 4    4096 Jul  2 19:01 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:13 d51a083a3b01fe8c58086903595b91fc975de59a9e9ececec755df384a181026</div><div class="line">-rw-r--r-- 1    1344 Jun  3 18:13 eaa21323de5e2cce7078df3af4dd292181114dfc94be761b948657efbe3af26b.json</div><div class="line">-rw-r--r-- 1 2362880 Jun  6 08:17 infected.tar</div><div class="line">-rw-r--r-- 1     373 Jan  1  1970 manifest.json</div><div class="line">-rw-r--r-- 1     106 Jan  1  1970 repositories</div></pre></td></tr></table></figure></p>
 </li>
-<li><p><code>983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</code>: show us which folder is infected, so display its content:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ls -AgG 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7/</div><div class="line">total 1020</div><div class="line">-rw-r--r-- 1       3 Jun  3 18:13 VERSION</div><div class="line">-rw-r--r-- 1     907 Jun  3 18:13 json</div><div class="line">-rw-r--r-- 1 1035776 Jun  3 18:13 layer.tar</div></pre></td></tr></table></figure>
+<li>
+<p>Display <code>repositories</code> file, it looks interesting:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat repositories</div><div class="line">&#123;&quot;busybox-1.24.1-infected&quot;:&#123;&quot;latest&quot;:&quot;983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7&quot;&#125;&#125;</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>Go into <code>983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</code>, untar <code>layer.tar</code>, and display:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cd 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</div><div class="line">tar xaf layer.tar</div><div class="line">ls -AgGR</div><div class="line">.:</div><div class="line">total 1028</div><div class="line">-rw-r--r-- 1       3 Jun  3 18:13 VERSION</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:11 bin</div><div class="line">-rw-r--r-- 1     907 Jun  3 18:13 json</div><div class="line">-rw-r--r-- 1 1035776 Jun  3 18:13 layer.tar</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:09 root</div><div class="line"></div><div class="line">./bin:</div><div class="line">total 2016</div><div class="line">-rwxr-xr-x 2 1031328 Jun  3 18:11 cat</div><div class="line">-rwxr-xr-x 2 1031328 Jun  3 18:11 sha1sum</div><div class="line"></div><div class="line">./root:</div><div class="line">total 4</div><div class="line">-rw------- 1 44 Jun  3 18:12 .ash_history</div></pre></td></tr></table></figure>
+<li>
+<p><code>983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</code>: show us which folder is infected, so display its content:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ls -AgG 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7/</div><div class="line">total 1020</div><div class="line">-rw-r--r-- 1       3 Jun  3 18:13 VERSION</div><div class="line">-rw-r--r-- 1     907 Jun  3 18:13 json</div><div class="line">-rw-r--r-- 1 1035776 Jun  3 18:13 layer.tar</div></pre></td></tr></table></figure></p>
 </li>
-<li><p><code>root/.ash_history</code> looks intersting:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat root/.ash_history</div><div class="line">not so easy bru - the infections is intense</div></pre></td></tr></table></figure>
+<li>
+<p>Go into <code>983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</code>, untar <code>layer.tar</code>, and display:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cd 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</div><div class="line">tar xaf layer.tar</div><div class="line">ls -AgGR</div><div class="line">.:</div><div class="line">total 1028</div><div class="line">-rw-r--r-- 1       3 Jun  3 18:13 VERSION</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:11 bin</div><div class="line">-rw-r--r-- 1     907 Jun  3 18:13 json</div><div class="line">-rw-r--r-- 1 1035776 Jun  3 18:13 layer.tar</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:09 root</div><div class="line"></div><div class="line">./bin:</div><div class="line">total 2016</div><div class="line">-rwxr-xr-x 2 1031328 Jun  3 18:11 cat</div><div class="line">-rwxr-xr-x 2 1031328 Jun  3 18:11 sha1sum</div><div class="line"></div><div class="line">./root:</div><div class="line">total 4</div><div class="line">-rw------- 1 44 Jun  3 18:12 .ash_history</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>… but is not. So let’s see what are the binaries:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cat bin/sha1sum</div><div class="line">[...]</div><div class="line">THIS IS WHAT YOU ARE LOOKING FOR:    0n3_n00b_ru1n5_0n3_hundr3d_pr05</div></pre></td></tr></table></figure>
+<li>
+<p><code>root/.ash_history</code> looks intersting:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat root/.ash_history</div><div class="line">not so easy bru - the infections is intense</div></pre></td></tr></table></figure></p>
 </li>
-<li><p>The last line of the binary shows us what we are looking for <code>0n3_n00b_ru1n5_0n3_hundr3d_pr05</code> (1337 : <code>one noob ruins one hundred pros</code>)</p>
+<li>
+<p>... but is not. So let's see what are the binaries:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cat bin/sha1sum</div><div class="line">[...]</div><div class="line">THIS IS WHAT YOU ARE LOOKING FOR:    0n3_n00b_ru1n5_0n3_hundr3d_pr05</div></pre></td></tr></table></figure></p>
 </li>
-<li>Try to sha256 it:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo -n &quot;0n3_n00b_ru1n5_0n3_hundr3d_pr05&quot; | sha256sum</div><div class="line">0743a3265649702df53b083056b2f426d20e449cd68210384ff0ff159f3867fa</div></pre></td></tr></table></figure>
+<li>
+<p>The last line of the binary shows us what we are looking for <code>0n3_n00b_ru1n5_0n3_hundr3d_pr05</code> (1337 : <code>one noob ruins one hundred pros</code>)</p>
+</li>
+<li>
+<p>Try to sha256 it:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo -n &quot;0n3_n00b_ru1n5_0n3_hundr3d_pr05&quot; | sha256sum</div><div class="line">0743a3265649702df53b083056b2f426d20e449cd68210384ff0ff159f3867fa</div></pre></td></tr></table></figure></p>
 </li>
 </ol>
 <p>PS : You could have seen that the repository has the structure of a <a href="https://github.com/docker/docker/blob/master/image/spec/v1.md" target="_blank" rel="external">docker image</a> and try to load and build it.</p>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><blockquote>
-<p>Since Backdoor is an always-online CTF platform, and not a one time contest, we kindly request you to not publish flags for the challenges in your writeups.<br>Writeups are an excellent way to share knowledge and help others learn. In Backdoor, challenges are shifted from a contest to the Practice section, where people can continue to attempt them after the contest is over. It would be very unfair to participants if the flags for the problems were easily available in writeups online.<br>Hence, we kindly request to not publish flags of the problems that you solve. Here is an example of an excellent writeup which refrains from giving the complete solution.</p>
+<h3>Flag</h3>
+<blockquote>
+<p>Since Backdoor is an always-online CTF platform, and not a one time contest, we kindly request you to not publish flags for the challenges in your writeups.
+Writeups are an excellent way to share knowledge and help others learn. In Backdoor, challenges are shifted from a contest to the Practice section, where people can continue to attempt them after the contest is over. It would be very unfair to participants if the flags for the problems were easily available in writeups online.
+Hence, we kindly request to not publish flags of the problems that you solve. Here is an example of an excellent writeup which refrains from giving the complete solution.</p>
 </blockquote>
 
         </div>
@@ -320,7 +348,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-forensic-busybee/" data-id="cizepeo9r00gg2rfs1mf413p2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-forensic-busybee/" data-id="cizoihhcy00eimefs45mpiyjg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -456,11 +484,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/virtualbox-export-vmware-esxi/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/virtualbox-change-virtual-disk-uuid/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Virtualbox : Export from VirtualBox and import to VMware ESXI
+            Virtualbox : change the UUID of a virtual disk
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -508,26 +536,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -541,6 +549,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

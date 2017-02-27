@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,stegano,writeups,ctf" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,6 +27,7 @@ Creation
 
 
 CTF
+
 Name : Hack The Vote 2016
 Website : https://pwn.voting/
 Type : Online
@@ -32,12 +35,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Somebody leA">
+
+Somebody">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hack The Vote 2016 - 250 - Trump likes colors - Steganography">
 <meta property="og:url" content="http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -54,6 +60,7 @@ Creation
 
 
 CTF
+
 Name : Hack The Vote 2016
 Website : https://pwn.voting/
 Type : Online
@@ -61,12 +68,15 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Somebody leA">
+
+Somebody">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hack The Vote 2016 - 250 - Trump likes colors - Steganography">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -83,6 +93,7 @@ Creation
 
 
 CTF
+
 Name : Hack The Vote 2016
 Website : https://pwn.voting/
 Type : Online
@@ -90,7 +101,8 @@ Format : Jeopardy
 CTF Time : link
 
 Description
-Somebody leA">
+
+Somebody">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -250,7 +262,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -266,31 +280,35 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : Hack The Vote 2016</li>
 <li><strong>Website</strong> : <a href="https://pwn.voting/" target="_blank" rel="external">https://pwn.voting/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/345" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
-<p>Somebody leAked TrumP’s favorite colors, looks like they used a really esoteric format. Some chiNese hacker named “DanGer Mouse” provided us the leak, getting this crucial info could really sway voters at the polls!</p>
+<h3>Description</h3>
+<blockquote>
+<p>Somebody leAked TrumP's favorite colors, looks like they used a really esoteric format. Some chiNese hacker named &quot;DanGer Mouse&quot; provided us the leak, getting this crucial info could really sway voters at the polls!</p>
 <p><a href="https://s3.amazonaws.com/hackthevote/trump_likes_colors.bcddf8152cf2848c058310655c280a7dbb4f22fcc3687f00a26b6e9a57657dc4.png" target="_blank" rel="external">trump_likes_colors.png</a></p>
-<p>author’s irc nick: nihliphobe</p>
+<p>author's irc nick: nihliphobe</p>
 </blockquote>
 <p><strong>Note</strong>: This challenge was classified as <em>Forensics</em> but is <em>Steganography</em>.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><strong>TL;DR :</strong> this is a incomplete solving, we didn’t go until the end of this challenge.</p>
-<p>The description is talking about <code>DanGer Mouse</code>, search for it, it looks like a website about esoteric languages and algorithms (<a href="http://www.dangermouse.net/esoteric/" target="_blank" rel="external">http://www.dangermouse.net/esoteric/</a>).</p>
+<h2>Solution</h2>
+<p><strong>TL;DR :</strong> this is a incomplete solving, we didn't go until the end of this challenge.</p>
+<p>The description is talking about <code>DanGer Mouse</code>, search for it, it looks like a website about esoteric languages and algorithms (http://www.dangermouse.net/esoteric/).</p>
 <p>Look at the histogram of the image:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ convert trump_likes_colors.png histogram:- | identify -format %c -</div><div class="line">    249552: (  0,  0,  0) #000000 black</div><div class="line">         1: (  0,  0,192) #0000C0 srgb(0,0,192)</div><div class="line">       102: (  0,  0,255) #0000FF blue</div><div class="line">         1: (  0,192,  0) #00C000 srgb(0,192,0)</div><div class="line">         1: (  0,192,192) #00C0C0 srgb(0,192,192)</div><div class="line">        48: (  0,255,  0) #00FF00 lime</div><div class="line">        48: (  0,255,255) #00FFFF cyan</div><div class="line">         2: (192,  0,  0) #C00000 srgb(192,0,0)</div><div class="line">         1: (192,  0,192) #C000C0 srgb(192,0,192)</div><div class="line">         1: (192,192,  0) #C0C000 srgb(192,192,0)</div><div class="line">        83: (255,  0,  0) #FF0000 red</div><div class="line">       103: (255,  0,255) #FF00FF magenta</div><div class="line">        51: (255,255,  0) #FFFF00 yellow</div><div class="line">         6: (255,255,255) #FFFFFF white</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ convert trump_likes_colors.png histogram:- | identify -format %c -</div><div class="line">    249552: (  0,  0,  0) #000000 black</div><div class="line">         1: (  0,  0,192) #0000C0 srgb(0,0,192)</div><div class="line">       102: (  0,  0,255) #0000FF blue</div><div class="line">         1: (  0,192,  0) #00C000 srgb(0,192,0)</div><div class="line">         1: (  0,192,192) #00C0C0 srgb(0,192,192)</div><div class="line">        48: (  0,255,  0) #00FF00 lime</div><div class="line">        48: (  0,255,255) #00FFFF cyan</div><div class="line">         2: (192,  0,  0) #C00000 srgb(192,0,0)</div><div class="line">         1: (192,  0,192) #C000C0 srgb(192,0,192)</div><div class="line">         1: (192,192,  0) #C0C000 srgb(192,192,0)</div><div class="line">        83: (255,  0,  0) #FF0000 red</div><div class="line">       103: (255,  0,255) #FF00FF magenta</div><div class="line">        51: (255,255,  0) #FFFF00 yellow</div><div class="line">         6: (255,255,255) #FFFFFF white</div></pre></td></tr></table></figure></p>
 <p>The colors used seem to be only the ones used in <a href="http://www.dangermouse.net/esoteric/piet.html" target="_blank" rel="external">PIET</a> language.</p>
 <p>There is a programm implementing PIET: <code>npiet</code>, we used it to run the programm.</p>
 <p><strong>N.B.:</strong> As we can see in the <a href="https://www.bertnase.de/npiet/picture.html" target="_blank" rel="external">gallery</a>. Vertical lines are an easy way to store a string, so our image must contain a string with the favorite color of Trump.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ npiet trump_likes_colors.png</div><div class="line">#ff0000</div></pre></td></tr></table></figure>
-<p>So the programm gave us the favorite color of Trump:<br><code>#ff0000</code> = Red = rgb(255, 0, 0) = hsl(0, 100%, 50%).</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ npiet trump_likes_colors.png</div><div class="line">#ff0000</div></pre></td></tr></table></figure></p>
+<p>So the programm gave us the favorite color of Trump:
+<code>#ff0000</code> = Red = rgb(255, 0, 0) = hsl(0, 100%, 50%).</p>
 <p>The description let us think that was that we were looking for but IRC moderators told us that was not the end.</p>
 <p>So I checked the trace of the programm:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ npiet -t trump_likes_colors.png</div><div class="line"></div><div class="line">trace: step 0  (0,0/r,l nR -&gt; 1,0/r,l dR):</div><div class="line">action: push, value 35</div><div class="line">trace: stack (1 values): 35</div><div class="line"></div><div class="line">trace: step 1  (1,0/r,l dR -&gt; 2,0/r,l nM):</div><div class="line">action: out(char)</div><div class="line">#</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 2  (2,0/r,l nM -&gt; 3,0/r,l dM):</div><div class="line">action: push, value 102</div><div class="line">trace: stack (1 values): 102</div><div class="line"></div><div class="line">trace: step 3  (3,0/r,l dM -&gt; 4,0/r,l nB):</div><div class="line">action: out(char)</div><div class="line">f</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 4  (4,0/r,l nB -&gt; 5,0/r,l dB):</div><div class="line">action: push, value 102</div><div class="line">trace: stack (1 values): 102</div><div class="line"></div><div class="line">trace: step 5  (5,0/r,l dB -&gt; 6,0/r,l nC):</div><div class="line">action: out(char)</div><div class="line">f</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 6  (6,0/r,l nC -&gt; 7,0/r,l dC):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 7  (7,0/r,l dC -&gt; 8,0/r,l nG):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 8  (8,0/r,l nG -&gt; 9,0/r,l dG):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 9  (9,0/r,l dG -&gt; 10,0/r,l nY):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 10  (10,0/r,l nY -&gt; 11,0/r,l dY):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 11  (11,0/r,l dY -&gt; 12,0/r,l nR):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 12  (12,0/r,l nR -&gt; 13,0/r,l dR):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 13  (13,0/r,l dR -&gt; 14,0/r,l nM):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line">trace: entering white block at 16,0 (like the perl interpreter would)...</div><div class="line"></div><div class="line">trace: step 14  (14,0/r,l nM -&gt; 16,0/r,l WW):</div><div class="line">trace: special case: we at a white codel - continuing</div><div class="line">trace: entering white block at 16,3 (like the perl interpreter would)...</div><div class="line"></div><div class="line">trace: step 15  (16,0/r,l WW -&gt; 16,3/d,r WW):</div><div class="line">trace: special case: we at a white codel - continuing</div><div class="line">trace: white cell(s) crossed - continuing with no command at 14,3...</div><div class="line"></div><div class="line">trace: step 16  (16,3/d,r WW -&gt; 14,3/l,l nY):</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">[noraj@rawsec]––––––––––––––––––––––––––––––––––––––––[~/CTF/Hack_The_Vote/2016]</div><div class="line">$ npiet -t trump_likes_colors.png</div><div class="line"></div><div class="line">trace: step 0  (0,0/r,l nR -&gt; 1,0/r,l dR):</div><div class="line">action: push, value 35</div><div class="line">trace: stack (1 values): 35</div><div class="line"></div><div class="line">trace: step 1  (1,0/r,l dR -&gt; 2,0/r,l nM):</div><div class="line">action: out(char)</div><div class="line">#</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 2  (2,0/r,l nM -&gt; 3,0/r,l dM):</div><div class="line">action: push, value 102</div><div class="line">trace: stack (1 values): 102</div><div class="line"></div><div class="line">trace: step 3  (3,0/r,l dM -&gt; 4,0/r,l nB):</div><div class="line">action: out(char)</div><div class="line">f</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 4  (4,0/r,l nB -&gt; 5,0/r,l dB):</div><div class="line">action: push, value 102</div><div class="line">trace: stack (1 values): 102</div><div class="line"></div><div class="line">trace: step 5  (5,0/r,l dB -&gt; 6,0/r,l nC):</div><div class="line">action: out(char)</div><div class="line">f</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 6  (6,0/r,l nC -&gt; 7,0/r,l dC):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 7  (7,0/r,l dC -&gt; 8,0/r,l nG):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 8  (8,0/r,l nG -&gt; 9,0/r,l dG):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 9  (9,0/r,l dG -&gt; 10,0/r,l nY):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 10  (10,0/r,l nY -&gt; 11,0/r,l dY):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 11  (11,0/r,l dY -&gt; 12,0/r,l nR):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line"></div><div class="line">trace: step 12  (12,0/r,l nR -&gt; 13,0/r,l dR):</div><div class="line">action: push, value 48</div><div class="line">trace: stack (1 values): 48</div><div class="line"></div><div class="line">trace: step 13  (13,0/r,l dR -&gt; 14,0/r,l nM):</div><div class="line">action: out(char)</div><div class="line">0</div><div class="line">trace: stack is empty</div><div class="line">trace: entering white block at 16,0 (like the perl interpreter would)...</div><div class="line"></div><div class="line">trace: step 14  (14,0/r,l nM -&gt; 16,0/r,l WW):</div><div class="line">trace: special case: we at a white codel - continuing</div><div class="line">trace: entering white block at 16,3 (like the perl interpreter would)...</div><div class="line"></div><div class="line">trace: step 15  (16,0/r,l WW -&gt; 16,3/d,r WW):</div><div class="line">trace: special case: we at a white codel - continuing</div><div class="line">trace: white cell(s) crossed - continuing with no command at 14,3...</div><div class="line"></div><div class="line">trace: step 16  (16,3/d,r WW -&gt; 14,3/l,l nY):</div></pre></td></tr></table></figure></p>
 <p>Seems there is nothing interesting.</p>
 <p>I also genererated the image trace:</p>
 <p><img src="http://i.imgur.com/wOE90pQ.png" alt=""></p>
@@ -303,7 +321,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/" data-id="cizepeobk00hr2rfswin8haps" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/Hack-The-Vote-2016-250-trump-likes-colors/" data-id="cizoihhdz00fymefsztr8lubh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -491,26 +509,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -524,6 +522,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

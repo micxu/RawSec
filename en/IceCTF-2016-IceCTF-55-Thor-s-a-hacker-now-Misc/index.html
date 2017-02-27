@@ -8,7 +8,9 @@
     
         <meta name="keywords" content="security,writeups,ctf,misc" />
     
-    <meta name="description" content="InformationsVersion
+    <meta name="description" content="Informations
+Version
+
 
 
 By
@@ -25,18 +27,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThor has been staring a">
+Description
+Thor has been stari">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF - 55 - Thor's a hacker now - Misc">
 <meta property="og:url" content="http://rawsec.ml/en/IceCTF-2016-IceCTF-55-Thor-s-a-hacker-now-Misc/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="InformationsVersion
+<meta property="og:description" content="Informations
+Version
+
 
 
 By
@@ -53,18 +59,22 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThor has been staring a">
+Description
+Thor has been stari">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF - 55 - Thor's a hacker now - Misc">
-<meta name="twitter:description" content="InformationsVersion
+<meta name="twitter:description" content="Informations
+Version
+
 
 
 By
@@ -81,13 +91,15 @@ Creation
 
 
 CTF
+
 Name : IceCTF 2016
 Website : https://icec.tf/
 Type : Online
 Format : Jeopardy
 CTF Time : link
 
-DescriptionThor has been staring a">
+Description
+Thor has been stari">
 <meta name="twitter:image" content="http://rawsec.ml/images/ctf.png">
     
 
@@ -247,7 +259,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Informations"><a href="#Informations" class="headerlink" title="Informations"></a>Informations</h2><h3 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h3><table>
+            <h2>Informations</h2>
+<h3>Version</h3>
+<table>
 <thead>
 <tr>
 <th>By</th>
@@ -263,28 +277,41 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><ul>
+<h3>CTF</h3>
+<ul>
 <li><strong>Name</strong> : IceCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://icec.tf/" target="_blank" rel="external">https://icec.tf/</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/319" target="_blank" rel="external">link</a></li>
 </ul>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Thor has been staring at this for hours and he can’t make any sense out of it, can you help him figure out what it is? <a href="https://play.icec.tf/problem-static/thor_7101f3b9690d5dc6c3afefa49d82e0526b278ec1c564139369ad22c28721d4cf.txt" target="_blank" rel="external">thor.txt</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><code>thor.txt</code> is an xxd dump so just reverse it to get the binary: <code>xxd -r thor.txt &gt; thor.lz</code>.</li>
-<li><p>Check what the binary looks like:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file thor.lz</div><div class="line">thor.lz: lzip compressed data, version: 1</div></pre></td></tr></table></figure>
+<h3>Description</h3>
+<p>Thor has been staring at this for hours and he can't make any sense out of it, can you help him figure out what it is? <a href="https://play.icec.tf/problem-static/thor_7101f3b9690d5dc6c3afefa49d82e0526b278ec1c564139369ad22c28721d4cf.txt" target="_blank" rel="external">thor.txt</a></p>
+<h2>Solution</h2>
+<ol>
+<li>
+<p><code>thor.txt</code> is an xxd dump so just reverse it to get the binary: <code>xxd -r thor.txt &gt; thor.lz</code>.</p>
 </li>
-<li><p>We’ll need he <strong>lzip</strong> lib and utility to manage that: <code>apt-get install lzip</code>.</p>
+<li>
+<p>Check what the binary looks like:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file thor.lz</div><div class="line">thor.lz: lzip compressed data, version: 1</div></pre></td></tr></table></figure></p>
 </li>
-<li>Let’s uncompress the archive: <code>lzip -d thor.lz</code>.</li>
-<li><p>Now we get an image:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file thor</div><div class="line">thor: JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, little-endian, direntries=5, xresolution=74, yresolution=82, resolutionunit=2, software=GIMP 2.8.18], progressive, precision 8, 1600x680, frames 3</div></pre></td></tr></table></figure>
+<li>
+<p>We'll need he <strong>lzip</strong> lib and utility to manage that: <code>apt-get install lzip</code>.</p>
 </li>
-<li><p>Just display it: <code>display thor</code>.</p>
+<li>
+<p>Let's uncompress the archive: <code>lzip -d thor.lz</code>.</p>
 </li>
-<li><code>IceCTF{h3XduMp1N9_l1K3_A_r341_B14Ckh47}</code></li>
+<li>
+<p>Now we get an image:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">file thor</div><div class="line">thor: JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, little-endian, direntries=5, xresolution=74, yresolution=82, resolutionunit=2, software=GIMP 2.8.18], progressive, precision 8, 1600x680, frames 3</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Just display it: <code>display thor</code>.</p>
+</li>
+<li>
+<p><code>IceCTF{h3XduMp1N9_l1K3_A_r341_B14Ckh47}</code></p>
+</li>
 </ol>
 
         </div>
@@ -293,7 +320,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-55-Thor-s-a-hacker-now-Misc/" data-id="cizepeodo00jc2rfsx6xll22j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/IceCTF-2016-IceCTF-55-Thor-s-a-hacker-now-Misc/" data-id="cizoihhf400hnmefscq64lcd0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -429,11 +456,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/CTFx-2016-CTFx-50-crash-forensics/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/CTFx-2016-CTFx-50-lambda-cryptography/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            CTF(x) - 50 - crash - Forensics
+            CTF(x) - 50 - λ - Cryptography
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -481,26 +508,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -514,6 +521,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

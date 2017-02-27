@@ -205,17 +205,17 @@ ga('send', 'pageview');
 <ol>
 <li>Create a folder (an existant one can be used), ex:</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir /home/user/vbox-shared</div></pre></td></tr></table></figure>
-<ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir /home/user/vbox-shared</div></pre></td></tr></table></figure></p>
+<ol start="2">
 <li>Mount the shared folder and is file system as root, ex:</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mount -t vboxsf [FOLDER_NAME] [GUEST_PATH]</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mount -t vboxsf [FOLDER_NAME] [GUEST_PATH]</span></div></pre></td></tr></table></figure></p>
 <p>with <code>[FOLDER_NAME]</code> the name of the shared folder created on virtualbox and <code>[GUEST_PATH]</code> the folder path where the share file system have to be mounted.</p>
 <p>So here that will give:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mount -t vboxsf folder-shared /home/user/vbox-shared</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mount -t vboxsf folder-shared /home/user/vbox-shared</span></div></pre></td></tr></table></figure></p>
 <p><strong>Note</strong> : Even if a permanent shared folder was created, the mount command will have to be runned each time the guest restart.</p>
-<p>Mounting a file system requires root privileges, but instead of mounting the file system as roor like previously, it’s preferable to mount it as a user:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mount -t vboxsf -o <span class="built_in">umask</span>=0022,gid=1000,uid=1000 folder-shared /home/user/vbox-shared</div></pre></td></tr></table></figure>
+<p>Mounting a file system requires root privileges, but instead of mounting the file system as roor like previously, it's preferable to mount it as a user:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mount -t vboxsf -o <span class="built_in">umask</span>=0022,gid=1000,uid=1000 folder-shared /home/user/vbox-shared</div></pre></td></tr></table></figure></p>
 <p>Where the <em>gid</em> and <em>uid</em> value math with the ones of the user (it can be check with the <code>id</code> command).</p>
 
         </div>
@@ -224,7 +224,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/virtualbox-shared-folder-with-guest/" data-id="cizepensa008j2rfse8hptt5a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/virtualbox-shared-folder-with-guest/" data-id="cizoihh4z0070mefs3shthzy6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -360,20 +360,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/how-to-manually-configure-firefox-waterfox-language/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/BackdoorCTF-2016-writeups-crypto-mindblown/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            How to manually configure Firefox / Waterfox language
+            Writeups - Crypto - MindBlown
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/find-out-linux-distribution-name-and-version/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/how-to-manually-configure-firefox-waterfox-language/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">How to find out the Linux distribution name and version</p>
+        <p class="article-nav-title">How to manually configure Firefox / Waterfox language</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -412,26 +412,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -445,6 +425,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

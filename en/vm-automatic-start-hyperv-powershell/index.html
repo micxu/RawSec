@@ -8,35 +8,41 @@
     
         <meta name="keywords" content="windows,virtualization,hyper-v" />
     
-    <meta name="description" content="VM automatic action at Hyper-V start up1Set-VM [VM_NAME] -AutomaticStartAction [Option]
+    <meta name="description" content="VM automatic action at Hyper-V start up
+1Set-VM [VM_NAME] -AutomaticStartAction [Option]
 With :
 
 [VM_NAME] : The VM name
 [Option] :
+
 Nothing : When the host is powered on, the VM will do nothing
-StartIf">
+Start">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to configure VM Auto Start in Hyper-V with PowerShell">
 <meta property="og:url" content="http://rawsec.ml/en/vm-automatic-start-hyperv-powershell/index.html">
 <meta property="og:site_name" content="RawSec">
-<meta property="og:description" content="VM automatic action at Hyper-V start up1Set-VM [VM_NAME] -AutomaticStartAction [Option]
+<meta property="og:description" content="VM automatic action at Hyper-V start up
+1Set-VM [VM_NAME] -AutomaticStartAction [Option]
 With :
 
 [VM_NAME] : The VM name
 [Option] :
+
 Nothing : When the host is powered on, the VM will do nothing
-StartIf">
+Start">
 <meta property="og:image" content="http://rawsec.ml/images/Windows_logo.svg">
 <meta property="og:updated_time" content="2017-02-07T18:23:37.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to configure VM Auto Start in Hyper-V with PowerShell">
-<meta name="twitter:description" content="VM automatic action at Hyper-V start up1Set-VM [VM_NAME] -AutomaticStartAction [Option]
+<meta name="twitter:description" content="VM automatic action at Hyper-V start up
+1Set-VM [VM_NAME] -AutomaticStartAction [Option]
 With :
 
 [VM_NAME] : The VM name
 [Option] :
+
 Nothing : When the host is powered on, the VM will do nothing
-StartIf">
+Start">
 <meta name="twitter:image" content="http://rawsec.ml/images/Windows_logo.svg">
     
 
@@ -196,25 +202,31 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="VM-automatic-action-at-Hyper-V-start-up"><a href="#VM-automatic-action-at-Hyper-V-start-up" class="headerlink" title="VM automatic action at Hyper-V start up"></a>VM automatic action at Hyper-V start up</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-VM [VM_NAME] -AutomaticStartAction [Option]</div></pre></td></tr></table></figure>
+            <h2>VM automatic action at Hyper-V start up</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-VM [VM_NAME] -AutomaticStartAction [Option]</div></pre></td></tr></table></figure></p>
 <p>With :</p>
 <ul>
 <li>[VM_NAME] : The VM name</li>
-<li>[Option] :<ul>
+<li>[Option] :
+<ul>
 <li>Nothing : When the host is powered on, the VM will do nothing</li>
 <li>StartIfRunning : The VM will start only if it was running when the host was stopped</li>
 <li>Start : The VM will start up automatically not matter what state the VM was in previously</li>
 </ul>
 </li>
 </ul>
-<h2 id="Change-startup-delay"><a href="#Change-startup-delay" class="headerlink" title="Change startup delay"></a>Change startup delay</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-VM [VM_NAME] -AutomaticStartDelay [Delay]</div></pre></td></tr></table></figure>
+<h2>Change startup delay</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-VM [VM_NAME] -AutomaticStartDelay [Delay]</div></pre></td></tr></table></figure></p>
 <p>With :</p>
 <ul>
 <li>[VM_NAME] : The VM name</li>
 <li>[Delay] : Delay in second</li>
 </ul>
-<h2 id="Display-VM-Start-action-and-delay"><a href="#Display-VM-Start-action-and-delay" class="headerlink" title="Display VM Start action and delay"></a>Display VM Start action and delay</h2><p>All :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Get-VM -VMName * | Select-Object VMName,AutomaticStartAction,AutomaticStartDelay</div></pre></td></tr></table></figure></p>
-<p>One :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Get-VM -VMName [VM_NAME] | Select-Object VMName,AutomaticStartAction,AutomaticStartDelay</div></pre></td></tr></table></figure></p>
+<h2>Display VM Start action and delay</h2>
+<p>All :
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Get-VM -VMName * | Select-Object VMName,AutomaticStartAction,AutomaticStartDelay</div></pre></td></tr></table></figure></p>
+<p>One :
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Get-VM -VMName [VM_NAME] | Select-Object VMName,AutomaticStartAction,AutomaticStartDelay</div></pre></td></tr></table></figure></p>
 <p>With :</p>
 <ul>
 <li>[VM_NAME] : The VM name</li>
@@ -226,7 +238,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/vm-automatic-start-hyperv-powershell/" data-id="cizepensd008m2rfs5pcoksvh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/vm-automatic-start-hyperv-powershell/" data-id="cizoihh4w006wmefs0kl1llc1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -414,26 +426,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -447,6 +439,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 01 - 20 - For001 - Forensics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" class="title">WhiteHat Challenge 01 - 20 - For001 - Forensics</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>
