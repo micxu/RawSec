@@ -1,0 +1,71 @@
+---
+layout: post
+title: "WhiteHat Challenge 01 - 20 - For001 - Forensics"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - forencics
+date: 2017/02/27
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By        | Version | Comment
+| ---       | ---     | ---
+| noraj     | 1.0     | Creation
+
+### CTF
+
+- **Name** : WhiteHat Challenge 01
+- **Website** : [wargame.whitehat.vn](https://wargame.whitehat.vn/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/429)
+
+### Description
+
+> Can you find the secret in this image?
+Download file here:
+>
+> http://material.wargame.whitehat.vn/challenges/1/For001_b9f7cdc52232efc20abe3ca3df14be5d.zip
+>
+> Submit WhiteHat{sha1(flag)}
+
+## Solution
+
+The zip contain an image: `LSB.png`.
+
+Let's try to retrive something with LSB attack, I found a Microsoft Word 2007 document.
+
+Trying to open it with LibreOffice said me that the document is corrupted.
+
+As it is only an archive I extrated it with `7z`.
+
+I then open the `document.xml` and I found that:
+
+```
+. .- ... -.-- ..-. --- .-. . -. ... .. -.-.
+```
+
+It is morse. So I used http://www.dcode.fr/morse-code to decode the message.
+
+That gave me `EASYFORENSIC`.
+
+```
+$ printf %s 'EASYFORENSIC' | sha1sum
+ffed6da75c3296041fc52abc75298e120c350917  -
+
+$ printf %s 'easyforensic' | sha1sum
+1f0aa393d3e5369f391c35a793bcf1178b8299a0  -
+```
+
+So flag is `WhiteHat{1f0aa393d3e5369f391c35a793bcf1178b8299a0}`.
+
+*Note*: Again, this is stegano not digital forencis...

@@ -1,0 +1,234 @@
+---
+layout: post
+title: "Xiomara CTF 2017 - Write-ups"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2017/02/27
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By        | Version | Comment
+| ---       | ---     | ---
+| noraj     | 1.0     | Creation
+
+### CTF
+
+- **Name** : Xiomara CTF 2017
+- **Website** : [xiomara.xyz](https://xiomara.xyz/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/430/)
+
+# 50 - Easy Login? - Web Exploitation
+
+> An aspiring engineer started learning web development on Youtube a day ago and he was asked to build a nice, secure, simple login page as part of his project. Well, he just started off so don't blame him. Go, hack!
+>
+> http://139.59.61.220:23478/
+
+The source is suspicious:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+</head>
+<script type="text/javascript" src="main.js"></script>
+<link rel="stylesheet" href="flag.css" />
+<body>
+<h1 align= "center">Login Portal</h1>
+<form name="login" method="POST" action="">
+
+        <b>Username :<b> <input type="text" name ="username"/><br>
+       <b> Password :<b> <input type="password" name="password" /></br></br>
+        <input onclick="Login()" type="button" value="verify" name="button" />
+    </form>
+</body>
+</html>
+```
+
+Let's see `main.js`:
+
+```javascript
+function Login(){
+
+    var username=document.login.username.value;
+    var password=document.login.password.value;
+
+
+
+
+    if (password == "53cure" && username=="@nokh@") {
+        alert("Awesome!");
+             window.open("secureflag.html");
+    } else {
+        alert("Oh swap!You are close. Why cant you try again?");
+
+    }
+}
+```
+
+Now we can use `@nokh@` and `53cure` or directly go to http://139.59.61.220:23478/secureflag.html.
+
+The image is named `hiddenflag.jpeg` so let's download it.
+
+There is some hidden data here:
+
+```
+$ binwalk hiddenflag.jpeg
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             JPEG image data, JFIF standard 1.01
+48981         0xBF55          Zip archive data, at least v1.0 to extract, compressed size: 29, uncompressed size: 29, name: flag.txt
+49154         0xC002          End of Zip archive
+
+$ foremost -v hiddenflag.jpeg
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Sun Feb 26 19:14:21 2017
+Invocation: foremost -v hiddenflag.jpeg
+Output directory: /home/noraj/CTF/XiomaraCTF/2017/output
+Configuration file: /etc/foremost.conf
+Processing: hiddenflag.jpeg
+|------------------------------------------------------------------
+File: hiddenflag.jpeg
+Start: Sun Feb 26 19:14:21 2017
+Length: 48 KB (49176 bytes)
+
+Num	 Name (bs=512)	       Size	 File Offset	 Comment
+
+0:	00000000.jpg 	      47 KB 	          0 	 
+foundat=flag.txtUT
+1:	00000095.zip 	      196 B 	      48981 	 
+*|
+Finish: Sun Feb 26 19:14:21 2017
+
+2 FILES EXTRACTED
+
+jpg:= 1
+zip:= 1
+------------------------------------------------------------------
+
+Foremost finished at Sun Feb 26 19:14:21 2017
+
+$ cd output/zip
+
+$ unzip 00000095.zip
+Archive:  00000095.zip
+ extracting: flag.txt
+
+$ cat flag.txt
+xiomara{50_y0u_ar3_@_h@ck3r}
+```
+
+# 50 - Lulz - Web Exploitation
+
+> Heavy sarcasm awaits. Are you a person who finds opportunities even in trolls? Well, let's find out.
+>
+> http://139.59.61.220:23456
+
+The webpage is a troll opening a pop-up and redirecting to a troll page: http://139.59.61.220:23456/troll.html
+
+But of course you are using NoScript or know about `view-source:` in Firefox.
+
+Let's see the source (`view-source:http://139.59.61.220:23456/`):
+
+```html
+<head>
+<title>Hahaha!!!</title>
+
+<body>
+   <img src ="lol.jpg" align ="center" width ="50%" height = "50%" alt ="lollol">
+</body>
+
+<script type="text/javascript" src="hook.js"></script>
+</head>
+```
+
+`hook.js` source:
+
+```javascript
+function catch_me()
+{
+(![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]+(![]+[][(![]+[])[+[]]+([![]]+[][[]]) /*VERY LONG*/
+}
+
+ function Redirect() {
+               window.location="troll.html";
+            }
+
+            alert("Warning you are about to be trolled");
+            setTimeout('Redirect()', 0);
+```
+
+The `catch_me()` function looks like some brainfuck-js.
+
+Copy it and paste it in your browser terminal, you will get:
+
+```
+"alert(Xiomara{i_4gr33_Y0U_4r3_a_Flash!}))"
+```
+
+The is a ~~mistake~~ troll, so correct `Xiomara{i_4gr33_Y0U_4r3_a_Flash!}` into `xiomara{i_4gr33_Y0U_4r3_a_Flash!}` (lowercase the first char).
+
+# 50 - No Flags? - Web Exploitation
+
+> What would you do if we tell you there are no flags for this question? Go on, solve it. That reminds me, Nothing is impossible.
+>
+> http://139.59.61.220:23467/
+
+I tried [`robots.txt`](http://139.59.61.220:23467/robots.txt):
+
+```
+User-agent:*
+Disallow: /flags/
+Disallow: /more_flags/
+Disallow: /more_and_more_flags/
+Disallow: /no_flag/
+```
+
+`/flags/`, `/more_flags/` and `/more_and_more_flags/` are obviously trolls.
+
+Let's see `/no_flag/` source:
+
+```javascript
+<script>
+function encode(str) {
+str = str.replace(/http:/g, "^^^");
+str = str.replace(/bin/g, "*^$#!")
+str= str.replace(/com/g, "*%=_()");
+str= str.replace(/paste/g, "~~@;;");
+}
+</script>
+<iframe src="flag.txt" width="2500" height="2255">
+</iframe>
+```
+
+It's an iframe of `flag.txt` which containd some ASCII art, like the three others. But this time there is a script.
+
+The ASCII art display *YOU HAVE BEEN HACKED !* but on the middle of *HACKED* we can see `"^^^//~~@;;*^$#!.*%=_()/SwzEKazp"`.
+
+So let's replace back: `http://pastebin.com/SwzEKazp`.
+
+So go to pastebin and... `This page has been removed!`.
+
+So go to the [wayback machine](https://web.archive.org/web/20170225133747/http://pastebin.com/SwzEKazp), there is a snapshot dating from 25 Feb. 2017.
+
+We can see an untitled document from *XIOMARA_CTF* containing: `eGlvbWFyYXsxXzRtX21yX3IwYjA3fQ==`.
+
+```
+$ printf %s 'eGlvbWFyYXsxXzRtX21yX3IwYjA3fQ==' | base64 -di
+xiomara{1_4m_mr_r0b07}
+```

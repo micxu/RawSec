@@ -1,0 +1,698 @@
+---
+layout: post
+title: "NeverLAN CTF 2017 - Write-ups"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+  - forensics
+date: 2017/02/27
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By        | Version | Comment
+| ---       | ---     | ---
+| noraj     | 1.0     | Creation
+
+### CTF
+
+- **Name** : NeverLAN CTF 2017
+- **Website** : [neverlanctf.com](https://neverlanctf.com/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/431/)
+
+# 50 - Encoding Apprentice - Trivia
+
+> What common encoding practice’s title contains the square of 8 and occasionally ends with an “=”, or “==”?
+
+Answer: *base64*
+
+# 50 - Shifty Ciphers… - Trivia
+
+> What cipher is the shiftiest of them all? He even has his own salad…
+
+Answer: *caesar*
+
+# 50 - Know your extensions - Trivia
+
+> Unix and Linux use this (instead of a file extension) to determine what format a file is.
+
+Answer: *magic numbers*
+
+# 50 - Mmmm... SSL - Trivia
+
+> What is the standard, secure, size of an ssl certificate?
+
+Answer: *2048*
+
+# 50 - Don't eat me - Trivia
+
+> I allow HTTP to act as a stateful protocol instead of the stateless protocol it actually is. Just a small piece of data sent from a website...
+
+Answer: *cookie*
+
+# 50 - NeverLAN - Recon
+
+> We've been known to leak things on twitter...
+
+Go to NeverLanCTF twitter: https://twitter.com/NeverLanCTF
+
+There is [an interesting twitter status](https://twitter.com/NeverLanCTF/status/834992893978804224):
+
+```
+Rnfl erpba vf rnfl. synt{vas0ezngvba_vf_c0jre_xa0j_l0he_nqirefnel} #CommonCaeserCipher
+```
+
+I tried a rot13 and I got that:
+
+```
+Easy recon is easy. flag{inf0rmation_is_p0wer_kn0w_y0ur_adversary}
+```
+
+Flag is `inf0rmation_is_p0wer_kn0w_y0ur_adversary`.
+
+# 100 - Purvesta - Recon
+
+> Purvesta also really likes his twitter...
+
++ NeverLAN CTFTime page: https://ctftime.org/team/32118
++ purvesta CTFtime page: https://ctftime.org/user/23157
+
+purvesta name is: *Tanner Purves*, his LinkedIn page is not working. So I searched for *twitter Tanner Purves* and found his twitter page (@purvesta0704): https://twitter.com/purvesta0704
+
+His twitter descripton says:
+
+```
+\\\BSU '20, Co-founder of the NeverLAN CTF/// {ZmxhZ3tXMHdfeTB1X0FyM19HZXR0aW5nX2cwMGRfYXRfVGhpNX0=}
+```
+
+It looks like a base64 string:
+
+```
+$ printf %s 'ZmxhZ3tXMHdfeTB1X0FyM19HZXR0aW5nX2cwMGRfYXRfVGhpNX0=' | base64 -d
+flag{W0w_y0u_Ar3_Getting_g00d_at_Thi5}
+```
+
+# 50 - SoYouLikeMusic - Forensics
+
+> [SoYouLikeMusic.class](https://ctf.neverlanctf.com/files/d8dacada92f876cff3f4f5775185240c/SoYouLikeMusic.class)
+
+We can use `strings` on the java class:
+
+```
+$ strings SoYouLikeMusic.class
+scan
+Ljava/util/Scanner;
+<init>
+Code
+LineNumberTable
+main
+([Ljava/lang/String;)V
+decompilingTheCodeNow
+qOne
+StackMapTable
+qTwo
+qThree
+playGame
+SourceFile
+SoYouLikeMusic.java
+java/util/Scanner
+OAhh welcome... so I hear you like music? What might I call you fellow listener?
+java/lang/StringBuilder
+Well
+4, let's play a game and see how much you like music.
+UWho was the special artist to dj music for our live streams before the event started?
+    s7a73farm
+Try Again...
+@Now you are on a roll! What is zestyfe's favorite type of music?
+dubstep
+=Final Question! What is the name of purvesta's only rap song?
+The_Gettysburg_Address_Rap
+|I will ask you three questions. If you can answer them all right, then I will point you towards your precious flag you seek!
+Want to play? (y/n)
+;Great let's play! (ctrl-c if you really don't want to play)
+Congratulations!! You did it!!
+8ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=
+SoYouLikeMusic
+java/lang/Object
+java/lang/String
+java/lang/System
+Ljava/io/InputStream;
+(Ljava/io/InputStream;)V
+Ljava/io/PrintStream;
+java/io/PrintStream
+println
+(Ljava/lang/String;)V
+nextLine
+()Ljava/lang/String;
+trim
+append
+-(Ljava/lang/String;)Ljava/lang/StringBuilder;
+toString
+equals
+(Ljava/lang/Object;)Z
+equalsIgnoreCase
+(Ljava/lang/String;)Z
+exit
+(I)V
+```
+
+Focus on:
+
+```
+Congratulations!! You did it!!
+8ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=
+```
+
+That looks like base64:
+
+```
+printf %s '8ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=' |base64 -d
+񙱅��Mѥ��}]��ѥ��}=�}���ٕ�ф��}5��х���base64: invalid input
+```
+
+That's wrong let's execute the java class, we know teh answers:
+
+```
+$ java -cp . SoYouLikeMusic
+Ahh welcome... so I hear you like music? What might I call you fellow listener?
+alex
+
+Well alex, let's play a game and see how much you like music.
+I will ask you three questions. If you can answer them all right, then I will point you towards your precious flag you seek!
+Want to play? (y/n)
+y
+
+Great let's play! (ctrl-c if you really don't want to play)
+
+Who was the special artist to dj music for our live streams before the event started?
+s7a73farm
+
+Now you are on a roll! What is zestyfe's favorite type of music?
+dubstep
+
+Final Question! What is the name of purvesta's only rap song?
+The_Gettysburg_Address_Rap
+
+Congratulations!! You did it!!
+ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=
+```
+
+There was only a `8` before our base64 string:
+
+```
+$ printf %s 'ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=' | base64 -di
+flag{Still_Waiting_On_purvesta's_Mixtape}
+```
+
+**Note**: This is not forensics.
+
+# 300 - just-a-selfie - Forensics
+
+> You've been put in charge of a very secret project. There's talk that some of your data has leaked out. Your security analyst has flagged this email as "out of place". Has your company been breached?
+>
+> Hmm.. Binwalk.
+>
+> Now that's a useful tool!
+
+
+```
+$ file email.txt
+email.txt: SMTP mail, ASCII text
+```
+
+This is a mail with a attached image.
+
+```
+--Apple-Mail=_9C94B8C8-A2CF-4892-8E1B-A89A4C3EAE03
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+    filename=selfie.jpg
+Content-Type: image/jpeg;
+    x-unix-mode=0644;
+    name="selfie.jpg"
+Content-Id: <456C033A-8B84-4975-B1DC-3E5820C8993A@death.star>
+```
+
+The image is base64 encoded, and split between line 92 and line 12617.
+
+Of course, `binwalk` is useless here:
+
+```
+1369          0x559           HTML document header
+4003          0xFA3           HTML document footer
+9689          0x25D9          Unix path: /WqckbqxDJsHoQRUjuIXZONp/Kk81v7p/KjzN4BFG73qguf/0Pu9
+11085         0x2B4D          Unix path: /4RD4Z6ZCUZZplNxIrjBy/I/QgV9N/DfxvL4aeO+t0
+13229         0x33AD          Unix path: /ENn/Y/huxtvl8wx5Yrjljz/XFcVZQtPdqFRpH3DhFzntj8eK7L4h3
+13284         0x33E4          Unix path: /nakVUgImCE9BjOK2f2dPAx8c/F/w/p+zfD9pW4kA4+SP5mz7dK8OeIjhsJKtN7Js/Sc0pxnmnsl
+14560         0x38E0          Unix path: /wCEI0L/AJ8I/wDvqtxbcOoY/KTz6Uv2
+15287         0x3BB7          Unix path: /qK6f4i/C/VfHGu/wBs+MdbXXmhwEuZIRFIUAGAQuOn1P0rxLRVlc+hdp6rRI8RvvDfhTxRpk8h
+22696         0x58A8          Unix path: /8E/Ke8hMUKjeWAOBkde/9c/jVZIhnPfvmr2or8qZwpPJHFVQm7ngjsDWt
+23242         0x5ACA          Unix path: /jivyX2F9h6LjJ/P/J/GvqMszD+0Kcm1ZrcqbhUh7WGielgaMcY
+25527         0x63B7          Unix path: /VX4Z/sceA/B/hq2iksI7rUFjAedu/Gf5ivMlZaHq+1jSXNI/P8A+FHxw1DwhrDWGlBbnT3bZLay
+26919         0x6927          Unix path: /g9Ya7q2iG9/4SKO4Xz1zss1b/AFYcehBbrXxjjLmaPufiimmec/DD4VaN4j1K8uIbWym1
+29935         0x74EF          Unix path: /AI/pTd3IVudkZwoPsWP/AI7X2XdzLDG7M20AE5r8q/2lvHLfED4yeIL/
+33346         0x8242          Unix path: /8d2V8h6gAHRADuC54969P/aJ8X/8ACc/H
+35802         0x8BDA          Unix path: /KvZNS/bO8a61EBdzJLFghkZuAOR1/Ovn74k/FC58Q
+36928         0x9040          Unix path: /klCp/1gIwfY1z2sSrIxWX5to/vYrQ4iLU/FsiXLyLB5MucoAPlj/xrKufEV1e4S4K/NyGB
+42880         0xA780          Unix path: /a/E/hDRQwxbWk1y/PQu4Uf+i/1r4a1Ihrjysj93x07100aM
+43257         0xA8F9          Unix path: /Z8yuKjGpSany/ebZ8P6bqWDG/2Vm/ij5H5Gsq/8K3FmC0bxzpuyD0Ki
+49189         0xC025          Unix path: /rtr4UWLzdoB3Z/Kvfv2z/GR8UfGaewhfdaaLAtoo3Y/eHDuf1A/C
+50244         0xC444          Unix path: /ljkcgHrV/RNXOm6pFLjMT/LKnHzr3WgpMr5AA2/xVteG5f3k0bN6HH+fwqprmnHTbwmI7rOb95B
+53176         0xCFB8          Unix path: /8E7tBW30/xJrEsflyTMlvE5/iGSWA/Ja+HzKq6OAqS6yP0PMKqipQh9iKXzPt7Tvml5rY
+55034         0xD6FA          Unix path: /wBivxnBfOmn6hp91bfwySPsY/UGqX/DGPxA/wCfjTP+/wAK+8fIP90n8KPI
+60216         0xEB38          Unix path: /TRd66LiUARWaeeWI6sDhV/U/lT/F1+19qUuO
+65339         0xFF3B          Unix path: /AMBrzL/hb3ib/oI3X5mvAdFXPSWHbSZ//9P4g8A+Ab3VNM1HxQztJpem3kFoSSMvNKrlVwOw
+67005         0x105BD         StuffIt Deluxe Segment (data): fpW74o1EL5VrGoBI3PhRkc
+[...]
+```
+
+So let's extract the base64 string, join it, decode it and save the ouput in a file (with a ruby script of course).
+
+```ruby
+require "base64"
+
+line_no = 1
+selfie_b64 = ""
+
+File.open("email.txt", 'r') do |file|
+    file.each do |line|
+        if line_no >= 92 && line_no <= 12617
+            selfie_b64 += line.chomp
+        end
+        line_no += 1
+    end
+end
+
+selfie_plain = Base64.decode64(selfie_b64)
+
+File.open("selfie.jpg", 'w') do |file|
+    file.write(selfie_plain)
+end
+```
+
+I obtained this picture:
+```
+$ file selfie.jpg
+selfie.jpg: JPEG image data, JFIF standard 1.01, aspect ratio, density 72x72, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=2, orientation=upper-left], baseline, precision 8, 820x618, frames 3
+```
+
+![](http://i.imgur.com/tcjBM2a.jpg)
+
+This image seems to hide something else (trailing data):
+
+```
+$ binwalk selfie.jpg
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             JPEG image data, JFIF standard 1.01
+30            0x1E            TIFF image data, big-endian, offset of first image directory: 8
+128969        0x1F7C9         Zip archive data, at least v2.0 to extract, name: Death_Star_Owner's_Technical_Manual_blueprints.jpg
+712883        0xAE0B3         Zip archive data, at least v1.0 to extract, name: __MACOSX/
+712938        0xAE0EA         Zip archive data, at least v2.0 to extract, name: __MACOSX/._Death_Star_Owner's_Technical_Manual_blueprints.jpg
+713908        0xAE4B4         End of Zip archive
+```
+
+Then I extracted it with `foremost` and unzip the archive:
+
+```
+$ unzip 00000251.zip
+Archive:  00000251.zip
+  inflating: Death_Star_Owner's_Technical_Manual_blueprints.jpg  
+   creating: __MACOSX/
+  inflating: __MACOSX/._Death_Star_Owner's_Technical_Manual_blueprints.jpg
+```
+
+Finally, I get this Death Star Elevation Plan:
+
+![](http://i.imgur.com/YZ84sSG.jpg)
+
+Flag is `rebellions_are_built_on_hope`.
+
+**Note**: This is steganography, not forensics.
+
+# 100 - TheHistoryOfCryptography - Cryptography
+
+`The_History_of_Cryptography.zip` contains two files: `0.txt` and `1.zip` :
+
+```
+$ cat 0.txt
+This Shifty Cipher is one of the simplest, and most well know ciphers.
+```
+
+Answer: *caesar*
+
+The zip is password protected and the password is the answer of `0.txt`.
+
+`1.zip` contains 2 files: `1.txt` and `2.zip`, and so on.
+
+```
+$ cat 1.txt
+This Cipher is is named after the person who made it famous, not but the man who first created it.
+
+Password:"The name of cipher in the riddle" with out the quotes.
+```
+
+Answer: *vigenere*
+
+```
+$ cat 2.txt
+This transposition cipher was used by the warriors in the famous movie "the 300"
+
+PassWord:"The name of cipher in the riddle" with out the quotes.
+```
+
+Answer: *scytale*
+
+```
+$ cat 3.txt
+The first recorded use of this cipher was used to hide a book of magic.
+
+Password:"The name of cipher in the riddle" with out the quotes.
+```
+
+Answer: *steganography* ([details](https://en.wikipedia.org/wiki/Steganography))
+
+```
+$ cat 4.txt
+This world famous cipher was invented by Arthur Scherbius
+
+Password:"The name of cipher in the riddle" with out the quotes.
+```
+
+Answer: *enigma machine* ([details](https://en.wikipedia.org/wiki/Arthur_Scherbius))
+
+```
+$ cat 5.txt
+Which one is you're favorite? I love them all because...
+flag{THEHISTORYOFCRYPTOGRAPHYISAW3S0M3}
+```
+
+Flag is `THEHISTORYOFCRYPTOGRAPHYISAW3S0M3`.
+
+**Note**: this challenge was a quizz, not a cryptography challenge. It should have been in Trivia, Misc, Quizz or Other.
+
+# 100 - A Slight Cut - Web
+
+> http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/
+
+Source:
+
+```
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>A slight cut</title>
+        <script src="js/jquery.js"></script>
+        <script>
+[...]
+        </script>
+    </head>
+    <body>
+        <div>
+            <h1>type in some text to have the server repeat it back</h1>
+            <form onsubmit="getEcho(); return false;">
+                <input id="text" name="text" type="text" placeholder="type some text here"/>
+                <input id="length" type="hidden" name="length" value="0"/>
+                <input type="submit"/>
+            </form>
+            <p id="echo">output will appear here</p>
+        </div>
+    </body>
+</html>
+```
+
+There is two parameters in te request url: `length` and `text`. `text` comes from the input field, and `length` is calculated with javascript.
+
+```javascript
+function getEcho(){
+    var text = $('#text').val();
+    var length = $('#length').val();
+    $.ajax('echo.php?length='+length+'&text='+text).done(function(echoed){
+        $('#echo').text(echoed);
+    });
+}
+$(document).ready(function(){
+    $('#text').on('input', function(){
+        $('#length').val($('#text').val().length);
+    });
+});
+```
+
+If I submit `A`, the calculated length is `1`.
+
+```
+GET /echo.php?length=1&text=A HTTP/1.1
+Host: neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:51.0) Gecko/20100101 Firefox/51.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/
+X-Requested-With: XMLHttpRequest
+Connection: close
+```
+
+But what will happen if I change the value from 1 to 1000 with Burp:
+
+```
+GET /echo.php?length=1000&text=A HTTP/1.1
+```
+
+The server displays more than intended:
+
+```
+Auo$@uyc kds2^4a ady 5 tyusft tuyuy_#65afajty ajb tjuflt ty%&(juuyttyjtji KEY: flag{bleeding_in_javascript} SDF4 asd6f ayj1dsgff@ af ttmtum56tu$%ga wrg3@#%aa9-mtyumty dfgsaumg68g$%ershe as 9tuyt t9uty38dsdfg-5f htyd45s#$
+```
+
+Flag is: `bleeding_in_javascript`.
+
+# 300 - WebCipher - Web
+
+> #anti-human
+>
+> http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/
+>
+> word list:
+>
+> https://s3-us-west-2.amazonaws.com/neverlanctf/files/words.txt
+
+Source:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>anti-human cipher</title>
+    </head>
+    <body>
+                <div id="cipher_box">
+            <h1 id="cipher">shhsjwfl</h1>
+        </div>
+        <div id="form_box">
+            <form id="form" method="GET" action="?">
+                <input type="text" name="deciphered" id="deciphered"/>
+                <input type="submit"/>
+            </form>
+        </div>
+    </body>
+</html>
+```
+
+First thing is to understand what to do. Here is what the server do:
++ A word is picked up randomly from `words.txt`
++ This word is randomly rotated (Caesar cipher with a shift between 1 and 25)
++ Then the shifted word is displayed for a few seconds
++ A new word is picked up and so on...
+
+So we need a script that:
++ Get the shifted word
++ Cross the dictionary and test words one by one (only same length as teh shifted word)
++ For each tested word try all possible shifting
++ Break when that match
++ Send the answer (decipered/unshifted word)
++ Get the flag
+
+So that's what I did with a ruby script and `curb`:
+
+```
+$ ruby webcipher.rb
+• Connexion works
+• Cracking ciphered word
+• Deciphered: cassidony
+• Sending answer
+• Flag: c34s3r_c1ph3r_70_7h3_m4x
+```
+
+My ruby script:
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'curb' # for get/post requests
+
+# from https://gist.github.com/matugm/db363c7131e6af27716c
+def caesar_cipher(string, shift = 1)
+    alphabet   = Array('a'..'z')
+    encrypter  = Hash[alphabet.zip(alphabet.rotate(shift))]
+    string.chars.map { |c| encrypter.fetch(c, " ") }
+end
+
+hostname = 'http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/index.php'
+
+c = Curl::Easy.new(hostname) do |curl|
+  curl.headers['Cookie'] = 'PHPSESSID=30ff4361f8af2985595bff7c9614b1f1'
+  curl.headers['Referer'] = hostname
+  curl.headers['Upgrade-Insecure-Requests'] = '1'
+  #curl.verbose = true
+end # Curl
+
+c.perform # send the request
+if c.body_str.match(/anti\-human cipher/)
+  puts '• Connexion works'
+end
+
+# get the cipher word
+ciphered_word = c.body_str.match(/<h1 id="cipher">([a-zA-Z]*)<\/h1>/).captures[0]
+ciphered_word.downcase! # put lowercase
+ciphered_word_length = ciphered_word.length
+
+puts '• Cracking ciphered word'
+do_break = false
+answer = ""
+File.open("words.txt", 'r') do |file|
+    file.each do |word|
+        word.chomp! # remove spaces
+        if word.length.eql?(ciphered_word_length) # only try word with same length
+            answer = word # save the word because it can be mixed case
+            word.downcase! # put lowercase
+            # puts "word: #{word}"
+            (1..25).each do |i|
+                # puts caesar_cipher(word, i).join
+                if caesar_cipher(word, i).join == ciphered_word
+                    puts "• Deciphered: #{word}"
+                    do_break = true
+                    break
+                end
+            end
+        end
+        break if do_break
+    end
+end
+
+puts "• Sending answer"
+c.url = hostname.concat("?deciphered=#{answer}")
+c.perform
+
+puts "• Flag: ".concat(c.body_str.match(/<p>flag{(.*)}<\/p>/).captures[0])
+```
+
+**Note**: This is not web, this is scripting.
+
+# 50 - Master Mind 1 - Other
+
+> Can you break my three digit lock?
+>
+> [MasterMind1.txt](https://ctf.neverlanctf.com/files/fd671a9b0e49da2d34c8fcc055663d9c/MasterMind1.txt)
+
+Source:
+
+```
++-----------------------+
+|       |       |       |
+|   7   |   3   |   6   | One number is correct but wrongly placed
+|       |       |       |
+|_______|_______|_______|
+|       |       |       |
+|   0   |   6   |   5   | One number is correct and correctly placed
+|       |       |       |
+|_______|_______|_______|
+|       |       |       |
+|   3   |   7   |   2   | Two numbers are correct but wrongly placed
+|       |       |       |
+|_______|_______|_______|
+|       |       |       |
+|   6   |   4   |   7   | No numbers are correct
+|       |       |       |
+|_______|_______|_______|
+|       |       |       |
+|   5   |   2   |   4   | One number is correct and correctly placed
+|       |       |       |
+|       |       |       |
++-----------------------+
+```
+
+Rules: [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game))
+
+Code-breaking:
++ Line 4: 647, No numbers are correct => [0,1,2,3,5,8,9] are possible
++ Line 1: 736, One number is correct but wrongly placed => 7 and 6 are wrong, so 3 is in the code and is right or left
++ Line 2: 065, One number is correct and correctly placed => 6 is wrong, so 0 or 5 is in the code and corrctly placed
++ Line 3: 372, Two numbers are correct but wrongly placed => 7 is wrong, 3 and 2 are good so [3,2,[0|5]] are possible
++ Line 5: 524, One number is correct and correctly placed => Only one number is correct, 2 is good so 5 is wrong and [3,2,0] are possible
++ (We have the three numbers so now let's order them)
++ Line 5: 524, One number is correct and correctly placed => 2 is middle
++ Line 2: 065, One number is correct and correctly placed => 0 is left
++ So 3 is right
+
+Flag is `023`.
+
+# 100 - Master Mind 2 - Other
+
+> I've upgraded my lock! Can you solve it?
+>
+> [MasterMind2.txt](https://ctf.neverlanctf.com/files/7ce349ea5750338cb65d4e92cbd1a56e/MasterMind2.txt)
+
+Source:
+
+```
++-------------------------------+
+|       |       |       |       |
+|   9   |   5   |   3   |   2   | One number is correct but wrongly placed
+|       |       |       |       |
+|_______|_______|_______|_______|
+|       |       |       |       |
+|   1   |   6   |   7   |   3   | Two numbers are correct and correctly placed
+|       |       |       |       |
+|_______|_______|_______|_______|
+|       |       |       |       |
+|   0   |   6   |   5   |   9   | Two numbers are correct but wrongly placed
+|       |       |       |       |
+|_______|_______|_______|_______|
+|       |       |       |       |
+|   2   |   4   |   3   |   8   | No numbers are correct
+|       |       |       |       |
+|_______|_______|_______|_______|
+|       |       |       |       |
+|   5   |   2   |   4   |   0   | One number is correct and correctly placed
+|       |       |       |       |
+|       |       |       |       |
++-------------------------------+
+```
+
+Rules: [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game))
+
+Code-breaking:
++ Line 4: 2438, No numbers are correct => Only [0,1,5,6,7,9] are possible
++ Line 5: 5240, One number is correct and correctly placed => 2 and 4 are wrong, so 0 or 5 is in the code, [[0|5],1,6,7,9]
++ Line 1: 9532, One number is correct but wrongly placed => 2 and 3 are wrong, so 9 or 5 is good, [0|5] & [5|9] = 5 so [1,5,6,7] OR [0|5] & [5|9] = [0,9] so so [0,1,6,7,9]
++ Line 2: 1673, Two numbers are correct and correctly placed => Only two number are good so [1,5,6,7] impossible so [0,1,6,7,9] is only possible
++ (Now we need to filter the 5 numbers to keep only 4)
++ Line 1: Confirmed [9], Possible [0,1,6,7]
++ Line 3: Confirmed [9,[0|6]], Possible [1,7]
++ Line 5: Confirmed [9,0], Possible [1,7] so [0,1,7,9] are the four numbers
++ (We have the four numbers so now let's order them)
++ Line 2: Place [1,x,7,x]
++ Line 5: Place [1,x,7,0] so  [1,9,7,0]
+
+Flag is `1970`.
