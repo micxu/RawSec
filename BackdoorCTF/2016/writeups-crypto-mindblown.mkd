@@ -113,7 +113,7 @@ Medium
 
 #### PBKDF2 + HMAC collision explanation
 
-**Inspired by** [mathiasbynens.be][mathiasbynens.be]
+**Inspired by** [mathiasbynensbe][mathiasbynensbe]
 
 PBKDF2 is a widely used method to derive a key.
 
@@ -158,7 +158,7 @@ There is an infinity of PBKDF2-HMAC-SHA1 collisions.
 
 > While it’s easy to find a collision for any given string larger than 64 bytes (just run the above Bash command), it gets trickier if you want the colliding password to consist of readable ASCII characters only. SHA1 hashes can contain any hexadecimal digits, and converting such a hash back into a string is likely to result in at least one character outside of the printable ASCII range (`[\x20-\x7E]`).
 
-To see how to choose a prefix for the colliding password go to [link][[mathiasbynens.be].
+To see how to choose a prefix for the colliding password go to [link][[mathiasbynensbe].
 
 ### Flag
 
@@ -173,4 +173,4 @@ To see how to choose a prefix for the colliding password go to [link][[mathiasby
 [pbkdf2sync]:https://nodejs.org/api/crypto.html#crypto_crypto_pbkdf2sync_password_salt_iterations_keylen_digest "Node.js pbkdf2Sync method"
 [rfc2898]:https://tools.ietf.org/html/rfc2898#appendix-A.2 "RFC 2898"
 [sha1]:https://en.wikipedia.org/wiki/SHA-1 "SHA-1 Wikipedia page"
-[mathiasbynens.be]:https://mathiasbynens.be/notes/pbkdf2-hmac "PBKDF2+HMAC hash collisions explained"
+[mathiasbynensbe]:https://mathiasbynens.be/notes/pbkdf2-hmac "PBKDF2+HMAC hash collisions explained"
