@@ -210,20 +210,20 @@ ga('send', 'pageview');
 <li>MIME type</li>
 <li>Null Byte</li>
 </ul>
-<h2>Extensions blacklist</h2>
+<h2 id="extensions-blacklist">Extensions blacklist</h2>
 <p>Blacklists are a bad idea in security.</p>
 <p>For example if a server check that there is no <code>.php</code> file extension uploaded. Ok, you may upload a php script saved as <code>.png</code> but even if it is include or publicly available you won't be able to execute it. So what? Did you know that a php server also interpret <code>.php2</code>, <code>.pwml</code>, <code>.phtml</code>?</p>
 <p>Whit a blacklist, an administrator can forget to add them all. So to protect you, a better solution will be to establish a whitelist of authorized extension instead of a blacklist of forbidden ones.</p>
-<h2>Double extensions</h2>
+<h2 id="double-extensions">Double extensions</h2>
 <p>A server is filtering authorized extensions and only <code>.jpg</code>, <code>.gif</code>, <code>.jpeg</code>, <code>.png</code> authorized.</p>
 <p>This kind of verification will only check the end extension with a regex matching what is after the dot in the filename.</p>
 <p>To bypass this just rename your files from <code>file.php</code> to <code>file.php.png</code>.</p>
 <p>In practice this is not so effective because the file have not the desired file extensions.</p>
 <p>To protect from this kind of attack don't trust filename, ignore them and rename the file with a hash. And before accepting it you may want to check what the file really is with the MIME type. Once uploaded on the server check again for example with file signature header and because it can be fake you can also you other methods. For example if you only allow png images use pngcheck to be sure that's really a png.</p>
-<h2>MIME type</h2>
+<h2 id="mime-type">MIME type</h2>
 <p>If an attacker name is php script <code>image.png</code> and temper his request and modify the content type from <code>application/octet-stream</code> to <code>image/png</code>, how can you know that's not an image?</p>
 <p>As said previously, don't trust client side, check again server side.</p>
-<h2>Null byte</h2>
+<h2 id="null-byte">Null byte</h2>
 <p>Double extensions works on the server but you can execute your script with an image extension? Let's fix that.</p>
 <p>Just usethe this old flaw: injection of a null byte, that will stop the php server reading the name of the file after the null byte.</p>
 <p>Name your script something like <code>script.php%00.png</code> and upload it. What's <code>%00</code>? It's the hexadecimal representation of the null byte encoded for http. How does it work? See my <a href="/en/local-file-inclusion-vulnerability/#Null-Byte-Injection">post about LFI</a>, I talked about Null Byte injection.</p>
@@ -235,7 +235,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/common-upload-flaws/" data-id="cizoihh1j0027mefsalg8c303" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/common-upload-flaws/" data-id="cizoiwla60024olfszbhttih2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -403,26 +403,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -436,6 +416,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -202,13 +202,13 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2>Install rTorrent</h2>
+            <h2 id="install-rtorrent">Install rTorrent</h2>
 <p>As rTorrent package is always up-to-date on Arch repository, it's not needed to compile it.</p>
 <ul>
 <li>Install <a href="https://www.archlinux.org/packages/?q=rtorrent" target="_blank" rel="external">rtorrent</a>:</li>
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pacman -S rtorrent</div></pre></td></tr></table></figure></p>
-<h2>Install ruTorrent</h2>
+<h2 id="install-rutorrent">Install ruTorrent</h2>
 <ul>
 <li>Create the web server root directory if it doesn't already exist:</li>
 </ul>
@@ -217,7 +217,7 @@ ga('send', 'pageview');
 <li>Go to the web server folder and clone the <a href="https://github.com/Novik/ruTorrent.git" target="_blank" rel="external">ruTorrent</a> git repository into it:</li>
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /usr/share/nginx/html/</div><div class="line"># git clone https://github.com/Novik/ruTorrent.git rutorrent</div></pre></td></tr></table></figure></p>
-<h2>Install Nginx</h2>
+<h2 id="install-nginx">Install Nginx</h2>
 <ul>
 <li>Install <a href="https://www.archlinux.org/packages/?name=nginx-mainline" target="_blank" rel="external">nginx-mainline</a>:</li>
 </ul>
@@ -226,7 +226,7 @@ ga('send', 'pageview');
 <li>Enable and start nginx:</li>
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable nginx.service</div><div class="line"># systemctl start nginx.service</div></pre></td></tr></table></figure></p>
-<h2>Install and configure PHP</h2>
+<h2 id="install-and-configure-php">Install and configure PHP</h2>
 <ul>
 <li>Install <a href="https://www.archlinux.org/packages/?sort=&amp;q=php&amp;maintainer=&amp;flagged=" target="_blank" rel="external">php</a>:</li>
 </ul>
@@ -264,7 +264,7 @@ ga('send', 'pageview');
 <li>Enable and start php-fpm:</li>
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># systemctl enable php-fpm</div><div class="line"># systemctl start php-fpm</div></pre></td></tr></table></figure></p>
-<h2>Configure Nginx</h2>
+<h2 id="configure-nginx">Configure Nginx</h2>
 <ul>
 <li>Change the default conf:</li>
 </ul>
@@ -290,9 +290,9 @@ ga('send', 'pageview');
 <li>Enable the server:</li>
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ln -s /etc/nginx/servers-available/seedbox.conf /etc/nginx/servers-enabled/seedbox.conf</div></pre></td></tr></table></figure></p>
-<h2>Configure SSL</h2>
+<h2 id="configure-ssl">Configure SSL</h2>
 <p>We will both view self-signed certificate and Let's Encrypt ones.</p>
-<h3>Self-signed</h3>
+<h3 id="self-signed">Self-signed</h3>
 <ul>
 <li>Add certificate folder:</li>
 </ul>
@@ -305,9 +305,9 @@ ga('send', 'pageview');
 <li>Modify files rights:</li>
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># chmod 644 /etc/nginx/ssl/*.crt</div><div class="line"># chmod 640 /etc/nginx/ssl/*.key</div></pre></td></tr></table></figure></p>
-<h3>Let's Encrypt</h3>
+<h3 id="let-s-encrypt">Let's Encrypt</h3>
 <p>TODO</p>
-<h2>Add an user</h2>
+<h2 id="add-an-user">Add an user</h2>
 <ul>
 <li>Create an user:</li>
 </ul>
@@ -356,7 +356,7 @@ ga('send', 'pageview');
 <li>Correct permissions:</li>
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># chown -R http:http /usr/share/nginx/html/rutorrent</div><div class="line"># chmod 0777 /usr/share/nginx/html/rutorrent/share/&#123;settings,torrents,users&#125;</div><div class="line"># systemctl restart nginx.service</div></pre></td></tr></table></figure></p>
-<h2>Create a rTorrent service</h2>
+<h2 id="create-a-rtorrent-service">Create a rTorrent service</h2>
 <ul>
 <li>Create the file <code>/etc/systemd/system/rtorent.service</code> (because <code>/etc/systemd/user/</code> doesn't work) containing:</li>
 </ul>
@@ -366,14 +366,14 @@ ga('send', 'pageview');
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ systemctl enable rtorrent</div><div class="line">$ systemctl start rtorrent</div></pre></td></tr></table></figure></p>
 <p><strong>Source</strong>: <a href="https://www.sdbox.net/noobunschool/seedbox/installer-une-seedbox/" target="_blank" rel="external">sdbox</a>, <a href="https://wiki.archlinux.org/index.php/RTorrent#Installation" target="_blank" rel="external">wiki archlinux</a></p>
-<h2>Troubleshooting</h2>
-<h3>mediainfo</h3>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="mediainfo">mediainfo</h3>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mediainfo: Plugin will not work. rTorrent user can&apos;t access external program (mediainfo).</div></pre></td></tr></table></figure></p>
 <p>You may need to install mediainfo: <code>pacman -S mediainfo</code>.</p>
-<h3>unrar</h3>
+<h3 id="unrar">unrar</h3>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Unpack plugin: rTorrent user can&apos;t access &apos;unrar&apos; program.</div></pre></td></tr></table></figure></p>
 <p>You may need to install unrar: <code>pacman -S unrar</code>.</p>
-<h3>screenshots</h3>
+<h3 id="screenshots">screenshots</h3>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screenshots: Plugin will not work. rTorrent user can&apos;t access external program (ffmpeg).</div></pre></td></tr></table></figure></p>
 <p>I don't use it and don't want to install ffmpeg and all its dependencies (224 MB) so I disabled it.</p>
 <p>To do so:</p>
@@ -383,7 +383,7 @@ ga('send', 'pageview');
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[screenshots]</div><div class="line">enabled = no</div></pre></td></tr></table></figure></p>
 <p>Or if you want to use screenshots plugin just install ffmpeg: <code>pacman -S ffmpeg</code>.</p>
-<h3>rss</h3>
+<h3 id="rss">rss</h3>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rss: Some functionality will be unavailable. Webserver user can&apos;t access external program (curl).</div></pre></td></tr></table></figure></p>
 <p>I didn't find how to <strong>cleanly</strong> resolve that. Some tells to add <code>/urb/bin</code> in the <code>open_basedir</code> or <code>php.ini</code> but this is a security issue and that doesn't work in our case. So I just disabled rss plugin:</p>
 <ul>
@@ -391,7 +391,7 @@ ga('send', 'pageview');
 <li>And add this lines at the end:</li>
 </ul>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[rss]</div><div class="line">enabled = no</div><div class="line"></div><div class="line">[rssurlrewrite]</div><div class="line">enabled = no</div></pre></td></tr></table></figure></p>
-<h3>rutracker_check</h3>
+<h3 id="rutracker-check">rutracker_check</h3>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rutracker_check: Plugin will not work. Webserver user must have execute access to the rtorrent session directory (/home/sdbox/.session/).</div></pre></td></tr></table></figure></p>
 <p>Add <code>/home/sdbox/.session/</code> into <code>open_basedir</code> of <code>/etc/php/php.ini</code>.</p>
 
@@ -401,7 +401,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/" data-id="cizoihh0p001imefs8yw5jmqp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/archlinux-install-rtorrent-rutorrent/" data-id="cizoiwl9n001folfsm8mrngng" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -569,26 +569,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -602,6 +582,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

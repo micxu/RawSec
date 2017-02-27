@@ -256,8 +256,8 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2>Informations</h2>
-<h3>Version</h3>
+            <h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
 <table>
 <thead>
 <tr>
@@ -274,7 +274,7 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3>CTF</h3>
+<h3 id="ctf">CTF</h3>
 <ul>
 <li><strong>Name</strong> : NeverLAN CTF 2017</li>
 <li><strong>Website</strong> : <a href="https://neverlanctf.com/" target="_blank" rel="external">neverlanctf.com</a></li>
@@ -282,32 +282,32 @@ ga('send', 'pageview');
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/431/" target="_blank" rel="external">link</a></li>
 </ul>
-<h2>50 - Encoding Apprentice - Trivia</h2>
+<h2 id="50-encoding-apprentice-trivia">50 - Encoding Apprentice - Trivia</h2>
 <blockquote>
 <p>What common encoding practice’s title contains the square of 8 and occasionally ends with an “=”, or “==”?</p>
 </blockquote>
 <p>Answer: <em>base64</em></p>
-<h2>50 - Shifty Ciphers… - Trivia</h2>
+<h2 id="50-shifty-ciphers-trivia">50 - Shifty Ciphers… - Trivia</h2>
 <blockquote>
 <p>What cipher is the shiftiest of them all? He even has his own salad…</p>
 </blockquote>
 <p>Answer: <em>caesar</em></p>
-<h2>50 - Know your extensions - Trivia</h2>
+<h2 id="50-know-your-extensions-trivia">50 - Know your extensions - Trivia</h2>
 <blockquote>
 <p>Unix and Linux use this (instead of a file extension) to determine what format a file is.</p>
 </blockquote>
 <p>Answer: <em>magic numbers</em></p>
-<h2>50 - Mmmm... SSL - Trivia</h2>
+<h2 id="50-mmmm-ssl-trivia">50 - Mmmm... SSL - Trivia</h2>
 <blockquote>
 <p>What is the standard, secure, size of an ssl certificate?</p>
 </blockquote>
 <p>Answer: <em>2048</em></p>
-<h2>50 - Don't eat me - Trivia</h2>
+<h2 id="50-don-t-eat-me-trivia">50 - Don't eat me - Trivia</h2>
 <blockquote>
 <p>I allow HTTP to act as a stateful protocol instead of the stateless protocol it actually is. Just a small piece of data sent from a website...</p>
 </blockquote>
 <p>Answer: <em>cookie</em></p>
-<h2>50 - NeverLAN - Recon</h2>
+<h2 id="50-neverlan-recon">50 - NeverLAN - Recon</h2>
 <blockquote>
 <p>We've been known to leak things on twitter...</p>
 </blockquote>
@@ -317,7 +317,7 @@ ga('send', 'pageview');
 <p>I tried a rot13 and I got that:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Easy recon is easy. flag&#123;inf0rmation_is_p0wer_kn0w_y0ur_adversary&#125;</div></pre></td></tr></table></figure></p>
 <p>Flag is <code>inf0rmation_is_p0wer_kn0w_y0ur_adversary</code>.</p>
-<h2>100 - Purvesta - Recon</h2>
+<h2 id="100-purvesta-recon">100 - Purvesta - Recon</h2>
 <blockquote>
 <p>Purvesta also really likes his twitter...</p>
 </blockquote>
@@ -330,7 +330,7 @@ ga('send', 'pageview');
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\\\BSU &apos;20, Co-founder of the NeverLAN CTF/// &#123;ZmxhZ3tXMHdfeTB1X0FyM19HZXR0aW5nX2cwMGRfYXRfVGhpNX0=&#125;</div></pre></td></tr></table></figure></p>
 <p>It looks like a base64 string:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ printf %s &apos;ZmxhZ3tXMHdfeTB1X0FyM19HZXR0aW5nX2cwMGRfYXRfVGhpNX0=&apos; | base64 -d</div><div class="line">flag&#123;W0w_y0u_Ar3_Getting_g00d_at_Thi5&#125;</div></pre></td></tr></table></figure></p>
-<h2>50 - SoYouLikeMusic - Forensics</h2>
+<h2 id="50-soyoulikemusic-forensics">50 - SoYouLikeMusic - Forensics</h2>
 <blockquote>
 <p><a href="https://ctf.neverlanctf.com/files/d8dacada92f876cff3f4f5775185240c/SoYouLikeMusic.class" target="_blank" rel="external">SoYouLikeMusic.class</a></p>
 </blockquote>
@@ -345,7 +345,7 @@ ga('send', 'pageview');
 <p>There was only a <code>8</code> before our base64 string:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ printf %s &apos;ZmxhZ3tTdGlsbF9XYWl0aW5nX09uX3B1cnZlc3RhJ3NfTWl4dGFwZX0=&apos; | base64 -di</div><div class="line">flag&#123;Still_Waiting_On_purvesta&apos;s_Mixtape&#125;</div></pre></td></tr></table></figure></p>
 <p><strong>Note</strong>: This is not forensics.</p>
-<h2>300 - just-a-selfie - Forensics</h2>
+<h2 id="300-just-a-selfie-forensics">300 - just-a-selfie - Forensics</h2>
 <blockquote>
 <p>You've been put in charge of a very secret project. There's talk that some of your data has leaked out. Your security analyst has flagged this email as &quot;out of place&quot;. Has your company been breached?</p>
 <p>Hmm.. Binwalk.</p>
@@ -370,7 +370,7 @@ ga('send', 'pageview');
 <p><img src="http://i.imgur.com/YZ84sSG.jpg" alt=""></p>
 <p>Flag is <code>rebellions_are_built_on_hope</code>.</p>
 <p><strong>Note</strong>: This is steganography, not forensics.</p>
-<h2>100 - TheHistoryOfCryptography - Cryptography</h2>
+<h2 id="100-thehistoryofcryptography-cryptography">100 - TheHistoryOfCryptography - Cryptography</h2>
 <p><code>The_History_of_Cryptography.zip</code> contains two files: <code>0.txt</code> and <code>1.zip</code> :</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat 0.txt</div><div class="line">This Shifty Cipher is one of the simplest, and most well know ciphers.</div></pre></td></tr></table></figure></p>
 <p>Answer: <em>caesar</em></p>
@@ -387,7 +387,7 @@ ga('send', 'pageview');
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cat 5.txt</div><div class="line">Which one is you&apos;re favorite? I love them all because...</div><div class="line">flag&#123;THEHISTORYOFCRYPTOGRAPHYISAW3S0M3&#125;</div></pre></td></tr></table></figure></p>
 <p>Flag is <code>THEHISTORYOFCRYPTOGRAPHYISAW3S0M3</code>.</p>
 <p><strong>Note</strong>: this challenge was a quizz, not a cryptography challenge. It should have been in Trivia, Misc, Quizz or Other.</p>
-<h2>100 - A Slight Cut - Web</h2>
+<h2 id="100-a-slight-cut-web">100 - A Slight Cut - Web</h2>
 <blockquote>
 <p>http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/</p>
 </blockquote>
@@ -402,7 +402,7 @@ ga('send', 'pageview');
 <p>The server displays more than intended:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Auo$@uyc kds2^4a ady 5 tyusft tuyuy_#65afajty ajb tjuflt ty%&amp;(juuyttyjtji KEY: flag&#123;bleeding_in_javascript&#125; SDF4 asd6f ayj1dsgff@ af ttmtum56tu$%ga wrg3@#%aa9-mtyumty dfgsaumg68g$%ershe as 9tuyt t9uty38dsdfg-5f htyd45s#$</div></pre></td></tr></table></figure></p>
 <p>Flag is: <code>bleeding_in_javascript</code>.</p>
-<h2>300 - WebCipher - Web</h2>
+<h2 id="300-webcipher-web">300 - WebCipher - Web</h2>
 <blockquote>
 <p>#anti-human</p>
 <p>http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/</p>
@@ -432,7 +432,7 @@ ga('send', 'pageview');
 <p>My ruby script:</p>
 <p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env ruby</span></div><div class="line"></div><div class="line"><span class="keyword">require</span> <span class="string">'curb'</span> <span class="comment"># for get/post requests</span></div><div class="line"></div><div class="line"><span class="comment"># from https://gist.github.com/matugm/db363c7131e6af27716c</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">caesar_cipher</span><span class="params">(string, shift = <span class="number">1</span>)</span></span></div><div class="line">    alphabet   = Array(<span class="string">'a'</span>..<span class="string">'z'</span>)</div><div class="line">    encrypter  = Hash[alphabet.zip(alphabet.rotate(shift))]</div><div class="line">    string.chars.map &#123; <span class="params">|c|</span> encrypter.fetch(c, <span class="string">" "</span>) &#125;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">hostname = <span class="string">'http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/index.php'</span></div><div class="line"></div><div class="line">c = Curl::Easy.new(hostname) <span class="keyword">do</span> <span class="params">|curl|</span></div><div class="line">  curl.headers[<span class="string">'Cookie'</span>] = <span class="string">'PHPSESSID=30ff4361f8af2985595bff7c9614b1f1'</span></div><div class="line">  curl.headers[<span class="string">'Referer'</span>] = hostname</div><div class="line">  curl.headers[<span class="string">'Upgrade-Insecure-Requests'</span>] = <span class="string">'1'</span></div><div class="line">  <span class="comment">#curl.verbose = true</span></div><div class="line"><span class="keyword">end</span> <span class="comment"># Curl</span></div><div class="line"></div><div class="line">c.perform <span class="comment"># send the request</span></div><div class="line"><span class="keyword">if</span> c.body_str.match(<span class="regexp">/anti\-human cipher/</span>)</div><div class="line">  puts <span class="string">'• Connexion works'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># get the cipher word</span></div><div class="line">ciphered_word = c.body_str.match(<span class="regexp">/&lt;h1 id="cipher"&gt;([a-zA-Z]*)&lt;\/h1&gt;/</span>).captures[<span class="number">0</span>]</div><div class="line">ciphered_word.downcase! <span class="comment"># put lowercase</span></div><div class="line">ciphered_word_length = ciphered_word.length</div><div class="line"></div><div class="line">puts <span class="string">'• Cracking ciphered word'</span></div><div class="line">do_break = <span class="literal">false</span></div><div class="line">answer = <span class="string">""</span></div><div class="line">File.open(<span class="string">"words.txt"</span>, <span class="string">'r'</span>) <span class="keyword">do</span> <span class="params">|file|</span></div><div class="line">    file.each <span class="keyword">do</span> <span class="params">|word|</span></div><div class="line">        word.chomp! <span class="comment"># remove spaces</span></div><div class="line">        <span class="keyword">if</span> word.length.eql?(ciphered_word_length) <span class="comment"># only try word with same length</span></div><div class="line">            answer = word <span class="comment"># save the word because it can be mixed case</span></div><div class="line">            word.downcase! <span class="comment"># put lowercase</span></div><div class="line">            <span class="comment"># puts "word: #&#123;word&#125;"</span></div><div class="line">            (<span class="number">1</span>..<span class="number">25</span>).each <span class="keyword">do</span> <span class="params">|i|</span></div><div class="line">                <span class="comment"># puts caesar_cipher(word, i).join</span></div><div class="line">                <span class="keyword">if</span> caesar_cipher(word, i).join == ciphered_word</div><div class="line">                    puts <span class="string">"• Deciphered: <span class="subst">#&#123;word&#125;</span>"</span></div><div class="line">                    do_break = <span class="literal">true</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">                <span class="keyword">end</span></div><div class="line">            <span class="keyword">end</span></div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">break</span> <span class="keyword">if</span> do_break</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">puts <span class="string">"• Sending answer"</span></div><div class="line">c.url = hostname.concat(<span class="string">"?deciphered=<span class="subst">#&#123;answer&#125;</span>"</span>)</div><div class="line">c.perform</div><div class="line"></div><div class="line">puts <span class="string">"• Flag: "</span>.concat(c.body_str.match(<span class="regexp">/&lt;p&gt;flag&#123;(.*)&#125;&lt;\/p&gt;/</span>).captures[<span class="number">0</span>])</div></pre></td></tr></table></figure></p>
 <p><strong>Note</strong>: This is not web, this is scripting.</p>
-<h2>50 - Master Mind 1 - Other</h2>
+<h2 id="50-master-mind-1-other">50 - Master Mind 1 - Other</h2>
 <blockquote>
 <p>Can you break my three digit lock?</p>
 <p><a href="https://ctf.neverlanctf.com/files/fd671a9b0e49da2d34c8fcc055663d9c/MasterMind1.txt" target="_blank" rel="external">MasterMind1.txt</a></p>
@@ -453,7 +453,7 @@ ga('send', 'pageview');
 <li>So 3 is right</li>
 </ul>
 <p>Flag is <code>023</code>.</p>
-<h2>100 - Master Mind 2 - Other</h2>
+<h2 id="100-master-mind-2-other">100 - Master Mind 2 - Other</h2>
 <blockquote>
 <p>I've upgraded my lock! Can you solve it?</p>
 <p><a href="https://ctf.neverlanctf.com/files/7ce349ea5750338cb65d4e92cbd1a56e/MasterMind2.txt" target="_blank" rel="external">MasterMind2.txt</a></p>
@@ -483,7 +483,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/" data-id="cizoihhfw00ivmefszjjk3v2t" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/" data-id="cizoiwlop00ilolfs7w4vwexk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -619,20 +619,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/XiomaraCTF-2017-write-ups/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            Xiomara CTF 2017 - Write-ups
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/XiomaraCTF-2017-write-ups/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">WhiteHat Challenge 01 - 20 - For001 - Forensics</p>
+        <p class="article-nav-title">Xiomara CTF 2017 - Write-ups</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -651,26 +641,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -684,6 +654,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

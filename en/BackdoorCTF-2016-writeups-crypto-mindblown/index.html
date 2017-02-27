@@ -256,8 +256,8 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2>Informations</h2>
-<h3>Version</h3>
+            <h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
 <table>
 <thead>
 <tr>
@@ -276,7 +276,7 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3>CTF</h3>
+<h3 id="ctf">CTF</h3>
 <ul>
 <li><strong>Name</strong> : BackdoorCTF 2016</li>
 <li><strong>Website</strong> : <a href="https://backdoor.sdslabs.co/competitions/backdoorctf16/leaderboard" target="_blank" rel="external">https://backdoor.sdslabs.co</a></li>
@@ -284,11 +284,11 @@ ga('send', 'pageview');
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/314" target="_blank" rel="external">link</a></li>
 </ul>
-<h3>Name</h3>
+<h3 id="name">Name</h3>
 <p><em>MindBlown</em></p>
-<h3>Category</h3>
+<h3 id="category">Category</h3>
 <p><em>Cryptography</em></p>
-<h3>Wording</h3>
+<h3 id="wording">Wording</h3>
 <blockquote>
 <p>Recently Chintu made a login service to secure his flag.
 But we managed to get the authentification logic to be found <em>here</em>.
@@ -296,21 +296,21 @@ Can you help us to get his flag?
 Find the login form <em>here</em>.</p>
 </blockquote>
 <p><img src="http://i.imgur.com/moXsMFi.png" alt="Wording page"></p>
-<h3>Data(s)</h3>
+<h3 id="data-s">Data(s)</h3>
 <p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="keyword">var</span> port = process.env.PORT || <span class="number">9898</span>;</div><div class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</div><div class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)</div><div class="line"><span class="keyword">var</span> salt = <span class="string">'somestring'</span>;</div><div class="line"><span class="keyword">var</span> iteration = <span class="comment">/// some number here;</span></div><div class="line"><span class="keyword">var</span> keylength = <span class="comment">// some number here;</span></div><div class="line"></div><div class="line">app.post(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> username = req.body.username;</div><div class="line">    <span class="keyword">var</span> password = req.body.password;</div><div class="line">    <span class="keyword">if</span> (username !== <span class="string">'chintu'</span>) &#123;</div><div class="line">        res.send(<span class="string">'Username is wrong'</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (crypto.pbkdf2Sync(password, salt, iteration, keylength).toString() === hashOfPassword) &#123;</div><div class="line">        <span class="keyword">if</span> (password === <span class="string">'complexPasswordWhichContainsManyCharactersWithRandomSuffixeghjrjg'</span>) &#123;</div><div class="line">            <span class="comment">// some logic here and return something</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// return flag here</span></div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        res.send(<span class="string">'Password is wrong'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<h3>Equipment(s)</h3>
+<h3 id="equipment-s">Equipment(s)</h3>
 <ul>
 <li>A computer with an OS (preferably UNIX)</li>
 <li>Internet access</li>
 </ul>
-<h3>Hint(s)</h3>
+<h3 id="hint-s">Hint(s)</h3>
 <p>None</p>
-<h3>Help</h3>
+<h3 id="help">Help</h3>
 <p>None</p>
-<h3>Difficulty</h3>
+<h3 id="difficulty">Difficulty</h3>
 <p>Medium</p>
-<h2>Solution</h2>
-<h3>Methodology</h3>
+<h2 id="solution">Solution</h2>
+<h3 id="methodology">Methodology</h3>
 <ol>
 <li>Take a look at the <em>logic</em> source code.</li>
 <li><code>if (username !== 'chintu')</code> clearly indicates that the username is <code>chintu</code></li>
@@ -325,7 +325,7 @@ Find the login form <em>here</em>.</p>
 <li>Here you are.
 <img src="http://i.imgur.com/eZFIWTI.png" alt="flag"></li>
 </ol>
-<h4>PBKDF2 + HMAC collision explanation</h4>
+<h4 id="pbkdf2-hmac-collision-explanation">PBKDF2 + HMAC collision explanation</h4>
 <p><strong>Inspired by</strong> <a href="https://mathiasbynens.be/notes/pbkdf2-hmac" title="PBKDF2+HMAC hash collisions explained" target="_blank" rel="external">mathiasbynensbe</a></p>
 <p>PBKDF2 is a widely used method to derive a key.</p>
 <p>Minimal arguments are:</p>
@@ -369,7 +369,7 @@ Find the login form <em>here</em>.</p>
 <p>While it’s easy to find a collision for any given string larger than 64 bytes (just run the above Bash command), it gets trickier if you want the colliding password to consist of readable ASCII characters only. SHA1 hashes can contain any hexadecimal digits, and converting such a hash back into a string is likely to result in at least one character outside of the printable ASCII range (<code>[\x20-\x7E]</code>).</p>
 </blockquote>
 <p>To see how to choose a prefix for the colliding password go to [link][<a href="https://mathiasbynens.be/notes/pbkdf2-hmac" title="PBKDF2+HMAC hash collisions explained" target="_blank" rel="external">mathiasbynensbe</a>.</p>
-<h3>Flag</h3>
+<h3 id="flag">Flag</h3>
 <blockquote>
 <p>Since Backdoor is an always-online CTF platform, and not a one time contest, we kindly request you to not publish flags for the challenges in your writeups.
 Writeups are an excellent way to share knowledge and help others learn. In Backdoor, challenges are shifted from a contest to the Practice section, where people can continue to attempt them after the contest is over. It would be very unfair to participants if the flags for the problems were easily available in writeups online.
@@ -382,7 +382,7 @@ Hence, we kindly request to not publish flags of the problems that you solve. He
 
 
 
-    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-mindblown/" data-id="cizoihhcn00ebmefsjgs0xncb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-mindblown/" data-id="cizoiwll200duolfser7mdr62" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -550,26 +550,6 @@ Hence, we kindly request to not publish flags of the problems that you solve. He
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -583,6 +563,26 @@ Hence, we kindly request to not publish flags of the problems that you solve. He
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

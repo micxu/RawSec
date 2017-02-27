@@ -262,8 +262,8 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2>Informations</h2>
-<h3>Version</h3>
+            <h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
 <table>
 <thead>
 <tr>
@@ -280,7 +280,7 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3>CTF</h3>
+<h3 id="ctf">CTF</h3>
 <ul>
 <li><strong>Name</strong> : SECCON 2016 Online CTF</li>
 <li><strong>Website</strong> : <a href="http://2016.seccon.jp/news/#124" target="_blank" rel="external">seccon.jp</a></li>
@@ -288,7 +288,7 @@ ga('send', 'pageview');
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/354/" target="_blank" rel="external">link</a></li>
 </ul>
-<h3>Description</h3>
+<h3 id="description">Description</h3>
 <blockquote>
 <p>Find the website that the fake svchost is accessing.</p>
 <p>You can get the flag if you access the website!!</p>
@@ -297,7 +297,7 @@ ga('send', 'pageview');
 <p>Hint2: Check the hosts file</p>
 <p>password: fjliejflsjiejlsiejee33cnc</p>
 </blockquote>
-<h2>Solution</h2>
+<h2 id="solution">Solution</h2>
 <p>For this challenge, we get a zip file wih a raw memory dump inside named <em>forensic_100.raw</em>.</p>
 <p>First, let's determine which OS is this dump come from :</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw imageinfo</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">INFO    : volatility.debug    : Determining profile based on KDBG search...</div><div class="line">          Suggested Profile(s) : WinXPSP2x86, WinXPSP3x86 (Instantiated with WinXPSP2x86)</div><div class="line">                     AS Layer1 : IA32PagedMemoryPae (Kernel AS)</div><div class="line">                     AS Layer2 : FileAddressSpace (/media/sf_Challenges/CTF/SECCON/forensic_100.raw)</div><div class="line">                      PAE type : PAE</div><div class="line">                           DTB : 0x34c000L</div><div class="line">                          KDBG : 0x80545ce0L</div><div class="line">          Number of Processors : 1</div><div class="line">     Image Type (Service Pack) : 3</div><div class="line">                KPCR for CPU 0 : 0xffdff000L</div><div class="line">             KUSER_SHARED_DATA : 0xffdf0000L</div><div class="line">           Image date and time : 2016-12-06 05:28:47 UTC+0000</div><div class="line">     Image local date and time : 2016-12-06 14:28:47 +0900</div></pre></td></tr></table></figure></p>
@@ -319,7 +319,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/SECCON-2016-100-forensics-memory-analysis/" data-id="cizoihhgl00jkmefs4gwolyrz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/SECCON-2016-100-forensics-memory-analysis/" data-id="cizoiwlp800j9olfs7q1tewjv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -466,9 +466,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/privilege-escalation-on-windows-server-2012-via-powershell/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/enable-remote-desktop-windows-server-2012/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Privilege Escalation (EoP) on Windows Server 2012 via PowerShell (PS)</p>
+        <p class="article-nav-title">Enable Remote Desktop Protocol (RDP) on Windows Server 2012</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -487,26 +487,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -520,6 +500,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

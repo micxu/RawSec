@@ -208,11 +208,11 @@ ga('send', 'pageview');
 <li>vSphere Client 5.1</li>
 <li>VMware ESXI 5.1</li>
 </ul>
-<h2>Export to OVA/OVF</h2>
+<h2 id="export-to-ova-ovf">Export to OVA/OVF</h2>
 <p>From VirtualBox export the virtual machine : &quot;File&quot; &gt; &quot;Export Appliance&quot;.</p>
 <p>Then choose <code>OVF 1.0</code> format and don't check the write manifest file box.</p>
 <p>You now have a <code>.ova</code> file.</p>
-<h2>Edit OVF</h2>
+<h2 id="edit-ovf">Edit OVF</h2>
 <p>VMware ESXI is not good at all to import virtual machine from other virtual manager.</p>
 <p>So if you try to directly import your ova file you'll get an error message: <code>The OVF package requires unsupported hardware. Details: Line 25: Unsupported hardware family 'virtualbox-2.2'.</code></p>
 <p>To fix it, unzip the <code>.ova</code> file (ignore extracting error), go into the folder and edit the <code>.ovf</code> file.</p>
@@ -221,7 +221,7 @@ ga('send', 'pageview');
 <p>with:
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;vssd:VirtualSystemType&gt;vmx-07&lt;/vssd:VirtualSystemType&gt;</div></pre></td></tr></table></figure></p>
 <p>Note : if you didn't check <em>write manifest file</em> you won't have checksum problem, but if you did the easiest is to remove the <code>.mf</code> file. You can also re-generate the checksum <code>sha1sum file.ovf</code> and replace the value in the <code>.mf</code> file.</p>
-<h2>Import into ESXI</h2>
+<h2 id="import-into-esxi">Import into ESXI</h2>
 <p>You can now <strong>try</strong> to import the VM:</p>
 <ul>
 <li>&quot;File&quot; &gt; &quot;Deploy OVF Template&quot; &gt; Select the freshly edited <code>.ovf</code> (ot the original <code>.ova</code>)</li>
@@ -241,7 +241,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/virtualbox-export-vmware-esxi/" data-id="cizoihh4u006tmefsmjhcy9f0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/virtualbox-export-vmware-esxi/" data-id="cizoiwley009nolfsol071tp3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -377,20 +377,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/nikto-protecting-LFI/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/virtualbox-change-virtual-disk-uuid/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Nikto : protect your Apache server against a LFI vulnerability
+            Virtualbox : change the UUID of a virtual disk
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/virtualbox-change-virtual-disk-uuid/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/BackdoorCTF-2016-writeups-forensic-busybee/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Virtualbox : change the UUID of a virtual disk</p>
+        <p class="article-nav-title">Writeups - Forensic - BusyBee</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -409,26 +409,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -442,6 +422,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

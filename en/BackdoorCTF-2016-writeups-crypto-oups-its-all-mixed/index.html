@@ -256,8 +256,8 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2>Informations</h2>
-<h3>Version</h3>
+            <h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
 <table>
 <thead>
 <tr>
@@ -276,25 +276,25 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3>Name</h3>
+<h3 id="name">Name</h3>
 <p><em>Oups it's all mixed</em></p>
-<h3>Category</h3>
+<h3 id="category">Category</h3>
 <p><em>Cryptography</em></p>
-<h3>Wording</h3>
+<h3 id="wording">Wording</h3>
 <p>Decipher the following flag:
 <code>eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC</code></p>
-<h3>Data(s)</h3>
+<h3 id="data-s">Data(s)</h3>
 <p><code>+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/</code></p>
-<h3>Equipment(s)</h3>
+<h3 id="equipment-s">Equipment(s)</h3>
 <p>A computer with an OS (preferably UNIX)</p>
-<h3>Hint(s)</h3>
+<h3 id="hint-s">Hint(s)</h3>
 <p>The name title is a hint.</p>
-<h3>Help</h3>
+<h3 id="help">Help</h3>
 <p>Base64</p>
-<h3>Difficulty</h3>
+<h3 id="difficulty">Difficulty</h3>
 <p>Easy / Medium</p>
-<h2>Solution</h2>
-<h3>Methodology</h3>
+<h2 id="solution">Solution</h2>
+<h3 id="methodology">Methodology</h3>
 <ol>
 <li>Identify that is a base64 string</li>
 <li>Decode the base64 string and observe only garbage</li>
@@ -304,13 +304,13 @@ ga('send', 'pageview');
 <li>Write a script that will translate one alphabet to the other and pick up the output standard base64 string and then decode it</li>
 </ol>
 <p>Some scrip examples below.</p>
-<h4>Python 2</h4>
+<h4 id="python-2">Python 2</h4>
 <p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python2                                                                               </span></div><div class="line"><span class="comment"># made with python 2.7.9</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">base64_mixed_alphabet =     <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span></div><div class="line">base64_standard_alphabet =  <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></div><div class="line"></div><div class="line">s = <span class="string">'eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC'</span></div><div class="line"></div><div class="line">s_unmixed = s.translate(string.maketrans(base64_mixed_alphabet, base64_standard_alphabet))</div><div class="line"></div><div class="line">s_unb64 = base64.urlsafe_b64decode(s_unmixed)</div></pre></td></tr></table></figure></p>
-<h4>Python 3</h4>
+<h4 id="python-3">Python 3</h4>
 <p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python3                                                      </span></div><div class="line"><span class="comment"># made with python 3.4.1</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"></div><div class="line">base64_mixed_alphabet =     <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span></div><div class="line">base64_standard_alphabet =  <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></div><div class="line"></div><div class="line">s = <span class="string">'eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC'</span></div><div class="line"></div><div class="line">s_unmixed = s.translate(str.maketrans(base64_mixed_alphabet, base64_standard_alphabet))</div><div class="line"></div><div class="line">s_unb64 = base64.urlsafe_b64decode(s_unmixed.encode(<span class="string">'utf-8'</span>))</div><div class="line">s_unb64 = s_unb64.decode(<span class="string">'utf-8'</span>) <span class="comment"># byte to string</span></div></pre></td></tr></table></figure></p>
-<h4>Bash</h4>
+<h4 id="bash">Bash</h4>
 <p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># made with bash 4.2.47</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"eGqaelr557dK4BbK47dS17dK68cu2PVPdydK2TtR5lKC"</span> | tr <span class="string">'+aAzZbByYcCxXdDwWeEvV9876543210fFuUgGtThHsSiIrRjJqQkKpPlLoOmMnN/'</span> <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span> | base64 -di &amp;&amp; <span class="built_in">echo</span> <span class="string">"\n"</span></div></pre></td></tr></table></figure></p>
-<h3>Flag</h3>
+<h3 id="flag">Flag</h3>
 <p><code>FLAG{Yesthatisjustabase64string}</code></p>
 
         </div>
@@ -319,7 +319,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-oups-its-all-mixed/" data-id="cizoihhcv00efmefszfh0olde" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/BackdoorCTF-2016-writeups-crypto-oups-its-all-mixed/" data-id="cizoiwll500dyolfss3cv6ftk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -487,26 +487,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -520,6 +500,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -193,7 +193,7 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2>Well-known tricks</h2>
+            <h2 id="well-known-tricks">Well-known tricks</h2>
 <p>Malware often tries to hide itself from being an obvious executable.</p>
 <p>Windows malwares may:</p>
 <ul>
@@ -201,12 +201,12 @@ ga('send', 'pageview');
 <li>use double extensions such as <code>.pdf.exe</code> or <code>.doc.exe</code>, this is effective because by default Windows hides the extension so not aware users wouldn't notice this an an executable as they are only seeing <code>.pdf</code> or <code>.doc</code> .</li>
 <li>use lesser known extensions of executable format like <code>.scr</code>.</li>
 </ul>
-<h2>PIF extension</h2>
+<h2 id="pif-extension">PIF extension</h2>
 <p>This trick is very effective because it hides the real extension even if the extension hiding feature is disabled.
 The <code>.pif</code> extension is hidden and the original icon too but the file is still executable.</p>
 <p>PIF means Program Information file, historically it was used for DOS program and is not used today because there is no more DOS applications. But Creating a PIF file for a DOS-based program creates a shortcut to the program executable and all the settings saved in the PIF are contained in the shortcut.</p>
 <p>This trick was used in 2016 by a <a href="https://blog.malwarebytes.com/cybercrime/2016/09/lesser-known-tricks-of-spoofing-extensions/" target="_blank" rel="external">Petya/Mischa campaign in Poland</a>.</p>
-<h2>RTLO trick</h2>
+<h2 id="rtlo-trick">RTLO trick</h2>
 <p>RTLO (Right To Left Override) trick uses the fact that some languages are being written from right side towards left but not the majority of countries.
 In order to support such languages, a Unicode character (<code>U+202e</code>) is used to do the switch between those two modes. It can be use maliciously, in order to displace the displayed extensions.</p>
 <p>You can use <a href="https://www.branah.com/unicode-converter" target="_blank" rel="external">this site</a> to see how it works.</p>
@@ -224,7 +224,7 @@ In order to support such languages, a Unicode character (<code>U+202e</code>) is
 
 
 
-    <a data-url="http://rawsec.ml/en/2-less-known-tricks-spoofing-extensions/" data-id="cizoihh0e0019mefsc5roc8y2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/2-less-known-tricks-spoofing-extensions/" data-id="cizoiwl9g0018olfsg9t5710q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -360,20 +360,20 @@ In order to support such languages, a Unicode character (<code>U+202e</code>) is
         
 <nav id="article-nav">
     
-        <a href="/en/proxy-linux/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/archlinux-temporarily-resize-tmp-partition/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Setup a proxy under Linux
+            ArchLinux - Temporarily resize /tmp partition
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/archlinux-setup-sftp-user-deluge/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/proxy-linux/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ArchLinux - Setup an SFTP user for Deluge</p>
+        <p class="article-nav-title">Setup a proxy under Linux</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -392,26 +392,6 @@ In order to support such languages, a Unicode character (<code>U+202e</code>) is
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -425,6 +405,26 @@ In order to support such languages, a Unicode character (<code>U+202e</code>) is
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

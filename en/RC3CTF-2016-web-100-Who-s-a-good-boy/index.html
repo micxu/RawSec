@@ -262,8 +262,8 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2>Informations</h2>
-<h3>Version</h3>
+            <h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
 <table>
 <thead>
 <tr>
@@ -280,7 +280,7 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<h3>CTF</h3>
+<h3 id="ctf">CTF</h3>
 <ul>
 <li><strong>Name</strong> : RC3 CTF 2016</li>
 <li><strong>Website</strong> : <a href="http://ctf.rc3.club/" target="_blank" rel="external">http://ctf.rc3.club/</a></li>
@@ -288,13 +288,13 @@ ga('send', 'pageview');
 <li><strong>Format</strong> : Jeopardy</li>
 <li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/389" target="_blank" rel="external">link</a></li>
 </ul>
-<h3>Description</h3>
+<h3 id="description">Description</h3>
 <blockquote>
 <p>You’re trying to see the cute dog pictures on ctf.rc3.club. But every time you click on one of them, it brings you to a bad gateway.</p>
 <p>https://ctf.rc3.club:3000/</p>
 <p>-- Your friendly neighborhood webadmin</p>
 </blockquote>
-<h2>Solution</h2>
+<h2 id="solution">Solution</h2>
 <p>We can see that one of the image is not like all others:</p>
 <p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"phil me up"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/doge-pattern-27481-2880x1800.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>the absolute mostest?<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"philarydufflebag"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/doge/this-aint-the-RC3-flag-we're-getting-there-though.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>CTF flags!!1!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"guys the flag is!"</span></span></div><div class="line"><span class="attr">src</span>=<span class="string">"http://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/doge-pattern-27481-2880x1800.jpg"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>Find the Phil<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
 <p>But this image doesn't exist, and is not cached in the WayBackMachine.</p>
@@ -310,7 +310,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/" data-id="cizoihhgg00jemefseqj1aof0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/RC3CTF-2016-web-100-Who-s-a-good-boy/" data-id="cizoiwlp300j3olfsx4rgx13b" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -446,11 +446,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/RC3CTF-2016-web-300-bork-bork/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/RC3CTF-2016-forensics-300-breaking-news/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            RC3 CTF - 300 - Bork Bork - Web
+            RC3 CTF - 300 - Breaking News - Forensics
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -478,26 +478,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -511,6 +491,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -189,12 +189,12 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <p>This how-to was made for Linux user.
 The user will need p7zip, exiv2 and optionally exif, exiftool, unzip.</p>
-<h2>Create an AES-256 encrypted zip file</h2>
+<h2 id="create-an-aes-256-encrypted-zip-file">Create an AES-256 encrypted zip file</h2>
 <p><a href="http://www.7-zip.org/7z.html" title="7z Zip" target="_blank" rel="external">7z</a> (p7zip for Linux) can produce zip-format archives with encryption scheme.</p>
 <p>To add <em>file.txt</em> to <em>archive.zip</em> and cipher zip data with AES-256 :
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">7za a -tzip -pTHE_PASSWORD -mem=AES256 archive.zip file.txt</div></pre></td></tr></table></figure></p>
 <p>To uncompress <code>unzip -p THE_PASSWORD archive.zip</code> or <code>7za e archive.zip</code> and provide password. It may also work with GUI archive manager.</p>
-<h2>Hide the zip into the image</h2>
+<h2 id="hide-the-zip-into-the-image">Hide the zip into the image</h2>
 <p>To do so, concatenate the zip an image data:
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat original_image.jpg archive.zip &gt; new_image.jpg</div></pre></td></tr></table></figure></p>
 <p>Now check file type:
@@ -209,7 +209,7 @@ The user will need p7zip, exiv2 and optionally exif, exiftool, unzip.</p>
 <p>Jpeg zip archive:
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">unzip new_image.jpg</div><div class="line">Archive:  new_image.jpg</div><div class="line">warning [new_image.jpg]:  35068 extra bytes at beginning or within zipfile</div><div class="line">  (attempting to process anyway)</div><div class="line">   skipping: file.txt             need PK compat. v5.1 (can do v4.5)</div></pre></td></tr></table></figure></p>
 <p>To really extract the archive use <code>unzip -p</code>, <code>7za e</code> or a GUI archive manager like explained in the previous part.</p>
-<h2>Hide the archive password into image metadata</h2>
+<h2 id="hide-the-archive-password-into-image-metadata">Hide the archive password into image metadata</h2>
 <p>Here we'll hide password in image comment, it's not safe at all but it's just for fun.</p>
 <p>We'll hide the real password into jpeg comment and a fake password into exif user comment.</p>
 <p>Hide the password into jpeg comment:
@@ -221,7 +221,7 @@ The user will need p7zip, exiv2 and optionally exif, exiftool, unzip.</p>
 <p>Exif user comment can be seen with:
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">exiv2 -p t new_image.jpg</div><div class="line">Exif.Image.ExifTag                           Long        1  26  </div><div class="line">Exif.Photo.UserComment                       Undefined  37  FAKE_PASSWORD</div></pre></td></tr></table></figure></p>
 <p>More datails are avaible at <a href="http://www.exiv2.org/manpage.html" title="Exiv2 manpage" target="_blank" rel="external">exiv2 manpage</a>.</p>
-<h2>Why two different passwords and two different comments</h2>
+<h2 id="why-two-different-passwords-and-two-different-comments">Why two different passwords and two different comments</h2>
 <p>As I said put the password in metadata is not safe, everyone aware of steganography will know how to find it. But we can get confused more novice people.</p>
 <p>Novice in steganography often use only default behaviour of tools commands like <code>exiftool</code>, <code>exif</code> or less often <code>exiv2</code>.</p>
 <p><code>exif</code> and <code>exiv2</code> default behaviour without options show only exif data but <code>exiftool</code> will show Exif, IPTC, XMP and image type dependent data.</p>
@@ -237,7 +237,7 @@ The user will need p7zip, exiv2 and optionally exif, exiftool, unzip.</p>
 
 
 
-    <a data-url="http://rawsec.ml/en/hide-encrypted-zip-image/" data-id="cizoihh34003jmefsyjt78u13" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/hide-encrypted-zip-image/" data-id="cizoiwlb5003folfsfzbmmrcu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -405,26 +405,6 @@ The user will need p7zip, exiv2 and optionally exif, exiftool, unzip.</p>
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
     
     
@@ -438,6 +418,26 @@ The user will need p7zip, exiv2 and optionally exif, exiftool, unzip.</p>
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>
