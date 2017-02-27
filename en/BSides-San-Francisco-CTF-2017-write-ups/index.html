@@ -327,15 +327,15 @@ ga('send', 'pageview');
 <blockquote>
 <p>Welcome to ZUMBOCOM....you can do anything at ZUMBOCOM.</p>
 <p>Three flags await. Can you find them?</p>
-<p>http://zumbo-8ac445b1.ctf.bsidessf.net</p>
+<p><a href="http://zumbo-8ac445b1.ctf.bsidessf.net" target="_blank" rel="external">http://zumbo-8ac445b1.ctf.bsidessf.net</a></p>
 <p>Stages 2 and 3 - coming soon!</p>
 </blockquote>
-<p>View source of http://zumbo-8ac445b1.ctf.bsidessf.net/index.template</p>
+<p>View source of <a href="http://zumbo-8ac445b1.ctf.bsidessf.net/index.template" target="_blank" rel="external">http://zumbo-8ac445b1.ctf.bsidessf.net/index.template</a></p>
 <p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- page: index.template, src: /code/server.py --&gt;</span></div></pre></td></tr></table></figure></p>
-<p>Let's check the <code>/code/server.py</code> path: http://zumbo-8ac445b1.ctf.bsidessf.net/code/server.py. We get an error:</p>
+<p>Let's check the <code>/code/server.py</code> path: <a href="http://zumbo-8ac445b1.ctf.bsidessf.net/code/server.py" target="_blank" rel="external">http://zumbo-8ac445b1.ctf.bsidessf.net/code/server.py</a>. We get an error:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[Errno 2] No such file or directory: u&apos;code/server.py&apos;</div><div class="line">&lt;!-- page: code/server.py, src: /code/server.py --&gt;</div></pre></td></tr></table></figure></p>
-<p>Every non-existing page give the same error. We need to do a directory traversal: http://zumbo-8ac445b1.ctf.bsidessf.net/../../../../code/server.py. But unfortunately the <code>../../../../</code> part is automatically removed.</p>
-<p>So I just URLencoded this part to bypass the filter: http://zumbo-8ac445b1.ctf.bsidessf.net/..%2f..%2f..%2f..%2fcode/server.py.</p>
+<p>Every non-existing page give the same error. We need to do a directory traversal: <a href="http://zumbo-8ac445b1.ctf.bsidessf.net/../../../../code/server.py" target="_blank" rel="external">http://zumbo-8ac445b1.ctf.bsidessf.net/../../../../code/server.py</a>. But unfortunately the <code>../../../../</code> part is automatically removed.</p>
+<p>So I just URLencoded this part to bypass the filter: <a href="http://zumbo-8ac445b1.ctf.bsidessf.net/..%2f..%2f..%2f..%2fcode/server.py" target="_blank" rel="external">http://zumbo-8ac445b1.ctf.bsidessf.net/..%2F..%2F..%2F..%2Fcode/server.py</a>.</p>
 <p>And we get the <code>server.py</code> source:</p>
 <p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">import flask, sys, os</div><div class="line">import requests</div><div class="line"></div><div class="line">app = flask.Flask(__name__)</div><div class="line">counter = 12345672</div><div class="line"></div><div class="line"></div><div class="line">@app.route('/&lt;path:page&gt;')</div><div class="line">def custom_page(page):</div><div class="line">    if page == 'favicon.ico': return ''</div><div class="line">    global counter</div><div class="line">    counter += 1</div><div class="line">    try:</div><div class="line">        template = open(page).read()</div><div class="line">    except Exception as e:</div><div class="line">        template = str(e)</div><div class="line">    template += "\n&lt;!-- page: %s, src: %s --&gt;\n" % (page, __file__)</div><div class="line">    return flask.render_template_string(template, name='test', counter=counter);</div><div class="line"></div><div class="line">@app.route('/')</div><div class="line">def home():</div><div class="line">    return flask.redirect('/index.template');</div><div class="line"></div><div class="line">if __name__ == '__main__':</div><div class="line">    flag1 = 'FLAG: FIRST_FLAG_WASNT_HARD'</div><div class="line">    with open('/flag') as f:</div><div class="line">            flag2 = f.read()</div><div class="line">    flag3 = requests.get('http://vault:8080/flag').text</div><div class="line"></div><div class="line">    print "Ready set go!"</div><div class="line">    sys.stdout.flush()</div><div class="line">    app.run(host="0.0.0.0")</div><div class="line"></div><div class="line">&lt;!-- page: ../../../../code/server.py, src: /code/server.py --&gt;</div></pre></td></tr></table></figure></p>
 <p>Flag was <code>FLAG: FIRST_FLAG_WASNT_HARD</code>.</p>
@@ -344,7 +344,7 @@ ga('send', 'pageview');
 <blockquote>
 <p>Welcome to ZUMBOCOM....you can do anything at ZUMBOCOM.</p>
 <p>Three flags await. Can you find them?</p>
-<p>http://zumbo-8ac445b1.ctf.bsidessf.net</p>
+<p><a href="http://zumbo-8ac445b1.ctf.bsidessf.net" target="_blank" rel="external">http://zumbo-8ac445b1.ctf.bsidessf.net</a></p>
 <p>Stage 3 - coming soon!</p>
 </blockquote>
 <p>For the next part of the challenge, we already got the <code>server.py</code> source so I looked again at the flag2 part:</p>
@@ -354,7 +354,7 @@ ga('send', 'pageview');
 <h1 id="100-the-year-2000-web">100 - the-year-2000 - Web</h1>
 <blockquote>
 <p>Wait, what year is it?</p>
-<p>http://theyear2000.ctf.bsidessf.net/</p>
+<p><a href="http://theyear2000.ctf.bsidessf.net/" target="_blank" rel="external">http://theyear2000.ctf.bsidessf.net/</a></p>
 </blockquote>
 <p>The author says on this home page:</p>
 <blockquote>
@@ -403,7 +403,7 @@ ga('send', 'pageview');
 <h1 id="30-easyauth-web">30 - easyauth - Web</h1>
 <blockquote>
 <p>Can you gain admin access to this site?</p>
-<p>http://easyauth-afee0e67.ctf.bsidessf.net</p>
+<p><a href="http://easyauth-afee0e67.ctf.bsidessf.net" target="_blank" rel="external">http://easyauth-afee0e67.ctf.bsidessf.net</a></p>
 <ul>
 <li><a href="https://scoreboard.ctf.bsidessf.com/attachment/cdbec071e3710a8465030f032d44e72ab2449098c9ad6597256087751d19bb39" target="_blank" rel="external">easyauth.php</a></li>
 </ul>
@@ -426,7 +426,7 @@ ga('send', 'pageview');
 <p>---- Due to a bug, the challenge might be easier than intended. Enjoy the free points! ----</p>
 <p>Can you gain admin access to this site?</p>
 <p>(The vhash binary is what's used for signing the cookie)</p>
-<p>http://vhash-c6bb0e85.ctf.bsidessf.net:9292</p>
+<p><a href="http://vhash-c6bb0e85.ctf.bsidessf.net:9292" target="_blank" rel="external">http://vhash-c6bb0e85.ctf.bsidessf.net:9292</a></p>
 <ul>
 <li><a href="https://scoreboard.ctf.bsidessf.com/attachment/97a121e61a9dba819eb07de40ddad8ac23c11ee4f92055110a7c6f987c73ed83" target="_blank" rel="external">vhash.zip </a></li>
 </ul>
@@ -449,7 +449,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/BSides-San-Francisco-CTF-2017-write-ups/" data-id="cizoiwll100drolfsu5r7hunn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/BSides-San-Francisco-CTF-2017-write-ups/" data-id="cizoog80l00e8fffscukf8hx6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -617,26 +617,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
     
     
@@ -650,6 +630,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

@@ -285,22 +285,22 @@ ga('send', 'pageview');
 <h2 id="50-easy-login-web-exploitation">50 - Easy Login? - Web Exploitation</h2>
 <blockquote>
 <p>An aspiring engineer started learning web development on Youtube a day ago and he was asked to build a nice, secure, simple login page as part of his project. Well, he just started off so don't blame him. Go, hack!</p>
-<p>http://139.59.61.220:23478/</p>
+<p><a href="http://139.59.61.220:23478/" target="_blank" rel="external">http://139.59.61.220:23478/</a></p>
 </blockquote>
 <p>The source is suspicious:</p>
 <p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Login<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"flag.css"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">align</span>= <span class="string">"center"</span>&gt;</span>Login Portal<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">action</span>=<span class="string">""</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">b</span>&gt;</span>Username :<span class="tag">&lt;<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span> =<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">b</span>&gt;</span> Password :<span class="tag">&lt;<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> /&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">onclick</span>=<span class="string">"Login()"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"verify"</span> <span class="attr">name</span>=<span class="string">"button"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>Let's see <code>main.js</code>:</p>
 <p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Login</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> username=<span class="built_in">document</span>.login.username.value;</div><div class="line">    <span class="keyword">var</span> password=<span class="built_in">document</span>.login.password.value;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (password == <span class="string">"53cure"</span> &amp;&amp; username==<span class="string">"@nokh@"</span>) &#123;</div><div class="line">        alert(<span class="string">"Awesome!"</span>);</div><div class="line">             <span class="built_in">window</span>.open(<span class="string">"secureflag.html"</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        alert(<span class="string">"Oh swap!You are close. Why cant you try again?"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Now we can use <code>@nokh@</code> and <code>53cure</code> or directly go to http://139.59.61.220:23478/secureflag.html.</p>
+<p>Now we can use <code>@nokh@</code> and <code>53cure</code> or directly go to <a href="http://139.59.61.220:23478/secureflag.html" target="_blank" rel="external">http://139.59.61.220:23478/secureflag.html</a>.</p>
 <p>The image is named <code>hiddenflag.jpeg</code> so let's download it.</p>
 <p>There is some hidden data here:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">$ binwalk hiddenflag.jpeg</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.01</div><div class="line">48981         0xBF55          Zip archive data, at least v1.0 to extract, compressed size: 29, uncompressed size: 29, name: flag.txt</div><div class="line">49154         0xC002          End of Zip archive</div><div class="line"></div><div class="line">$ foremost -v hiddenflag.jpeg</div><div class="line">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus</div><div class="line">Audit File</div><div class="line"></div><div class="line">Foremost started at Sun Feb 26 19:14:21 2017</div><div class="line">Invocation: foremost -v hiddenflag.jpeg</div><div class="line">Output directory: /home/noraj/CTF/XiomaraCTF/2017/output</div><div class="line">Configuration file: /etc/foremost.conf</div><div class="line">Processing: hiddenflag.jpeg</div><div class="line">|------------------------------------------------------------------</div><div class="line">File: hiddenflag.jpeg</div><div class="line">Start: Sun Feb 26 19:14:21 2017</div><div class="line">Length: 48 KB (49176 bytes)</div><div class="line"></div><div class="line">Num	 Name (bs=512)	       Size	 File Offset	 Comment</div><div class="line"></div><div class="line">0:	00000000.jpg 	      47 KB 	          0 	 </div><div class="line">foundat=flag.txtUT</div><div class="line">1:	00000095.zip 	      196 B 	      48981 	 </div><div class="line">*|</div><div class="line">Finish: Sun Feb 26 19:14:21 2017</div><div class="line"></div><div class="line">2 FILES EXTRACTED</div><div class="line"></div><div class="line">jpg:= 1</div><div class="line">zip:= 1</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">Foremost finished at Sun Feb 26 19:14:21 2017</div><div class="line"></div><div class="line">$ cd output/zip</div><div class="line"></div><div class="line">$ unzip 00000095.zip</div><div class="line">Archive:  00000095.zip</div><div class="line"> extracting: flag.txt</div><div class="line"></div><div class="line">$ cat flag.txt</div><div class="line">xiomara&#123;50_y0u_ar3_@_h@ck3r&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="50-lulz-web-exploitation">50 - Lulz - Web Exploitation</h2>
 <blockquote>
 <p>Heavy sarcasm awaits. Are you a person who finds opportunities even in trolls? Well, let's find out.</p>
-<p>http://139.59.61.220:23456</p>
+<p><a href="http://139.59.61.220:23456" target="_blank" rel="external">http://139.59.61.220:23456</a></p>
 </blockquote>
-<p>The webpage is a troll opening a pop-up and redirecting to a troll page: http://139.59.61.220:23456/troll.html</p>
+<p>The webpage is a troll opening a pop-up and redirecting to a troll page: <a href="http://139.59.61.220:23456/troll.html" target="_blank" rel="external">http://139.59.61.220:23456/troll.html</a></p>
 <p>But of course you are using NoScript or know about <code>view-source:</code> in Firefox.</p>
 <p>Let's see the source (<code>view-source:http://139.59.61.220:23456/</code>):</p>
 <p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Hahaha!!!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> =<span class="string">"lol.jpg"</span> <span class="attr">align</span> =<span class="string">"center"</span> <span class="attr">width</span> =<span class="string">"50%"</span> <span class="attr">height</span> = <span class="string">"50%"</span> <span class="attr">alt</span> =<span class="string">"lollol"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"hook.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div></pre></td></tr></table></figure></p>
@@ -313,7 +313,7 @@ ga('send', 'pageview');
 <h2 id="50-no-flags-web-exploitation">50 - No Flags? - Web Exploitation</h2>
 <blockquote>
 <p>What would you do if we tell you there are no flags for this question? Go on, solve it. That reminds me, Nothing is impossible.</p>
-<p>http://139.59.61.220:23467/</p>
+<p><a href="http://139.59.61.220:23467/" target="_blank" rel="external">http://139.59.61.220:23467/</a></p>
 </blockquote>
 <p>I tried <a href="http://139.59.61.220:23467/robots.txt" target="_blank" rel="external"><code>robots.txt</code></a>:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">User-agent:*</div><div class="line">Disallow: /flags/</div><div class="line">Disallow: /more_flags/</div><div class="line">Disallow: /more_and_more_flags/</div><div class="line">Disallow: /no_flag/</div></pre></td></tr></table></figure></p>
@@ -334,7 +334,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/XiomaraCTF-2017-write-ups/" data-id="cizoiwlpu00k1olfsl0whv7zb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/XiomaraCTF-2017-write-ups/" data-id="cizoog85200kcfffs3lb2jsq3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -470,20 +470,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/NeverLAN-CTF-2017-write-ups/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            NeverLAN CTF 2017 - Write-ups
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/NeverLAN-CTF-2017-write-ups/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">WhiteHat Challenge 01 - 20 - For001 - Forensics</p>
+        <p class="article-nav-title">NeverLAN CTF 2017 - Write-ups</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -502,26 +492,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
     
     
@@ -535,6 +505,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

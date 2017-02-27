@@ -285,16 +285,16 @@ ga('send', 'pageview');
 <h3 id="description">Description</h3>
 <blockquote>
 <p>When you gather all part of flag. Let's submit: WhiteHat{SHA1(flag)}</p>
-<p>nc misc04.grandprix.whitehatvn.com 23403</p>
-<p>nc bakmisc04.grandprix.whitehatvn.com 23403</p>
-<p>http://material.grandprix.whitehatvn.com/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip</p>
-<p>http://bakmaterial.grandprix.whitehatvn.com/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip</p>
+<p>nc <a href="http://misc04.grandprix.whitehatvn.com" target="_blank" rel="external">misc04.grandprix.whitehatvn.com</a> 23403</p>
+<p>nc <a href="http://bakmisc04.grandprix.whitehatvn.com" target="_blank" rel="external">bakmisc04.grandprix.whitehatvn.com</a> 23403</p>
+<p><a href="http://material.grandprix.whitehatvn.com/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip" target="_blank" rel="external">http://material.grandprix.whitehatvn.com/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip</a></p>
+<p><a href="http://bakmaterial.grandprix.whitehatvn.com/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip" target="_blank" rel="external">http://bakmaterial.grandprix.whitehatvn.com/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip</a></p>
 <p>Alternative server on amazon in case of low traffic:</p>
-<p>http://54.183.97.137/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip</p>
+<p><a href="http://54.183.97.137/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip" target="_blank" rel="external">http://54.183.97.137/gp2016/Misc04_be5358f2cb135ae9a38665a0d5ff199fc4fabb47.zip</a></p>
 </blockquote>
 <p>create_folder_player.py</p>
 <p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> random</div><div class="line"></div><div class="line">flag = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</span></div><div class="line">count = <span class="number">0</span></div><div class="line">length = len(flag)</div><div class="line"><span class="keyword">print</span> length</div><div class="line"></div><div class="line">arr = random.sample(range(<span class="number">0</span>,<span class="number">10000</span>),length)</div><div class="line">arr = sorted(arr)</div><div class="line"></div><div class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10000</span>):</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        os.mkdir(str(k))</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        <span class="keyword">pass</span></div><div class="line">    <span class="keyword">if</span> k <span class="keyword">in</span> arr:</div><div class="line">        f=open(<span class="string">"./"</span>+str(k)+<span class="string">"/"</span>+os.urandom(<span class="number">8</span>).encode(<span class="string">"hex"</span>)+<span class="string">"."</span>+os.urandom(<span class="number">8</span>).encode(<span class="string">"hex"</span>),<span class="string">"w"</span>).write(str(flag[count]))</div><div class="line">        count +=<span class="number">1</span></div></pre></td></tr></table></figure></p>
-<p>mics.py</p>
+<p><a href="http://mics.py" target="_blank" rel="external">mics.py</a></p>
 <p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> sys</div><div class="line">blaclist = <span class="string">"cat|nano|less|tail|vim|head|apt|install|wget|more|emacs|vi|subl|pico|bash|sh|rm|sed|nl|flag.hihi|`|%|\$|chmod|python"</span></div><div class="line"></div><div class="line">myregrex = <span class="string">"\W*(?i)("</span>+blaclist+<span class="string">")\W*"</span></div><div class="line">cmd = <span class="string">""</span></div><div class="line"><span class="keyword">while</span>(cmd != <span class="string">"exit"</span>):</div><div class="line">    sys.stdout.write(<span class="string">"Input your command: \n"</span>)</div><div class="line">    sys.stdout.flush()</div><div class="line">    cmd = raw_input()</div><div class="line">    check = re.findall(myregrex,cmd)</div><div class="line">    <span class="keyword">if</span> check!=[]:</div><div class="line">        sys.stdout.write(<span class="string">"rejected\n"</span>)</div><div class="line">        sys.stdout.flush()</div><div class="line">        <span class="keyword">continue</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="comment">#call()</span></div><div class="line">        a =<span class="string">"XXXXXXXXXXXXX"</span></div><div class="line">        a+=cmd</div><div class="line">        os.system(a)</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stdout.write(<span class="string">"bad command\n"</span>)</div><div class="line">        sys.stdout.flush()</div></pre></td></tr></table></figure></p>
 <h2 id="solution">Solution</h2>
 <ul>
@@ -331,7 +331,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/WhiteHat-GrandPrix-2016-misc-100-Banh-da-Ke/" data-id="cizoiwlpm00jsolfs59tciyg5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/WhiteHat-GrandPrix-2016-misc-100-Banh-da-Ke/" data-id="cizoog84v00k3fffsrhrd5w48" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -467,20 +467,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/en/WhiteHat-GrandPrix-2016-forensics-300-Banh-it-la-gai/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            WhiteHat GrandPrix - 300 - Banh it la gai - Forensics
+            WhiteHat GrandPrix - 100 - Banh bot loc - Web
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/WhiteHat-GrandPrix-2016-web-100-banh-can/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">WhiteHat GrandPrix - 100 - Banh bot loc - Web</p>
+        <p class="article-nav-title">WhiteHat GrandPrix - 100 - Banh can - Web</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -499,26 +499,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
     
     
@@ -532,6 +512,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

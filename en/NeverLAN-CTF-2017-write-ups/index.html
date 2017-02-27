@@ -67,7 +67,7 @@ CTF Time : link
 
 50 - Encoding Apprentice -">
 <meta property="og:image" content="http://rawsec.ml/images/ctf.png">
-<meta property="og:updated_time" content="2017-02-27T19:38:12.803Z">
+<meta property="og:updated_time" content="2017-02-27T22:29:30.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NeverLAN CTF 2017 - Write-ups">
 <meta name="twitter:description" content="Informations
@@ -311,7 +311,7 @@ ga('send', 'pageview');
 <blockquote>
 <p>We've been known to leak things on twitter...</p>
 </blockquote>
-<p>Go to NeverLanCTF twitter: https://twitter.com/NeverLanCTF</p>
+<p>Go to NeverLanCTF twitter: <a href="https://twitter.com/NeverLanCTF" target="_blank" rel="external">https://twitter.com/NeverLanCTF</a></p>
 <p>There is <a href="https://twitter.com/NeverLanCTF/status/834992893978804224" target="_blank" rel="external">an interesting twitter status</a>:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Rnfl erpba vf rnfl. synt&#123;vas0ezngvba_vf_c0jre_xa0j_l0he_nqirefnel&#125; #CommonCaeserCipher</div></pre></td></tr></table></figure></p>
 <p>I tried a rot13 and I got that:</p>
@@ -322,10 +322,10 @@ ga('send', 'pageview');
 <p>Purvesta also really likes his twitter...</p>
 </blockquote>
 <ul>
-<li>NeverLAN CTFTime page: https://ctftime.org/team/32118</li>
-<li>purvesta CTFtime page: https://ctftime.org/user/23157</li>
+<li>NeverLAN CTFTime page: <a href="https://ctftime.org/team/32118" target="_blank" rel="external">https://ctftime.org/team/32118</a></li>
+<li>purvesta CTFtime page: <a href="https://ctftime.org/user/23157" target="_blank" rel="external">https://ctftime.org/user/23157</a></li>
 </ul>
-<p>purvesta name is: <em>Tanner Purves</em>, his LinkedIn page is not working. So I searched for <em>twitter Tanner Purves</em> and found his twitter page (@purvesta0704): https://twitter.com/purvesta0704</p>
+<p>purvesta name is: <em>Tanner Purves</em>, his LinkedIn page is not working. So I searched for <em>twitter Tanner Purves</em> and found his twitter page <a href="https://twitter.com/purvesta0704" target="_blank" rel="external">@purvesta0704</a>.</p>
 <p>His twitter descripton says:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\\\BSU &apos;20, Co-founder of the NeverLAN CTF/// &#123;ZmxhZ3tXMHdfeTB1X0FyM19HZXR0aW5nX2cwMGRfYXRfVGhpNX0=&#125;</div></pre></td></tr></table></figure></p>
 <p>It looks like a base64 string:</p>
@@ -389,7 +389,7 @@ ga('send', 'pageview');
 <p><strong>Note</strong>: this challenge was a quizz, not a cryptography challenge. It should have been in Trivia, Misc, Quizz or Other.</p>
 <h2 id="100-a-slight-cut-web">100 - A Slight Cut - Web</h2>
 <blockquote>
-<p>http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/</p>
+<p><a href="http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/" target="_blank" rel="external">http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:9123/</a></p>
 </blockquote>
 <p>Source:</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;A slight cut&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;script&gt;</div><div class="line">[...]</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;div&gt;</div><div class="line">            &lt;h1&gt;type in some text to have the server repeat it back&lt;/h1&gt;</div><div class="line">            &lt;form onsubmit=&quot;getEcho(); return false;&quot;&gt;</div><div class="line">                &lt;input id=&quot;text&quot; name=&quot;text&quot; type=&quot;text&quot; placeholder=&quot;type some text here&quot;/&gt;</div><div class="line">                &lt;input id=&quot;length&quot; type=&quot;hidden&quot; name=&quot;length&quot; value=&quot;0&quot;/&gt;</div><div class="line">                &lt;input type=&quot;submit&quot;/&gt;</div><div class="line">            &lt;/form&gt;</div><div class="line">            &lt;p id=&quot;echo&quot;&gt;output will appear here&lt;/p&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
@@ -405,9 +405,9 @@ ga('send', 'pageview');
 <h2 id="300-webcipher-web">300 - WebCipher - Web</h2>
 <blockquote>
 <p>#anti-human</p>
-<p>http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/</p>
+<p><a href="http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/" target="_blank" rel="external">http://neverlanctf-challenges-elb-248020705.us-west-2.elb.amazonaws.com:7129/</a></p>
 <p>word list:</p>
-<p>https://s3-us-west-2.amazonaws.com/neverlanctf/files/words.txt</p>
+<p><a href="https://s3-us-west-2.amazonaws.com/neverlanctf/files/words.txt" target="_blank" rel="external">https://s3-us-west-2.amazonaws.com/neverlanctf/files/words.txt</a></p>
 </blockquote>
 <p>Source:</p>
 <p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>anti-human cipher<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"cipher_box"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"cipher"</span>&gt;</span>shhsjwfl<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"form_box"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"form"</span> <span class="attr">method</span>=<span class="string">"GET"</span> <span class="attr">action</span>=<span class="string">"?"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"deciphered"</span> <span class="attr">id</span>=<span class="string">"deciphered"</span>/&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
@@ -483,7 +483,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/" data-id="cizoiwlop00ilolfs7w4vwexk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/" data-id="cizoog84100izfffsfgvxq2or" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -619,10 +619,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
+        <a href="/en/XiomaraCTF-2017-write-ups/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Xiomara CTF 2017 - Write-ups
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
     
-        <a href="/en/XiomaraCTF-2017-write-ups/" id="article-nav-older" class="article-nav-link-wrap">
+    
+        <a href="/en/WhiteHat-Challenge-2017-20-For001-Forensics/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Xiomara CTF 2017 - Write-ups</p>
+        <p class="article-nav-title">WhiteHat Challenge 01 - 20 - For001 - Forensics</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -641,26 +651,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
     
     
@@ -674,6 +664,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>

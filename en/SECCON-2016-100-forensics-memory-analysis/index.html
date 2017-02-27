@@ -293,7 +293,7 @@ ga('send', 'pageview');
 <p>Find the website that the fake svchost is accessing.</p>
 <p>You can get the flag if you access the website!!</p>
 <p>The challenge files are huge, please download it first.</p>
-<p>Hint1: http://www.volatilityfoundation.org/</p>
+<p>Hint1: <a href="http://www.volatilityfoundation.org/" target="_blank" rel="external">http://www.volatilityfoundation.org/</a></p>
 <p>Hint2: Check the hosts file</p>
 <p>password: fjliejflsjiejlsiejee33cnc</p>
 </blockquote>
@@ -303,7 +303,7 @@ ga('send', 'pageview');
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw imageinfo</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">INFO    : volatility.debug    : Determining profile based on KDBG search...</div><div class="line">          Suggested Profile(s) : WinXPSP2x86, WinXPSP3x86 (Instantiated with WinXPSP2x86)</div><div class="line">                     AS Layer1 : IA32PagedMemoryPae (Kernel AS)</div><div class="line">                     AS Layer2 : FileAddressSpace (/media/sf_Challenges/CTF/SECCON/forensic_100.raw)</div><div class="line">                      PAE type : PAE</div><div class="line">                           DTB : 0x34c000L</div><div class="line">                          KDBG : 0x80545ce0L</div><div class="line">          Number of Processors : 1</div><div class="line">     Image Type (Service Pack) : 3</div><div class="line">                KPCR for CPU 0 : 0xffdff000L</div><div class="line">             KUSER_SHARED_DATA : 0xffdf0000L</div><div class="line">           Image date and time : 2016-12-06 05:28:47 UTC+0000</div><div class="line">     Image local date and time : 2016-12-06 14:28:47 +0900</div></pre></td></tr></table></figure></p>
 <p>Check the hosts file as the second hint say :</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw --profile=WinXPSP2x86 dumpfiles -Q 0x000000000217b748 --dump-dir=.</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">DataSectionObject 0x0217b748   None   \Device\HarddiskVolume1\WINDOWS\system32\drivers\etc\hosts</div><div class="line"></div><div class="line">➜ ls</div><div class="line">file.None.0x819a3008.dat  forensic_100.raw  memoryanalysis.zip</div><div class="line"></div><div class="line">➜ cat file.None.0x819a3008.dat</div><div class="line"># Copyright (c) 1993-1999 Microsoft Corp.</div><div class="line">#</div><div class="line"># This is a sample HOSTS file used by Microsoft TCP/IP for Windows.</div><div class="line">#</div><div class="line"># This file contains the mappings of IP addresses to host names. Each</div><div class="line"># entry should be kept on an individual line. The IP address should</div><div class="line"># be placed in the first column followed by the corresponding host name.</div><div class="line"># The IP address and the host name should be separated by at least one</div><div class="line"># space.</div><div class="line">#</div><div class="line"># Additionally, comments (such as these) may be inserted on individual</div><div class="line"># lines or following the machine name denoted by a &apos;#&apos; symbol.</div><div class="line">#</div><div class="line"># For example:</div><div class="line">#</div><div class="line">#      102.54.94.97     rhino.acme.com          # source server</div><div class="line">#       38.25.63.10     x.acme.com              # x client host</div><div class="line"></div><div class="line">127.0.0.1       localhost</div><div class="line">153.127.200.178    crattack.tistory.com #</div></pre></td></tr></table></figure></p>
-<p>So the DNS entry crattack.tistory.com is pointing on the 153.127.200.178 IP adress.</p>
+<p>So the DNS entry <a href="http://crattack.tistory.com" target="_blank" rel="external">crattack.tistory.com</a> is pointing on the 153.127.200.178 IP adress.</p>
 <p>List processus to see what was running when the memory was captured :</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw --profile=WinXPSP2x86 pstree</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">Name                                                  Pid   PPid   Thds   Hnds Time</div><div class="line">-------------------------------------------------- ------ ------ ------ ------ ----</div><div class="line"> 0x8231f698:explorer.exe                             1556   1520     15    466 2016-12-06 05:27:10 UTC+0000</div><div class="line">. 0x821f8438:vmtoolsd.exe                            1856   1556      3    129 2016-12-06 05:27:11 UTC+0000</div><div class="line">. 0x819b4380:tcpview.exe                             3308   1556      2     84 2016-12-06 05:28:42 UTC+0000</div><div class="line">. 0x82267900:rundll32.exe                            1712   1556      2    144 2016-12-06 05:27:16 UTC+0000</div><div class="line">. 0x8216a5e8:DumpIt.exe                              3740   1556      1     25 2016-12-06 05:28:46 UTC+0000</div><div class="line">. 0x82170da0:ctfmon.exe                              1872   1556      1     87 2016-12-06 05:27:11 UTC+0000</div><div class="line"> 0x823c8660:System                                      4      0     58    259 1970-01-01 00:00:00 UTC+0000</div><div class="line">. 0x81a18020:smss.exe                                 540      4      3     19 2016-12-06 05:27:04 UTC+0000</div><div class="line">.. 0x82173da0:winlogon.exe                            628    540     24    541 2016-12-06 05:27:07 UTC+0000</div><div class="line">... 0x8216e670:services.exe                           672    628     15    286 2016-12-06 05:27:07 UTC+0000</div><div class="line">.... 0x81f46238:alg.exe                              2028    672      7    104 2016-12-06 05:27:16 UTC+0000</div><div class="line">.... 0x82312450:svchost.exe                          1036    672     87   1514 2016-12-06 05:27:08 UTC+0000</div><div class="line">..... 0x81f2cb20:wuauclt.exe                         3164   1036      5    107 2016-12-06 05:28:15 UTC+0000</div><div class="line">..... 0x82062b20:wuauclt.exe                          488   1036      7    132 2016-12-06 05:27:13 UTC+0000</div><div class="line">..... 0x81e56228:wscntfy.exe                          720   1036      1     37 2016-12-06 05:27:18 UTC+0000</div><div class="line">.... 0x82154880:vmacthlp.exe                          836    672      1     25 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x82151ca8:svchost.exe                           936    672     10    272 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x81e4b4b0:vmtoolsd.exe                          312    672      9    265 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81f92778:svchost.exe                          1088    672      7     83 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x81f00558:VGAuthService.e                       196    672      2     60 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81e18da0:svchost.exe                           848    672     20    216 2016-12-06 05:27:08 UTC+0000</div><div class="line">..... 0x81e89200:wmiprvse.exe                         596    848     12    255 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81e41928:svchost.exe                          1320    672     12    183 2016-12-06 05:27:10 UTC+0000</div><div class="line">.... 0x81f0dbe0:spoolsv.exe                          1644    672     15    133 2016-12-06 05:27:10 UTC+0000</div><div class="line">.... 0x81f65da0:svchost.exe                          1776    672      2     23 2016-12-06 05:27:10 UTC+0000</div><div class="line">..... 0x8225bda0:IEXPLORE.EXE                         380   1776     22    385 2016-12-06 05:27:19 UTC+0000</div><div class="line">...... 0x8229f7e8:IEXPLORE.EXE                       1080    380     19    397 2016-12-06 05:27:21 UTC+0000</div><div class="line">.... 0x81e4f560:svchost.exe                          1704    672      5    107 2016-12-06 05:27:10 UTC+0000</div><div class="line">... 0x81f8c9a0:lsass.exe                              684    628     26    374 2016-12-06 05:27:07 UTC+0000</div><div class="line">.. 0x81ef6da0:csrss.exe                               604    540     11    480 2016-12-06 05:27:07 UTC+0000</div><div class="line"> 0x81e886f0:GoogleUpdate.ex                           372   1984      7    138 2016-12-06 05:27:13 UTC+0000</div></pre></td></tr></table></figure></p>
 <p>We see a IEXPLORE.EXE. Why don't check its history ?</p>
@@ -311,7 +311,7 @@ ga('send', 'pageview');
 <p>If we visit this URL without matching the IP adress in the host file, we are on a CTF site. There is no flag on this site...</p>
 <p>But, if we match the IP adress with the URL, we have a file to download, and this file hold the flag :-)</p>
 <p>Flag : SECCON{<em>h3110_w3_h4ve_fun_w4rg4m3</em>}</p>
-<p><strong>Note</strong>: We could retrieve the IP adress with the connscan plugin, but it was impossible to determine that the crattack.tistory.com site was associated with this IP adress.</p>
+<p><strong>Note</strong>: We could retrieve the IP adress with the connscan plugin, but it was impossible to determine that the <a href="http://crattack.tistory.com" target="_blank" rel="external">crattack.tistory.com</a> site was associated with this IP adress.</p>
 
         </div>
         <footer class="article-footer">
@@ -319,7 +319,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://rawsec.ml/en/SECCON-2016-100-forensics-memory-analysis/" data-id="cizoiwlp800j9olfs7q1tewjv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://rawsec.ml/en/SECCON-2016-100-forensics-memory-analysis/" data-id="cizoog84h00jkfffsvmqo8r0b" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -466,9 +466,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/en/enable-remote-desktop-windows-server-2012/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/en/manage-local-users-and-groups-on-windows-server-2012/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Enable Remote Desktop Protocol (RDP) on Windows Server 2012</p>
+        <p class="article-nav-title">Manage local users and groups on Windows Server 2012</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -487,26 +487,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
-                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
-                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
     
     
@@ -520,6 +500,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
                             <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/NeverLAN-CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="NeverLAN CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/NeverLAN-CTF-2017-write-ups/" class="title">NeverLAN CTF 2017 - Write-ups</a></p>
                             <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
                         </div>
                     </li>
