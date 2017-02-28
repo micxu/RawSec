@@ -9,7 +9,7 @@
     <meta name="description" content="a cybersecurity and IT blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="RawSec">
-<meta property="og:url" content="http://rawsec.ml/tags/security/page/12/index.html">
+<meta property="og:url" content="https://rawsec.ml/tags/security/page/12/index.html">
 <meta property="og:site_name" content="RawSec">
 <meta property="og:description" content="a cybersecurity and IT blog">
 <meta name="twitter:card" content="summary">
@@ -48,6 +48,8 @@ ga('send', 'pageview');
     
     
 
+
+    <link rel="canonical" href="https://rawsec.ml" />
 </head>
 
 <body>
@@ -167,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/en/disable-netbios-via-windows-register/" class="thumbnail">
+        <a href="/en/disable-netbios-cli-wmic/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/security-265130_640.jpg)" alt="Disable NetBIOS  via Windows register" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/security-265130_640.jpg)" alt="Disable NetBIOS in CLI with WMIC" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/disable-netbios-via-windows-register/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rawsec.ml/en/disable-netbios-cli-wmic/">0</span>
     
 </span>
 
@@ -194,15 +196,13 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/en/disable-netbios-via-windows-register/">Disable NetBIOS  via Windows register</a>
+        <a href="/en/disable-netbios-cli-wmic/">Disable NetBIOS in CLI with WMIC</a>
         </h1>
     
 
         <p class="article-excerpt">
-            NetBIOS is a very old protocol wich is no more interesting today except in some particular cases.
-To disable it with the Windows register there are only a few steps :
-
-Launch the register editor (rege
+            NetBIOS is a very old protocol wich is no more interesting today except in some particular cases. But it has a large number of security flaws.
+We can use WMIC (Microsoft Windows Management Instrumenta
         </p>
     </div>
 </article>
@@ -489,6 +489,14 @@ Launch the register editor (rege
 
 <!-- Custom Scripts -->
 <script src="/js/main.js"></script>
+
+<!-- SSL redirect -->
+<script type="text/javascript">
+  var host = "rawsec.ml";
+  if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
+</script>
+
 
     </div>
 </body>

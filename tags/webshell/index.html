@@ -9,7 +9,7 @@
     <meta name="description" content="a cybersecurity and IT blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="RawSec">
-<meta property="og:url" content="http://rawsec.ml/tags/webshell/index.html">
+<meta property="og:url" content="https://rawsec.ml/tags/webshell/index.html">
 <meta property="og:site_name" content="RawSec">
 <meta property="og:description" content="a cybersecurity and IT blog">
 <meta name="twitter:card" content="summary">
@@ -48,6 +48,8 @@ ga('send', 'pageview');
     
     
 
+
+    <link rel="canonical" href="https://rawsec.ml" />
 </head>
 
 <body>
@@ -177,7 +179,7 @@ ga('send', 'pageview');
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://rawsec.ml/en/c99-php-backdoor-backdoored/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rawsec.ml/en/c99-php-backdoor-backdoored/">0</span>
     
 </span>
 
@@ -482,6 +484,14 @@ This webshell is protected by a customiza
 
 <!-- Custom Scripts -->
 <script src="/js/main.js"></script>
+
+<!-- SSL redirect -->
+<script type="text/javascript">
+  var host = "rawsec.ml";
+  if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
+</script>
+
 
     </div>
 </body>
