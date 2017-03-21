@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Writeups - Forensic - BusyBee | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="security,writeups,ctf,forensics" />
+    
+    <meta name="description" content="Informations
+Version
+
+
+
+Date
+By
+Version
+Comment
+
+
+
+
+05/06/2016
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : BackdoorCTF 2016
+Website : https://backdoor.sdslabs.co
+Type : Online
+Format : Jeopardy
+CTF Time : link">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeups - Forensic - BusyBee">
+<meta property="og:url" content="https://rawsec.ml/en/BackdoorCTF-2016-writeups-forensics-busybee/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="Informations
+Version
+
+
+
+Date
+By
+Version
+Comment
+
+
+
+
+05/06/2016
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : BackdoorCTF 2016
+Website : https://backdoor.sdslabs.co
+Type : Online
+Format : Jeopardy
+CTF Time : link">
+<meta property="og:image" content="https://rawsec.ml/images/ctf.png">
+<meta property="og:updated_time" content="2017-03-21T22:25:31.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Writeups - Forensic - BusyBee">
+<meta name="twitter:description" content="Informations
+Version
+
+
+
+Date
+By
+Version
+Comment
+
+
+
+
+05/06/2016
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : BackdoorCTF 2016
+Website : https://backdoor.sdslabs.co
+Type : Online
+Format : Jeopardy
+CTF Time : link">
+<meta name="twitter:image" content="https://rawsec.ml/images/ctf.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <link rel="canonical" href="https://rawsec.ml" />
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/security/writeups/">writeups</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-BackdoorCTF-2016-writeups-forensics-busybee" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Writeups - Forensic - BusyBee
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/BackdoorCTF-2016-writeups-forensics-busybee/" class="article-date">
+    <time datetime="2016-07-01T22:00:00.000Z" itemprop="datePublished">Saturday 2 July 2016 (2016-07-02)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forensics/">forensics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeups/">writeups</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>05/06/2016</td>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : BackdoorCTF 2016</li>
+<li><strong>Website</strong> : <a href="https://backdoor.sdslabs.co/competitions/backdoorctf16/leaderboard" target="_blank" rel="external">https://backdoor.sdslabs.co</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/314" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="name">Name</h3>
+<p><em>BusyBee</em></p>
+<h3 id="category">Category</h3>
+<p><em>Forensic</em></p>
+<h3 id="wording">Wording</h3>
+<blockquote>
+<p>A deadly virus is killing bees in Busybee's village Busybox, India. Unfortuantely, you have to go to the village to fight the infection. Get the flag virus out of the infected files.
+Village address: <a href="http://hack.bckdr.in/BUSYBEE/infected.tar" target="_blank" rel="external">http://hack.bckdr.in/BUSYBEE/infected.tar</a>
+Created by: Ashish Chaudhary</p>
+</blockquote>
+<h3 id="data-s">Data(s)</h3>
+<p><a href="http://hack.bckdr.in/BUSYBEE/infected.tar" target="_blank" rel="external">link</a></p>
+<h2 id="solution">Solution</h2>
+<h3 id="methodology">Methodology</h3>
+<ol>
+<li>
+<p>Untar the datas: <code>tar xaf infected.tar</code></p>
+</li>
+<li>
+<p>List the content of the directory:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ls -AgG</div><div class="line">total 2332</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:13 2b0fbc0e1ac044737fd881cff8164bb5a2c7bfbf90c40c87de3c3435f2c6a94e</div><div class="line">drwxr-xr-x 4    4096 Jul  2 19:01 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:13 d51a083a3b01fe8c58086903595b91fc975de59a9e9ececec755df384a181026</div><div class="line">-rw-r--r-- 1    1344 Jun  3 18:13 eaa21323de5e2cce7078df3af4dd292181114dfc94be761b948657efbe3af26b.json</div><div class="line">-rw-r--r-- 1 2362880 Jun  6 08:17 infected.tar</div><div class="line">-rw-r--r-- 1     373 Jan  1  1970 manifest.json</div><div class="line">-rw-r--r-- 1     106 Jan  1  1970 repositories</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Display <code>repositories</code> file, it looks interesting:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat repositories</div><div class="line">&#123;&quot;busybox-1.24.1-infected&quot;:&#123;&quot;latest&quot;:&quot;983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7&quot;&#125;&#125;</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p><code>983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</code>: show us which folder is infected, so display its content:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ls -AgG 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7/</div><div class="line">total 1020</div><div class="line">-rw-r--r-- 1       3 Jun  3 18:13 VERSION</div><div class="line">-rw-r--r-- 1     907 Jun  3 18:13 json</div><div class="line">-rw-r--r-- 1 1035776 Jun  3 18:13 layer.tar</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Go into <code>983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</code>, untar <code>layer.tar</code>, and display:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cd 983179bdb58ea980ec1fe7c45f63571d49b140bdd629f234be9c00a6edd8a4a7</div><div class="line">tar xaf layer.tar</div><div class="line">ls -AgGR</div><div class="line">.:</div><div class="line">total 1028</div><div class="line">-rw-r--r-- 1       3 Jun  3 18:13 VERSION</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:11 bin</div><div class="line">-rw-r--r-- 1     907 Jun  3 18:13 json</div><div class="line">-rw-r--r-- 1 1035776 Jun  3 18:13 layer.tar</div><div class="line">drwxr-xr-x 2    4096 Jun  3 18:09 root</div><div class="line"></div><div class="line">./bin:</div><div class="line">total 2016</div><div class="line">-rwxr-xr-x 2 1031328 Jun  3 18:11 cat</div><div class="line">-rwxr-xr-x 2 1031328 Jun  3 18:11 sha1sum</div><div class="line"></div><div class="line">./root:</div><div class="line">total 4</div><div class="line">-rw------- 1 44 Jun  3 18:12 .ash_history</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p><code>root/.ash_history</code> looks intersting:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat root/.ash_history</div><div class="line">not so easy bru - the infections is intense</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>... but is not. So let's see what are the binaries:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cat bin/sha1sum</div><div class="line">[...]</div><div class="line">THIS IS WHAT YOU ARE LOOKING FOR:    0n3_n00b_ru1n5_0n3_hundr3d_pr05</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>The last line of the binary shows us what we are looking for <code>0n3_n00b_ru1n5_0n3_hundr3d_pr05</code> (1337 : <code>one noob ruins one hundred pros</code>)</p>
+</li>
+<li>
+<p>Try to sha256 it:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo -n &quot;0n3_n00b_ru1n5_0n3_hundr3d_pr05&quot; | sha256sum</div><div class="line">0743a3265649702df53b083056b2f426d20e449cd68210384ff0ff159f3867fa</div></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<p>PS : You could have seen that the repository has the structure of a <a href="https://github.com/docker/docker/blob/master/image/spec/v1.md" target="_blank" rel="external">docker image</a> and try to load and build it.</p>
+<h3 id="flag">Flag</h3>
+<blockquote>
+<p>Since Backdoor is an always-online CTF platform, and not a one time contest, we kindly request you to not publish flags for the challenges in your writeups.
+Writeups are an excellent way to share knowledge and help others learn. In Backdoor, challenges are shifted from a contest to the Practice section, where people can continue to attempt them after the contest is over. It would be very unfair to participants if the flags for the problems were easily available in writeups online.
+Hence, we kindly request to not publish flags of the problems that you solve. Here is an example of an excellent writeup which refrains from giving the complete solution.</p>
+</blockquote>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rawsec.ml/en/BackdoorCTF-2016-writeups-forensics-busybee/" data-id="cj0k435eh00eousfsmbxokmor" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/en/virtualbox-change-virtual-disk-uuid/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Virtualbox : change the UUID of a virtual disk
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/en/hardened-tor-browser-selfrando/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Hardened Tor Browser with Selfrando</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/archlinux-pacman-error-filename-exists-in-filesystem/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/archlinux.svg)" alt="ArchLinux - Pacman error: $filename exists in filesystem" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/linux/archlinux/">archlinux</a></p>
+                            <p class="item-title"><a href="/en/archlinux-pacman-error-filename-exists-in-filesystem/" class="title">ArchLinux - Pacman error: $filename exists in filesystem</a></p>
+                            <p class="item-date"><time datetime="2017-03-20T23:00:00.000Z" itemprop="datePublished">Tuesday 21 March 2017 (2017-03-21)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/EasyCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="EasyCTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/EasyCTF-2017-write-ups/" class="title">EasyCTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-03-20T23:00:00.000Z" itemprop="datePublished">Tuesday 21 March 2017 (2017-03-21)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/0CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="0CTF 2017 Quals - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/0CTF-2017-write-ups/" class="title">0CTF 2017 Quals - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-03-20T23:00:00.000Z" itemprop="datePublished">Tuesday 21 March 2017 (2017-03-21)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/PragyanCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Pragyan CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/PragyanCTF-2017-write-ups/" class="title">Pragyan CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-03-03T23:00:00.000Z" itemprop="datePublished">Saturday 4 March 2017 (2017-03-04)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/XiomaraCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Xiomara CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/XiomaraCTF-2017-write-ups/" class="title">Xiomara CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-02-26T23:00:00.000Z" itemprop="datePublished">Monday 27 February 2017 (2017-02-27)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">29</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/ruby/">ruby</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">109</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">97</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.67px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.67px;">centos</a> <a href="/tags/crypto/" style="font-size: 15.33px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.33px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensics/" style="font-size: 17.33px;">forensics</a> <a href="/tags/git/" style="font-size: 11.33px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.67px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.67px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.67px;">linux</a> <a href="/tags/misc/" style="font-size: 16px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.67px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 13.33px;">news</a> <a href="/tags/opensuse/" style="font-size: 14px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.67px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 12.67px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.67px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 11.33px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.67px;">reverse</a> <a href="/tags/reversing/" style="font-size: 10.67px;">reversing</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.67px;">ssh</a> <a href="/tags/stegano/" style="font-size: 12px;">stegano</a> <a href="/tags/system/" style="font-size: 16.67px;">system</a> <a href="/tags/tor/" style="font-size: 10.67px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.67px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.67px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 14.67px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.67px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 18px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.33px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'https://rawsec.ml/en/BackdoorCTF-2016-writeups-forensics-busybee/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+<!-- SSL redirect -->
+<script type="text/javascript">
+  var host = "rawsec.ml";
+  if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
+</script>
+
+
+    </div>
+</body>
+</html>
