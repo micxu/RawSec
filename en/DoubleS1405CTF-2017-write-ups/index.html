@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>DoubleS1405 CTF - Write-ups | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="security,web,crypto,writeups,ctf,forensics,misc" />
+    
+    <meta name="description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : DoubleS1405 CTF
+Website : doubles1405.com
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+1 - Mic Check - Misc
+
+flag{W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DoubleS1405 CTF - Write-ups">
+<meta property="og:url" content="https://rawsec.ml/en/DoubleS1405CTF-2017-write-ups/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : DoubleS1405 CTF
+Website : doubles1405.com
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+1 - Mic Check - Misc
+
+flag{W">
+<meta property="og:image" content="https://rawsec.ml/images/ctf.png">
+<meta property="og:updated_time" content="2017-03-26T22:09:13.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DoubleS1405 CTF - Write-ups">
+<meta name="twitter:description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : DoubleS1405 CTF
+Website : doubles1405.com
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+1 - Mic Check - Misc
+
+flag{W">
+<meta name="twitter:image" content="https://rawsec.ml/images/ctf.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <link rel="canonical" href="https://rawsec.ml" />
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/security/writeups/">writeups</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-DoubleS1405CTF-2017-write-ups" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        DoubleS1405 CTF - Write-ups
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/DoubleS1405CTF-2017-write-ups/" class="article-date">
+    <time datetime="2017-03-25T23:00:00.000Z" itemprop="datePublished">Sunday 26 March 2017 (2017-03-26)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/">crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forensics/">forensics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/misc/">misc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeups/">writeups</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : DoubleS1405 CTF</li>
+<li><strong>Website</strong> : <a href="http://doubles1405.com/" target="_blank" rel="external">doubles1405.com</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/446" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="1-mic-check-misc">1 - Mic Check - Misc</h2>
+<blockquote>
+<p>flag{W3lc0me_T0_DoubleS1405_CTF!}</p>
+</blockquote>
+<h2 id="50-easy-crypt-crypto">50 - Easy_Crypt - Crypto</h2>
+<blockquote>
+<p>hui awavmiis hqklse mx o gvslfr tn zrqecuhcef ecdmiwihvg ysrk ac lgnvb e grvnsm fe mehjzrsjrr hoyjzv twupzvg oexsx fm xys qmoxsew tt u bdcncwl. dx wf e kcld nj gcqgvpduegsnzb wlpxbdxigmtb. zczk zg mmgpc_imlshvqi</p>
+</blockquote>
+<p>It's Vigenere cipher.</p>
+<p>Key is: <code>ONEFOURZEROFIVE</code></p>
+<p>Cleartext is:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">the vigenere cipher is a method of encrypting alphabetic text by using a series of interwoven caesar ciphers based on the letters of a keyword. it is a form of polyalphabetic substitution. flag is hello_vigenere</div></pre></td></tr></table></figure></p>
+<p>You can <a href="http://www.cs.du.edu/~snarayan/crypt/vigenere.html" target="_blank" rel="external">try it</a> by youself.</p>
+<h2 id="50-crypto-crypto">50 - Crypto? - Crypto</h2>
+<blockquote>
+<p><a href="https://drive.google.com/open?id=0B4SaQn817BNcUVR2OUIzRTVFNUU" target="_blank" rel="external">https://drive.google.com/open?id=0B4SaQn817BNcUVR2OUIzRTVFNUU</a></p>
+<p>#lowercase</p>
+</blockquote>
+<p><a href="https://gist.githubusercontent.com/noraj1337/99229acaea2fbb47203821d6ec01c544/raw/dceaf270a6f0d2a836b1d98f7c7e24fce8eba6b0/gistfile1.txt" target="_blank" rel="external">Source text</a></p>
+<p>We can see some ASCII decimals in the text:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat Crypto.txt| egrep -oh &apos;\[[0-9]&#123;1,3&#125;\]&apos; | tr -d &apos;\n&apos;</div><div class="line">[123][82][48][43][86][71][80][73][79][95][78][48][74][95][51][68][65][75][84][95][49][73][125][25][88][38][28][29][30][31][32][33][34][35][36][37][38][39][40]</div></pre></td></tr></table></figure></p>
+<p>So a little ruby script to convert this into a string:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">open(<span class="string">'Crypto.txt'</span>, <span class="string">'r'</span>) <span class="keyword">do</span> <span class="params">|f|</span></div><div class="line">    text = f.read()</div><div class="line">    chars = text.scan(<span class="regexp">/\[([0-9]&#123;1,3&#125;)\]/</span>).flatten</div><div class="line">    print chars.map&#123;<span class="params">|c|</span> c.to_i.chr&#125;.join</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>And the output is: <code>{R0+VGPIO_N0J_3DAKT_1I}</code> plus some garbage. SO we keep only what's between curly braces. And now let's apply a Ceasar bruteforce.</p>
+<p>The key was +11: <code>{C0+GRATZ_Y0U_3OLVE_1T}</code>.</p>
+<p>To submit we need to lowercase (see challenge's description).</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">irb(main):003:0&gt; &quot;&#123;C0+GRATZ_Y0U_3OLVE_1T&#125;&quot;.downcase</div><div class="line">=&gt; &quot;&#123;c0+gratz_y0u_3olve_1t&#125;&quot;</div></pre></td></tr></table></figure></p>
+<p>But that was not good (no flag format...), I needed to remove curly braces and change <code>+</code> into <code>n</code>: <code>c0ngratz_y0u_3olve_1t</code>.</p>
+<h2 id="150-rsa-crypto">150 - RSA - Crypto</h2>
+<blockquote>
+<p>RSA 쉽던데..?</p>
+<p>RSA is easy, huh?</p>
+<p>#Change Code due to logic error</p>
+<p>#Change server address due to server overload</p>
+<p>nc 203.251.182.94 4000</p>
+<p><a href="https://drive.google.com/open?id=0B4SaQn817BNcck83M3lyS1dHc1E" target="_blank" rel="external">https://drive.google.com/open?id=0B4SaQn817BNcck83M3lyS1dHc1E</a></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&gt; if True:</div><div class="line">&gt;    enc_data = SECRET_LOGIC()</div><div class="line">&gt;    enc = powmod(enc_data, e, n)</div><div class="line">&gt;    conn.send(&quot;enc : %d\ne : %d\np : %d\nq : %d\n&quot; % (enc, e, p, q))</div><div class="line">&gt;</div><div class="line">&gt;    recv = conn.recv(1024)</div><div class="line">&gt;</div><div class="line">&gt;    if end - start &gt; 1:</div><div class="line">&gt;        conn.send(&quot;time out&quot;)</div><div class="line">&gt;        conn.close()</div><div class="line">&gt;</div><div class="line">&gt;    if recv == enc_data:</div><div class="line">&gt;        conn.send(FLAG)</div><div class="line">&gt;        conn.close()</div><div class="line">&gt;</div><div class="line">&gt;    conn.send(&quot;wrong&quot;)</div><div class="line">&gt;    conn.close()</div><div class="line">&gt;</div><div class="line">&gt; else:</div><div class="line">&gt;    conn.close()</div><div class="line">&gt;    print &quot;error&quot;</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>I wrote a ruby script to solve this RSA:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/ruby</span></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'openssl'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'base64'</span></div><div class="line"></div><div class="line"><span class="comment"># Source of int2Text: http://stackoverflow.com/questions/42993763/how-to-convert-bytes-in-number-into-a-string-of-characters-character-represent#42999986</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">int2Text</span><span class="params">(int)</span></span></div><div class="line">    a = []</div><div class="line">    <span class="keyword">while</span> int&gt;<span class="number">0</span></div><div class="line">        a &lt;&lt; (int &amp; <span class="number">0xFF</span>)</div><div class="line">        int <span class="meta">&gt;&gt;= </span><span class="number">8</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">return</span> a.reverse.pack(<span class="string">'C*'</span>)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Source of egcd: https://gist.github.com/jsanders/6735046</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span></span></div><div class="line">  u_a, v_a, u_b, v_b = [ <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span> ]</div><div class="line">  <span class="keyword">while</span> a != <span class="number">0</span></div><div class="line">    q = b / a</div><div class="line">    a, b = [ b - q*a, a ]</div><div class="line">    u_a, v_a, u_b, v_b = [ u_b - q*u_a, v_b - q*v_a, u_a, v_a ]</div><div class="line">    <span class="comment"># Each time, `u_a*a' + v_a*b' = a` and `u_b*a' + v_b*b' = b`</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">  [ b, u_b, v_b ]</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">modinv</span><span class="params">(a, m)</span></span></div><div class="line">    g, x, y = egcd(a, m)</div><div class="line">    <span class="keyword">if</span> g != <span class="number">1</span></div><div class="line">        raise <span class="string">'modular inverse does not exist'</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> x % m</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># Server connection</span></div><div class="line">hostname = <span class="string">'203.251.182.94'</span></div><div class="line">port = <span class="number">4000</span></div><div class="line">s = TCPSocket.open(hostname, port)</div><div class="line">raw = <span class="string">''</span></div><div class="line">answer_sent = <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> line = s.gets   <span class="comment"># Read lines from the socket</span></div><div class="line">    puts line.chop    <span class="comment"># And print with platform line terminator</span></div><div class="line">    raw += line</div><div class="line">    <span class="keyword">if</span> raw.match(<span class="regexp">/q :/</span>) &amp;&amp; answer_sent == <span class="literal">false</span></div><div class="line">        c = raw.match(<span class="regexp">/^enc : ([0-9]*)$/</span>).captures[<span class="number">0</span>].to_i</div><div class="line">        e = raw.match(<span class="regexp">/^e : ([0-9]*)$/</span>).captures[<span class="number">0</span>].to_i</div><div class="line">        p_int = raw.match(<span class="regexp">/^p : ([0-9]*)$/</span>).captures[<span class="number">0</span>].to_i</div><div class="line">        q = raw.match(<span class="regexp">/^q : ([0-9]*)$/</span>).captures[<span class="number">0</span>].to_i</div><div class="line">        phi = (p_int - <span class="number">1</span>) * (q - <span class="number">1</span>)</div><div class="line">        d = modinv(e, phi)</div><div class="line">        n = p_int*q</div><div class="line"></div><div class="line">        <span class="comment"># more efficient than m_int = (c ** d) % n</span></div><div class="line">        m_int = c.to_bn.mod_exp(d, n).to_i</div><div class="line"></div><div class="line">        <span class="comment"># cleartext is base64 containing an integer</span></div><div class="line">        m_b64 = int2Text(m_int)</div><div class="line">        puts <span class="string">"base64 : <span class="subst">#&#123;m_b64&#125;</span>"</span></div><div class="line">        m = Base64.decode64(m_b64)</div><div class="line">        puts <span class="string">"int : <span class="subst">#&#123;m&#125;</span>"</span></div><div class="line">        <span class="comment"># integer must be transform to text again</span></div><div class="line">        m_text = int2Text(m.to_i)</div><div class="line">        puts <span class="string">"text : <span class="subst">#&#123;m_text&#125;</span>"</span></div><div class="line">        s.puts m_text</div><div class="line">        answer_sent = <span class="literal">true</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div><div class="line">s.close               <span class="comment"># Close the socket when done</span></div></pre></td></tr></table></figure></p>
+<p>An example of output from my script:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ ruby rsa.rb</div><div class="line">enc : 491122313213059047386587355703000827178576243139630115107824179230229619638230359264090916176374104821742487423477640046091956570072907849863979916992012277080517371737063659607380884337353809683315958180812970513119961236305718314856508806575062351521772465118704267216578937782652026891140564554699280499155421872621380063738498801480672462553217846124110631365349374404141214553794903345385240728734320886304119126434949216541748009316097394118225456235324726150812532266854157628444800299612332540488915092939585065747993258534210496110027307168741103227954668422763393074609550128115559442563807710071873205546623595056058012799686847872624717521357873024268621752914303954208374908780786312254128829726625119613542022988078172368143379162734941970190142937076819213707077010206986159149431729867187504847837987139017023926853873484450256772068033378979496285329969789758899711272261594435793646971822229226412599644872158251842719957278621048558842287038138868659481907505634015392299324362317019730935313919966703702616226085783306686686638481716975435704933248720402377816087988961312653435421407390516891418321288636502551122036111983361547523717812270804583522804832003079689675943949319910428221021037993090021553176551473</div><div class="line">e : 65537</div><div class="line">p : 32317006071311007300714876688669951960444102669715484032130345427524655138867890893197201411522913463688717960921898019494119559150490921095088152386448283120630877367300996091750197750389652106796057638384067568276792218642619756161838094338476170470581645852036305042887575891541065808607552399123930385521954285833276606292740174507176908054077273016103644389803261062635470374515595892199454891155463898488297024308700957247533881208055894474582694028535079545281620566442541400114261729854235365927395115457109476960042332821732358509197923144094801013581965651112146928918286923938064987973879624251895591220179</div><div class="line">q : 32317006071311007300714876688669951960444102669715484032130345427524655138867890893197201411522913463688717960921898019494119559150490921095088152386448283120630877367300996091750197750389652106796057638384067568276792218642619756161838094338476170470581645852036305042887575891541065808607552399123930385521990685772174514834944123086486002362345153147580453526134037171595087108668773961917317502849945855689432886442889958513294157709640362363734479327004391952407569596153273880472331909250263593691635107321048666489395316204775782962517724272901158130972610802371589601746375325078943967095960733617174538141999</div><div class="line">base64 : NTEzMjU2MzI3MTA4MDgzNzE3Mjg4MzE2OTU4MTc4MTEwNTI1NzE4OTEyMTM0MDMzNTY3Mjc3Njc2NTI1MjYxMjI5MjExMzE0MDE1ODk=</div><div class="line">int : 51325632710808371728831695817811052571891213403356727767652526122921131401589</div><div class="line">text : qyGUcwNSzMF8uCOxByuBpTZ53Bn2IJau</div><div class="line">flag&#123;Y34hh_RSA_1S_S0_E4sy&#125;</div></pre></td></tr></table></figure></p>
+<p>Flag is: <code>Y34hh_RSA_1S_S0_E4sy</code>.</p>
+<h2 id="50-instead-of-5-billion-won-i-give-you-a-cute-handcuffs-misc">50 - Instead of 5 billion won, I give you a cute handcuffs - Misc</h2>
+<blockquote>
+<p>In the fall of 2016, an e-mail arrived to detective Kim, who is tracking up economic fugitives who have shed large amounts of money from a large corporation.</p>
+<p>I know the location of the perpetrator, but I can not tell you, and if you pay me 5 billion, I was attached with a photograph that would tell you the exact location.</p>
+<p>The attached photo was taken nearest to his refuge.</p>
+<p>Can Kim find out where the shooter escaped?</p>
+<p>(The correct answer is the address in Korea. Example: 52-3, Yeonsan-dong, Yeonje-gu, Busan, Republic of Korea)</p>
+<p><a href="https://drive.google.com/open?id=0B4SaQn817BNceWIxTlE5RVlIbkU" target="_blank" rel="external">https://drive.google.com/open?id=0B4SaQn817BNceWIxTlE5RVlIbkU</a></p>
+</blockquote>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ exiftool 1.JPG | grep -i gps</div><div class="line">GPS Latitude Ref                : North</div><div class="line">GPS Longitude Ref               : East</div><div class="line">GPS Altitude Ref                : Above Sea Level</div><div class="line">GPS Time Stamp                  : 04:50:51</div><div class="line">GPS Speed Ref                   : km/h</div><div class="line">GPS Speed                       : 0</div><div class="line">GPS Img Direction Ref           : True North</div><div class="line">GPS Img Direction               : 115.244898</div><div class="line">GPS Dest Bearing Ref            : True North</div><div class="line">GPS Dest Bearing                : 115.244898</div><div class="line">GPS Date Stamp                  : 2016:11:06</div><div class="line">GPS Horizontal Positioning Error: 10 m</div><div class="line">GPS Altitude                    : 95.3 m Above Sea Level</div><div class="line">GPS Date/Time                   : 2016:11:06 04:50:51Z</div><div class="line">GPS Latitude                    : 37 deg 40&apos; 11.91&quot; N</div><div class="line">GPS Longitude                   : 127 deg 0&apos; 29.88&quot; E</div><div class="line">GPS Position                    : 37 deg 40&apos; 11.91&quot; N, 127 deg 0&apos; 29.88&quot; E</div></pre></td></tr></table></figure></p>
+<p>Google Maps sucks: <code>DEG40, 94551, Deggendorf, Niederbayern, Bayern, Allemagne</code></p>
+<p><a href="http://www.findlatitudeandlongitude.com/?lat=37.4192&amp;lon=-122.057&amp;zoom=10&amp;map_type=G_NORMAL_MAP#.WNbyDK21vTg" target="_blank" rel="external">findlatitudeandlongitude.com</a> works better: <code>238-1 Ui-dong, Gangbuk-gu, Seoul, South Korea</code> but we need to respect description format: <code>238-1, Ui-dong, Gangbuk-gu, Seoul, Republic of Korea</code>.</p>
+<h2 id="50-cute-forensic">50 - Cute - Forensic</h2>
+<blockquote>
+<p>Very cute..</p>
+<p><a href="https://drive.google.com/open?id=0B4SaQn817BNcOFJmel91OFA4azA" target="_blank" rel="external">https://drive.google.com/open?id=0B4SaQn817BNcOFJmel91OFA4azA</a></p>
+</blockquote>
+<p>The file is a mkv (Matroska):</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ file file</div><div class="line">file: Matroska data</div><div class="line"></div><div class="line">$ mv file file.mkv</div></pre></td></tr></table></figure></p>
+<p>There is a subtitle track. We can see with <code>mkvtoolnix</code> that the subtitle track id for <code>mkextract</code> is <code>2</code>.</p>
+<p>So I extracted it:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkvextract tracks &quot;file.mkv&quot; 2:out.srt</div></pre></td></tr></table></figure></p>
+<p>And we get someting like:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">1</div><div class="line">00:00:01,000 --&gt; 00:00:01,021</div><div class="line">e</div><div class="line"></div><div class="line">2</div><div class="line">00:00:01,022 --&gt; 00:00:01,042</div><div class="line">eh</div><div class="line"></div><div class="line">3</div><div class="line">00:00:01,043 --&gt; 00:00:01,064</div><div class="line">eh~</div><div class="line"></div><div class="line">4</div><div class="line">00:00:01,065 --&gt; 00:00:01,086</div><div class="line">eh~!</div><div class="line"></div><div class="line">5</div><div class="line">00:00:01,087 --&gt; 00:00:01,108</div><div class="line">eh~!@</div><div class="line"></div><div class="line">[...]</div><div class="line"></div><div class="line">81</div><div class="line">00:00:10,539 --&gt; 00:00:10,539</div><div class="line">f</div><div class="line"></div><div class="line">82</div><div class="line">00:00:10,539 --&gt; 00:00:10,539</div><div class="line">l</div><div class="line"></div><div class="line">83</div><div class="line">00:00:10,539 --&gt; 00:00:10,539</div><div class="line">a</div><div class="line"></div><div class="line">84</div><div class="line">00:00:10,539 --&gt; 00:00:10,539</div><div class="line">g</div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
+<p>So we can see <code>flag</code> from the entry 81. Flag is written between entries 81 and 110: <code>flag{v3r_cut3_p4Rr0t_12nt_!t?}</code>.</p>
+<p>Flag is <code>v3r_cut3_p4Rr0t_12nt_!t?</code>.</p>
+<h2 id="100-iterator-web">100 - iterator - Web</h2>
+<p><strong>Warning</strong> : we didn't flag this challenge!</p>
+<p>The server is executing:</p>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$directory = $_GET[<span class="string">'dir'</span>];</div><div class="line">$cond = explode(<span class="string">"="</span>, urldecode($_SERVER[<span class="string">'QUERY_STRING'</span>]));</div><div class="line"><span class="keyword">if</span> (!is_dir($cond[<span class="number">1</span>])) <span class="keyword">echo</span> <span class="string">'folder does not exist.'</span>;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">    $directory = <span class="keyword">new</span> DirectoryIterator($directory);</div><div class="line">    <span class="keyword">foreach</span>($directory <span class="keyword">as</span> $file) &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"\n&lt;!--"</span>;</div><div class="line">        <span class="keyword">if</span> (preg_match(<span class="string">"/txt$/i"</span>, $file-&gt;getFilename())) <span class="keyword">echo</span> $file-&gt;getFilename();</div><div class="line">        <span class="keyword">else</span>;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"--&gt;"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Ok so let's try <code>/var/www/html</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!--534dddm3.txt--&gt;</div><div class="line">&lt;!----&gt;</div><div class="line">&lt;!----&gt;</div><div class="line">&lt;!----&gt;</div><div class="line">&lt;!----&gt;</div><div class="line">&lt;!----&gt;</div></pre></td></tr></table></figure></p>
+<p>Now try to reach <code>http://175.214.81.36/534dddm3.txt</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Hello! If you are reading this article you have succeeded in reading the file.</div><div class="line">what is left is finding a hidden diretory!</div></pre></td></tr></table></figure></p>
+<p>We didn't manage to find the hidden directory.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rawsec.ml/en/DoubleS1405CTF-2017-write-ups/" data-id="cj0r8madz00g9mpfsomyi1rd9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/en/WhiteHat-Challenge-02-15-Web001-Web/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            WhiteHat Challenge 02 - 15 - Web001 - Web
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/en/archlinux-pacman-error-filename-exists-in-filesystem/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">ArchLinux - Pacman error: $filename exists in filesystem</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/VolgaCTF-2017-Quals-VC-Crypto/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="VolgaCTF 2017 Quals - VC - Crypto" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/VolgaCTF-2017-Quals-VC-Crypto/" class="title">VolgaCTF 2017 Quals - VC - Crypto</a></p>
+                            <p class="item-date"><time datetime="2017-03-25T23:00:00.000Z" itemprop="datePublished">Sunday 26 March 2017 (2017-03-26)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/WhiteHat-Challenge-02-15-Web001-Web/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="WhiteHat Challenge 02 - 15 - Web001 - Web" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/WhiteHat-Challenge-02-15-Web001-Web/" class="title">WhiteHat Challenge 02 - 15 - Web001 - Web</a></p>
+                            <p class="item-date"><time datetime="2017-03-25T23:00:00.000Z" itemprop="datePublished">Sunday 26 March 2017 (2017-03-26)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/DoubleS1405CTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="DoubleS1405 CTF - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/DoubleS1405CTF-2017-write-ups/" class="title">DoubleS1405 CTF - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-03-25T23:00:00.000Z" itemprop="datePublished">Sunday 26 March 2017 (2017-03-26)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/archlinux-pacman-error-filename-exists-in-filesystem/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/archlinux.svg)" alt="ArchLinux - Pacman error: $filename exists in filesystem" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/linux/">linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/linux/archlinux/">archlinux</a></p>
+                            <p class="item-title"><a href="/en/archlinux-pacman-error-filename-exists-in-filesystem/" class="title">ArchLinux - Pacman error: $filename exists in filesystem</a></p>
+                            <p class="item-date"><time datetime="2017-03-20T23:00:00.000Z" itemprop="datePublished">Tuesday 21 March 2017 (2017-03-21)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/EasyCTF-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="EasyCTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/EasyCTF-2017-write-ups/" class="title">EasyCTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-03-20T23:00:00.000Z" itemprop="datePublished">Tuesday 21 March 2017 (2017-03-21)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">29</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/ruby/">ruby</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">112</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">100</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 13.57px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.71px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.71px;">centos</a> <a href="/tags/crypto/" style="font-size: 15.71px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.29px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensics/" style="font-size: 17.14px;">forensics</a> <a href="/tags/git/" style="font-size: 11.43px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.71px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.71px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/misc/" style="font-size: 16.43px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.71px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 13.57px;">news</a> <a href="/tags/opensuse/" style="font-size: 14.29px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.71px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 12.86px;">programming</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.71px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/reconnaissance/" style="font-size: 11.43px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.71px;">reverse</a> <a href="/tags/reversing/" style="font-size: 10.71px;">reversing</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.71px;">ssh</a> <a href="/tags/stegano/" style="font-size: 12.14px;">stegano</a> <a href="/tags/system/" style="font-size: 16.43px;">system</a> <a href="/tags/tor/" style="font-size: 10.71px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.71px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.71px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 15px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.71px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 17.86px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 13.57px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.29px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'https://rawsec.ml/en/DoubleS1405CTF-2017-write-ups/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+<!-- SSL redirect -->
+<script type="text/javascript">
+  var host = "rawsec.ml";
+  if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
+</script>
+
+
+    </div>
+</body>
+</html>
