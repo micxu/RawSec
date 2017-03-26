@@ -31,13 +31,16 @@ thumbnail: /images/ctf.png
 
 ### Description
 
- I RSA encrypted the same message 3 different times with the same exponent. Can you decrypt [this][this]?
- [this]:https://gist.githubusercontent.com/bobacadodl/92430f0c2fb1fc5517b4743904ea17a1/raw/78dbd37a2d21cb9b1de640bed616ffd404de9008/broadcast.txt
+> I RSA encrypted the same message 3 different times with the same exponent. Can you decrypt [this][this]?
+
+[this]:https://gist.githubusercontent.com/bobacadodl/92430f0c2fb1fc5517b4743904ea17a1/raw/78dbd37a2d21cb9b1de640bed616ffd404de9008/broadcast.txt
 
 ## Solution
 
 Corrected challenge version [URL][corrected]:
+
 [corrected]:https://gist.github.com/bobacadodl/92430f0c2fb1fc5517b4743904ea17a1/
+
 ```
 Problem updated on 7/17/16 @ 8PM EST - fixed values
 I RSA encrypted the same message 3 different times with the same exponent. Can you decrypt it?
@@ -55,6 +58,7 @@ C3:55139001168534905791033093049281485849516290567638780139733282880064346293967
 1. The idea is to carry out a [Håstad's broadcast attack][hastad] on the RSA protocol. This attack will allow us to decipher a text transmitted multiple times, provided that the exponent of the key that was used to cipher this text be lower or equal to the number of obtained transmissions.
 2. So, here, exponent must be 1, 2 or 3 (it's often 3).
 3. Here is the script (comments are in French):
+
 ```python
 # RSA : Hastad Attack
 # Chill3d

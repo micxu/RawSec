@@ -1,0 +1,69 @@
+---
+layout: post
+title: "VolgaCTF 2017 Quals - VC - Crypto"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - crypto
+date: 2017/03/26
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : VolgaCTF 2017 Quals
+- **Website** : [quals.2017.volgactf.ru](https://quals.2017.volgactf.ru/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/374)
+
+### Description
+
+> There are files A.png and B.png. But where's the flag?
+>
+> [A.png](https://quals.2017.volgactf.ru/files/lch5o23ids28n26t9fe7vov2qfclz9rp/A.png)
+>
+> [B.png](https://quals.2017.volgactf.ru/files/lch5o23ids28n26t9fe7vov2qfclz9rp/B.png)
+
+`A.png`:
+
+![A](http://i.imgur.com/Jj8s6vX.png)
+
+`B.png`:
+
+![B](http://i.imgur.com/gd3iCKb.png)
+
+## Solution
+
+If you know [OTP][1] you must know this famous attack on [pad reused][2].
+
+[1]:https://en.wikipedia.org/wiki/One-time_pad
+[2]:http://crypto.stackexchange.com/questions/59/taking-advantage-of-one-time-pad-key-reuse
+
+You can also see some black lines on image B. Now let's XOR image A and B (with [ImageMagick][3]):
+
+[3]:http://stackoverflow.com/questions/8504882/searching-for-a-way-to-do-bitwise-xor-on-images
+
+```
+$ convert A.png B.png -fx "(((255*u)&(255*(1-v)))|((255*(1-u))&(255*v)))/255" out.png
+```
+
+And now we get the result:
+
+![out](http://i.imgur.com/8uwlM0o.png)
+
+Flag is: `VolgaCTF{Classic_secret_sharing_scheme}`.
+
+**Note**: *VC* is for *Visual Cryptography*

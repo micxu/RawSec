@@ -9,7 +9,7 @@ tags:
   - security
   - writeups
   - ctf
-  - forensic
+  - forensics
 date: 2016/07/02
 thumbnail: /images/ctf.png
 ---

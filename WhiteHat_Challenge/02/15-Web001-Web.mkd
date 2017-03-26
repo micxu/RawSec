@@ -1,0 +1,98 @@
+---
+layout: post
+title: "WhiteHat Challenge 02 - 15 - Web001 - Web"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2017/03/26
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By        | Version | Comment
+| ---       | ---     | ---
+| noraj     | 1.0     | Creation
+
+### CTF
+
+- **Name** : WhiteHat Challenge 02
+- **Website** : [wargame.whitehat.vn](https://wargame.whitehat.vn/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/447)
+
+### Description
+
+> Have you ever code JavaScript? Find flag in Website: web01.wargame.whitehat.vn.
+>
+>Submit WhiteHat{sha1(flag)}
+>
+> Example: flag = Hello World
+>
+> sha1("Hello World") = 0a4d55a8d778e5022fab701977c5d840bbc486d0
+>
+> You must submit: WhiteHat{0a4d55a8d778e5022fab701977c5d840bbc486d0}
+>
+> (all hash charactera in lowercase)
+
+## Solution
+
+Let's check the JavaScript at: `http://web01.wargame.whitehat.vn/hello.js`
+
+```javascript
+function sayHello() {
+    alert ("This is a javascript challenge");
+    showFlag=String.fromCharCode(118,97,114,32,101,110,99,111,61,39,39,59,13,10,118,97,114,32,101,110,99,111,50,61,49,50,54,59,13,10,118,97,114,32,101,110,99,111,51,61,51,51,59,13,10,118,97,114,32,99,107,61,100,111,99,117,109,101,110,116,46,85,82,76,46,115,117,98,115,116,114,40,100,111,99,117,109,101,110,116,46,85,82,76,46,105,110,100,101,120,79,102,40,39,61,39,41,41,59,13,10,32,13,10,32,13,10,102,111,114,40,105,61,49,59,105,60,49,50,50,59,105,43,43,41,13,10,123,13,10,101,110,99,111,61,101,110,99,111,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,105,44,48,41,59,13,10,125,13,10,32,13,10,102,117,110,99,116,105,111,110,32,101,110,99,111,95,40,120,41,13,10,123,13,10,114,101,116,117,114,110,32,101,110,99,111,46,99,104,97,114,67,111,100,101,65,116,40,120,41,59,13,10,125,13,10,32,13,10,105,102,40,99,107,61,61,34,61,34,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,50,52,48,41,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,50,50,48,41,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,50,51,50,41,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,49,57,50,41,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,50,50,54,41,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,50,48,48,41,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,50,48,52,41,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,50,50,50,45,50,41,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,95,40,49,57,56,41,41,43,34,126,126,126,126,126,126,34,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,50,41,43,83,116,114,105,110,103,46,102,114,111,109,67,104,97,114,67,111,100,101,40,101,110,99,111,51,41,41,13,10,123,13,10,97,108,101,114,116,40,34,80,97,115,115,119,111,114,100,32,105,115,32,34,43,99,107,46,114,101,112,108,97,99,101,40,34,61,34,44,34,34,41,41,59,13,10,125,13,10);
+    eval(showFlag);
+}
+```
+
+`showFlag` can be evaluated (with the browser javascript console) to:
+
+```javascript
+var enco='';
+var enco2=126;
+var enco3=33;
+var ck=document.URL.substr(document.URL.indexOf('='));
+
+for(i=1;i<122;i++) {
+    enco=enco+String.fromCharCode(i,0);
+}
+
+function enco_(x) {
+    return enco.charCodeAt(x);
+}
+
+if(ck=="="+String.fromCharCode(enco_(240))+String.fromCharCode(enco_(220))+String.fromCharCode(enco_(232))+String.fromCharCode(enco_(192))+String.fromCharCode(enco_(226))+String.fromCharCode(enco_(200))+String.fromCharCode(enco_(204))+String.fromCharCode(enco_(222-2))+String.fromCharCode(enco_(198))+"~~~~~~"+String.fromCharCode(enco2)+String.fromCharCode(enco3)) {
+    alert("Password is "+ck.replace("=",""));
+}
+```
+
+And the if statement can be evaluated from:
+
+```javascript
+"="+String.fromCharCode(enco_(240))+String.fromCharCode(enco_(220))+String.fromCharCode(enco_(232))+String.fromCharCode(enco_(192))+String.fromCharCode(enco_(226))+String.fromCharCode(enco_(200))+String.fromCharCode(enco_(204))+String.fromCharCode(enco_(222-2))+String.fromCharCode(enco_(198))+"~~~~~~"+String.fromCharCode(enco2)+String.fromCharCode(enco3)
+```
+
+to:
+
+```
+=youaregod~~~~~~~!
+```
+
+Because of `alert("Password is "+ck.replace("=",""));` we just need to remove the `=`.
+
+Now we can generate the flag:
+
+```
+$ printf "WhiteHat{%s}" $(printf %s 'youaregod~~~~~~~!' | sha1sum | awk '{ print $1 }')
+WhiteHat{1c0e74d5f61b6c3901a277bdd490ad070265f027}
+```

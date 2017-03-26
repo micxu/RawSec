@@ -87,7 +87,7 @@ Flag is `inf0rmation_is_p0wer_kn0w_y0ur_adversary`.
 + NeverLAN CTFTime page: https://ctftime.org/team/32118
 + purvesta CTFtime page: https://ctftime.org/user/23157
 
-purvesta name is: *Tanner Purves*, his LinkedIn page is not working. So I searched for *twitter Tanner Purves* and found his twitter page (@purvesta0704): https://twitter.com/purvesta0704
+purvesta name is: *Tanner Purves*, his LinkedIn page is not working. So I searched for *twitter Tanner Purves* and found his twitter page [@purvesta0704](https://twitter.com/purvesta0704).
 
 His twitter descripton says:
 

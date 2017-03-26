@@ -1,0 +1,601 @@
+---
+layout: post
+title: "EasyCTF 2017 - Write-ups"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+  - misc
+  - programming
+  - reversing
+  - crypto
+  - forensics
+date: 2017/03/21
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By        | Version | Comment
+| ---       | ---     | ---
+| noraj     | 1.0     | Creation
+
+### CTF
+
+- **Name** : EasyCTF 2017
+- **Website** : [easyctf.com](https://www.easyctf.com/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/441)
+
+## 5 - IRC - Miscellaneous
+
+> EasyCTF has an IRC channel! Check out `#easyctf2017` on freenode to claim a free flag, and stick around to get on-the-fly updates during the competition.
+
+Flag: `easyctf{irc_d0esn7_apist0rm_:)}`
+
+## 10 - Hello, world! - Programming
+
+> Use your favorite programming language to print `Hello, world!` to stdout! Use the programming interface to do this!
+>
+> Programming Judge codes:
+>
+> ```
+> AC: accepted
+> WA: WRONG ANSWER (you're bad)
+> TLE: time limit exceeded (make your code faster)
+> RTE: runtime error
+> JE: judge error (contact an admin if you encounter this)
+> CE: compilation error
+> ```
+
+Python3 code:
+
+```python
+# python3
+print("Hello, world!")
+```
+
+## 15 - Things Add Up - Programming
+
+> For this problem you will utilise the programming interface, which you can access via the navigation bar at the top of your screen.
+>
+> The input for your program will be given via STDIN - that's `cin`, `input()`, and `System.in` for cxx, Python, and Java respectively. Output goes to STDOUT - `cout`, `print`, and `System.out`. Your program will be run on several sets of input, and if your output matches ours for each testcase, this problem will be marked solved.
+>
+> We'll start with a simple challenge. Each testcase has two lines of input. The first will contain an integer `N`. The second will contain a sequence of integers `a_1, a_2, ..., a_N`. You are to output the sum of that sequence - that is, `a_1 + a_2 + ... + a_n`. Good luck!
+> #### Input Constraints
+>
+> `0 < N < 100`
+>
+> `-1000 < a_i < 1000`
+>
+> #### Sample Input
+>
+> ```
+> 5
+> 2 4 7 3 1
+> ```
+>
+> ## Sample Output
+>
+> `17`
+
+Python3 code:
+
+```python
+# total
+tot = 0
+
+# N
+N = int(input())
+
+# sequence
+a_ = input().split(' ')
+for i in a_:
+    tot += int(i)
+
+print(tot)
+```
+
+## 20 - Flip My Letters - Cryptography
+
+> I dropped my alphabet on its head, can you help me reassemble it? `easyctf{r_wlmg_vevm_mvvw_zm_zhxrr_gzyov}`
+
+Hint:
+
+> What happens if you turn the alphabet upside down?
+
+It is some *Backward Alphabet Code*. I used [theproblemsite.com](https://www.theproblemsite.com/reference/mathematics/codes/backwards-alphabet-code) to solve this: `easyctf{i_dont_even_need_an_ascii_table}`.
+
+## 20 - Clear and Concise Commentary on Caesar Cipher - Cryptography
+
+> I tried to hide a flag sneakily, can you find it? [Download](https://www.easyctf.com/static/0f2b8968db2219e13d4e40125baede48a6ee77af_hexable)
+
+It's easy to find a bunch of ciphertext:
+
++ `omz kag odmow ftue oubtqd`
++ `h fns sghr qhfgs sghr shld`
++ `WKLV LV QRW WKH IODJ`
++ `xaywqoa fqheqo eo ykkh hega pdwp`
++ `ldnv bdzrzq hr dzrx`
++ `RNFLPGS{LBHTBGVG}`
++ `omt vbvdi`
++ `gmbbbbbbbbbbbbh`
+
+Just crack the ceasar code (with some ruby):
+
+```ruby
+# from https://gist.github.com/matugm/db363c7131e6af27716c
+def caesar_cipher(string, shift = 1)
+    alphabet   = Array('a'..'z')
+    encrypter  = Hash[alphabet.zip(alphabet.rotate(shift))]
+    # " " => c because I don't want to void non-letters chars
+    string.chars.map { |c| encrypter.fetch(c, c) }
+end
+
+ciphertext = 'RNFLPGS{LBHTBGVG}'.downcase
+
+(1...26).each do |n|
+    puts caesar_cipher(ciphertext, n).join
+end
+```
+
+Output:
+
+```
+sogmqht{mciuchwh}
+tphnriu{ndjvdixi}
+uqiosjv{oekwejyj}
+vrjptkw{pflxfkzk}
+wskqulx{qgmyglal}
+xtlrvmy{rhnzhmbm}
+yumswnz{sioaincn}
+zvntxoa{tjpbjodo}
+awouypb{ukqckpep}
+bxpvzqc{vlrdlqfq}
+cyqward{wmsemrgr}
+dzrxbse{xntfnshs}
+easyctf{yougotit}
+fbtzdug{zpvhpuju}
+gcuaevh{aqwiqvkv}
+hdvbfwi{brxjrwlw}
+iewcgxj{csyksxmx}
+jfxdhyk{dtzltyny}
+kgyeizl{euamuzoz}
+lhzfjam{fvbnvapa}
+miagkbn{gwcowbqb}
+njbhlco{hxdpxcrc}
+okcimdp{iyeqydsd}
+pldjneq{jzfrzete}
+qmekofr{kagsafuf}
+```
+
+So flag is `easyctf{yougotit}`.
+
+## 25 - Hexable - Reverse Engineering
+
+> I tried to hide a flag sneakily, can you find it? [Download](https://www.easyctf.com/static/0f2b8968db2219e13d4e40125baede48a6ee77af_hexable)
+
+Easy:
+
+```
+$ strings hexable
+Can you find the flag?
+easyctf{g3lZd5MgTYPBJz}
+```
+
+## 30 - Phunky Python I - Reverse Engineering
+
+> The other day we happened upon a dusty old laptop covered in duct tape and surrounded by several papers with notes scrawled all over them. Upon inspection, we found that the laptop contained several python files labeled `phunky`.
+>
+> We've determined that each of the files contains a mini reversing challenge. The first task is simple: Find the value of x such that the program prints out `easyctf` (make sure it's lowercase!).
+>
+> [phunky1.py](https://www.easyctf.com/static/c4d0110ccfce8b2d59f4914a7f7e703765c3738c_phunky1.py)
+
+Python code to reverse is:
+
+```python
+x = 0 # REDACTED
+digs = [7074241208379116738, 7074241208379116734, 7074241208379116752, 7074241208379116758, 7074241208379116736, 7074241208379116753, 7074241208379116739]
+out = ""
+for letter in reversed(digs):
+    out = chr(letter - x) + out
+print out
+```
+
+In decimal `e` equal `101` (ASCII). We know the first letter is `e` (first letter of `easyctf`) so to find x we have to calculate `7074241208379116738 - 101`.
+
+```
+irb(main):001:0> 7074241208379116738 - 101
+=> 7074241208379116637
+```
+
+So the flag is `easyctf{7074241208379116637}`.
+
+## 30 - Cookie Blog - Web
+
+> I found the cookie monster's [blog!](http://cookieblog.web.easyctf.com/)
+
+Let's see cookies in the http headers:
+
+```
+$ curl --head http://cookieblog.web.easyctf.com/
+HTTP/1.1 200 OK
+Date: Thu, 16 Mar 2017 22:08:18 GMT
+Content-Type: text/html
+Connection: keep-alive
+Set-Cookie: __cfduid=d32c1739063bfca06d37c0c40cf61298f1489702098; expires=Fri, 16-Mar-18 22:08:18 GMT; path=/; domain=.easyctf.com; HttpOnly
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+Set-Cookie: flag=easyctf%7Byum_c00kies%21%21%21%7D
+Server: cloudflare-nginx
+CF-RAY: 340b07c1f3201509-CDG
+```
+
+The server tell us to use this cookie: `flag=easyctf%7Byum_c00kies%21%21%21%7D`. Let's URLdecode it: `flag=easyctf{yum_c00kies!!!}`.
+
+## 50 - Mane Event - Forensics
+
+> My friend just got back from the plains and he took [this](https://www.easyctf.com/static/588785dd3d2d4e8366c4b0802da7f2425fd7e3fe_lion.jpg) picture with his new camera. He also told me there's a flag hidden in it - can you check it out for me?
+
+We can easyly solve it with `strings` or `exiftool`:
+
+```
+$ strings 588785dd3d2d4e8366c4b0802da7f2425fd7e3fe_lion.jpg | grep -i easyctf
+@12 - Photo Contests,easyctf{pride_in_african_engin33ring},2011 B
+
+$ exiftool 588785dd3d2d4e8366c4b0802da7f2425fd7e3fe_lion.jpg | grep -i easyctf
+Keywords                        : 12 - Photo Contests,easyctf{pride_in_african_engin33ring},2011 B
+```
+
+## 50 - Fizz Buzz 1 - Programming
+
+> Write a program that takes an integer `n` as input.
+>
+> Output the numbers 1 through `n`, in increasing order, one per line.
+>
+> However, replace any line that is a multiple of 3 with `Fizz` and any that are a multiple of 5 with `Buzz`. Any line that is a multiple of 3 and 5 should be written as `FizzBuzz`.
+>
+> The input will be the number of lines to write, n, followed by a linebreak.
+>
+> Sample input:
+>
+> ```
+> 17
+> ```
+>
+> Sample output:
+>
+> ```
+> 1
+> 2
+> Fizz
+> 4
+> Buzz
+> Fizz
+> 7
+> 8
+> Fizz
+> Buzz
+> 11
+> Fizz
+> 13
+> 14
+> FizzBuzz
+> 16
+> 17
+> ```
+
+```python
+# python3
+# strip newline and cast to int
+n = int(input().rstrip())
+for i in range(1, n+1):
+    if i % 3 == 0 and i % 5 == 0:
+        print('FizzBuzz')
+    elif i % 3 == 0:
+        print('Fizz')
+    elif i % 5 == 0:
+        print('Buzz')
+    else:
+        print(i)
+```
+
+## 50 - RSA 1 - Cryptography
+
+> I found somebody's notes on their private RSA! Help me crack [this](https://www.easyctf.com/static/66d84423fe976a19761216f5a8b9d036125903be_ciphertext1.txt).
+
+[Here](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) is how RSA works.
+
+We have `p` and `q` so we can calculate `n` and `d` to get `m`, and then convert `m` from integer (numeric) to ASCII:
+
+```python
+#!/usr/bin/python2
+
+# credit : http://jhafranco.com/2012/01/29/rsa-implementation-in-python/
+def int2Text(number, size):
+    text = "".join([chr((number >> j) & 0xff)
+                    for j in reversed(range(0, size << 3, 8))])
+    return text.lstrip("\x00")
+
+# credit : http://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python
+def egcd(a, b):
+    if a == 0:
+        return (b, 0, 1)
+    else:
+        g, y, x = egcd(b % a, a)
+        return (g, x - (b // a) * y, y)
+
+def modinv(a, m):
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise Exception('modular inverse does not exist')
+    else:
+        return x % m
+
+p = 35885212171111995346302466488176876500816040695661602379955175537461355378690177
+q = 33082048174033265491869743773326801992276462089543967631444525716583833833612769
+e = 65537
+c = 769108774360724583422343365602954767977840874127335163429133026925857210310609352349335631128387073031906212125470248375564260399006500790258805385203332728116
+phi = (p-1)*(q-1)
+d = modinv(e, phi)
+n = p*q
+
+m_int = pow(c,d,n)
+
+print int2Text(m_int, len(str(m_int)))
+```
+
+Flag is `easyctf{wh3n_y0u_h4ve_p&q_RSA_iz_ez_a45031e1}`.
+
+## 50 - Useless Python - Reverse Engineering
+
+> Boredom took over, so I wrote this python file! I didn't want anyone to see it though because it doesn't actually run, so I used the coolest base-16 encoding to keep it secret. [python](https://www.easyctf.com/static/42552c587e13c09d2873cf20c4a2a558f60a3a46_useless.py)
+
+The python sample looks like this:
+
+```
+657865632863687228313031292b63687228313230292b6 [ ... ] 92b6368722836872283532292b636872283439292b636872283431292b6368722834312929
+```
+
+Base16 is only hexadecimal so just convert it to text:
+
+```
+exec(chr(101)+chr(120)+chr(101)+chr(99)+chr(40)+ [...] +chr(40)+chr(52)+chr(49)+chr(41)+chr(41))
+```
+
+Ok, so I made a little ruby script to decode all chars and get the message, but it's like in Inception, the message is an `exec` with some `chr` again. So I adapted my script to do the same process until we get the flag:
+
+```ruby
+#!/usr/bin/ruby
+
+def deobfuscate(s)
+    # split file
+    arr_in = s.split('+')
+    # convert int to char
+    arr_out = []
+    for c in arr_in
+        char = /.*chr\(([0-9]{1,3})\).*/.match(c).captures[0].to_i.chr
+        arr_out.push(char)
+    end
+    out = arr_out.join
+    return out
+end
+
+open('test.py', 'r') do |f|
+    input = f.read()
+    output = ''
+
+    i = 1
+    until /easyctf/.match(output) do
+        puts "=== pass n°#{i} ==="
+        output = deobfuscate(input)
+        puts output + "\n\n"
+        input = output
+        i+=1
+    end
+
+end
+```
+
+Output of teh script:
+
+```
+$ ruby solve.rb
+=== pass n°1 ===
+exec(chr(101)+chr(120)+chr(101)+chr(99)+chr(40)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(56)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(55)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(51)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(54)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(55)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(54)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(51)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(54)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(52)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(53)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(53)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(53)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(53)+chr(49)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(50)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(57)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(52)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(53)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(48)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(49)+chr(54)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(51)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(50)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(56)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(57)+chr(55)+chr(41)+chr(43)+chr(99)+chr(104)+chr(114)+chr(40)+chr(49)+chr(48)+chr(51)+chr(41)+chr(41))
+
+=== pass n°2 ===
+exec(chr(102)+chr(108)+chr(97)+chr(103)+chr(32)+chr(61)+chr(32)+chr(39)+chr(101)+chr(97)+chr(115)+chr(121)+chr(99)+chr(116)+chr(102)+chr(123)+chr(112)+chr(121)+chr(116)+chr(104)+chr(111)+chr(110)+chr(95)+chr(51)+chr(120)+chr(51)+chr(99)+chr(95)+chr(101)+chr(120)+chr(101)+chr(99)+chr(95)+chr(51)+chr(120)+chr(101)+chr(99)+chr(95)+chr(101)+chr(120)+chr(51)+chr(99)+chr(125)+chr(39)+chr(10)+chr(112)+chr(114)+chr(105)+chr(105)+chr(110)+chr(116)+chr(32)+chr(102)+chr(108)+chr(97)+chr(103))
+
+=== pass n°3 ===
+flag = 'easyctf{python_3x3c_exec_3xec_ex3c}'
+priint flag
+```
+
+## 75 - Petty Difference - Forensics
+
+> I found two files in a secret room. They look like jumbled letters with no patterns. I mean look at it! [file1](https://www.easyctf.com/static/4b44b334ac0ff0a281597fb66c6f78bc8f5d537e_file1.txt) is identical to [file2](https://www.easyctf.com/static/d1de718973b070b1c12b78cef89d21ded505f9f0_file2.txt), right?
+
+Ok so let's compare the two files:
+
+```
+$ cmp -bl file1.txt file2.txt
+   482 175 }    154 l
+  1638  64 4    146 f
+  1796 137 _    142 b
+  2240 147 g    172 z
+  3157 156 n     71 9
+  3303  61 1     65 5
+  3568 153 k    145 e
+  3892  60 0    157 o
+  3911  60 0    142 b
+  4501 154 l    143 c
+  5204 137 _    162 r
+  5582  63 3    164 t
+  6107 162 r    161 q
+  6563  63 3    141 a
+  7043 167 w    144 d
+  7196 137 _    164 t
+  8269 165 u     67 7
+  8866  60 0    153 k
+  9164 171 y    144 d
+  9965 137 _    170 x
+ 10771  63 3    172 z
+ 11220 143 c     60 0
+ 11283 156 n    144 d
+ 11285  63 3    143 c
+ 11666 162 r    151 i
+ 13337  63 3    163 s
+ 14816 146 f    167 w
+ 15168 146 f    173 {
+ 15180  61 1    170 x
+ 15366 144 d     65 5
+ 15656 137 _    153 k
+ 16168  63 3    151 i
+ 17651 150 h    153 k
+ 17761 164 t     64 4
+ 18186 137 _    160 p
+ 18261  63 3    165 u
+ 18592 142 b    145 e
+ 18739 137 _    162 r
+ 19676 171 y    151 i
+ 20033  64 4    151 i
+ 20228 155 m    145 e
+ 20246 137 _    142 b
+ 23511 163 s    155 m
+ 24001  61 1    141 a
+ 24487 150 h    166 v
+ 24845 164 t    167 w
+ 25291 173 {    156 n
+ 25411 146 f    170 x
+ 25491 164 t    144 d
+ 25502 143 c    166 v
+ 25673 171 y    167 w
+ 26410 163 s    145 e
+ 27127 141 a    170 x
+ 27132 145 e     71 9
+```
+
+It seems that we got the flag (reverse order of the diff from first file), but let's write a ruby script to make it easier to copy:
+
+```ruby
+#!/usr/bin/ruby
+# empty array
+flag = []
+
+# generate diff.txt : cmp -bl file1.txt file2.txt > diff.txt
+open('diff.txt', 'r') do |f|
+    # split lines
+    lines = f.read().split("\n")
+    for line in lines
+        # split columns
+        words = line.split(' ')
+        flag.push(words[2])
+    end
+end
+
+puts flag.reverse.join
+```
+
+Let's try it:
+
+```
+$ ruby diff.rb
+easyctf{th1s_m4y_b3_th3_d1ff3r3nc3_y0u_w3r3_l00k1ng_4}
+```
+
+## 80 - RSA 2 - Cryptography
+
+> Some more RSA! This time, there's no P and Q... [this](https://www.easyctf.com/static/e583c3cc832e2f8394a89f15e034a45574a63365_ciphertext2.txt).
+
+Let's see how it looks this tiem:
+
+```
+$ cat ciphertext2.txt
+n: 292977443899368435277959020404942780635643
+e: 65537
+c: 116661734456209126203156567366346251672660
+```
+
+This time we got `n` but not `p` and `q`.
+
+Maybe [factordb](https://factordb.com/index.php?query=292977443899368435277959020404942780635643) can help us: `292977443899368435277959020404942780635643 = 471665935909122708917 · 621154553666596093679`.
+
+We can now use the same script (from RSA 1 challenge).
+
+```python
+#!/usr/bin/python2
+
+# credit : http://jhafranco.com/2012/01/29/rsa-implementation-in-python/
+def int2Text(number, size):
+    text = "".join([chr((number >> j) & 0xff)
+                    for j in reversed(range(0, size << 3, 8))])
+    return text.lstrip("\x00")
+
+# credit : http://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python
+def egcd(a, b):
+    if a == 0:
+        return (b, 0, 1)
+    else:
+        g, y, x = egcd(b % a, a)
+        return (g, x - (b // a) * y, y)
+
+def modinv(a, m):
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise Exception('modular inverse does not exist')
+    else:
+        return x % m
+
+p = 471665935909122708917
+q = 621154553666596093679
+e = 65537
+c = 116661734456209126203156567366346251672660
+phi = (p-1)*(q-1)
+d = modinv(e, phi)
+n = p*q
+
+m_int = pow(c,d,n)
+
+print int2Text(m_int, len(str(m_int)))
+```
+
+Output:
+
+```
+$ python2 rsa2.py
+flag{l0w_n_79c0}
+```
+
+## 85 - Zooooooom - Forensics
+
+> [Hekkerman](https://www.easyctf.com/static/d9040024afd9d38b73c72e30f722cf09e1093e3c_hekkerman.jpg) is looking awfully spooky. That hekker glare could pierce a firewall. What can he see that you can't?
+
+Image:
+
+![image](http://i.imgur.com/HdmaNou.jpg)
+
+We can see there is a thumbnail, let's extract it. But the thumbnail itself have a thumbnail:
+
+```
+$ exiftool -b -ThumbnailImage hekkerman.jpg > thumbnail.jpg
+$ exiftool -b -ThumbnailImage thumbnail.jpg > thumbnail_thumbnail.jpg
+```
+
+Thumbnail:
+
+![thumbnail](http://i.imgur.com/R1WBI21.jpg)
+
+Thumbnail of the thumbnail:
+
+![thumbnail thumbnail](http://i.imgur.com/v5LWUDs.jpg)
+
+Flag is: `easyctf{d33p_zo0m_HeKker_2c1ae5}`.
+
+**Note**: this is Steganography not Digital Forensics.

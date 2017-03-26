@@ -1,0 +1,67 @@
+---
+layout: post
+title: "Pragyan CTF 2017 - Write-ups"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - stegano
+date: 2017/03/04
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By        | Version | Comment
+| ---       | ---     | ---
+| noraj     | 1.0     | Creation
+
+### CTF
+
+- **Name** : Pragyan CTF 2017
+- **Website** : [ctf.pragyan.org](https://ctf.pragyan.org/home)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/420/)
+
+Pragyan CTF 2017 was one of the worst ctf ever. All challenge was guessing or steganography, web were always down, no irc, ... a shame.
+
+# 50 - Look Harder - Forencics
+
+> There are rumours that in the Great Sahara Desert, a great treasure has been buried deep inside the ground, but the map for the exact location of the treasure over the years, has not been preserved properly.
+You have got hold of the map, but it looks nothing more than a plain white sheet of paper. Can you make sense out of it ??
+>
+> [reasure_map.png](https://ctf.pragyan.org/download?file_key=dcf38b6fe45c2cf517f6aee056013674d3be7d0f7624cb029c4932d202b0c995&team_key=2f700f66c76a10df5bf3951c45926037452ccba47785e3710d8c8f0657ca979e)
+
+I used stegsolve and blue plane 4 revealed a QR code.
+
+![](http://i.imgur.com/GNnLLfD.png)
+
+I next used [Zxing online](https://zxing.org/) to decode teh QR code: `stay_pragyaned`.
+
+Flag: `pragyanctf{stay_pragyaned}`.
+
+**Important note**: this is a steganography challenge, not a digital forencics one as pretend organizers.
+
+# 150 - Interstellar - Forencics
+
+> Dr. Cooper, on another one of his endless journeys encounter a mysterious planet. However when he tried to land on it, the ship gave way and he was left stranded on the planet. Desperate for help, he relays a message to the mothership containing the details of the people with him. Their HyperPhotonic transmission is 10 times the speed of light, so there is no delay in the message. However, a few photons and magnetic particles interefered with the transmission, causing it to become as shown in the picture. Can you help the scientists on the mothership get back the original image?
+>
+> [transmission.png](https://ctf.pragyan.org/download?file_key=cbd65f738c1f6c2aedb47758e847239317188d6fb87485930ab7817909eaa333&team_key=2f700f66c76a10df5bf3951c45926037452ccba47785e3710d8c8f0657ca979e)
+
+Image is badly dammaged.
+
+![](http://i.imgur.com/15lOtfp.jpg)
+
+I used stegsolve and the Invert Color (Xor) showed me: `The flag is {Cooper_Brand}`.
+
+![](http://i.imgur.com/CuDDz4z.jpg)
+
+Flag: `pragyanctf{Cooper_Brand}`.
+
+**Important note**: this is a steganography challenge, not a digital forencics one as pretend organizers.

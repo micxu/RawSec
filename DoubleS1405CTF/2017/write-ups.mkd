@@ -1,0 +1,376 @@
+---
+layout: post
+title: "DoubleS1405 CTF - Write-ups"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - misc
+  - crypto
+  - forensics
+  - web
+date: 2017/03/26
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By    | Version | Comment
+| ---   | ---     | ---
+| noraj | 1.0     | Creation
+
+### CTF
+
+- **Name** : DoubleS1405 CTF
+- **Website** : [doubles1405.com](http://doubles1405.com/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/446)
+
+## 1 - Mic Check - Misc
+
+> flag{W3lc0me_T0_DoubleS1405_CTF!}
+
+## 50 - Easy_Crypt - Crypto
+
+> hui awavmiis hqklse mx o gvslfr tn zrqecuhcef ecdmiwihvg ysrk ac lgnvb e grvnsm fe mehjzrsjrr hoyjzv twupzvg oexsx fm xys qmoxsew tt u bdcncwl. dx wf e kcld nj gcqgvpduegsnzb wlpxbdxigmtb. zczk zg mmgpc_imlshvqi
+
+It's Vigenere cipher.
+
+Key is: `ONEFOURZEROFIVE`
+
+Cleartext is:
+
+```
+the vigenere cipher is a method of encrypting alphabetic text by using a series of interwoven caesar ciphers based on the letters of a keyword. it is a form of polyalphabetic substitution. flag is hello_vigenere
+```
+
+You can [try it](http://www.cs.du.edu/~snarayan/crypt/vigenere.html) by youself.
+
+## 50 - Crypto? - Crypto
+
+> https://drive.google.com/open?id=0B4SaQn817BNcUVR2OUIzRTVFNUU
+>
+> \#lowercase
+
+[Source text](https://gist.githubusercontent.com/noraj1337/99229acaea2fbb47203821d6ec01c544/raw/dceaf270a6f0d2a836b1d98f7c7e24fce8eba6b0/gistfile1.txt)
+
+We can see some ASCII decimals in the text:
+
+```
+$ cat Crypto.txt| egrep -oh '\[[0-9]{1,3}\]' | tr -d '\n'
+[123][82][48][43][86][71][80][73][79][95][78][48][74][95][51][68][65][75][84][95][49][73][125][25][88][38][28][29][30][31][32][33][34][35][36][37][38][39][40]
+```
+
+So a little ruby script to convert this into a string:
+
+```ruby
+open('Crypto.txt', 'r') do |f|
+    text = f.read()
+    chars = text.scan(/\[([0-9]{1,3})\]/).flatten
+    print chars.map{|c| c.to_i.chr}.join
+end
+```
+
+And the output is: `{R0+VGPIO_N0J_3DAKT_1I}` plus some garbage. SO we keep only what's between curly braces. And now let's apply a Ceasar bruteforce.
+
+The key was +11: `{C0+GRATZ_Y0U_3OLVE_1T}`.
+
+To submit we need to lowercase (see challenge's description).
+
+```
+irb(main):003:0> "{C0+GRATZ_Y0U_3OLVE_1T}".downcase
+=> "{c0+gratz_y0u_3olve_1t}"
+```
+
+But that was not good (no flag format...), I needed to remove curly braces and change `+` into `n`: `c0ngratz_y0u_3olve_1t`.
+
+## 150 - RSA - Crypto
+
+> RSA 쉽던데..?
+>
+> RSA is easy, huh?
+>
+> \#Change Code due to logic error
+>
+> \#Change server address due to server overload
+>
+> nc 203.251.182.94 4000
+>
+> https://drive.google.com/open?id=0B4SaQn817BNcck83M3lyS1dHc1E
+>
+> ```
+> if True:
+>    enc_data = SECRET_LOGIC()
+>    enc = powmod(enc_data, e, n)
+>    conn.send("enc : %d\ne : %d\np : %d\nq : %d\n" % (enc, e, p, q))
+>
+>    recv = conn.recv(1024)
+>
+>    if end - start > 1:
+>        conn.send("time out")
+>        conn.close()
+>
+>    if recv == enc_data:
+>        conn.send(FLAG)
+>        conn.close()
+>
+>    conn.send("wrong")
+>    conn.close()
+>
+> else:
+>    conn.close()
+>    print "error"
+> ```
+
+I wrote a ruby script to solve this RSA:
+
+```ruby
+#!/usr/bin/ruby
+require 'socket'
+require 'openssl'
+require 'base64'
+
+# Source of int2Text: http://stackoverflow.com/questions/42993763/how-to-convert-bytes-in-number-into-a-string-of-characters-character-represent#42999986
+def int2Text(int)
+    a = []
+    while int>0
+        a << (int & 0xFF)
+        int >>= 8
+    end
+    return a.reverse.pack('C*')
+end
+
+# Source of egcd: https://gist.github.com/jsanders/6735046
+def egcd(a, b)
+  u_a, v_a, u_b, v_b = [ 1, 0, 0, 1 ]
+  while a != 0
+    q = b / a
+    a, b = [ b - q*a, a ]
+    u_a, v_a, u_b, v_b = [ u_b - q*u_a, v_b - q*v_a, u_a, v_a ]
+    # Each time, `u_a*a' + v_a*b' = a` and `u_b*a' + v_b*b' = b`
+  end
+  [ b, u_b, v_b ]
+end
+
+def modinv(a, m)
+    g, x, y = egcd(a, m)
+    if g != 1
+        raise 'modular inverse does not exist'
+    else
+        return x % m
+    end
+end
+
+# Server connection
+hostname = '203.251.182.94'
+port = 4000
+s = TCPSocket.open(hostname, port)
+raw = ''
+answer_sent = false
+
+while line = s.gets   # Read lines from the socket
+    puts line.chop    # And print with platform line terminator
+    raw += line
+    if raw.match(/q :/) && answer_sent == false
+        c = raw.match(/^enc : ([0-9]*)$/).captures[0].to_i
+        e = raw.match(/^e : ([0-9]*)$/).captures[0].to_i
+        p_int = raw.match(/^p : ([0-9]*)$/).captures[0].to_i
+        q = raw.match(/^q : ([0-9]*)$/).captures[0].to_i
+        phi = (p_int - 1) * (q - 1)
+        d = modinv(e, phi)
+        n = p_int*q
+
+        # more efficient than m_int = (c ** d) % n
+        m_int = c.to_bn.mod_exp(d, n).to_i
+
+        # cleartext is base64 containing an integer
+        m_b64 = int2Text(m_int)
+        puts "base64 : #{m_b64}"
+        m = Base64.decode64(m_b64)
+        puts "int : #{m}"
+        # integer must be transform to text again
+        m_text = int2Text(m.to_i)
+        puts "text : #{m_text}"
+        s.puts m_text
+        answer_sent = true
+    end
+
+end
+s.close               # Close the socket when done
+```
+
+An example of output from my script:
+
+```
+$ ruby rsa.rb
+enc : 491122313213059047386587355703000827178576243139630115107824179230229619638230359264090916176374104821742487423477640046091956570072907849863979916992012277080517371737063659607380884337353809683315958180812970513119961236305718314856508806575062351521772465118704267216578937782652026891140564554699280499155421872621380063738498801480672462553217846124110631365349374404141214553794903345385240728734320886304119126434949216541748009316097394118225456235324726150812532266854157628444800299612332540488915092939585065747993258534210496110027307168741103227954668422763393074609550128115559442563807710071873205546623595056058012799686847872624717521357873024268621752914303954208374908780786312254128829726625119613542022988078172368143379162734941970190142937076819213707077010206986159149431729867187504847837987139017023926853873484450256772068033378979496285329969789758899711272261594435793646971822229226412599644872158251842719957278621048558842287038138868659481907505634015392299324362317019730935313919966703702616226085783306686686638481716975435704933248720402377816087988961312653435421407390516891418321288636502551122036111983361547523717812270804583522804832003079689675943949319910428221021037993090021553176551473
+e : 65537
+p : 32317006071311007300714876688669951960444102669715484032130345427524655138867890893197201411522913463688717960921898019494119559150490921095088152386448283120630877367300996091750197750389652106796057638384067568276792218642619756161838094338476170470581645852036305042887575891541065808607552399123930385521954285833276606292740174507176908054077273016103644389803261062635470374515595892199454891155463898488297024308700957247533881208055894474582694028535079545281620566442541400114261729854235365927395115457109476960042332821732358509197923144094801013581965651112146928918286923938064987973879624251895591220179
+q : 32317006071311007300714876688669951960444102669715484032130345427524655138867890893197201411522913463688717960921898019494119559150490921095088152386448283120630877367300996091750197750389652106796057638384067568276792218642619756161838094338476170470581645852036305042887575891541065808607552399123930385521990685772174514834944123086486002362345153147580453526134037171595087108668773961917317502849945855689432886442889958513294157709640362363734479327004391952407569596153273880472331909250263593691635107321048666489395316204775782962517724272901158130972610802371589601746375325078943967095960733617174538141999
+base64 : NTEzMjU2MzI3MTA4MDgzNzE3Mjg4MzE2OTU4MTc4MTEwNTI1NzE4OTEyMTM0MDMzNTY3Mjc3Njc2NTI1MjYxMjI5MjExMzE0MDE1ODk=
+int : 51325632710808371728831695817811052571891213403356727767652526122921131401589
+text : qyGUcwNSzMF8uCOxByuBpTZ53Bn2IJau
+flag{Y34hh_RSA_1S_S0_E4sy}
+```
+
+Flag is: `Y34hh_RSA_1S_S0_E4sy`.
+
+## 50 - Instead of 5 billion won, I give you a cute handcuffs - Misc
+
+> In the fall of 2016, an e-mail arrived to detective Kim, who is tracking up economic fugitives who have shed large amounts of money from a large corporation.
+>
+>I know the location of the perpetrator, but I can not tell you, and if you pay me 5 billion, I was attached with a photograph that would tell you the exact location.
+>
+>The attached photo was taken nearest to his refuge.
+>
+>Can Kim find out where the shooter escaped?
+>
+>(The correct answer is the address in Korea. Example: 52-3, Yeonsan-dong, Yeonje-gu, Busan, Republic of Korea)
+>
+>https://drive.google.com/open?id=0B4SaQn817BNceWIxTlE5RVlIbkU
+
+
+```
+$ exiftool 1.JPG | grep -i gps
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Altitude Ref                : Above Sea Level
+GPS Time Stamp                  : 04:50:51
+GPS Speed Ref                   : km/h
+GPS Speed                       : 0
+GPS Img Direction Ref           : True North
+GPS Img Direction               : 115.244898
+GPS Dest Bearing Ref            : True North
+GPS Dest Bearing                : 115.244898
+GPS Date Stamp                  : 2016:11:06
+GPS Horizontal Positioning Error: 10 m
+GPS Altitude                    : 95.3 m Above Sea Level
+GPS Date/Time                   : 2016:11:06 04:50:51Z
+GPS Latitude                    : 37 deg 40' 11.91" N
+GPS Longitude                   : 127 deg 0' 29.88" E
+GPS Position                    : 37 deg 40' 11.91" N, 127 deg 0' 29.88" E
+```
+
+Google Maps sucks: `DEG40, 94551, Deggendorf, Niederbayern, Bayern, Allemagne`
+
+[findlatitudeandlongitude.com](http://www.findlatitudeandlongitude.com/?lat=37.4192&lon=-122.057&zoom=10&map_type=G_NORMAL_MAP#.WNbyDK21vTg) works better: `238-1 Ui-dong, Gangbuk-gu, Seoul, South Korea` but we need to respect description format: `238-1, Ui-dong, Gangbuk-gu, Seoul, Republic of Korea`.
+
+## 50 - Cute - Forensic
+
+> Very cute..
+>
+> https://drive.google.com/open?id=0B4SaQn817BNcOFJmel91OFA4azA
+
+The file is a mkv (Matroska):
+
+```
+$ file file
+file: Matroska data
+
+$ mv file file.mkv
+```
+
+There is a subtitle track. We can see with `mkvtoolnix` that the subtitle track id for `mkextract` is `2`.
+
+So I extracted it:
+
+```
+$ mkvextract tracks "file.mkv" 2:out.srt
+```
+
+And we get someting like:
+
+```
+1
+00:00:01,000 --> 00:00:01,021
+e
+
+2
+00:00:01,022 --> 00:00:01,042
+eh
+
+3
+00:00:01,043 --> 00:00:01,064
+eh~
+
+4
+00:00:01,065 --> 00:00:01,086
+eh~!
+
+5
+00:00:01,087 --> 00:00:01,108
+eh~!@
+
+[...]
+
+81
+00:00:10,539 --> 00:00:10,539
+f
+
+82
+00:00:10,539 --> 00:00:10,539
+l
+
+83
+00:00:10,539 --> 00:00:10,539
+a
+
+84
+00:00:10,539 --> 00:00:10,539
+g
+
+[...]
+```
+
+So we can see `flag` from the entry 81. Flag is written between entries 81 and 110: `flag{v3r_cut3_p4Rr0t_12nt_!t?}`.
+
+Flag is `v3r_cut3_p4Rr0t_12nt_!t?`.
+
+## 100 - iterator - Web
+
+**Warning** : we didn't flag this challenge!
+
+The server is executing:
+
+```php
+<?php
+$directory = $_GET['dir'];
+$cond = explode("=", urldecode($_SERVER['QUERY_STRING']));
+if (!is_dir($cond[1])) echo 'folder does not exist.';
+else {
+    $directory = new DirectoryIterator($directory);
+    foreach($directory as $file) {
+        echo "\n<!--";
+        if (preg_match("/txt$/i", $file->getFilename())) echo $file->getFilename();
+        else;
+        echo "-->";
+    }
+}
+?>
+```
+
+Ok so let's try `/var/www/html`:
+
+```
+<!--534dddm3.txt-->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+```
+
+Now try to reach `http://175.214.81.36/534dddm3.txt`:
+
+```
+Hello! If you are reading this article you have succeeded in reading the file.
+what is left is finding a hidden diretory!
+```
+
+We didn't manage to find the hidden directory.

