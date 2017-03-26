@@ -1,0 +1,38 @@
+---
+layout: post
+title: "ArchLinux - Pacman error: $filename exists in filesystem"
+date: 2017/03/21
+lang: en
+categories:
+- linux
+- archlinux
+tags:
+- linux
+- archlinux
+thumbnail: /images/archlinux.svg
+---
+Before each update, check [Archlinux news](https://www.archlinux.org/news/), there may be special instructions.
+
+When updating you system with `# pacman -Syu` you may sometimes encounter this error:
+
+```
+error: could not prepare transaction
+error: failed to commit transaction (conflicting files)
+libname: /absolut/file/path exists in filesystem
+Errors occurred, no packages were upgraded.
+```
+
+`pacman` has detected a file conflict, and is preventing you to overwrite those files. So it's user responsability to take a decision.
+
+To solve this you have to check that those files are not used by any installed package with the command: `$ pacman -Qo /absolut/file/path`.
+
+If no package is using the file you will get this normal error:
+
+```
+$ pacman -Qo /absolut/file/path
+error: No package owns /absolut/file/path
+```
+
+Now you can rename the file (`mv /path/file.ext /path/file.ext.bck`), then try the update again `# pacman -Syu` and then remove the, now, useless file (`rm /path/file.ext.bck`).
+
+But if the file is used [report a bug](https://wiki.archlinux.org/index.php/Reporting_bug_guidelines).
