@@ -285,6 +285,86 @@ However I do not know what to do, so I want you to solve it instead.</p>
   </entry>
   
   <entry>
+    <title>ASIS CTF Quals 2017 - Write-ups</title>
+    <link href="https://rawsec.ml/en/ASIS-2017-Quals-write-ups/"/>
+    <id>https://rawsec.ml/en/ASIS-2017-Quals-write-ups/</id>
+    <published>2017-04-09T22:00:00.000Z</published>
+    <updated>2017-04-09T22:48:39.900Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : ASIS CTF Quals 2017</li>
+<li><strong>Website</strong> : <a href="https://asis-ctf.ir/" target="_blank" rel="external">asis-ctf.ir</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/364/" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="1-welcome-trivia">1 - Welcome - Trivia</h2>
+<blockquote>
+<p>What is the smallest valid flag for ASIS CTF?</p>
+</blockquote>
+<p><code>ASIS{}</code></p>
+<h2 id="19-our-weird-os-trivia">19 - our weird OS! - Trivia</h2>
+<blockquote>
+<p>Once upon a time we could have files with the exactly same name in our OS! Submit the flag like ASIS{OS_name}.</p>
+</blockquote>
+<p>Source: Wikipedia <a href="https://en.wikipedia.org/wiki/List_of_file_systems" target="_blank" rel="external">List of file systems</a> - <a href="https://en.wikipedia.org/wiki/Apple_Lisa" target="_blank" rel="external">Apple Lisa</a></p>
+<blockquote>
+<p>LisaFS - Filesystem used by Apple Lisa's operating system. Unique in that it allowed two different files with exactly same name (&quot;foo&quot; and &quot;foo&quot;).</p>
+</blockquote>
+<p>Source: <a href="http://www.macworld.com/article/2026544/the-little-known-apple-lisa-five-quirks-and-oddities.html" target="_blank" rel="external">macworld</a></p>
+<blockquote>
+<p>Amazingly, Lisa OS is one of the only operating systems in history (if not the only one; research pending) to allow duplicate file names. Each file was assigned a physical file name that represented the file on the disk, and a virtual file name provided by the user that showed up in the Lisa interface.</p>
+</blockquote>
+<p>Flag: <code>ASIS{Lisa}</code> (should have been <code>ASIS{Lisa_OS}</code>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Egypt &amp; UAE National Cyber Security CTF Quals 2017 - Write-ups</title>
     <link href="https://rawsec.ml/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/"/>
     <id>https://rawsec.ml/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/</id>
@@ -392,11 +472,11 @@ However I do not know what to do, so I want you to solve it instead.</p>
   </entry>
   
   <entry>
-    <title>ASIS CTF Quals 2017 - Write-ups</title>
-    <link href="https://rawsec.ml/en/ASIS-2017-Quals-write-ups/"/>
-    <id>https://rawsec.ml/en/ASIS-2017-Quals-write-ups/</id>
+    <title>Sunshine CTF 2017 - Write-ups</title>
+    <link href="https://rawsec.ml/en/Sunshine-CTF-2017-writ-ups/"/>
+    <id>https://rawsec.ml/en/Sunshine-CTF-2017-writ-ups/</id>
     <published>2017-04-09T22:00:00.000Z</published>
-    <updated>2017-04-09T22:48:39.900Z</updated>
+    <updated>2017-04-09T22:57:33.464Z</updated>
     
     <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
 <h3 id="version">Version</h3>
@@ -418,30 +498,79 @@ However I do not know what to do, so I want you to solve it instead.</p>
 </table>
 <h3 id="ctf">CTF</h3>
 <ul>
-<li><strong>Name</strong> : ASIS CTF Quals 2017</li>
-<li><strong>Website</strong> : <a href="https://asis-ctf.ir/" target="_blank" rel="external">asis-ctf.ir</a></li>
+<li><strong>Name</strong> : Sunshine CTF 2017</li>
+<li><strong>Website</strong> : <a href="https://sunshinectf.org/" target="_blank" rel="external">sunshinectf.org</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/364/" target="_blank" rel="external">link</a></li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/449/" target="_blank" rel="external">link</a></li>
 </ul>
-<h2 id="1-welcome-trivia">1 - Welcome - Trivia</h2>
+<h2 id="1-snowflake-crypto">1 - Snowflake - Crypto</h2>
+<p><code>sun{74K3_Y0UR_p4r7icIP47i0N_7r0PhY_y0U_5N0Wfl4k3}</code></p>
+<h2 id="25-easy-1-web">25 - Easy 1 - Web</h2>
 <blockquote>
-<p>What is the smallest valid flag for ASIS CTF?</p>
+<p>Doom is upon us. We are surrounded by enemies on all sides. There is only one hope. Use your hacking skills to find it.</p>
+<p><a href="http://easy1.web.sunshinectf.org" target="_blank" rel="external">easy1.web.sunshinectf.org</a></p>
 </blockquote>
-<p><code>ASIS{}</code></p>
-<h2 id="19-our-weird-os-trivia">19 - our weird OS! - Trivia</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ curl --head http://easy1.web.sunshinectf.org/</div><div class="line">HTTP/1.1 200 OK</div><div class="line">Server: nginx</div><div class="line">Date: Fri, 07 Apr 2017 21:59:44 GMT</div><div class="line">Content-Type: text/html</div><div class="line">Connection: keep-alive</div><div class="line">X-Powered-By: PHP/5.5.9-1ubuntu4.11</div><div class="line">flag: sun&#123;k4rEfUL_D0nT_H1T_y0uR_HE4dEr&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="50-easy-2-web">50 - Easy 2 - Web</h2>
 <blockquote>
-<p>Once upon a time we could have files with the exactly same name in our OS! Submit the flag like ASIS{OS_name}.</p>
+<p>Plan ahead.</p>
+<p>Heighten your situational awareness.</p>
+<p>Dress in clothes that are common to the area where you are, or where you plan to go.</p>
+<p>Avoid bright colors. Neutral will blend in. Choose grey over black or white or red.</p>
+<p><a href="http://easy2.web.sunshinectf.org" target="_blank" rel="external">easy2.web.sunshinectf.org</a></p>
 </blockquote>
-<p>Source: Wikipedia <a href="https://en.wikipedia.org/wiki/List_of_file_systems" target="_blank" rel="external">List of file systems</a> - <a href="https://en.wikipedia.org/wiki/Apple_Lisa" target="_blank" rel="external">Apple Lisa</a></p>
+<p>There is a form:</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"index.php"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">     Username: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"admin"</span> /&gt;</span> <span class="tag">&lt;<span class="name">br</span> /&gt;</span></div><div class="line">     Password: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"admin"</span> /&gt;</span> <span class="tag">&lt;<span class="name">br</span> /&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"is_admin"</span> <span class="attr">value</span>=<span class="string">"0"</span> /&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"submit"</span> /&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Change the hidden input field value (<code>&lt;input type=&quot;hidden&quot; name=&quot;is_admin&quot; value=&quot;1&quot; /&gt;</code>) from <code>0</code> to <code>1</code> and submit inputs.</p>
+<p>We get the flag: <code>sun{n07HIn9_C4N_83_HiDD3n_Fr0m_4_h4X0R}</code>.</p>
+<h2 id="150-tag-forensics">150 - Tag - Forensics</h2>
 <blockquote>
-<p>LisaFS - Filesystem used by Apple Lisa's operating system. Unique in that it allowed two different files with exactly same name (&quot;foo&quot; and &quot;foo&quot;).</p>
+<p>You are surrounded by zombies on all sides. Blood and flesh that drip from their mouths. You run for cover in an abandoned building. As you huddle in terror under a delapitated desk your foot brushes against a small package. What could be inside???</p>
+<p><a href="https://sunshinectf.org/files/88f6331e28192d47e3842911b21057f0/tag.gz" target="_blank" rel="external">https://sunshinectf.org/files/88f6331e28192d47e3842911b21057f0/tag.gz</a></p>
 </blockquote>
-<p>Source: <a href="http://www.macworld.com/article/2026544/the-little-known-apple-lisa-five-quirks-and-oddities.html" target="_blank" rel="external">macworld</a></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file tag.gz</div><div class="line">tag.gz: pcap-ng capture file - version 1.0</div></pre></td></tr></table></figure></p>
+<p>So open <code>tag.gz</code> with Wireshark.</p>
+<p>We can be ready to find some files:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ binwalk tag.gz</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">1181          0x49D           JPEG image data, EXIF standard</div><div class="line">1193          0x4A9           TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">14252         0x37AC          Unix path: /www.w3.org/1999/02/22-rdf-syntax-ns#&quot;&gt; &lt;rdf:Description rdf:about=&quot;&quot; xmlns:xmp=&quot;http://ns.adobe.com/xap/1.0/&quot; xmlns:dc=&quot;http://</div><div class="line">18412         0x47EC          Copyright string: &quot;Copyright (c) 1998 Hewlett-Packard Company&quot;</div><div class="line">244133        0x3B9A5         JPEG image data, JFIF standard 1.01</div><div class="line">396028        0x60AFC         7-zip archive data, version 0.3</div></pre></td></tr></table></figure></p>
+<p>In Wireshark: File &gt; Export Objects &gt; HTTP. Here we can save 3 files: 2 images (jpeg) and 1 archive (7z).</p>
+<p>Images are useless and archive is password protected.</p>
+<p>Let's find password in the <code>pcap-ng</code>. If you do a <code>strings</code> on <code>tag.gz</code> you can see a lot of trailing data that are no port of the extracted files.</p>
+<p>The data are on frame n°313 in the TCP data field (length 1116). Right click on data and <em>Export Selected Packet Bytes</em>.</p>
+<p>That looks like base64:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ cat data.ext</div><div class="line">NDg2NTIwNzc2MTZjNmI2NTY0MjA2Zjc1NzQyMDY5NmUyMDc0Njg2NTIwNjc3MjYxNzkyMDZjNjk2NzY4NzQyMDYxNmU2NDIwNzM3NDZmNmY2NDIwNjE2ZTY0MjA2ODY1MjA3MzYxNzcyMDY2NmY3MjIwNjEyMDYyNzI2OTY1NjYyMDZkNmY2ZDY1NmU3NDIwNzQ2ODY1MjA2MTYyNzM2ZjZjNzU3NDY1MjA3NDcyNzU3NDY4MjA2ZjY2MjA3NDY4NjUyMDc3NmY3MjZjNjQyZTIwNTQ2ODY1MjA2MzZmNmM2NDIwNzI2NTZjNjU2ZTc0NmM2NTczNzMyMDYzNjk3MjYzNmM2OTZlNjcyMDZmNjYyMDc0Njg2NTIwNjk2ZTc0NjU3Mzc0NjE3NDY1MjA2NTYxNzI3NDY4MmUyMDQ0NjE3MjZiNmU2NTczNzMyMDY5NmQ3MDZjNjE2MzYxNjI2YzY1MmUyMDU0Njg2NTIwNjI2YzY5NmU2NDIwNjQ2ZjY3NzMyMDZmNjYyMDc0Njg2NTIwNzM3NTZlMjA2OTZlMjA3NDY4NjU2OTcyMjA3Mjc1NmU2ZTY5NmU2NzJlMjA1NDY4NjUyMDYzNzI3NTczNjg2OTZlNjcyMDYyNmM2MTYzNmIyMDc2NjE2Mzc1NzU2ZDIwNmY2NjIwNzQ2ODY1MjA3NTZlNjk3NjY1NzI3MzY1MmUyMDQxNmU2NDIwNzM2ZjZkNjU3NzY4NjU3MjY1MjA3NDc3NmYyMDY4NzU2ZTc0NjU2NDIwNjE2ZTY5NmQ2MTZjNzMyMDc0NzI2NTZkNjI2YzY5NmU2NzIwNmM2OTZiNjUyMDY3NzI2Zjc1NmU2NDJkNjY2Zjc4NjU3MzIwNjk2ZTIwNzQ2ODY1Njk3MjIwNjM2Zjc2NjU3MjJlMjA0MjZmNzI3MjZmNzc2NTY0MjA3NDY5NmQ2NTIwNjE2ZTY0MjA2MjZmNzI3MjZmNzc2NTY0MjA3NzZmNzI2YzY0MjA2MTZlNjQyMDYyNmY3MjcyNmY3NzY1NjQyMDY1Nzk2NTczMjA3NzY5NzQ2ODIwNzc2ODY5NjM2ODIwNzQ2ZjIwNzM2ZjcyNzI2Zjc3MjA2OTc0MmU=</div><div class="line"></div><div class="line">$ cat data.ext | base64 -di</div><div class="line">48652077616c6b6564206f757420696e207468652067726179206c6967687420616e642073746f6f6420616e642068652073617720666f722061206272696566206d6f6d656e7420746865206162736f6c757465207472757468206f662074686520776f726c642e2054686520636f6c642072656c656e746c65737320636972636c696e67206f662074686520696e746573746174652065617274682e204461726b6e65737320696d706c616361626c652e2054686520626c696e6420646f6773206f66207468652073756e20696e2074686569722072756e6e696e672e20546865206372757368696e6720626c61636b2076616375756d206f662074686520756e6976657273652e20416e6420736f6d6577686572652074776f2068756e74656420616e696d616c73207472656d626c696e67206c696b652067726f756e642d666f78657320696e20746865697220636f7665722e20426f72726f7765642074696d6520616e6420626f72726f77656420776f726c6420616e6420626f72726f7765642065796573207769746820776869636820746f20736f72726f772069742e</div></pre></td></tr></table></figure></p>
+<p>That now looks like hex:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat data.ext | base64 -di | xxd -r -p</div><div class="line">He walked out in the gray light and stood and he saw for a brief moment the absolute truth of the world. The cold relentless circling of the intestate earth. Darkness implacable. The blind dogs of the sun in their running. The crushing black vacuum of the universe. And somewhere two hunted animals trembling like ground-foxes in their cover. Borrowed time and borrowed world and borrowed eyes with which to sorrow it.</div></pre></td></tr></table></figure></p>
+<p>Now we get a quote, let's paste it in a search engine, that come from <code>The Road</code>.</p>
+<p>Extract <code>flag.7z</code> with <code>the road</code> as password.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat flag.txt</div><div class="line">sun&#123;phUn_1n_7h3_c0MPl373_l4ck_0f_5UN&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="150-vanity-crypto">150 - Vanity - Crypto</h2>
 <blockquote>
-<p>Amazingly, Lisa OS is one of the only operating systems in history (if not the only one; research pending) to allow duplicate file names. Each file was assigned a physical file name that represented the file on the disk, and a virtual file name provided by the user that showed up in the Lisa interface.</p>
+<p>You need to buy some things, and luckily the local merchant accepts Bitcoin! You found out he only checks that the first four characters of his address and the one you send the coins to. Can you make him think you are sending him the coins while they really go to yourself?</p>
+<p>nc <a href="http://pwn.sunshinectf.org" target="_blank" rel="external">pwn.sunshinectf.org</a> 40003</p>
 </blockquote>
-<p>Flag: <code>ASIS{Lisa}</code> (should have been <code>ASIS{Lisa_OS}</code>)</p>
+<p>We need to have a bitcoin address where the 4 first char are the same as the vendor address:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">$ nc pwn.sunshinectf.org 40003</div><div class="line">The local vendor is warry to accept anynthing but bitcoin, but he only checks the first</div><div class="line">four characters of each address.</div><div class="line">Can you make him think you are sending him the coins while they really go to yourself?</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1kXeFFwxJcyVbHVUkJ59ykfax4F4P4NoZb</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">fc3009f6a11328a4ece34ee4209c712f7f14a81fd0ce4d0b0e8dbb9f40d9d7d9</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1kXer5xriQaRBWPZWLUyQuhy7WFMbiQAi</div><div class="line"></div><div class="line">Glad the payment went through, here are your goods.</div><div class="line">You only have 4 purchases left!</div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1tM15GpBJbAc8uc2MPz2qsnSMBs1k2VA7H</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">cb14680d253636f95dd68e7cab26773ffb8ceba4e2aa1848668cee1dd044706b</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1tM1BtrZ26tzDjWyXGgyUHPT1b5WJCqz3</div><div class="line"></div><div class="line">Glad the payment went through, here are your goods.</div><div class="line">You only have 3 purchases left!</div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1RMogK6nrk7LLkFGBBdcRjvozC1rs9GDSp</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">92ac39806ed9b333004a405042b0598a6bdedfed5e5e262e737b70f66921729e</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1RMo33Retq4GrcebJKEChHLQZZFCpR22q</div><div class="line"></div><div class="line">Glad the payment went through, here are your goods.</div><div class="line">You only have 2 purchases left!</div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1EdVCpLJ1aSQqoKzWy5T4LTMmKuqbtzoyF</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">1821075f9b31112a5543703a7a2b7bbdc0553265ce302b3daafd3e77f0d0282f</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1EdVGodXWjtPn4JsvqEDocZq4d3B4Qv2pL</div><div class="line"></div><div class="line">Glad the payment went through, here are your goods.</div><div class="line">You only have 1 purchases left!</div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1xRWfB5a9S5q74fE2w7QtS4GhghBtLeP7j</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">6fa7d622cd209657c1d858c546d4aa31d525a9167e33e7bbbc38944ba0cee71e</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1xRWUawaT6KsjaSzgxUyEnFTByqpdLm5C</div><div class="line"></div><div class="line">Thanks for all of your payments, here&apos;s your flag:</div><div class="line">sun&#123;a1waY5_ch3k__th0se_bits&#125;</div></pre></td></tr></table></figure></p>
+<p>To generate a private key matching a 4 case-sensitive pattern is used <a href="https://github.com/samr7/vanitygen" target="_blank" rel="external">vanitygen</a>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">$ ./vanitygen 1kXe</div><div class="line">Difficulty: 4553521</div><div class="line">Pattern: 1kXe</div><div class="line">Address: 1kXer5xriQaRBWPZWLUyQuhy7WFMbiQAi</div><div class="line">Privkey: 5KjMNoAXxtRffAz96EzguPq8ZDAJZUrHmZ9ddCztA68QoD4kP45</div><div class="line"></div><div class="line">$ ./vanitygen 1tM1</div><div class="line">Difficulty: 4553521</div><div class="line">Pattern: 1tM1</div><div class="line">Address: 1tM1BtrZ26tzDjWyXGgyUHPT1b5WJCqz3</div><div class="line">Privkey: 5KMiyog4NfQmJ2ZFxsaLkVNVLaMGy3uMpwTX8QEgQSEBwkTcrgT</div><div class="line"></div><div class="line">$ ./vanitygen 1RMo</div><div class="line">Difficulty: 4553521</div><div class="line">Pattern: 1RMo</div><div class="line">Address: 1RMo33Retq4GrcebJKEChHLQZZFCpR22q</div><div class="line">Privkey: 5Jvt95bYNH7E9scFXSidFrSN9TkCdHiHBTAqPrh89S1cexJVgGi</div><div class="line"></div><div class="line">$ ./vanitygen 1EdV</div><div class="line">Difficulty: 77178</div><div class="line">Pattern: 1EdV</div><div class="line">Address: 1EdVGodXWjtPn4JsvqEDocZq4d3B4Qv2pL</div><div class="line">Privkey: 5HzuvbeUwNxixqAnK2UPfjRQVkgEe7coKBLmZGaBPifDR2gycL6</div><div class="line"></div><div class="line">$ ./vanitygen 1xRW</div><div class="line">Difficulty: 4553521</div><div class="line">Pattern: 1xRW</div><div class="line">Address: 1xRWUawaT6KsjaSzgxUyEnFTByqpdLm5C</div><div class="line">Privkey: 5JfTg4Pw3n2i81bK8keWb9R3gnRDaNi8p1ZJ61Lzo79nnhuPh4A</div></pre></td></tr></table></figure></p>
+<p>But output of the private key is WIF encoded in base58 and we need a hexadecimal encoding of the uncompressed private key, so I used <a href="https://github.com/matja/bitcoin-tool" target="_blank" rel="external">bitcoin-tool</a> to convert it:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5KjMNoAXxtRffAz96EzguPq8ZDAJZUrHmZ9ddCztA68QoD4kP45</div><div class="line">fc3009f6a11328a4ece34ee4209c712f7f14a81fd0ce4d0b0e8dbb9f40d9d7d9</div><div class="line"></div><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5KMiyog4NfQmJ2ZFxsaLkVNVLaMGy3uMpwTX8QEgQSEBwkTcrgT</div><div class="line">cb14680d253636f95dd68e7cab26773ffb8ceba4e2aa1848668cee1dd044706b</div><div class="line"></div><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5Jvt95bYNH7E9scFXSidFrSN9TkCdHiHBTAqPrh89S1cexJVgGi</div><div class="line">92ac39806ed9b333004a405042b0598a6bdedfed5e5e262e737b70f66921729e</div><div class="line"></div><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5HzuvbeUwNxixqAnK2UPfjRQVkgEe7coKBLmZGaBPifDR2gycL6</div><div class="line">1821075f9b31112a5543703a7a2b7bbdc0553265ce302b3daafd3e77f0d0282f</div><div class="line"></div><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5JfTg4Pw3n2i81bK8keWb9R3gnRDaNi8p1ZJ61Lzo79nnhuPh4A</div><div class="line">6fa7d622cd209657c1d858c546d4aa31d525a9167e33e7bbbc38944ba0cee71e</div></pre></td></tr></table></figure></p>
+<h2 id="150-zombiedex-web">150 - Zombiedex - Web</h2>
+<blockquote>
+<p><a href="http://zombiedex.web.sunshinectf.org" target="_blank" rel="external">zombiedex.web.sunshinectf.org</a></p>
+</blockquote>
+<p><strong>Warning</strong>: partial solution!</p>
+<p>Convert from HEX to ASCII:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">printf</span> %s <span class="string">'66534a68496a6f695a484a7664334e7a595841694c434a756157316b59534936496d5674595735795a584e31496e733d'</span> | xxd -r -p</div><div class="line">fSJhIjoiZHJvd3NzYXAiLCJuaW1kYSI6ImVtYW5yZXN1Ins=</div></pre></td></tr></table></figure></p>
+<p>Base64 decode:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">printf</span> %s <span class="string">'fSJhIjoiZHJvd3NzYXAiLCJuaW1kYSI6ImVtYW5yZXN1Ins='</span> | base64 <span class="_">-d</span></div><div class="line">&#125;<span class="string">"a"</span>:<span class="string">"drowssap"</span>,<span class="string">"nimda"</span>:<span class="string">"emanresu"</span>&#123;</div></pre></td></tr></table></figure></p>
+<p>Reverse the string:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">printf</span> %s <span class="string">'&#125;"a":"drowssap","nimda":"emanresu"&#123;'</span> | rev</div><div class="line">&#123;<span class="string">"username"</span>:<span class="string">"admin"</span>,<span class="string">"password"</span>:<span class="string">"a"</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>That's the credentials I used to lokin in JSON format.</p>
+<p>Or in one line:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span> %s <span class="string">'66534a68496a6f695a484a7664334e7a595841694c434a756157316b59534936496d5674595735795a584e31496e733d'</span> | xxd -r -p | base64 <span class="_">-d</span> | rev</div><div class="line">&#123;<span class="string">"username"</span>:<span class="string">"admin"</span>,<span class="string">"password"</span>:<span class="string">"a"</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>Let's inject something in the JSON and send a crafted cookie.</p>
+<p><strong>Warning</strong>: we didn't go further.</p>
 ]]></content>
     
     <summary type="html">
@@ -465,9 +594,15 @@ However I do not know what to do, so I want you to solve it instead.</p>
     
       <category term="security" scheme="https://rawsec.ml/tags/security/"/>
     
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
+    
       <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
     
   </entry>
   
@@ -644,141 +779,6 @@ However I do not know what to do, so I want you to solve it instead.</p>
   </entry>
   
   <entry>
-    <title>Sunshine CTF 2017 - Write-ups</title>
-    <link href="https://rawsec.ml/en/Sunshine-CTF-2017-writ-ups/"/>
-    <id>https://rawsec.ml/en/Sunshine-CTF-2017-writ-ups/</id>
-    <published>2017-04-09T22:00:00.000Z</published>
-    <updated>2017-04-09T22:57:33.464Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : Sunshine CTF 2017</li>
-<li><strong>Website</strong> : <a href="https://sunshinectf.org/" target="_blank" rel="external">sunshinectf.org</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/449/" target="_blank" rel="external">link</a></li>
-</ul>
-<h2 id="1-snowflake-crypto">1 - Snowflake - Crypto</h2>
-<p><code>sun{74K3_Y0UR_p4r7icIP47i0N_7r0PhY_y0U_5N0Wfl4k3}</code></p>
-<h2 id="25-easy-1-web">25 - Easy 1 - Web</h2>
-<blockquote>
-<p>Doom is upon us. We are surrounded by enemies on all sides. There is only one hope. Use your hacking skills to find it.</p>
-<p><a href="http://easy1.web.sunshinectf.org" target="_blank" rel="external">easy1.web.sunshinectf.org</a></p>
-</blockquote>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ curl --head http://easy1.web.sunshinectf.org/</div><div class="line">HTTP/1.1 200 OK</div><div class="line">Server: nginx</div><div class="line">Date: Fri, 07 Apr 2017 21:59:44 GMT</div><div class="line">Content-Type: text/html</div><div class="line">Connection: keep-alive</div><div class="line">X-Powered-By: PHP/5.5.9-1ubuntu4.11</div><div class="line">flag: sun&#123;k4rEfUL_D0nT_H1T_y0uR_HE4dEr&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="50-easy-2-web">50 - Easy 2 - Web</h2>
-<blockquote>
-<p>Plan ahead.</p>
-<p>Heighten your situational awareness.</p>
-<p>Dress in clothes that are common to the area where you are, or where you plan to go.</p>
-<p>Avoid bright colors. Neutral will blend in. Choose grey over black or white or red.</p>
-<p><a href="http://easy2.web.sunshinectf.org" target="_blank" rel="external">easy2.web.sunshinectf.org</a></p>
-</blockquote>
-<p>There is a form:</p>
-<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"index.php"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">     Username: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"admin"</span> /&gt;</span> <span class="tag">&lt;<span class="name">br</span> /&gt;</span></div><div class="line">     Password: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"admin"</span> /&gt;</span> <span class="tag">&lt;<span class="name">br</span> /&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"is_admin"</span> <span class="attr">value</span>=<span class="string">"0"</span> /&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"submit"</span> /&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>Change the hidden input field value (<code>&lt;input type=&quot;hidden&quot; name=&quot;is_admin&quot; value=&quot;1&quot; /&gt;</code>) from <code>0</code> to <code>1</code> and submit inputs.</p>
-<p>We get the flag: <code>sun{n07HIn9_C4N_83_HiDD3n_Fr0m_4_h4X0R}</code>.</p>
-<h2 id="150-tag-forensics">150 - Tag - Forensics</h2>
-<blockquote>
-<p>You are surrounded by zombies on all sides. Blood and flesh that drip from their mouths. You run for cover in an abandoned building. As you huddle in terror under a delapitated desk your foot brushes against a small package. What could be inside???</p>
-<p><a href="https://sunshinectf.org/files/88f6331e28192d47e3842911b21057f0/tag.gz" target="_blank" rel="external">https://sunshinectf.org/files/88f6331e28192d47e3842911b21057f0/tag.gz</a></p>
-</blockquote>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file tag.gz</div><div class="line">tag.gz: pcap-ng capture file - version 1.0</div></pre></td></tr></table></figure></p>
-<p>So open <code>tag.gz</code> with Wireshark.</p>
-<p>We can be ready to find some files:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ binwalk tag.gz</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">1181          0x49D           JPEG image data, EXIF standard</div><div class="line">1193          0x4A9           TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">14252         0x37AC          Unix path: /www.w3.org/1999/02/22-rdf-syntax-ns#&quot;&gt; &lt;rdf:Description rdf:about=&quot;&quot; xmlns:xmp=&quot;http://ns.adobe.com/xap/1.0/&quot; xmlns:dc=&quot;http://</div><div class="line">18412         0x47EC          Copyright string: &quot;Copyright (c) 1998 Hewlett-Packard Company&quot;</div><div class="line">244133        0x3B9A5         JPEG image data, JFIF standard 1.01</div><div class="line">396028        0x60AFC         7-zip archive data, version 0.3</div></pre></td></tr></table></figure></p>
-<p>In Wireshark: File &gt; Export Objects &gt; HTTP. Here we can save 3 files: 2 images (jpeg) and 1 archive (7z).</p>
-<p>Images are useless and archive is password protected.</p>
-<p>Let's find password in the <code>pcap-ng</code>. If you do a <code>strings</code> on <code>tag.gz</code> you can see a lot of trailing data that are no port of the extracted files.</p>
-<p>The data are on frame n°313 in the TCP data field (length 1116). Right click on data and <em>Export Selected Packet Bytes</em>.</p>
-<p>That looks like base64:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ cat data.ext</div><div class="line">NDg2NTIwNzc2MTZjNmI2NTY0MjA2Zjc1NzQyMDY5NmUyMDc0Njg2NTIwNjc3MjYxNzkyMDZjNjk2NzY4NzQyMDYxNmU2NDIwNzM3NDZmNmY2NDIwNjE2ZTY0MjA2ODY1MjA3MzYxNzcyMDY2NmY3MjIwNjEyMDYyNzI2OTY1NjYyMDZkNmY2ZDY1NmU3NDIwNzQ2ODY1MjA2MTYyNzM2ZjZjNzU3NDY1MjA3NDcyNzU3NDY4MjA2ZjY2MjA3NDY4NjUyMDc3NmY3MjZjNjQyZTIwNTQ2ODY1MjA2MzZmNmM2NDIwNzI2NTZjNjU2ZTc0NmM2NTczNzMyMDYzNjk3MjYzNmM2OTZlNjcyMDZmNjYyMDc0Njg2NTIwNjk2ZTc0NjU3Mzc0NjE3NDY1MjA2NTYxNzI3NDY4MmUyMDQ0NjE3MjZiNmU2NTczNzMyMDY5NmQ3MDZjNjE2MzYxNjI2YzY1MmUyMDU0Njg2NTIwNjI2YzY5NmU2NDIwNjQ2ZjY3NzMyMDZmNjYyMDc0Njg2NTIwNzM3NTZlMjA2OTZlMjA3NDY4NjU2OTcyMjA3Mjc1NmU2ZTY5NmU2NzJlMjA1NDY4NjUyMDYzNzI3NTczNjg2OTZlNjcyMDYyNmM2MTYzNmIyMDc2NjE2Mzc1NzU2ZDIwNmY2NjIwNzQ2ODY1MjA3NTZlNjk3NjY1NzI3MzY1MmUyMDQxNmU2NDIwNzM2ZjZkNjU3NzY4NjU3MjY1MjA3NDc3NmYyMDY4NzU2ZTc0NjU2NDIwNjE2ZTY5NmQ2MTZjNzMyMDc0NzI2NTZkNjI2YzY5NmU2NzIwNmM2OTZiNjUyMDY3NzI2Zjc1NmU2NDJkNjY2Zjc4NjU3MzIwNjk2ZTIwNzQ2ODY1Njk3MjIwNjM2Zjc2NjU3MjJlMjA0MjZmNzI3MjZmNzc2NTY0MjA3NDY5NmQ2NTIwNjE2ZTY0MjA2MjZmNzI3MjZmNzc2NTY0MjA3NzZmNzI2YzY0MjA2MTZlNjQyMDYyNmY3MjcyNmY3NzY1NjQyMDY1Nzk2NTczMjA3NzY5NzQ2ODIwNzc2ODY5NjM2ODIwNzQ2ZjIwNzM2ZjcyNzI2Zjc3MjA2OTc0MmU=</div><div class="line"></div><div class="line">$ cat data.ext | base64 -di</div><div class="line">48652077616c6b6564206f757420696e207468652067726179206c6967687420616e642073746f6f6420616e642068652073617720666f722061206272696566206d6f6d656e7420746865206162736f6c757465207472757468206f662074686520776f726c642e2054686520636f6c642072656c656e746c65737320636972636c696e67206f662074686520696e746573746174652065617274682e204461726b6e65737320696d706c616361626c652e2054686520626c696e6420646f6773206f66207468652073756e20696e2074686569722072756e6e696e672e20546865206372757368696e6720626c61636b2076616375756d206f662074686520756e6976657273652e20416e6420736f6d6577686572652074776f2068756e74656420616e696d616c73207472656d626c696e67206c696b652067726f756e642d666f78657320696e20746865697220636f7665722e20426f72726f7765642074696d6520616e6420626f72726f77656420776f726c6420616e6420626f72726f7765642065796573207769746820776869636820746f20736f72726f772069742e</div></pre></td></tr></table></figure></p>
-<p>That now looks like hex:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat data.ext | base64 -di | xxd -r -p</div><div class="line">He walked out in the gray light and stood and he saw for a brief moment the absolute truth of the world. The cold relentless circling of the intestate earth. Darkness implacable. The blind dogs of the sun in their running. The crushing black vacuum of the universe. And somewhere two hunted animals trembling like ground-foxes in their cover. Borrowed time and borrowed world and borrowed eyes with which to sorrow it.</div></pre></td></tr></table></figure></p>
-<p>Now we get a quote, let's paste it in a search engine, that come from <code>The Road</code>.</p>
-<p>Extract <code>flag.7z</code> with <code>the road</code> as password.</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat flag.txt</div><div class="line">sun&#123;phUn_1n_7h3_c0MPl373_l4ck_0f_5UN&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="150-vanity-crypto">150 - Vanity - Crypto</h2>
-<blockquote>
-<p>You need to buy some things, and luckily the local merchant accepts Bitcoin! You found out he only checks that the first four characters of his address and the one you send the coins to. Can you make him think you are sending him the coins while they really go to yourself?</p>
-<p>nc <a href="http://pwn.sunshinectf.org" target="_blank" rel="external">pwn.sunshinectf.org</a> 40003</p>
-</blockquote>
-<p>We need to have a bitcoin address where the 4 first char are the same as the vendor address:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">$ nc pwn.sunshinectf.org 40003</div><div class="line">The local vendor is warry to accept anynthing but bitcoin, but he only checks the first</div><div class="line">four characters of each address.</div><div class="line">Can you make him think you are sending him the coins while they really go to yourself?</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1kXeFFwxJcyVbHVUkJ59ykfax4F4P4NoZb</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">fc3009f6a11328a4ece34ee4209c712f7f14a81fd0ce4d0b0e8dbb9f40d9d7d9</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1kXer5xriQaRBWPZWLUyQuhy7WFMbiQAi</div><div class="line"></div><div class="line">Glad the payment went through, here are your goods.</div><div class="line">You only have 4 purchases left!</div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1tM15GpBJbAc8uc2MPz2qsnSMBs1k2VA7H</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">cb14680d253636f95dd68e7cab26773ffb8ceba4e2aa1848668cee1dd044706b</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1tM1BtrZ26tzDjWyXGgyUHPT1b5WJCqz3</div><div class="line"></div><div class="line">Glad the payment went through, here are your goods.</div><div class="line">You only have 3 purchases left!</div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1RMogK6nrk7LLkFGBBdcRjvozC1rs9GDSp</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">92ac39806ed9b333004a405042b0598a6bdedfed5e5e262e737b70f66921729e</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1RMo33Retq4GrcebJKEChHLQZZFCpR22q</div><div class="line"></div><div class="line">Glad the payment went through, here are your goods.</div><div class="line">You only have 2 purchases left!</div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1EdVCpLJ1aSQqoKzWy5T4LTMmKuqbtzoyF</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">1821075f9b31112a5543703a7a2b7bbdc0553265ce302b3daafd3e77f0d0282f</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1EdVGodXWjtPn4JsvqEDocZq4d3B4Qv2pL</div><div class="line"></div><div class="line">Glad the payment went through, here are your goods.</div><div class="line">You only have 1 purchases left!</div><div class="line">Hey there! Here&apos;s my Bitcoin address:</div><div class="line">1xRWfB5a9S5q74fE2w7QtS4GhghBtLeP7j</div><div class="line"></div><div class="line">Enter your private key(in hex, uncompressed):</div><div class="line">6fa7d622cd209657c1d858c546d4aa31d525a9167e33e7bbbc38944ba0cee71e</div><div class="line"></div><div class="line">That key came out to:</div><div class="line">1xRWUawaT6KsjaSzgxUyEnFTByqpdLm5C</div><div class="line"></div><div class="line">Thanks for all of your payments, here&apos;s your flag:</div><div class="line">sun&#123;a1waY5_ch3k__th0se_bits&#125;</div></pre></td></tr></table></figure></p>
-<p>To generate a private key matching a 4 case-sensitive pattern is used <a href="https://github.com/samr7/vanitygen" target="_blank" rel="external">vanitygen</a>:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">$ ./vanitygen 1kXe</div><div class="line">Difficulty: 4553521</div><div class="line">Pattern: 1kXe</div><div class="line">Address: 1kXer5xriQaRBWPZWLUyQuhy7WFMbiQAi</div><div class="line">Privkey: 5KjMNoAXxtRffAz96EzguPq8ZDAJZUrHmZ9ddCztA68QoD4kP45</div><div class="line"></div><div class="line">$ ./vanitygen 1tM1</div><div class="line">Difficulty: 4553521</div><div class="line">Pattern: 1tM1</div><div class="line">Address: 1tM1BtrZ26tzDjWyXGgyUHPT1b5WJCqz3</div><div class="line">Privkey: 5KMiyog4NfQmJ2ZFxsaLkVNVLaMGy3uMpwTX8QEgQSEBwkTcrgT</div><div class="line"></div><div class="line">$ ./vanitygen 1RMo</div><div class="line">Difficulty: 4553521</div><div class="line">Pattern: 1RMo</div><div class="line">Address: 1RMo33Retq4GrcebJKEChHLQZZFCpR22q</div><div class="line">Privkey: 5Jvt95bYNH7E9scFXSidFrSN9TkCdHiHBTAqPrh89S1cexJVgGi</div><div class="line"></div><div class="line">$ ./vanitygen 1EdV</div><div class="line">Difficulty: 77178</div><div class="line">Pattern: 1EdV</div><div class="line">Address: 1EdVGodXWjtPn4JsvqEDocZq4d3B4Qv2pL</div><div class="line">Privkey: 5HzuvbeUwNxixqAnK2UPfjRQVkgEe7coKBLmZGaBPifDR2gycL6</div><div class="line"></div><div class="line">$ ./vanitygen 1xRW</div><div class="line">Difficulty: 4553521</div><div class="line">Pattern: 1xRW</div><div class="line">Address: 1xRWUawaT6KsjaSzgxUyEnFTByqpdLm5C</div><div class="line">Privkey: 5JfTg4Pw3n2i81bK8keWb9R3gnRDaNi8p1ZJ61Lzo79nnhuPh4A</div></pre></td></tr></table></figure></p>
-<p>But output of the private key is WIF encoded in base58 and we need a hexadecimal encoding of the uncompressed private key, so I used <a href="https://github.com/matja/bitcoin-tool" target="_blank" rel="external">bitcoin-tool</a> to convert it:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5KjMNoAXxtRffAz96EzguPq8ZDAJZUrHmZ9ddCztA68QoD4kP45</div><div class="line">fc3009f6a11328a4ece34ee4209c712f7f14a81fd0ce4d0b0e8dbb9f40d9d7d9</div><div class="line"></div><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5KMiyog4NfQmJ2ZFxsaLkVNVLaMGy3uMpwTX8QEgQSEBwkTcrgT</div><div class="line">cb14680d253636f95dd68e7cab26773ffb8ceba4e2aa1848668cee1dd044706b</div><div class="line"></div><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5Jvt95bYNH7E9scFXSidFrSN9TkCdHiHBTAqPrh89S1cexJVgGi</div><div class="line">92ac39806ed9b333004a405042b0598a6bdedfed5e5e262e737b70f66921729e</div><div class="line"></div><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5HzuvbeUwNxixqAnK2UPfjRQVkgEe7coKBLmZGaBPifDR2gycL6</div><div class="line">1821075f9b31112a5543703a7a2b7bbdc0553265ce302b3daafd3e77f0d0282f</div><div class="line"></div><div class="line">$ ./bitcoin-tool --input-type private-key-wif --input-format base58check --output-type private-key --output-format hex --input 5JfTg4Pw3n2i81bK8keWb9R3gnRDaNi8p1ZJ61Lzo79nnhuPh4A</div><div class="line">6fa7d622cd209657c1d858c546d4aa31d525a9167e33e7bbbc38944ba0cee71e</div></pre></td></tr></table></figure></p>
-<h2 id="150-zombiedex-web">150 - Zombiedex - Web</h2>
-<blockquote>
-<p><a href="http://zombiedex.web.sunshinectf.org" target="_blank" rel="external">zombiedex.web.sunshinectf.org</a></p>
-</blockquote>
-<p><strong>Warning</strong>: partial solution!</p>
-<p>Convert from HEX to ASCII:</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">printf</span> %s <span class="string">'66534a68496a6f695a484a7664334e7a595841694c434a756157316b59534936496d5674595735795a584e31496e733d'</span> | xxd -r -p</div><div class="line">fSJhIjoiZHJvd3NzYXAiLCJuaW1kYSI6ImVtYW5yZXN1Ins=</div></pre></td></tr></table></figure></p>
-<p>Base64 decode:</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">printf</span> %s <span class="string">'fSJhIjoiZHJvd3NzYXAiLCJuaW1kYSI6ImVtYW5yZXN1Ins='</span> | base64 <span class="_">-d</span></div><div class="line">&#125;<span class="string">"a"</span>:<span class="string">"drowssap"</span>,<span class="string">"nimda"</span>:<span class="string">"emanresu"</span>&#123;</div></pre></td></tr></table></figure></p>
-<p>Reverse the string:</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">printf</span> %s <span class="string">'&#125;"a":"drowssap","nimda":"emanresu"&#123;'</span> | rev</div><div class="line">&#123;<span class="string">"username"</span>:<span class="string">"admin"</span>,<span class="string">"password"</span>:<span class="string">"a"</span>&#125;</div></pre></td></tr></table></figure></p>
-<p>That's the credentials I used to lokin in JSON format.</p>
-<p>Or in one line:</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span> %s <span class="string">'66534a68496a6f695a484a7664334e7a595841694c434a756157316b59534936496d5674595735795a584e31496e733d'</span> | xxd -r -p | base64 <span class="_">-d</span> | rev</div><div class="line">&#123;<span class="string">"username"</span>:<span class="string">"admin"</span>,<span class="string">"password"</span>:<span class="string">"a"</span>&#125;</div></pre></td></tr></table></figure></p>
-<p>Let's inject something in the JSON and send a crafted cookie.</p>
-<p><strong>Warning</strong>: we didn't go further.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
-    
-      <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Install BlackArch Linux on top of ArchLinux without gnupg / behind a proxy</title>
     <link href="https://rawsec.ml/en/archlinux-install-blackarch-without-gnupg-behind-proxy/"/>
     <id>https://rawsec.ml/en/archlinux-install-blackarch-without-gnupg-behind-proxy/</id>
@@ -807,94 +807,9 @@ However I do not know what to do, so I want you to solve it instead.</p>
     
       <category term="system" scheme="https://rawsec.ml/tags/system/"/>
     
-      <category term="proxy" scheme="https://rawsec.ml/tags/proxy/"/>
-    
       <category term="archlinux" scheme="https://rawsec.ml/tags/archlinux/"/>
     
-  </entry>
-  
-  <entry>
-    <title>WhiteHat Challenge 02 - 15 - Web001 - Web</title>
-    <link href="https://rawsec.ml/en/WhiteHat-Challenge-02-15-Web001-Web/"/>
-    <id>https://rawsec.ml/en/WhiteHat-Challenge-02-15-Web001-Web/</id>
-    <published>2017-03-25T23:00:00.000Z</published>
-    <updated>2017-03-26T21:42:01.052Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : WhiteHat Challenge 02</li>
-<li><strong>Website</strong> : <a href="https://wargame.whitehat.vn/" target="_blank" rel="external">wargame.whitehat.vn</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/447" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="description">Description</h3>
-<blockquote>
-<p>Have you ever code JavaScript? Find flag in Website: <a href="http://web01.wargame.whitehat.vn" target="_blank" rel="external">web01.wargame.whitehat.vn</a>.</p>
-<p>Submit WhiteHat{sha1(flag)}</p>
-<p>Example: flag = Hello World</p>
-<p>sha1(&quot;Hello World&quot;) = 0a4d55a8d778e5022fab701977c5d840bbc486d0</p>
-<p>You must submit: WhiteHat{0a4d55a8d778e5022fab701977c5d840bbc486d0}</p>
-<p>(all hash charactera in lowercase)</p>
-</blockquote>
-<h2 id="solution">Solution</h2>
-<p>Let's check the JavaScript at: <code>http://web01.wargame.whitehat.vn/hello.js</code></p>
-<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert (<span class="string">"This is a javascript challenge"</span>);</div><div class="line">    showFlag=<span class="built_in">String</span>.fromCharCode(<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">61</span>,<span class="number">39</span>,<span class="number">39</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">50</span>,<span class="number">61</span>,<span class="number">49</span>,<span class="number">50</span>,<span class="number">54</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">51</span>,<span class="number">61</span>,<span class="number">51</span>,<span class="number">51</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">99</span>,<span class="number">107</span>,<span class="number">61</span>,<span class="number">100</span>,<span class="number">111</span>,<span class="number">99</span>,<span class="number">117</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">46</span>,<span class="number">85</span>,<span class="number">82</span>,<span class="number">76</span>,<span class="number">46</span>,<span class="number">115</span>,<span class="number">117</span>,<span class="number">98</span>,<span class="number">115</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">40</span>,<span class="number">100</span>,<span class="number">111</span>,<span class="number">99</span>,<span class="number">117</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">46</span>,<span class="number">85</span>,<span class="number">82</span>,<span class="number">76</span>,<span class="number">46</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">120</span>,<span class="number">79</span>,<span class="number">102</span>,<span class="number">40</span>,<span class="number">39</span>,<span class="number">61</span>,<span class="number">39</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">32</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">32</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">102</span>,<span class="number">111</span>,<span class="number">114</span>,<span class="number">40</span>,<span class="number">105</span>,<span class="number">61</span>,<span class="number">49</span>,<span class="number">59</span>,<span class="number">105</span>,<span class="number">60</span>,<span class="number">49</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">59</span>,<span class="number">105</span>,<span class="number">43</span>,<span class="number">43</span>,<span class="number">41</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">61</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">105</span>,<span class="number">44</span>,<span class="number">48</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">125</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">32</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">102</span>,<span class="number">117</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">116</span>,<span class="number">105</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">120</span>,<span class="number">41</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">114</span>,<span class="number">101</span>,<span class="number">116</span>,<span class="number">117</span>,<span class="number">114</span>,<span class="number">110</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">46</span>,<span class="number">99</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">65</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">120</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">125</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">32</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">105</span>,<span class="number">102</span>,<span class="number">40</span>,<span class="number">99</span>,<span class="number">107</span>,<span class="number">61</span>,<span class="number">61</span>,<span class="number">34</span>,<span class="number">61</span>,<span class="number">34</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">52</span>,<span class="number">48</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">48</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">51</span>,<span class="number">50</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">57</span>,<span class="number">50</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">54</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">48</span>,<span class="number">52</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">45</span>,<span class="number">50</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">57</span>,<span class="number">56</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">34</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">34</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">50</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">51</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">34</span>,<span class="number">80</span>,<span class="number">97</span>,<span class="number">115</span>,<span class="number">115</span>,<span class="number">119</span>,<span class="number">111</span>,<span class="number">114</span>,<span class="number">100</span>,<span class="number">32</span>,<span class="number">105</span>,<span class="number">115</span>,<span class="number">32</span>,<span class="number">34</span>,<span class="number">43</span>,<span class="number">99</span>,<span class="number">107</span>,<span class="number">46</span>,<span class="number">114</span>,<span class="number">101</span>,<span class="number">112</span>,<span class="number">108</span>,<span class="number">97</span>,<span class="number">99</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">34</span>,<span class="number">61</span>,<span class="number">34</span>,<span class="number">44</span>,<span class="number">34</span>,<span class="number">34</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">125</span>,<span class="number">13</span>,<span class="number">10</span>);</div><div class="line">    <span class="built_in">eval</span>(showFlag);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><code>showFlag</code> can be evaluated (with the browser javascript console) to:</p>
-<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> enco=<span class="string">''</span>;</div><div class="line"><span class="keyword">var</span> enco2=<span class="number">126</span>;</div><div class="line"><span class="keyword">var</span> enco3=<span class="number">33</span>;</div><div class="line"><span class="keyword">var</span> ck=<span class="built_in">document</span>.URL.substr(<span class="built_in">document</span>.URL.indexOf(<span class="string">'='</span>));</div><div class="line"></div><div class="line"><span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;<span class="number">122</span>;i++) &#123;</div><div class="line">    enco=enco+<span class="built_in">String</span>.fromCharCode(i,<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">enco_</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> enco.charCodeAt(x);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(ck==<span class="string">"="</span>+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">240</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">220</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">232</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">192</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">226</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">200</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">204</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">222</span><span class="number">-2</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">198</span>))+<span class="string">"~~~~~~"</span>+<span class="built_in">String</span>.fromCharCode(enco2)+<span class="built_in">String</span>.fromCharCode(enco3)) &#123;</div><div class="line">    alert(<span class="string">"Password is "</span>+ck.replace(<span class="string">"="</span>,<span class="string">""</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>And the if statement can be evaluated from:</p>
-<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"="</span>+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">240</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">220</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">232</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">192</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">226</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">200</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">204</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">222</span><span class="number">-2</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">198</span>))+<span class="string">"~~~~~~"</span>+<span class="built_in">String</span>.fromCharCode(enco2)+<span class="built_in">String</span>.fromCharCode(enco3)</div></pre></td></tr></table></figure></p>
-<p>to:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">=youaregod~~~~~~~!</div></pre></td></tr></table></figure></p>
-<p>Because of <code>alert(&quot;Password is &quot;+ck.replace(&quot;=&quot;,&quot;&quot;));</code> we just need to remove the <code>=</code>.</p>
-<p>Now we can generate the flag:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ printf &quot;WhiteHat&#123;%s&#125;&quot; $(printf %s &apos;youaregod~~~~~~~!&apos; | sha1sum | awk &apos;&#123; print $1 &#125;&apos;)</div><div class="line">WhiteHat&#123;1c0e74d5f61b6c3901a277bdd490ad070265f027&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+      <category term="proxy" scheme="https://rawsec.ml/tags/proxy/"/>
     
   </entry>
   
@@ -1121,6 +1036,91 @@ However I do not know what to do, so I want you to solve it instead.</p>
       <category term="security" scheme="https://rawsec.ml/tags/security/"/>
     
       <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WhiteHat Challenge 02 - 15 - Web001 - Web</title>
+    <link href="https://rawsec.ml/en/WhiteHat-Challenge-02-15-Web001-Web/"/>
+    <id>https://rawsec.ml/en/WhiteHat-Challenge-02-15-Web001-Web/</id>
+    <published>2017-03-25T23:00:00.000Z</published>
+    <updated>2017-03-26T21:42:01.052Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : WhiteHat Challenge 02</li>
+<li><strong>Website</strong> : <a href="https://wargame.whitehat.vn/" target="_blank" rel="external">wargame.whitehat.vn</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/447" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="description">Description</h3>
+<blockquote>
+<p>Have you ever code JavaScript? Find flag in Website: <a href="http://web01.wargame.whitehat.vn" target="_blank" rel="external">web01.wargame.whitehat.vn</a>.</p>
+<p>Submit WhiteHat{sha1(flag)}</p>
+<p>Example: flag = Hello World</p>
+<p>sha1(&quot;Hello World&quot;) = 0a4d55a8d778e5022fab701977c5d840bbc486d0</p>
+<p>You must submit: WhiteHat{0a4d55a8d778e5022fab701977c5d840bbc486d0}</p>
+<p>(all hash charactera in lowercase)</p>
+</blockquote>
+<h2 id="solution">Solution</h2>
+<p>Let's check the JavaScript at: <code>http://web01.wargame.whitehat.vn/hello.js</code></p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert (<span class="string">"This is a javascript challenge"</span>);</div><div class="line">    showFlag=<span class="built_in">String</span>.fromCharCode(<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">61</span>,<span class="number">39</span>,<span class="number">39</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">50</span>,<span class="number">61</span>,<span class="number">49</span>,<span class="number">50</span>,<span class="number">54</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">51</span>,<span class="number">61</span>,<span class="number">51</span>,<span class="number">51</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">99</span>,<span class="number">107</span>,<span class="number">61</span>,<span class="number">100</span>,<span class="number">111</span>,<span class="number">99</span>,<span class="number">117</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">46</span>,<span class="number">85</span>,<span class="number">82</span>,<span class="number">76</span>,<span class="number">46</span>,<span class="number">115</span>,<span class="number">117</span>,<span class="number">98</span>,<span class="number">115</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">40</span>,<span class="number">100</span>,<span class="number">111</span>,<span class="number">99</span>,<span class="number">117</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">46</span>,<span class="number">85</span>,<span class="number">82</span>,<span class="number">76</span>,<span class="number">46</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">120</span>,<span class="number">79</span>,<span class="number">102</span>,<span class="number">40</span>,<span class="number">39</span>,<span class="number">61</span>,<span class="number">39</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">32</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">32</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">102</span>,<span class="number">111</span>,<span class="number">114</span>,<span class="number">40</span>,<span class="number">105</span>,<span class="number">61</span>,<span class="number">49</span>,<span class="number">59</span>,<span class="number">105</span>,<span class="number">60</span>,<span class="number">49</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">59</span>,<span class="number">105</span>,<span class="number">43</span>,<span class="number">43</span>,<span class="number">41</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">61</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">105</span>,<span class="number">44</span>,<span class="number">48</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">125</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">32</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">102</span>,<span class="number">117</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">116</span>,<span class="number">105</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">120</span>,<span class="number">41</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">114</span>,<span class="number">101</span>,<span class="number">116</span>,<span class="number">117</span>,<span class="number">114</span>,<span class="number">110</span>,<span class="number">32</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">46</span>,<span class="number">99</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">65</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">120</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">125</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">32</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">105</span>,<span class="number">102</span>,<span class="number">40</span>,<span class="number">99</span>,<span class="number">107</span>,<span class="number">61</span>,<span class="number">61</span>,<span class="number">34</span>,<span class="number">61</span>,<span class="number">34</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">52</span>,<span class="number">48</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">48</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">51</span>,<span class="number">50</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">57</span>,<span class="number">50</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">54</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">48</span>,<span class="number">52</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">45</span>,<span class="number">50</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">95</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">57</span>,<span class="number">56</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">34</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">34</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">50</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">83</span>,<span class="number">116</span>,<span class="number">114</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">46</span>,<span class="number">102</span>,<span class="number">114</span>,<span class="number">111</span>,<span class="number">109</span>,<span class="number">67</span>,<span class="number">104</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">67</span>,<span class="number">111</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">111</span>,<span class="number">51</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">34</span>,<span class="number">80</span>,<span class="number">97</span>,<span class="number">115</span>,<span class="number">115</span>,<span class="number">119</span>,<span class="number">111</span>,<span class="number">114</span>,<span class="number">100</span>,<span class="number">32</span>,<span class="number">105</span>,<span class="number">115</span>,<span class="number">32</span>,<span class="number">34</span>,<span class="number">43</span>,<span class="number">99</span>,<span class="number">107</span>,<span class="number">46</span>,<span class="number">114</span>,<span class="number">101</span>,<span class="number">112</span>,<span class="number">108</span>,<span class="number">97</span>,<span class="number">99</span>,<span class="number">101</span>,<span class="number">40</span>,<span class="number">34</span>,<span class="number">61</span>,<span class="number">34</span>,<span class="number">44</span>,<span class="number">34</span>,<span class="number">34</span>,<span class="number">41</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">125</span>,<span class="number">13</span>,<span class="number">10</span>);</div><div class="line">    <span class="built_in">eval</span>(showFlag);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>showFlag</code> can be evaluated (with the browser javascript console) to:</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> enco=<span class="string">''</span>;</div><div class="line"><span class="keyword">var</span> enco2=<span class="number">126</span>;</div><div class="line"><span class="keyword">var</span> enco3=<span class="number">33</span>;</div><div class="line"><span class="keyword">var</span> ck=<span class="built_in">document</span>.URL.substr(<span class="built_in">document</span>.URL.indexOf(<span class="string">'='</span>));</div><div class="line"></div><div class="line"><span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;<span class="number">122</span>;i++) &#123;</div><div class="line">    enco=enco+<span class="built_in">String</span>.fromCharCode(i,<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">enco_</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> enco.charCodeAt(x);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(ck==<span class="string">"="</span>+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">240</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">220</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">232</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">192</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">226</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">200</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">204</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">222</span><span class="number">-2</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">198</span>))+<span class="string">"~~~~~~"</span>+<span class="built_in">String</span>.fromCharCode(enco2)+<span class="built_in">String</span>.fromCharCode(enco3)) &#123;</div><div class="line">    alert(<span class="string">"Password is "</span>+ck.replace(<span class="string">"="</span>,<span class="string">""</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>And the if statement can be evaluated from:</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"="</span>+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">240</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">220</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">232</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">192</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">226</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">200</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">204</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">222</span><span class="number">-2</span>))+<span class="built_in">String</span>.fromCharCode(enco_(<span class="number">198</span>))+<span class="string">"~~~~~~"</span>+<span class="built_in">String</span>.fromCharCode(enco2)+<span class="built_in">String</span>.fromCharCode(enco3)</div></pre></td></tr></table></figure></p>
+<p>to:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">=youaregod~~~~~~~!</div></pre></td></tr></table></figure></p>
+<p>Because of <code>alert(&quot;Password is &quot;+ck.replace(&quot;=&quot;,&quot;&quot;));</code> we just need to remove the <code>=</code>.</p>
+<p>Now we can generate the flag:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ printf &quot;WhiteHat&#123;%s&#125;&quot; $(printf %s &apos;youaregod~~~~~~~!&apos; | sha1sum | awk &apos;&#123; print $1 &#125;&apos;)</div><div class="line">WhiteHat&#123;1c0e74d5f61b6c3901a277bdd490ad070265f027&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
     
       <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
     
@@ -1578,89 +1578,6 @@ You have got hold of the map, but it looks nothing more than a plain white sheet
   </entry>
   
   <entry>
-    <title>WhiteHat Challenge 01 - 20 - For001 - Forensics</title>
-    <link href="https://rawsec.ml/en/WhiteHat-Challenge-01-20-For001-Forensics/"/>
-    <id>https://rawsec.ml/en/WhiteHat-Challenge-01-20-For001-Forensics/</id>
-    <published>2017-02-26T23:00:00.000Z</published>
-    <updated>2017-03-21T22:24:32.344Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : WhiteHat Challenge 01</li>
-<li><strong>Website</strong> : <a href="https://wargame.whitehat.vn/" target="_blank" rel="external">wargame.whitehat.vn</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/429" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="description">Description</h3>
-<blockquote>
-<p>Can you find the secret in this image?
-Download file here:</p>
-<p><a href="http://material.wargame.whitehat.vn/challenges/1/For001_b9f7cdc52232efc20abe3ca3df14be5d.zip" target="_blank" rel="external">http://material.wargame.whitehat.vn/challenges/1/For001_b9f7cdc52232efc20abe3ca3df14be5d.zip</a></p>
-<p>Submit WhiteHat{sha1(flag)}</p>
-</blockquote>
-<h2 id="solution">Solution</h2>
-<p>The zip contain an image: <code>LSB.png</code>.</p>
-<p>Let's try to retrive something with LSB attack, I found a Microsoft Word 2007 document.</p>
-<p>Trying to open it with LibreOffice said me that the document is corrupted.</p>
-<p>As it is only an archive I extrated it with <code>7z</code>.</p>
-<p>I then open the <code>document.xml</code> and I found that:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">. .- ... -.-- ..-. --- .-. . -. ... .. -.-.</div></pre></td></tr></table></figure></p>
-<p>It is morse. So I used <a href="http://www.dcode.fr/morse-code" target="_blank" rel="external">http://www.dcode.fr/morse-code</a> to decode the message.</p>
-<p>That gave me <code>EASYFORENSIC</code>.</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ printf %s &apos;EASYFORENSIC&apos; | sha1sum</div><div class="line">ffed6da75c3296041fc52abc75298e120c350917  -</div><div class="line"></div><div class="line">$ printf %s &apos;easyforensic&apos; | sha1sum</div><div class="line">1f0aa393d3e5369f391c35a793bcf1178b8299a0  -</div></pre></td></tr></table></figure></p>
-<p>So flag is <code>WhiteHat{1f0aa393d3e5369f391c35a793bcf1178b8299a0}</code>.</p>
-<p><em>Note</em>: Again, this is stegano not digital forencis...</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
     <title>NeverLAN CTF 2017 - Write-ups</title>
     <link href="https://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/"/>
     <id>https://rawsec.ml/en/NeverLAN-CTF-2017-write-ups/</id>
@@ -1911,6 +1828,89 @@ Download file here:</p>
       <category term="security" scheme="https://rawsec.ml/tags/security/"/>
     
       <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WhiteHat Challenge 01 - 20 - For001 - Forensics</title>
+    <link href="https://rawsec.ml/en/WhiteHat-Challenge-01-20-For001-Forensics/"/>
+    <id>https://rawsec.ml/en/WhiteHat-Challenge-01-20-For001-Forensics/</id>
+    <published>2017-02-26T23:00:00.000Z</published>
+    <updated>2017-03-21T22:24:32.344Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : WhiteHat Challenge 01</li>
+<li><strong>Website</strong> : <a href="https://wargame.whitehat.vn/" target="_blank" rel="external">wargame.whitehat.vn</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/429" target="_blank" rel="external">link</a></li>
+</ul>
+<h3 id="description">Description</h3>
+<blockquote>
+<p>Can you find the secret in this image?
+Download file here:</p>
+<p><a href="http://material.wargame.whitehat.vn/challenges/1/For001_b9f7cdc52232efc20abe3ca3df14be5d.zip" target="_blank" rel="external">http://material.wargame.whitehat.vn/challenges/1/For001_b9f7cdc52232efc20abe3ca3df14be5d.zip</a></p>
+<p>Submit WhiteHat{sha1(flag)}</p>
+</blockquote>
+<h2 id="solution">Solution</h2>
+<p>The zip contain an image: <code>LSB.png</code>.</p>
+<p>Let's try to retrive something with LSB attack, I found a Microsoft Word 2007 document.</p>
+<p>Trying to open it with LibreOffice said me that the document is corrupted.</p>
+<p>As it is only an archive I extrated it with <code>7z</code>.</p>
+<p>I then open the <code>document.xml</code> and I found that:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">. .- ... -.-- ..-. --- .-. . -. ... .. -.-.</div></pre></td></tr></table></figure></p>
+<p>It is morse. So I used <a href="http://www.dcode.fr/morse-code" target="_blank" rel="external">http://www.dcode.fr/morse-code</a> to decode the message.</p>
+<p>That gave me <code>EASYFORENSIC</code>.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ printf %s &apos;EASYFORENSIC&apos; | sha1sum</div><div class="line">ffed6da75c3296041fc52abc75298e120c350917  -</div><div class="line"></div><div class="line">$ printf %s &apos;easyforensic&apos; | sha1sum</div><div class="line">1f0aa393d3e5369f391c35a793bcf1178b8299a0  -</div></pre></td></tr></table></figure></p>
+<p>So flag is <code>WhiteHat{1f0aa393d3e5369f391c35a793bcf1178b8299a0}</code>.</p>
+<p><em>Note</em>: Again, this is stegano not digital forencis...</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
     
       <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
     
